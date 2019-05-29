@@ -15,17 +15,19 @@ const FormItem = Form.Item;
 const option = Select.Option;
 
 
+
 class BillBoard extends Component {
     constructor() {
         super()
         this.state = {
             companyName: [],
             fileList: [],
+            imageList: [],
             previewImage: '',
             previewVisible: false,
             keyFor: [],
             noChooseFile: false,
-            index: '',
+            index: 0,
             imgArr: [],
             sumitDataAlert: false,
             company: '',
@@ -66,6 +68,7 @@ class BillBoard extends Component {
     }
 
 
+
     handleCancel = () => this.setState({ previewVisible: false })
 
 
@@ -80,6 +83,12 @@ class BillBoard extends Component {
         let fileListRef = `fileList${index}`
         // console.log(fileListRef, 'handle change fileList')
         this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
+    }
+
+    deleteImage(e) {
+        let { imageList } = this.state;
+        imageList = imageList.filter((elem) => elem !== e)
+        this.setState({ imageList: imageList })
     }
 
     handleChange = (data) => {
@@ -188,6 +197,7 @@ class BillBoard extends Component {
         for (var i = 0; i <= keyFor.length; i++) {
             let fileListRef = `fileList${i}`;
             // console.log(fileListRef)
+            // console.log(this.state[fileListRef])
             arr.push(this.state[fileListRef])
             // console.log(arr)
             arr = arr.filter(function (element) {
@@ -266,10 +276,69 @@ class BillBoard extends Component {
             });
         }, 3000);
     }
+    onChange(index , {file,  fileList }  ) {
+        if (file.status !== 'uploading') {
+            // console.log(file ,'file')
+            // console.log(fileList ,'fileList')
+
+            // console.log(index)
+            let fileListRef = `fileList${index}`
+            // console.log(fileListRef, 'handle change fileList')
+            this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
+        }
+    }
 
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
-        const { fileList, imgArr, sumitDataAlert, companyName } = this.state;
+        const { fileList, imgArr, sumitDataAlert, companyName, previewVisible, previewImage, index } = this.state;
+
+        // const props = {
+        //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        //     // onChange({ file, fileList }) {
+        //     //     if (file.status !== 'uploading') {
+        //     //         console.log(file, fileList);
+        //     //         console.log(this.state[fileListRef] , 'this.state[fileListRef]')
+        //     //     }
+        //     // }
+        //     onChange({file,  fileList } ) {
+        //         if (file.status !== 'uploading') {
+        //             console.log(index)
+        //             let fileListRef = `fileList${index}`
+        //             // console.log(fileListRef, 'handle change fileList')
+        //             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
+        //         }
+        //     }
+        // }
+        // const uploadedImages = (
+        //     <div style={{ height: '100%' }}>
+
+        //         {this.state.imageList.map((elem) => {
+        //             console.log(elem, 'elem')
+        //             return (
+        //                 <div className='insideDiv'>
+        //                     <a>
+        //                         <img alt='img1' src={elem} style={{ height: '100%' }} />
+        //                         <span>
+        //                             <a><Icon title='Preview file' onClick={() =>
+        //                                 this.handlePreview(elem)} type="eye" theme="outlined"
+        //                                 style={{
+        //                                     zIndex: 10, transition: 'all .3s', fontSize: '16px',
+        //                                     width: '30px', color: 'rgba(255, 255, 255, 0.85)', margin: '0 4px'
+        //                                 }} />
+        //                             </a>
+        //                             <Icon title='Remove file' type='delete'
+        //                                 onClick={this.deleteImage.bind(this, elem)}
+        //                                 style={{
+        //                                     zIndex: 10, transition: 'all .3s', fontSize: '16px',
+        //                                     width: '30px', color: 'rgba(255, 255, 255, 0.85)', margin: '0 4px'
+        //                                 }} />
+        //                         </span>
+        //                     </a>
+        //                 </div>
+        //             )
+        //         })}
+        //     </div>
+        // )
 
         const uploadButton = (
             <div>
@@ -430,16 +499,40 @@ class BillBoard extends Component {
                                                             }],
                                                         })(
                                                             <div className="clearfix">
-                                                                <Upload
+                                                                {/* <Upload
                                                                     action="//jsonplaceholder.typicode.com/posts/"
                                                                     listType="picture-card"
                                                                     fileList={this.state[fileListRef]}
                                                                     onPreview={this.handlePreview}
                                                                     onChange={this.handleChanges.bind(this, index)}
                                                                 >
-                                                                    {fileList.length >= 3 ? null : uploadButton}
+                                                                    {this.state.imageList.length + fileList.length >= 3 ? null : uploadButton}
+                                                                    {uploadedImages}
+
+                                                                </Upload> */}
+                                                                <Upload onChange={this.onChange.bind(this, index)}>
+                                                                    <Button
+                                                                    // onChange={this.onChange.bind(this, index)}
+                                                                    >
+                                                                        <Icon type="upload" /> Upload
+                                                                    </Button>
                                                                 </Upload>
                                                             </div>
+                                                            // <div className="clearfix">
+                                                            //     <Upload
+                                                            //         action="//jsonplaceholder.typicode.com/posts/"
+                                                            //         listType="picture-card"
+                                                            //         fileList={this.state[fileListRef]}
+                                                            //         onPreview={this.handlePreview}
+                                                            //         onChange={this.handleChange}
+                                                            //     >
+                                                            //         { fileList.length >= 3 ? null : uploadButton}
+                                                            //     </Upload>
+                                                            //     <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                                                            //         <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                                            //     </Modal>
+                                                            //     {/* {uploadedImages} */}
+                                                            // </div>
                                                         )}
                                                     </FormItem>
                                                 </div>
@@ -545,9 +638,9 @@ class BillBoard extends Component {
                                     type="primary" htmlType="submit"
                                     data-toggle="modal" data-target="#biilbord"
                                 >Submit</Button>
-                                <br/>
-                                <br/>
-                                
+                                <br />
+                                <br />
+
                                 {/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#biilbord">
                                     Submit
                                     </button> */}
