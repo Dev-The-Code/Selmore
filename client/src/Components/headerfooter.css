@@ -1,0 +1,276 @@
+
+@media screen and (min-width: 360px) and (max-width: 660px){
+	.navmargin{
+	        margin-top: 30px;
+	        margin-right: -2%;
+	}
+	.selmorelogo{
+	    height: 101px;
+    	margin-left: 30px;
+	}
+		.true2{
+	    list-style-type: none;
+	    margin-left: -15px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 9px;
+	    margin-top: 14px;
+	    margin-bottom: -1px;
+	}
+	.true22{
+	    list-style-type: none;
+	    margin-left: -21px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 9px;
+	    margin-top: 12px;
+	    margin-bottom: 30px;
+	}
+	.navbiddbtn{
+		    margin-left: 10px;
+		    margin-top: 33px;
+	}
+
+}
+@media screen and (min-width: 768px) and (max-width: 1024px){
+	.navsm{
+		margin-left: -10%;
+	}
+	.navmargin{
+	        margin-top: 30px;
+	        margin-right: -4%;
+	}
+	.selmorelogo{
+	    height: 101px;
+
+	}
+	.true2{
+	    list-style-type: none;
+	    margin-left: 3px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-top: 12px;
+	    margin-bottom: 30px;
+	}
+	.true22{
+	    list-style-type: none;
+	    margin-left: 24px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-top: 12px;
+	    margin-bottom: 30px;
+	}
+	.navbiddbtn{
+		        margin-left: 17px;
+    		margin-top: 5px;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.navsm{
+		margin-left: 3%;
+	}
+	.navmargin{
+	            margin-top: 37px;
+    			margin-right: 16px;
+	}
+	.selmorelogo{
+	    height: 101px;
+    	margin-left: 0px;
+	}
+	.true2{
+	    list-style-type: none;
+	    margin-left: 28px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	        margin-top: 12px;
+    	margin-bottom: 30px;
+	}
+	.true22{
+	    list-style-type: none;
+	    margin-left: 53px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	        margin-top: 12px;
+    	margin-bottom: 30px;
+	}
+	.navbiddbtn{
+		    margin-left: 10px;
+		    margin-top: 33px;
+	}
+
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.navsm{
+		    margin-left: 12%
+	}
+	.navmargin{
+	        margin-top: 36px;
+	        margin-right: 3%;
+	}
+	.selmorelogo{
+	    height: 101px;
+    	margin-left: 30px;
+	}
+	.true2{
+	    list-style-type: none;
+	    margin-left: 42px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	        margin-top: 12px;
+    	margin-bottom: 30px;
+	}
+	.true22{
+	    list-style-type: none;
+	    margin-left: 74px;
+	    font-family: Helvetica;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-top: 12px;
+	    margin-bottom: 30px;
+	}
+	.navbiddbtn{
+		    margin-left: 10px;
+		    margin-top: 33px;
+	}
+
+}
+.navbtnmargin{
+		    margin-left: 10px;
+		    margin-top: 33px;
+}
+
+
+.true3{
+	margin-top: 50px;
+}
+.footertext1{
+		text-align: center;
+		 font-family: Helvetica;
+		 font-weight: 600;
+		     font-size: 23px;
+}
+.hrline3{
+	margin-bottom: 9px;
+	border-bottom: 3px solid #29abe2;
+}
+
+
+.true2 a{
+	color: black;
+}
+.true2 a:hover{
+	color: #29abe2;
+}
+.true22 a{
+	color: black;
+}
+.true22 a:hover{
+	color: #29abe2;
+}
+.nav a:hover {
+	color: black;
+}
+.true5{
+	font-size: 15px;
+	color: white;
+
+}
+.true6{
+	margin: 5px;
+}
+.true7{
+	    margin-top: 13px;
+}
+@media screen and (min-width: 360px) and (max-width: 660px){
+		.footertext2{
+		    width: 100%;
+		    margin-left: 6px;
+		    font-family: Helvetica;
+		    font-size: 9px;
+		    font-weight: 600;
+		    margin-top: 12px;
+		    margin-bottom: 9px;
+		    line-height: 17px;
+		    text-align: justify;
+	}
+	.footertext1{
+		text-align: center;
+		 font-family: Helvetica;
+		 font-weight: 600;
+		     font-size: 13px;
+	}
+	.navmargin12{
+		margin-top: 33px;
+		margin-left: 2%;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+	.footertext2{
+	     width: 62%;
+	    margin-left: 61px;
+	    font-family: Helvetica;
+	    font-size: 9px;
+	    font-weight: 700;
+	    margin-top: 12px;
+	    margin-bottom: 29px;
+	    line-height: 16px;
+	}
+	.footertext1{
+		text-align: center;
+		 font-family: Helvetica;
+		 font-weight: 600;
+		     font-size: 23px;
+	}
+	.navmargin12{
+		margin-top: 33px;
+		margin-left: 2%;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.footertext2{
+	    width: 60%;
+    	margin-left: 91px;
+    	 font-family: Helvetica;
+     	font-size: 12px;
+    	 font-weight: 600;
+         margin-top: 12px;
+   		 margin-bottom: 30px;
+        line-height: 16px;
+	}
+	.footertext1{
+		text-align: center;
+		 font-family: Helvetica;
+		 font-weight: 600;
+		     font-size: 23px;
+	}
+	.navmargin12{
+		margin-top: 33px;
+		margin-left: 2%;
+	}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.footertext2{
+	    width: 60%;
+    	margin-left: 110px;
+    	 font-family: Helvetica;
+     	font-size: 12px;
+    	 font-weight: 600;
+         margin-top: 12px;
+   		 margin-bottom: 30px;
+        line-height: 15px;
+	}
+	.footertext1{
+		text-align: center;
+		 font-family: Helvetica;
+		 font-weight: 600;
+		     font-size: 23px;
+	}
+	.navmargin12{
+		margin-top: 33px;
+	}
+}

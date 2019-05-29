@@ -1,0 +1,121 @@
+.apple1{
+	width: 100%;
+	height: 300px;
+	margin-top: 5px;
+	position: absolute;
+}
+.apple2{
+		margin-top: 10%;
+	    font-family: Helvetica;
+	    margin-left: 10%;
+    	position: relative;
+}
+.apple3{
+		 font-size: 35px;
+	    font-weight: 600;
+	    color: white;
+}
+.apple4{
+	background-color: #29abe2;
+}
+.apple5{
+		display: inline;
+	margin-left: -55px;
+}
+.apple6{
+		display: inline;
+	margin-left: -31px;
+}
+.apple7{
+	color: white;
+}
+@media screen and (min-width: 360px) and (max-width: 660px){
+	.apple8{
+	margin-top: 227px;
+	padding: 0px;
+
+	}
+	.apple1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+}
+	.gone4{
+
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+	.apple8{
+	margin-top: 186px;
+	padding: 0px;
+
+	}
+	.apple1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+}
+	.gone4{
+		
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.apple8{
+	margin-top: 163px;
+	padding: 0px;
+
+	}
+	.apple1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+	}	
+	.gone4{
+		margin-left: 71px
+	}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.apple8{
+	margin-top: 126px;
+	padding: 0px;
+
+	}
+	.apple1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.gone4{
+		margin-left: 94px;
+	}
+}
+.apple9{
+	color: black;
+	font-weight: 700;
+	font-size: 25px;
+	font-family: Helvetica;
+}
+.apple10{
+		border-bottom: 3px solid #29abe2;
+	margin-left: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

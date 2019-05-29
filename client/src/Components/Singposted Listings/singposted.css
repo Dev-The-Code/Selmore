@@ -1,0 +1,193 @@
+.flyover1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+}
+.flyover2{
+		margin-top: 10%;
+	    font-family: Helvetica;
+	    margin-left: 10%;
+    	position: relative;
+}
+.flyover3{
+	 	font-size: 35px;
+	    font-weight: 600;
+	    color: white;
+	    font-family: Helvetica;
+}
+.flyover4{
+	display: inline;
+	margin-left: -55px;
+}
+.flyover5{
+	display: inline;
+	margin-left: -31px;
+}
+.flyover6{
+	color: white;
+}
+.flyover7{
+	background-color: #29abe2;
+}
+@media screen and (min-width: 360px) and (max-width: 660px){
+.flyover8{
+	margin-top: 185px;
+
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+.flyover8{
+	margin-top: 187px;
+	padding: 0px;
+
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+.flyover8{
+	margin-top: 161px;
+	padding: 0px;
+
+	}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+.flyover8{
+		margin-top: 126px;
+		padding: 0px;
+	}	
+}
+
+.lootlo1{
+	background-color: #29abe2;
+    padding: 5px;
+}
+.lootlo2{
+	color: white;
+}
+.lootlo3{
+	background-color: #D0C9C9;
+    padding: 15px;
+    margin: 0px;
+}
+.lootlo4{
+	background-color: white;
+
+}
+.lootlo5{
+	font-weight: 700;
+	font-size: 23px;
+	font-family: Helvetica;
+	color: black;
+}
+.lootlo6{
+	font-size: 15px;
+	font-family: Helvetica;
+	color: black;
+}
+.btnlootlo7{
+	border-radius: 34%;
+	background-color: #29abe2; 
+}
+.hearddicon{
+	font-size: 35px;
+	color: #29abe2;
+}
+@media screen and (min-width: 360px) and (max-width: 660px){
+	.lootlo7{
+		max-width: 73%;
+	}
+	.iimagesize{
+		width: 100%;
+		height: 190px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+	.lootlo7{
+		max-width: 56%;
+	}
+	.iimagesize{
+		width: 112%;
+    	height: 216px;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.lootlo7{
+		max-width: 70%;
+	}
+	.iimagesize{
+		width: 110%;
+		height: 190px;
+	}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.lootlo7{
+		max-width: 73%;
+	}
+	.iimagesize{
+		width: 108%;
+		height: 190px;
+	}
+}
+.lootlo8{
+	color: white;
+	font-weight: 600;
+	font-size: 23px;
+	font-family: Helvetica;
+}
+.kross1{
+	font-weight: 700;
+}
+.kross2{
+	background-color: white;
+	padding: 42px;
+	width: 124%;
+	border: 2px solid #29abe2;
+	text-align: center;
+}
+.kross3{
+	border-bottom: 3px solid #29abe2;
+}
+.kross4{
+		font-family: Helvetica;
+		font-weight: 500;
+}
+.kross5{
+	text-align: center;
+    margin-top: 25px;
+}
+.kross6{
+	background-color: #D0C9C9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
