@@ -61,6 +61,9 @@ class Formpanel extends Component {
 			})
 		} else {
 			callback()
+			this.setState({
+				registerBtn: false
+			})
 		}
 
 
