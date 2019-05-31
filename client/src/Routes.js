@@ -15,7 +15,7 @@ import Buyer from './Components/Buyer/buyer';
 import Contactpage from './Components/Contact Page/contact';
 import Sellerprofile from './Components/Seller Profile/sellerprofile';
 import Billboardmardan from './Components/Billboard Mardan/billmardan';
-import Billboardmilitary from './Components/Billboard Military/billmilitary';
+// import Billboardmilitary from './Components/Billboard Military/billmilitary';
 import Billboards from './Components/Billboards/billboards';
 import Singposted from './Components/Singposted Listings/singposted';
 import Bidding from './Components/Bidding/bidding';
@@ -30,7 +30,7 @@ import ProfileView from './Components/Profile/profile';
 import { Provider } from 'react-redux';
 import store from './store';
 import AddBillboards from './Components/BillboardForm/addBillboards';
-
+import Billboardmilitary from './Components/Billboard Military/billmilitary'
 
 
 
@@ -56,7 +56,7 @@ class Routes extends Component {
               <Route path="/profile" component={ProfileView}></Route>
               <Route path="/" component={LogOut}></Route>
               <Route path="/list_add" component={AddBillboards}></Route>
-
+              <Route path = 'billborad_Militry' component = {Billboardmilitary}></Route>
             </div>
           </BrowserRouter>
         </Provider>

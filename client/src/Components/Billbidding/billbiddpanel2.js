@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import './billbidding.css';
 
 class Billbiddpanel2 extends Component {
@@ -55,7 +56,9 @@ class Billbiddpanel2 extends Component {
 										<i className="fa fa-heart-o billionhearticon"></i>
 									</div>
 									<div className="col-md-1 col-4 col-sm-1">
-										<button type="button" className="btn billionbtn">More</button>
+										<button type="button" className="btn billionbtn">
+										<Link  rel="noopener noreferrer" to={`/billborad_Militry`}><span className="contbutton">More</span></Link>		
+											</button>
 									</div>				
 								</div>
 							</div>

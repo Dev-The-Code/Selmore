@@ -28,6 +28,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Routes from './Routes';
 // import {Provider} from 'react-redux';
 // import store from './Store'
+// import Billboardmilitary from './Components/Billboard Military/billmilitary'
 
 
 
@@ -52,6 +53,7 @@ class App extends Component {
         </div>
       </BrowserRouter> */}
         <Routes />
+        {/* <Billboardmilitary /> */}
         {/* <Provider store={store}>
         </Provider> */}
       </div>

@@ -144,7 +144,7 @@ class Formpanel extends Component {
 			<div>
 				<Form onSubmit={this.handleSubmit}>
 					<div className="container proroute2">
-						<div className="row ball5">
+						{/* <div className="row ball5">
 							<div className="col-md-8">
 								<div className="form-group">
 									<label for="usr"></label>
@@ -168,7 +168,7 @@ class Formpanel extends Component {
 								</div>
 							</div>
 							<div className="col-md-4"></div>
-						</div>
+						</div> */}
 						<div className="row ball4">
 							<div className="col-md-4 col-6">
 								<div className="form-group">
@@ -276,7 +276,7 @@ class Formpanel extends Component {
 										{getFieldDecorator('landlineNo', {
 											initialValue: this.state.dataBnumber,
 											rules: [{
-												required: true,
+												required: false,
 												message: 'Please input your landline Number!',
 												whitespace: true
 											},
@@ -286,7 +286,7 @@ class Formpanel extends Component {
 												className={"form-control backcolor"}
 												id={"usr"}
 												name="username"
-												placeholder="Landline No.:*"
+												placeholder="Landline No: (optional)"
 											/>
 										)}
 									</Form.Item>
@@ -299,10 +299,10 @@ class Formpanel extends Component {
 								<form action="/action_page.php">
 									<RadioGroup name="radiogroup" defaultValue={1}>
 										<div className="form-check-inline">
-											<label className="form-check-label" for="radio1">
+											<label className="form-check-label" for="Advertiser">
 												<Radio value={1}
 													className={"form-check-input"}
-													id={"radio1"}
+													id={"Advertiser"}
 													name="Advertiser"
 													value={"Advertiser"}
 													checked={this.state.selectedOption === 'Advertiser'}
@@ -312,10 +312,10 @@ class Formpanel extends Component {
 											</label>
 										</div>
 										<div className="form-check-inline checkmargin">
-											<label className="form-check-label" for="radio2">
+											<label className="form-check-label" for="Agent">
 												<Radio value={2}
 													className={"form-check-input"}
-													id={"radio2"}
+													id={"Agent"}
 													name="Agent"
 													value="Agent"
 													checked={this.state.selectedOption === 'Agent'}
@@ -325,10 +325,10 @@ class Formpanel extends Component {
 											</label>
 										</div>
 										<div className="form-check-inline checkmargin">
-											<label className="form-check-label">
+											<label className="form-check-label" for='Buyer'>
 												<Radio value={3}
 													className={"form-check-input"}
-													id={"radio2"}
+													id={"Buyer"}
 													name="Buyer"
 													value="Buyer"
 													checked={this.state.selectedOption === 'Buyer'}
@@ -338,10 +338,10 @@ class Formpanel extends Component {
 											</label>
 										</div>
 										<div className="form-check-inline checkmargin">
-											<label className="form-check-label">
+											<label className="form-check-label" for = 'Seller'>
 												<Radio value={3}
 													className={"form-check-input"}
-													id={"radio2"}
+													id={"Seller"}
 													name="Seller"
 													value="Seller"
 													checked={this.state.selectedOption === 'Seller'}
@@ -382,7 +382,7 @@ class Formpanel extends Component {
 							<div className="col-0 col-md-4 col-lg-4 col-xl-4"></div>
 						</div>
 						<div className="row ball4">
-							<div className="col-md-6 col-8">
+							{/* <div className="col-md-6 col-8">
 								<div className="form-group">
 									<label for="usr"></label>
 									<Form.Item>
@@ -404,7 +404,7 @@ class Formpanel extends Component {
 										)}
 									</Form.Item>
 								</div>
-							</div>
+							</div> */}
 							<div className="col-md-2 col-4">
 								<button className="btn btn-primary btnapple" disabled={this.state.registerBtn}
 								>Request</button>

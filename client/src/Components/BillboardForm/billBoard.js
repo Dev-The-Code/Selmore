@@ -567,6 +567,50 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
+                                        <div className="col-md-8">
+                                            <div className="form-group">
+                                                {/* <label for="type"></label> */}
+                                                <Form.Item>
+                                                    {getFieldDecorator(`price${index}`, {
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please enter price',
+                                                            whitespace: true
+                                                        }],
+                                                    })(
+                                                        <Input
+                                                            type="text"
+                                                            className={'form-control backcolor'}
+                                                            id={"price"}
+                                                            // name="type"
+                                                            placeholder="Enter Billboard price"
+                                                        />
+                                                    )}
+                                                </Form.Item>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-8">
+                                            <div className="form-group">
+                                                {/* <label for="type"></label> */}
+                                                <Form.Item>
+                                                    {getFieldDecorator(`city${index}`, {
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please enter city',
+                                                            whitespace: true
+                                                        }],
+                                                    })(
+                                                        <Input
+                                                            type="text"
+                                                            className={'form-control backcolor'}
+                                                            id={"city"}
+                                                            // name="type"
+                                                            placeholder="Enter Billboard city"
+                                                        />
+                                                    )}
+                                                </Form.Item>
+                                            </div>
+                                        </div>
                                     </div>
                                     {/* </div> */}
                                     {keys.length > 1 ? (
