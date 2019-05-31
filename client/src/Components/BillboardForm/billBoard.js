@@ -59,7 +59,7 @@ class BillBoard extends Component {
         this.setState({ companyName });
     }
 
-    validateNumber = (rule, value, callback) => {
+    validateNumber(rule, value, callback) {
         if (isNaN(value)) {
             callback('Please type Numbers');
         } else {
@@ -276,7 +276,7 @@ class BillBoard extends Component {
             });
         }, 3000);
     }
-    onChange(index , {file,  fileList }  ) {
+    onChange(index, { file, fileList }) {
         if (file.status !== 'uploading') {
             // console.log(file ,'file')
             // console.log(fileList ,'fileList')
@@ -545,6 +545,51 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
                                         <br />
+
+                                        {/* <div className="col-md-8">
+                                            <div className="form-group">
+                                                {/* <label for="type"></label> 
+                                                <Form.Item>
+                                                    {getFieldDecorator(`price${index}`, {
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please enter price',
+                                                            whitespace: true
+                                                        }],
+                                                    })(
+                                                        <Input
+                                                            type="text"
+                                                            className={'form-control backcolor'}
+                                                            id={"price"}
+                                                            // name="type"
+                                                            placeholder="Enter Billboard price"
+                                                        />
+                                                    )}
+                                                </Form.Item>
+                                            </div>
+                                        </div> */}
+                                        {/* <div className="col-md-8">
+                                            <div className="form-group">
+                                                {/* <label for="type"></label> 
+                                                <Form.Item>
+                                                    {getFieldDecorator(`city${index}`, {
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please enter city',
+                                                            whitespace: true
+                                                        }],
+                                                    })(
+                                                        <Input
+                                                            type="text"
+                                                            className={'form-control backcolor'}
+                                                            id={"city"}
+                                                            // name="type"
+                                                            placeholder="Enter Billboard city"
+                                                        />
+                                                    )}
+                                                </Form.Item>
+                                            </div>
+                                        </div> */}
                                         <div className="col-md-8">
                                             <div className="form-group">
                                                 {/* <label for="traffic"></label> */}
@@ -567,49 +612,388 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-                                        <div className="col-md-8">
-                                            <div className="form-group">
-                                                {/* <label for="type"></label> */}
-                                                <Form.Item>
-                                                    {getFieldDecorator(`price${index}`, {
-                                                        rules: [{
-                                                            required: true,
-                                                            message: 'Please enter price',
-                                                            whitespace: true
-                                                        }],
-                                                    })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"price"}
-                                                            // name="type"
-                                                            placeholder="Enter Billboard price"
-                                                        />
-                                                    )}
-                                                </Form.Item>
+
+
+
+
+
+                                        <div id='addWeiget'>
+                                            <div> Billboard Road City Point Details </div>
+                                            <br />
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`width${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter Width',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"Width"}
+                                                                // name="type"
+                                                                placeholder="Enter Width"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-md-8">
-                                            <div className="form-group">
-                                                {/* <label for="type"></label> */}
-                                                <Form.Item>
-                                                    {getFieldDecorator(`city${index}`, {
-                                                        rules: [{
-                                                            required: true,
-                                                            message: 'Please enter city',
-                                                            whitespace: true
-                                                        }],
-                                                    })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"city"}
-                                                            // name="type"
-                                                            placeholder="Enter Billboard city"
-                                                        />
-                                                    )}
-                                                </Form.Item>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`height${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter Height',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"Height"}
+                                                                // name="type"
+                                                                placeholder="Enter Height"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
                                             </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`lightning${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter Lightning',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"Lightning"}
+                                                                // name="type"
+                                                                placeholder="Enter Lightning"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`description${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter description',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"description"}
+                                                                // name="type"
+                                                                placeholder="Enter description"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`status${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter status',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"status"}
+                                                                // name="type"
+                                                                placeholder="Enter status"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+                                            <br />
+                                            <div> Military Road City Point Rate Card </div>
+                                            <br />
+
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`dailyRate${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter daily rate',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"dailyRate"}
+                                                                // name="type"
+                                                                placeholder="Enter daily rate"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`weeklyRate${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter weekly rate',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"weeklyRate"}
+                                                                // name="type"
+                                                                placeholder="Enter weekly rate"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`monthlyRate${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter monthly rate',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"monthlyRate"}
+                                                                // name="type"
+                                                                placeholder="Enter monthly rate"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`yearlyRate${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter yearly rate',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"yearlyRate"}
+                                                                // name="type"
+                                                                placeholder="Enter yearly rate"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div> Military Road City Point Demographics </div>
+                                            <br />
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`audianceType${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter audiance type',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"audianceType"}
+                                                                // name="type"
+                                                                placeholder="Enter audiance type"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`dailyVisitor${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter daily visitor',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"dailyVisitor"}
+                                                                // name="type"
+                                                                placeholder="Enter daily visitor"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`nearBy${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter near By',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"nearBy"}
+                                                                // name="type"
+                                                                placeholder="Enter near By"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+                                            <br />
+                                            <div> Military Road City Point Location </div>
+                                            <br />
+
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`country${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter country',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"country"}
+                                                                // name="type"
+                                                                placeholder="Enter country"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`state${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter state',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"state"}
+                                                                // name="type"
+                                                                placeholder="Enter state"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`city${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter city',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"city"}
+                                                                // name="type"
+                                                                placeholder="Enter city"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`address${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter address',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"address"}
+                                                                // name="type"
+                                                                placeholder="Enter address"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                     {/* </div> */}
