@@ -86,7 +86,7 @@ class Formpanel extends Component {
 				console.log('Received values of form: ', values);
 				this.setState({ isLoader: true })
 				this.fectSignUpApiFunc(values)
-				this.props.form.resetFields()				
+				this.props.form.resetFields()
 				setTimeout(() => {
 					this.setState({
 						isAlert: false,
