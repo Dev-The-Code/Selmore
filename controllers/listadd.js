@@ -13,7 +13,23 @@ exports.postAddData = function(req,res,next){
       size:formData.size,
       latitude:formData.latitude,
       longitude:formData.longitude,
-      traffic:formData.traffic
+      traffic:formData.traffic,
+      width:formData.width,
+      height:formData.height,
+      lightning:formData.lightning,
+      description:formData.description,
+      status:formData.status,
+      dailyRate:formData.dialyRate,
+      weeklyRate:formData.weeklyRate,
+      monthlyRate:formData.monthlyRate,
+      yearlyRate:formData.yearlyRate,
+      audianceType:formData.audianceType,
+      dailyVisitor:formData.dailyVisitor,
+      nearBy:formData.nearBy,
+      address:formData.address,
+      city:formData.city,
+      state:formData.state,
+      country:formData.country
   })
   console.log(postListData,'after creating object')
   postListData.save((err,data) => {
