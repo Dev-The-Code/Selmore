@@ -159,6 +159,22 @@ class BillBoard extends Component {
         let latitude = [];
         let size = [];
         let type = [];
+        let width = [];
+        let height = [];
+        let lightning = [];
+        let description = [];
+        let status = [];
+        let dailyRate = [];
+        let weeklyRate = [];
+        let monthlyRate = [];
+        let yearlyRate = [];
+        let audianceType = [];
+        let dailyVisitor = [];
+        let nearBy = [];
+        let address = [];
+        let city = [];
+        let state = [];
+        let country = [];
         for (var i = 0; i <= index; i++) {
             for (var property in values) {
                 if (property.indexOf(`facing${i}`) !== -1) {
@@ -179,6 +195,42 @@ class BillBoard extends Component {
                 if (property.indexOf(`type${i}`) !== -1) {
                     type.push(values[property])
                 }
+
+
+                if (property.indexOf(`width${i}`) !== -1) {
+                    width.push(values[property])
+                }
+                if (property.indexOf(`height${i}`) !== -1) {
+                    height.push(values[property])
+                } if (property.indexOf(`lightning${i}`) !== -1) {
+                    lightning.push(values[property])
+                } if (property.indexOf(`description${i}`) !== -1) {
+                    description.push(values[property])
+                } if (property.indexOf(`status${i}`) !== -1) {
+                    status.push(values[property])
+                } if (property.indexOf(`dailyRate${i}`) !== -1) {
+                    dailyRate.push(values[property])
+                } if (property.indexOf(`weeklyRate${i}`) !== -1) {
+                    weeklyRate.push(values[property])
+                } if (property.indexOf(`monthlyRate${i}`) !== -1) {
+                    monthlyRate.push(values[property])
+                } if (property.indexOf(`yearlyRate${i}`) !== -1) {
+                    yearlyRate.push(values[property])
+                } if (property.indexOf(`audianceType${i}`) !== -1) {
+                    audianceType.push(values[property])
+                } if (property.indexOf(`dailyVisitor${i}`) !== -1) {
+                    dailyVisitor.push(values[property])
+                } if (property.indexOf(`nearBy${i}`) !== -1) {
+                    nearBy.push(values[property])
+                } if (property.indexOf(`address${i}`) !== -1) {
+                    address.push(values[property])
+                } if (property.indexOf(`city${i}`) !== -1) {
+                    city.push(values[property])
+                } if (property.indexOf(`state${i}`) !== -1) {
+                    state.push(values[property])
+                } if (property.indexOf(`country${i}`) !== -1) {
+                    country.push(values[property])
+                }
             }
         }
 
@@ -192,7 +244,24 @@ class BillBoard extends Component {
         obj.latitude = latitude;
         obj.longitude = longitude;
         obj.traffic = traffic;
+        obj.width = width;
+        obj.height = height;
+        obj.lightning = lightning;
+        obj.description = description;
+        obj.status = status;
+        obj.dailyRate = dailyRate;
+        obj.weeklyRate = weeklyRate;
+        obj.monthlyRate = monthlyRate;
+        obj.yearlyRate = yearlyRate;
+        obj.audianceType = audianceType;
+        obj.dailyVisitor = dailyVisitor;
+        obj.nearBy = nearBy;
+        obj.address = address;
+        obj.city = city;
+        obj.state = state;
+        obj.country = country;
 
+        console.log(obj , 'combined values')
         let arr = [];
         for (var i = 0; i <= keyFor.length; i++) {
             let fileListRef = `fileList${i}`;
@@ -908,41 +977,19 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     {/* <label for="type"></label> */}
                                                     <Form.Item>
-                                                        {getFieldDecorator(`country${index}`, {
+                                                        {getFieldDecorator(`address${index}`, {
                                                             rules: [{
                                                                 required: true,
-                                                                message: 'Please enter country',
+                                                                message: 'Please enter address',
                                                                 whitespace: true
                                                             }],
                                                         })(
                                                             <Input
                                                                 type="text"
                                                                 className={'form-control backcolor'}
-                                                                id={"country"}
+                                                                id={"address"}
                                                                 // name="type"
-                                                                placeholder="Enter country"
-                                                            />
-                                                        )}
-                                                    </Form.Item>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="form-group">
-                                                    {/* <label for="type"></label> */}
-                                                    <Form.Item>
-                                                        {getFieldDecorator(`state${index}`, {
-                                                            rules: [{
-                                                                required: true,
-                                                                message: 'Please enter state',
-                                                                whitespace: true
-                                                            }],
-                                                        })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"state"}
-                                                                // name="type"
-                                                                placeholder="Enter state"
+                                                                placeholder="Enter address"
                                                             />
                                                         )}
                                                     </Form.Item>
@@ -974,19 +1021,41 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     {/* <label for="type"></label> */}
                                                     <Form.Item>
-                                                        {getFieldDecorator(`address${index}`, {
+                                                        {getFieldDecorator(`state${index}`, {
                                                             rules: [{
                                                                 required: true,
-                                                                message: 'Please enter address',
+                                                                message: 'Please enter state',
                                                                 whitespace: true
                                                             }],
                                                         })(
                                                             <Input
                                                                 type="text"
                                                                 className={'form-control backcolor'}
-                                                                id={"address"}
+                                                                id={"state"}
                                                                 // name="type"
-                                                                placeholder="Enter address"
+                                                                placeholder="Enter state"
+                                                            />
+                                                        )}
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    {/* <label for="type"></label> */}
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`country${index}`, {
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter country',
+                                                                whitespace: true
+                                                            }],
+                                                        })(
+                                                            <Input
+                                                                type="text"
+                                                                className={'form-control backcolor'}
+                                                                id={"country"}
+                                                                // name="type"
+                                                                placeholder="Enter country"
                                                             />
                                                         )}
                                                     </Form.Item>
