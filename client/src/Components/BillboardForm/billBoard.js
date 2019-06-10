@@ -329,7 +329,7 @@ class BillBoard extends Component {
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values);
+        console.log(values , 'all data in object');
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
         //fetch signUp api
