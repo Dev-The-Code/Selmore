@@ -22,7 +22,6 @@ class Formpanel extends Component {
 			radioVal: false,
 			emailsArr: [],
 			registerBtn: false,
-			user: ''
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -326,13 +325,13 @@ class Formpanel extends Component {
 							}
 							{this.state.isAlert ?
 								selectedOption === 'Seller' ?
-									<div class="alert alert-success" role="alert">
+									<div class="alert alert-success message" role="alert">
 										<strong>Request Submiting </strong>
 										Your request has been submited and
 										one of our support member will call & email you shortly.
 									</div>
 									:
-									<div class="alert alert-success" role="alert">
+									<div class="alert alert-success message" role="alert">
 										<strong>Request Submiting </strong>
 										Thank you for contact us.
 							</div>
