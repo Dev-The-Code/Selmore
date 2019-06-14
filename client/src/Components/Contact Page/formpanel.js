@@ -5,8 +5,6 @@ import {
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 const RadioGroup = Radio.Group;
 
 class Formpanel extends Component {
@@ -23,26 +21,18 @@ class Formpanel extends Component {
 			isAlert: false,
 			radioVal: false,
 			emailsArr: [],
-			registerBtn: false
+			registerBtn: false,
+			user: ''
 		}
-
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
 	}
 
 	componentDidMount() {
 		this.checkEmails();
-		// setTimeout(
-		// 	function() {
-		// 		isAlert;
-		// 	}
-		// 	.bind(this),
-		// 	3000
-		// );
 	}
 
 	checkEmails = async () => {
-
 		let response = await HttpUtils.get('getemails');
 		let getEmail = response.content;
 		console.log(response)
@@ -65,17 +55,15 @@ class Formpanel extends Component {
 				registerBtn: false
 			})
 		}
-
-
 	}
 
 	//radio button state function
 	handleOptionChange(changeEvent) {
+		console.log(changeEvent.target.value, 'changeEvent')
 		this.setState({
 			selectedOption: changeEvent.target.value,
-			radioVal: true
+			radioVal: true,
 		});
-		// console.log(this.state.radioVal)
 	}
 
 	//form validation funcs
@@ -100,14 +88,12 @@ class Formpanel extends Component {
 		//concat Frist Name & Mobile No for Password
 		let password = values.firstName.concat(values.mobileNo)
 		values.password = password;
-		console.log(values);
-
+		// console.log(values);
 		let response = await HttpUtils.post('signup', values);
-		console.log(response);
+		// console.log(response);
 		//fetch signUp api
 		if (response.code === 200) {
 			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true });
-
 		} else {
 			this.setState({ isData: false })
 		}
@@ -131,8 +117,8 @@ class Formpanel extends Component {
 
 
 	render() {
+		const { selectedOption } = this.state
 		const { getFieldDecorator } = this.props.form;
-
 		const formItemLayout = {
 			wrapperCol: {
 				xs: { span: 24 },
@@ -144,31 +130,6 @@ class Formpanel extends Component {
 			<div>
 				<Form onSubmit={this.handleSubmit}>
 					<div className="container proroute2">
-						{/* <div className="row ball5">
-							<div className="col-md-8">
-								<div className="form-group">
-									<label for="usr"></label>
-									<Form.Item>
-										{getFieldDecorator('fullName', {
-											rules: [{
-												required: true,
-												message: 'Please input your Full Name!',
-												whitespace: true
-											}],
-										})(
-											<Input
-												type="text"
-												className={'form-control backcolor'}
-												id={"usr"}
-												name="username"
-												placeholder="Full Name:*"
-											/>
-										)}
-									</Form.Item>
-								</div>
-							</div>
-							<div className="col-md-4"></div>
-						</div> */}
 						<div className="row ball4">
 							<div className="col-md-4 col-6">
 								<div className="form-group">
@@ -237,7 +198,6 @@ class Formpanel extends Component {
 												id={"usr"}
 												name="username"
 												placeholder="Email:*"
-											// onChange={this.onChangeEmail.bind(this)}
 											/>
 										)}
 									</Form.Item>
@@ -298,35 +258,9 @@ class Formpanel extends Component {
 							<div className="col-12 col-md-8 col-lg-8 col-xl-8">
 								<form action="/action_page.php">
 									<RadioGroup name="radiogroup" defaultValue={1}>
-										<div className="form-check-inline">
-											<label className="form-check-label" for="Advertiser">
-												<Radio value={1}
-													className={"form-check-input"}
-													id={"Advertiser"}
-													name="Advertiser"
-													value={"Advertiser"}
-													checked={this.state.selectedOption === 'Advertiser'}
-													onChange={this.handleOptionChange}
-												>Advertiser
-													</Radio>
-											</label>
-										</div>
-										<div className="form-check-inline checkmargin">
-											<label className="form-check-label" for="Agent">
-												<Radio value={2}
-													className={"form-check-input"}
-													id={"Agent"}
-													name="Agent"
-													value="Agent"
-													checked={this.state.selectedOption === 'Agent'}
-													onChange={this.handleOptionChange}
-												>Agent
-													</Radio>
-											</label>
-										</div>
-										<div className="form-check-inline checkmargin">
+										<div className="form-check-inline ">
 											<label className="form-check-label" for='Buyer'>
-												<Radio value={3}
+												<Radio value={1}
 													className={"form-check-input"}
 													id={"Buyer"}
 													name="Buyer"
@@ -338,8 +272,8 @@ class Formpanel extends Component {
 											</label>
 										</div>
 										<div className="form-check-inline checkmargin">
-											<label className="form-check-label" for = 'Seller'>
-												<Radio value={3}
+											<label className="form-check-label" for='Seller'>
+												<Radio value={2}
 													className={"form-check-input"}
 													id={"Seller"}
 													name="Seller"
@@ -382,29 +316,6 @@ class Formpanel extends Component {
 							<div className="col-0 col-md-4 col-lg-4 col-xl-4"></div>
 						</div>
 						<div className="row ball4">
-							{/* <div className="col-md-6 col-8">
-								<div className="form-group">
-									<label for="usr"></label>
-									<Form.Item>
-										{getFieldDecorator('contact', {
-											initialValue: this.state.dataBnumber,
-											rules: [{
-												required: true,
-												message: 'Please enter your contact Number!',
-												whitespace: true
-											},
-											{ validator: this.validateNumber.bind(this) }]
-										})(
-											<Input
-												className={"form-control backcolor"}
-												id={"usr"}
-												name="username"
-												placeholder="Contact:*"
-											/>
-										)}
-									</Form.Item>
-								</div>
-							</div> */}
 							<div className="col-md-2 col-4">
 								<button className="btn btn-primary btnapple" disabled={this.state.registerBtn}
 								>Request</button>
@@ -413,18 +324,21 @@ class Formpanel extends Component {
 								:
 								null
 							}
-
 							{this.state.isAlert ?
-								<div class="alert alert-success" role="alert">
-									{/* {setTimeout(() =>  */}
-									<strong>Request Submiting </strong>
-
-									Your request has been submited and
-									one of our support member will call & email you shortly.
-								{/* // , 3000)} */}
-								</div>
+								selectedOption === 'Seller' ?
+									<div class="alert alert-success" role="alert">
+										<strong>Request Submiting </strong>
+										Your request has been submited and
+										one of our support member will call & email you shortly.
+									</div>
+									:
+									<div class="alert alert-success" role="alert">
+										<strong>Request Submiting </strong>
+										Thank you for contact us.
+							</div>
 								:
 								null
+
 							}
 							<div className="col-md-4"></div>
 						</div>
