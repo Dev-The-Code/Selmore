@@ -13,7 +13,16 @@ import Footer from './footer';
 import './home.css';
 
 class Home extends Component {
+  constructor(props){
+    super(props)
+  }
+
+  componentDidMount(){
+    let data = this.props.location.state
+    console.log(data , 'data')
+  }
   render() {
+    // console.log(this.)
     return (
       <div>
         <Header />

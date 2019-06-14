@@ -4,12 +4,13 @@ import {
 	Form, Input, Select, Radio, AutoComplete,
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
+import { Redirect } from 'react-router';
 
 const RadioGroup = Radio.Group;
 
 class Formpanel extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 
 		//Initilize states
 		this.state = {
@@ -22,6 +23,7 @@ class Formpanel extends Component {
 			radioVal: false,
 			emailsArr: [],
 			registerBtn: false,
+			username: ''
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -34,8 +36,8 @@ class Formpanel extends Component {
 	checkEmails = async () => {
 		let response = await HttpUtils.get('getemails');
 		let getEmail = response.content;
-		console.log(response)
-		console.log(response.content);
+		// console.log(response)
+		// console.log(response.content);
 		this.setState({
 			emailsArr: response.content
 		})
@@ -89,10 +91,19 @@ class Formpanel extends Component {
 		values.password = password;
 		// console.log(values);
 		let response = await HttpUtils.post('signup', values);
-		// console.log(response);
+		console.log(response, 'response');
 		//fetch signUp api
 		if (response.code === 200) {
-			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true });
+			console.log(response.content, ' response.content')
+			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true, username: response.username });
+			if (this.state.selectedOption === 'Buyer') {
+				console.log(this.props)
+				// this.props.history.push({
+				// 	pathname: '/',
+				// 	state: username
+
+				// })
+			}
 		} else {
 			this.setState({ isData: false })
 		}
@@ -116,7 +127,7 @@ class Formpanel extends Component {
 
 
 	render() {
-		const { selectedOption } = this.state
+		const { selectedOption, username } = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
@@ -124,6 +135,10 @@ class Formpanel extends Component {
 				sm: { span: 10 }
 			}
 		};
+		// if (this.state.selectedOption === 'Buyer') {
+		// 	return <Redirect to={`/`} state={username} />
+
+		// }
 
 		return (
 			<div>
@@ -337,7 +352,6 @@ class Formpanel extends Component {
 							</div>
 								:
 								null
-
 							}
 							<div className="col-md-4"></div>
 						</div>
@@ -347,7 +361,7 @@ class Formpanel extends Component {
 						</div><br />
 					</div>
 				</Form>
-			</div>
+			</div >
 		);
 	}
 }
