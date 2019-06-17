@@ -44,7 +44,7 @@ exports.postAddData = function(req,res,next){
       res.send({
         code:200,
         content:data,
-        msg:'All user emails'
+        msg:'Detail inserted'
       })
     }
   })
