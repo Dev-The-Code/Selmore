@@ -299,3 +299,6 @@
 	  transform: rotate(360deg);
 	}
   }
+.message{
+	display: block;
+}

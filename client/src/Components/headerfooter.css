@@ -6,11 +6,11 @@
 	}
 	.selmorelogo{
 	    height: 101px;
-    	margin-left: 30px;
+    	/* margin-left: 30px; */
 	}
 		.true2{
 	    list-style-type: none;
-	    margin-left: -15px;
+	    /* margin-left: -15px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 9px;
@@ -19,7 +19,7 @@
 	}
 	.true22{
 	    list-style-type: none;
-	    margin-left: -21px;
+	    /* margin-left: -21px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 9px;
@@ -27,14 +27,14 @@
 	    margin-bottom: 30px;
 	}
 	.navbiddbtn{
-		    margin-left: 10px;
+		    /* margin-left: 10px; */
 		    margin-top: 33px;
 	}
 
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.navsm{
-		margin-left: -10%;
+		/* margin-left: -10%; */
 	}
 	.navmargin{
 	        margin-top: 30px;
@@ -46,7 +46,7 @@
 	}
 	.true2{
 	    list-style-type: none;
-	    margin-left: 3px;
+	    /* margin-left: 3px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -55,7 +55,7 @@
 	}
 	.true22{
 	    list-style-type: none;
-	    margin-left: 24px;
+	    /* margin-left: 24px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -63,13 +63,13 @@
 	    margin-bottom: 30px;
 	}
 	.navbiddbtn{
-		        margin-left: 17px;
+		        /* margin-left: 17px; */
     		margin-top: 5px;
 	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.navsm{
-		margin-left: 3%;
+		/* margin-left: 3%; */
 	}
 	.navmargin{
 	            margin-top: 37px;
@@ -77,11 +77,11 @@
 	}
 	.selmorelogo{
 	    height: 101px;
-    	margin-left: 0px;
+    	/* margin-left: 0px; */
 	}
 	.true2{
 	    list-style-type: none;
-	    margin-left: 28px;
+	    /* margin-left: 28px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -90,7 +90,7 @@
 	}
 	.true22{
 	    list-style-type: none;
-	    margin-left: 53px;
+	    /* margin-left: 53px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -98,14 +98,14 @@
     	margin-bottom: 30px;
 	}
 	.navbiddbtn{
-		    margin-left: 10px;
+		    /* margin-left: 10px; */
 		    margin-top: 33px;
 	}
 
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.navsm{
-		    margin-left: 12%
+		    /* margin-left: 12% */
 	}
 	.navmargin{
 	        margin-top: 36px;
@@ -113,11 +113,11 @@
 	}
 	.selmorelogo{
 	    height: 101px;
-    	margin-left: 30px;
+    	/* margin-left: 30px; */
 	}
 	.true2{
 	    list-style-type: none;
-	    margin-left: 42px;
+	    /* margin-left: 42px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -126,7 +126,7 @@
 	}
 	.true22{
 	    list-style-type: none;
-	    margin-left: 74px;
+	    /* margin-left: 74px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -134,13 +134,13 @@
 	    margin-bottom: 30px;
 	}
 	.navbiddbtn{
-		    margin-left: 10px;
+		    /* margin-left: 10px; */
 		    margin-top: 33px;
 	}
 
 }
 .navbtnmargin{
-		    margin-left: 10px;
+		    /* margin-left: 10px; */
 		    margin-top: 33px;
 }
 

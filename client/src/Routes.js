@@ -30,9 +30,8 @@ import ProfileView from './Components/Profile/profile';
 import { Provider } from 'react-redux';
 import store from './store';
 import AddBillboards from './Components/BillboardForm/addBillboards';
-import Billboardmilitary from './Components/Billboard Military/billmilitary'
-
-
+import Billboardmilitary from './Components/Billboard Military/billmilitary';
+import MarketPlace from './Components/MarketPlace/marketPlace';
 
 class Routes extends Component {
   render() {
@@ -56,7 +55,9 @@ class Routes extends Component {
               <Route path="/profile" component={ProfileView}></Route>
               <Route path="/" component={LogOut}></Route>
               <Route path="/list_add" component={AddBillboards}></Route>
-              <Route path = 'billborad_Militry' component = {Billboardmilitary}></Route>
+              <Route path = '/billborad_Militry' component = {Billboardmilitary}></Route>
+              <Route path = '/market_place' component = {MarketPlace}></Route>
+
             </div>
           </BrowserRouter>
         </Provider>

@@ -32,7 +32,7 @@ class FormLogin extends Component {
         store.dispatch(logUser(this.state));
         this.setState({ isLoader: true }, () => {
           // console.log(this.state.loggedIn, "logged in")
-          localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
+          // localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         })
         // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
@@ -43,22 +43,20 @@ class FormLogin extends Component {
   fectSignInApiFunc = async (values) => {
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
-    // console.log(response.username);
+    console.log(response);
     try {
       if (response.code === 200) {
         this.setState({ data: response.content, isData: true, isLoader: false, loggedIn: true });
-        // console.log(response.token, 'token')
+        localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         localStorage.setItem('userToken', JSON.stringify(response.token))
         localStorage.setItem('userName', JSON.stringify(response.username))
+        console.log(response.username, 'token')
       } else {
         this.setState({ isData: false, isLoader: true })
       }
       // this.props.modalDis();
       // document.getElementById('myModal').modal("hide");
       console.log(document.getElementById('myModal'));
-      // if (response.code === 200) {
-      //   return <Redirect to='/' />
-      // }
     }
     catch (error) {
       console.log(error , 'catch')
@@ -69,16 +67,13 @@ class FormLogin extends Component {
           isAlert: true,
           isLoader: false
         })
-        // console.log("please check your email or password")
       }
     }
-
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
     const { isData, isLoader, loggedIn, isAlert } = this.state
-    // console.log(loggedIn ,'loggedIn')
     //redirect to home page
     if (loggedIn) {
       return <Redirect to='/' />

@@ -7,9 +7,26 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class Dropdown extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userName: ''
+    }
     this.logOut = this.logOut.bind(this)
   }
 
+  componentDidMount() {
+    let data = this.props.userName;
+    let userName = JSON.parse(localStorage.getItem('userName'));
+    if (data) {
+      this.setState({
+        userName: data
+      })
+    }
+    else if (userName) {
+      this.setState({
+        userName: userName
+      })
+    }
+  }
   //clear local storage & redirect to Home
   logOut() {
     localStorage.removeItem('loggedIn');
@@ -20,7 +37,7 @@ class Dropdown extends Component {
   }
 
   render() {
-    let userName = JSON.parse(localStorage.getItem('userName'));
+    const { userName } = this.state
 
     return (
       <MDBDropdown>
