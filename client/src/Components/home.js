@@ -15,25 +15,12 @@ import './home.css';
 class Home extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      userName: ''
-    }
   }
 
-  // componentDidMount() {
-  //   let data = this.props.location.state
-  //   // this.setState({
-  //   //   userName: data
-  //   // })
-  //   console.log(data, 'data')
-  // }
   render() {
-    const { userName } = this.props
-    // console.log(this.)
     return (
       <div>
-        <Header  />
+        <Header userName={this.props.location.state} />
         <Banner />
         <Panel0 />
         <Panel1 />

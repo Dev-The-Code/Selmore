@@ -140,7 +140,7 @@ class Formpanel extends Component {
 			}
 		};
 		if (buyer) {
-			return <Redirect to={{ pathname: '/'}} />
+			return <Redirect to={{ pathname: '/', state: username }} />
 		}
 
 		return (

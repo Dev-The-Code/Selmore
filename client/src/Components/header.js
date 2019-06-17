@@ -16,25 +16,33 @@ class Header extends Component {
 
     }
   }
-
-  // componentDidMount() {
-  //   let data = this.props.userName
-  //   const value = localStorage.getItem("loggedIn");
-
+  async componentDidMount() {
+        let value = await localStorage.getItem("loggedIn");
+        console.log(value)
+  }
+  // async componentDidMount() {
+  //   let value = await localStorage.getItem("loggedIn");
+  //   console.log(value)
+  //   if (value) {
+  //     this.setState({
+  //       propUser: true
+  //     })
+  //   }
+  //   // let data = this.props.userName
   //   // console.log(data, 'header')
+  //   // console.log(value, 'values of the header')
   //   // if (data) {
   //   //   console.log(data, 'data in header')
   //   //   this.setState({
   //   //     propUser: true
   //   //   })
   //   // }
-  //   // else 
-  //   if (value) {
-  //     console.log(value, 'data in header from local storage')
-  //     this.setState({
-  //       propUser: true
-  //     })
-  //   }
+  //   // else if (value) {
+  //   //   console.log(value, 'data in header from local storage')
+  //   //   this.setState({
+  //   //     propUser: true
+  //   //   })
+  //   // }
   // }
   modalDis = () => {
     console.log('calllll')
@@ -44,9 +52,8 @@ class Header extends Component {
   }
 
   render() {
-    // const { propUser } = this.state
+    const { propUser } = this.state
     const value = localStorage.getItem("loggedIn");
-    // console.log(this.props.location.state , '.............')
     return (
       <div>
         <div className="container">
@@ -102,7 +109,7 @@ class Header extends Component {
                 {value
                   ?
                   <li className="nav-item navbtnmargin">
-                    <Dropdown userName={this.props.userName} />
+                    <Dropdown />
                   </li>
                   :
                   <li className="nav-item navbtnmargin" >
@@ -130,7 +137,7 @@ class Header extends Component {
                     </div>
                   </li>
                 }
-                <li className="nav-item navbiddbtn">              
+                <li className="nav-item navbiddbtn">
                 </li>
               </ul>
             </div>

@@ -23,11 +23,11 @@ class Dropdown extends Component {
     //   })
     // }
     // else 
-    if (userName) {
-      this.setState({
-        userName: userName
-      })
-    }
+    // if (userName) {
+    //   this.setState({
+    //     userName: userName
+    //   })
+    // }
   }
   //clear local storage & redirect to Home
   logOut() {
@@ -40,13 +40,10 @@ class Dropdown extends Component {
       logout: true
     })
     return <Redirect to={{ pathname: '/' }} />
-    // if (this.state.logout) {
-    // }
   }
 
   render() {
-    const { userName, logout } = this.state
-    // let userName = JSON.parse(localStorage.getItem('userName'));
+    let userName = JSON.parse(localStorage.getItem('userName'));
 
     return (
       <MDBDropdown>
