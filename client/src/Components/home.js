@@ -21,19 +21,19 @@ class Home extends Component {
     }
   }
 
-  componentDidMount() {
-    let data = this.props.location.state
-    // this.setState({
-    //   userName: data
-    // })
-    console.log(data, 'data')
-  }
+  // componentDidMount() {
+  //   let data = this.props.location.state
+  //   // this.setState({
+  //   //   userName: data
+  //   // })
+  //   console.log(data, 'data')
+  // }
   render() {
     const { userName } = this.props
     // console.log(this.)
     return (
       <div>
-        <Header userName={this.props.location.state} />
+        <Header  />
         <Banner />
         <Panel0 />
         <Panel1 />

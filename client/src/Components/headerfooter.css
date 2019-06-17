@@ -2,7 +2,8 @@
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.navmargin{
 	        margin-top: 30px;
-	        margin-right: -2%;
+			margin-right: -2%;
+			    margin-left: -15px;
 	}
 	.selmorelogo{
 	    height: 101px;
@@ -28,7 +29,8 @@
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
 	}
 
 }
@@ -64,7 +66,9 @@
 	}
 	.navbiddbtn{
 		        /* margin-left: 17px; */
-    		margin-top: 5px;
+			margin-top: 5px;
+			margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
@@ -99,7 +103,9 @@
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
+
 	}
 
 }
@@ -135,7 +141,9 @@
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
+
 	}
 
 }
@@ -207,6 +215,8 @@
 	.navmargin12{
 		margin-top: 33px;
 		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 1020px){
@@ -229,6 +239,8 @@
 	.navmargin12{
 		margin-top: 33px;
 		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
@@ -251,6 +263,8 @@
 	.navmargin12{
 		margin-top: 33px;
 		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
@@ -272,5 +286,7 @@
 	}
 	.navmargin12{
 		margin-top: 33px;
+		margin-right: 4px;
+
 	}
 }

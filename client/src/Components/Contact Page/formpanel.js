@@ -24,7 +24,8 @@ class Formpanel extends Component {
 			emailsArr: [],
 			registerBtn: false,
 			username: '',
-			buyer: false
+			buyer: false,
+			loggedIn: false
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -101,8 +102,12 @@ class Formpanel extends Component {
 			//if user has as a buyer contact us
 			if (this.state.selectedOption === 'Buyer') {
 				this.setState({
-					buyer: true
+					buyer: true,
+					loggedIn:true
 				})
+				localStorage.setItem('userName', JSON.stringify(response.username));
+				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
+
 			}
 		} else {
 			this.setState({ isData: false })
@@ -135,7 +140,7 @@ class Formpanel extends Component {
 			}
 		};
 		if (buyer) {
-			return <Redirect to={{ pathname: '/', state: username }} />
+			return <Redirect to={{ pathname: '/'}} />
 		}
 
 		return (

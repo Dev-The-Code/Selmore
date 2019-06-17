@@ -17,25 +17,25 @@ class Header extends Component {
     }
   }
 
-  componentDidMount() {
-    let data = this.props.userName
-    const value = localStorage.getItem("loggedIn");
+  // componentDidMount() {
+  //   let data = this.props.userName
+  //   const value = localStorage.getItem("loggedIn");
 
-    console.log(data, 'header')
-    if (data) {
-      console.log(data, 'data in header')
-      this.setState({
-        propUser: true
-      })
-    }
-    else if (value) {
-      console.log(value, 'data in header from local storage')
-
-      this.setState({
-        propUser: true
-      })
-    }
-  }
+  //   // console.log(data, 'header')
+  //   // if (data) {
+  //   //   console.log(data, 'data in header')
+  //   //   this.setState({
+  //   //     propUser: true
+  //   //   })
+  //   // }
+  //   // else 
+  //   if (value) {
+  //     console.log(value, 'data in header from local storage')
+  //     this.setState({
+  //       propUser: true
+  //     })
+  //   }
+  // }
   modalDis = () => {
     console.log('calllll')
     this.setState({
@@ -44,17 +44,17 @@ class Header extends Component {
   }
 
   render() {
-    const { propUser } = this.state
+    // const { propUser } = this.state
     const value = localStorage.getItem("loggedIn");
     // console.log(this.props.location.state , '.............')
     return (
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-4 col-md-4 col-lg-3 col-xl-4">
+            <div className="col-4 col-md-4 col-lg-3 col-xl-3">
               <img src="../images/selmore-logo.png" className="selmorelogo" />
             </div>
-            <div className="col-md-8 col-lg-9 col-xl-8 d-none d-sm-block">
+            <div className="col-md-8 col-lg-9 col-xl-9 d-none d-sm-block">
               <ul className="nav navsm">
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
@@ -99,7 +99,7 @@ class Header extends Component {
                     </Link>
                   </button>
                 </li>
-                {propUser
+                {value
                   ?
                   <li className="nav-item navbtnmargin">
                     <Dropdown userName={this.props.userName} />
