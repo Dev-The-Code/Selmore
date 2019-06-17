@@ -17,3 +17,7 @@ body {
 .filter{
     padding: 15px;
 }
+.filterDivs{
+    font-size: 20px;
+    font-weight: bold;
+}
