@@ -23,7 +23,8 @@ class Formpanel extends Component {
 			radioVal: false,
 			emailsArr: [],
 			registerBtn: false,
-			username: ''
+			username: '',
+			buyer: false
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -96,13 +97,12 @@ class Formpanel extends Component {
 		if (response.code === 200) {
 			console.log(response.content, ' response.content')
 			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true, username: response.username });
-			if (this.state.selectedOption === 'Buyer') {
-				console.log(this.props)
-				// this.props.history.push({
-				// 	pathname: '/',
-				// 	state: username
 
-				// })
+			//if user has as a buyer contact us
+			if (this.state.selectedOption === 'Buyer') {
+				this.setState({
+					buyer: true
+				})
 			}
 		} else {
 			this.setState({ isData: false })
@@ -125,9 +125,8 @@ class Formpanel extends Component {
 		return Object.keys(fieldsError).some(field => fieldsError[field]);
 	}
 
-
 	render() {
-		const { selectedOption, username } = this.state
+		const { selectedOption, username, buyer } = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
@@ -135,10 +134,9 @@ class Formpanel extends Component {
 				sm: { span: 10 }
 			}
 		};
-		// if (this.state.selectedOption === 'Buyer') {
-		// 	return <Redirect to={`/`} state={username} />
-
-		// }
+		if (buyer) {
+			return <Redirect to={{ pathname: '/', state: username }} />
+		}
 
 		return (
 			<div>

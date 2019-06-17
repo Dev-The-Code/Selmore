@@ -11,7 +11,29 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: 'modal'
+      modal: 'modal',
+      propUser: false
+
+    }
+  }
+
+  componentDidMount() {
+    let data = this.props.userName
+    const value = localStorage.getItem("loggedIn");
+
+    console.log(data, 'header')
+    if (data) {
+      console.log(data, 'data in header')
+      this.setState({
+        propUser: true
+      })
+    }
+    else if (value) {
+      console.log(value, 'data in header from local storage')
+
+      this.setState({
+        propUser: true
+      })
     }
   }
   modalDis = () => {
@@ -22,8 +44,9 @@ class Header extends Component {
   }
 
   render() {
+    const { propUser } = this.state
     const value = localStorage.getItem("loggedIn");
-    // console.log(value)
+    // console.log(this.props.location.state , '.............')
     return (
       <div>
         <div className="container">
@@ -76,10 +99,10 @@ class Header extends Component {
                     </Link>
                   </button>
                 </li>
-                {value
+                {propUser
                   ?
                   <li className="nav-item navbtnmargin">
-                    <Dropdown />
+                    <Dropdown userName={this.props.userName} />
                   </li>
                   :
                   <li className="nav-item navbtnmargin" >
@@ -107,6 +130,8 @@ class Header extends Component {
                     </div>
                   </li>
                 }
+                <li className="nav-item navbiddbtn">              
+                </li>
               </ul>
             </div>
           </div>
