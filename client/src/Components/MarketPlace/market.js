@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './market.css';
 import image1 from './billboard.jpg';
 import {
-    Checkbox, Form, Row, Col, Menu, Dropdown, Button 
+    Checkbox, Form, Row, Col, Menu, Dropdown, Button
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 
@@ -14,7 +14,8 @@ class Market extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            billboardData: ''
+            billboardData: [],
+            filterValue: ''
         }
     }
 
@@ -29,28 +30,54 @@ class Market extends Component {
             billboardData: response.content
         })
     }
+
+    filterBillBoard(filter) {
+        console.log(filter, 'filter Value')
+        this.handleFiltration(filter)
+    }
+    handleFiltration = (value) => {
+        const { billboardData } = this.state;
+        let val = value[0]
+        for (var i = 0; i < billboardData.length; i++) {
+            let data = billboardData[i]
+            for (var j in data) {
+                // console.log(data[j], 'data[j]')
+                if (val !== undefined) {
+                    if (val.includes(data[j])) {
+                        // if (data === data) {
+                        //     console.log(data, '............');
+                        // }
+                        // this.setState({
+                        //     billboardData: data
+                        // })
+                    }
+                }
+            }
+        }
+    }
+
     render() {
         const { billboardData } = this.state;
-        console.log(billboardData, 'billboardData')
-        const menu = (
-            <Menu>
-                <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                        1st menu item
-                </a>
-                </Menu.Item>
-                <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                        2nd menu item
-                </a>
-                </Menu.Item>
-                <Menu.Item>
-                    <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                        3rd menu item
-                </a>
-                </Menu.Item>
-            </Menu>
-        );
+        // console.log(billboardData, 'billboardData')
+        // const menu = (
+        //     <Menu>
+        //         <Menu.Item>
+        //             <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        //                 1st menu item
+        //         </a>
+        //         </Menu.Item>
+        //         <Menu.Item>
+        //             <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        //                 2nd menu item
+        //         </a>
+        //         </Menu.Item>
+        //         <Menu.Item>
+        //             <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        //                 3rd menu item
+        //         </a>
+        //         </Menu.Item>
+        //     </Menu>
+        // );
         return (
             <div>
                 <div className='row billboard'>
@@ -60,8 +87,8 @@ class Market extends Component {
                 <div className='row filter'>
                     <div className='col-md-3'>
                         <CheckboxGroup
-                        // setFieldsValue={this.state.intendedUsekeyWords}
-                        // onChange={this.onChangekeyWords.bind(this)}
+                            setFieldsValue={this.state.filterValue}
+                            onChange={this.filterBillBoard.bind(this)}
                         >
                             {/* <div className='filterDivs'>Billboard Facing</div>
                             <Row>
@@ -99,7 +126,7 @@ class Market extends Component {
                             {/* <Row>
                             </Row> */}
                             <Row>
-                                <div className='filterDivs'>Billboard Location</div>
+                                <div className='filterDivs'>Facing</div>
                                 {/* <Col >
                                     <Checkbox value="latitude">Latitude</Checkbox>
                                 </Col>
@@ -116,7 +143,7 @@ class Market extends Component {
                                     <Checkbox value="Front Facing">Front Facing</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="Back Facing">Back Facing</Checkbox>
+                                    <Checkbox value="back">Back Facing</Checkbox>
                                 </Col>
                                 <Col >
                                     {/* <Checkbox value="city">City</Checkbox> */}
@@ -124,9 +151,9 @@ class Market extends Component {
                                         <Button>City</Button>
                                     </Dropdown> */}
                                 </Col>
-                                <Col >
+                                {/* <Col >
                                     <Checkbox value="state">State</Checkbox>
-                                </Col>
+                                </Col> */}
                                 {/* <Col >
                                     <Checkbox value="country">Country</Checkbox>
                                 </Col> */}
@@ -134,7 +161,7 @@ class Market extends Component {
                             {/* <div className='filterDivs'>Billboard Rates</div>
                             <Row>
                                 <Col >
-                                    <Checkbox value="dailyRate">Daily Rate</Checkbox>
+                                    <Checkbox value="dailyRate">1</Checkbox>
                                 </Col>
                                 <Col >
                                     <Checkbox value="weeklyRate">Weekly Rate</Checkbox>
