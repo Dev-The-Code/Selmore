@@ -26,8 +26,9 @@ class Market extends Component {
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');
         console.log(response, 'response')
+        let data = response.content
         this.setState({
-            billboardData: response.content
+            billboardData: data
         })
     }
 
@@ -37,24 +38,82 @@ class Market extends Component {
     }
     handleFiltration = (value) => {
         const { billboardData } = this.state;
-        let val = value[0]
-        for (var i = 0; i < billboardData.length; i++) {
-            let data = billboardData[i]
-            for (var j in data) {
-                // console.log(data[j], 'data[j]')
-                if (val !== undefined) {
-                    if (val.includes(data[j])) {
-                        // if (data === data) {
-                        //     console.log(data, '............');
-                        // }
-                        // this.setState({
-                        //     billboardData: data
-                        // })
-                    }
-                }
-            }
-        }
+
+        var obj = billboardData.map(function (billboard) {
+            console.log(billboard ,'billboard')
+            return billboard
+        });
+        console.log(obj)
+        // let val = value
+        // let fieldValue = [];
+        // let filter = []
+        // // console.log(billboardData, 'billboardData')
+        // for (var i = 0; i < billboardData.length; i++) {
+        //     let data = billboardData[i]
+        //     for (var j in data) {
+        // let d = data[j]
+        // for(var k=0 ; k<d.length; k++){
+        //     fieldValue.push(d[k])
+        // }
+        // console.log(data[j], 'data[j]')
+        // if (val !== undefined) {
+        //     if (val.includes(data[j])) {
+        //         fieldValue.push(val);
+        //         // let filtered = val.filter((elem) => elem !== data[j]);
+        //         // console.log(filtered , 'filtered')
+        //         // if (data.companyName === data.companyName) {
+        //         //     console.log(data[j], '............');
+        //         // }
+        //         // this.setState({
+        //         //     billboardData: data
+        //         // })
+        //     }
+        //     }
+        // }
+        // console.log(fieldValue, 'fieldValue')
+        // if (val !== undefined) {
+        //     console.log('.........')
+        //     if (val.includes(fieldValue)) {
+        //         console.log(';;;;;;;;;;;')
+        //         filter.push(val);
+        //     }
+        //     // this.setState({ filtered }, () => {
+        //     // 	this.filteringData();
+        //     // });
+        //     // for (var j in data) {
+        //     // }
+        //     console.log(filter, 'data')
+        // }
+
     }
+    // handleConditions(filtered, filter, item){
+    // 	if(filtered.includes(filter)){
+    // 		filtered = filtered.filter((elem) => elem !== filter);
+    // 		// console.log(item , 'item')
+    // 		// console.log(filter , 'filter')
+    // 		// console.log(filtered , 'filtered in the if')
+    // 	}
+    // 	filtered.push(item);
+    // 	this.setState({ filtered }, () => {
+    // 		this.filteringData();
+    // 	});
+    // 	console.log(filtered , 'filtered outside the if')
+    // }
+    // filteringData(){
+    // 	const { arr, mainFilter, weather, size, filtered } = this.state;
+    // 	if(filtered.length === 0){
+    // 		this.setState({ data: arr });
+
+    // 	}else {
+    // 		let data = arr;
+    // 		data = !!mainFilter.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
+    // 		data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
+    // 		data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))): data;
+    // 		this.setState({ data });
+    // 		console.log(data)
+    // 	}
+    // }
+
 
     render() {
         const { billboardData } = this.state;
@@ -182,7 +241,7 @@ class Market extends Component {
                                 // console.log(elem, elem)
                                 return (
                                     <div className='col-md-3'>
-                                        <img src={elem.billBoardImgs[0]} className='imgBillBoard' />
+                                        <img src={elem.billBoardImgs[0]} className='imgBillBoard' alt={key} />
                                         <p>{elem.companyName}</p>
                                         <p>{elem.city[0]}</p>
                                     </div>
@@ -211,6 +270,20 @@ class Market extends Component {
                                 <p>Billboards</p>
                             </div>
                         </div> */}
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
