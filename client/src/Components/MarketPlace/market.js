@@ -15,7 +15,8 @@ class Market extends Component {
         super(props)
         this.state = {
             billboardData: [],
-            filterValue: ''
+            filterValue: '',
+            filtered: []
         }
     }
 
@@ -38,12 +39,34 @@ class Market extends Component {
     }
     handleFiltration = (value) => {
         const { billboardData } = this.state;
+        let filterValues = [];
+        let filtered = [];
+        for (var i = 0; i < billboardData.length; i++) {
+            let data = billboardData[i]
+            // console.log(data, 'data')
+            for (var j in data) {
+                // console.log(data[j])
+                filterValues.push(data[j])
+            }
+            for (var k = 0; k < value.length; k++) {
+                if (filterValues.indexOf(value[k])) {
+                    // console.log(filterValues , "filterValues")
+                    filtered.push(value[k])
+                    this.setState({ filtered }, () => {
+                        this.filteringData();
+                    });
+                }
+            }
+        }
+        // console.log(filterValues , 'filterValues')
 
-        var obj = billboardData.map(function (billboard) {
-            console.log(billboard ,'billboard')
-            return billboard
-        });
-        console.log(obj)
+        // var obj = billboardData.map(function (billboard) {
+        //     for (var i = 0; i < billboard.length; i++) {
+        //         console.log(billboard[i], 'billboard')
+        //     }
+        //     return billboard
+        // });
+        // console.log(obj)
         // let val = value
         // let fieldValue = [];
         // let filter = []
@@ -99,44 +122,25 @@ class Market extends Component {
     // 	});
     // 	console.log(filtered , 'filtered outside the if')
     // }
-    // filteringData(){
-    // 	const { arr, mainFilter, weather, size, filtered } = this.state;
-    // 	if(filtered.length === 0){
-    // 		this.setState({ data: arr });
 
-    // 	}else {
-    // 		let data = arr;
-    // 		data = !!mainFilter.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
-    // 		data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
-    // 		data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))): data;
-    // 		this.setState({ data });
-    // 		console.log(data)
-    // 	}
-    // }
+
+    filteringData() {
+        const { billboardData, filtered } = this.state;
+        if (filtered.length === 0) {
+            this.setState({ billboardData: billboardData });
+        } else {
+            let data = billboardData;
+            // data = !!filtered.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
+            // data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
+            // data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))) : data;
+            this.setState({ billboardData });
+            // console.log(billboardData)
+        }
+    }
 
 
     render() {
         const { billboardData } = this.state;
-        // console.log(billboardData, 'billboardData')
-        // const menu = (
-        //     <Menu>
-        //         <Menu.Item>
-        //             <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-        //                 1st menu item
-        //         </a>
-        //         </Menu.Item>
-        //         <Menu.Item>
-        //             <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-        //                 2nd menu item
-        //         </a>
-        //         </Menu.Item>
-        //         <Menu.Item>
-        //             <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-        //                 3rd menu item
-        //         </a>
-        //         </Menu.Item>
-        //     </Menu>
-        // );
         return (
             <div>
                 <div className='row billboard'>
