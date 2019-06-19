@@ -26,11 +26,32 @@ class Market extends Component {
 
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');
-        console.log(response, 'response')
-        let data = response.content
-        this.setState({
-            billboardData: data
-        })
+        console.log(response, 'response');
+        let data = response.content;
+        console.log(data , 'data')
+        // for (var i = 0; i < data.length; i++) {
+        //     let billboardArr = [];
+        //     let array = [];
+        //     let billboardObj = data[i]
+        //     for (var j in billboardObj) {
+        //         let da = billboardObj[j]
+        //         for (var k = 0; k < da.length; k++) {
+        //             billboardArr.push(da[k])
+        //         }
+        //         if (j == 'companyId') {
+        //             let ab = billboardArr.slice(0, 21)
+        //             array.push(ab)
+        //             let companyId = billboardObj["companyId"]
+        //             let companyName = billboardObj["companyName"]
+        //             let _id = billboardObj["_id"]
+        //             array.push(companyId, companyName, _id)
+        //         }
+        //     }
+        //     console.log(array)
+        // }
+        // this.setState({
+        //     billboardData: arr
+        // })
     }
 
     filterBillBoard(filter) {
@@ -50,11 +71,18 @@ class Market extends Component {
             }
             for (var k = 0; k < value.length; k++) {
                 if (filterValues.indexOf(value[k])) {
-                    // console.log(filterValues , "filterValues")
-                    filtered.push(value[k])
-                    this.setState({ filtered }, () => {
-                        this.filteringData();
-                    });
+                    let filter = value[k]
+                    // console.log(data[filter] , "data")
+                    let filtered = data.filter((elem) => elem.filter.includes("Front Facing"))
+                    console.log(filtered, 'filtered')
+                    // filtered.push(value[k])
+                    // for(var l in data){
+                    //     let d = data[l]
+                    //     console.log(d,';;;;;;;;')
+                    // }
+                    // this.setState({ filtered }, () => {
+                    //     this.filteringData();
+                    // });
                 }
             }
         }
@@ -141,6 +169,7 @@ class Market extends Component {
 
     render() {
         const { billboardData } = this.state;
+        console.log(billboardData, 'billboardData')
         return (
             <div>
                 <div className='row billboard'>
@@ -242,12 +271,12 @@ class Market extends Component {
                         {/* rendering the billboard data on front end */}
                         <div className='row '>
                             {billboardData && billboardData.map((elem, key) => {
-                                // console.log(elem, elem)
+                                console.log(elem, elem)
                                 return (
                                     <div className='col-md-3'>
-                                        <img src={elem.billBoardImgs[0]} className='imgBillBoard' alt={key} />
+                                        {/* <img src={elem.billBoardImgs[0]} className='imgBillBoard' alt={key} /> */}
                                         <p>{elem.companyName}</p>
-                                        <p>{elem.city[0]}</p>
+                                        {/* <p>{elem.city[0][0]}</p> */}
                                     </div>
                                 )
                             })}
