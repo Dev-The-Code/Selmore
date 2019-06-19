@@ -26,66 +26,89 @@ class Market extends Component {
 
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');
-        console.log(response, 'response');
+        // console.log(response, 'response');
+        let arr = [];
         let data = response.content;
-        console.log(data , 'data')
-        // for (var i = 0; i < data.length; i++) {
-        //     let billboardArr = [];
-        //     let array = [];
-        //     let billboardObj = data[i]
-        //     for (var j in billboardObj) {
-        //         let da = billboardObj[j]
-        //         for (var k = 0; k < da.length; k++) {
-        //             billboardArr.push(da[k])
-        //         }
-        //         if (j == 'companyId') {
-        //             let ab = billboardArr.slice(0, 21)
-        //             array.push(ab)
-        //             let companyId = billboardObj["companyId"]
-        //             let companyName = billboardObj["companyName"]
-        //             let _id = billboardObj["_id"]
-        //             array.push(companyId, companyName, _id)
-        //         }
-        //     }
-        //     console.log(array)
-        // }
-        // this.setState({
-        //     billboardData: arr
-        // })
-    }
 
+        // seprate billboard data in the array from array of objects and objects has an multiple array
+        for (var i = 0; i < data.length; i++) {
+            let billboardArr1 = [];
+            let billboardArr2 = [];
+            let billboardObj = data[i];
+            for (var j in billboardObj) {
+                let billboardFields = [];
+                if (j !== 'companyId' && j !== 'companyName' && j !== '_id') {
+                    billboardFields = billboardObj[j]
+                }
+                for (var k = 0; k < billboardFields.length; k++) {
+                    if (k == 0) {
+                        billboardArr1.push(billboardFields[k])
+                    }
+                    else {
+                        billboardArr2.push(billboardFields[k])
+                    }
+                }
+                if (j == 'companyId') {
+                    let companyId = billboardObj["companyId"]
+                    let companyName = billboardObj["companyName"]
+                    let _id = billboardObj["_id"]
+                    billboardArr2.push(companyId, companyName, _id)
+                    billboardArr1.push(companyId, companyName, _id)
+                }
+            }
+            arr.push(billboardArr1, billboardArr2)
+        }
+        this.setState({
+            billboardData: arr
+        })
+    }
     filterBillBoard(filter) {
         console.log(filter, 'filter Value')
         this.handleFiltration(filter)
     }
     handleFiltration = (value) => {
         const { billboardData } = this.state;
-        let filterValues = [];
-        let filtered = [];
-        for (var i = 0; i < billboardData.length; i++) {
-            let data = billboardData[i]
-            // console.log(data, 'data')
-            for (var j in data) {
-                // console.log(data[j])
-                filterValues.push(data[j])
-            }
-            for (var k = 0; k < value.length; k++) {
-                if (filterValues.indexOf(value[k])) {
-                    let filter = value[k]
-                    // console.log(data[filter] , "data")
-                    let filtered = data.filter((elem) => elem.filter.includes("Front Facing"))
-                    console.log(filtered, 'filtered')
-                    // filtered.push(value[k])
-                    // for(var l in data){
-                    //     let d = data[l]
-                    //     console.log(d,';;;;;;;;')
-                    // }
-                    // this.setState({ filtered }, () => {
-                    //     this.filteringData();
-                    // });
+        var ret = [];
+        for (var i = 0; i < value.length; i++) {
+            for (var j in billboardData) {
+                for (var k = 0; k < billboardData[j].length; k++) {
+                    if (billboardData[j][k] == value[i]) {
+                        ret.push(billboardData[j]);
+                        // console.log(ret)
+                    }
                 }
             }
         }
+        // console.log(ret)
+        this.setState({
+            billboardData: ret
+        })
+
+        // if(filterValues.indexOf(billboardData)
+        // for (var i = 0; i < billboardData.length; i++) {
+        //     let data = billboardData[i]
+        //     // console.log(data, 'data')
+        //     for (var j in data) {
+        //         // console.log(data[j])
+        //         filterValues.push(data[j])
+        //     }
+        //     for (var k = 0; k < value.length; k++) {
+        //         if (filterValues.indexOf(value[k])) {
+        //             let filter = value[k]
+        // console.log(data[filter] , "data")
+        // let filtered = data.filter((elem) => elem.filter.includes("Front Facing"))
+        // console.log(filtered, 'filtered')
+        // filtered.push(value[k])
+        // for(var l in data){
+        //     let d = data[l]
+        //     console.log(d,';;;;;;;;')
+        // }
+        // this.setState({ filtered }, () => {
+        //     this.filteringData();
+        //             // });
+        //         }
+        //     }
+        // }
         // console.log(filterValues , 'filterValues')
 
         // var obj = billboardData.map(function (billboard) {
@@ -152,19 +175,20 @@ class Market extends Component {
     // }
 
 
-    filteringData() {
-        const { billboardData, filtered } = this.state;
-        if (filtered.length === 0) {
-            this.setState({ billboardData: billboardData });
-        } else {
-            let data = billboardData;
-            // data = !!filtered.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
-            // data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
-            // data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))) : data;
-            this.setState({ billboardData });
-            // console.log(billboardData)
-        }
-    }
+    // filteringData() {
+    //     const { billboardData, filtered } = this.state;
+    //     // console.log(billboardData, 'billboardData')
+    //     // if (filtered.length === 0) {
+    //     //     this.setState({ billboardData: billboardData });
+    //     // } else {
+    //     //     let data = billboardData;
+    //     //     // data = !!filtered.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
+    //     //     // data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
+    //     //     // data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))) : data;
+    //     //     this.setState({ billboardData });
+    //     //     // console.log(billboardData)
+    //     // }
+    // }
 
 
     render() {
@@ -232,7 +256,7 @@ class Market extends Component {
                                     <Checkbox value="nearBy">Near By</Checkbox>
                                 </Col>*/}
                                 <Col >
-                                    <Checkbox value="Front Facing">Front Facing</Checkbox>
+                                    <Checkbox value="Front">Front Facing</Checkbox>
                                 </Col>
                                 <Col >
                                     <Checkbox value="back">Back Facing</Checkbox>
@@ -271,12 +295,13 @@ class Market extends Component {
                         {/* rendering the billboard data on front end */}
                         <div className='row '>
                             {billboardData && billboardData.map((elem, key) => {
-                                console.log(elem, elem)
+                                console.log(elem, "elem")
+                                console.log(key, 'key')
                                 return (
                                     <div className='col-md-3'>
-                                        {/* <img src={elem.billBoardImgs[0]} className='imgBillBoard' alt={key} /> */}
-                                        <p>{elem.companyName}</p>
-                                        {/* <p>{elem.city[0][0]}</p> */}
+                                        <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                        <p>{elem[23]}</p>
+                                        <p>{elem[19]}</p>
                                     </div>
                                 )
                             })}
@@ -303,7 +328,6 @@ class Market extends Component {
                                 <p>Billboards</p>
                             </div>
                         </div> */}
-
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item disabled">
