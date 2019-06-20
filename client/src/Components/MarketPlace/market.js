@@ -4,6 +4,8 @@ import {
     Checkbox, Form, Row, Col, Menu, Dropdown, Button
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
+import Pagination from "react-js-pagination";
+// require("bootstrap/less/bootstrap.less");
 
 const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group;
@@ -15,10 +17,11 @@ class Market extends Component {
             billboardData: [],
             billboardFilterdData: [],
             filterValue: '',
-            filtered: []
+            activePage: 15
         }
     }
     componentDidMount() {
+        //fetching billboard data
         this.billBoradDetails();
     }
     billBoradDetails = async () => {
@@ -27,7 +30,7 @@ class Market extends Component {
         let arr = [];
         let data = response.content;
 
-        // seprate billboard data in the array from array of objects and objects has an multiple array
+        // seprate every billboard data in the array from array of objects and objects has an multiple array
         for (var i = 0; i < data.length; i++) {
             let billboardArr1 = [];
             let billboardArr2 = [];
@@ -95,8 +98,41 @@ class Market extends Component {
             })
         }
     }
+
+    //pagination function
+    handlePageChange(pageNumber) {
+        console.log(`active page is ${pageNumber}`);
+        this.setState({ activePage: pageNumber });
+    }
     render() {
         const { billboardData, billboardFilterdData } = this.state;
+
+        const billboardRendring = (
+            <div>
+                {/* rendering the billboard data on front end */}
+                <div className='row '>
+                    {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
+                        return (
+                            <div className='col-md-3'>
+                                <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                <p>{elem[23]}</p>
+                                <p>{elem[19]}</p>
+                            </div>
+                        )
+                    })
+                        :
+                        billboardData && billboardData.map((elem, key) => {
+                            return (
+                                <div className='col-md-3'>
+                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                    <p>{elem[23]}</p>
+                                    <p>{elem[19]}</p>
+                                </div>
+                            )
+                        })}
+                </div>
+            </div>
+        );
         return (
             <div>
                 <div className='row billboard'>
@@ -195,29 +231,7 @@ class Market extends Component {
                         </CheckboxGroup>
                     </div>
                     <div className='col-md-9'>
-                        {/* rendering the billboard data on front end */}
-                        <div className='row '>
-
-                            {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
-                                return (
-                                    <div className='col-md-3'>
-                                        <img src={elem[0][0]} className='imgBillBoard' alt={key} />
-                                        <p>{elem[23]}</p>
-                                        <p>{elem[19]}</p>
-                                    </div>
-                                )
-                            })
-                                :
-                                billboardData && billboardData.map((elem, key) => {
-                                    return (
-                                        <div className='col-md-3'>
-                                            <img src={elem[0][0]} className='imgBillBoard' alt={key} />
-                                            <p>{elem[23]}</p>
-                                            <p>{elem[19]}</p>
-                                        </div>
-                                    )
-                                })}
-                        </div>
+                        {/* {billboardRendring} */}
                         {/* <div className='row '>
                             <div className='col-md-3'>
                                 <img src={image1} className='imgBillBoard' />
@@ -240,19 +254,14 @@ class Market extends Component {
                                 <p>Billboards</p>
                             </div>
                         </div> */}
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <Pagination
+                            activePage={this.state.activePage}
+                            itemsCountPerPage={10}
+                            item = {billboardRendring}
+                            totalItemsCount={450}
+                            pageRangeDisplayed={5}
+                            onChange={this.handlePageChange}
+                        />
                     </div>
                 </div>
             </div>
