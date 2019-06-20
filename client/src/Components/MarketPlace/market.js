@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './market.css';
-import image1 from './billboard.jpg';
 import {
     Checkbox, Form, Row, Col, Menu, Dropdown, Button
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-
 
 const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group;
@@ -15,15 +13,14 @@ class Market extends Component {
         super(props)
         this.state = {
             billboardData: [],
+            billboardFilterdData: [],
             filterValue: '',
             filtered: []
         }
     }
-
     componentDidMount() {
         this.billBoradDetails();
     }
-
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');
         // console.log(response, 'response');
@@ -61,139 +58,45 @@ class Market extends Component {
         this.setState({
             billboardData: arr
         })
+        localStorage.setItem('billboardData', JSON.stringify(arr))
     }
+
+    //filtration the data with given values
     filterBillBoard(filter) {
-        console.log(filter, 'filter Value')
+        // console.log(filter, 'filter Value')
         this.handleFiltration(filter)
     }
     handleFiltration = (value) => {
+        //filter data with given values array
         const { billboardData } = this.state;
-        var ret = [];
-        for (var i = 0; i < value.length; i++) {
-            for (var j in billboardData) {
-                for (var k = 0; k < billboardData[j].length; k++) {
-                    if (billboardData[j][k] == value[i]) {
-                        ret.push(billboardData[j]);
-                        // console.log(ret)
+        var filteredData = [];
+        if (value.length >= 1) {
+            //if user has filter values the run the code
+            for (var i = 0; i < value.length; i++) {
+                for (var j in billboardData) {
+                    for (var k = 0; k < billboardData[j].length; k++) {
+                        if (billboardData[j][k] == value[i]) {
+                            filteredData.push(billboardData[j]);
+                        }
                     }
                 }
             }
+            this.setState({
+                billboardFilterdData: filteredData
+            })
         }
-        // console.log(ret)
-        this.setState({
-            billboardData: ret
-        })
-
-        // if(filterValues.indexOf(billboardData)
-        // for (var i = 0; i < billboardData.length; i++) {
-        //     let data = billboardData[i]
-        //     // console.log(data, 'data')
-        //     for (var j in data) {
-        //         // console.log(data[j])
-        //         filterValues.push(data[j])
-        //     }
-        //     for (var k = 0; k < value.length; k++) {
-        //         if (filterValues.indexOf(value[k])) {
-        //             let filter = value[k]
-        // console.log(data[filter] , "data")
-        // let filtered = data.filter((elem) => elem.filter.includes("Front Facing"))
-        // console.log(filtered, 'filtered')
-        // filtered.push(value[k])
-        // for(var l in data){
-        //     let d = data[l]
-        //     console.log(d,';;;;;;;;')
-        // }
-        // this.setState({ filtered }, () => {
-        //     this.filteringData();
-        //             // });
-        //         }
-        //     }
-        // }
-        // console.log(filterValues , 'filterValues')
-
-        // var obj = billboardData.map(function (billboard) {
-        //     for (var i = 0; i < billboard.length; i++) {
-        //         console.log(billboard[i], 'billboard')
-        //     }
-        //     return billboard
-        // });
-        // console.log(obj)
-        // let val = value
-        // let fieldValue = [];
-        // let filter = []
-        // // console.log(billboardData, 'billboardData')
-        // for (var i = 0; i < billboardData.length; i++) {
-        //     let data = billboardData[i]
-        //     for (var j in data) {
-        // let d = data[j]
-        // for(var k=0 ; k<d.length; k++){
-        //     fieldValue.push(d[k])
-        // }
-        // console.log(data[j], 'data[j]')
-        // if (val !== undefined) {
-        //     if (val.includes(data[j])) {
-        //         fieldValue.push(val);
-        //         // let filtered = val.filter((elem) => elem !== data[j]);
-        //         // console.log(filtered , 'filtered')
-        //         // if (data.companyName === data.companyName) {
-        //         //     console.log(data[j], '............');
-        //         // }
-        //         // this.setState({
-        //         //     billboardData: data
-        //         // })
-        //     }
-        //     }
-        // }
-        // console.log(fieldValue, 'fieldValue')
-        // if (val !== undefined) {
-        //     console.log('.........')
-        //     if (val.includes(fieldValue)) {
-        //         console.log(';;;;;;;;;;;')
-        //         filter.push(val);
-        //     }
-        //     // this.setState({ filtered }, () => {
-        //     // 	this.filteringData();
-        //     // });
-        //     // for (var j in data) {
-        //     // }
-        //     console.log(filter, 'data')
-        // }
-
+        else {
+            // if user have not filter data then render orignal data in the page
+            let notFilterd = []
+            var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
+            this.setState({
+                billboardData: billboardDataFromLocalStorage,
+                billboardFilterdData: notFilterd
+            })
+        }
     }
-    // handleConditions(filtered, filter, item){
-    // 	if(filtered.includes(filter)){
-    // 		filtered = filtered.filter((elem) => elem !== filter);
-    // 		// console.log(item , 'item')
-    // 		// console.log(filter , 'filter')
-    // 		// console.log(filtered , 'filtered in the if')
-    // 	}
-    // 	filtered.push(item);
-    // 	this.setState({ filtered }, () => {
-    // 		this.filteringData();
-    // 	});
-    // 	console.log(filtered , 'filtered outside the if')
-    // }
-
-
-    // filteringData() {
-    //     const { billboardData, filtered } = this.state;
-    //     // console.log(billboardData, 'billboardData')
-    //     // if (filtered.length === 0) {
-    //     //     this.setState({ billboardData: billboardData });
-    //     // } else {
-    //     //     let data = billboardData;
-    //     //     // data = !!filtered.length ? arr.filter((elem) => filtered.includes(elem.bodyType)) : data;
-    //     //     // data = !!weather.length ? data.filter((elem) => filtered.includes(elem.weather)) : data;
-    //     //     // data = !!size.length ? data.filter((elem) => filtered.some(r => elem.sizes.includes(r))) : data;
-    //     //     this.setState({ billboardData });
-    //     //     // console.log(billboardData)
-    //     // }
-    // }
-
-
     render() {
-        const { billboardData } = this.state;
-        console.log(billboardData, 'billboardData')
+        const { billboardData, billboardFilterdData } = this.state;
         return (
             <div>
                 <div className='row billboard'>
@@ -294,9 +197,8 @@ class Market extends Component {
                     <div className='col-md-9'>
                         {/* rendering the billboard data on front end */}
                         <div className='row '>
-                            {billboardData && billboardData.map((elem, key) => {
-                                console.log(elem, "elem")
-                                console.log(key, 'key')
+
+                            {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                                 return (
                                     <div className='col-md-3'>
                                         <img src={elem[0][0]} className='imgBillBoard' alt={key} />
@@ -304,7 +206,17 @@ class Market extends Component {
                                         <p>{elem[19]}</p>
                                     </div>
                                 )
-                            })}
+                            })
+                                :
+                                billboardData && billboardData.map((elem, key) => {
+                                    return (
+                                        <div className='col-md-3'>
+                                            <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                            <p>{elem[23]}</p>
+                                            <p>{elem[19]}</p>
+                                        </div>
+                                    )
+                                })}
                         </div>
                         {/* <div className='row '>
                             <div className='col-md-3'>
