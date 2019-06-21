@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col, Menu, Dropdown, Button
+    Checkbox, Form, Row, Col, Menu, Dropdown, Button, Select
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-// import Pagination from "react-js-pagination";
+import InputRange from 'react-input-range';
+import Slider, { Range } from 'rc-slider';
 
+// import Pagination from "react-js-pagination";
+const FormItem = Form.Item;
 const CheckboxGroup = Checkbox.Group;
 
 class Market extends Component {
@@ -21,7 +24,10 @@ class Market extends Component {
             // itemsCountPerPage: 1,
             // totalItemsCount: 3,
             from: 0,
-            to: 2
+            to: 2,
+            inputValue: 1,
+            value: 0,
+            companyName: [0, 100, 150, 200]
         }
     }
     componentDidMount() {
@@ -46,6 +52,7 @@ class Market extends Component {
                 }
                 for (var k = 0; k < billboardFields.length; k++) {
                     if (k == 0) {
+                        // console.log(j, billboardFields[k], 'billboardFields[k]')
                         billboardArr1.push(billboardFields[k])
                     }
                     else {
@@ -84,11 +91,14 @@ class Market extends Component {
         //filter data with given values array
         const { billboardData } = this.state;
         var filteredData = [];
+        console.log(value, 'value')
         if (value.length >= 1) {
             //if user has filter values the run the code
             for (var i = 0; i < value.length; i++) {
                 for (var j in billboardData) {
                     for (var k = 0; k < billboardData[j].length; k++) {
+                        console.log(value[i])
+                        console.log(billboardData[j], 'billboard data')
                         if (billboardData[j][k] == value[i]) {
                             filteredData.push(billboardData[j]);
                         }
@@ -137,7 +147,8 @@ class Market extends Component {
     //     // });
     // }
     render() {
-        const { billBorad, billboardFilterdData } = this.state;
+        const { getFieldDecorator } = this.props.form;
+        const { billBorad, billboardFilterdData, inputValue } = this.state;
         console.log(billBorad, 'billBorad')
         const billboardRendring = (
             <div>
@@ -178,60 +189,49 @@ class Market extends Component {
                             setFieldsValue={this.state.filterValue}
                             onChange={this.filterBillBoard.bind(this)}
                         >
-                            {/* <div className='filterDivs'>Billboard Facing</div>
+                            <div className='filterDivs'>Types</div>
                             <Row>
-                                <Col >
-                                    <Checkbox value="audianceType">Audiance Type</Checkbox>
+                                <Col>
+                                    <Checkbox value='static'>Static</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="status">Status</Checkbox>
+                                    <Checkbox value="classic">Classic</Checkbox>
+                                </Col>
+                                <Col>
+                                    <Checkbox value='digital'>Digital</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="traffic">Traffic</Checkbox>
+                                    <Checkbox value="mobile">Mobile</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="Facing">Facing</Checkbox>
+                                    <Checkbox value="bridge">Bridge</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="lightning">Lightning</Checkbox>
-                                </Col>
-                            </Row> */}
-                            {/* <div className='filterDivs'>Size</div>
-                            <Row>
-                                <Col >
-                                    <Checkbox value="size">Size</Checkbox>
+                                    <Checkbox value="vinyl">Vinyl</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="width">Width</Checkbox>
+                                    <Checkbox value="painted">Painted</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="height">Height</Checkbox>
+                                    <Checkbox value="three dimensional">Three Dimensional</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="type">Type </Checkbox>
+                                    <Checkbox value="scented">Scented</Checkbox>
                                 </Col>
-                            </Row> */}
-                            {/* <Row>
-                            </Row> */}
+                                <Col >
+                                    <Checkbox value="painted">Painted</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox value="lamp post">Lamp Post</Checkbox>
+                                </Col>
+                            </Row>
                             <Row>
                                 <div className='filterDivs'>Facing</div>
-                                {/* <Col >
-                                    <Checkbox value="latitude">Latitude</Checkbox>
+                                <Col >
+                                    <Checkbox value="Front">Front</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="longitude">Longitude</Checkbox>
-                                </Col> 
-                                <Col >
-                                    <Checkbox value="address">Address</Checkbox>
-                                </Col>
-                                <Col >
-                                    <Checkbox value="nearBy">Near By</Checkbox>
-                                </Col>*/}
-                                <Col >
-                                    <Checkbox value="Front">Front Facing</Checkbox>
-                                </Col>
-                                <Col >
-                                    <Checkbox value="back">Back Facing</Checkbox>
+                                    <Checkbox value="back">Back</Checkbox>
                                 </Col>
                                 <Col >
                                     {/* <Checkbox value="city">City</Checkbox> */}
@@ -239,28 +239,80 @@ class Market extends Component {
                                         <Button>City</Button>
                                     </Dropdown> */}
                                 </Col>
-                                {/* <Col >
-                                    <Checkbox value="state">State</Checkbox>
-                                </Col> */}
-                                {/* <Col >
-                                    <Checkbox value="country">Country</Checkbox>
-                                </Col> */}
                             </Row>
-                            {/* <div className='filterDivs'>Billboard Rates</div>
+                            <div className='filterDivs'>Lightning</div>
                             <Row>
                                 <Col >
-                                    <Checkbox value="dailyRate">1</Checkbox>
+                                    <Checkbox value="yes">Yes</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="weeklyRate">Weekly Rate</Checkbox>
+                                    <Checkbox value="no">No</Checkbox>
+                                </Col>
+                            </Row>
+                            <div className='filterDivs'>Width</div>
+                            <Row>
+                                {/* <Col >
+                                    <Checkbox value="0 - 500">0 - 500</Checkbox>
+                                </Col> */}
+                                {/* <InputRange
+                                    maxValue={20}
+                                    minValue={0}
+                                    value={this.state.value}
+                                    onChange={value => this.setState({ value })} /> */}
+                                {/* <Slider defaultValue={0}  /> */}
+                                <Col>
+                                    {/* <Slider
+                                        min={1}
+                                        max={20}
+                                        onChange={this.onChange}
+                                        value={typeof inputValue === 'number' ? inputValue : 0}
+                                    /> */}
+                                    {/* <Slider />
+                                    <Range /> */}
+                                    {/* <Slider
+                                        value={this.state.value}
+                                        onChange={this.onSliderChange}
+                                        onAfterChange={this.onAfterChange}
+                                    /> */}
+                                    {/* <Select
+                                        onChange={this.handleChange}
+                                        options={this.state.companyName}
+                                    ></Select> */}
+                                    <Form.Item>
+                                        <p>Company Name:</p>
+                                        {getFieldDecorator('company', {
+                                            initialValue: this.state.compaNames,
+                                            //  defaultValue: option.initialValue,
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter your company name!',
+                                            }],
+                                        })(
+                                            <Select
+                                                // defaultValue={Option.initialValue}
+                                                onChange={this.handleChange}
+                                                options={this.state.companyName}
+                                            // value={this.state.companyName}
+                                            ></Select>
+                                            // <Select>
+                                            //     {optionItems}
+                                            // </Select>
+                                        )}
+                                    </Form.Item>
+                                </Col>
+                                {/* <Col >
+                                    <Checkbox value="500 - 1000">501 - 1000</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="monthlyRate">Monthly Rate</Checkbox>
+                                    <Checkbox value="1001 - 1500">1001 - 1500</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="yearlyRate">Yearly Rate</Checkbox>
+                                    <Checkbox value="1500 - 2000">1500 - 2000</Checkbox>
                                 </Col>
-                            </Row> */}
+                                <Col >
+                                    <Checkbox value="2000 >">2000 ></Checkbox>
+                                </Col> */}
+                            </Row>
                         </CheckboxGroup>
                     </div>
                     <div className='col-md-9'>
@@ -287,4 +339,5 @@ class Market extends Component {
         )
     }
 }
-export default Market;
+const WrappedDynamicFieldSet = Form.create()(Market);
+export default WrappedDynamicFieldSet;

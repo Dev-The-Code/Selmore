@@ -360,55 +360,6 @@ class BillBoard extends Component {
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { fileList, imgArr, sumitDataAlert, companyName, previewVisible, previewImage, index } = this.state;
-
-        // const props = {
-        //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        //     // onChange({ file, fileList }) {
-        //     //     if (file.status !== 'uploading') {
-        //     //         console.log(file, fileList);
-        //     //         console.log(this.state[fileListRef] , 'this.state[fileListRef]')
-        //     //     }
-        //     // }
-        //     onChange({file,  fileList } ) {
-        //         if (file.status !== 'uploading') {
-        //             console.log(index)
-        //             let fileListRef = `fileList${index}`
-        //             // console.log(fileListRef, 'handle change fileList')
-        //             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
-        //         }
-        //     }
-        // }
-        // const uploadedImages = (
-        //     <div style={{ height: '100%' }}>
-
-        //         {this.state.imageList.map((elem) => {
-        //             console.log(elem, 'elem')
-        //             return (
-        //                 <div className='insideDiv'>
-        //                     <a>
-        //                         <img alt='img1' src={elem} style={{ height: '100%' }} />
-        //                         <span>
-        //                             <a><Icon title='Preview file' onClick={() =>
-        //                                 this.handlePreview(elem)} type="eye" theme="outlined"
-        //                                 style={{
-        //                                     zIndex: 10, transition: 'all .3s', fontSize: '16px',
-        //                                     width: '30px', color: 'rgba(255, 255, 255, 0.85)', margin: '0 4px'
-        //                                 }} />
-        //                             </a>
-        //                             <Icon title='Remove file' type='delete'
-        //                                 onClick={this.deleteImage.bind(this, elem)}
-        //                                 style={{
-        //                                     zIndex: 10, transition: 'all .3s', fontSize: '16px',
-        //                                     width: '30px', color: 'rgba(255, 255, 255, 0.85)', margin: '0 4px'
-        //                                 }} />
-        //                         </span>
-        //                     </a>
-        //                 </div>
-        //             )
-        //         })}
-        //     </div>
-        // )
-
         const uploadButton = (
             <div>
                 <Icon type="plus" />
@@ -1137,40 +1088,12 @@ class BillBoard extends Component {
                                 >Submit</Button>
                                 <br />
                                 <br />
-
-                                {/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#biilbord">
-                                    Submit
-                                    </button> */}
                                 {sumitDataAlert ?
-                                    // <div class="modal fade" id="biilbord">
-                                    //     <div class="modal-dialog">
-                                    //         <div class="modal-content">
-                                    //             <div class="modal-body">
-                                    //                 Your Data Has been Submitted
-                                    //         </div>
-                                    //             <div class="modal-footer">
-                                    //                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    //             </div>
-                                    //         </div>
-                                    //     </div>
-                                    // </div>
                                     <div class="alert alert-success" role="alert">
                                         <strong>Data Has Been Submitted </strong>
 
                                     </div>
                                     :
-                                    //      <div class="modal fade" id="biilbord">
-                                    //      <div class="modal-dialog">
-                                    //          <div class="modal-content">
-                                    //              <div class="modal-body">
-                                    //                  Fill the Form 
-                                    //          </div>
-                                    //              <div class="modal-footer">
-                                    //                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    //              </div>
-                                    //          </div>
-                                    //      </div>
-                                    //  </div>
                                     null
                                 }
                             </Form.Item>
