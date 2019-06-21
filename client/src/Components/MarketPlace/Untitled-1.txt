@@ -4,7 +4,8 @@ import {
     Checkbox, Form, Row, Col, Menu, Dropdown, Button
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-// import Pagination from "react-js-pagination";
+import Pagination from "react-js-pagination";
+// require("bootstrap/less/bootstrap.less");
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -29,8 +30,12 @@ class Market extends Component {
         this.billBoradDetails();
     }
     billBoradDetails = async () => {
+        console.log(this.state.from, 'form')
+        console.log(this.state.to, 'to')
+
+        // if (this.state.form == 0) {
         let response = await HttpUtils.get('getbillboard');
-        // console.log(response, 'response');
+        // console.log(response.content.length, 'response');
         let arr = [];
         let data = response.content;
 
@@ -65,14 +70,21 @@ class Market extends Component {
         this.setState({
             billboardData: arr
         })
-        localStorage.setItem('billboardData', JSON.stringify(arr))
-
-        //slice for render some data and click on more button then show some next data
         var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
-        // console.log(billboard)
         this.setState({
             billBorad: billboard
         })
+        localStorage.setItem('billboardData', JSON.stringify(arr))
+        console.log(billboard, ';;;;;;;;;')
+        // }
+        // if (this.state.to > 2) {
+
+        //     var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
+        //     this.setState({
+        //         billBorad: billboard
+        //     })
+        //     console.log('load more')
+        // }
     }
 
     //filtration the data with given values
@@ -110,17 +122,6 @@ class Market extends Component {
         }
     }
 
-    //for load more data
-    onMoreData = () => {
-        const { to } = this.state;
-        let total = to + 2
-        this.setState({
-            form: 0,
-            to: total
-        })
-        this.billBoradDetails();
-    }
-
     //pagination function
     // handlePageChange = (pageNumber) => {
     //     const { activePage, billboardData } = this.state;
@@ -136,33 +137,46 @@ class Market extends Component {
     //     //     totalItemsCount: 2
     //     // });
     // }
+    onMoreData = () => {
+        const { billboardData, from, to } = this.state;
+        let fr = 0;
+        let t = to + 2
+        // console.log(fr, 'lklkljk', t, 'jhgjgjhgjh')
+        this.setState({
+            form: fr,
+            to: t
+        })
+        this.billBoradDetails();
+    }
     render() {
         const { billBorad, billboardFilterdData } = this.state;
-        console.log(billBorad, 'billBorad')
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
                 <div className='row '>
                     {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (
-                            <div className='col-md-3'>
-                                <img src={elem[0][0]} className='imgBillBoard' alt={key} />
-                                <p>{elem[23]}</p>
-                                <p>{elem[19]}</p>
+                            <div>
+                                <div className='col-md-3'>
+                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                    <p>{elem[23]}</p>
+                                    <p>{elem[19]}</p>
+                                </div>
                             </div>
                         )
                     })
                         :
                         billBorad && billBorad.map((elem, key) => {
                             return (
-                                <div className='col-md-3 activeClass'>
-                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} />
-                                    <p>{elem[23]}</p>
-                                    <p>{elem[19]}</p>
+                                <div>
+                                    <div className='col-md-3'>
+                                        <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                        <p>{elem[23]}</p>
+                                        <p>{elem[19]}</p>
+                                    </div>
                                 </div>
                             )
                         })}
-
                 </div>
             </div>
         );
@@ -264,7 +278,30 @@ class Market extends Component {
                         </CheckboxGroup>
                     </div>
                     <div className='col-md-9'>
+                        {/* <div className='row '>
+                            <div className='col-md-3'>
+                                <img src={image1} className='imgBillBoard' />
+                                <p>Billboards</p>
+                                <p>Billboards</p>
+                            </div>
+                            <div className='col-md-3'>
+                                <img src={image1} className='imgBillBoard' />
+                                <p>Billboards</p>
+                                <p>Billboards</p>
+                            </div>
+                            <div className='col-md-3'>
+                                <img src={image1} className='imgBillBoard' />
+                                <p>Billboards</p>
+                                <p>Billboards</p>
+                            </div>
+                            <div className='col-md-3'>
+                                <img src={image1} className='imgBillBoard' />
+                                <p>Billboards</p>
+                                <p>Billboards</p>
+                            </div>
+                        </div> */}
                         {billboardRendring}
+
                         {/* <div class="d-flex justify-content-center">
                             <Pagination
                                 pageRangeDisplayed={this.state.pageRangeDisplayed}
@@ -276,11 +313,11 @@ class Market extends Component {
                                 linkClass='page-link'
                             />
                         </div> */}
-                        <div class="d-flex justify-content-center">
-                            <button onClick={this.onMoreData}>
-                                Load more
+                    <div class="d-flex justify-content-center">
+                        <button onClick={this.onMoreData}>
+                            Load more
                         </button>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
