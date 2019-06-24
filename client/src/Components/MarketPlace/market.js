@@ -4,8 +4,7 @@ import {
     Checkbox, Form, Row, Col, Menu, Dropdown, Button, Select, Icon
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-
+import { Link } from "react-router-dom";
 
 const CheckboxGroup = Checkbox.Group;
 const { Option } = Select;
@@ -195,7 +194,8 @@ class Market extends Component {
                     {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (
                             <div className='col-md-3'>
-                                <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                <Link to={{ pathname: `/billBoardDetail`, state: elem }}>
+                                <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
                                 <p>{elem[23]}</p>
                                 <p>{elem[19]}</p>
                             </div>
@@ -205,7 +205,8 @@ class Market extends Component {
                         billBorad && billBorad.map((elem, key) => {
                             return (
                                 <div className='col-md-3 activeClass'>
-                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} />
+                                    <Link to={{ pathname: `/billBoardDetail`, state: elem }}>
+                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
                                     <p>{elem[23]}</p>
                                     <p>{elem[19]}</p>
                                 </div>

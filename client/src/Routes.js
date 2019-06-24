@@ -32,6 +32,7 @@ import store from './store';
 import AddBillboards from './Components/BillboardForm/addBillboards';
 import Billboardmilitary from './Components/Billboard Military/billmilitary';
 import MarketPlace from './Components/MarketPlace/marketPlace';
+import BillBoardDetail from './Components/MarketPlace/billBoardDetails';
 
 class Routes extends Component {
   render() {
@@ -57,6 +58,7 @@ class Routes extends Component {
               <Route path="/list_add" component={AddBillboards}></Route>
               <Route path = '/billborad_Militry' component = {Billboardmilitary}></Route>
               <Route path = '/market_place' component = {MarketPlace}></Route>
+              <Route path = '/billBoardDetail' component = {BillBoardDetail}></Route>
 
             </div>
           </BrowserRouter>
