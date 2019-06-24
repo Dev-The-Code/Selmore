@@ -18,8 +18,8 @@ class Billboardmilitary extends Component {
 				<Header />
 				<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'} bred2={'> BILLBOARD'} bred3={'> MILITARY ROAD CITY POINT'} />
 				<Militarypanel1 data={this.props.location.state} />
-				{/* <Militarypanel2 /> */}
-				{/* <Militarypanel3 /> */}
+				<Militarypanel2 />
+				<Militarypanel3 />
 			</div>
 		);
 	}

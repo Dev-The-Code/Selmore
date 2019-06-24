@@ -47,6 +47,9 @@ class Market extends Component {
     componentDidMount() {
         //fetching billboard data
         this.billBoradDetails();
+        // fetch('./cities.json')
+        //     .then(resp => resp.json())
+        //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');

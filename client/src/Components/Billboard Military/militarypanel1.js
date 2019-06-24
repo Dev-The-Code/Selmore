@@ -23,10 +23,17 @@ class Militarypanel1 extends Component {
 		if (images.length > 0) {
 			console.log('iamges')
 			image = images.map((elem, key) => {
-				return <div class="carousel-item ">
-					<img class="d-block w-100" src={elem} alt="Second slide" />
-				</div>
-				// console.log(elem, '........')
+				// console.log(key , 'key')
+				if (key == 0) {
+					return <div class="carousel-item active">
+						<img class="d-block w-100" src={elem} alt="Second slide" />
+					</div>
+				}
+				else {
+					return <div class="carousel-item">
+						<img class="d-block w-100" src={elem} alt="Second slide" />
+					</div>
+				}
 			})
 		}
 		return (
