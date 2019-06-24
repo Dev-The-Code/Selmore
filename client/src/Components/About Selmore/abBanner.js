@@ -3,7 +3,7 @@ import './about.css';
 
 class AbBanner extends Component {
   render() {
-  	console.log(this.props,'asdasdsadasdas');
+  	// console.log(this.props,'asdasdsadasdas');
     return (
         <div>				
 					<div className="row" style={{margin:'0px'}}>

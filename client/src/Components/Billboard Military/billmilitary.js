@@ -9,16 +9,19 @@ import './billmilitary.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billboardmilitary extends Component {
-  render() {
-    return (
-        <div>
-        	<Header />
-        	<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'}  bred2={'> BILLBOARD'} bred3={'> MILITARY ROAD CITY POINT'} />
-        	<Militarypanel1 />
-        	<Militarypanel2 />
-        	<Militarypanel3 />
-  		</div> 
-    );
-  }
+	constructor(props) {
+		super(props)
+	}
+	render() {
+		return (
+			<div>
+				<Header />
+				<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'} bred2={'> BILLBOARD'} bred3={'> MILITARY ROAD CITY POINT'} />
+				<Militarypanel1 data={this.props.location.state} />
+				{/* <Militarypanel2 /> */}
+				{/* <Militarypanel3 /> */}
+			</div>
+		);
+	}
 }
 export default Billboardmilitary;

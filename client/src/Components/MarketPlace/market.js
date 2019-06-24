@@ -52,6 +52,7 @@ class Market extends Component {
         let response = await HttpUtils.get('getbillboard');
         let arr = [];
         let data = response.content;
+        console.log(data, 'data')
 
         // seprate every billboard data in the array from array of objects and objects has an multiple array
         for (var i = 0; i < data.length; i++) {
@@ -194,8 +195,8 @@ class Market extends Component {
                     {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (
                             <div className='col-md-3'>
-                                <Link to={{ pathname: `/billBoardDetail`, state: elem }}>
-                                <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
+                                <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
                                 <p>{elem[23]}</p>
                                 <p>{elem[19]}</p>
                             </div>
@@ -205,8 +206,8 @@ class Market extends Component {
                         billBorad && billBorad.map((elem, key) => {
                             return (
                                 <div className='col-md-3 activeClass'>
-                                    <Link to={{ pathname: `/billBoardDetail`, state: elem }}>
-                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
+                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                        <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
                                     <p>{elem[23]}</p>
                                     <p>{elem[19]}</p>
                                 </div>

@@ -1068,7 +1068,6 @@ class BillBoard extends Component {
                             </div>
                         </div>
                         {formItems}
-
                         <FormItem >
                             <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
                                 <Icon className='fa fa-plus' />
