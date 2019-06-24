@@ -50,12 +50,6 @@ class BillBoard extends Component {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
 
         })
-        // this.setState({
-        //     companyName: response.content
-        // })
-        // companyName = this.state.companyName.map((elem, i) => {
-        //     return { label: elem, value: elem };
-        // })
         this.setState({ companyName });
     }
 

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col, Menu, Dropdown, Button, Select
+    Checkbox, Form, Row, Col, Menu, Dropdown, Button, Select, Icon
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-import InputRange from 'react-input-range';
-import Slider, { Range } from 'rc-slider';
+import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 
-// import Pagination from "react-js-pagination";
-const FormItem = Form.Item;
+
 const CheckboxGroup = Checkbox.Group;
+const { Option } = Select;
 
 class Market extends Component {
     constructor(props) {
@@ -19,15 +18,31 @@ class Market extends Component {
             billboardFilterdData: [],
             billBorad: [],
             filterValue: '',
-            // pageRangeDisplayed: 1,
-            // activePage: 1,
-            // itemsCountPerPage: 1,
-            // totalItemsCount: 3,
             from: 0,
             to: 2,
             inputValue: 1,
             value: 0,
-            companyName: [0, 100, 150, 200]
+            valArr: [],
+            cities: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+                " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
+                " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+                " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
+                " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad",
+                " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+                " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+                " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+                " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+                " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
+            states: ['sindh', 'punjab', 'kpk', 'balochistan', 'gilgit', 'azad kashmir']
+
+
         }
     }
     componentDidMount() {
@@ -36,7 +51,6 @@ class Market extends Component {
     }
     billBoradDetails = async () => {
         let response = await HttpUtils.get('getbillboard');
-        // console.log(response, 'response');
         let arr = [];
         let data = response.content;
 
@@ -52,7 +66,6 @@ class Market extends Component {
                 }
                 for (var k = 0; k < billboardFields.length; k++) {
                     if (k == 0) {
-                        // console.log(j, billboardFields[k], 'billboardFields[k]')
                         billboardArr1.push(billboardFields[k])
                     }
                     else {
@@ -76,9 +89,15 @@ class Market extends Component {
 
         //slice for render some data and click on more button then show some next data
         var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
-        // console.log(billboard)
         this.setState({
             billBorad: billboard
+        })
+        let widthHeight = [];
+        for (var i = 0; i <= 3000; i = i + 500) {
+            widthHeight.push(i)
+        }
+        this.setState({
+            valArr: widthHeight
         })
     }
 
@@ -97,8 +116,8 @@ class Market extends Component {
             for (var i = 0; i < value.length; i++) {
                 for (var j in billboardData) {
                     for (var k = 0; k < billboardData[j].length; k++) {
-                        console.log(value[i])
-                        console.log(billboardData[j], 'billboard data')
+                        // console.log(value[i])
+                        // console.log(billboardData[j], 'billboard data')
                         if (billboardData[j][k] == value[i]) {
                             filteredData.push(billboardData[j]);
                         }
@@ -130,26 +149,45 @@ class Market extends Component {
         })
         this.billBoradDetails();
     }
+    //filtration for drop down data
+    handleChange = (value) => {
+        const { billboardData } = this.state;
+        console.log(value)
+        var filteredData = [];
+        for (var i = 0; i < billboardData.length; i++) {
+            let data = billboardData[i];
+            for (var j = 0; j < data.length; j++) {
+                if (data[j] == value) {
+                    if (data[7] == value) {
+                        filteredData.push(data);
+                    }
+                    else if (data[8] == value) {
+                        filteredData.push(data);
+                    }
+                    else if (data[j] == value) {
+                        filteredData.push(data);
+                    }
+                }
+            }
+        }
+        this.setState({
+            billboardFilterdData: filteredData
+        })
+    }
 
-    //pagination function
-    // handlePageChange = (pageNumber) => {
-    //     const { activePage, billboardData } = this.state;
-    //     var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
-    //     let total = billboardDataFromLocalStorage.length
-    //     // console.log(activePage, 'activePage')
-    //     // console.log(pageNumber, 'pageNumber')
-    //     console.log(billboardDataFromLocalStorage, 'billboardDataFromLocalStorage')
-    //     // this.setState({
-    //     //     billboardData: billboardDataFromLocalStorage,
-    //     //     activePage: billboardDataFromLocalStorage[0][1],
-    //     //     itemsCountPerPage: 2,
-    //     //     totalItemsCount: 2
-    //     // });
-    // }
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const { billBorad, billboardFilterdData, inputValue } = this.state;
-        console.log(billBorad, 'billBorad')
+        const { billBorad, billboardFilterdData, valArr, cities, states } = this.state;
+        let option = valArr.map((elem, key) => {
+            // return { label: elem, value: elem}
+            return <Option value={elem}>{elem}</Option>
+            // return <MDBDropdownItem > {elem} </MDBDropdownItem>
+        });
+        let citiesOfCountary = cities.map((elem, key) => {
+            return <Option value={elem}>{elem}</Option>
+        });
+        let statesOfCountary = states.map((elem, key) => {
+            return <Option value={elem}>{elem}</Option>
+        });
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
@@ -219,9 +257,6 @@ class Market extends Component {
                                     <Checkbox value="scented">Scented</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="painted">Painted</Checkbox>
-                                </Col>
-                                <Col >
                                     <Checkbox value="lamp post">Lamp Post</Checkbox>
                                 </Col>
                             </Row>
@@ -232,12 +267,6 @@ class Market extends Component {
                                 </Col>
                                 <Col >
                                     <Checkbox value="back">Back</Checkbox>
-                                </Col>
-                                <Col >
-                                    {/* <Checkbox value="city">City</Checkbox> */}
-                                    {/* <Dropdown overlay={menu} placement="City">
-                                        <Button>City</Button>
-                                    </Dropdown> */}
                                 </Col>
                             </Row>
                             <div className='filterDivs'>Lightning</div>
@@ -251,83 +280,42 @@ class Market extends Component {
                             </Row>
                             <div className='filterDivs'>Width</div>
                             <Row>
-                                {/* <Col >
-                                    <Checkbox value="0 - 500">0 - 500</Checkbox>
-                                </Col> */}
-                                {/* <InputRange
-                                    maxValue={20}
-                                    minValue={0}
-                                    value={this.state.value}
-                                    onChange={value => this.setState({ value })} /> */}
-                                {/* <Slider defaultValue={0}  /> */}
                                 <Col>
-                                    {/* <Slider
-                                        min={1}
-                                        max={20}
-                                        onChange={this.onChange}
-                                        value={typeof inputValue === 'number' ? inputValue : 0}
-                                    /> */}
-                                    {/* <Slider />
-                                    <Range /> */}
-                                    {/* <Slider
-                                        value={this.state.value}
-                                        onChange={this.onSliderChange}
-                                        onAfterChange={this.onAfterChange}
-                                    /> */}
-                                    {/* <Select
-                                        onChange={this.handleChange}
-                                        options={this.state.companyName}
-                                    ></Select> */}
-                                    <Form.Item>
-                                        <p>Company Name:</p>
-                                        {getFieldDecorator('company', {
-                                            initialValue: this.state.compaNames,
-                                            //  defaultValue: option.initialValue,
-                                            rules: [{
-                                                required: true,
-                                                message: 'Please enter your company name!',
-                                            }],
-                                        })(
-                                            <Select
-                                                // defaultValue={Option.initialValue}
-                                                onChange={this.handleChange}
-                                                options={this.state.companyName}
-                                            // value={this.state.companyName}
-                                            ></Select>
-                                            // <Select>
-                                            //     {optionItems}
-                                            // </Select>
-                                        )}
-                                    </Form.Item>
+                                    <Select onChange={this.handleChange}
+                                    //  options={this.state.companyName}
+                                    >
+                                        {option}
+                                    </Select>
                                 </Col>
-                                {/* <Col >
-                                    <Checkbox value="500 - 1000">501 - 1000</Checkbox>
+                            </Row>
+                            <div className='filterDivs'>Height</div>
+                            <Row>
+                                <Col>
+                                    <Select onChange={this.handleChange}>
+                                        {option}
+                                    </Select>
                                 </Col>
-                                <Col >
-                                    <Checkbox value="1001 - 1500">1001 - 1500</Checkbox>
+                            </Row>
+                            <div className='filterDivs'>Cities</div>
+                            <Row>
+                                <Col>
+                                    <Select onChange={this.handleChange}>
+                                        {citiesOfCountary}
+                                    </Select>
                                 </Col>
-                                <Col >
-                                    <Checkbox value="1500 - 2000">1500 - 2000</Checkbox>
+                            </Row>
+                            <div className='filterDivs'>States</div>
+                            <Row>
+                                <Col>
+                                    <Select onChange={this.handleChange}>
+                                        {statesOfCountary}
+                                    </Select>
                                 </Col>
-                                <Col >
-                                    <Checkbox value="2000 >">2000 ></Checkbox>
-                                </Col> */}
                             </Row>
                         </CheckboxGroup>
                     </div>
                     <div className='col-md-9'>
                         {billboardRendring}
-                        {/* <div class="d-flex justify-content-center">
-                            <Pagination
-                                pageRangeDisplayed={this.state.pageRangeDisplayed}
-                                activePage={this.state.activePage}
-                                itemsCountPerPage={this.state.itemsCountPerPage}
-                                totalItemsCount={this.state.totalItemsCount}
-                                onChange={this.handlePageChange}
-                                itemClass='page-item'
-                                linkClass='page-link'
-                            />
-                        </div> */}
                         <div class="d-flex justify-content-center">
                             <button onClick={this.onMoreData}>
                                 Load more
