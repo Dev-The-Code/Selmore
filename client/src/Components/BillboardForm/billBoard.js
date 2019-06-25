@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './billboardDetail.css';
 import {
-    Form, Input, Icon, Button, message, Upload, Modal, notification
+    Form, Input, Icon, Button, message, Upload, Modal, notification, Cascader,
 } from 'antd';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
@@ -9,12 +9,16 @@ import './billboardDetail.css';
 import { HttpUtils } from '../../Services/HttpUtils';
 import superagent from "superagent";
 import sha1 from "sha1";
+import { type } from 'os';
 
 let id = 0;
 const FormItem = Form.Item;
 const option = Select.Option;
-
-
+const { Option } = Select;
+const country = [{
+    value: 'Pakistan',
+    label: 'Pakistan'
+}]
 
 class BillBoard extends Component {
     constructor() {
@@ -33,6 +37,37 @@ class BillBoard extends Component {
             company: '',
             id: '',
             compaNames: '',
+            typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
+                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
+            facingArr: ['Front', 'Back'],
+            lightningArr: ['Yes', 'No'],
+            statusArr: ['Available', 'No Available'],
+            audienceTypeArr: ['All types of people', 'Office type of people', 'Labour type people', 'Govt official type people'],
+            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+                " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
+                " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+                " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
+                " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad",
+                " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+                " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+                " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+                " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+                " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
+            statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
+            type: [],
+            facing: [],
+            lightning: [],
+            status: [],
+            audienceType: [],
+            cities: [],
+            states: []
         }
     }
 
@@ -41,16 +76,44 @@ class BillBoard extends Component {
     }
 
     companyNames = async () => {
-        let { companyName } = this.state;
+        let { companyName, citiesArr, typeArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
+            type, facing, lightning, status, audienceType, cities, states } = this.state;
         let response = await HttpUtils.get('getcompanyname');
-        console.log(response.content, 'response')
+        // console.log(response.content, 'response')
         companyName = response.content.map((elem, i) => {
-            // console.log(elem, 'elem')
-            // console.log(i , 'index')
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
-
         })
-        this.setState({ companyName });
+        type = typeArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        facing = facingArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        lightning = lightningArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        status = statusArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        audienceType = audienceTypeArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        cities = citiesArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        states = statesArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        await this.setState({
+            companyName: companyName,
+            type: type,
+            facing: facing,
+            lightning: lightning,
+            status: status,
+            audianceType: audienceType,
+            cities: cities,
+            states: states
+        });
     }
 
     validateNumber(rule, value, callback) {
@@ -60,11 +123,7 @@ class BillBoard extends Component {
             callback()
         }
     }
-
-
-
     handleCancel = () => this.setState({ previewVisible: false })
-
 
     handlePreview = (file) => {
         this.setState({
@@ -75,7 +134,6 @@ class BillBoard extends Component {
 
     handleChanges(index, { fileList }) {
         let fileListRef = `fileList${index}`
-        // console.log(fileListRef, 'handle change fileList')
         this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
     }
 
@@ -86,7 +144,6 @@ class BillBoard extends Component {
     }
 
     handleChange = (data) => {
-        // console.log(data.id)
         this.setState({ company: data.value, id: data.id });
     }
 
@@ -132,10 +189,6 @@ class BillBoard extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                // this.openNotification();
-                // this.setState({
-                //     sumitDataAlert: false
-                // })
                 this.setState({ sumitDataAlert: true });
                 this.funcForUpload(values)
                 this.props.form.resetFields()
@@ -145,7 +198,6 @@ class BillBoard extends Component {
 
     async funcForUpload(values) {
         const { fileList, keyFor, index } = this.state;
-
         //merge multiple value of the field in one array
         let facing = [];
         let traffic = [];
@@ -189,8 +241,6 @@ class BillBoard extends Component {
                 if (property.indexOf(`type${i}`) !== -1) {
                     type.push(values[property])
                 }
-
-
                 if (property.indexOf(`width${i}`) !== -1) {
                     width.push(values[property])
                 }
@@ -255,18 +305,14 @@ class BillBoard extends Component {
         obj.state = state;
         obj.country = country;
 
-        console.log(obj , 'combined values')
+        // console.log(obj, 'combined values')
         let arr = [];
         for (var i = 0; i <= keyFor.length; i++) {
             let fileListRef = `fileList${i}`;
-            // console.log(fileListRef)
-            // console.log(this.state[fileListRef])
             arr.push(this.state[fileListRef])
-            // console.log(arr)
             arr = arr.filter(function (element) {
                 return element !== undefined;
             });
-            // console.log(arr);
             Promise.all(arr[i].map((val, i) => {
                 return this.uploadFile(val).then((result) => {
                     return result.body.url
@@ -307,32 +353,21 @@ class BillBoard extends Component {
     //-----------------cloudnary function end ------------------//
 
     async postData(values, response, obj) {
-
         //store imgs in array 
         const { imgArr } = this.state
         this.setState({
             imgArr: [...imgArr, response],
 
         })
-
         //add img array in the obj
         obj.billBoardImgs = this.state.imgArr;
         this.fectSignUpApiFunc(obj)
-
-        // console.log(obj, 'obj')
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values , 'all arrays in one object');
+        console.log(values, 'all arrays in one object');
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
-        //fetch signUp api
-        // if (response.code === 200) {
-        //     this.setState({ sumitDataAlert: true });
-        // }
-        // } else {
-        // 	this.setState({ isData: false })
-        // }
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,
@@ -341,35 +376,18 @@ class BillBoard extends Component {
     }
     onChange(index, { file, fileList }) {
         if (file.status !== 'uploading') {
-            // console.log(file ,'file')
-            // console.log(fileList ,'fileList')
-
-            // console.log(index)
             let fileListRef = `fileList${index}`
-            // console.log(fileListRef, 'handle change fileList')
             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
         }
     }
 
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
-        const { fileList, imgArr, sumitDataAlert, companyName, previewVisible, previewImage, index } = this.state;
-        const uploadButton = (
-            <div>
-                <Icon type="plus" />
-                <div className="ant-upload-text ">Upload</div>
-            </div>
-        );
-        const divStyle = {
-            margin: '10px',
-            // border: '2px solid black',
-            fontSize: '16px'
-        };
-
+        const { sumitDataAlert, companyName, previewVisible, previewImage, index,
+            type, facing, lightning, status, audianceType, cities, states } = this.state;
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
-            let fileListRef = `fileList${index}`
             return (
                 <div className='row'>
                     <div className='mainDive container'>
@@ -383,56 +401,56 @@ class BillBoard extends Component {
                                     required={false}
                                     key={k}
                                 >
-                                    {/* <div className='mainDive'> */}
                                     <div >
                                         <div className="col-md-8">
                                             <div className="form-group">
-                                                {/* <label for="type"></label> */}
+                                                <label for="type"></label>
                                                 <Form.Item>
+                                                <p>BillBoard Type:</p>
                                                     {getFieldDecorator(`type${index}`, {
+                                                        // initialValue: type,
+                                                        // defaultValue: option.initialValue,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a type',
                                                             whitespace: true
                                                         }],
                                                     })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"type"}
-                                                            // name="type"
-                                                            placeholder="Enter Billboard Type"
-                                                        />
+                                                        <Select
+                                                            onChange={this.handleChange}
+                                                            options={type}
+                                                        >
+                                                        </Select>
                                                     )}
                                                 </Form.Item>
                                             </div>
                                         </div>
                                         <div className="col-md-8">
                                             <div className="form-group">
-                                                {/* <label for="facing"></label> */}
+                                                <label for="facing"></label>
                                                 <Form.Item>
+                                                <p>Facing:</p>
                                                     {getFieldDecorator(`facing${index}`, {
-
+                                                        // initialValue: facing,
+                                                        // defaultValue: option.initialValue,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a facing',
                                                             whitespace: true
                                                         }],
                                                     })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"facing"}
-                                                            // name="facing"
-                                                            placeholder="Enter billboard facing"
-                                                        />
+                                                        <Select
+                                                            onChange={this.handleChange}
+                                                            options={facing}
+                                                        >
+                                                        </Select>
                                                     )}
                                                 </Form.Item>
                                             </div>
                                         </div>
                                         <div className="col-md-8">
                                             <div className="form-group">
-                                                {/* <label for="size"></label> */}
+                                                <label for="size"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`size${index}`, {
                                                         rules: [{
@@ -445,7 +463,7 @@ class BillBoard extends Component {
                                                             type="text"
                                                             className={'form-control backcolor'}
                                                             id={"size"}
-                                                            // name="size"
+                                                            name="size"
                                                             placeholder="Enter billboard size"
                                                         />
                                                     )}
@@ -454,7 +472,7 @@ class BillBoard extends Component {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="form-group">
-                                                {/* <label for="latitude"></label> */}
+                                                <label for="latitude"></label>
                                                 <Form.Item>
                                                     <br />
                                                     {getFieldDecorator(`latitude${index}`, {
@@ -469,7 +487,7 @@ class BillBoard extends Component {
                                                             type="text"
                                                             className={'form-control '}
                                                             id="latitude"
-                                                            // name="latitude"
+                                                            name="latitude"
                                                             placeholder="Enter latitude"
                                                         />
                                                     )}
@@ -478,7 +496,7 @@ class BillBoard extends Component {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="form-group">
-                                                {/* <label for="longitude"></label> */}
+                                                <label for="longitude"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`longitude${index}`, {
                                                         rules: [{
@@ -492,7 +510,7 @@ class BillBoard extends Component {
                                                             type="text"
                                                             className={'form-control '}
                                                             id="longitude"
-                                                            // name="longitude"
+                                                            name="longitude"
                                                             placeholder="Enter longitude"
                                                         />
                                                     )}
@@ -513,40 +531,13 @@ class BillBoard extends Component {
                                                             }],
                                                         })(
                                                             <div className="clearfix">
-                                                                {/* <Upload
-                                                                    action="//jsonplaceholder.typicode.com/posts/"
-                                                                    listType="picture-card"
-                                                                    fileList={this.state[fileListRef]}
-                                                                    onPreview={this.handlePreview}
-                                                                    onChange={this.handleChanges.bind(this, index)}
-                                                                >
-                                                                    {this.state.imageList.length + fileList.length >= 3 ? null : uploadButton}
-                                                                    {uploadedImages}
-
-                                                                </Upload> */}
                                                                 <Upload onChange={this.onChange.bind(this, index)}>
                                                                     <Button
-                                                                    // onChange={this.onChange.bind(this, index)}
                                                                     >
                                                                         <Icon type="upload" /> Upload
                                                                     </Button>
                                                                 </Upload>
                                                             </div>
-                                                            // <div className="clearfix">
-                                                            //     <Upload
-                                                            //         action="//jsonplaceholder.typicode.com/posts/"
-                                                            //         listType="picture-card"
-                                                            //         fileList={this.state[fileListRef]}
-                                                            //         onPreview={this.handlePreview}
-                                                            //         onChange={this.handleChange}
-                                                            //     >
-                                                            //         { fileList.length >= 3 ? null : uploadButton}
-                                                            //     </Upload>
-                                                            //     <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                                                            //         <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                                                            //     </Modal>
-                                                            //     {/* {uploadedImages} */}
-                                                            // </div>
                                                         )}
                                                     </FormItem>
                                                 </div>
@@ -559,54 +550,9 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
                                         <br />
-
-                                        {/* <div className="col-md-8">
-                                            <div className="form-group">
-                                                {/* <label for="type"></label> 
-                                                <Form.Item>
-                                                    {getFieldDecorator(`price${index}`, {
-                                                        rules: [{
-                                                            required: true,
-                                                            message: 'Please enter price',
-                                                            whitespace: true
-                                                        }],
-                                                    })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"price"}
-                                                            // name="type"
-                                                            placeholder="Enter Billboard price"
-                                                        />
-                                                    )}
-                                                </Form.Item>
-                                            </div>
-                                        </div> */}
-                                        {/* <div className="col-md-8">
-                                            <div className="form-group">
-                                                {/* <label for="type"></label> 
-                                                <Form.Item>
-                                                    {getFieldDecorator(`city${index}`, {
-                                                        rules: [{
-                                                            required: true,
-                                                            message: 'Please enter city',
-                                                            whitespace: true
-                                                        }],
-                                                    })(
-                                                        <Input
-                                                            type="text"
-                                                            className={'form-control backcolor'}
-                                                            id={"city"}
-                                                            // name="type"
-                                                            placeholder="Enter Billboard city"
-                                                        />
-                                                    )}
-                                                </Form.Item>
-                                            </div>
-                                        </div> */}
                                         <div className="col-md-8">
                                             <div className="form-group">
-                                                {/* <label for="traffic"></label> */}
+                                                <label for="traffic"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`traffic${index}`, {
                                                         rules: [{
@@ -619,24 +565,19 @@ class BillBoard extends Component {
                                                             type="text"
                                                             className={'form-control backcolor'}
                                                             id={"traffic"}
-                                                            // name="traffic"
+                                                            name="traffic"
                                                             placeholder="Enter traffic count"
                                                         />
                                                     )}
                                                 </Form.Item>
                                             </div>
                                         </div>
-
-
-
-
-
                                         <div id='addWeiget'>
                                             <div> Billboard Road City Point Details </div>
                                             <br />
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="width"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`width${index}`, {
                                                             rules: [{
@@ -649,8 +590,8 @@ class BillBoard extends Component {
                                                             <Input
                                                                 type="text"
                                                                 className={'form-control backcolor'}
-                                                                id={"Width"}
-                                                                // name="type"
+                                                                id={"width"}
+                                                                name="width"
                                                                 placeholder="Enter Width"
                                                             />
                                                         )}
@@ -659,7 +600,7 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="height"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`height${index}`, {
                                                             rules: [{
@@ -672,8 +613,8 @@ class BillBoard extends Component {
                                                             <Input
                                                                 type="text"
                                                                 className={'form-control backcolor'}
-                                                                id={"Height"}
-                                                                // name="type"
+                                                                id={"height"}
+                                                                name="height"
                                                                 placeholder="Enter Height"
                                                             />
                                                         )}
@@ -682,29 +623,30 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="lightning"></label>
                                                     <Form.Item>
+                                                    <p>Lightning:</p>
                                                         {getFieldDecorator(`lightning${index}`, {
+                                                            //  initialValue: lightning,
+                                                            //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter Lightning',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"Lightning"}
-                                                                // name="type"
-                                                                placeholder="Enter Lightning"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={lightning}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="description"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`description${index}`, {
                                                             rules: [{
@@ -717,7 +659,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"description"}
-                                                                // name="type"
+                                                                name="description"
                                                                 placeholder="Enter description"
                                                             />
                                                         )}
@@ -726,34 +668,33 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="status"></label>
                                                     <Form.Item>
+                                                    <p>Status:</p>
                                                         {getFieldDecorator(`status${index}`, {
+                                                            //   initialValue: status,
+                                                            //   defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter status',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"status"}
-                                                                // name="type"
-                                                                placeholder="Enter status"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={status}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
-
                                             <br />
                                             <div> Military Road City Point Rate Card </div>
                                             <br />
-
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="dailyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`dailyRate${index}`, {
                                                             rules: [{
@@ -767,7 +708,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"dailyRate"}
-                                                                // name="type"
+                                                                name="dailyRate"
                                                                 placeholder="Enter daily rate"
                                                             />
                                                         )}
@@ -776,7 +717,7 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="weeklyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`weeklyRate${index}`, {
                                                             rules: [{
@@ -790,7 +731,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"weeklyRate"}
-                                                                // name="type"
+                                                                name="weeklyRate"
                                                                 placeholder="Enter weekly rate"
                                                             />
                                                         )}
@@ -799,7 +740,7 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="monthlyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`monthlyRate${index}`, {
                                                             rules: [{
@@ -813,7 +754,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"monthlyRate"}
-                                                                // name="type"
+                                                                name="monthlyRate"
                                                                 placeholder="Enter monthly rate"
                                                             />
                                                         )}
@@ -822,7 +763,7 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="yearlyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`yearlyRate${index}`, {
                                                             rules: [{
@@ -836,7 +777,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"yearlyRate"}
-                                                                // name="type"
+                                                                name="yearlyRate"
                                                                 placeholder="Enter yearly rate"
                                                             />
                                                         )}
@@ -848,29 +789,30 @@ class BillBoard extends Component {
                                             <br />
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="audianceType"></label>
                                                     <Form.Item>
+                                                    <p>Audiance Type:</p>
                                                         {getFieldDecorator(`audianceType${index}`, {
+                                                            //  initialValue: audianceType,
+                                                            //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter audiance type',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"audianceType"}
-                                                                // name="type"
-                                                                placeholder="Enter audiance type"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={audianceType}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="dailyVisitor"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`dailyVisitor${index}`, {
                                                             rules: [{
@@ -884,7 +826,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"dailyVisitor"}
-                                                                // name="type"
+                                                                name="dailyVisitor"
                                                                 placeholder="Enter daily visitor"
                                                             />
                                                         )}
@@ -893,7 +835,7 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="nearBy"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`nearBy${index}`, {
                                                             rules: [{
@@ -906,21 +848,19 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"nearBy"}
-                                                                // name="type"
+                                                                name="nearBy"
                                                                 placeholder="Enter near By"
                                                             />
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
-
                                             <br />
                                             <div> Military Road City Point Location </div>
                                             <br />
-
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="address"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`address${index}`, {
                                                             rules: [{
@@ -933,7 +873,7 @@ class BillBoard extends Component {
                                                                 type="text"
                                                                 className={'form-control backcolor'}
                                                                 id={"address"}
-                                                                // name="type"
+                                                                name="address"
                                                                 placeholder="Enter address"
                                                             />
                                                         )}
@@ -942,75 +882,74 @@ class BillBoard extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="city"></label>
                                                     <Form.Item>
+                                                    <p>City:</p>
                                                         {getFieldDecorator(`city${index}`, {
+                                                            // initialValue: cities,
+                                                            // defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter city',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"city"}
-                                                                // name="type"
-                                                                placeholder="Enter city"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={cities}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
+                                                    <label for="state"></label>
                                                     <Form.Item>
+                                                    <p>States:</p>
                                                         {getFieldDecorator(`state${index}`, {
+                                                            // initialValue: states,
+                                                            //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter state',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"state"}
-                                                                // name="type"
-                                                                placeholder="Enter state"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={states}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    {/* <label for="type"></label> */}
                                                     <Form.Item>
+                                                    <p>Country:</p>
                                                         {getFieldDecorator(`country${index}`, {
+                                                            // initialValue: this.state.country,
+                                                            //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter country',
                                                                 whitespace: true
                                                             }],
                                                         })(
-                                                            <Input
-                                                                type="text"
-                                                                className={'form-control backcolor'}
-                                                                id={"country"}
-                                                                // name="type"
-                                                                placeholder="Enter country"
-                                                            />
+                                                            <Select
+                                                                onChange={this.handleChange}
+                                                                options={country}
+                                                            >
+                                                            </Select>
                                                         )}
                                                     </Form.Item>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
-                                    {/* </div> */}
                                     {keys.length > 1 ? (
                                         <Icon
                                             className="dynamic-delete-button btn btn-danger iconBtn fa fa-minus"
@@ -1024,14 +963,12 @@ class BillBoard extends Component {
                 </div>
             )
         });
-
         return (
             <div className='row'>
                 <div className='mainDive container'>
                     <Form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="col-md-8">
                             <div className="form-group">
-                                {/* <label for="company"></label> */}
                                 <Form.Item>
                                     <p>Company Name:</p>
                                     {getFieldDecorator('company', {
@@ -1043,27 +980,10 @@ class BillBoard extends Component {
                                         }],
                                     })(
                                         <Select
-                                            // defaultValue={Option.initialValue}
                                             onChange={this.handleChange}
                                             options={this.state.companyName}
-                                        // value={this.state.companyName}
                                         ></Select>
-                                        // <Select>
-                                        //     {optionItems}
-                                        // </Select>
                                     )}
-                                    {/* {getFieldDecorator('company', {
-                                        rules: [{ required: true, message: 'Please enter your company name!' }],
-                                    })(
-                                        <Select
-                                            placeholder="Please select company name!"
-                                            onChange={this.handleChange}
-                                            options={this.state.companyName}
-                                        >
-                                            <Option >{this.state.companyName}</Option>
-                                           
-                                        </Select>
-                                    )} */}
                                 </Form.Item>
                             </div>
                         </div>

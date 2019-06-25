@@ -106,7 +106,6 @@ class Market extends Component {
 
     //filtration the data with given values
     filterBillBoard(filter) {
-        // console.log(filter, 'filter Value')
         this.handleFiltration(filter)
     }
     handleFiltration = (value) => {
@@ -181,9 +180,7 @@ class Market extends Component {
     render() {
         const { billBorad, billboardFilterdData, valArr, cities, states } = this.state;
         let option = valArr.map((elem, key) => {
-            // return { label: elem, value: elem}
             return <Option value={elem}>{elem}</Option>
-            // return <MDBDropdownItem > {elem} </MDBDropdownItem>
         });
         let citiesOfCountary = cities.map((elem, key) => {
             return <Option value={elem}>{elem}</Option>
