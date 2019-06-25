@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './billmilitary.css';
-import Image1 from '../MarketPlace/billboard.jpg'
+import Location from './googlemap';
 
 class Militarypanel1 extends Component {
 	constructor(props) {
@@ -45,15 +45,6 @@ class Militarypanel1 extends Component {
 								<div className="">
 									<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 										<div class="carousel-inner">
-											{/* <div class="carousel-item active">
-												<img class="d-block w-100" src={Image1} alt="First slide" />
-											</div>
-											<div class="carousel-item">
-												<img class="d-block w-100" src="..." alt="Second slide" />
-											</div>
-											<div class="carousel-item">
-												<img class="d-block w-100" src="..." alt="Third slide" />
-											</div> */}
 											{image}
 										</div>
 										<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -65,8 +56,6 @@ class Militarypanel1 extends Component {
 											<span class="sr-only">Next</span>
 										</a>
 									</div>
-									{/* <h4>SLIDER</h4> */}
-									{/* <img src={data[0]} alt='image' /> */}
 								</div>
 							</div><br />
 							{/*first panel1*/}
@@ -166,9 +155,16 @@ class Militarypanel1 extends Component {
 								<div className="col-md-1 col-2"></div>
 							</div>
 						</div>
+						<div className="col-md-4">
+							<div className="row soldier7" style={{ margin: '0px' }}>
+								<div><h3>Map</h3></div>
+
+							</div><br />
+							<div><Location /></div>
+						</div>
 					</div>
-				</div><br />
-			</div>
+				</div> <br />
+			</div >
 		);
 	}
 }

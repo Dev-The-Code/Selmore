@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col, Menu, Dropdown, Button, Select, Icon
+    Checkbox, Form, Row, Col, Menu, Dropdown, Button, Icon
 } from 'antd';
+import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom";
 
 const CheckboxGroup = Checkbox.Group;
+const option = Select.Option;
 const { Option } = Select;
 
 class Market extends Component {
@@ -22,7 +24,7 @@ class Market extends Component {
             inputValue: 1,
             value: 0,
             valArr: [],
-            cities: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
@@ -39,9 +41,9 @@ class Market extends Component {
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
-            states: ['sindh', 'punjab', 'kpk', 'balochistan', 'gilgit', 'azad kashmir']
-
-
+            statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
+            cities: [],
+            states: [],
         }
     }
     componentDidMount() {
@@ -52,10 +54,10 @@ class Market extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
+        const { citiesArr, cities , statesArr } = this.state;
         let response = await HttpUtils.get('getbillboard');
         let arr = [];
         let data = response.content;
-        console.log(data, 'data')
 
         // seprate every billboard data in the array from array of objects and objects has an multiple array
         for (var i = 0; i < data.length; i++) {
@@ -92,16 +94,23 @@ class Market extends Component {
 
         //slice for render some data and click on more button then show some next data
         var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
-        this.setState({
-            billBorad: billboard
-        })
         let widthHeight = [];
         for (var i = 0; i <= 3000; i = i + 500) {
             widthHeight.push(i)
         }
-        this.setState({
-            valArr: widthHeight
+        let city = citiesArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
         })
+        let state = statesArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        await this.setState({
+            billBorad: billboard,
+            valArr: widthHeight,
+            cities: city,
+            states: state
+        })
+        console.log(cities, 'cities')
     }
 
     //filtration the data with given values
@@ -118,8 +127,6 @@ class Market extends Component {
             for (var i = 0; i < value.length; i++) {
                 for (var j in billboardData) {
                     for (var k = 0; k < billboardData[j].length; k++) {
-                        // console.log(value[i])
-                        // console.log(billboardData[j], 'billboard data')
                         if (billboardData[j][k] == value[i]) {
                             filteredData.push(billboardData[j]);
                         }
@@ -178,16 +185,17 @@ class Market extends Component {
     }
 
     render() {
-        const { billBorad, billboardFilterdData, valArr, cities, states } = this.state;
-        let option = valArr.map((elem, key) => {
-            return <Option value={elem}>{elem}</Option>
-        });
-        let citiesOfCountary = cities.map((elem, key) => {
-            return <Option value={elem}>{elem}</Option>
-        });
-        let statesOfCountary = states.map((elem, key) => {
-            return <Option value={elem}>{elem}</Option>
-        });
+        const { billBorad, billboardFilterdData, cities , states} = this.state;
+        // console.log(cities, 'cities')
+        // let option = valArr.map((elem, key) => {
+        //     return <Option value={elem}>{elem}</Option>
+        // });
+        // let citiesOfCountary = cities.map((elem, key) => {
+        //     return <Option value={elem}>{elem}</Option>
+        // });
+        // let statesOfCountary = states.map((elem, key) => {
+        //     return <Option value={elem}>{elem}</Option>
+        // });
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
@@ -301,16 +309,20 @@ class Market extends Component {
                             <div className='filterDivs'>Cities</div>
                             <Row>
                                 <Col>
-                                    <Select onChange={this.handleChange}>
-                                        {citiesOfCountary}
+                                    <Select
+                                        onChange={this.handleChange}
+                                        options={cities}
+                                    >
                                     </Select>
                                 </Col>
                             </Row>
                             <div className='filterDivs'>States</div>
                             <Row>
                                 <Col>
-                                    <Select onChange={this.handleChange}>
-                                        {statesOfCountary}
+                                <Select
+                                        onChange={this.handleChange}
+                                        options={states}
+                                    >
                                     </Select>
                                 </Col>
                             </Row>

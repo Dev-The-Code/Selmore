@@ -5,6 +5,8 @@
   "dependencies": {
     "@callstack/async-storage": "^1.1.0",
     "antd": "^3.16.3",
+    "google-map-react": "^1.1.4",
+    "google-maps-react": "^2.0.2",
     "local-storage": "^1.4.2",
     "mdbreact": "^4.13.0",
     "rc-slider": "^8.6.13",
