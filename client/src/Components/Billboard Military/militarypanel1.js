@@ -114,7 +114,7 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[17]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data[16]}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
@@ -160,6 +160,7 @@ class Militarypanel1 extends Component {
 								<div><h3>Map</h3></div>
 
 							</div><br />
+							{/* render a map and show a location of the Billboard */}
 							<div><Location /></div>
 						</div>
 					</div>
