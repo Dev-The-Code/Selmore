@@ -101,8 +101,8 @@ class Location extends Component {
             this.setState({
                 coords:
                 {
-                    latitude: 33.690980,
-                    longitude: 73.091140
+                    latitude: 34.550335,
+                    longitude: 73.353259
                 }
             });
         })
@@ -145,8 +145,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     >
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-        title = 'awaisbjhb'
-        name = 'Awaisjbhjbh'
+            title='awaisbjhb'
+            name='Awaisjbhjbh'
         // position={{ lat: 33.690980, lng: 73.091140 }}
         // draggable={true}
         // onDragEnd={position => {
@@ -170,3 +170,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     </GoogleMap>
 ))
 export default Location;
+// export default GoogleApiWrapper({
+//     apiKey: 'YOUR_GOOGLE_API_KEY_GOES_HERE'
+//   })(MapContainer);
