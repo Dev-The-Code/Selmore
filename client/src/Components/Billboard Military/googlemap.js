@@ -128,6 +128,7 @@ class Location extends Component {
                     containerElement={<div style={{ height: `75vh` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                     coords={coords}
+                    onInfoWindowClose={this.onInfoWindowClose}
                 // getCurrentPosition={this.getCurrPosition}
                 />
             </div>
@@ -147,6 +148,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
             title='awaisbjhb'
             name='Awaisjbhjbh'
+            text ='rehman'
+            key = 'arain'
         // position={{ lat: 33.690980, lng: 73.091140 }}
         // draggable={true}
         // onDragEnd={position => {
@@ -157,9 +160,10 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
         >
 
             <InfoWindow
-            // marker={this.state.activeMarker}
-            // visible={this.state.showingInfoWindow}
-            // onClose={this.onInfoWindowClose}
+                // onCloseClick={() => { this.props.onInfoWindowClose }}
+                // marker={this.state.activeMarker}
+                // visible={this.state.showingInfoWindow}
+                onCloseClick={props.onInfoWindowClose}
             >
                 <div>
                     Awais
