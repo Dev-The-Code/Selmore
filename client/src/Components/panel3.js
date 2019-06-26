@@ -44,12 +44,12 @@ class Panel3 extends Component {
 							{citiesArr && citiesArr.map((elem, key) => {
 								// console.log(elem, 'elem')
 								return <Link rel="noopener noreferrer" to={`/market_place`}>
-									<div className="col-md-3 panel3div divFont">
+									<div className="col-md-3 panel3div ">
 										<div className=''>
 											<div className="col-md-2 innerdiv">
 											</div>
 											<div className="col-md-8 innerdiv">
-												<h5>{elem}</h5>
+												<h5 className='divFont'>{elem}</h5>
 												<h6 className="hani2">30 Ads available</h6>
 											</div>
 											<div className="col-md-2 innerdiv">

@@ -4,7 +4,11 @@
 
 		position: relative;
 }
-
+.container{
+	padding-right: 0px; 
+    padding-left: 25px;
+    margin-right: auto;
+}
 .rowabsolute{
 			position: absolute;
 }
@@ -371,13 +375,13 @@
 	background-color: #9A9191;
 }
 .divFont{
-	font-size: 1rem !important
+	font-size: 0.90rem !important
 }
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.funday{
 			margin-bottom: 13px;
 		    margin-left: -30px;
-		    width: 100%;
+			width: 100%;
 	}
 	.innerdiv{
 		 float: right;
@@ -409,7 +413,7 @@
 	.funday{
 		    margin-bottom: 13px;
 		    margin-left: -30px;
-		    width: 100%;
+			width: 100%;
 	}
 	.innerdiv{
 		 float: right;
@@ -439,7 +443,7 @@
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
-    	margin-left: -42px;
+		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;
@@ -469,7 +473,7 @@
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
-    	margin-left: -42px;
+		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;

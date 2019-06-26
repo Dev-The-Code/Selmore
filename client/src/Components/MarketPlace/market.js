@@ -23,7 +23,7 @@ class Market extends Component {
             to: 2,
             inputValue: 1,
             value: 0,
-            valArr: [],
+            rangeValzForDropdown: [],
             citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
@@ -54,7 +54,7 @@ class Market extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
-        const { citiesArr, cities , statesArr } = this.state;
+        const { citiesArr, cities, statesArr } = this.state;
         let response = await HttpUtils.get('getbillboard');
         let arr = [];
         let data = response.content;
@@ -94,10 +94,13 @@ class Market extends Component {
 
         //slice for render some data and click on more button then show some next data
         var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
-        let widthHeight = [];
-        for (var i = 0; i <= 3000; i = i + 500) {
-            widthHeight.push(i)
+        let rangeNumArr = [];
+        for (var i = 0; i <= 5000; i = i + 5) {
+            rangeNumArr.push(i)
         }
+        let rangeValues = rangeNumArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
         let city = citiesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
@@ -106,7 +109,7 @@ class Market extends Component {
         })
         await this.setState({
             billBorad: billboard,
-            valArr: widthHeight,
+            rangeValzForDropdown: rangeValues,
             cities: city,
             states: state
         })
@@ -159,43 +162,34 @@ class Market extends Component {
         this.billBoradDetails();
     }
     //filtration for drop down data
-    handleChange = (value) => {
+    handleChange = (data) => {
         const { billboardData } = this.state;
-        console.log(value)
+        console.log(data.value)
         var filteredData = [];
         for (var i = 0; i < billboardData.length; i++) {
             let data = billboardData[i];
             for (var j = 0; j < data.length; j++) {
-                if (data[j] == value) {
-                    if (data[7] == value) {
+                if (data[j] == data.value) {
+                    if (data[7] == data.value) {
                         filteredData.push(data);
                     }
-                    else if (data[8] == value) {
+                    else if (data[8] == data.value) {
                         filteredData.push(data);
                     }
-                    else if (data[j] == value) {
+                    else if (data[j] == data.value) {
                         filteredData.push(data);
                     }
                 }
             }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
     }
 
     render() {
-        const { billBorad, billboardFilterdData, cities , states} = this.state;
-        // console.log(cities, 'cities')
-        // let option = valArr.map((elem, key) => {
-        //     return <Option value={elem}>{elem}</Option>
-        // });
-        // let citiesOfCountary = cities.map((elem, key) => {
-        //     return <Option value={elem}>{elem}</Option>
-        // });
-        // let statesOfCountary = states.map((elem, key) => {
-        //     return <Option value={elem}>{elem}</Option>
-        // });
+        const { billBorad, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
@@ -240,34 +234,34 @@ class Market extends Component {
                             <div className='filterDivs'>Types</div>
                             <Row>
                                 <Col>
-                                    <Checkbox value='static'>Static</Checkbox>
+                                    <Checkbox value='Static'>Static</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="classic">Classic</Checkbox>
+                                    <Checkbox value="Classic">Classic</Checkbox>
                                 </Col>
                                 <Col>
-                                    <Checkbox value='digital'>Digital</Checkbox>
+                                    <Checkbox value='Digital'>Digital</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="mobile">Mobile</Checkbox>
+                                    <Checkbox value="Mobile">Mobile</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="bridge">Bridge</Checkbox>
+                                    <Checkbox value="Bridge">Bridge</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="vinyl">Vinyl</Checkbox>
+                                    <Checkbox value="Vinyl">Vinyl</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="painted">Painted</Checkbox>
+                                    <Checkbox value="Painted">Painted</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="three dimensional">Three Dimensional</Checkbox>
+                                    <Checkbox value="Three Dimensional">Three Dimensional</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="scented">Scented</Checkbox>
+                                    <Checkbox value="Scented">Scented</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="lamp post">Lamp Post</Checkbox>
+                                    <Checkbox value="Lamp post">Lamp Post</Checkbox>
                                 </Col>
                             </Row>
                             <Row>
@@ -276,56 +270,102 @@ class Market extends Component {
                                     <Checkbox value="Front">Front</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="back">Back</Checkbox>
+                                    <Checkbox value="Back">Back</Checkbox>
                                 </Col>
                             </Row>
                             <div className='filterDivs'>Lightning</div>
                             <Row>
                                 <Col >
-                                    <Checkbox value="yes">Yes</Checkbox>
+                                    <Checkbox value="Yes">Yes</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox value="no">No</Checkbox>
+                                    <Checkbox value="No">No</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='filterDivs'>Width</div>
+                            <div className='filterDivs'>Status</div>
                             <Row>
-                                <Col>
-                                    <Select onChange={this.handleChange}
-                                    //  options={this.state.companyName}
-                                    >
-                                        {option}
-                                    </Select>
+                                <Col >
+                                    <Checkbox value="Available">Available</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox value="No Available">No Available</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='filterDivs'>Height</div>
+                            <div className='filterDivs'>Audience Type</div>
                             <Row>
-                                <Col>
-                                    <Select onChange={this.handleChange}>
-                                        {option}
-                                    </Select>
+                                <Col >
+                                    <Checkbox value="All types of people">All types of people</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox value="Office type of people">Office type of people</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox value="Labour type people">Labour type people</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox value="Govt official type people">Govt official type people</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='filterDivs'>Cities</div>
-                            <Row>
-                                <Col>
-                                    <Select
-                                        onChange={this.handleChange}
-                                        options={cities}
-                                    >
-                                    </Select>
-                                </Col>
-                            </Row>
-                            <div className='filterDivs'>States</div>
-                            <Row>
-                                <Col>
-                                <Select
-                                        onChange={this.handleChange}
-                                        options={states}
-                                    >
-                                    </Select>
-                                </Col>
-                            </Row>
+                            <div className='col-md-9 dropdown'>
+                                <div className='filterDivs'>Width</div>
+                                <Row>
+                                    <Col>
+                                        <Select onChange={this.handleChange}
+                                            options={rangeValzForDropdown}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                                <div className='filterDivs'>Height</div>
+                                <Row>
+                                    <Col>
+                                        <Select onChange={this.handleChange}
+                                            options={rangeValzForDropdown}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                                <div className='filterDivs'>Traffic Count</div>
+                                <Row>
+                                    <Col>
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={rangeValzForDropdown}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                                <div className='filterDivs'>Daily Visitor</div>
+                                <Row>
+                                    <Col>
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={rangeValzForDropdown}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                                <div className='filterDivs'>Cities</div>
+                                <Row>
+                                    <Col>
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={cities}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                                <div className='filterDivs'>States</div>
+                                <Row>
+                                    <Col>
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={states}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                            </div>
                         </CheckboxGroup>
                     </div>
                     <div className='col-md-9'>
