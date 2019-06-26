@@ -46,20 +46,20 @@ class FormLogin extends Component {
     console.log(response);
     try {
       if (response.code === 200) {
-        this.setState({ data: response.content, isData: true, isLoader: false, loggedIn: true });
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         localStorage.setItem('userToken', JSON.stringify(response.token))
         localStorage.setItem('userName', JSON.stringify(response.username))
-        console.log(response.username, 'token')
+        this.setState({ isLoader: false, loggedIn: true });
+        // console.log(response.username, 'token')
       } else {
-        this.setState({ isData: false, isLoader: true })
+        this.setState({ isLoader: true })
       }
       // this.props.modalDis();
       // document.getElementById('myModal').modal("hide");
       console.log(document.getElementById('myModal'));
     }
     catch (error) {
-      console.log(error , 'catch')
+      console.log(error, 'catch')
 
       //error handling if user enter wrong email or password
       if (response === undefined) {
@@ -73,7 +73,7 @@ class FormLogin extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isData, isLoader, loggedIn, isAlert } = this.state
+    const { isLoader, loggedIn, isAlert } = this.state
     //redirect to home page
     if (loggedIn) {
       return <Redirect to='/' />

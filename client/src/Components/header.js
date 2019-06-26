@@ -12,13 +12,23 @@ class Header extends Component {
     super(props);
     this.state = {
       modal: 'modal',
-      propUser: false
+      propUser: false,
+      showDasboardandLisAdd: false
 
     }
   }
   async componentDidMount() {
-        let value = await localStorage.getItem("loggedIn");
-        console.log(value)
+    let value = await localStorage.getItem("loggedIn");
+    this.StateSetForShowDashboard()
+    // console.log(adminUser)
+  }
+  StateSetForShowDashboard = () => {
+    let adminUser = JSON.parse(localStorage.getItem("userName"));
+    if (adminUser == 'admin') {
+      this.setState({
+        showDasboardandLisAdd: true
+      })
+    }
   }
   // async componentDidMount() {
   //   let value = await localStorage.getItem("loggedIn");
@@ -52,7 +62,7 @@ class Header extends Component {
   }
 
   render() {
-    const { propUser } = this.state
+    const { propUser, showDasboardandLisAdd } = this.state
     const value = localStorage.getItem("loggedIn");
     return (
       <div>
@@ -79,26 +89,45 @@ class Header extends Component {
                   </Link>
                 </li>
                 <li className="nav-item navmargin">
-                  <Link rel="noopener noreferrer" to={`/faq`}>
-                    FAQ
+                  <Link rel="noopener noreferrer" to={`/dashboard`}>
+                    DASHBOARD
                   </Link>
                 </li>
-                <li className="nav-item navmargin" style={{ marginTop: "28px" }}>
-                  <a className="nav-link" href="#">
-                    BLOG
+                {/* {showDasboardandLisAdd ?
+                  <li className="nav-item navmargin">
+                    <Link rel="noopener noreferrer" to={`/dashboard`}>
+                      FAQ
+                  </Link>
+                  </li>
+                  :
+                  <li className="nav-item navmargin">
+                    <Link rel="noopener noreferrer" to={`/faq`}>
+                      FAQ
+              </Link>
+                  </li>
+
+                  <li className="nav-item navmargin" style={{ marginTop: "28px" }}>
+                    <a className="nav-link" href="#">
+                      BLOG
                   </a>
-                </li>
+                  </li>
+                } */}
+
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/market_place`}>
                     MARKETPLACE
                   </Link>
                 </li>
-                <li className="nav-item navmargin12">
-                  <Link rel="noopener noreferrer" to={`/list_add`}><button type="button" className="btn btn-primary btn-sm">
-                    <span> LIST AD </span>
-                  </button>
-                  </Link>
-                </li>
+                {showDasboardandLisAdd ?
+                  <li className="nav-item navmargin12">
+                    <Link rel="noopener noreferrer" to={`/list_add`}><button type="button" className="btn btn-primary btn-sm">
+                      <span> LIST AD </span>
+                    </button>
+                    </Link>
+                  </li>
+                  :
+                  null
+                }
                 <li className="nav-item navbiddbtn">
                   <button type="button" className="btn btn-primary btn-sm">
                     <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white" }}>
