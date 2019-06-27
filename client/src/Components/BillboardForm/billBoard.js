@@ -228,21 +228,21 @@ class BillBoard extends Component {
         // let country = [];
         // console.log(index, 'index')
         for (var i = 0; i <= index; i++) {
-            let biilbordObj = {}
+            let biilbordObj = []
             for (var property in values) {
                 // console.log(property, 'property name')
                 // console.log(`facing${i}`);
                 // console.log(values, 'values of complete form')
                 // console.log(values[property], 'property value values ')
-                if (property == `facing${i}` && property == `traffic${i}` && property == `longitude${i}` && property == `latitude${i}` &&
-                    property == `images${i}` && property == `size${i}` && property == `type${i}` && property == `width${i}` &&
-                    property == `height${i}` && property == `lightning${i}` && property == `description${i}` && property == `status${i}` &&
-                    property == `dailyRate${i}` && property == `dailyRate${i}` && property == `weeklyRate${i}` && property == `monthlyRate${i}`
-                    && property == `yearlyRate${i}` && property == `audianceType${i}` && property == `dailyVisitor${i}` &&
-                    property == `nearBy${i}` && property == `address${i}` && property == `city${i}` && property == `state${i}` &&
-                    property == `country${i}`) {
-                    console.log('true with &&')
-                }
+                // if (property == `facing${i}` && property == `traffic${i}` && property == `longitude${i}` && property == `latitude${i}` &&
+                //     property == `images${i}` && property == `size${i}` && property == `type${i}` && property == `width${i}` &&
+                //     property == `height${i}` && property == `lightning${i}` && property == `description${i}` && property == `status${i}` &&
+                //     property == `dailyRate${i}` && property == `dailyRate${i}` && property == `weeklyRate${i}` && property == `monthlyRate${i}`
+                //     && property == `yearlyRate${i}` && property == `audianceType${i}` && property == `dailyVisitor${i}` &&
+                //     property == `nearBy${i}` && property == `address${i}` && property == `city${i}` && property == `state${i}` &&
+                //     property == `country${i}`) {
+                //     console.log('true with &&')
+                // }
                 if (property == `facing${i}` || property == `traffic${i}` || property == `longitude${i}` || property == `latitude${i}` ||
                     property == `images${i}` || property == `size${i}` || property == `type${i}` || property == `width${i}` ||
                     property == `height${i}` || property == `lightning${i}` || property == `description${i}` || property == `status${i}` ||
@@ -250,7 +250,7 @@ class BillBoard extends Component {
                     || property == `yearlyRate${i}` || property == `audianceType${i}` || property == `dailyVisitor${i}` ||
                     property == `nearBy${i}` || property == `address${i}` || property == `city${i}` || property == `state${i}` ||
                     property == `country${i}`) {
-                    biilbordObj.property = values[property]
+                    biilbordObj.push(values[property])
                     // console.log('true with ||')
                 }
                 // if (property.indexOf(`facing${i}`) !== -1) {
