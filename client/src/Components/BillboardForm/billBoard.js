@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './billboardDetail.css';
 import {
-    Form, Input, Icon, Button, message, Upload, Modal, notification, Cascader,
+    Form, Input, Icon, Button, Upload, Modal, notification, Cascader,
 } from 'antd';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
@@ -9,7 +9,6 @@ import './billboardDetail.css';
 import { HttpUtils } from '../../Services/HttpUtils';
 import superagent from "superagent";
 import sha1 from "sha1";
-import { type } from 'os';
 
 let id = 0;
 const FormItem = Form.Item;
@@ -25,7 +24,7 @@ class BillBoard extends Component {
         super()
         this.state = {
             companyName: [],
-            types: '',
+            type: '',
             facing: '',
             fileList: [],
             imageList: [],
@@ -52,7 +51,7 @@ class BillBoard extends Component {
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
                 " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad",
                 " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
-                " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+                " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
                 " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
@@ -148,7 +147,8 @@ class BillBoard extends Component {
     }
 
     handleChange = (data) => {
-        this.setState({ company: data.value, id: data.id });
+        console.log(data.value)
+        // this.setState({ company: data.value, id: data.id });
     }
 
     removeForm = (k) => {
@@ -202,129 +202,156 @@ class BillBoard extends Component {
 
     async funcForUpload(values) {
         const { fileList, keyFor, index } = this.state;
+        console.log(values)
         //merge multiple value of the field in one array
-        let facing = [];
-        let traffic = [];
-        let longitude = [];
-        let latitude = [];
-        let size = [];
-        let type = [];
-        let width = [];
-        let height = [];
-        let lightning = [];
-        let description = [];
-        let status = [];
-        let dailyRate = [];
-        let weeklyRate = [];
-        let monthlyRate = [];
-        let yearlyRate = [];
-        let audianceType = [];
-        let dailyVisitor = [];
-        let nearBy = [];
-        let address = [];
-        let city = [];
-        let state = [];
-        let country = [];
+        // let facing = [];
+        // let traffic = [];
+        // let longitude = [];
+        // let latitude = [];
+        // let size = [];
+        // let type = [];
+        // let width = [];
+        // let height = [];
+        // let lightning = [];
+        // let description = [];
+        // let status = [];
+        // let dailyRate = [];
+        // let weeklyRate = [];
+        // let monthlyRate = [];
+        // let yearlyRate = [];
+        // let audianceType = [];
+        // let dailyVisitor = [];
+        // let nearBy = [];
+        // let address = [];
+        // let city = [];
+        // let state = [];
+        // let country = [];
+        // console.log(index, 'index')
         for (var i = 0; i <= index; i++) {
+            let biilbordObj = {}
             for (var property in values) {
-                if (property.indexOf(`facing${i}`) !== -1) {
-                    facing.push(values[property])
+                // console.log(property, 'property name')
+                // console.log(`facing${i}`);
+                // console.log(values, 'values of complete form')
+                // console.log(values[property], 'property value values ')
+                if (property == `facing${i}` && property == `traffic${i}` && property == `longitude${i}` && property == `latitude${i}` &&
+                    property == `images${i}` && property == `size${i}` && property == `type${i}` && property == `width${i}` &&
+                    property == `height${i}` && property == `lightning${i}` && property == `description${i}` && property == `status${i}` &&
+                    property == `dailyRate${i}` && property == `dailyRate${i}` && property == `weeklyRate${i}` && property == `monthlyRate${i}`
+                    && property == `yearlyRate${i}` && property == `audianceType${i}` && property == `dailyVisitor${i}` &&
+                    property == `nearBy${i}` && property == `address${i}` && property == `city${i}` && property == `state${i}` &&
+                    property == `country${i}`) {
+                    console.log('true with &&')
                 }
-                if (property.indexOf(`traffic${i}`) !== -1) {
-                    traffic.push(values[property])
+                if (property == `facing${i}` || property == `traffic${i}` || property == `longitude${i}` || property == `latitude${i}` ||
+                    property == `images${i}` || property == `size${i}` || property == `type${i}` || property == `width${i}` ||
+                    property == `height${i}` || property == `lightning${i}` || property == `description${i}` || property == `status${i}` ||
+                    property == `dailyRate${i}` || property == `dailyRate${i}` || property == `weeklyRate${i}` || property == `monthlyRate${i}`
+                    || property == `yearlyRate${i}` || property == `audianceType${i}` || property == `dailyVisitor${i}` ||
+                    property == `nearBy${i}` || property == `address${i}` || property == `city${i}` || property == `state${i}` ||
+                    property == `country${i}`) {
+                    biilbordObj.property = values[property]
+                    // console.log('true with ||')
                 }
-                if (property.indexOf(`longitude${i}`) !== -1) {
-                    longitude.push(values[property])
-                }
-                if (property.indexOf(`latitude${i}`) !== -1) {
-                    latitude.push(values[property])
-                }
-                if (property.indexOf(`size${i}`) !== -1) {
-                    size.push(values[property])
-                }
-                if (property.indexOf(`type${i}`) !== -1) {
-                    type.push(values[property])
-                }
-                if (property.indexOf(`width${i}`) !== -1) {
-                    width.push(values[property])
-                }
-                if (property.indexOf(`height${i}`) !== -1) {
-                    height.push(values[property])
-                } if (property.indexOf(`lightning${i}`) !== -1) {
-                    lightning.push(values[property])
-                } if (property.indexOf(`description${i}`) !== -1) {
-                    description.push(values[property])
-                } if (property.indexOf(`status${i}`) !== -1) {
-                    status.push(values[property])
-                } if (property.indexOf(`dailyRate${i}`) !== -1) {
-                    dailyRate.push(values[property])
-                } if (property.indexOf(`weeklyRate${i}`) !== -1) {
-                    weeklyRate.push(values[property])
-                } if (property.indexOf(`monthlyRate${i}`) !== -1) {
-                    monthlyRate.push(values[property])
-                } if (property.indexOf(`yearlyRate${i}`) !== -1) {
-                    yearlyRate.push(values[property])
-                } if (property.indexOf(`audianceType${i}`) !== -1) {
-                    audianceType.push(values[property])
-                } if (property.indexOf(`dailyVisitor${i}`) !== -1) {
-                    dailyVisitor.push(values[property])
-                } if (property.indexOf(`nearBy${i}`) !== -1) {
-                    nearBy.push(values[property])
-                } if (property.indexOf(`address${i}`) !== -1) {
-                    address.push(values[property])
-                } if (property.indexOf(`city${i}`) !== -1) {
-                    city.push(values[property])
-                } if (property.indexOf(`state${i}`) !== -1) {
-                    state.push(values[property])
-                } if (property.indexOf(`country${i}`) !== -1) {
-                    country.push(values[property])
-                }
+                // if (property.indexOf(`facing${i}`) !== -1) {
+                //     facing.push(values[property])
+                // }
+                // if (property.indexOf(`traffic${i}`) !== -1) {
+                //     traffic.push(values[property])
+                // }
+                // if (property.indexOf(`longitude${i}`) !== -1) {
+                //     longitude.push(values[property])
+                // }
+                // if (property.indexOf(`latitude${i}`) !== -1) {
+                //     latitude.push(values[property])
+                // }
+                // if (property.indexOf(`size${i}`) !== -1) {
+                //     size.push(values[property])
+                // }
+                // if (property.indexOf(`type${i}`) !== -1) {
+                //     type.push(values[property])
+                // }
+                // if (property.indexOf(`width${i}`) !== -1) {
+                //     width.push(values[property])
+                // }
+                // if (property.indexOf(`height${i}`) !== -1) {
+                //     height.push(values[property])
+                // } if (property.indexOf(`lightning${i}`) !== -1) {
+                //     lightning.push(values[property])
+                // } if (property.indexOf(`description${i}`) !== -1) {
+                //     description.push(values[property])
+                // } if (property.indexOf(`status${i}`) !== -1) {
+                //     status.push(values[property])
+                // } if (property.indexOf(`dailyRate${i}`) !== -1) {
+                //     dailyRate.push(values[property])
+                // } if (property.indexOf(`weeklyRate${i}`) !== -1) {
+                //     weeklyRate.push(values[property])
+                // } if (property.indexOf(`monthlyRate${i}`) !== -1) {
+                //     monthlyRate.push(values[property])
+                // } if (property.indexOf(`yearlyRate${i}`) !== -1) {
+                //     yearlyRate.push(values[property])
+                // } if (property.indexOf(`audianceType${i}`) !== -1) {
+                //     audianceType.push(values[property])
+                // } if (property.indexOf(`dailyVisitor${i}`) !== -1) {
+                //     dailyVisitor.push(values[property])
+                // } if (property.indexOf(`nearBy${i}`) !== -1) {
+                //     nearBy.push(values[property])
+                // } if (property.indexOf(`address${i}`) !== -1) {
+                //     address.push(values[property])
+                // } if (property.indexOf(`city${i}`) !== -1) {
+                //     city.push(values[property])
+                // } if (property.indexOf(`state${i}`) !== -1) {
+                //     state.push(values[property])
+                // } if (property.indexOf(`country${i}`) !== -1) {
+                //     country.push(values[property])
+                // }
             }
+            console.log(biilbordObj, 'data')
         }
 
         //store properties in object
-        let obj = {};
-        obj.companyName = this.state.company;
-        obj.companyId = this.state.id;
-        obj.facing = facing;
-        obj.type = type;
-        obj.size = size;
-        obj.latitude = latitude;
-        obj.longitude = longitude;
-        obj.traffic = traffic;
-        obj.width = width;
-        obj.height = height;
-        obj.lightning = lightning;
-        obj.description = description;
-        obj.status = status;
-        obj.dailyRate = dailyRate;
-        obj.weeklyRate = weeklyRate;
-        obj.monthlyRate = monthlyRate;
-        obj.yearlyRate = yearlyRate;
-        obj.audianceType = audianceType;
-        obj.dailyVisitor = dailyVisitor;
-        obj.nearBy = nearBy;
-        obj.address = address;
-        obj.city = city;
-        obj.state = state;
-        obj.country = country;
+        // let obj = {};
+        // obj.companyName = this.state.company;
+        // obj.companyId = this.state.id;
+        // obj.facing = facing;
+        // obj.type = type;
+        // obj.size = size;
+        // obj.latitude = latitude;
+        // obj.longitude = longitude;
+        // obj.traffic = traffic;
+        // obj.width = width;
+        // obj.height = height;
+        // obj.lightning = lightning;
+        // obj.description = description;
+        // obj.status = status;
+        // obj.dailyRate = dailyRate;
+        // obj.weeklyRate = weeklyRate;
+        // obj.monthlyRate = monthlyRate;
+        // obj.yearlyRate = yearlyRate;
+        // obj.audianceType = audianceType;
+        // obj.dailyVisitor = dailyVisitor;
+        // obj.nearBy = nearBy;
+        // obj.address = address;
+        // obj.city = city;
+        // obj.state = state;
+        // obj.country = country;
 
         // console.log(obj, 'combined values')
-        let arr = [];
-        for (var i = 0; i <= keyFor.length; i++) {
-            let fileListRef = `fileList${i}`;
-            arr.push(this.state[fileListRef])
-            arr = arr.filter(function (element) {
-                return element !== undefined;
-            });
-            Promise.all(arr[i].map((val, i) => {
-                return this.uploadFile(val).then((result) => {
-                    return result.body.url
-                })
-            })).then((results) => {
-                this.postData(values, results, obj)
-            })
-        }
+        // let arr = [];
+        // for (var i = 0; i <= keyFor.length; i++) {
+        //     let fileListRef = `fileList${i}`;
+        //     arr.push(this.state[fileListRef])
+        //     arr = arr.filter(function (element) {
+        //         return element !== undefined;
+        //     });
+        //     Promise.all(arr[i].map((val, i) => {
+        //         return this.uploadFile(val).then((result) => {
+        //             return result.body.url
+        //         })
+        //     })).then((results) => {
+        //         this.postData(values, results, obj)
+        //     })
+        // }
     }
     //--------------function for cloudnary url ---------------
     uploadFile = (files) => {
@@ -370,8 +397,8 @@ class BillBoard extends Component {
 
     fectSignUpApiFunc = async (values) => {
         console.log(values, 'all arrays in one object');
-        let response = await HttpUtils.post('listadd', values);
-        console.log(response);
+        // let response = await HttpUtils.post('listadd', values);
+        // console.log(response);
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,
@@ -635,7 +662,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter Lightning',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
@@ -680,7 +706,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter status',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
@@ -801,7 +826,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter audiance type',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
@@ -894,7 +918,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter city',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
@@ -917,7 +940,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter state',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
@@ -939,7 +961,6 @@ class BillBoard extends Component {
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter country',
-                                                                whitespace: true
                                                             }],
                                                         })(
                                                             <Select
