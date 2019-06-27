@@ -25,6 +25,8 @@ class BillBoard extends Component {
         super()
         this.state = {
             companyName: [],
+            types: '',
+            facing: '',
             fileList: [],
             imageList: [],
             previewImage: '',
@@ -61,11 +63,11 @@ class BillBoard extends Component {
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
-            type: [],
-            facing: [],
-            lightning: [],
-            status: [],
-            audienceType: [],
+            types: [],
+            facings: [],
+            lightnings: [],
+            statuses: [],
+            audienceTypes: [],
             cities: [],
             states: []
         }
@@ -73,29 +75,31 @@ class BillBoard extends Component {
 
     componentDidMount() {
         this.companyNames();
+        let data = this.props.data;
+        console.log(data, 'data in billboard edit')
     }
 
     companyNames = async () => {
         let { companyName, citiesArr, typeArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
-            type, facing, lightning, status, audienceType, cities, states } = this.state;
+            types, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
         let response = await HttpUtils.get('getcompanyname');
         // console.log(response.content, 'response')
         companyName = response.content.map((elem, i) => {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
         })
-        type = typeArr.map((elem, i) => {
+        types = typeArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        facing = facingArr.map((elem, i) => {
+        facings = facingArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        lightning = lightningArr.map((elem, i) => {
+        lightnings = lightningArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        status = statusArr.map((elem, i) => {
+        statuses = statusArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        audienceType = audienceTypeArr.map((elem, i) => {
+        audienceTypes = audienceTypeArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
         cities = citiesArr.map((elem, i) => {
@@ -106,11 +110,11 @@ class BillBoard extends Component {
         })
         await this.setState({
             companyName: companyName,
-            type: type,
-            facing: facing,
-            lightning: lightning,
-            status: status,
-            audianceType: audienceType,
+            types: types,
+            facings: facings,
+            lightnings: lightnings,
+            statuses: statuses,
+            audianceTypes: audienceTypes,
             cities: cities,
             states: states
         });
@@ -384,7 +388,7 @@ class BillBoard extends Component {
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert, companyName, previewVisible, previewImage, index,
-            type, facing, lightning, status, audianceType, cities, states } = this.state;
+            types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -406,19 +410,18 @@ class BillBoard extends Component {
                                             <div className="form-group">
                                                 <label for="type"></label>
                                                 <Form.Item>
-                                                <p>BillBoard Type:</p>
+                                                    <p>BillBoard Type:</p>
                                                     {getFieldDecorator(`type${index}`, {
-                                                        // initialValue: type,
+                                                        initialValue: this.state.type,
                                                         // defaultValue: option.initialValue,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a type',
-                                                            whitespace: true
                                                         }],
                                                     })(
                                                         <Select
                                                             onChange={this.handleChange}
-                                                            options={type}
+                                                            options={types}
                                                         >
                                                         </Select>
                                                     )}
@@ -429,19 +432,19 @@ class BillBoard extends Component {
                                             <div className="form-group">
                                                 <label for="facing"></label>
                                                 <Form.Item>
-                                                <p>Facing:</p>
+                                                    <p>Facing:</p>
                                                     {getFieldDecorator(`facing${index}`, {
+                                                        initialValue: this.state.facing,
                                                         // initialValue: facing,
                                                         // defaultValue: option.initialValue,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a facing',
-                                                            whitespace: true
                                                         }],
                                                     })(
                                                         <Select
                                                             onChange={this.handleChange}
-                                                            options={facing}
+                                                            options={facings}
                                                         >
                                                         </Select>
                                                     )}
@@ -625,7 +628,7 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     <label for="lightning"></label>
                                                     <Form.Item>
-                                                    <p>Lightning:</p>
+                                                        <p>Lightning:</p>
                                                         {getFieldDecorator(`lightning${index}`, {
                                                             //  initialValue: lightning,
                                                             //  defaultValue: option.initialValue,
@@ -637,7 +640,7 @@ class BillBoard extends Component {
                                                         })(
                                                             <Select
                                                                 onChange={this.handleChange}
-                                                                options={lightning}
+                                                                options={lightnings}
                                                             >
                                                             </Select>
                                                         )}
@@ -670,7 +673,7 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     <label for="status"></label>
                                                     <Form.Item>
-                                                    <p>Status:</p>
+                                                        <p>Status:</p>
                                                         {getFieldDecorator(`status${index}`, {
                                                             //   initialValue: status,
                                                             //   defaultValue: option.initialValue,
@@ -682,7 +685,7 @@ class BillBoard extends Component {
                                                         })(
                                                             <Select
                                                                 onChange={this.handleChange}
-                                                                options={status}
+                                                                options={statuses}
                                                             >
                                                             </Select>
                                                         )}
@@ -791,7 +794,7 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     <label for="audianceType"></label>
                                                     <Form.Item>
-                                                    <p>Audiance Type:</p>
+                                                        <p>Audiance Type:</p>
                                                         {getFieldDecorator(`audianceType${index}`, {
                                                             //  initialValue: audianceType,
                                                             //  defaultValue: option.initialValue,
@@ -803,7 +806,7 @@ class BillBoard extends Component {
                                                         })(
                                                             <Select
                                                                 onChange={this.handleChange}
-                                                                options={audianceType}
+                                                                options={audianceTypes}
                                                             >
                                                             </Select>
                                                         )}
@@ -884,7 +887,7 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     <label for="city"></label>
                                                     <Form.Item>
-                                                    <p>City:</p>
+                                                        <p>City:</p>
                                                         {getFieldDecorator(`city${index}`, {
                                                             // initialValue: cities,
                                                             // defaultValue: option.initialValue,
@@ -907,7 +910,7 @@ class BillBoard extends Component {
                                                 <div className="form-group">
                                                     <label for="state"></label>
                                                     <Form.Item>
-                                                    <p>States:</p>
+                                                        <p>States:</p>
                                                         {getFieldDecorator(`state${index}`, {
                                                             // initialValue: states,
                                                             //  defaultValue: option.initialValue,
@@ -929,7 +932,7 @@ class BillBoard extends Component {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <Form.Item>
-                                                    <p>Country:</p>
+                                                        <p>Country:</p>
                                                         {getFieldDecorator(`country${index}`, {
                                                             // initialValue: this.state.country,
                                                             //  defaultValue: option.initialValue,

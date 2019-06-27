@@ -4,14 +4,14 @@ import Footer from '../footer';
 import BillBoard from './billBoard';
 
 class AddBillboards extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props);
     }
     render() {
         return (
             <div>
                 <Header />
-                <BillBoard />
+                <BillBoard data ={this.props.location.state}/>
                 <Footer />
             </div>
         )

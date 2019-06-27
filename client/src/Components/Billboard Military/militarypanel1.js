@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import './billmilitary.css';
 import Location from './googlemap';
+import { Link } from "react-router-dom";
 
 class Militarypanel1 extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			data: '',
-			images: []
+			images: [],
+			admin: true
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
+		console.log(data , 'data')
 		await this.setState({
 			data: data,
 			images: data[0]
 		})
 	}
 	render() {
-		const { data, images } = this.state;
+		const { data, images, admin } = this.state;
 		let image;
 		if (images.length > 0) {
 			console.log('iamges')
@@ -58,6 +61,14 @@ class Militarypanel1 extends Component {
 									</div>
 								</div>
 							</div><br />
+							{admin ?
+								<Link to={{ pathname: `/list_add`, state: data }}>
+									<div className='editbtn'>
+										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
+									</div>
+								</Link>
+								: null
+							}
 							{/*first panel1*/}
 							<div className="row ufone1" style={{ margin: '0px' }}>
 								<span className="ufone2">Billboard in {data[19]} Millitary Road City Point Details</span>
