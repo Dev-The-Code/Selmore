@@ -83,8 +83,8 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 class Location extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             coords: null,
             showingInfoWindow: true,
@@ -94,20 +94,24 @@ class Location extends Component {
         this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     }
     componentWillMount() {
-        this.setPosition();
+        this.setPosition(this.props.latitude, this.props.longitude);
     }
-    setPosition() {
+    setPosition(latitude, longitude) {
         navigator.geolocation.getCurrentPosition(position => {
+            // console.log(position)
             this.setState({
                 coords:
                 {
-                    latitude: 34.550335,
-                    longitude: 73.353259
+                    // latitude: latitude,
+                    // longitude: longitude,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
                 }
             });
         })
     }
     getCurrPosition({ latitude, longitude }) {
+        // console.log(latitude)
         this.setState({ coords: { latitude, longitude } })
     }
     onInfoWindowClose() {
@@ -117,6 +121,7 @@ class Location extends Component {
         })
     }
     render() {
+        // console.log(this.props.address)
         const { coords } = this.state;
         return (
             <div>
@@ -129,6 +134,7 @@ class Location extends Component {
                     mapElement={<div style={{ height: `100%` }} />}
                     coords={coords}
                     onInfoWindowClose={this.onInfoWindowClose}
+                    address={this.props.address}
                 // getCurrentPosition={this.getCurrPosition}
                 />
             </div>
@@ -139,26 +145,25 @@ class Location extends Component {
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     <GoogleMap
         defaultZoom={15}
-        // defaultCenter={{ lat: props.coords.latitude, lng: props.coords.longitude }}
+        defaultCenter={{ lat: props.coords.latitude, lng: props.coords.longitude }}
         // center={{ lat: 33.690980, lng: 73.091140 }}
         center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
 
     >
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-            title='awaisbjhb'
-            name='Awaisjbhjbh'
-            text ='rehman'
-            key = 'arain'
-        // position={{ lat: 33.690980, lng: 73.091140 }}
-        // draggable={true}
-        // onDragEnd={position => {
-        //     // console.log(position.latLng.lat(), position.latLng.lng());
-        //     props.getCurrentPosition({ latitude: position.latLng.lat(), longitude: position.latLng.lng() });
-        //     console.log(position , 'position')
-        // }}
+            title={props.address}
+            // name='Awaisjbhjbh'
+            // text='rehman'
+            // key='arain'
+            // position={{ lat: 33.690980, lng: 73.091140 }}
+            draggable={true}
+            onDragEnd={position => {
+                // console.log(position.latLng.lat(), position.latLng.lng());
+                props.getCurrentPosition({ latitude: position.latLng.lat(), longitude: position.latLng.lng() });
+                console.log(position, 'position')
+            }}
         >
-
             <InfoWindow
                 // onCloseClick={() => { this.props.onInfoWindowClose }}
                 // marker={this.state.activeMarker}
@@ -166,7 +171,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
                 onCloseClick={props.onInfoWindowClose}
             >
                 <div>
-                    Awais
+                    {props.address}
                 </div>
             </InfoWindow>
         </Marker>

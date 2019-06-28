@@ -19,7 +19,7 @@ exports.postAddData = function(req,res,next){
       lightning:formData.lightning,
       description:formData.description,
       status:formData.status,
-      dailyRate:formData.dialyRate,
+      dailyRate:formData.dailyRate,
       weeklyRate:formData.weeklyRate,
       monthlyRate:formData.monthlyRate,
       yearlyRate:formData.yearlyRate,

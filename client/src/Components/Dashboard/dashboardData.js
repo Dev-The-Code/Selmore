@@ -16,39 +16,10 @@ class DashboardData extends Component {
     }
     billBoradData = async () => {
         let response = await HttpUtils.get('getbillboard');
-        let arr = [];
         let data = response.content;
         console.log(data)
-        for (var i = 0; i < data.length; i++) {
-            let billboardArr1 = [];
-            let billboardArr2 = [];
-            let billboardObj = data[i];
-            for (var j in billboardObj) {
-                let billboardFields = [];
-                if (j !== 'companyId' && j !== 'companyName' && j !== '_id') {
-                    billboardFields = billboardObj[j]
-                }
-                for (var k = 0; k < billboardFields.length; k++) {
-                    if (k == 0) {
-                        billboardArr1.push(billboardFields[k])
-                    }
-                    else {
-                        billboardArr2.push(billboardFields[k])
-                    }
-                }
-                if (j == 'companyId') {
-                    let companyId = billboardObj["companyId"]
-                    let companyName = billboardObj["companyName"]
-                    let _id = billboardObj["_id"]
-                    billboardArr2.push(companyId, companyName, _id)
-                    billboardArr1.push(companyId, companyName, _id)
-                }
-            }
-            arr.push(billboardArr1, billboardArr2)
-        }
-        // console.log(arr)
         this.setState({
-            billboardData: arr
+            billboardData: data
         })
     }
     render() {
@@ -58,9 +29,10 @@ class DashboardData extends Component {
             tableData = billboardData.map((elem, i) => {
                 console.log(elem)
                 return <tbody>
-                    <td>{elem[23]}</td>
-                    <td>{elem[18]}</td>
-                    <td>{elem[3]}</td>
+                    <td>{i}</td>
+                    <td>{elem.companyName}</td>
+                    <td>{elem.address}</td>
+                    <td>{elem.size}</td>
                     <td> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
                 </tbody>
                 // return elem;
@@ -69,10 +41,11 @@ class DashboardData extends Component {
         }
         return (
             <div className='row'>
-                <div className='col-md-4'></div>
-                <div className='col-md-8'>
+                <div className='col-md-2'></div>
+                <div className='col-md-10'>
                     <table className='tableData'>
                         <thead >
+                            <th className='tableHead'>#</th>
                             <th className='tableHead'>Company Name</th>
                             <th className='tableHead'>Address</th>
                             <th className='tableHead'>Size</th>

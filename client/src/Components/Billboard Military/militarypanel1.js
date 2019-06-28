@@ -9,15 +9,14 @@ class Militarypanel1 extends Component {
 		this.state = {
 			data: '',
 			images: [],
-			admin: true
+			admin: true,
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
-		console.log(data , 'data')
 		await this.setState({
 			data: data,
-			images: data[0]
+			images: data.images,
 		})
 	}
 	render() {
@@ -61,37 +60,30 @@ class Militarypanel1 extends Component {
 									</div>
 								</div>
 							</div><br />
-							{admin ?
-								<Link to={{ pathname: `/list_add`, state: data }}>
-									<div className='editbtn'>
-										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
-									</div>
-								</Link>
-								: null
-							}
+
 							{/*first panel1*/}
 							<div className="row ufone1" style={{ margin: '0px' }}>
-								<span className="ufone2">Billboard in {data[19]} Millitary Road City Point Details</span>
+								<span className="ufone2">Billboard in {data.city} Millitary Road City Point Details</span>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Ad Width</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[7]}- Feet</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.width}- Feet</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Ad Height</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[8]} - Feet</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.height} - Feet</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Lightning</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[9]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.lightning}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Description</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[10]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.description}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Ad Status</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[11]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.status}</span></div>
 							</div>
 							<br />
 							{/*Second panel*/}
@@ -100,19 +92,19 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[12]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.dailyRate}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[13]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.weeklyRate}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[12]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.monthlyRate}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[14]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.yearlyRate}</span></div>
 							</div>
 							<br />
 							{/*Third panel*/}
@@ -121,15 +113,15 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Audiance Type</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[15]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.audianceType}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[16]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.dailyVisitor}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[17]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.nearBy}</span></div>
 							</div>
 							<br />
 							{/*Fourth panel*/}
@@ -138,19 +130,19 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Country</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[21]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">State</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[20]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">City</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[19]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data[18]}</span></div>
+								<div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
 							</div>
 							<br />
 							<div className="row">
@@ -167,12 +159,21 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
+						{admin ?
+								<Link to={{ pathname: `/list_add`, state: data }}>
+									<div className='editbtn'>
+										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
+									</div>
+								</Link>
+								: null
+							}
 							<div className="row soldier7" style={{ margin: '0px' }}>
 								<div><h3>Map</h3></div>
 
 							</div><br />
 							{/* render a map and show a location of the Billboard */}
-							<div><Location /></div>
+							<div><Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
+								address={this.props.data.address} /></div>
 						</div>
 					</div>
 				</div> <br />

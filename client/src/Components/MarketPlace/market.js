@@ -58,42 +58,45 @@ class Market extends Component {
         let response = await HttpUtils.get('getbillboard');
         let arr = [];
         let data = response.content;
+        // console.log(data, 'bill board data')
 
         // seprate every billboard data in the array from array of objects and objects has an multiple array
-        for (var i = 0; i < data.length; i++) {
-            let billboardArr1 = [];
-            let billboardArr2 = [];
-            let billboardObj = data[i];
-            for (var j in billboardObj) {
-                let billboardFields = [];
-                if (j !== 'companyId' && j !== 'companyName' && j !== '_id') {
-                    billboardFields = billboardObj[j]
-                }
-                for (var k = 0; k < billboardFields.length; k++) {
-                    if (k == 0) {
-                        billboardArr1.push(billboardFields[k])
-                    }
-                    else {
-                        billboardArr2.push(billboardFields[k])
-                    }
-                }
-                if (j == 'companyId') {
-                    let companyId = billboardObj["companyId"]
-                    let companyName = billboardObj["companyName"]
-                    let _id = billboardObj["_id"]
-                    billboardArr2.push(companyId, companyName, _id)
-                    billboardArr1.push(companyId, companyName, _id)
-                }
-            }
-            arr.push(billboardArr1, billboardArr2)
-        }
+        // for (var i = 0; i < data.length; i++) {
+        // let billboardArr1 = [];
+        // let billboardArr2 = [];
+        // let billboardObj = data[i];
+        // console.log(billboardObj)
+        // for (var j in billboardObj) {
+        //     let billboardFields = [];
+        //     if (j !== 'companyId' && j !== 'companyName' && j !== '_id') {
+        //         billboardFields = billboardObj[j]
+        //     }
+        //     for (var k = 0; k < billboardFields.length; k++) {
+        //         if (k == 0) {
+        //             billboardArr1.push(billboardFields[k])
+        //         }
+        //         else {
+        //             billboardArr2.push(billboardFields[k])
+        //         }
+        //     }
+        //     if (j == 'companyId') {
+        //         let companyId = billboardObj["companyId"]
+        //         let companyName = billboardObj["companyName"]
+        //         let _id = billboardObj["_id"]
+        //         billboardArr2.push(companyId, companyName, _id)
+        //         billboardArr1.push(companyId, companyName, _id)
+        //     }
+        // }
+        // arr.push(billboardArr1, billboardArr2)
         this.setState({
-            billboardData: arr
+            billboardData: data
         })
-        localStorage.setItem('billboardData', JSON.stringify(arr))
+        // }
+        // console.log(this.state.billboardData)
+        localStorage.setItem('billboardData', JSON.stringify(data))
 
         //slice for render some data and click on more button then show some next data
-        var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
+        // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
         let rangeNumArr = [];
         for (var i = 0; i <= 5000; i = i + 5) {
             rangeNumArr.push(i)
@@ -107,13 +110,13 @@ class Market extends Component {
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await this.setState({
-            billBorad: billboard,
-            rangeValzForDropdown: rangeValues,
-            cities: city,
-            states: state
-        })
-        console.log(cities, 'cities')
+        // await this.setState({
+        //     billBorad: billboard,
+        //     rangeValzForDropdown: rangeValues,
+        //     cities: city,
+        //     states: state
+        // })
+        // console.log(cities, 'cities')
     }
 
     //filtration the data with given values
@@ -189,7 +192,7 @@ class Market extends Component {
     }
 
     render() {
-        const { billBorad, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
+        const { billboardData, billBorad, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
@@ -205,13 +208,14 @@ class Market extends Component {
                         )
                     })
                         :
-                        billBorad && billBorad.map((elem, key) => {
+                        billboardData && billboardData.map((elem, key) => {
+                            console.log(elem, 'elem')
                             return (
                                 <div className='col-md-3 activeClass'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                        <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
-                                    <p>{elem[23]}</p>
-                                    <p>{elem[19]}</p>
+                                        <img src={elem.images[0]} className='imgBillBoard' alt={key} /></Link>
+                                    <p>{elem.companyName}</p>
+                                    <p>{elem.city}</p>
                                 </div>
                             )
                         })}
@@ -219,6 +223,7 @@ class Market extends Component {
                 </div>
             </div>
         );
+        // console.log(billboardRendring ,'aaaaa' )
         return (
             <div>
                 <div className='row billboard'>

@@ -32,6 +32,20 @@ class BillBoard extends Component {
             city: '',
             state: '',
             country: '',
+            size: '',
+            latitude: '',
+            longitude: '',
+            traffic: '',
+            width: '',
+            height: '',
+            description: '',
+            dailyRate: '',
+            weeklyRate: '',
+            monthlyRate: '',
+            yearlyRate: '',
+            dailyVisitor: '',
+            nearBy: '',
+            address: '',
             fileList: [],
             imageList: [],
             previewImage: '',
@@ -80,7 +94,32 @@ class BillBoard extends Component {
     componentDidMount() {
         this.companyNames();
         let data = this.props.data;
-        console.log(data, 'data in billboard edit')
+        // console.log(data, 'data in billboard edit')
+        this.setState({
+            compaNames: data.companyName,
+            type: data.type,
+            facing: data.facing,
+            lightning: data.lightning,
+            status: data.status,
+            audianceType: data.audianceType,
+            city: data.city,
+            state: data.state,
+            country: data.country,
+            size: data.size,
+            latitude: data.latitude,
+            longitude: data.longitude,
+            traffic: data.traffic,
+            width: data.width,
+            height: data.height,
+            description: data.description,
+            dailyRate: data.dailyRate,
+            weeklyRate: data.weeklyRate,
+            monthlyRate: data.monthlyRate,
+            yearlyRate: data.yearlyRate,
+            dailyVisitor: data.dailyVisitor,
+            nearBy: data.nearBy,
+            address: data.address,
+        })
     }
     companyNames = async () => {
         let { companyName, citiesArr, typeArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
@@ -235,9 +274,6 @@ class BillBoard extends Component {
                 if (property == `width${i}`) {
                     multipleBillbordObj.width = values[property]
                 }
-                if (property == `facing${i}`) {
-                    multipleBillbordObj.facing = values[property]
-                }
                 if (property == `height${i}`) {
                     multipleBillbordObj.height = values[property]
                 }
@@ -284,7 +320,7 @@ class BillBoard extends Component {
                     multipleBillbordObj.country = values[property].value
                 }
                 if (property == 'company') {
-                    multipleBillbordObj.companyNames = values[property].value
+                    multipleBillbordObj.companyName = values[property].value
                     multipleBillbordObj.companyId = values[property].id
                 }
                 if (property == `images${i}`) {
@@ -370,8 +406,8 @@ class BillBoard extends Component {
 
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
-        const { sumitDataAlert, 
-            companyName,types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
+        const { sumitDataAlert,
+            companyName, types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -439,6 +475,7 @@ class BillBoard extends Component {
                                                 <label for="size"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`size${index}`, {
+                                                        initialValue: this.state.size,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a size',
@@ -462,6 +499,7 @@ class BillBoard extends Component {
                                                 <Form.Item>
                                                     <br />
                                                     {getFieldDecorator(`latitude${index}`, {
+                                                        initialValue: this.state.latitude,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter latitude',
@@ -485,6 +523,7 @@ class BillBoard extends Component {
                                                 <label for="longitude"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`longitude${index}`, {
+                                                        initialValue: this.state.longitude,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter longitude',
@@ -510,6 +549,7 @@ class BillBoard extends Component {
                                                         label="Images"
                                                     >
                                                         {getFieldDecorator(`images${index}`, {
+                                                            initialValue: this.state.imgArr,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please upload your Images!',
@@ -541,6 +581,7 @@ class BillBoard extends Component {
                                                 <label for="traffic"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`traffic${index}`, {
+                                                        initialValue: this.state.traffic,
                                                         rules: [{
                                                             required: true,
                                                             message: 'Please enter a type',
@@ -566,6 +607,7 @@ class BillBoard extends Component {
                                                     <label for="width"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`width${index}`, {
+                                                            initialValue: this.state.width,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter Width',
@@ -589,6 +631,7 @@ class BillBoard extends Component {
                                                     <label for="height"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`height${index}`, {
+                                                            initialValue: this.state.height,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter Height',
@@ -613,7 +656,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Lightning:</p>
                                                         {getFieldDecorator(`lightning${index}`, {
-                                                             initialValue: this.state.lightning,
+                                                            initialValue: this.state.lightning,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -634,6 +677,7 @@ class BillBoard extends Component {
                                                     <label for="description"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`description${index}`, {
+                                                            initialValue: this.state.description,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter description',
@@ -657,7 +701,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Status:</p>
                                                         {getFieldDecorator(`status${index}`, {
-                                                              initialValue: this.state.status,
+                                                            initialValue: this.state.status,
                                                             //   defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -681,6 +725,7 @@ class BillBoard extends Component {
                                                     <label for="dailyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`dailyRate${index}`, {
+                                                            initialValue: this.state.dailyRate,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter daily rate',
@@ -704,6 +749,7 @@ class BillBoard extends Component {
                                                     <label for="weeklyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`weeklyRate${index}`, {
+                                                            initialValue: this.state.weeklyRate,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter weekly rate',
@@ -727,6 +773,7 @@ class BillBoard extends Component {
                                                     <label for="monthlyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`monthlyRate${index}`, {
+                                                            initialValue: this.state.monthlyRate,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter monthly rate',
@@ -750,6 +797,7 @@ class BillBoard extends Component {
                                                     <label for="yearlyRate"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`yearlyRate${index}`, {
+                                                            initialValue: this.state.yearlyRate,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter yearly rate',
@@ -777,7 +825,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Audiance Type:</p>
                                                         {getFieldDecorator(`audianceType${index}`, {
-                                                             initialValue: this.state.audianceType,
+                                                            initialValue: this.state.audianceType,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -798,6 +846,7 @@ class BillBoard extends Component {
                                                     <label for="dailyVisitor"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`dailyVisitor${index}`, {
+                                                            initialValue: this.state.dailyVisitor,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter daily visitor',
@@ -821,6 +870,7 @@ class BillBoard extends Component {
                                                     <label for="nearBy"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`nearBy${index}`, {
+                                                            initialValue: this.state.nearBy,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter near By',
@@ -846,6 +896,7 @@ class BillBoard extends Component {
                                                     <label for="address"></label>
                                                     <Form.Item>
                                                         {getFieldDecorator(`address${index}`, {
+                                                            initialValue: this.state.address,
                                                             rules: [{
                                                                 required: true,
                                                                 message: 'Please enter address',

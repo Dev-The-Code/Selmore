@@ -6,7 +6,7 @@ const addSchema = new Schema({
     images: { type: Array },
     companyId: { type: String },
     companyName: { type: String },
-    facing: { type: Object },
+    facing: { type: String },
     type: { type: String },
     size: { type: String },
     latitude: { type: String },
