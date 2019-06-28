@@ -7,7 +7,7 @@ exports.postAddData = function(req,res,next){
   const postListData = new listAdd({
       companyId:formData.companyId,
       companyName:formData.companyName,
-      billBoardImgs:formData.billBoardImgs,
+      images:formData.images,
       facing:formData.facing,
       type:formData.type,
       size:formData.size,

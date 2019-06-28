@@ -23,9 +23,15 @@ class BillBoard extends Component {
     constructor() {
         super()
         this.state = {
-            companyName: [],
+            compaNames: '',
             type: '',
             facing: '',
+            lightning: '',
+            status: "",
+            audianceType: '',
+            city: '',
+            state: '',
+            country: '',
             fileList: [],
             imageList: [],
             previewImage: '',
@@ -35,9 +41,8 @@ class BillBoard extends Component {
             index: 0,
             imgArr: [],
             sumitDataAlert: false,
-            company: '',
             id: '',
-            compaNames: '',
+            companyName: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
             facingArr: ['Front', 'Back'],
@@ -77,7 +82,6 @@ class BillBoard extends Component {
         let data = this.props.data;
         console.log(data, 'data in billboard edit')
     }
-
     companyNames = async () => {
         let { companyName, citiesArr, typeArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
             types, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
@@ -201,157 +205,107 @@ class BillBoard extends Component {
     }
 
     async funcForUpload(values) {
-        const { fileList, keyFor, index } = this.state;
+        const { index } = this.state;
         console.log(values)
-        //merge multiple value of the field in one array
-        // let facing = [];
-        // let traffic = [];
-        // let longitude = [];
-        // let latitude = [];
-        // let size = [];
-        // let type = [];
-        // let width = [];
-        // let height = [];
-        // let lightning = [];
-        // let description = [];
-        // let status = [];
-        // let dailyRate = [];
-        // let weeklyRate = [];
-        // let monthlyRate = [];
-        // let yearlyRate = [];
-        // let audianceType = [];
-        // let dailyVisitor = [];
-        // let nearBy = [];
-        // let address = [];
-        // let city = [];
-        // let state = [];
-        // let country = [];
-        // console.log(index, 'index')
+        let arr = [];
         for (var i = 0; i <= index; i++) {
-            let biilbordObj = []
+            let multipleBillbordObj = `billbordObj${i}`;
+            multipleBillbordObj = {}
             for (var property in values) {
-                // console.log(property, 'property name')
-                // console.log(`facing${i}`);
-                // console.log(values, 'values of complete form')
-                // console.log(values[property], 'property value values ')
-                // if (property == `facing${i}` && property == `traffic${i}` && property == `longitude${i}` && property == `latitude${i}` &&
-                //     property == `images${i}` && property == `size${i}` && property == `type${i}` && property == `width${i}` &&
-                //     property == `height${i}` && property == `lightning${i}` && property == `description${i}` && property == `status${i}` &&
-                //     property == `dailyRate${i}` && property == `dailyRate${i}` && property == `weeklyRate${i}` && property == `monthlyRate${i}`
-                //     && property == `yearlyRate${i}` && property == `audianceType${i}` && property == `dailyVisitor${i}` &&
-                //     property == `nearBy${i}` && property == `address${i}` && property == `city${i}` && property == `state${i}` &&
-                //     property == `country${i}`) {
-                //     console.log('true with &&')
-                // }
-                if (property == `facing${i}` || property == `traffic${i}` || property == `longitude${i}` || property == `latitude${i}` ||
-                    property == `images${i}` || property == `size${i}` || property == `type${i}` || property == `width${i}` ||
-                    property == `height${i}` || property == `lightning${i}` || property == `description${i}` || property == `status${i}` ||
-                    property == `dailyRate${i}` || property == `dailyRate${i}` || property == `weeklyRate${i}` || property == `monthlyRate${i}`
-                    || property == `yearlyRate${i}` || property == `audianceType${i}` || property == `dailyVisitor${i}` ||
-                    property == `nearBy${i}` || property == `address${i}` || property == `city${i}` || property == `state${i}` ||
-                    property == `country${i}`) {
-                    biilbordObj.push(values[property])
-                    // console.log('true with ||')
+                //seprate the billboard form data in user fill multiple form in one time
+                if (property == `traffic${i}`) {
+                    multipleBillbordObj.traffic = values[property]
                 }
-                // if (property.indexOf(`facing${i}`) !== -1) {
-                //     facing.push(values[property])
-                // }
-                // if (property.indexOf(`traffic${i}`) !== -1) {
-                //     traffic.push(values[property])
-                // }
-                // if (property.indexOf(`longitude${i}`) !== -1) {
-                //     longitude.push(values[property])
-                // }
-                // if (property.indexOf(`latitude${i}`) !== -1) {
-                //     latitude.push(values[property])
-                // }
-                // if (property.indexOf(`size${i}`) !== -1) {
-                //     size.push(values[property])
-                // }
-                // if (property.indexOf(`type${i}`) !== -1) {
-                //     type.push(values[property])
-                // }
-                // if (property.indexOf(`width${i}`) !== -1) {
-                //     width.push(values[property])
-                // }
-                // if (property.indexOf(`height${i}`) !== -1) {
-                //     height.push(values[property])
-                // } if (property.indexOf(`lightning${i}`) !== -1) {
-                //     lightning.push(values[property])
-                // } if (property.indexOf(`description${i}`) !== -1) {
-                //     description.push(values[property])
-                // } if (property.indexOf(`status${i}`) !== -1) {
-                //     status.push(values[property])
-                // } if (property.indexOf(`dailyRate${i}`) !== -1) {
-                //     dailyRate.push(values[property])
-                // } if (property.indexOf(`weeklyRate${i}`) !== -1) {
-                //     weeklyRate.push(values[property])
-                // } if (property.indexOf(`monthlyRate${i}`) !== -1) {
-                //     monthlyRate.push(values[property])
-                // } if (property.indexOf(`yearlyRate${i}`) !== -1) {
-                //     yearlyRate.push(values[property])
-                // } if (property.indexOf(`audianceType${i}`) !== -1) {
-                //     audianceType.push(values[property])
-                // } if (property.indexOf(`dailyVisitor${i}`) !== -1) {
-                //     dailyVisitor.push(values[property])
-                // } if (property.indexOf(`nearBy${i}`) !== -1) {
-                //     nearBy.push(values[property])
-                // } if (property.indexOf(`address${i}`) !== -1) {
-                //     address.push(values[property])
-                // } if (property.indexOf(`city${i}`) !== -1) {
-                //     city.push(values[property])
-                // } if (property.indexOf(`state${i}`) !== -1) {
-                //     state.push(values[property])
-                // } if (property.indexOf(`country${i}`) !== -1) {
-                //     country.push(values[property])
-                // }
+                if (property == `facing${i}`) {
+                    multipleBillbordObj.facing = values[property].value
+                    // console.log(values[property].value, '...........')
+                }
+                if (property == `longitude${i}`) {
+                    multipleBillbordObj.longitude = values[property]
+                }
+                if (property == `latitude${i}`) {
+                    multipleBillbordObj.latitude = values[property]
+                }
+                if (property == `size${i}`) {
+                    multipleBillbordObj.size = values[property]
+                }
+                if (property == `type${i}`) {
+                    multipleBillbordObj.type = values[property].value
+                }
+                if (property == `width${i}`) {
+                    multipleBillbordObj.width = values[property]
+                }
+                if (property == `facing${i}`) {
+                    multipleBillbordObj.facing = values[property]
+                }
+                if (property == `height${i}`) {
+                    multipleBillbordObj.height = values[property]
+                }
+                if (property == `lightning${i}`) {
+                    multipleBillbordObj.lightning = values[property].value
+                }
+                if (property == `description${i}`) {
+                    multipleBillbordObj.description = values[property]
+                }
+                if (property == `status${i}`) {
+                    multipleBillbordObj.status = values[property].value
+                }
+                if (property == `dailyRate${i}`) {
+                    multipleBillbordObj.dailyRate = values[property]
+                }
+                if (property == `weeklyRate${i}`) {
+                    multipleBillbordObj.weeklyRate = values[property]
+                }
+                if (property == `monthlyRate${i}`) {
+                    multipleBillbordObj.monthlyRate = values[property]
+                }
+                if (property == `yearlyRate${i}`) {
+                    multipleBillbordObj.yearlyRate = values[property]
+                }
+                if (property == `audianceType${i}`) {
+                    multipleBillbordObj.audianceType = values[property].value
+                }
+                if (property == `dailyVisitor${i}`) {
+                    multipleBillbordObj.dailyVisitor = values[property]
+                }
+                if (property == `nearBy${i}`) {
+                    multipleBillbordObj.nearBy = values[property]
+                }
+                if (property == `address${i}`) {
+                    multipleBillbordObj.address = values[property]
+                }
+                if (property == `city${i}`) {
+                    multipleBillbordObj.city = values[property].value
+                }
+                if (property == `state${i}`) {
+                    multipleBillbordObj.state = values[property].value
+                }
+                if (property == `country${i}`) {
+                    multipleBillbordObj.country = values[property].value
+                }
+                if (property == 'company') {
+                    multipleBillbordObj.companyNames = values[property].value
+                    multipleBillbordObj.companyId = values[property].id
+                }
+                if (property == `images${i}`) {
+                    multipleBillbordObj.images = values[property]
+                }
             }
-            console.log(biilbordObj, 'data')
+            let fileListRef = `fileList${i}`;
+            arr.push(this.state[fileListRef])
+            arr = arr.filter(function (element) {
+                return element !== undefined;
+            });
+            Promise.all(arr[i].map((val, i) => {
+                return this.uploadFile(val).then((result) => {
+                    return result.body.url
+                })
+            })).then((results) => {
+                console.log(results)
+                multipleBillbordObj.images = results
+                this.postData(results, multipleBillbordObj)
+            })
         }
-
-        //store properties in object
-        // let obj = {};
-        // obj.companyName = this.state.company;
-        // obj.companyId = this.state.id;
-        // obj.facing = facing;
-        // obj.type = type;
-        // obj.size = size;
-        // obj.latitude = latitude;
-        // obj.longitude = longitude;
-        // obj.traffic = traffic;
-        // obj.width = width;
-        // obj.height = height;
-        // obj.lightning = lightning;
-        // obj.description = description;
-        // obj.status = status;
-        // obj.dailyRate = dailyRate;
-        // obj.weeklyRate = weeklyRate;
-        // obj.monthlyRate = monthlyRate;
-        // obj.yearlyRate = yearlyRate;
-        // obj.audianceType = audianceType;
-        // obj.dailyVisitor = dailyVisitor;
-        // obj.nearBy = nearBy;
-        // obj.address = address;
-        // obj.city = city;
-        // obj.state = state;
-        // obj.country = country;
-
-        // console.log(obj, 'combined values')
-        // let arr = [];
-        // for (var i = 0; i <= keyFor.length; i++) {
-        //     let fileListRef = `fileList${i}`;
-        //     arr.push(this.state[fileListRef])
-        //     arr = arr.filter(function (element) {
-        //         return element !== undefined;
-        //     });
-        //     Promise.all(arr[i].map((val, i) => {
-        //         return this.uploadFile(val).then((result) => {
-        //             return result.body.url
-        //         })
-        //     })).then((results) => {
-        //         this.postData(values, results, obj)
-        //     })
-        // }
     }
     //--------------function for cloudnary url ---------------
     uploadFile = (files) => {
@@ -383,22 +337,24 @@ class BillBoard extends Component {
 
     //-----------------cloudnary function end ------------------//
 
-    async postData(values, response, obj) {
+    async postData(response, obj) {
         //store imgs in array 
         const { imgArr } = this.state
-        this.setState({
-            imgArr: [...imgArr, response],
-
-        })
+        console.log(response)
+        // let img = response
+        // this.setState({
+        //     imgArr: [...imgArr, response],
+        // }, () => { obj.images = this.state.imgArr })
+        // console.log(imgArr)
         //add img array in the obj
-        obj.billBoardImgs = this.state.imgArr;
+        console.log(obj)
         this.fectSignUpApiFunc(obj)
     }
 
     fectSignUpApiFunc = async (values) => {
         console.log(values, 'all arrays in one object');
-        // let response = await HttpUtils.post('listadd', values);
-        // console.log(response);
+        let response = await HttpUtils.post('listadd', values);
+        console.log(response);
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,
@@ -414,8 +370,8 @@ class BillBoard extends Component {
 
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
-        const { sumitDataAlert, companyName, previewVisible, previewImage, index,
-            types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
+        const { sumitDataAlert, 
+            companyName,types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -657,7 +613,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Lightning:</p>
                                                         {getFieldDecorator(`lightning${index}`, {
-                                                            //  initialValue: lightning,
+                                                             initialValue: this.state.lightning,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -701,7 +657,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Status:</p>
                                                         {getFieldDecorator(`status${index}`, {
-                                                            //   initialValue: status,
+                                                              initialValue: this.state.status,
                                                             //   defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -821,7 +777,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Audiance Type:</p>
                                                         {getFieldDecorator(`audianceType${index}`, {
-                                                            //  initialValue: audianceType,
+                                                             initialValue: this.state.audianceType,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -913,7 +869,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>City:</p>
                                                         {getFieldDecorator(`city${index}`, {
-                                                            // initialValue: cities,
+                                                            initialValue: this.state.city,
                                                             // defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -935,7 +891,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>States:</p>
                                                         {getFieldDecorator(`state${index}`, {
-                                                            // initialValue: states,
+                                                            initialValue: this.state.state,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -956,7 +912,7 @@ class BillBoard extends Component {
                                                     <Form.Item>
                                                         <p>Country:</p>
                                                         {getFieldDecorator(`country${index}`, {
-                                                            // initialValue: this.state.country,
+                                                            initialValue: this.state.country,
                                                             //  defaultValue: option.initialValue,
                                                             rules: [{
                                                                 required: true,
@@ -1005,7 +961,7 @@ class BillBoard extends Component {
                                     })(
                                         <Select
                                             onChange={this.handleChange}
-                                            options={this.state.companyName}
+                                            options={companyName}
                                         ></Select>
                                     )}
                                 </Form.Item>
