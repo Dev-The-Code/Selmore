@@ -167,6 +167,7 @@ exports.signup = function(req, res, next){
         token:tokenForUser(user),
         username:user.firstName+''+user.lastName,
         _id:user._id,
+        role:user.role,
         code:200
       });
     });
