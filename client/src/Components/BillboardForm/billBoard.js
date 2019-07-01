@@ -196,7 +196,6 @@ class BillBoard extends Component {
 
     handleChange = (data) => {
         console.log(data.value)
-        // this.setState({ company: data.value, id: data.id });
     }
 
     removeForm = (k) => {
