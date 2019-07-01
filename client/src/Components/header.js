@@ -18,9 +18,12 @@ class Header extends Component {
     }
   }
   async componentDidMount() {
-    let value = await localStorage.getItem("loggedIn");
     this.StateSetForShowDashboard()
     // console.log(adminUser)
+  }
+  componentWillMount() {
+    let value = JSON.parse(localStorage.getItem("loggedIn"));
+    console.log(value)
   }
   StateSetForShowDashboard = () => {
     let adminUser = JSON.parse(localStorage.getItem("userName"));

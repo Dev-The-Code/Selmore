@@ -25,7 +25,8 @@ class Formpanel extends Component {
 			registerBtn: false,
 			username: '',
 			buyer: false,
-			loggedIn: false
+			loggedIn: false,
+			role: ''
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -38,15 +39,13 @@ class Formpanel extends Component {
 	checkEmails = async () => {
 		let response = await HttpUtils.get('getemails');
 		let getEmail = response.content;
-		// console.log(response)
-		// console.log(response.content);
 		this.setState({
 			emailsArr: response.content
 		})
 	}
 
 	onChangeEmail(rule, value, callback) {
-		console.log(rule)
+		// console.log(rule)
 		if (this.state.emailsArr.includes(value)) {
 			callback('Email is already exists');
 			this.setState({
@@ -66,6 +65,7 @@ class Formpanel extends Component {
 		this.setState({
 			selectedOption: changeEvent.target.value,
 			radioVal: true,
+			role: changeEvent.target.value
 		});
 	}
 
@@ -91,21 +91,22 @@ class Formpanel extends Component {
 		//concat Frist Name & Mobile No for Password
 		let password = values.firstName.concat(values.mobileNo)
 		values.password = password;
-		// console.log(values);
+		values.role = this.state.role;
+		console.log(values, 'values')
 		let response = await HttpUtils.post('signup', values);
 		console.log(response, 'response');
 		//fetch signUp api
 		if (response.code === 200) {
 			console.log(response.content, ' response.content')
-			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true, username: response.username });
+			this.setState({ isData: true, isLoader: false, isAlert: true, username: response.username });
 
 			//if user has as a buyer contact us
 			if (this.state.selectedOption === 'Buyer') {
 				this.setState({
 					buyer: true,
-					loggedIn:true
+					loggedIn: true
 				})
-				localStorage.setItem('userName', JSON.stringify(response.username));
+				localStorage.setItem('userData', JSON.stringify(response.username));
 				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
 
 			}
