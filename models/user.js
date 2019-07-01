@@ -15,6 +15,7 @@ const userSchema = new Schema({
   landlineNo:{type:String},
   fullName:{type:String},
   type:{type:String},
+  role:{type:String},
   resetPasswordToken:{type:String},
   resetPasswordExpires:{type:String},
 });
