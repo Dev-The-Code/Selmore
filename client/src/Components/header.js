@@ -3,9 +3,6 @@ import './headerfooter.css';
 import { Link, withRouter } from 'react-router-dom';
 import Dropdown from '../constant/dropdownmenu/Dropdown';
 import FormLogin from './Login Form/form';
-// import { Modal,Button } from 'react-bootstrap';
-
-
 
 class Header extends Component {
   constructor(props) {
@@ -13,21 +10,26 @@ class Header extends Component {
     this.state = {
       modal: 'modal',
       propUser: false,
-      showDasboardandLisAdd: false
-
+      showDasboardandLisAdd: false,
+      hiddenModal: false
     }
   }
   async componentDidMount() {
+
     this.StateSetForShowDashboard()
-    // console.log(adminUser)
   }
   componentWillMount() {
-    let value = JSON.parse(localStorage.getItem("loggedIn"));
-    console.log(value)
+    let loggedIn = this.props.logedIn;
+    if (loggedIn) {
+      this.setState({
+        propUser: true
+      })
+    }
   }
   StateSetForShowDashboard = () => {
     let adminUser = JSON.parse(localStorage.getItem("userName"));
     if (adminUser == 'admin') {
+      console.log('admin')
       this.setState({
         showDasboardandLisAdd: true
       })
@@ -63,9 +65,14 @@ class Header extends Component {
       modal: 'modal'
     })
   }
+  modelHide = () => {
+    this.setState({
+      hiddenModal: true
+    })
+  }
 
   render() {
-    const { propUser, showDasboardandLisAdd } = this.state
+    const { propUser, showDasboardandLisAdd, hiddenModal } = this.state
     const value = localStorage.getItem("loggedIn");
     return (
       <div>
@@ -99,7 +106,7 @@ class Header extends Component {
                 {/* {showDasboardandLisAdd ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
-                      FAQ
+                      DASHBOARD
                   </Link>
                   </li>
                   :
@@ -138,12 +145,13 @@ class Header extends Component {
                     </Link>
                   </button>
                 </li>
-                {value
+                {hiddenModal
                   ?
                   <li className="nav-item navbtnmargin">
                     <Dropdown />
                   </li>
                   :
+                  // hiddenModal ? 
                   <li className="nav-item navbtnmargin" >
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" >
                       Login
@@ -160,7 +168,7 @@ class Header extends Component {
                             <h4 class="modal-title">Login</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
-                          <FormLogin />
+                          <FormLogin modelHide={this.modelHide}/>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss='modal' >Cancel</button>
                           </div>
@@ -168,6 +176,7 @@ class Header extends Component {
                       </div>
                     </div>
                   </li>
+                    // : null
                 }
                 <li className="nav-item navbiddbtn">
                 </li>

@@ -17,7 +17,7 @@ class FormLogin extends Component {
     this.state = {
       email: '',
       password: '',
-      loggedIn: false,
+      loggedIn: true,
       isData: true,
       data: {},
       isLoader: false,
@@ -36,6 +36,7 @@ class FormLogin extends Component {
         })
         // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
+        this.props.modelHide();
       }
     });
   }
@@ -49,14 +50,15 @@ class FormLogin extends Component {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         localStorage.setItem('userToken', JSON.stringify(response.token))
         localStorage.setItem('userName', JSON.stringify(response.username))
-        this.setState({ isLoader: false, loggedIn: true });
+        localStorage.setItem('userData', JSON.stringify(response))
+        this.setState({ isLoader: false });
         // console.log(response.username, 'token')
       } else {
         this.setState({ isLoader: true })
       }
       // this.props.modalDis();
-      // document.getElementById('myModal').modal("hide");
-      console.log(document.getElementById('myModal'));
+      // document.getElementById('myModal').data-dismiss;
+      // document.getElementById('close').click;
     }
     catch (error) {
       console.log(error, 'catch')
@@ -75,9 +77,9 @@ class FormLogin extends Component {
     const { getFieldDecorator } = this.props.form;
     const { isLoader, loggedIn, isAlert } = this.state
     //redirect to home page
-    if (loggedIn) {
-      return <Redirect to='/' />
-    }
+    // if (loggedIn) {
+    //   return <Redirect to='/' />
+    // }
     return (
       <div className="container">
         <div className="row school1" style={{ marginRight: '0px' }}>

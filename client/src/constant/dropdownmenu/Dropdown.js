@@ -44,7 +44,7 @@ class Dropdown extends Component {
 
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
-
+    console.log(userName , 'userName')
     return (
       <MDBDropdown>
         <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>

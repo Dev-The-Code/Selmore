@@ -20,7 +20,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header userName={this.props.location.state} />
+        <Header logedIn={this.props.location.state} />
         <Banner />
         <Panel0 />
         <Panel1 />

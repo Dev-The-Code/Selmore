@@ -102,14 +102,14 @@ class Formpanel extends Component {
 
 			//if user has as a buyer contact us
 			if (this.state.selectedOption === 'Buyer') {
-				this.setState({
+				await this.setState({
 					buyer: true,
 					loggedIn: true
 				})
-				localStorage.setItem('userData', JSON.stringify(response.username));
-				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
-
-			}
+				// console.log(this.state.loggedIn , 'this.state.loggedIn')
+				localStorage.setItem('userName', JSON.stringify(response.username));
+				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn));
+				localStorage.setItem('userData', JSON.stringify(response));			}
 		} else {
 			this.setState({ isData: false })
 		}
@@ -132,7 +132,7 @@ class Formpanel extends Component {
 	}
 
 	render() {
-		const { selectedOption, username, buyer } = this.state
+		const { selectedOption, username, buyer , loggedIn} = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
@@ -141,7 +141,7 @@ class Formpanel extends Component {
 			}
 		};
 		if (buyer) {
-			return <Redirect to={{ pathname: '/', state: username }} />
+			return <Redirect to={{ pathname: '/', state: loggedIn }} />
 		}
 
 		return (
