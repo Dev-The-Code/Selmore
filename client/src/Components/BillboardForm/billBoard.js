@@ -46,6 +46,7 @@ class BillBoard extends Component {
             dailyVisitor: '',
             nearBy: '',
             address: '',
+            objectId: '',
             fileList: [],
             imageList: [],
             previewImage: '',
@@ -96,7 +97,7 @@ class BillBoard extends Component {
     }
     async componentWillMount() {
         let data = this.props.data;
-        console.log(data,'data')
+        console.log(data, 'data')
         await this.editDataShowns(data)
     }
     gettingDropDownValues = async () => {
@@ -140,6 +141,7 @@ class BillBoard extends Component {
         });
     }
     editDataShowns = async (data) => {
+        console.log(data, 'data')
         await this.setState({
             compaNames: data.companyName,
             type: data.type,
@@ -164,6 +166,7 @@ class BillBoard extends Component {
             dailyVisitor: data.dailyVisitor,
             nearBy: data.nearBy,
             address: data.address,
+            objectId: data._id
         })
     }
 
@@ -261,7 +264,6 @@ class BillBoard extends Component {
                 }
                 if (property == `facing${i}`) {
                     multipleBillbordObj.facing = values[property].value
-                    // console.log(values[property].value, '...........')
                 }
                 if (property == `longitude${i}`) {
                     multipleBillbordObj.longitude = values[property]
@@ -330,6 +332,7 @@ class BillBoard extends Component {
                 if (property == `images${i}`) {
                     multipleBillbordObj.images = values[property]
                 }
+
             }
             let fileListRef = `fileList${i}`;
             arr.push(this.state[fileListRef])
