@@ -5,3 +5,8 @@
 .tableHead{
     padding: 20px;
 }
+.tableTd{
+    padding: 20px !important; 
+    /* font-weight: bold */
+    font-size: 15px;
+}

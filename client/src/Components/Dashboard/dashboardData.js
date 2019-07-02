@@ -29,30 +29,37 @@ class DashboardData extends Component {
             tableData = billboardData.map((elem, i) => {
                 console.log(elem)
                 return <tbody>
-                    <td>{i}</td>
-                    <td>{elem.companyName}</td>
-                    <td>{elem.address}</td>
-                    <td>{elem.size}</td>
-                    <td> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
+                    <tr>
+                        <th scope="row">{i}</th>
+                        <td className='tableTd'>{elem.companyName}</td>
+                        <td className='tableTd'>{elem.address}</td>
+                        <td className='tableTd'>{elem.city}</td>
+                        <td className='tableTd'>{elem.state}</td>
+                        <td className='tableTd'>{elem.size}</td>
+                        <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
+                    </tr>
                 </tbody>
-                // return elem;
             })
-            // console.log(tableData)
         }
         return (
-            <div className='row'>
-                <div className='col-md-2'></div>
-                <div className='col-md-10'>
-                    <table className='tableData'>
-                        <thead >
-                            <th className='tableHead'>#</th>
-                            <th className='tableHead'>Company Name</th>
-                            <th className='tableHead'>Address</th>
-                            <th className='tableHead'>Size</th>
-                            <th className='tableHead'>Action</th>
-                        </thead>
-                        {tableData}
-                    </table>
+            <div>
+                <div className='row'>
+                    <div className='col-md-1'></div>
+                    <div className='col-md-10'>
+                        <table className='tableData table'>
+                            <thead className="thead-dark">
+                                <th className='tableHead' scope="col">#</th>
+                                <th className='tableHead' scope="col">Company Name</th>
+                                <th className='tableHead' scope="col">Address</th>
+                                <th className='tableHead' scope="col">City</th>
+                                <th className='tableHead' scope="col">State</th>
+                                <th className='tableHead' scope="col">Size</th>
+                                <th className='tableHead' scope="col">Action</th>
+                            </thead>
+                            {tableData}
+                        </table>
+                    </div>
+                    <div className='col-md-1'></div>
                 </div>
             </div>
         )
