@@ -27,7 +27,6 @@ class DashboardData extends Component {
         let tableData;
         if (billboardData) {
             tableData = billboardData.map((elem, i) => {
-                console.log(elem)
                 return <tbody>
                     <tr>
                         <th scope="row">{i}</th>

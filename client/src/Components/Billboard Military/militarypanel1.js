@@ -29,7 +29,6 @@ class Militarypanel1 extends Component {
 		const { data, images, admin } = this.state;
 		let image;
 		if (images.length > 0) {
-			console.log('iamges')
 			image = images.map((elem, key) => {
 				// console.log(key , 'key')
 				if (key == 0) {
