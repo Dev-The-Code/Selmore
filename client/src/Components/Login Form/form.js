@@ -7,7 +7,7 @@ import {
   Form, Icon, Input, Button, Checkbox,
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-
+// var modal = ReactBootstrap.Modal
 
 class FormLogin extends Component {
   constructor() {
@@ -36,7 +36,7 @@ class FormLogin extends Component {
         })
         // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
-        this.props.modelHide();
+        // this.props.modelHide();
       }
     });
   }
@@ -57,8 +57,10 @@ class FormLogin extends Component {
         this.setState({ isLoader: true })
       }
       // this.props.modalDis();
-      // document.getElementById('myModal').data-dismiss;
-      // document.getElementById('close').click;
+      // document.getElementById('myModal').close;
+      // document.getElementById('myModal').modal("hide");
+      // document.getElementById('myModal').hide()
+      this.props.modelHide();
     }
     catch (error) {
       console.log(error, 'catch')

@@ -9,15 +9,21 @@ class Militarypanel1 extends Component {
 		this.state = {
 			data: '',
 			images: [],
-			admin: true,
+			admin: false,
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
+		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		await this.setState({
 			data: data,
 			images: data.images,
 		})
+		if (adminUser.role == 'admin') {
+			this.setState({
+				admin: true
+			})
+		}
 	}
 	render() {
 		const { data, images, admin } = this.state;
@@ -159,7 +165,7 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
-						{admin ?
+							{admin ?
 								<Link to={{ pathname: `/list_add`, state: data }}>
 									<div className='editbtn'>
 										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>

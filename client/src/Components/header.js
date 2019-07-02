@@ -10,8 +10,8 @@ class Header extends Component {
     this.state = {
       modal: 'modal',
       propUser: false,
-      showDasboardandLisAdd: false,
-      hiddenModal: false
+      showDasboardandListAdd: false,
+      hiddenModal: ''
     }
   }
   async componentDidMount() {
@@ -25,13 +25,13 @@ class Header extends Component {
         propUser: true
       })
     }
+
   }
   StateSetForShowDashboard = () => {
-    let adminUser = JSON.parse(localStorage.getItem("userName"));
-    if (adminUser == 'admin') {
-      console.log('admin')
+    let adminUser = JSON.parse(localStorage.getItem("userData"));
+    if (adminUser.role == 'admin') {
       this.setState({
-        showDasboardandLisAdd: true
+        showDasboardandListAdd: true
       })
     }
   }
@@ -67,12 +67,12 @@ class Header extends Component {
   }
   modelHide = () => {
     this.setState({
-      hiddenModal: true
+      hiddenModal: 'modal'
     })
   }
 
   render() {
-    const { propUser, showDasboardandLisAdd, hiddenModal } = this.state
+    const { showDasboardandListAdd } = this.state
     const value = localStorage.getItem("loggedIn");
     return (
       <div>
@@ -98,12 +98,7 @@ class Header extends Component {
                     AGENCY
                   </Link>
                 </li>
-                <li className="nav-item navmargin">
-                  <Link rel="noopener noreferrer" to={`/dashboard`}>
-                    DASHBOARD
-                  </Link>
-                </li>
-                {/* {showDasboardandLisAdd ?
+                {showDasboardandListAdd ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
                       DASHBOARD
@@ -113,22 +108,24 @@ class Header extends Component {
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/faq`}>
                       FAQ
-              </Link>
+                  </Link>
                   </li>
-
+                }
+                {showDasboardandListAdd ?
+                  null
+                  :
                   <li className="nav-item navmargin" style={{ marginTop: "28px" }}>
                     <a className="nav-link" href="#">
                       BLOG
-                  </a>
+                    </a>
                   </li>
-                } */}
-
+                }
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/market_place`}>
                     MARKETPLACE
                   </Link>
                 </li>
-                {showDasboardandLisAdd ?
+                {showDasboardandListAdd ?
                   <li className="nav-item navmargin12">
                     <Link rel="noopener noreferrer" to={`/list_add`}><button type="button" className="btn btn-primary btn-sm">
                       <span> LIST AD </span>
@@ -145,30 +142,24 @@ class Header extends Component {
                     </Link>
                   </button>
                 </li>
-                {hiddenModal
+                {value
                   ?
                   <li className="nav-item navbtnmargin">
                     <Dropdown />
                   </li>
                   :
-                  // hiddenModal ? 
                   <li className="nav-item navbtnmargin" >
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" >
                       Login
                   </button>
-                    <div class="modal fade" id="myModal"
-                    >
-                      <div class="modal-dialog"
-                        style={{ marginRight: '650px' }}
-                      >
-                        <div class="modal-content"
-                          style={{ width: '200%', height: '600px' }}
-                        >
+                    <div class="modal fade" id="myModal">
+                      <div class="modal-dialog" style={{ marginRight: '650px' }}>
+                        <div class="modal-content" style={{ width: '200%', height: '600px' }}>
                           <div class="modal-header">
                             <h4 class="modal-title">Login</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" data-dismiss='modal'>&times;</button>
                           </div>
-                          <FormLogin modelHide={this.modelHide}/>
+                          <FormLogin modelHide={this.modelHide} />
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss='modal' >Cancel</button>
                           </div>
@@ -176,7 +167,6 @@ class Header extends Component {
                       </div>
                     </div>
                   </li>
-                    // : null
                 }
                 <li className="nav-item navbiddbtn">
                 </li>

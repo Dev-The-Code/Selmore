@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 const CheckboxGroup = Checkbox.Group;
 const option = Select.Option;
 const { Option } = Select;
-
 class Market extends Component {
     constructor(props) {
         super(props)
@@ -56,7 +55,6 @@ class Market extends Component {
     billBoradDetails = async () => {
         const { citiesArr, cities, statesArr } = this.state;
         let response = await HttpUtils.get('getbillboard');
-        let arr = [];
         let data = response.content;
         // console.log(data, 'bill board data')
 
@@ -88,9 +86,6 @@ class Market extends Component {
         //     }
         // }
         // arr.push(billboardArr1, billboardArr2)
-        this.setState({
-            billboardData: data
-        })
         // }
         // console.log(this.state.billboardData)
         localStorage.setItem('billboardData', JSON.stringify(data))
@@ -110,38 +105,57 @@ class Market extends Component {
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        // await this.setState({
-        //     billBorad: billboard,
-        //     rangeValzForDropdown: rangeValues,
-        //     cities: city,
-        //     states: state
-        // })
-        // console.log(cities, 'cities')
+        await this.setState({
+            billboardData: data,
+            rangeValzForDropdown: rangeValues,
+            cities: city,
+            states: state
+        })
     }
 
     //filtration the data with given values
     filterBillBoard(filter) {
-        this.handleFiltration(filter)
+        var arr = []
+        if (Array.isArray(filter)) {
+            for (var i = 0; i < filter.length; i++) {
+                arr.push(filter[i])
+            }
+            // console.log('array')
+        }
+        else {
+            arr.push(filter)
+            // console.log('string')
+        }
+        // console.log(arr)
+        this.handleFiltration(arr)
     }
     handleFiltration = (value) => {
         //filter data with given values array
         const { billboardData } = this.state;
-        var filteredData = [];
+        var filteredData = {};
         console.log(value, 'value')
         if (value.length >= 1) {
             //if user has filter values the run the code
             for (var i = 0; i < value.length; i++) {
                 for (var j in billboardData) {
-                    for (var k = 0; k < billboardData[j].length; k++) {
-                        if (billboardData[j][k] == value[i]) {
-                            filteredData.push(billboardData[j]);
+                    let data =billboardData[j]
+                    // console.log(billboardData[j])
+                    for(var k in data){
+                        // console.log(data[k])
+                        if(data[k] == value[i]){
+                            console.log(data[k])
                         }
                     }
+            //         for (var k = 0; k < billboardData[j].length; k++) {
+            //             if (billboardData[j][k] == value[i]) {
+            //                 filteredData.push(billboardData[j]);
+            //             }
+            //         }
                 }
             }
-            this.setState({
-                billboardFilterdData: filteredData
-            })
+            // this.setState({
+            //     billboardFilterdData: filteredData
+            // })
         }
         else {
             // if user have not filter data then render orignal data in the page
@@ -166,50 +180,53 @@ class Market extends Component {
     }
     //filtration for drop down data
     handleChange = (data) => {
-        const { billboardData } = this.state;
-        console.log(data.value)
-        var filteredData = [];
-        for (var i = 0; i < billboardData.length; i++) {
-            let data = billboardData[i];
-            for (var j = 0; j < data.length; j++) {
-                if (data[j] == data.value) {
-                    if (data[7] == data.value) {
-                        filteredData.push(data);
-                    }
-                    else if (data[8] == data.value) {
-                        filteredData.push(data);
-                    }
-                    else if (data[j] == data.value) {
-                        filteredData.push(data);
-                    }
-                }
-            }
-        }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+        // const { billboardData } = this.state;
+        // console.log(data.value)
+        // var dropDownFilterVal = [];
+        // dropDownFilterVal.push(data.value)
+        // console.log(dropDownFilterVal)
+        this.filterBillBoard(data.value)
+        // for (var i = 0; i < billboardData.length; i++) {
+        //     let data = billboardData[i];
+        //     for (var j = 0; j < data.length; j++) {
+        //         if (data[j] == data.value) {
+        //             if (data[7] == data.value) {
+        //                 filteredData.push(data);
+        //             }
+        //             else if (data[8] == data.value) {
+        //                 filteredData.push(data);
+        //             }
+        //             else if (data[j] == data.value) {
+        //                 filteredData.push(data);
+        //             }
+        //         }
+        //     }
+        // }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
     }
 
     render() {
-        const { billboardData, billBorad, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
         const billboardRendring = (
             <div>
                 {/* rendering the billboard data on front end */}
                 <div className='row '>
                     {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (
-                            <div className='col-md-3'>
+                            <div className='col-md-3 activeClass'>
                                 <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                    <img src={elem[0][0]} className='imgBillBoard' alt={key} /></Link>
-                                <p>{elem[23]}</p>
-                                <p>{elem[19]}</p>
+                                    <img src={elem.images[0]} className='imgBillBoard' alt={key} /></Link>
+                                <p>{elem.companyName}</p>
+                                <p>{elem.city}</p>
                             </div>
                         )
                     })
                         :
                         billboardData && billboardData.map((elem, key) => {
-                            console.log(elem, 'elem')
+                            // console.log(elem, 'elem')
                             return (
                                 <div className='col-md-3 activeClass'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -223,7 +240,6 @@ class Market extends Component {
                 </div>
             </div>
         );
-        // console.log(billboardRendring ,'aaaaa' )
         return (
             <div>
                 <div className='row billboard'>

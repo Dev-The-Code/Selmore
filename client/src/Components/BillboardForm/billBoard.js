@@ -142,32 +142,34 @@ class BillBoard extends Component {
     }
     editDataShowns = async (data) => {
         console.log(data, 'data')
-        await this.setState({
-            compaNames: data.companyName,
-            type: data.type,
-            facing: data.facing,
-            lightning: data.lightning,
-            status: data.status,
-            audianceType: data.audianceType,
-            city: data.city,
-            state: data.state,
-            country: data.country,
-            size: data.size,
-            latitude: data.latitude,
-            longitude: data.longitude,
-            traffic: data.traffic,
-            width: data.width,
-            height: data.height,
-            description: data.description,
-            dailyRate: data.dailyRate,
-            weeklyRate: data.weeklyRate,
-            monthlyRate: data.monthlyRate,
-            yearlyRate: data.yearlyRate,
-            dailyVisitor: data.dailyVisitor,
-            nearBy: data.nearBy,
-            address: data.address,
-            objectId: data._id
-        })
+        if (data != undefined) {
+            await this.setState({
+                compaNames: data.companyName,
+                type: data.type,
+                facing: data.facing,
+                lightning: data.lightning,
+                status: data.status,
+                audianceType: data.audianceType,
+                city: data.city,
+                state: data.state,
+                country: data.country,
+                size: data.size,
+                latitude: data.latitude,
+                longitude: data.longitude,
+                traffic: data.traffic,
+                width: data.width,
+                height: data.height,
+                description: data.description,
+                dailyRate: data.dailyRate,
+                weeklyRate: data.weeklyRate,
+                monthlyRate: data.monthlyRate,
+                yearlyRate: data.yearlyRate,
+                dailyVisitor: data.dailyVisitor,
+                nearBy: data.nearBy,
+                address: data.address,
+                objectId: data._id
+            })
+        }
     }
 
     validateNumber(rule, value, callback) {
@@ -1010,6 +1012,7 @@ class BillBoard extends Component {
                                             onChange={this.handleChange}
                                             options={companyName}
                                             defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                            Select-placeholder = "Country"
                                         ></Select>
                                     )}
                                 </Form.Item>
