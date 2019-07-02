@@ -10,3 +10,12 @@
     /* font-weight: bold */
     font-size: 15px;
 }
+.filter{
+    /* margin-top: 5px */
+}
+.text_topFilter{
+    margin-top: -24%;
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 15px;
+}

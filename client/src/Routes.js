@@ -32,11 +32,12 @@ import AddBillboards from './Components/BillboardForm/addBillboards';
 import Billboardmilitary from './Components/Billboard Military/billmilitary';
 import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
+import './App.css';
 
 class Routes extends Component {
   render() {
     return (
-      <div>
+      <div className='App'>
         <Provider store={store}>
           <BrowserRouter>
             <div>
