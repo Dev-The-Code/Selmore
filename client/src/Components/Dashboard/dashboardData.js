@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import {
-    Checkbox, Form, Row, Col,
-} from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
+import { fileToObject } from 'antd/lib/upload/utils';
 
-var arr = []
+var filteredObj = {};
 
 class DashboardData extends Component {
     constructor(props) {
@@ -92,42 +90,191 @@ class DashboardData extends Component {
             states: states
         });
     }
-    handleChange = (data) => {
+    handleChangeCompany = (data) => {
+        filteredObj.companyName = data.value;
+        this.filteredData();
+    }
+    handleChangeType = (data) => {
+        filteredObj.type = data.value;
+        this.filteredData();
+    }
+    handleChangeSize = (data) => {
+        filteredObj.size = data.value;
+        this.filteredData();
+    }
+    handleChangeAddress = (data) => {
+        filteredObj.address = data.value;
+        this.filteredData();
+    }
+    handleChangeCity = (data) => {
+        filteredObj.city = data.value;
+        this.filteredData();
+    }
+    handleChangeState = (data) => {
+        filteredObj.state = data.value;
+        this.filteredData();
+    }
+    filteredData = () => {
         const { billboardData } = this.state;
+        console.log(filteredObj)
         var filteredData = [];
-        arr.push(data.value)
-        if (arr.length >= 1) {
-            //if user has filter values the run the code
-            for (var i = 0; i < arr.length; i++) {
-                for (var j in billboardData) {
-                    let data = billboardData[j]
-                    for (var k in data) {
-                        if (data[k] == arr[i]) {
-                            filteredData.push(data)
+        // arr.push(data.value)
+        // if (arr.length >= 1) {
+        //     //if user has filter values the run the code
+        //     for (var i = 0; i < arr.length; i++) {
+        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.size !== undefined
+            && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
+            for (var i in billboardData) {
+                let data = billboardData[i]
+                // console.log(data)
+                // console.log(data[k])
+                // if (filteredObj.companyName == data[k] || filteredObj.type == data[k] || filteredObj.address == data[k] ||
+                //     filteredObj.size == data[k] || filteredObj.city == data[k] || filteredObj.state == data[k]) {
+                // filteredData.push(data)
+                for (var j in data) {
+                    if (filteredObj.companyName == data[j]) {
+                        // console.log(data)
+                        let checkingCompany = data;
+                        for (var address in checkingCompany) {
+                            if (filteredObj.address == checkingCompany[address]) {
+                                let checkingAddres = checkingCompany
+                                // console.log(abc)
+                                for (var type in checkingAddres) {
+                                    if (filteredObj.type == checkingAddres[type]) {
+                                        let CheckingType = checkingAddres;
+                                        for (var city in CheckingType) {
+                                            // if (filteredObj.size == CheckingType[size]) {
+                                            if (filteredObj.city == CheckingType[city]) {
+                                                let checkingCity = CheckingType;
+                                                for (var state in checkingCity) {
+                                                    if (filteredObj.state == checkingCity[state]) {
+                                                        let cheakingState = checkingCity;
+                                                        if (filteredObj.size == cheakingState.size) {
+                                                            // console.log(cheakingState)
+                                                            filteredData.push(cheakingState)
+                                                        }
+                                                    }
+                                                    // for (var state in cheakingState) {
+                                                    //     if (filteredObj.state == cheakingState[state]) {
+                                                    //         console.log(cheakingState)
+                                                    //         filteredData.push(cheakingState)
+                                                    //         // this.setState({
+                                                    //         //     billboardFilterdData: cheakingState
+                                                    //         // })
+                                                    //     }
+                                                    // }
+                                                }
+                                            }
+                                            // }
+
+                                        }
+                                        // console.log(checkingAddres)
+                                    }
+                                }
+                            }
+
+                            // break;
+                            // else if(filteredObj.type == abc[k]){
+                            //     console.log(abc)
+                            // }
+                            // else if(filteredObj.size == abc[k]){
+                            //     console.log(abc)
+                            // }
+                            // else if(filteredObj.city == abc[k]){
+                            //     console.log(abc)
+                            // }
+                            // else if(filteredObj.state == abc[k]){
+                            //     console.log(abc)
+                            // }
+                            // if (filteredObj.address == data[k] && filteredObj.type == data[k] &&
+                            //     filteredObj.size == data[k] && filteredObj.city == data[k] && filteredObj.state == data[k]) {
+                            //     console.log(data)
+                            // }
+
                         }
                     }
+                    // if (data == fileToObject) {
+                    //     console.log(data)
+                    // }
+
+                    // if (filteredObj.companyName == data[k] && filteredObj.type && filteredObj.address &&
+                    //     filteredObj.size && filteredObj.city && filteredObj.state == data[k]) {
+                    //     console.log('true')
+                    //     console.log(data)
+                    // }
+
+                    // if(filteredObj.companyName == data[k]){
+                    //     // console.log('companyName')
+                    //     console.log(data)
+                    // }
+                    // else if(filteredObj.type == data[k]){
+                    //     // console.log('type')
+                    //     console.log(data)
+                    // }
+                    // else if(filteredObj.address == data[k]){
+                    //     // console.log('address')
+                    //     console.log(data)
+                    // }
+                    // else if(filteredObj.size == data[k]){
+                    //     // console.log('size')
+                    //     console.log(data)
+                    // }
+                    // else if(filteredObj.city == data[k]){
+                    //     // console.log('city')
+                    //     console.log(data)
+                    // }
+                    // else if(filteredObj.state == data[k]){
+                    //     // console.log('state')
+                    //     console.log(data)
+                    // }
+                    // for(var i in filteredObj){
+                    // if(data[k] ==filteredObj[i]){
+                    // console.log(data)
+                    // this.setState({
+                    //     billboardFilterdData: data
+                    // })
+                    // }
+                    // }
                 }
             }
+            // console.log(filteredData)
+        }
+        // }
+        //     }
             this.setState({
                 billboardFilterdData: filteredData
             })
-        }
-        else {
-            // if user have not filter data then render orignal data in the page
-            let notFilterd = []
-            var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
-            this.setState({
-                billboardData: billboardDataFromLocalStorage,
-                billboardFilterdData: notFilterd
-            })
-        }
+        // }
+        // else {
+        //     // if user have not filter data then render orignal data in the page
+        //     let notFilterd = []
+        //     var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
+        //     this.setState({
+        //         billboardData: billboardDataFromLocalStorage,
+        //         billboardFilterdData: notFilterd
+        //     })
+        // }
     }
+
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
+        console.log(billboardFilterdData, 'billboardFilterdData')
         let tableData;
         const billboardRendring = (
             <div>
-                {billboardFilterdData.length !== 0 ? tableData = billboardFilterdData.map((elem, key) => {
+                <table className='tableData table'>
+                    <thead className="thead-dark">
+                        <th className='tableHead' scope="col">#</th>
+                        <th className='tableHead' scope="col">Company Name</th>
+                        <th className='tableHead' scope="col">Address</th>
+                        <th className='tableHead' scope="col">City</th>
+                        <th className='tableHead' scope="col">State</th>
+                        <th className='tableHead' scope="col">Size</th>
+                        <th className='tableHead' scope="col">Action</th>
+                    </thead>
+                    {/* {tableData} */}
+
+                    {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (<tbody>
                             <tr>
                                 <th scope="row">{key}</th>
@@ -141,54 +288,24 @@ class DashboardData extends Component {
                         </tbody>
                         )
                     })
-                    :
-                    tableData =billboardData && billboardData.map((elem, key) => {
-                        return (<tbody>
-                            <tr>
-                                <th scope="row">{key}</th>
-                                <td className='tableTd'>{elem.companyName}</td>
-                                <td className='tableTd'>{elem.address}</td>
-                                <td className='tableTd'>{elem.city}</td>
-                                <td className='tableTd'>{elem.state}</td>
-                                <td className='tableTd'>{elem.size}</td>
-                                <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
-                            </tr>
-                        </tbody>)
-                    })
-                }
+                        :
+                        billboardData && billboardData.map((elem, key) => {
+                            return (<tbody>
+                                <tr>
+                                    <th scope="row">{key}</th>
+                                    <td className='tableTd'>{elem.companyName}</td>
+                                    <td className='tableTd'>{elem.address}</td>
+                                    <td className='tableTd'>{elem.city}</td>
+                                    <td className='tableTd'>{elem.state}</td>
+                                    <td className='tableTd'>{elem.size}</td>
+                                    <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
+                                </tr>
+                            </tbody>)
+                        })
+                    }
+                </table>
             </div>
         );
-
-        // billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
-        //     tableData = billboardData && billboardData.map((elem, i) => {
-        //         return (<tbody>
-        //             <tr>
-        //                 <th scope="row">{i}</th>
-        //                 <td className='tableTd'>{elem.companyName}</td>
-        //                 <td className='tableTd'>{elem.address}</td>
-        //                 <td className='tableTd'>{elem.city}</td>
-        //                 <td className='tableTd'>{elem.state}</td>
-        //                 <td className='tableTd'>{elem.size}</td>
-        //                 <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
-        //             </tr>
-        //         </tbody>
-        //         )
-        //     })
-        // : 
-        // tableData = billboardData && billboardData.map((elem, i) => {
-        //             return (<tbody>
-        //                 <tr>
-        //                     <th scope="row">{i}</th>
-        //                     <td className='tableTd'>{elem.companyName}</td>
-        //                     <td className='tableTd'>{elem.address}</td>
-        //                     <td className='tableTd'>{elem.city}</td>
-        //                     <td className='tableTd'>{elem.state}</td>
-        //                     <td className='tableTd'>{elem.size}</td>
-        //                     <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
-        //                 </tr>
-        //             </tbody>)
-        //         })
-
         return (
             <div>
                 <div></div>
@@ -198,10 +315,18 @@ class DashboardData extends Component {
                         </div>
                         <div className='filter'>
                             <div>
+                                <h2 className='text_topFilter filteration'>Filter</h2>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div><br />
+                        <div className='filter'>
+                            <div>
                                 <h4 className='text_topFilter'>Company Name</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeCompany}
                                     options={companyName}
                                 >
                                 </Select>
@@ -212,7 +337,7 @@ class DashboardData extends Component {
                                 <h4 className='text_topFilter'>BillBoard Type</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeType}
                                     options={types}
                                 >
                                 </Select>
@@ -223,7 +348,7 @@ class DashboardData extends Component {
                                 <h4 className='text_topFilter'>Size</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeSize}
                                     options={rangeValzForDropdown}
                                 >
                                 </Select>
@@ -234,7 +359,7 @@ class DashboardData extends Component {
                                 <h4 className='text_topFilter'>Address</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeAddress}
                                     options={address}
                                 >
                                 </Select>
@@ -245,7 +370,7 @@ class DashboardData extends Component {
                                 <h4 className='text_topFilter'>City</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeCity}
                                     options={cities}
                                 >
                                 </Select>
@@ -256,7 +381,7 @@ class DashboardData extends Component {
                                 <h4 className='text_topFilter'>State</h4>
                             </div>
                             <div>
-                                <Select onChange={this.handleChange}
+                                <Select onChange={this.handleChangeState}
                                     options={states}
                                 >
                                 </Select>
@@ -265,18 +390,7 @@ class DashboardData extends Component {
                     </div>
 
                     <div className='col-xs-12 col-sm-9 col-md-9'>
-                        <table className='tableData table'>
-                            <thead className="thead-dark">
-                                <th className='tableHead' scope="col">#</th>
-                                <th className='tableHead' scope="col">Company Name</th>
-                                <th className='tableHead' scope="col">Address</th>
-                                <th className='tableHead' scope="col">City</th>
-                                <th className='tableHead' scope="col">State</th>
-                                <th className='tableHead' scope="col">Size</th>
-                                <th className='tableHead' scope="col">Action</th>
-                            </thead>
-                            {tableData}
-                        </table>
+                        {billboardRendring}
                     </div>
                     <div className='col-md-1'></div>
                 </div>
