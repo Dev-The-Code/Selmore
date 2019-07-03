@@ -57,10 +57,13 @@ class FormLogin extends Component {
         this.setState({ isLoader: true })
       }
       // this.props.modalDis();
-      // document.getElementById('myModal').close;
+      document.getElementById('closss').click();
+      // document.getElementById('closss').click();
+      // document.getElementById('myModal').attr('data-dismiss');
       // document.getElementById('myModal').modal("hide");
-      // document.getElementById('myModal').hide()
-      this.props.modelHide();
+      // document.getElementsByClassName('close').Click()
+      // document.getElementsByTagName
+      // this.props.modelHide();
     }
     catch (error) {
       console.log(error, 'catch')

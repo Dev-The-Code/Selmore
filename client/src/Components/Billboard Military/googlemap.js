@@ -135,7 +135,7 @@ class Location extends Component {
                     coords={coords}
                     onInfoWindowClose={this.onInfoWindowClose}
                     address={this.props.address}
-                // getCurrentPosition={this.getCurrPosition}
+                    getCurrentPosition={this.getCurrPosition}
                 />
             </div>
         )

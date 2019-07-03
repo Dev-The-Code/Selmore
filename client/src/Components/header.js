@@ -3,6 +3,8 @@ import './headerfooter.css';
 import { Link, withRouter } from 'react-router-dom';
 import Dropdown from '../constant/dropdownmenu/Dropdown';
 import FormLogin from './Login Form/form';
+// var Modal = require('react-bootstrap-modal')
+// var Button = require('react-bootstrap-button')
 
 class Header extends Component {
   constructor(props) {
@@ -161,12 +163,26 @@ class Header extends Component {
                           </div>
                           <FormLogin modelHide={this.modelHide} />
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' >Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id= 'closss'>Cancel</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </li>
+                  //   <Modal >
+                  //   <Modal.Header closeButton>
+                  //     <Modal.Title>Modal heading</Modal.Title>
+                  //   </Modal.Header>
+                  //   <Modal.Body> <FormLogin /></Modal.Body>
+                  //   <Modal.Footer>
+                  //     <button variant="secondary" >
+                  //       Close
+                  //     </button>
+                  //     <button variant="primary">
+                  //       Save Changes
+                  //     </button>
+                  //   </Modal.Footer>
+                  // </Modal>
                 }
                 <li className="nav-item navbiddbtn">
                 </li>
