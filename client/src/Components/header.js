@@ -3,8 +3,6 @@ import './headerfooter.css';
 import { Link, withRouter } from 'react-router-dom';
 import Dropdown from '../constant/dropdownmenu/Dropdown';
 import FormLogin from './Login Form/form';
-// var Modal = require('react-bootstrap-modal')
-// var Button = require('react-bootstrap-button')
 
 class Header extends Component {
   constructor(props) {
@@ -13,35 +11,62 @@ class Header extends Component {
       modal: 'modal',
       propUser: false,
       showDasboardandListAdd: false,
-      hiddenModal: ''
+      hiddenModal: '',
+      dropDownUser: false
     }
   }
   async componentDidMount() {
-
-    this.StateSetForShowDashboard()
-  }
-  componentWillMount() {
-    let loggedIn = this.props.logedIn;
-    if (loggedIn) {
-      this.setState({
-        propUser: true
-      })
-    }
-
-  }
-  StateSetForShowDashboard = () => {
     let adminUser = JSON.parse(localStorage.getItem("userData"));
-    if (adminUser.role == 'admin') {
-      this.setState({
-        showDasboardandListAdd: true
-      })
+    if (adminUser != null) {
+      if (adminUser.role == 'admin') {
+        this.StateSetForShowDashboard()
+      }
     }
   }
+  // componentWillMount() {
+  //   let loggedIn = this.props.logedIn;
+  //   if (loggedIn) {
+  //     this.setState({
+  //       propUser: true
+  //     })
+  //   }
 
+  // }
+  // componentWillUpdate() {
+  //   let adminUser = JSON.parse(localStorage.getItem("userData"));
+  //   if (adminUser != null) {
+  //     if (adminUser.role == 'admin') {
+  //       this.StateSetForShowDashboard()
+  //     }
+  //   }
+  // }
+  StateSetForShowDashboard = () => {
+    this.setState({
+      showDasboardandListAdd: true
+    })
+  }
+  hideStateSetForShowDashboard = () => {
+    this.setState({
+      showDasboardandListAdd: false
+    })
+  }
+
+  showDropDown = () => {
+    this.setState({
+      dropDownUser: true
+    })
+  }
+  hideDropDown = () => {
+    this.setState({
+      dropDownUser: false
+    })
+  }
 
   render() {
-    const { showDasboardandListAdd } = this.state
+    const { showDasboardandListAdd, dropDownUser } = this.state;
     const value = localStorage.getItem("loggedIn");
+    let adminUser = JSON.parse(localStorage.getItem("userData"));
+    console.log(showDasboardandListAdd);
     return (
       <div>
         <div className="container">
@@ -110,10 +135,10 @@ class Header extends Component {
                     </Link>
                   </button>
                 </li>
-                {value
+                {dropDownUser || value
                   ?
                   <li className="nav-item navbtnmargin">
-                    <Dropdown />
+                    <Dropdown hideDropDown={this.hideDropDown} hideStateSetForShowDashboard={this.hideStateSetForShowDashboard} />
                   </li>
                   :
                   <li className="nav-item navbtnmargin" >
@@ -127,9 +152,9 @@ class Header extends Component {
                             <h4 class="modal-title">Login</h4>
                             <button type="button" class="close" data-dismiss='modal'>&times;</button>
                           </div>
-                          <FormLogin modelHide={this.modelHide} />
+                          <FormLogin showDropDown={this.showDropDown} StateSetForShowDashboard={this.StateSetForShowDashboard} />
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id= 'closss'>Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss'>Cancel</button>
                           </div>
                         </div>
                       </div>

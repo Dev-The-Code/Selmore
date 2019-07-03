@@ -109,7 +109,9 @@ class Formpanel extends Component {
 				// console.log(this.state.loggedIn , 'this.state.loggedIn')
 				localStorage.setItem('userName', JSON.stringify(response.username));
 				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn));
-				localStorage.setItem('userData', JSON.stringify(response));			}
+				localStorage.setItem('userData', JSON.stringify(response));
+				this.props.showDropDown();
+			}
 		} else {
 			this.setState({ isData: false })
 		}
@@ -132,7 +134,7 @@ class Formpanel extends Component {
 	}
 
 	render() {
-		const { selectedOption, username, buyer , loggedIn} = this.state
+		const { selectedOption, username, buyer, loggedIn } = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
