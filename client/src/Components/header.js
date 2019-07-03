@@ -37,41 +37,7 @@ class Header extends Component {
       })
     }
   }
-  // async componentDidMount() {
-  //   let value = await localStorage.getItem("loggedIn");
-  //   console.log(value)
-  //   if (value) {
-  //     this.setState({
-  //       propUser: true
-  //     })
-  //   }
-  //   // let data = this.props.userName
-  //   // console.log(data, 'header')
-  //   // console.log(value, 'values of the header')
-  //   // if (data) {
-  //   //   console.log(data, 'data in header')
-  //   //   this.setState({
-  //   //     propUser: true
-  //   //   })
-  //   // }
-  //   // else if (value) {
-  //   //   console.log(value, 'data in header from local storage')
-  //   //   this.setState({
-  //   //     propUser: true
-  //   //   })
-  //   // }
-  // }
-  modalDis = () => {
-    console.log('calllll')
-    this.setState({
-      modal: 'modal'
-    })
-  }
-  modelHide = () => {
-    this.setState({
-      hiddenModal: 'modal'
-    })
-  }
+
 
   render() {
     const { showDasboardandListAdd } = this.state
