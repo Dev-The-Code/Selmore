@@ -41,7 +41,6 @@ class Header extends Component {
   //   }
   // }
   StateSetForShowDashboard = () => {
-<<<<<<< HEAD
     let adminUser = JSON.parse(localStorage.getItem("userData"));
     console.log(adminUser)
     if(adminUser !== null){
