@@ -152,6 +152,27 @@
 		height: 190px;
 	}
 }
+@media screen and (min-width: 360px) and (max-width: 660px){
+	.list_form{
+		width: 98%;
+	}	
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+	.list_form{
+		width: 103.5%;
+	}	
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.list_form{
+		width: 102.5%;
+	}	
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.list_form{
+		width: 102%;
+	}	
+}
+
 
 
 

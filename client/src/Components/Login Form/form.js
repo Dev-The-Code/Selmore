@@ -42,6 +42,7 @@ class FormLogin extends Component {
   }
 
   fectSignInApiFunc = async (values) => {
+    console.log(values)
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
     console.log(response);
