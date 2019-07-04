@@ -7,76 +7,12 @@ import FormLogin from './Login Form/form';
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modal: 'modal',
-      propUser: false,
-      showDasboardandListAdd: false,
-      hiddenModal: '',
-      dropDownUser: false
-    }
   }
-  async componentDidMount() {
-    let adminUser = JSON.parse(localStorage.getItem("userData"));
-    // if (adminUser != null) {
-    //   if (adminUser.role == 'admin') {
-    //     this.StateSetForShowDashboard()
-    //   }
-    // }
-  }
-  // componentWillMount() {
-  //   let loggedIn = this.props.logedIn;
-  //   if (loggedIn) {
-  //     this.setState({
-  //       propUser: true
-  //     })
-  //   }
-
-  // }
-  // componentWillUpdate() {
-  //   let adminUser = JSON.parse(localStorage.getItem("userData"));
-  //   if (adminUser != null) {
-  //     if (adminUser.role == 'admin') {
-  //       this.StateSetForShowDashboard()
-  //     }
-  //   }
-  // }
-  StateSetForShowDashboard = () => {
-    let adminUser = JSON.parse(localStorage.getItem("userData"));
-    console.log(adminUser)
-    if(adminUser !== null){
-       if (adminUser.role == 'admin') {
-      this.setState({
-        showDasboardandListAdd: true
-      })
-    }
-    }
-   
-    this.setState({
-      showDasboardandListAdd: true
-    })
-  }
-  hideStateSetForShowDashboard = () => {
-    this.setState({
-      showDasboardandListAdd: false
-    })
-  }
-
-  showDropDown = () => {
-    this.setState({
-      dropDownUser: true
-    })
-  }
-  hideDropDown = () => {
-    this.setState({
-      dropDownUser: false
-    })
-  }
-
   render() {
-    const { showDasboardandListAdd, dropDownUser } = this.state;
+    const { dropDownUser } = this.props;
     const value = localStorage.getItem("loggedIn");
     let adminUser = JSON.parse(localStorage.getItem("userData"));
-    console.log(adminUser);
+    // console.log(adminUser);
     return (
       <div>
         <div className="container">
@@ -148,7 +84,7 @@ class Header extends Component {
                 {dropDownUser || value
                   ?
                   <li className="nav-item navbtnmargin">
-                    <Dropdown hideDropDown={this.hideDropDown} />
+                    <Dropdown hideDropDown={this.props.hideDropDown} />
                   </li>
                   :
                   <li className="nav-item navbtnmargin" >
@@ -162,7 +98,7 @@ class Header extends Component {
                             <h4 class="modal-title">Login</h4>
                             <button type="button" class="close" data-dismiss='modal'>&times;</button>
                           </div>
-                          <FormLogin showDropDown={this.showDropDown} />
+                          <FormLogin showDropDown={this.props.showDropDown} />
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss'>Cancel</button>
                           </div>

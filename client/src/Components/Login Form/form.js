@@ -42,10 +42,10 @@ class FormLogin extends Component {
   }
 
   fectSignInApiFunc = async (values) => {
-    console.log(values)
+    // console.log(values)
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
-    console.log(response);
+    // console.log(response);
     try {
       if (response.code === 200) {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))

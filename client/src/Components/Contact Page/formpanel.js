@@ -97,7 +97,6 @@ class Formpanel extends Component {
 		console.log(response, 'response');
 		//fetch signUp api
 		if (response.code === 200) {
-			console.log(response.content, ' response.content')
 			this.setState({ isData: true, isLoader: false, isAlert: true, username: response.username });
 
 			//if user has as a buyer contact us

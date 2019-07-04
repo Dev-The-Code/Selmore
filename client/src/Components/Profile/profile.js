@@ -16,7 +16,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <Header />
+                 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
                 <ProfileView/>
                 <Panel1 />
                 <Panel2 />
