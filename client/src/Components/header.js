@@ -12,7 +12,6 @@ class Header extends Component {
     const { dropDownUser } = this.props;
     const value = localStorage.getItem("loggedIn");
     let adminUser = JSON.parse(localStorage.getItem("userData"));
-    // console.log(adminUser);
     return (
       <div>
         <div className="container">

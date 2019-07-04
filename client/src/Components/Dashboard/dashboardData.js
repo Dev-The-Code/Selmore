@@ -3,7 +3,6 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
-import { fileToObject } from 'antd/lib/upload/utils';
 
 var filteredObj = {};
 
@@ -118,142 +117,44 @@ class DashboardData extends Component {
         const { billboardData } = this.state;
         console.log(filteredObj)
         var filteredData = [];
-        // arr.push(data.value)
-        // if (arr.length >= 1) {
-        //     //if user has filter values the run the code
-        //     for (var i = 0; i < arr.length; i++) {
+
         if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.size !== undefined
             && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
             for (var i in billboardData) {
                 let data = billboardData[i]
-                // console.log(data)
-                // console.log(data[k])
-                // if (filteredObj.companyName == data[k] || filteredObj.type == data[k] || filteredObj.address == data[k] ||
-                //     filteredObj.size == data[k] || filteredObj.city == data[k] || filteredObj.state == data[k]) {
-                // filteredData.push(data)
                 for (var j in data) {
                     if (filteredObj.companyName == data[j]) {
-                        // console.log(data)
                         let checkingCompany = data;
                         for (var address in checkingCompany) {
                             if (filteredObj.address == checkingCompany[address]) {
                                 let checkingAddres = checkingCompany
-                                // console.log(abc)
                                 for (var type in checkingAddres) {
                                     if (filteredObj.type == checkingAddres[type]) {
                                         let CheckingType = checkingAddres;
                                         for (var city in CheckingType) {
-                                            // if (filteredObj.size == CheckingType[size]) {
                                             if (filteredObj.city == CheckingType[city]) {
                                                 let checkingCity = CheckingType;
                                                 for (var state in checkingCity) {
                                                     if (filteredObj.state == checkingCity[state]) {
                                                         let cheakingState = checkingCity;
                                                         if (filteredObj.size == cheakingState.size) {
-                                                            // console.log(cheakingState)
                                                             filteredData.push(cheakingState)
                                                         }
                                                     }
-                                                    // for (var state in cheakingState) {
-                                                    //     if (filteredObj.state == cheakingState[state]) {
-                                                    //         console.log(cheakingState)
-                                                    //         filteredData.push(cheakingState)
-                                                    //         // this.setState({
-                                                    //         //     billboardFilterdData: cheakingState
-                                                    //         // })
-                                                    //     }
-                                                    // }
                                                 }
                                             }
-                                            // }
-
                                         }
-                                        // console.log(checkingAddres)
                                     }
                                 }
                             }
-
-                            // break;
-                            // else if(filteredObj.type == abc[k]){
-                            //     console.log(abc)
-                            // }
-                            // else if(filteredObj.size == abc[k]){
-                            //     console.log(abc)
-                            // }
-                            // else if(filteredObj.city == abc[k]){
-                            //     console.log(abc)
-                            // }
-                            // else if(filteredObj.state == abc[k]){
-                            //     console.log(abc)
-                            // }
-                            // if (filteredObj.address == data[k] && filteredObj.type == data[k] &&
-                            //     filteredObj.size == data[k] && filteredObj.city == data[k] && filteredObj.state == data[k]) {
-                            //     console.log(data)
-                            // }
-
                         }
                     }
-                    // if (data == fileToObject) {
-                    //     console.log(data)
-                    // }
-
-                    // if (filteredObj.companyName == data[k] && filteredObj.type && filteredObj.address &&
-                    //     filteredObj.size && filteredObj.city && filteredObj.state == data[k]) {
-                    //     console.log('true')
-                    //     console.log(data)
-                    // }
-
-                    // if(filteredObj.companyName == data[k]){
-                    //     // console.log('companyName')
-                    //     console.log(data)
-                    // }
-                    // else if(filteredObj.type == data[k]){
-                    //     // console.log('type')
-                    //     console.log(data)
-                    // }
-                    // else if(filteredObj.address == data[k]){
-                    //     // console.log('address')
-                    //     console.log(data)
-                    // }
-                    // else if(filteredObj.size == data[k]){
-                    //     // console.log('size')
-                    //     console.log(data)
-                    // }
-                    // else if(filteredObj.city == data[k]){
-                    //     // console.log('city')
-                    //     console.log(data)
-                    // }
-                    // else if(filteredObj.state == data[k]){
-                    //     // console.log('state')
-                    //     console.log(data)
-                    // }
-                    // for(var i in filteredObj){
-                    // if(data[k] ==filteredObj[i]){
-                    // console.log(data)
-                    // this.setState({
-                    //     billboardFilterdData: data
-                    // })
-                    // }
-                    // }
                 }
             }
-            // console.log(filteredData)
         }
-        // }
-        //     }
-            this.setState({
-                billboardFilterdData: filteredData
-            })
-        // }
-        // else {
-        //     // if user have not filter data then render orignal data in the page
-        //     let notFilterd = []
-        //     var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
-        //     this.setState({
-        //         billboardData: billboardDataFromLocalStorage,
-        //         billboardFilterdData: notFilterd
-        //     })
-        // }
+        this.setState({
+            billboardFilterdData: filteredData
+        })
     }
 
     render() {
@@ -398,5 +299,4 @@ class DashboardData extends Component {
         )
     }
 }
-
 export default DashboardData;

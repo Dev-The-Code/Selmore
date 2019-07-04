@@ -42,10 +42,8 @@ class FormLogin extends Component {
   }
 
   fectSignInApiFunc = async (values) => {
-    // console.log(values)
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
-    // console.log(response);
     try {
       if (response.code === 200) {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
@@ -53,19 +51,11 @@ class FormLogin extends Component {
         localStorage.setItem('userName', JSON.stringify(response.username))
         localStorage.setItem('userData', JSON.stringify(response))
         this.setState({ isLoader: false });
-        // console.log(response.username, 'token')
       } else {
         this.setState({ isLoader: true })
       }
-      // this.props.modalDis();
       document.getElementById('closss').click();
       this.props.showDropDown();
-      // document.getElementById('closss').click();
-      // document.getElementById('myModal').attr('data-dismiss');
-      // document.getElementById('myModal').modal("hide");
-      // document.getElementsByClassName('close').Click()
-      // document.getElementsByTagName
-      // this.props.modelHide();
     }
     catch (error) {
       console.log(error, 'catch')
@@ -82,11 +72,7 @@ class FormLogin extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoader, loggedIn, isAlert } = this.state
-    //redirect to home page
-    // if (loggedIn) {
-    //   return <Redirect to='/' />
-    // }
+    const { isLoader, isAlert } = this.state
     return (
       <div className="container">
         <div className="row school1" style={{ marginRight: '0px' }}>
