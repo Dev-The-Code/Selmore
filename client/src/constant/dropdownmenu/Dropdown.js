@@ -36,9 +36,12 @@ class Dropdown extends Component {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
     localStorage.removeItem('coords');
+    localStorage.removeItem('userData');
     this.setState({
       logout: true
     })
+    this.props.hideDropDown();
+    this.props.hideStateSetForShowDashboard();
     return <Redirect to={{ pathname: '/' }} />
   }
 

@@ -36,7 +36,7 @@ class FormLogin extends Component {
         })
         // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
-        // this.props.modelHide();
+
       }
     });
   }
@@ -59,6 +59,7 @@ class FormLogin extends Component {
       }
       // this.props.modalDis();
       document.getElementById('closss').click();
+      this.props.showDropDown();
       // document.getElementById('closss').click();
       // document.getElementById('myModal').attr('data-dismiss');
       // document.getElementById('myModal').modal("hide");
