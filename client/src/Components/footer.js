@@ -59,7 +59,7 @@ class Footer extends Component {
       		</div>
       				<div className="row rowbackground true7" style={{margin:'0px'}}>
                 <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
-      					<div className="col-9 col-md-6 col-lg-6 col-xl-6 true6"><span className="true5">Copyrights 2019 By Selmore. All Rights Reservered</span></div>
+      					<div className="col-12 col-md-12 col-lg-12 col-xl-12 true6"><span className="true5">Copyrights 2019 By Selmore. All Rights Reservered</span></div>
 
       					<div className="col-2 col-md-5 col-lg-5 col-xl-5"></div>
       				</div>			

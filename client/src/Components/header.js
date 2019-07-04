@@ -41,6 +41,16 @@ class Header extends Component {
   //   }
   // }
   StateSetForShowDashboard = () => {
+    let adminUser = JSON.parse(localStorage.getItem("userData"));
+    console.log(adminUser)
+    if(adminUser !== null){
+       if (adminUser.role == 'admin') {
+      this.setState({
+        showDasboardandListAdd: true
+      })
+    }
+    }
+   
     this.setState({
       showDasboardandListAdd: true
     })
@@ -71,10 +81,10 @@ class Header extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-4 col-md-4 col-lg-3 col-xl-3">
+            <div className="col-md-3 col-lg-3 col-xl-3">
               <img src="../images/selmore-logo.png" className="selmorelogo" />
             </div>
-            <div className="col-md-8 col-lg-9 col-xl-9 d-none d-sm-block">
+            <div className="col-md-9 col-lg-9 col-xl-9 d-none d-sm-block">
               <ul className="nav navsm">
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
