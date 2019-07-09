@@ -4,8 +4,8 @@ import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
 
-import { fileToObject } from 'antd/lib/upload/utils';
-import filterImg from "./caret-down.png";
+// import { fileToObject } from 'antd/lib/upload/utils';
+// import filterImg from "./caret-down.png";
 
 var filteredObj = {};
 
@@ -64,6 +64,7 @@ class DashboardData extends Component {
             rangeNumArr.push(i)
         }
         let response = await HttpUtils.get('getcompanyname');
+        console.log(response)
         let responseBillboardData = await HttpUtils.get('getbillboard');
         companyName = response.content.map((elem, i) => {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
@@ -163,7 +164,6 @@ class DashboardData extends Component {
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
         console.log(billboardFilterdData, 'billboardFilterdData')
-        let tableData;
         const billboardRendring = (
             <div>
                 <br/>

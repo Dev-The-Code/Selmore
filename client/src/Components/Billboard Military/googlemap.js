@@ -126,9 +126,9 @@ class Location extends Component {
         })
     }
     render() {
-        const { coords , position} = this.state;
-        console.log(coords)
-        console.log(this.props.latitude, this.props.longitude , 'props')
+        const { coords } = this.state;
+        // console.log(coords)
+        // console.log(this.props.latitude, this.props.longitude , 'props')
 
         return (
             <div>
@@ -153,7 +153,7 @@ class Location extends Component {
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 <GoogleMap
         defaultZoom={15}
-        defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
+        // defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
         // center={{ lat: 33.690980, lng: 73.091140 }}
         center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
         

@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 //Define model
 const addSchema = new Schema({
-<<<<<<< HEAD
 billBoardImgs:{type:String},
 companyId:{type:String},
 companyName:{type:String},
@@ -30,7 +29,6 @@ address:{type:Array},
 city:{type:Array},
 state:{type:Array},
 country:{type:Array},
-=======
     images: { type: Array },
     companyId: { type: String },
     companyName: { type: String },
@@ -57,7 +55,6 @@ country:{type:Array},
     city: { type: String },
     state: { type: String },
     country: { type: String },
->>>>>>> 83d36e2005d852d99cefa72d623fd03289739461
 
 });
 

@@ -97,7 +97,7 @@ class BillBoard extends Component {
     }
     async componentWillMount() {
         let data = this.props.data;
-        console.log(data, 'data')
+        // console.log(data, 'data')
         await this.editDataShowns(data)
     }
     gettingDropDownValues = async () => {
@@ -140,7 +140,7 @@ class BillBoard extends Component {
         });
     }
     editDataShowns = async (data) => {
-        console.log(data, 'data')
+        // console.log(data, 'data')
         if (data != undefined) {
             await this.setState({
                 compaNames: data.companyName,
@@ -446,6 +446,7 @@ class BillBoard extends Component {
                                                         }],
                                                     })(
                                                         <Select
+                                                        // placeholder = 'Type'
                                                             onChange={this.handleChange}
                                                             options={types}
                                                             defaultValue={{ label: this.state.type, value: this.state.type }}

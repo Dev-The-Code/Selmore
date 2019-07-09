@@ -112,9 +112,10 @@ class Market extends Component {
                     // console.log(billboardData[j])
                     for (var k in data) {
                         // console.log(data[k])
-                        if (data[k] == value[i]) {
+                        if (data[k] === value[i]) {
                             // console.log(data)
                             filteredData.push(data)
+                            break;
                         }
                     }
                 }
