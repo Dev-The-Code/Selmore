@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 //Define model
 const addSchema = new Schema({
-billBoardImgs:{type:Array},
+billBoardImgs:{type:String},
 companyId:{type:String},
 companyName:{type:String},
 facing:{type:Array},
