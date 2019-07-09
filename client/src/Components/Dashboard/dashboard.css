@@ -1,14 +1,16 @@
 .tableData{
     justify-content: center;
     text-align: center;
+    color: black;
+
 }
 .tableHead{
-    padding: 20px;
 }
 .tableTd{
-    padding: 20px !important; 
+    padding: 13px !important; 
     /* font-weight: bold */
     font-size: 15px;
+    border-left: 1px solid #dee2e6;
 }
 
 .text_topFilter{
@@ -20,3 +22,27 @@
 .filteration{
     font-size: 25px !important;
 }
+
+.caret_downOne {
+    
+    margin-left: 180px;
+    width:10px;
+    height: 10px;
+
+  }
+
+div.scroll_table {
+  overflow: auto;
+  white-space: nowrap;
+  border: 1px solid #dee2e6;
+}
+
+div.scroll_table a {
+  color: #007bff!important;
+  display: inline-block;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+

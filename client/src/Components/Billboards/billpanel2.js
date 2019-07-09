@@ -15,9 +15,7 @@ export default billpanel2;
 /*<div className="container">
                 <div className="row" style={{margin:'0px'}}>
                     <div className="col-md-8">
-                        <div className="row aux1" style={{margin:'0px'}}>
-                          <span className="aux2">Search Result(5)</span>
-                        </div>
+                        
                         <div className="row aux3" style={{margin:'0px'}}>
                           <div className="col-md-4">
                             <img src="./images/bill1.png" className="imagesize"/>

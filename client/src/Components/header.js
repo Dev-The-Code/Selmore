@@ -105,13 +105,13 @@ class Header extends Component {
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
                       DASHBOARD
-                  </Link>
+                    </Link>
                   </li>
                   :
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/faq`}>
                       FAQ
-                  </Link>
+                    </Link>
                   </li>
                 }
                 {showDasboardandListAdd ?
@@ -130,9 +130,10 @@ class Header extends Component {
                 </li>
                 {showDasboardandListAdd ?
                   <li className="nav-item navmargin12">
-                    <Link rel="noopener noreferrer" to={`/list_add`}><button type="button" className="btn btn-primary btn-sm">
-                      <span> LIST AD </span>
-                    </button>
+                    <Link rel="noopener noreferrer" to={`/list_add`}>
+                      <button type="button" className="btn btn-primary btn-sm">
+                        <span> LIST AD </span>
+                      </button>
                     </Link>
                   </li>
                   :
@@ -189,6 +190,88 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
+
+
+{/*mobile_menu*/}
+
+
+            {/*<div className="d-block d-sm-none">
+              <div id="side_menu" class="mobile_menu">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/`}>
+                    HOME
+                  </Link></a>
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/about`}>
+                    ABOUT
+                  </Link></a>
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/advertising_agency`}>
+                    AGENCY
+                  </Link></a>
+                  {showDasboardandListAdd ?
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/dashboard`}>
+                    DASHBOARD
+                  </Link></a>
+                  :
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/faq`}>
+                    FAQ
+                  </Link>
+                </a>
+                }
+                {showDasboardandListAdd ?
+                  null
+                  :
+                <a className="nav-link"  href="#">
+                  BLOG
+                </a>
+                }
+                <a href="#">
+                  <Link rel="noopener noreferrer" to={`/market_place`}>
+                    MARKETPLACE
+                  </Link>
+                </a>
+                {showDasboardandListAdd ?
+
+                <Link rel="noopener noreferrer" to={`/list_add`}>
+                  <button type="button" className="btn btn-primary btn-sm">
+                    <span> LIST AD </span>
+                  </button>
+                </Link>
+
+                :
+                  null
+                }
+
+                <button type="button" className="btn btn-primary btn-sm">
+                  <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white" }}>
+                    <span>BIDDING</span>
+                  </Link>
+                </button>
+
+                {dropDownUser || value
+                  ?
+
+// kaam karna he is me
+              </div>
+
+              <h2>Animated Sidenav Example</h2>
+              <p>Click on the element below to open the side navigation menu.</p>
+              <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+            </div>*/}
+
+
+
+
+
+
+
+
+
           </div>
         </div>
       </div>

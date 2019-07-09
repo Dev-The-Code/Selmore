@@ -81,7 +81,7 @@
 	}
 	.navmargin{
 	            margin-top: 37px;
-    			margin-right: 16px;
+    			margin-right: 22px;
 	}
 	.selmorelogo{
 	    height: 101px;
@@ -160,6 +160,7 @@
 .navbtnmargin{
 		    /* margin-left: 10px; */
 		    margin-top: 33px;
+		    height: 31px;
 }
 
 
@@ -245,7 +246,6 @@
 	}
 	.navmargin12{
 		margin-top: 33px;
-		margin-left: 2%;
 		margin-right: 4px;
 
 	}
@@ -297,4 +297,46 @@
 		margin-right: 4px;
 
 	}
+}
+
+
+/*Mobile Menu CSS*/
+
+.mobile_menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.mobile_menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.mobile_menu a:hover {
+  color: #f1f1f1;
+}
+
+.mobile_menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .mobile_menu {padding-top: 15px;}
+  .mobile_menu a {font-size: 18px;}
 }
