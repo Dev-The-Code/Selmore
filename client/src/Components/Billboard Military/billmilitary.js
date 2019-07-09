@@ -15,7 +15,7 @@ class Billboardmilitary extends Component {
 	render() {
 		return (
 			<div>
-				<Header />
+				 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
 				<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'} bred2={'> BILLBOARD'} bred3={'> MILITARY ROAD CITY POINT'} />
 				<Militarypanel1 data={this.props.location.state} />
 				<Militarypanel2 />

@@ -32,13 +32,13 @@ class Militarypanel1 extends Component {
 			image = images.map((elem, key) => {
 				// console.log(key , 'key')
 				if (key == 0) {
-					return <div class="carousel-item active">
-						<img class="d-block w-100" src={elem} alt="Second slide" />
+					return <div className="carousel-item active">
+						<img className="d-block w-100" src={elem} alt={key} />
 					</div>
 				}
 				else {
-					return <div class="carousel-item">
-						<img class="d-block w-100" src={elem} alt="Second slide" />
+					return <div className="carousel-item">
+						<img className="d-block w-100" src={elem} alt={key} />
 					</div>
 				}
 			})
@@ -50,17 +50,17 @@ class Militarypanel1 extends Component {
 						<div className="col-md-8">
 							<div className="row slidersoldier" style={{ margin: '0px' }}>
 								<div className="">
-									<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-										<div class="carousel-inner">
+									<div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+										<div className="carousel-inner">
 											{image}
 										</div>
-										<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="sr-only">Previous</span>
+										<a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+											<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span className="sr-only">Previous</span>
 										</a>
-										<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="sr-only">Next</span>
+										<a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+											<span className="carousel-control-next-icon" aria-hidden="true"></span>
+											<span className="sr-only">Next</span>
 										</a>
 									</div>
 								</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './contact.css';
 import {
-	Form, Input, Select, Radio, AutoComplete,
+	Form, Input,  Radio, 
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Redirect } from 'react-router';
@@ -92,21 +92,16 @@ class Formpanel extends Component {
 		let password = values.firstName.concat(values.mobileNo)
 		values.password = password;
 		values.role = this.state.role;
-		console.log(values, 'values')
 		let response = await HttpUtils.post('signup', values);
-		console.log(response, 'response');
 		//fetch signUp api
 		if (response.code === 200) {
-			console.log(response.content, ' response.content')
 			this.setState({ isData: true, isLoader: false, isAlert: true, username: response.username });
-
 			//if user has as a buyer contact us
 			if (this.state.selectedOption === 'Buyer') {
 				await this.setState({
 					buyer: true,
 					loggedIn: true
 				})
-				// console.log(this.state.loggedIn , 'this.state.loggedIn')
 				localStorage.setItem('userName', JSON.stringify(response.username));
 				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn));
 				localStorage.setItem('userData', JSON.stringify(response));

@@ -11,7 +11,7 @@ class Faq extends Component {
   render() {
     return (
         <div>
-        		<Header />
+        		 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
                 <AbBanner advertise={'FREQUENTLY ASKED QUESTIONS'} bred={'FAQ'}/>
         		<Faqpanel1 />
         		<Footer />

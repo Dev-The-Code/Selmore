@@ -88,7 +88,8 @@ class Location extends Component {
         this.state = {
             coords: null,
             showingInfoWindow: true,
-            activeMarker: ''
+            activeMarker: '',
+            position:null
         };
         this.getCurrPosition = this.getCurrPosition.bind(this);
         this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
@@ -102,11 +103,15 @@ class Location extends Component {
             this.setState({
                 coords:
                 {
-                    // latitude: latitude,
-                    // longitude: longitude,
+                    // latitude: this.props.latitude,
+                    // longitude: this.props.longitude,
                     latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                }
+                    longitude: position.coords.longitude,
+                },
+                // position:{
+                //      latitude: this.props.latitude,
+                //     longitude: this.props.longitude,
+                // }
             });
         })
     }
@@ -121,8 +126,10 @@ class Location extends Component {
         })
     }
     render() {
-        // console.log(this.props.address)
-        const { coords } = this.state;
+        const { coords , position} = this.state;
+        console.log(coords)
+        console.log(this.props.latitude, this.props.longitude , 'props')
+
         return (
             <div>
                 <MyMapComponent
@@ -136,6 +143,7 @@ class Location extends Component {
                     onInfoWindowClose={this.onInfoWindowClose}
                     address={this.props.address}
                     getCurrentPosition={this.getCurrPosition}
+                    // position = {position}
                 />
             </div>
         )
@@ -143,13 +151,13 @@ class Location extends Component {
 }
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap
+<GoogleMap
         defaultZoom={15}
-        defaultCenter={{ lat: props.coords.latitude, lng: props.coords.longitude }}
+        defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
         // center={{ lat: 33.690980, lng: 73.091140 }}
         center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-
-    >
+        
+        >
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
             title={props.address}
@@ -161,6 +169,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
             onDragEnd={position => {
                 // console.log(position.latLng.lat(), position.latLng.lng());
                 props.getCurrentPosition({ latitude: position.latLng.lat(), longitude: position.latLng.lng() });
+                console.log(position)
                 console.log(position, 'position')
             }}
         >
@@ -179,6 +188,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     </GoogleMap>
 ))
 export default Location;
-// export default GoogleApiWrapper({
-//     apiKey: 'YOUR_GOOGLE_API_KEY_GOES_HERE'
-//   })(MapContainer);
+// export default MyMapComponent({
+//     apiKey: 'AIzaSyAV77zKJtP5MeEAFIgi3YhdgIzsuYKBuxo'
+//   })(Location);

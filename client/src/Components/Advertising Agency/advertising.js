@@ -13,7 +13,7 @@ class Advertising extends Component {
   render() {
     return (
         <div>
-        	<Header />
+        	 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
         	<AbBanner advertise={'ADVERTISING'} bred={'Advertising'} />
         	<Aa1 />
         	<Aa2 />

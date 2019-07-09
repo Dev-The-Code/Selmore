@@ -11,7 +11,7 @@ class Buyer extends Component {
   render() {
     return (
       <div>
-      		<Header />
+      		 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
           <AbBanner advertise={'BUYER'} bred={'BUYER'} />
           <Buyerpanel1 />
           <Footer />

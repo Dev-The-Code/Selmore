@@ -14,21 +14,6 @@ class Dropdown extends Component {
     this.logOut = this.logOut.bind(this)
   }
 
-  componentDidMount() {
-    let data = this.props.userName;
-    let userName = JSON.parse(localStorage.getItem('userName'));
-    // if (data) {
-    //   this.setState({
-    //     userName: data
-    //   })
-    // }
-    // else 
-    // if (userName) {
-    //   this.setState({
-    //     userName: userName
-    //   })
-    // }
-  }
   //clear local storage & redirect to Home
   logOut() {
     console.log('logOut')
@@ -41,18 +26,15 @@ class Dropdown extends Component {
       logout: true
     })
     this.props.hideDropDown();
-    this.props.hideStateSetForShowDashboard();
     return <Redirect to={{ pathname: '/' }} />
   }
 
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
-    // console.log(userName , 'userName')
     return (
       <MDBDropdown>
         <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
           <div className='userName dropdown-toggle'
-          // style={{marginRight:'400px'}}
           >{userName}</div>
         </MDBDropdownToggle>
         <MDBDropdownMenu basic>

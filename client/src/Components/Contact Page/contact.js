@@ -12,9 +12,9 @@ class Contact extends Component {
   render() {
     return (
     	<div>
-		    <Header/>
+		    <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser}/>
         <AbBanner advertise={'CONTACT'} bred={'CONTACT'} />
-		    <Formpanel />
+		    <Formpanel showDropDown = {this.props.showDropDown}/>
         <Contpanel1 />
         <Footer />
 		  </div>
