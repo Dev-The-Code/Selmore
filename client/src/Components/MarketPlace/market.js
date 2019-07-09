@@ -216,8 +216,8 @@ class Market extends Component {
             <div className="container">
                 <div className='row billboard'>
                     {/*<div className="col-md-1"></div>*/}
-                    <div className='col-md-3'>Filters</div>
-                    <div className='col-md-9'>Billboards</div>
+                    <div className='col-md-4'>Filters</div>
+                    <div className='col-md-8'>Billboards</div>
                 </div>
                 <div className='row filter'>
                     {/*<div className="col-md-1"></div>*/}
