@@ -11,7 +11,7 @@ class Billbidding extends Component {
   render() {
     return (
         <div>
-          	<Header />
+          	 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
             <AbBanner advertise={'BILLBOARDS FOR BIDDING'} bred={'CATEGORY'} bred2={'> FOR BIDDING'} />  
             <Billofpanel1 />
             <Billofpanel2 />

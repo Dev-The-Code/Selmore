@@ -1,8 +1,8 @@
 import { AsyncStorage } from '@callstack/async-storage'
 
-// const BASE_URL = 'http://localhost:5000';
-const BASE_URL = 'https://salmore.herokuapp.com';
- //const BASE_URL = 'https://pure-hollows-17968.herokuapp.com/api';
+const BASE_URL = 'http://localhost:5000';
+//const BASE_URL = 'https://salmore.herokuapp.com';
+//const BASE_URL = 'https://pure-hollows-17968.herokuapp.com/api';
 
 
 const headersFor = (token) => {
@@ -22,7 +22,7 @@ const handleErrors = (response) => {
             if (responseData.errors.indexOf('Invalid token') !== -1) {
                 return AsyncStorage.removeItem('auth_token').then(() => {
                     let err = Error('Invalid auth token')
-                   // Sentry.captureException(err)
+                    // Sentry.captureException(err)
                     throw err
                 })
             } else {
@@ -45,8 +45,8 @@ const hitEndpoint = (method, endpoint, token, body) => {
         return handleErrors(response)
     }).catch((err) => {
         if (err.message === 'Network request failed')
-        //Sentry.captureException(err)
-        throw err
+            //Sentry.captureException(err)
+            throw err
     });
 }
 

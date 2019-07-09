@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './contact.css';
 import {
-	Form, Input, Select, Radio, AutoComplete,
+	Form, Input,  Radio, 
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Redirect } from 'react-router';
@@ -24,7 +24,9 @@ class Formpanel extends Component {
 			emailsArr: [],
 			registerBtn: false,
 			username: '',
-			buyer: false
+			buyer: false,
+			loggedIn: false,
+			role: ''
 		}
 		//bind funtions
 		this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -37,15 +39,13 @@ class Formpanel extends Component {
 	checkEmails = async () => {
 		let response = await HttpUtils.get('getemails');
 		let getEmail = response.content;
-		// console.log(response)
-		// console.log(response.content);
 		this.setState({
 			emailsArr: response.content
 		})
 	}
 
 	onChangeEmail(rule, value, callback) {
-		console.log(rule)
+		// console.log(rule)
 		if (this.state.emailsArr.includes(value)) {
 			callback('Email is already exists');
 			this.setState({
@@ -65,6 +65,7 @@ class Formpanel extends Component {
 		this.setState({
 			selectedOption: changeEvent.target.value,
 			radioVal: true,
+			role: changeEvent.target.value
 		});
 	}
 
@@ -90,19 +91,21 @@ class Formpanel extends Component {
 		//concat Frist Name & Mobile No for Password
 		let password = values.firstName.concat(values.mobileNo)
 		values.password = password;
-		// console.log(values);
+		values.role = this.state.role;
 		let response = await HttpUtils.post('signup', values);
-		console.log(response, 'response');
 		//fetch signUp api
 		if (response.code === 200) {
-			console.log(response.content, ' response.content')
-			this.setState({ data: response.content, isData: true, isLoader: false, isAlert: true, username: response.username });
-
+			this.setState({ isData: true, isLoader: false, isAlert: true, username: response.username });
 			//if user has as a buyer contact us
 			if (this.state.selectedOption === 'Buyer') {
-				this.setState({
-					buyer: true
+				await this.setState({
+					buyer: true,
+					loggedIn: true
 				})
+				localStorage.setItem('userName', JSON.stringify(response.username));
+				localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn));
+				localStorage.setItem('userData', JSON.stringify(response));
+				this.props.showDropDown();
 			}
 		} else {
 			this.setState({ isData: false })
@@ -126,7 +129,7 @@ class Formpanel extends Component {
 	}
 
 	render() {
-		const { selectedOption, username, buyer } = this.state
+		const { selectedOption, username, buyer, loggedIn } = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
@@ -135,7 +138,7 @@ class Formpanel extends Component {
 			}
 		};
 		if (buyer) {
-			return <Redirect to={{ pathname: '/', state: username }} />
+			return <Redirect to={{ pathname: '/', state: loggedIn }} />
 		}
 
 		return (

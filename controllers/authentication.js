@@ -41,6 +41,7 @@ exports.signin = function(req, res, next){
         token: tokenForUser(req.user),
         _id:req.user.id,
         email:req.user.email,
+        role:user.role,
         code:200,
         username:user.firstName +''+ user.lastName
       });
@@ -59,6 +60,7 @@ exports.signup = function(req, res, next){
   const landlineNo = req.body.landlineNo;
   const fullName  = req.body.fullName;
   const type = req.body.type;
+  const role = req.body.role;
   const companyName = req.body.CompanyName;
 
 
@@ -85,6 +87,7 @@ exports.signup = function(req, res, next){
         landlineNo:landlineNo,
         fullName:fullName,
         type:type,
+        role:role,
         randomno:rand,
         companyName:companyName
       });
@@ -164,6 +167,7 @@ exports.signup = function(req, res, next){
         token:tokenForUser(user),
         username:user.firstName+''+user.lastName,
         _id:user._id,
+        role:user.role,
         code:200
       });
     });

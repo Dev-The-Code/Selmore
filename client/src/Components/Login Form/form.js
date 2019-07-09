@@ -7,7 +7,7 @@ import {
   Form, Icon, Input, Button, Checkbox,
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-
+// var modal = ReactBootstrap.Modal
 
 class FormLogin extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class FormLogin extends Component {
     this.state = {
       email: '',
       password: '',
-      loggedIn: false,
+      loggedIn: true,
       isData: true,
       data: {},
       isLoader: false,
@@ -36,6 +36,7 @@ class FormLogin extends Component {
         })
         // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
+
       }
     });
   }
@@ -43,23 +44,21 @@ class FormLogin extends Component {
   fectSignInApiFunc = async (values) => {
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
-    console.log(response);
     try {
       if (response.code === 200) {
-        this.setState({ data: response.content, isData: true, isLoader: false, loggedIn: true });
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         localStorage.setItem('userToken', JSON.stringify(response.token))
         localStorage.setItem('userName', JSON.stringify(response.username))
-        console.log(response.username, 'token')
+        localStorage.setItem('userData', JSON.stringify(response))
+        this.setState({ isLoader: false });
       } else {
-        this.setState({ isData: false, isLoader: true })
+        this.setState({ isLoader: true })
       }
-      // this.props.modalDis();
-      // document.getElementById('myModal').modal("hide");
-      console.log(document.getElementById('myModal'));
+      document.getElementById('closss').click();
+      this.props.showDropDown();
     }
     catch (error) {
-      console.log(error , 'catch')
+      console.log(error, 'catch')
 
       //error handling if user enter wrong email or password
       if (response === undefined) {
@@ -73,11 +72,7 @@ class FormLogin extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isData, isLoader, loggedIn, isAlert } = this.state
-    //redirect to home page
-    if (loggedIn) {
-      return <Redirect to='/' />
-    }
+    const { isLoader, isAlert } = this.state
     return (
       <div className="container">
         <div className="row school1" style={{ marginRight: '0px' }}>

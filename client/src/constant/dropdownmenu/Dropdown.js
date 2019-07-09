@@ -8,47 +8,42 @@ class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ''
+      userName: '',
+      logout: false
     }
     this.logOut = this.logOut.bind(this)
   }
 
-  componentDidMount() {
-    let data = this.props.userName;
-    let userName = JSON.parse(localStorage.getItem('userName'));
-    if (data) {
-      this.setState({
-        userName: data
-      })
-    }
-    else if (userName) {
-      this.setState({
-        userName: userName
-      })
-    }
-  }
   //clear local storage & redirect to Home
   logOut() {
+    console.log('logOut')
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
     localStorage.removeItem('coords');
-    return <Redirect to='/' />
+    localStorage.removeItem('userData');
+    this.setState({
+      logout: true
+    })
+    this.props.hideDropDown();
+    return <Redirect to={{ pathname: '/' }} />
   }
 
   render() {
-    const { userName } = this.state
-
+    let userName = JSON.parse(localStorage.getItem('userName'));
     return (
       <MDBDropdown>
         <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
           <div className='userName dropdown-toggle'
-          // style={{marginRight:'400px'}}
           >{userName}</div>
         </MDBDropdownToggle>
         <MDBDropdownMenu basic>
           <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
-          <MDBDropdownItem onClick={this.logOut}> <Link rel="noopener noreferrer" to={`/`}>Log Out</Link></MDBDropdownItem>
+          <MDBDropdownItem onClick={this.logOut}>
+            <Link rel="noopener noreferrer" to={`/`}>
+            Log Out
+            </Link>
+          </MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
     );

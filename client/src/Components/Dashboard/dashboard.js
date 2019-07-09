@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
-import Market from './market';
+import DashboardData from './dashboardData';
 
-class MarketPlace extends Component {
+class Dashboard extends Component {
     constructor(props) {
         super(props)
     }
@@ -11,10 +11,10 @@ class MarketPlace extends Component {
         return (
             <div>
                  <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
-                <Market />
+                <DashboardData />
                 <Footer />
             </div>
         )
     }
 }
-export default MarketPlace;
+export default Dashboard;

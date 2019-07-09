@@ -4,7 +4,11 @@
 
 		position: relative;
 }
-
+.container{
+	padding-right: 0px; 
+    padding-left: 25px;
+    margin-right: auto;
+}
 .rowabsolute{
 			position: absolute;
 }
@@ -370,29 +374,33 @@
 .clock2{
 	background-color: #9A9191;
 }
-
+.divFont{
+	font-size: 0.90rem !important
+}
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.funday{
 			margin-bottom: 13px;
 		    margin-left: -30px;
-		    width: 100%;
+			width: 100%;
 	}
 	.innerdiv{
 		 float: right;
 		 text-align: center;
 		 color: white;
+		 font-size: 1rem !important
 	}
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
 	}
 	.panel3div{
-		    float: right;
+		    float: left;
 		    background-color: #29abe2;
 		    margin-left: 27px;
 		    padding: 3px;
 		    width: 80%;
-		    margin-bottom: 5px;
+			margin-bottom: 5px;
+			margin:14px;
 	}
 	.locationbar{
 		font-size: 33px;
@@ -405,23 +413,25 @@
 	.funday{
 		    margin-bottom: 13px;
 		    margin-left: -30px;
-		    width: 100%;
+			width: 100%;
 	}
 	.innerdiv{
 		 float: right;
 		 text-align: center;
 		 color: white;
+		 font-size: 1rem !important
 	}
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
 	}
 	.panel3div{
-			float: right;
+			float: left;
 			background-color: #29abe2;
 		        width: 22%;
     			margin-left: 14px;
-    			padding: 3px;
+				padding: 3px;
+				margin:14px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -433,23 +443,25 @@
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
-    	margin-left: -42px;
+		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;
 		 text-align: center;
 		 color: white;
+		 font-size: 1rem !important
 	}
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
 	}
 	.panel3div{
-			float: right;
+			float: left;
 			background-color: #29abe2;
 		        width: 22%;
     			margin-left: 14px;
-    			padding: 3px;
+				padding: 3px;
+				margin:14px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -461,23 +473,25 @@
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
-    	margin-left: -42px;
+		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;
 		 text-align: center;
 		 color: white;
+		 font-size: 1rem !important
 	}
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
 	}
 	.panel3div{
-			float: right;
+			float: left;
 			background-color: #29abe2;
 		        width: 22%;
     			margin-left: 14px;
-    			padding: 3px;
+				padding: 3px;
+				margin:14px
 	}
 	.locationbar{
 		font-size: 33px;

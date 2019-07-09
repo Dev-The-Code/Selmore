@@ -12,8 +12,372 @@ body {
     padding: 15px;
 }
 .imgBillBoard{
-    width: 88%
+    width: 110px;
+    height: 170px;
 }
 .filter{
     padding: 15px;
+}
+.filterDivs{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Helvetica;
+    margin-bottom: 20px;
+}
+.dropdown{
+    padding-left: 0px
+}
+
+.fasla{
+  font-family: Helvetica;
+  line-height: 2;
+
+}
+.fasla1{
+  font-family: Helvetica;
+  margin-bottom: 15px;
+
+}
+
+
+
+/*.div_efect .text_efect::after {
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  position: relative;
+  visibility: show;
+
+}*/
+
+/*
+.text_efect1:hover{
+  margin-bottom: 15%;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: hidden;
+}
+.text_efect1:hover:after {
+  margin-bottom: 15%;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: show;
+}
+*/
+
+
+/*checkbox*/
+
+/*.led {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}*/
+
+/* Hide the browser's default checkbox */
+/*.led input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}*/
+
+/* Create a custom checkbox */
+/*#checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}*/
+
+/* On mouse-over, add a grey background color */
+/*.led:hover input ~ #checkmark {
+  background-color: #ccc;
+}*/
+
+/* When the checkbox is checked, add a blue background */
+/*.led input:checked ~ #checkmark {
+  background-color: #2196F3;
+}
+*/
+/* Create the checkmark/indicator (hidden when not checked) */
+/*#checkmark:after {
+  content: ""!important;
+  position: absolute!important;
+  display: none!important;
+}*/
+
+/* Show the checkmark when checked */
+/*.led input:checked ~ #checkmark:after {
+  display: block!important;
+}*/
+
+/* Style the checkmark/indicator */
+/*.led #checkmark:after {
+  left: 9px!important;
+  top: 5px!important;
+  width: 5px!important;
+  height: 10px!important;
+  border: solid white!important;
+  border-width: 0 3px 3px 0!important;
+  -webkit-transform: rotate(45deg)!important;
+  -ms-transform: rotate(45deg)!important;
+  transform: rotate(45deg)!important;
+}*/
+@media only screen and (min-device-width : 360px) and (max-device-width : 660px){
+.caret_down {
+    
+    margin-left: 140px;
+    width:10px;
+    height: 10px;
+
+  }
+.efect {
+  margin-bottom: 24%;
+  margin-left: 20px;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: show;
+}
+
+.im_efect {
+  border-radius: 3%;
+  opacity: 1;
+  display: block;
+  width: 279px;
+  margin-left: -15px;
+  height: 170px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.div_efect {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.efect:hover .im_efect {
+  opacity: 0.3;
+}
+
+.efect:hover .div_efect {
+  opacity: 1;
+  width: 100px;
+}
+
+.text_efect {
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  position: relative;
+  visibility: show;
+
+
+}
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+.efect {
+  margin-bottom: 15%;
+  margin-right: 4%;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: show;
+}
+
+.im_efect {
+  border-radius: 4%;
+  opacity: 1;
+  display: block;
+  width: 154px;
+  margin-left: -15px;
+  height: 170px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.div_efect {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.efect:hover .im_efect {
+  opacity: 0.3;
+}
+
+.efect:hover .div_efect {
+  opacity: 1;
+  width: 100px;
+}
+
+.text_efect {
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  position: relative;
+  visibility: show;
+
+
+}
+}
+
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px){
+.efect {
+  margin-bottom: 15%;
+  margin-right: 4%;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: show;
+}
+
+.im_efect {
+  border-radius: 4%;
+  opacity: 1;
+  display: block;
+  width: 209px;
+  margin-left: -15px;
+  height: 170px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.div_efect {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.efect:hover .im_efect {
+  opacity: 0.3;
+}
+
+.efect:hover .div_efect {
+  opacity: 1;
+  width: 100px;
+}
+
+.text_efect {
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  position: relative;
+  visibility: show;
+
+
+}
+}
+
+@media only screen and (min-device-width : 1366px) and (max-device-width : 1920px){
+.efect {
+  margin-bottom: 15%;
+  margin-right: 4%;
+  position: relative;
+  width: 100px;
+  height: 170px;
+  box-shadow: inset 0px -410px 42px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  margin-left: 15px;
+  display: block;
+  position: relative;
+  visibility: show;
+}
+
+.im_efect {
+  border-radius: 4%;
+  opacity: 1;
+  display: block;
+  width: 209px;
+  margin-left: -15px;
+  height: 170px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.div_efect {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.efect:hover .im_efect {
+  opacity: 0.3;
+}
+
+.efect:hover .div_efect {
+  opacity: 1;
+  width: 100px;
+}
+
+.text_efect {
+  color: white;
+  font-size: 14px;
+  width: 100px;
+  position: relative;
+  visibility: show;
+
+
+}
+
 }

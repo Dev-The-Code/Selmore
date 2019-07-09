@@ -2,7 +2,8 @@
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.navmargin{
 	        margin-top: 30px;
-	        margin-right: -2%;
+			margin-right: -2%;
+			    margin-left: -15px;
 	}
 	.selmorelogo{
 	    height: 101px;
@@ -10,25 +11,28 @@
 	}
 		.true2{
 	    list-style-type: none;
-	    /* margin-left: -15px; */
+	    text-align: center;
+	    margin-left: -40px;
 	    font-family: Helvetica;
 	    font-weight: 600;
-	    font-size: 9px;
-	    margin-top: 14px;
-	    margin-bottom: -1px;
+	    font-size: 8px;
 	}
 	.true22{
 	    list-style-type: none;
-	    /* margin-left: -21px; */
+	    text-align: center;
+	    margin-left: -40px;
 	    font-family: Helvetica;
 	    font-weight: 600;
-	    font-size: 9px;
-	    margin-top: 12px;
-	    margin-bottom: 30px;
+	    font-size: 8px;
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
+	}
+	.true5{
+		font-size: 10px !important;
+		color: white;
 	}
 
 }
@@ -38,7 +42,7 @@
 	}
 	.navmargin{
 	        margin-top: 30px;
-	        margin-right: -4%;
+	        margin-right: 4%;
 	}
 	.selmorelogo{
 	    height: 101px;
@@ -46,7 +50,8 @@
 	}
 	.true2{
 	    list-style-type: none;
-	    /* margin-left: 3px; */
+	    text-align: center;
+	    margin-left: -18%;
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -55,7 +60,8 @@
 	}
 	.true22{
 	    list-style-type: none;
-	    /* margin-left: 24px; */
+	    text-align: center;
+	    margin-left: -17%;
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -64,7 +70,9 @@
 	}
 	.navbiddbtn{
 		        /* margin-left: 17px; */
-    		margin-top: 5px;
+			margin-top: 6.5%;
+			margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
@@ -73,7 +81,7 @@
 	}
 	.navmargin{
 	            margin-top: 37px;
-    			margin-right: 16px;
+    			margin-right: 22px;
 	}
 	.selmorelogo{
 	    height: 101px;
@@ -81,26 +89,31 @@
 	}
 	.true2{
 	    list-style-type: none;
-	    /* margin-left: 28px; */
+	    text-align: center;
+		margin-left: -13%;
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
-	        margin-top: 12px;
+	    margin-top: 12px;
     	margin-bottom: 30px;
 	}
 	.true22{
 	    list-style-type: none;
-	    /* margin-left: 53px; */
+	    text-align: center;
+	    margin-left: -13%;
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
-	        margin-top: 12px;
+	    margin-top: 12px;
     	margin-bottom: 30px;
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
+
 	}
+
 
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
@@ -117,16 +130,19 @@
 	}
 	.true2{
 	    list-style-type: none;
+	    text-align: center;
 	    /* margin-left: 42px; */
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
-	        margin-top: 12px;
+	    margin-top: 12px;
     	margin-bottom: 30px;
+    	margin-left: -10%;
 	}
 	.true22{
 	    list-style-type: none;
-	    /* margin-left: 74px; */
+	    text-align: center;
+	    margin-left: -10%;
 	    font-family: Helvetica;
 	    font-weight: 600;
 	    font-size: 13px;
@@ -135,13 +151,16 @@
 	}
 	.navbiddbtn{
 		    /* margin-left: 10px; */
-		    margin-top: 33px;
+			margin-top: 33px;
+			margin-right: 4px;
+
 	}
 
 }
 .navbtnmargin{
 		    /* margin-left: 10px; */
 		    margin-top: 33px;
+		    height: 31px;
 }
 
 
@@ -182,6 +201,7 @@
 }
 .true6{
 	margin: 5px;
+	text-align: center;
 }
 .true7{
 	    margin-top: 13px;
@@ -189,30 +209,28 @@
 @media screen and (min-width: 360px) and (max-width: 660px){
 		.footertext2{
 		    width: 100%;
-		    margin-left: 6px;
 		    font-family: Helvetica;
-		    font-size: 9px;
+		    font-size: 8px;
 		    font-weight: 600;
-		    margin-top: 12px;
-		    margin-bottom: 9px;
-		    line-height: 17px;
-		    text-align: justify;
+		    text-align: center;
 	}
 	.footertext1{
 		text-align: center;
 		 font-family: Helvetica;
 		 font-weight: 600;
-		     font-size: 13px;
+		     font-size: 10px;
 	}
 	.navmargin12{
 		margin-top: 33px;
 		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1020px){
+@media screen and (min-width: 768px) and (max-width: 1024px){
 	.footertext2{
-	     width: 62%;
-	    margin-left: 61px;
+	     width: 100%;
+	     text-align: center;
 	    font-family: Helvetica;
 	    font-size: 9px;
 	    font-weight: 700;
@@ -224,39 +242,43 @@
 		text-align: center;
 		 font-family: Helvetica;
 		 font-weight: 600;
-		     font-size: 23px;
+		     font-size: 20px;
 	}
 	.navmargin12{
 		margin-top: 33px;
-		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.footertext2{
-	    width: 60%;
-    	margin-left: 91px;
-    	 font-family: Helvetica;
+	    width: 100%;
+	    text-align: center;
+    	font-family: Helvetica;
      	font-size: 12px;
-    	 font-weight: 600;
-         margin-top: 12px;
-   		 margin-bottom: 30px;
+    	font-weight: 600;
+    	margin-left: -1%;
+        margin-top: 12px;
+   		margin-bottom: 30px;
         line-height: 16px;
 	}
 	.footertext1{
 		text-align: center;
 		 font-family: Helvetica;
 		 font-weight: 600;
-		     font-size: 23px;
+		     font-size: 22px;
 	}
 	.navmargin12{
 		margin-top: 33px;
 		margin-left: 2%;
+		margin-right: 4px;
+
 	}
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.footertext2{
-	    width: 60%;
-    	margin-left: 110px;
+	    width: 100%;
+	    text-align: center;
     	 font-family: Helvetica;
      	font-size: 12px;
     	 font-weight: 600;
@@ -272,5 +294,49 @@
 	}
 	.navmargin12{
 		margin-top: 33px;
+		margin-right: 4px;
+
 	}
+}
+
+
+/*Mobile Menu CSS*/
+
+.mobile_menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.mobile_menu a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.mobile_menu a:hover {
+  color: #f1f1f1;
+}
+
+.mobile_menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .mobile_menu {padding-top: 15px;}
+  .mobile_menu a {font-size: 18px;}
 }
