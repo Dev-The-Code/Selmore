@@ -164,21 +164,25 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
-							{admin ?
+							{/* {admin ?
 								<Link to={{ pathname: `/list_add`, state: data }}>
 									<div className='editbtn'>
 										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
 									</div>
 								</Link>
 								: null
-							}
+							} */}
 							<div className="row soldier7" style={{ margin: '0px' }}>
 								<div><h3>Map</h3></div>
 
 							</div><br />
 							{/* render a map and show a location of the Billboard */}
-							<div><Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
-								address={this.props.data.address} /></div>
+							<div>
+								{/* <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
+								address={this.props.data.address} /> */}
+								<Location
+								address={this.props.data.address} />
+								</div>
 						</div>
 					</div>
 				</div> <br />
