@@ -20,7 +20,7 @@ class FormLogin extends Component {
       loggedIn: true,
       isData: true,
       data: {},
-      isLoader: false,
+      isLoader: true,
       isAlert: false
     }
   }

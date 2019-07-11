@@ -8,15 +8,24 @@ class Header extends Component {
   constructor(props) {
     super(props);
   }
+
+  openNav = ()=>{
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  closeNav = () =>{
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
   render() {
     const { dropDownUser } = this.props;
     const value = localStorage.getItem("loggedIn");
     let adminUser = JSON.parse(localStorage.getItem("userData"));
     return (
       <div>
-        <div className="container">
+        <div className="container" style={{paddingLeft: '0px'}}>
           <div className="row">
-            <div className="col-md-3 col-lg-3 col-xl-3">
+            <div className="col-md-3 col-lg-3 col-xl-3 d-none d-sm-block">
               <img src="../images/selmore-logo.png" className="selmorelogo" />
             </div>
             <div className="col-md-9 col-lg-9 col-xl-9 d-none d-sm-block">
@@ -114,76 +123,29 @@ class Header extends Component {
 
 
 {/*mobile_menu*/}
+        <div className="d-block d-sm-none">
+          <div id="mySidenav" class="menunav">
+            {/*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*/}
+            <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
+            <div className="menunav-content">
+              <a href="#">About</a>
+              <a href="#">Services</a>
+              <a href="#">Clients</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+        </div>
+        <div className="col-12 d-block d-sm-none">
+          <div className="col-6">
+            <i onClick={this.openNav} className="fa fa-bars" style={{content:'\f0c9', color:'black',fontSize:'24px',marginTop:'10px'}}></i>
+          </div>
+          <div className="col-6 d-block d-sm-none">
+            <img src="../images/selmore-logo.png" className="mobileselmorelogo" />
+          </div>
+        </div>
 
 
-            {/*<div className="d-block d-sm-none">
-              <div id="side_menu" class="mobile_menu">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/`}>
-                    HOME
-                  </Link></a>
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/about`}>
-                    ABOUT
-                  </Link></a>
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/advertising_agency`}>
-                    AGENCY
-                  </Link></a>
-                  {showDasboardandListAdd ?
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/dashboard`}>
-                    DASHBOARD
-                  </Link></a>
-                  :
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/faq`}>
-                    FAQ
-                  </Link>
-                </a>
-                }
-                {showDasboardandListAdd ?
-                  null
-                  :
-                <a className="nav-link"  href="#">
-                  BLOG
-                </a>
-                }
-                <a href="#">
-                  <Link rel="noopener noreferrer" to={`/market_place`}>
-                    MARKETPLACE
-                  </Link>
-                </a>
-                {showDasboardandListAdd ?
-
-                <Link rel="noopener noreferrer" to={`/list_add`}>
-                  <button type="button" className="btn btn-primary btn-sm">
-                    <span> LIST AD </span>
-                  </button>
-                </Link>
-
-                :
-                  null
-                }
-
-                <button type="button" className="btn btn-primary btn-sm">
-                  <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white" }}>
-                    <span>BIDDING</span>
-                  </Link>
-                </button>
-
-                {dropDownUser || value
-                  ?
-
-// kaam karna he is me
-              </div>
-
-              <h2>Animated Sidenav Example</h2>
-              <p>Click on the element below to open the side navigation menu.</p>
-              <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-
-            </div>*/}
+            
 
 
 

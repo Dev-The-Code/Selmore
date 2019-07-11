@@ -4,11 +4,11 @@
 
 		position: relative;
 }
-.container{
+/*.container{
 	padding-right: 0px; 
     padding-left: 25px;
     margin-right: auto;
-}
+}*/
 .rowabsolute{
 			position: absolute;
 }
@@ -380,7 +380,7 @@
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.funday{
 			margin-bottom: 13px;
-		    margin-left: -30px;
+		    margin-left: 35px;
 			width: 100%;
 	}
 	.innerdiv{
@@ -443,7 +443,6 @@
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
-		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;
@@ -473,7 +472,6 @@
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
-		margin-left: -42px;
 	}
 	.innerdiv{
 		 float: right;
@@ -882,14 +880,14 @@
 	.init7{
 		        position: relative;
 			     margin-top: -47px;
-			    margin-left: 36px;
+			    margin-left: 44px;
 			    background: rgba(30, 22, 22, 0.58);
-			    margin-right: 37px;
+			    margin-right: 44px;
 	}
 	.init2{
 			position: relative;
 		     margin-top: -47px;
-		    margin-left: 73px;
+		    margin-left: 87px;
 		    background: rgba(30, 22, 22, 0.58);
 		    margin-right: 0px;
 	}
@@ -900,9 +898,9 @@
 	.init6{
 		position: relative;
 	     margin-top: -47px;
-	    margin-left: 36px;
+	    margin-left: 43px;
 	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: 36px;
+	    margin-right: 44px;
 	}
 	.fantaa2{
 	margin-top: -42px;
@@ -1056,7 +1054,7 @@
 		    position: relative;
 		    color: white;
 		    margin-top: 42%;
-		    width: 271px;
+		    width: 323px;
 	}
 	.luxpure5{
 		font-size: 35px;

@@ -40,7 +40,7 @@ class Panel3 extends Component {
 					</div><br />
 					{/*first row*/}
 					<div className="row">
-						<div className="container funday">
+						<div className="container funday" style={{paddingRight: '0px', paddingLeft: '0px'}}>
 							{/* show the cities of the Billboards */}
 							{citiesArr && citiesArr.map((elem, key) => {
 								return <Link rel="noopener noreferrer" to={`/market_place`}>

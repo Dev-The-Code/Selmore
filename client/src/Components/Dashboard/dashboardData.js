@@ -229,7 +229,7 @@ class DashboardData extends Component {
                         
                         <div className="row">
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>Company Name</h4>
                                 </div>
                                 <div>
@@ -240,7 +240,7 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>BillBoard Type</h4>
                                 </div>
                                 <div>
@@ -251,7 +251,7 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>Size</h4>
                                 </div>
                                 <div>
@@ -262,7 +262,7 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>Address</h4>
                                 </div>
                                 <div>
@@ -273,7 +273,7 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>City</h4>
                                 </div>
                                 <div>
@@ -284,7 +284,7 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div>
+                                <div className="filture">
                                     <h4 className='text_topFilter'>State</h4>
                                 </div>
                                 <div>
