@@ -95,9 +95,9 @@ class Location extends Component {
         this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     }
     componentWillMount() {
-        this.setPosition(this.props.latitude, this.props.longitude);
+        this.setPosition();
     }
-    setPosition(latitude, longitude) {
+    setPosition() {
         navigator.geolocation.getCurrentPosition(position => {
             // console.log(position)
             this.setState({
