@@ -32,20 +32,41 @@ class Dropdown extends Component {
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
     return (
-      <MDBDropdown>
-        <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
-          <div className='userName dropdown-toggle'
-          >{userName}</div>
-        </MDBDropdownToggle>
-        <MDBDropdownMenu basic>
-          <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
-          <MDBDropdownItem onClick={this.logOut}>
-            <Link rel="noopener noreferrer" to={`/`}>
-            Log Out
-            </Link>
-          </MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown>
+      <div>
+        <div className="d-none d-sm-block">
+          <MDBDropdown>
+            <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
+              <div className='userName dropdown-toggle'
+              >{userName}</div>
+            </MDBDropdownToggle>
+            <MDBDropdownMenu basic>
+              <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
+              <MDBDropdownItem onClick={this.logOut}>
+                <Link rel="noopener noreferrer" to={`/`}>
+                Log Out
+                </Link>
+              </MDBDropdownItem>
+            </MDBDropdownMenu>
+          </MDBDropdown>
+        </div>
+
+        <div className="d-block d-sm-none">
+          <MDBDropdown>
+            <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle mob_butn'>
+              <div className='userName dropdown-toggle'
+              >{userName}</div>
+            </MDBDropdownToggle>
+            <MDBDropdownMenu basic>
+              <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`}><h5>Profile</h5></Link></MDBDropdownItem>
+              <MDBDropdownItem className="mob_butn_log" onClick={this.logOut}>
+                <Link rel="noopener noreferrer" to={`/`}>
+                Log Out
+                </Link>
+              </MDBDropdownItem>
+            </MDBDropdownMenu>
+          </MDBDropdown>
+        </div>
+      </div>
     );
   }
 }

@@ -316,7 +316,7 @@
 .mobileselmorelogo{
 	    height: 60px;
     	margin-left: 100px;
-    	margin-top: -35px;
+    	margin-top: -60px;
 	}
 
 .menunav {
@@ -326,15 +326,15 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background: linear-gradient(to bottom, #473463 0%, #2a1f3b 100%);
+  background: #223971;
   overflow-x: hidden;
   transition: 0.5s;
   color: white;
-  padding-top: 60px;
 }
 
 .menunav a {
   padding: 8px;
+  margin-left: -12%!important;
   text-decoration: none;
   font-size: 40px;
   color: #818181;
@@ -344,7 +344,7 @@
 }
 
 .menunav a:hover, .menunav a:focus {
-  color: yellow;
+  color: #818181;
 }
 
 .menunav .closebtn {
@@ -365,4 +365,11 @@
   text-align: center;
   margin-top: 30px;
   color:white;
+}
+
+.mob_butn{
+	background-color: #223971!important;
+}
+.mob_li{
+	list-style: none;
 }

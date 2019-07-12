@@ -217,8 +217,8 @@ class Market extends Component {
             <div className="container">
                 <div className='row billboard'>
                     {/*<div className="col-md-1"></div>*/}
-                    <div className='col-md-4'>Filters</div>
-                    <div className='col-md-8'>Billboards</div>
+                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
+                    <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>Billboards</div>
                 </div>
                 <div className='row filter'>
                     {/*<div className="col-md-1"></div>*/}
@@ -406,7 +406,7 @@ class Market extends Component {
                         </CheckboxGroup>
                     </div>
 
-                    <div className="col-11 d-block d-sm-none">
+                    <div className="col-12 d-block d-sm-none">
                         <div id="accordion">
                             <div className="card">
                                 <div className="card-header">
@@ -605,6 +605,9 @@ class Market extends Component {
                     </div>
 
                     <div className='col-xl-9 col-lg-9 col-md-8'>
+                    <div className='col-12 d-block d-sm-none' style={{fontSize:'30px'}}>Billboards</div>
+                        
+
                         {billboardRendring}
                         <div className="d-flex justify-content-center">
                             <button type="button" className="btn btn-primary btn-sm" onClick={this.onMoreData}>

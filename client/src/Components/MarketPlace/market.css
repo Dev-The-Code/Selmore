@@ -149,7 +149,7 @@ body {
 @media only screen and (min-device-width : 360px) and (max-device-width : 660px){
 .caret_down {
     
-    margin-left: 140px;
+    margin-left: 60%;
     width:10px;
     height: 10px;
 
