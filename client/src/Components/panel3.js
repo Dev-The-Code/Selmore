@@ -7,26 +7,36 @@ class Panel3 extends Component {
 		super(props)
 		this.state = {
 			citiesArr: ["Ahmadpur", "Ahmed Nager", "Alipur", "Arifwala",
-				"Attock", "Bhera", "Bhalwal", "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala",
-				"Chillianwala", "Saidanshah", "Chakwal", "Chak Jhumra", "Chichawatni", "Chiniot",
-				"Chishtian", "Chunian", "Dajkot", "Daska", "Davispur", "Darya Khan", "Dera Ghazi Khan",
-				"Dhaular", "Dina", "Dinga", " Dipalpur", "Faisalabad", "Fateh Jang",
-				"Ghakhar Mandi", "Gojra", "Gujranwala", "Gujrat", "Gujar Khan", "Harappa", "Hafizabad",
-				"Haroonabad", "Hasilpur", "Haveli Lakha", "Jalalpur Jattan", "Jampur", "Jaranwala", "Jhang",
-				"Jhelum", "Kallar Syedan", "Kalabagh", "Karor Lal Esan", 'karachi', "Kasur", "Kamalia", "Kāmoke", "Khanewal",
-				"Khanpur", "Khanqah Sharif", "Kharian", "Khushab", "Kot Adu", "Jauharabad", "Lahore", "Islamabad",
-				"Lalamusa", "Layyah", "Lawa Chakwal", "Liaquat Pur", "Lodhran", "Malakwal", "Mamoori", "Mailsi",
-				"Mandi Bahauddin", "Mian Channu", "Mianwali", "Miani", "Multan", "Murree", "Muridke", "Mianwali Bangla",
-				"Muzaffargarh", "Narowal", "Nankana Sahib", "Okara", "Renala Khurd", "Pakpattan", "Pattoki",
-				"Pindi Bhattian", "Pir Mahal", "Qaimpur", "Rabwah",
-				"Raiwind", "Rajanpur", "Rahim Yar Khan", "Rawalpindi", "Sadiqabad", "Sagri", "Sahiwal", "Sambrial",
-				"Samundri", "Sangla Hill", "Sarai Alamgir", "Sargodha", "Shakargarh", "Sheikhupura", "Shujaabad",
-				"Sialkot", "Sohawa", "Soianwala", "Siranwali", "Tandlianwala", "Talagang", "Taxila", "Toba Tek Singh",
-				"Vehari", "Wah Cantonment", "Wazirabad", "Yazman", "Zafarwal"],
+						"Attock", "Bhera", "Bhalwal", "Bahawalnagar", "Bahawalpur", "Bhakkar", "Burewala",
+						"Chillianwala", "Saidanshah", "Chakwal", "Chak Jhumra", "Chichawatni", "Chiniot",
+						"Chishtian", "Chunian", "Dajkot", "Daska", "Davispur", "Darya Khan", "Dera Ghazi Khan",
+						"Dhaular", "Dina", "Dinga", " Dipalpur", "Faisalabad", "Fateh Jang",
+						"Ghakhar Mandi", "Gojra", "Gujranwala", "Gujrat", "Gujar Khan", "Harappa", "Hafizabad",
+						"Haroonabad", "Hasilpur", "Haveli Lakha", "Jalalpur Jattan", "Jampur", "Jaranwala", "Jhang",
+						"Jhelum", "Kallar Syedan", "Kalabagh", "Karor Lal Esan", 'karachi', "Kasur", "Kamalia", "Kāmoke", "Khanewal",
+						"Khanpur", "Khanqah Sharif", "Kharian", "Khushab", "Kot Adu", "Jauharabad", "Lahore", "Islamabad",
+						"Lalamusa", "Layyah", "Lawa Chakwal", "Liaquat Pur", "Lodhran", "Malakwal", "Mamoori", "Mailsi",
+						"Mandi Bahauddin", "Mian Channu", "Mianwali", "Miani", "Multan", "Murree", "Muridke", "Mianwali Bangla",
+						"Muzaffargarh", "Narowal", "Nankana Sahib", "Okara", "Renala Khurd", "Pakpattan", "Pattoki",
+						"Pindi Bhattian", "Pir Mahal", "Qaimpur", "Rabwah",
+						"Raiwind", "Rajanpur", "Rahim Yar Khan", "Rawalpindi", "Sadiqabad", "Sagri", "Sahiwal", "Sambrial",
+						"Samundri", "Sangla Hill", "Sarai Alamgir", "Sargodha", "Shakargarh", "Sheikhupura", "Shujaabad",
+						"Sialkot", "Sohawa", "Soianwala", "Siranwali", "Tandlianwala", "Talagang", "Taxila", "Toba Tek Singh",
+						"Vehari", "Wah Cantonment", "Wazirabad", "Yazman", "Zafarwal"],
+			i:0
 		}
 	}
+	billCity =()=>{
+		this.setState({
+			i : this.state.i + 12 
+		})
+	}
 	render() {
-		const { citiesArr } = this.state;
+		const { citiesArr , i} = this.state;
+
+		let slipCity = citiesArr.slice(0, i+12);
+
+
 		return (
 			<div>
 				<div className="container" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
@@ -42,7 +52,7 @@ class Panel3 extends Component {
 					<div className="row">
 						<div className="container funday" style={{paddingRight: '0px', paddingLeft: '0px'}}>
 							{/* show the cities of the Billboards */}
-							{citiesArr && citiesArr.map((elem, key) => {
+							{slipCity && slipCity.map((elem, key) => {
 								return <Link rel="noopener noreferrer" to={`/market_place`}>
 									<div className="col-md-3 panel3div ">
 										<div className=''>
@@ -63,7 +73,7 @@ class Panel3 extends Component {
 					</div>
 					<div className="row moon2">
 						<div className="container moon5">
-							<button type="button" class="btn btn-light yup"><span className="moon">SEE MORE</span></button>
+							<button type="button" onClick={this.billCity} class="btn btn-light yup"><span className="moon">SEE MORE</span></button>
 						</div>
 					</div>
 				</div>
