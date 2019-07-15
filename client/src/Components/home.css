@@ -56,7 +56,7 @@
     	width: 100%;
 	}
 	.locate_icon{
-		 font-size : 33px;
+		 font-size : 25px;
 		 margin-left: 0px;
 	}
 	.buyimag{
@@ -101,8 +101,7 @@
     	width: 45%;
 	}
 	.locate_icon{
-		 font-size : 33px;
-		 margin-left: -125px;
+		 font-size : 24px;
 	}
 	.buyimag{
 		height: 120px;
@@ -384,7 +383,6 @@
 			width: 100%;
 	}
 	.innerdiv{
-		 float: right;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
@@ -408,19 +406,33 @@
 	.cityname{
 		font-size: 20px;
 	}
+	.cittxt{
+		margin-left: 15px;
+		margin-top: -30px;
+	}
+	
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.funday{
 		    margin-bottom: 13px;
-		    margin-left: -30px;
 			width: 100%;
 	}
 	.innerdiv{
-		 float: right;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
 	}
+	.citbox{
+		margin-bottom: 10px;
+	    margin-right: 9px;
+	    width: 200px;
+	    margin-left: 18px;
+	}
+	.cittxt{
+		margin-left: 15px;
+		margin-top: -30px;
+	}
+
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
@@ -428,10 +440,7 @@
 	.panel3div{
 			float: left;
 			background-color: #29abe2;
-		        width: 22%;
-    			margin-left: 14px;
 				padding: 3px;
-				margin:14px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -445,7 +454,7 @@
 	     margin-bottom: 13px;
 	}
 	.innerdiv{
-		 float: right;
+		float: left;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
@@ -474,7 +483,7 @@
 	     margin-bottom: 13px;
 	}
 	.innerdiv{
-		 float: right;
+		 float: left;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
