@@ -60,7 +60,7 @@ class Dropdown extends Component {
               <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`}><h5>Profile</h5></Link></MDBDropdownItem>
               <MDBDropdownItem className="mob_butn_log" onClick={this.logOut}>
                 <Link rel="noopener noreferrer" to={`/`}>
-                Log Out
+                  <h5>Log Out</h5>
                 </Link>
               </MDBDropdownItem>
             </MDBDropdownMenu>

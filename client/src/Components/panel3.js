@@ -49,7 +49,7 @@ class Panel3 extends Component {
 											<div className="col-md-2 innerdiv">
 											</div>
 											<div className="col-md-8 innerdiv">
-												<h5 className='divFont'>{elem}</h5>
+												<h5 className='divFont'>{elem.slice(0, 12)}</h5>
 												<h6 className="hani2">30 Ads available</h6>
 											</div>
 											<div className="col-md-2 innerdiv">

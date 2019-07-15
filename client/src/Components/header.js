@@ -61,7 +61,7 @@ class Header extends Component {
                 {adminUser !== null && adminUser.role == 'admin' ?
                   null
                   :
-                  <li className="nav-item navmargin" style={{ marginTop: "28px" }}>
+                  <li className="nav-item navmargin blgs">
                     <a className="nav-link" href="#">
                       BLOG
                     </a>
@@ -134,7 +134,7 @@ class Header extends Component {
               <a href="#">Contact</a>*/}
 
 
-              <ul className="">
+              <ul className="" style={{marginTop: '-30px'}}>
                 <li className="mob_li" style={{listStyle: 'none'}}>
                   <Link rel="noopener noreferrer" to={`/`}>
                     HOME
@@ -166,7 +166,7 @@ class Header extends Component {
                 {adminUser !== null && adminUser.role == 'admin' ?
                   null
                   :
-                  <li className="mob_li" style={{ marginTop: "28px" }}>
+                  <li className="mob_li">
                     <a className="nav-link" href="#">
                       BLOG
                     </a>
@@ -190,7 +190,7 @@ class Header extends Component {
                 }
                 <li className="mob_li">
                   <button type="button" className="btn btn-primary btn-sm  mob_butn">
-                    <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white" }}>
+                    <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white", fontSize: '.875rem'}}>
                       <span>BIDDING</span>
                     </Link>
                   </button>
@@ -202,25 +202,36 @@ class Header extends Component {
                   </li>
                   :
                   <li className="nav-item navbtnmargin mob_li" >
-                    <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal" >
+                    <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" >
                       Login
                   </button>
-                    <div class="modal fade mob_butn" id="myModal">
-                      <div class="modal-dialog" style={{ marginRight: '650px' }}>
-                        <div class="modal-content" style={{ width: '200%', height: '600px' }}>
+                    <div class="modal fade" id="myModal1" style={{marginTop: '-10px'}}>
+                      <div class="modal-dialog">
+                        <div class="modal-content" style={{ width: '100%', height: '740px' }}>
                           <div class="modal-header">
                             <h4 class="modal-title">Login</h4>
                             <button type="button" class="close" data-dismiss='modal'>&times;</button>
                           </div>
                           <FormLogin showDropDown={this.props.showDropDown} />
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss'>Cancel</button>
+                          <div class="modal-footer" style={{borderTop: '60px solid #e9ecef'}}>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{marginTop: '-30%'}}>Cancel</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </li>
                 }
+                {/*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+
+                <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      ...
+                    </div>
+                  </div>
+                </div>*/}
+
+
                 {/*<li className="nav-item navbiddbtn">
                 </li>*/}
               </ul>
