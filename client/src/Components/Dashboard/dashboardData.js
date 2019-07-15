@@ -17,7 +17,7 @@ class DashboardData extends Component {
             billboardFilterdData: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
-            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
@@ -28,13 +28,12 @@ class DashboardData extends Component {
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
                 " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
                 " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
-            statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             companyName: [],
             types: [],
             rangeValzForDropdown: [],
@@ -166,7 +165,7 @@ class DashboardData extends Component {
         console.log(billboardFilterdData, 'billboardFilterdData')
         const billboardRendring = (
             <div>
-                <br/>
+                <br />
                 <div className="scroll_table">
                     <table className='tableData table'>
                         <thead className="thead-dark">
@@ -216,17 +215,17 @@ class DashboardData extends Component {
         return (
             <div className="container">
 
-                
-                <div className='row' style={{marginLeft: '0px'}}>
+
+                <div className='row' style={{ marginLeft: '0px' }}>
 
                     <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
                         <div>
                             <h2 className='text_topFilter filteration'>Filter</h2>
                         </div>
-                        
+
                     </div>
-                    <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' > 
-                        
+                    <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' >
+
                         <div className="row">
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
                                 <div>
@@ -256,7 +255,7 @@ class DashboardData extends Component {
                                 </div>
                                 <div>
                                     <Select onChange={this.handleChangeSize}
-                                        options={rangeValzForDropdown} 
+                                        options={rangeValzForDropdown}
                                     >
                                     </Select>
                                 </div>
@@ -328,7 +327,7 @@ class DashboardData extends Component {
                                 </div>
                                 <div>
                                     <Select onChange={this.handleChangeSize}
-                                        options={rangeValzForDropdown} 
+                                        options={rangeValzForDropdown}
                                     >
                                     </Select>
                                 </div>
@@ -368,11 +367,11 @@ class DashboardData extends Component {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
-                        {billboardRendring}
-                    </div>
+                    {billboardRendring}
+                </div>
             </div>
         )
     }
