@@ -64,7 +64,7 @@ class BillBoard extends Component {
             lightningArr: ['Yes', 'No'],
             statusArr: ['Available', 'No Available'],
             audienceTypeArr: ['All types of people', 'Office type of people', 'Labour type people', 'Govt official type people'],
-           "Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+           citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan","Dera Ismail Khan",
