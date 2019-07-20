@@ -249,6 +249,7 @@ class BillBoard extends Component {
     };
 
     handleSubmit(e) {
+        const { index } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -1159,122 +1160,6 @@ class BillBoard extends Component {
                                 }
                             </Form.Item>
                         </div>
-
-                        <div className="row">
-                            <div className="col-md-8 col-xl-8 d-none d-sm-block">
-                                <div className="form-group" style={{ width: '97%' }}>
-                                    <Form.Item className="list_form" style={{ marginLeft: '1%' }}>
-                                        <p style={{ fontWeight: 'bold' }}>Company Name:</p>
-                                        {getFieldDecorator('company', {
-                                            rules: [{
-                                                required: true,
-                                                message: 'Please enter your company name!',
-                                            }],
-                                        })(
-                                            <Select
-                                                onChange={this.handleChange}
-                                                options={companyName}
-                                                style={{ textAlign: 'left' }}
-                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
-                                                Select-placeholder="Country"
-                                            ></Select>
-                                        )}
-                                    </Form.Item>
-                                </div>
-                            </div>
-
-                            <div className="col-12 d-block d-sm-none">
-                                <div className="form-group">
-                                    <Form.Item className="list_form" style={{ marginLeft: '1%' }}>
-                                        <p style={{ fontWeight: 'bold' }}>Company Name:</p>
-                                        {getFieldDecorator('company', {
-                                            rules: [{
-                                                required: true,
-                                                message: 'Please enter your company name!',
-                                            }],
-                                        })(
-                                            <Select
-                                                onChange={this.handleChange}
-                                                options={companyName}
-                                                style={{ textAlign: 'left' }}
-                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
-                                                Select-placeholder="Country"
-                                            ></Select>
-                                        )}
-                                    </Form.Item>
-                                </div>
-                            </div>
-                        </div>
-                        {formItems}
-
-                        <div className="col-xl-1 col-lg col-md-1 d-none d-sm-block" style={{ marginLeft: '0.5%' }}>
-                            <div className="row">
-                                <FormItem>
-                                    <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
-                                        <Icon className='fa fa-plus' />
-                                    </Button>
-                                </FormItem>
-                            </div>
-                        </div>
-                        <div className="col-1 d-block d-sm-none" style={{ marginLeft: '1.5%' }}>
-                            <div className="row">
-                                <FormItem>
-                                    <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
-                                        <Icon className='fa fa-plus' />
-                                    </Button>
-                                </FormItem>
-                            </div>
-                        </div>
-                        <div className="col-md-11"></div>
-
-
-
-                        <div className="col-xl-2 col-lg-2 col-md-2 d-none d-sm-block" style={{ marginLeft: '0.5%' }}>
-                            <div className="row">
-                                <Form.Item>
-                                    <Button className="btn btn-primary btnapple"
-                                        type="primary" htmlType="submit"
-                                        data-toggle="modal" data-target="#biilbord"
-                                    >Submit</Button>
-
-                                    <br />
-                                    <br />
-
-                                    {sumitDataAlert ?
-                                        <div class="alert alert-success" role="alert">
-                                            <strong>Data Has Been Submitted </strong>
-
-                                        </div>
-                                        :
-                                        null
-                                    }
-                                </Form.Item>
-                            </div>
-                        </div>
-
-                        <div className="col-4 d-block d-sm-none" style={{ marginLeft: '1%' }}>
-                            <div className="row">
-                                <Form.Item>
-                                    <Button className="btn btn-primary btnapple"
-                                        type="primary" htmlType="submit"
-                                        data-toggle="modal" data-target="#biilbord"
-                                    >Submit</Button>
-
-                                    <br />
-                                    <br />
-
-                                    {sumitDataAlert ?
-                                        <div class="alert alert-success" role="alert">
-                                            <strong>Data Has Been Submitted </strong>
-
-                                        </div>
-                                        :
-                                        null
-                                    }
-                                </Form.Item>
-                            </div>
-                        </div>
-
                     </Form>
                 </div>
             </div>
