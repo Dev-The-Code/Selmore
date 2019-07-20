@@ -8,7 +8,7 @@ class Banner extends Component {
     return (
       <div>
 
-      			<div className="container">
+      			<div className="container" style={{paddingLeft: '0px'}}>
       				<div className="row rowcolor">
 
 	      				<div className="col-md-8 col-sm-8 bannercol8">

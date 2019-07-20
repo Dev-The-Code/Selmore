@@ -14,11 +14,13 @@
 }
 
 .text_topFilter{
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 400;
     text-align: left;
     margin-bottom: 15px;
 }
+
+
 .filteration{
     font-size: 25px !important;
 }

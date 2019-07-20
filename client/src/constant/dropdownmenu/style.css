@@ -1,9 +1,36 @@
-.toogle{
+
+@media screen and (min-width: 360px) and (max-width: 660px){
+    .toogle{
     width: 110px;
     height: 30px;
     color: white;
     font-weight: 400;
-    margin-bottom: 10px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .toogle{
+        width: 110px;
+        height: 30px;
+        color: white;
+        font-weight: 400;
+        margin-top: -42px;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+    .toogle{
+    width: 110px;
+    height: 30px;
+    color: white;
+    font-weight: 400;
+}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+    .toogle{
+    width: 110px;
+    height: 30px;
+    color: white;
+    font-weight: 400;
+}
 }
 .userName{
     text-align: center;
@@ -12,6 +39,11 @@
     text-transform: uppercase;
     color: white;
      font-size: 12px;
-    /*font-weight: bold; */
-    /* padding-right:200px; */
+}
+.mob_butn_pro{
+    background-color: #223971;
+    font-size: 18px;
+}
+.mob_butn_log{
+   background-color: #223971; 
 }

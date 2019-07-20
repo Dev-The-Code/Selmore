@@ -25,6 +25,7 @@ class BillBoard extends Component {
         this.state = {
             compaNames: '',
             type: '',
+            category: '',
             facing: '',
             lightning: '',
             status: "",
@@ -60,6 +61,8 @@ class BillBoard extends Component {
             companyName: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
+            categoryArr: ['Billboard ' , 'Taxi Ads' , 'Bus Ads' , 'Bus Shelter Ads' , 'Airport Ads' , 'Shopping Mall' ,
+                'Total Cinima Ads' , 'Radio Ads' , 'Other'],
             facingArr: ['Front', 'Back'],
             lightningArr: ['Yes', 'No'],
             statusArr: ['Available', 'No Available'],
@@ -69,7 +72,7 @@ class BillBoard extends Component {
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad",
+                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
                 " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
@@ -83,6 +86,7 @@ class BillBoard extends Component {
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             types: [],
+            categories:[],
             facings: [],
             lightnings: [],
             statuses: [],
@@ -101,13 +105,16 @@ class BillBoard extends Component {
         await this.editDataShowns(data)
     }
     gettingDropDownValues = async () => {
-        let { companyName, citiesArr, typeArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
-            types, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
+        let { companyName, citiesArr, typeArr, categoryArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
+            types, categories, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
         let response = await HttpUtils.get('getcompanyname');
         companyName = response.content.map((elem, i) => {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
         })
         types = typeArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        categories = categoryArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
         facings = facingArr.map((elem, i) => {
@@ -131,6 +138,7 @@ class BillBoard extends Component {
         await this.setState({
             companyName: companyName,
             types: types,
+            categories: categories,
             facings: facings,
             lightnings: lightnings,
             statuses: statuses,
@@ -145,6 +153,7 @@ class BillBoard extends Component {
             await this.setState({
                 compaNames: data.companyName,
                 type: data.type,
+                category: data.category,
                 facing: data.facing,
                 lightning: data.lightning,
                 status: data.status,
@@ -239,7 +248,6 @@ class BillBoard extends Component {
     };
 
     handleSubmit(e) {
-        const { index } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -259,9 +267,13 @@ class BillBoard extends Component {
             let multipleBillbordObj = `billbordObj${i}`;
             multipleBillbordObj = {}
             for (var property in values) {
+
                 //seprate the billboard form data in user fill multiple form in one time
                 if (property == `traffic${i}`) {
                     multipleBillbordObj.traffic = values[property]
+                }
+                if (property == `category${i}`) {
+                    multipleBillbordObj.category = values[property].value
                 }
                 if (property == `facing${i}`) {
                     multipleBillbordObj.facing = values[property].value
@@ -345,7 +357,6 @@ class BillBoard extends Component {
                     return result.body.url
                 })
             })).then((results) => {
-                console.log(results)
                 multipleBillbordObj.images = results
                 this.postData(results, multipleBillbordObj)
             })
@@ -383,7 +394,6 @@ class BillBoard extends Component {
 
     async postData(response, obj) {
         //store imgs in array 
-        const { imgArr } = this.state
         console.log(response)
         // let img = response
         // this.setState({
@@ -415,7 +425,7 @@ class BillBoard extends Component {
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
-            companyName, types, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
+            companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -434,7 +444,7 @@ class BillBoard extends Component {
                                     key={k}
                                 >
                                     <div className="row">
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="type"></label>
                                                 <Form.Item>
@@ -457,7 +467,29 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
+                                            <div className="form-group">
+                                                <label for="category"></label>
+                                                <Form.Item>
+                                                    <p>Category:</p>
+                                                    {getFieldDecorator(`category${index}`, {
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please enter a category',
+                                                        }],
+                                                    })(
+                                                        <Select
+                                                            onChange={this.handleChange}
+                                                            options={categories}
+                                                            defaultValue={{ label: this.state.category, value: this.state.category }}
+                                                        >
+                                                        </Select>
+                                                    )}
+                                                </Form.Item>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="facing"></label>
                                                 <Form.Item>
@@ -479,7 +511,7 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="size"></label>
                                                 <Form.Item>
@@ -503,7 +535,7 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="latitude"></label>
                                                 <Form.Item>
@@ -529,7 +561,7 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="longitude"></label>
                                                 <Form.Item>
@@ -556,10 +588,10 @@ class BillBoard extends Component {
                                         <div className="col-md-4"></div>
 
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="vitalbox">
                                                 <div className="row">
-                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                                    <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                                         <FormItem
                                                             label="Images"
                                                         >
@@ -576,7 +608,7 @@ class BillBoard extends Component {
                                                                         <Button
                                                                         >
                                                                             <Icon type="upload" /> Upload
-                                                                            </Button>
+                                                                                </Button>
                                                                     </Upload>
                                                                 </div>
                                                             )}
@@ -585,7 +617,7 @@ class BillBoard extends Component {
                                                     {this.state.noChooseFile ?
                                                         null
                                                         : <div >
-                                                            <h6 style={{ marginTop: "10px", marginLeft: "4px" }}> No File Chosen</h6>
+                                                            <h6 style={{ marginTop: "10px", }}>&nbsp;&nbsp; No File Chosen</h6>
                                                         </div>
                                                     }
                                                 </div>
@@ -595,7 +627,7 @@ class BillBoard extends Component {
 
                                         <br />
 
-                                        <div className="col-xl-8 col-lg-8 col-md-8 col-11">
+                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="traffic"></label>
                                                 <Form.Item>
@@ -626,7 +658,7 @@ class BillBoard extends Component {
                                         <br />
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="width"></label>
                                                     <Form.Item>
@@ -653,7 +685,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="height"></label>
                                                     <Form.Item>
@@ -680,7 +712,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="lightning"></label>
                                                     <Form.Item>
@@ -704,7 +736,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="description"></label>
                                                     <Form.Item>
@@ -730,7 +762,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="status"></label>
                                                     <Form.Item>
@@ -760,7 +792,7 @@ class BillBoard extends Component {
                                         <br />
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="dailyRate"></label>
                                                     <Form.Item>
@@ -787,7 +819,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="weeklyRate"></label>
                                                     <Form.Item>
@@ -814,7 +846,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="monthlyRate"></label>
                                                     <Form.Item>
@@ -841,7 +873,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="yearlyRate"></label>
                                                     <Form.Item>
@@ -874,7 +906,7 @@ class BillBoard extends Component {
                                         <br />
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="audianceType"></label>
                                                     <Form.Item>
@@ -898,7 +930,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="dailyVisitor"></label>
                                                     <Form.Item>
@@ -925,7 +957,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="nearBy"></label>
                                                     <Form.Item>
@@ -957,7 +989,7 @@ class BillBoard extends Component {
                                         <br />
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="address"></label>
                                                     <Form.Item>
@@ -983,7 +1015,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="city"></label>
                                                     <Form.Item>
@@ -1007,7 +1039,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <label for="state"></label>
                                                     <Form.Item>
@@ -1031,7 +1063,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-11">
+                                            <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
                                                     <Form.Item>
                                                         <p>Country:</p>
@@ -1067,6 +1099,7 @@ class BillBoard extends Component {
                 </div>
             )
         });
+
         return (
             <div className='row'>
                 <div className='mainDive container'>
@@ -1124,6 +1157,121 @@ class BillBoard extends Component {
                                     null
                                 }
                             </Form.Item>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-8 col-xl-8 d-none d-sm-block">
+                                <div className="form-group" style={{ width: '97%' }}>
+                                    <Form.Item className="list_form" style={{ marginLeft: '1%' }}>
+                                        <p style={{ fontWeight: 'bold' }}>Company Name:</p>
+                                        {getFieldDecorator('company', {
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter your company name!',
+                                            }],
+                                        })(
+                                            <Select
+                                                onChange={this.handleChange}
+                                                options={companyName}
+                                                style={{ textAlign: 'left' }}
+                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                                Select-placeholder="Country"
+                                            ></Select>
+                                        )}
+                                    </Form.Item>
+                                </div>
+                            </div>
+
+                            <div className="col-12 d-block d-sm-none">
+                                <div className="form-group">
+                                    <Form.Item className="list_form" style={{ marginLeft: '1%' }}>
+                                        <p style={{ fontWeight: 'bold' }}>Company Name:</p>
+                                        {getFieldDecorator('company', {
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter your company name!',
+                                            }],
+                                        })(
+                                            <Select
+                                                onChange={this.handleChange}
+                                                options={companyName}
+                                                style={{ textAlign: 'left' }}
+                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                                Select-placeholder="Country"
+                                            ></Select>
+                                        )}
+                                    </Form.Item>
+                                </div>
+                            </div>
+                        </div>
+                        {formItems}
+
+                        <div className="col-xl-1 col-lg col-md-1 d-none d-sm-block" style={{ marginLeft: '0.5%' }}>
+                            <div className="row">
+                                <FormItem>
+                                    <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
+                                        <Icon className='fa fa-plus' />
+                                    </Button>
+                                </FormItem>
+                            </div>
+                        </div>
+                        <div className="col-1 d-block d-sm-none" style={{ marginLeft: '1.5%' }}>
+                            <div className="row">
+                                <FormItem>
+                                    <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
+                                        <Icon className='fa fa-plus' />
+                                    </Button>
+                                </FormItem>
+                            </div>
+                        </div>
+                        <div className="col-md-11"></div>
+
+
+
+                        <div className="col-xl-2 col-lg-2 col-md-2 d-none d-sm-block" style={{ marginLeft: '0.5%' }}>
+                            <div className="row">
+                                <Form.Item>
+                                    <Button className="btn btn-primary btnapple"
+                                        type="primary" htmlType="submit"
+                                        data-toggle="modal" data-target="#biilbord"
+                                    >Submit</Button>
+
+                                    <br />
+                                    <br />
+
+                                    {sumitDataAlert ?
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>Data Has Been Submitted </strong>
+
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                </Form.Item>
+                            </div>
+                        </div>
+
+                        <div className="col-4 d-block d-sm-none" style={{ marginLeft: '1%' }}>
+                            <div className="row">
+                                <Form.Item>
+                                    <Button className="btn btn-primary btnapple"
+                                        type="primary" htmlType="submit"
+                                        data-toggle="modal" data-target="#biilbord"
+                                    >Submit</Button>
+
+                                    <br />
+                                    <br />
+
+                                    {sumitDataAlert ?
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>Data Has Been Submitted </strong>
+
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                </Form.Item>
+                            </div>
                         </div>
 
                     </Form>

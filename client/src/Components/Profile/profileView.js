@@ -13,7 +13,13 @@ class ProfileView extends Component {
         return (
            
             <div>
-                <h1>My Profile</h1>
+                <div className="col-xl-12 col-lg-12 col-md-12 d-none d-sm-block">
+                    <h1 style={{textAlign: 'center'}}>My Profile</h1>
+                </div>
+                <div className=" col-12 d-block d-sm-none">
+                    <h2 style={{textAlign: 'center'}}>My Profile</h2>
+                </div>
+                
             </div>
         )
     }
