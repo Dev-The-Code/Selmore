@@ -1,4 +1,14 @@
-
+.up{
+  animation: Slide_Up 2.5s ease;
+}
+@keyframes Slide_Up{
+  0%{
+    transform: translate(250px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}
 .rowcolor{
 		background-color: #29abe2;
 
@@ -410,7 +420,7 @@
 		margin-left: 15px;
 		margin-top: -30px;
 	}
-	
+
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.funday{
@@ -449,9 +459,15 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
+	}
+	.luxpure1 {
+    width: 84%!important;
+    height: 160px;
+    position: absolute;
 	}
 	.innerdiv{
 		float: left;
@@ -469,7 +485,7 @@
 		        width: 22%;
     			margin-left: 14px;
 				padding: 3px;
-				margin:14px
+				margin:13px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -478,6 +494,7 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
@@ -889,14 +906,14 @@
 	.init7{
 		        position: relative;
 			     margin-top: -47px;
-			    margin-left: 44px;
+			    margin-left: 13%;
 			    background: rgba(30, 22, 22, 0.58);
 			    margin-right: 44px;
 	}
 	.init2{
 			position: relative;
 		     margin-top: -47px;
-		    margin-left: 87px;
+		    margin-left: 25.5%;
 		    background: rgba(30, 22, 22, 0.58);
 		    margin-right: 0px;
 	}
@@ -907,7 +924,7 @@
 	.init6{
 		position: relative;
 	     margin-top: -47px;
-	    margin-left: 43px;
+	    margin-left: 12%;
 	    background: rgba(30, 22, 22, 0.58);
 	    margin-right: 44px;
 	}
@@ -1063,7 +1080,7 @@
 		    position: relative;
 		    color: white;
 		    margin-top: 42%;
-		    width: 323px;
+		    width: 92.5%;
 	}
 	.luxpure5{
 		font-size: 35px;

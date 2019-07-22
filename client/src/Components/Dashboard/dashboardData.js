@@ -169,7 +169,7 @@ class DashboardData extends Component {
                 <br/>
                 <div className="scroll_table">
                     <table className='tableData table'>
-                        <thead className="thead-dark">
+                        <thead className="thead-dark" style={{width: '10px'}}>
                             <th className='tableHead' scope="col">#</th>
                             <th className='tableHead' scope="col">Company Name</th>
                             <th className='tableHead' scope="col">Address</th>

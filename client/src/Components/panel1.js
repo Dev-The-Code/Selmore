@@ -6,7 +6,7 @@ class Panel1 extends Component {
     return (
       <div>
 
-        <div className="container" style={{"backgroundImage":"url('../images/dropdown1.png')"}}>
+        <div className="container up" style={{"backgroundImage":"url('../images/dropdown1.png')"}}>
           <div className="row">
       			<div className="container">
       				<div className="row">

@@ -5,7 +5,7 @@ class Panel7 extends Component {
   render() {
     return (
         <div>
-    		<div className="container" style={{"backgroundImage":"url('../images/dropdown2.png')"}}>
+    		<div className="container up" style={{"backgroundImage":"url('../images/dropdown2.png')"}}>
       			<div className="row">
       				<div className="col-2 col-md-4 col-lg-4 col-xl-4"></div>       
   					<div className="col-8 col-md-4 col-lg-4 col-xl-4 line2"><h2 className="pakola1">FEATURED ADS</h2></div>

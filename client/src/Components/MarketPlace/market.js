@@ -166,15 +166,16 @@ class Market extends Component {
 
                                     <div className="div_efect">
                                         <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                         </div>
                                     </div>
 
-                                    <div id="more_efect1">
-                                        <div id="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                    <div id="more_efect1" className="card">
+                                        <div id="more_efect card-body slow">
+                                            <p className="crdtxt">{elem.companyName}</p>
+                                            <p className="crdtxt">{elem.city}</p>
                                         </div>
                                     </div>
                             </div>
@@ -193,15 +194,16 @@ class Market extends Component {
 
                                     <div className="div_efect">
                                         <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                         </div>
                                     </div>
 
-                                    <div id="more_efect1">
-                                        <div className="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                    <div id="more_efect1" className="card">
+                                        <div className="more_efect card-body slow">
+                                            <p className="crdtxt">{elem.companyName}</p>
+                                            <p className="crdtxt">{elem.city}</p>
                                         </div>
                                     </div>
 

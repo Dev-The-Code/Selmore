@@ -421,8 +421,59 @@ class BillBoard extends Component {
         const formItems = keys.map((k, index) => {
             return (
                 <div className='row'>
-                    <div className='mainDive container'>
-                        <div className='formDiv' key={index}>
+                <div className="container">
+                <div className="row">
+                    <div className='mainDive container shde'>
+
+
+                        <div className="col-md-8 col-xl-8 d-none d-sm-block" style={{paddingLeft: '0px'}}>
+                            <div className="form-group up" style={{width: '97%'}}>
+                                <Form.Item className="list_form" style={{marginLeft: '1%'}}>
+                                    <p style={{fontWeight: 'bold'}}>Company Name:</p>
+                                        {getFieldDecorator('company', {
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter your company name!',
+                                            }],
+                                        })(
+                                            <Select
+                                                onChange={this.handleChange}
+                                                options={companyName}
+                                                style={{textAlign: 'left'}}
+                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                                Select-placeholder = "Country"
+                                            ></Select>
+                                        )}
+                                </Form.Item>
+                            </div>
+                        </div>
+                        <div className="col-12 d-block d-sm-none" style={{paddingLeft: '0px'}}>
+                                <div className="form-group up">
+                                    <Form.Item className="list_form" style={{marginLeft: '1%'}}>
+                                        <p style={{fontWeight: 'bold'}}>Company Name:</p>
+                                        {getFieldDecorator('company', {
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter your company name!',
+                                            }],
+                                        })(
+                                            <Select
+                                                onChange={this.handleChange}
+                                                options={companyName}
+                                                style={{textAlign: 'left'}}
+                                                defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                                Select-placeholder = "Country"
+                                            ></Select>
+                                        )}
+                                    </Form.Item>
+                                </div>
+                            </div>
+
+
+
+
+
+                        <div className='formDiv up' key={index}>
                             {/* animation of page */}
                             <ReactCSSTransitionGroup transitionName="fade"
                                 transitionAppear={true} transitionAppearTimeout={500}
@@ -434,8 +485,14 @@ class BillBoard extends Component {
                                     key={k}
                                 >
                                     <div className="row">
+
+
+                                        
+
+
+
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group up">
                                                 <label for="type"></label>
                                                 <Form.Item>
                                                     <p>BillBoard Type:</p>
@@ -458,7 +515,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group  up">
                                                 <label for="facing"></label>
                                                 <Form.Item>
                                                     <p>Facing:</p>
@@ -480,7 +537,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group up">
                                                 <label for="size"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`size${index}`, {
@@ -504,7 +561,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group up">
                                                 <label for="latitude"></label>
                                                 <Form.Item>
                                                     <br />
@@ -530,7 +587,7 @@ class BillBoard extends Component {
                                         </div>
 
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group up">
                                                 <label for="longitude"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`longitude${index}`, {
@@ -559,7 +616,7 @@ class BillBoard extends Component {
                                             <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                                 <div className="vitalbox">
                                                     <div className="row">
-                                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12">
+                                                        <div className="col-xl-8 col-lg-8 col-md-8 col-12 up">
                                                             <FormItem
                                                                 label="Images"
                                                             >
@@ -584,7 +641,7 @@ class BillBoard extends Component {
                                                         </div>
                                                         {this.state.noChooseFile ?
                                                             null
-                                                            : <div >
+                                                            : <div className="up">
                                                                 <h6 style={{ marginTop: "10px", }}>&nbsp;&nbsp; No File Chosen</h6>
                                                             </div>
                                                         }
@@ -596,7 +653,7 @@ class BillBoard extends Component {
                                         <br />
 
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            <div className="form-group">
+                                            <div className="form-group up">
                                                 <label for="traffic"></label>
                                                 <Form.Item>
                                                     {getFieldDecorator(`traffic${index}`, {
@@ -621,13 +678,13 @@ class BillBoard extends Component {
                                     </div>
 
                                         <div id='addWeiget'>
-                                            <div> Billboard Road City Point Details </div>
+                                            <div className="up"> Billboard Road City Point Details </div>
 
                                             <br />
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="width"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`width${index}`, {
@@ -654,7 +711,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="height"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`height${index}`, {
@@ -681,7 +738,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="lightning"></label>
                                                         <Form.Item>
                                                             <p>Lightning:</p>
@@ -705,7 +762,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="description"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`description${index}`, {
@@ -731,7 +788,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="status"></label>
                                                         <Form.Item>
                                                             <p>Status:</p>
@@ -755,13 +812,13 @@ class BillBoard extends Component {
 
                                             <br />
 
-                                            <div> Military Road City Point Rate Card </div>
+                                            <div className="up"> Military Road City Point Rate Card </div>
 
                                             <br />
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="dailyRate"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`dailyRate${index}`, {
@@ -788,7 +845,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="weeklyRate"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`weeklyRate${index}`, {
@@ -815,7 +872,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="monthlyRate"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`monthlyRate${index}`, {
@@ -842,7 +899,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="yearlyRate"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`yearlyRate${index}`, {
@@ -869,13 +926,13 @@ class BillBoard extends Component {
 
                                             <br />
 
-                                            <div> Military Road City Point Demographics </div>
+                                            <div className="up"> Military Road City Point Demographics </div>
 
                                             <br />
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="audianceType"></label>
                                                         <Form.Item>
                                                             <p>Audiance Type:</p>
@@ -899,7 +956,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="dailyVisitor"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`dailyVisitor${index}`, {
@@ -926,7 +983,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="nearBy"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`nearBy${index}`, {
@@ -952,13 +1009,13 @@ class BillBoard extends Component {
 
                                             <br />
 
-                                            <div> Military Road City Point Location </div>
+                                            <div className="up"> Military Road City Point Location </div>
 
                                             <br />
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="address"></label>
                                                         <Form.Item>
                                                             {getFieldDecorator(`address${index}`, {
@@ -984,7 +1041,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="city"></label>
                                                         <Form.Item>
                                                             <p>City:</p>
@@ -1008,7 +1065,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <label for="state"></label>
                                                         <Form.Item>
                                                             <p>States:</p>
@@ -1032,7 +1089,7 @@ class BillBoard extends Component {
 
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                    <div className="form-group">
+                                                    <div className="form-group up">
                                                         <Form.Item>
                                                             <p>Country:</p>
                                                             {getFieldDecorator(`country${index}`, {
@@ -1052,6 +1109,87 @@ class BillBoard extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+                                            <div className="col-xl-1 col-lg col-md-1 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
+                                                <div className="row">
+                                                    <FormItem>
+                                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn up'>
+                                                            <Icon className='fa fa-plus' />
+                                                        </Button>
+                                                    </FormItem>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="col-1 d-block d-sm-none" style={{marginLeft: '1.5%'}}>
+                                                <div className="row">
+                                                    <FormItem>
+                                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn  up'>
+                                                            <Icon className='fa fa-plus' />
+                                                        </Button>
+                                                    </FormItem>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-11"></div>
+
+
+
+
+                                            <div className="col-xl-2 col-lg-2 col-md-2 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
+                                                <div className="row">
+                                                    <Form.Item>
+                                                        <Button className="btn btn-primary btnapple up"
+                                                            type="primary" htmlType="submit"
+                                                            data-toggle="modal" data-target="#biilbord"
+                                                        >Submit</Button>
+
+                                                        <br />
+                                                        <br />
+
+                                                        {sumitDataAlert ?
+                                                            <div class="alert alert-success" role="alert">
+                                                                <strong>Data Has Been Submitted </strong>
+
+                                                            </div>
+                                                            :
+                                                            null
+                                                        }
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className="col-4 d-block d-sm-none" style={{marginLeft: '1%'}}>
+                                                <div className="row">
+                                                    <Form.Item>
+                                                        <Button className="btn btn-primary btnapple up"
+                                                            type="primary" htmlType="submit"
+                                                            data-toggle="modal" data-target="#biilbord"
+                                                        >Submit</Button>
+
+                                                        <br />
+                                                        <br />
+
+                                                        {sumitDataAlert ?
+                                                            <div class="alert alert-success" role="alert">
+                                                                <strong>Data Has Been Submitted </strong>
+
+                                                            </div>
+                                                            :
+                                                            null
+                                                        }
+                                                    </Form.Item>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
                                         </div>
                                     
                                     {keys.length > 1 ? (
@@ -1065,6 +1203,8 @@ class BillBoard extends Component {
                         </div>
                     </div>
                 </div>
+                </div>
+                </div>
             )
         });
         return (
@@ -1072,8 +1212,8 @@ class BillBoard extends Component {
                 <div className='mainDive container'>
                     <Form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="row">
-                            <div className="col-md-8 col-xl-8 d-none d-sm-block">
-                                <div className="form-group" style={{width: '97%'}}>
+                            {/*<div className="col-md-8 col-xl-8 d-none d-sm-block">
+                                <div className="form-group up" style={{width: '97%'}}>
                                     <Form.Item className="list_form" style={{marginLeft: '1%'}}>
                                         <p style={{fontWeight: 'bold'}}>Company Name:</p>
                                         {getFieldDecorator('company', {
@@ -1092,10 +1232,10 @@ class BillBoard extends Component {
                                         )}
                                     </Form.Item>
                                 </div>
-                            </div>
+                            </div>*/}
 
-                            <div className="col-12 d-block d-sm-none">
-                                <div className="form-group">
+                            {/*<div className="col-12 d-block d-sm-none">
+                                <div className="form-group up">
                                     <Form.Item className="list_form" style={{marginLeft: '1%'}}>
                                         <p style={{fontWeight: 'bold'}}>Company Name:</p>
                                         {getFieldDecorator('company', {
@@ -1114,36 +1254,39 @@ class BillBoard extends Component {
                                         )}
                                     </Form.Item>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
                         {formItems}
                         
-                            <div className="col-xl-1 col-lg col-md-1 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
+                            {/*<div className="col-xl-1 col-lg col-md-1 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
                                 <div className="row">
                                     <FormItem>
-                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
+                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn up'>
+                                            <Icon className='fa fa-plus' />
+                                        </Button>
+                                    </FormItem>
+                                </div>
+                            </div>*/}
+
+
+
+                            {/*<div className="col-1 d-block d-sm-none" style={{marginLeft: '1.5%'}}>
+                                <div className="row">
+                                    <FormItem>
+                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn  up'>
                                             <Icon className='fa fa-plus' />
                                         </Button>
                                     </FormItem>
                                 </div>
                             </div>
-                            <div className="col-1 d-block d-sm-none" style={{marginLeft: '1.5%'}}>
-                                <div className="row">
-                                    <FormItem>
-                                        <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
-                                            <Icon className='fa fa-plus' />
-                                        </Button>
-                                    </FormItem>
-                                </div>
-                            </div>
-                            <div className="col-md-11"></div>
+                            <div className="col-md-11"></div>*/}
                         
 
                         
-                            <div className="col-xl-2 col-lg-2 col-md-2 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
+                            {/*<div className="col-xl-2 col-lg-2 col-md-2 d-none d-sm-block" style={{marginLeft: '0.5%'}}>
                                 <div className="row">
                                     <Form.Item>
-                                        <Button className="btn btn-primary btnapple"
+                                        <Button className="btn btn-primary btnapple up"
                                             type="primary" htmlType="submit"
                                             data-toggle="modal" data-target="#biilbord"
                                         >Submit</Button>
@@ -1161,12 +1304,12 @@ class BillBoard extends Component {
                                         }
                                     </Form.Item>
                                 </div>
-                            </div>
+                            </div>*/}
 
-                            <div className="col-4 d-block d-sm-none" style={{marginLeft: '1%'}}>
+                            {/*<div className="col-4 d-block d-sm-none" style={{marginLeft: '1%'}}>
                                 <div className="row">
                                     <Form.Item>
-                                        <Button className="btn btn-primary btnapple"
+                                        <Button className="btn btn-primary btnapple up"
                                             type="primary" htmlType="submit"
                                             data-toggle="modal" data-target="#biilbord"
                                         >Submit</Button>
@@ -1184,7 +1327,7 @@ class BillBoard extends Component {
                                         }
                                     </Form.Item>
                                 </div>
-                            </div>
+                            </div>*/}
                         
                     </Form>
                 </div>

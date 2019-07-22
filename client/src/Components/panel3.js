@@ -39,7 +39,7 @@ class Panel3 extends Component {
 
 		return (
 			<div>
-				<div className="container" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
+				<div className="container up" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
 					<div className="row">
 						<div className="col-md-12 line2"><h3 className="pakola1">Top Cities In Pakistan for Billboards</h3></div>
 					</div>

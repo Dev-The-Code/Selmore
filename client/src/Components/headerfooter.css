@@ -125,7 +125,7 @@
     }
     .navbiddbtn{
             /* margin-left: 10px; */
-            margin-top: 33px;
+            margin-top: 4.2%;
             margin-right: 4px;
 
     }
@@ -140,10 +140,14 @@
 @media screen and (min-width: 1366px) and (max-width: 1600px){
     .navsm{
             /* margin-left: 12% */
+        color: #007bff !important;
+            
     }
     .navmargin{
             margin-top: 36px;
             margin-right: 3%;
+        color: #007bff !important;
+
     }
     .selmorelogo{
         height: 101px;
@@ -186,7 +190,7 @@
 }
 .navbtnmargin{
             /* margin-left: 10px; */
-            margin-top: 33px;
+            margin-top: 4.1%;
             height: 31px;
 }
 
@@ -296,7 +300,7 @@
              font-size: 22px;
     }
     .navmargin12{
-        margin-top: 33px;
+        margin-top: 4.2%;
         margin-left: 2%;
         margin-right: 4px;
 
@@ -320,7 +324,7 @@
              font-size: 23px;
     }
     .navmargin12{
-        margin-top: 33px;
+        margin-top: 4%;
         margin-right: 4px;
 
     }

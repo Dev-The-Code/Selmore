@@ -36,3 +36,37 @@
   color:white;
   /*margin: 20px;*/
 }
+
+.up{
+  animation: Slide_Up 2.5s ease;
+}
+@keyframes Slide_Up{
+  0%{
+    transform: translate(250px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}
+
+.shde{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 65%;
+    border-radius: 0.8em;
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    line-height: 1em;
+}
+
+.shde{
+  animation: Slide_Up 2.5s ease;
+}
+@keyframes Slide_Up{
+  0%{
+    transform: translate(250px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}

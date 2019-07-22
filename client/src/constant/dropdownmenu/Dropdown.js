@@ -29,6 +29,21 @@ class Dropdown extends Component {
     return <Redirect to={{ pathname: '/' }} />
   }
 
+
+openNav = ()=>{
+      console.log(document.getElementById("myNav"))
+     document.getElementById("mySideNav").style.width = "100%";
+
+  }
+  openNav = ()=>{
+    document.getElementById("mySidenav").style.width = "100%";
+  }
+
+  closeNav = () =>{
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
+
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
     return (
@@ -57,9 +72,9 @@ class Dropdown extends Component {
               >{userName}</div>
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>
-              <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`}><h5>Profile</h5></Link></MDBDropdownItem>
-              <MDBDropdownItem className="mob_butn_log" onClick={this.logOut}>
-                <Link rel="noopener noreferrer" to={`/`}>
+              <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`} onClick={this.closeNav}><h5>Profile</h5></Link></MDBDropdownItem>
+              <MDBDropdownItem className="mob_butn_log" onClick={this.logOut} onClick={this.closeNav}>
+                <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
                   <h5>Log Out</h5>
                 </Link>
               </MDBDropdownItem>
