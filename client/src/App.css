@@ -1,3 +1,7 @@
+body{
+  background-color: #f7f8fa;
+}
+
 .App {
  /* text-align: center;*/
   overflow: hidden;

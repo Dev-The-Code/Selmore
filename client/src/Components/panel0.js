@@ -7,7 +7,7 @@ class Panel0 extends Component {
   render() {
     return (
       <div>
-      		<div className="container">
+      		<div className="container up">
   				<div className="row">
       				<div className="col-md-4"></div>
   					<div className="col-md-4 line2"><h2 className="pakola1">BIDDING</h2></div>

@@ -1,11 +1,21 @@
-
+.up{
+  animation: Slide_Up 2.5s ease;
+}
+@keyframes Slide_Up{
+  0%{
+    transform: translate(250px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}
 .rowcolor{
 		background-color: #29abe2;
 
 		position: relative;
 }
 /*.container{
-	padding-right: 0px; 
+	padding-right: 0px;
     padding-left: 25px;
     margin-right: auto;
 }*/
@@ -56,7 +66,7 @@
     	width: 100%;
 	}
 	.locate_icon{
-		 font-size : 33px;
+		 font-size : 25px;
 		 margin-left: 0px;
 	}
 	.buyimag{
@@ -101,8 +111,7 @@
     	width: 45%;
 	}
 	.locate_icon{
-		 font-size : 33px;
-		 margin-left: -125px;
+		 font-size : 24px;
 	}
 	.buyimag{
 		height: 120px;
@@ -384,7 +393,6 @@
 			width: 100%;
 	}
 	.innerdiv{
-		 float: right;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
@@ -408,19 +416,33 @@
 	.cityname{
 		font-size: 20px;
 	}
+	.cittxt{
+		margin-left: 15px;
+		margin-top: -30px;
+	}
+
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.funday{
 		    margin-bottom: 13px;
-		    margin-left: -30px;
 			width: 100%;
 	}
 	.innerdiv{
-		 float: right;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
 	}
+	.citbox{
+		margin-bottom: 10px;
+	    margin-right: 9px;
+	    width: 200px;
+	    margin-left: 18px;
+	}
+	.cittxt{
+		margin-left: 15px;
+		margin-top: -30px;
+	}
+
 	.hani2{
 		   font-size: 11px;
 	    	margin-top: -10px;
@@ -428,10 +450,7 @@
 	.panel3div{
 			float: left;
 			background-color: #29abe2;
-		        width: 22%;
-    			margin-left: 14px;
 				padding: 3px;
-				margin:14px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -440,12 +459,18 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
 	}
+	.luxpure1 {
+    width: 84%!important;
+    height: 160px;
+    position: absolute;
+	}
 	.innerdiv{
-		 float: right;
+		float: left;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
@@ -460,7 +485,7 @@
 		        width: 22%;
     			margin-left: 14px;
 				padding: 3px;
-				margin:14px
+				margin:13px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -469,12 +494,13 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
 	}
 	.innerdiv{
-		 float: right;
+		 float: left;
 		 text-align: center;
 		 color: white;
 		 font-size: 1rem !important
@@ -925,18 +951,19 @@
 	.init7{
 		        position: relative;
 			     margin-top: -47px;
-			    margin-left: 44px;
+			    margin-left: 13%;
 			    background: rgba(30, 22, 22, 0.58);
 			    margin-right: 44px;
 	}
 	.init2{
-			position: relative;
-		     margin-top: -8.5%;
-		    margin-left: 12%;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 0px;
-		    width: 75.5%;
-		    height: 49px;
+      position: relative;
+      margin-top: -47px;
+      margin-left: 12.5%;
+      background: rgba(30, 22, 22, 0.58);
+      margin-right: 0px;
+      width: 74.5%;
+      height: 49px;
+
 	}
 	.imgsizee{
 			    height: 154px;
@@ -945,7 +972,7 @@
 	.init6{
 		position: relative;
 	     margin-top: -47px;
-	    margin-left: 43px;
+	    margin-left: 12%;
 	    background: rgba(30, 22, 22, 0.58);
 	    margin-right: 44px;
 	}
@@ -1101,7 +1128,7 @@
 		    position: relative;
 		    color: white;
 		    margin-top: 42%;
-		    width: 323px;
+		    width: 92.5%;
 	}
 	.luxpure5{
 		font-size: 35px;

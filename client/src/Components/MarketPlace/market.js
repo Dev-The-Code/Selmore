@@ -24,7 +24,7 @@ class Market extends Component {
             inputValue: 1,
             value: 0,
             rangeValzForDropdown: [],
-            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
@@ -35,8 +35,8 @@ class Market extends Component {
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
                 " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
                 " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
@@ -174,15 +174,16 @@ class Market extends Component {
                                     <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
                                     <div className="div_efect">
                                         <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                         </div>
                                     </div>
 
-                                    <div id="more_efect1">
-                                        <div id="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                    <div id="more_efect1" className="card">
+                                        <div id="more_efect card-body slow">
+                                            <p className="crdtxt">{elem.companyName}</p>
+                                            <p className="crdtxt">{elem.city}</p>
                                         </div>
                                     </div>
                             </div>
@@ -196,15 +197,16 @@ class Market extends Component {
                                         <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
                                     <div className="div_efect">
                                         <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                         </div>
                                     </div>
 
-                                    <div id="more_efect1">
-                                        <div className="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                    <div id="more_efect1" className="card">
+                                        <div className="more_efect card-body slow">
+                                            <p className="crdtxt">{elem.companyName}</p>
+                                            <p className="crdtxt">{elem.city}</p>
                                         </div>
                                     </div>
 

@@ -1,0 +1,2 @@
+[0717/174802.641:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\Awais Rehman\AppData\Local\Google\Chrome\User Data\Crashpad\reports\2dd8e0e7-552e-4dee-b890-7326ed1c1f59.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0717/174802.966:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\Awais Rehman\AppData\Local\Google\Chrome\User Data\Crashpad\reports\3eb66898-5105-4ebf-ae4b-cc9c40206040.dmp: The process cannot access the file because it is being used by another process. (0x20)
