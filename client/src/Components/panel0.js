@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './home.css';
 import {Link, withRouter} from 'react-router-dom';
-
+import CommanMarket from './Comman/billBoard_marketPlace';
 
 class Panel0 extends Component {
   render() {
@@ -18,7 +18,8 @@ class Panel0 extends Component {
 					<div className="col-md-2 col-4 hrline"></div>
   					<div className="col-md-5 col-4"></div>
 		      	</div><br/>
-		      	<div className="row">
+		      	<CommanMarket />
+				{/*<div className="row">
 		      		<div className="col-md-4 seth1">
 		      			<div className="key1">
 		      				<img src="./images/bill1.png" className="imgsizee"/>
@@ -28,9 +29,9 @@ class Panel0 extends Component {
 				      			<p className="fanta1">Lahore</p>
 				      			<p className="fanta2"><button type="button" className="btn btn-primary fanta3"><Link  rel="noopener noreferrer" to={`/city_bidding`} style={{color:"white"}}>BIDDING</Link></button></p>
 			      			</div>
-      					</div>
-		      		</div>
-		      		<div className="col-md-4 text-center">
+      			 		</div>
+		      	 	</div>
+		      	 	<div className="col-md-4 text-center">
 		      			<div className="key1">
 		      				<img src="./images/bill2.png" className="imgsizee"/>
 		      			</div>
@@ -52,10 +53,10 @@ class Panel0 extends Component {
 			      			</div>
 	      				</div>
 		      		</div>
-		      	</div>
+		      	</div>*/}
 		      	<div className="row moon2">
   					<div className="container fanta4">
-						  <button type="button" className="btn btn-light yup"><span className="moon">SEE MORE</span></button>
+						  <Link to={`/market_place`}><button type="button" className="btn btn-light yup"><span className="moon">SEE MORE</span></button></Link>
 			      </div>
   				</div>
       		</div>

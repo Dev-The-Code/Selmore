@@ -1,11 +1,37 @@
 import React, { Component } from 'react';
 import './home.css';
+import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import Market from './MarketPlace/market';
 
 class Panel1 extends Component {
-  render() {
-    return (
-      <div>
+  constructor(props){
+      super(props)
+      this.state = {
+          directMarket : false,
+          keyValuee: ''
+      }
+  }
 
+
+
+  hoverAlert = (value) => { 
+      this.setState({
+          directMarket : true,
+          keyValuee: value
+      })  
+  }
+
+  render(){
+          const { directMarket , keyValuee } = this.state;
+          if(directMarket){
+            return <Redirect to={{ pathname: '/market_place',
+                                   state : { value1:keyValuee }
+                                }} />
+          }
+    return (
+        <div>
+        
         <div className="container" style={{"backgroundImage":"url('../images/dropdown1.png')"}}>
           <div className="row">
       			<div className="container">
@@ -23,17 +49,17 @@ class Panel1 extends Component {
       		</div><br/>
           <div className="row">
             <div className="container space">
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Bus')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/1.png" className="lane1"/>
                         </div>
                         <div className="col-md-9 col-9 col-sm-9">                                                
-                            <h5 className="lane3">Bus Ads (0)</h5>
+                            <h5 className="lane3" >Bus Ads (0)</h5>
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Taxi')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/2.png" className="lane1"/>
@@ -43,7 +69,7 @@ class Panel1 extends Component {
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Billboard')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/3.png" className="lane1"/>
@@ -57,7 +83,7 @@ class Panel1 extends Component {
           </div>
           <div className="row">
             <div className="container space">      
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Shopping Mall')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/4.png" className="lane1"/>
@@ -67,7 +93,7 @@ class Panel1 extends Component {
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Airport')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/5.png" className="lane1"/>
@@ -77,7 +103,7 @@ class Panel1 extends Component {
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Bus Shelter')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/6.png" className="lane1"/>
@@ -91,7 +117,7 @@ class Panel1 extends Component {
           </div>
           <div className="row">
             <div className="container space">   
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Other')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/7.png" className="lane1"/>
@@ -101,7 +127,7 @@ class Panel1 extends Component {
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Radio')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/8.png" className="lane1"/>
@@ -111,7 +137,7 @@ class Panel1 extends Component {
                         </div>
                     </div>
                   </div>
-                  <div className="col-md-4 divborder">
+                  <div className="col-md-4 divborder" onClick={() => this.hoverAlert('Total Cinima')}>
                     <div className="row">
                         <div className="col-md-3 col-3 col-sm-3">
                             <img src="../images/9.png" className="lane1"/>

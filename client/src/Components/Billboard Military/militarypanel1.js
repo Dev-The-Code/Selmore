@@ -181,7 +181,8 @@ class Militarypanel1 extends Component {
 								{/* <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
 								address={this.props.data.address} /> */}
 								<Location
-								address={this.props.data.address} />
+									address={this.props.data.address} 
+								/>
 								</div>
 						</div>
 					</div>
