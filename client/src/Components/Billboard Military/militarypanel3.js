@@ -7,7 +7,7 @@ class Militarypanel3 extends Component {
      	<div>
      			<div className="container soldier1">
      				<div className="row" style={{margin:'0px'}}>
-     					<div className="col-md-6">
+     					{/*<div className="col-md-6">
      						<div><h4><span className="honda3">ALSO ON SELMORE</span></h4></div>
      						<div className="row" style={{margin:'0px'}}>
      							<span className="honda4">Billboard in mardan shahbadad bano khadabad</span>
@@ -71,7 +71,7 @@ class Militarypanel3 extends Component {
      						</div>	
      					</div>
      					<div className="col-md-2"></div>
-     					<div className="col-md-4"></div>
+     					<div className="col-md-4"></div>*/}
      				</div>
      			</div>
      	</div>
