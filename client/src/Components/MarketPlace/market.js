@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom"; 
 import filtersImg from "./caret-down.png";
+import billboardMarket from '../Comman/billBoard_marketPlace';
 
 const CheckboxGroup = Checkbox.Group;
 const option = Select.Option;
@@ -16,7 +17,6 @@ class Market extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            billboardData: [],
             billboardFilterdData: [],
             filterValue: '',
             from: 0,
@@ -44,6 +44,8 @@ class Market extends Component {
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
             states: [],
+            billboardData: [],
+            i:0,
         }
     }
     componentDidMount() {
@@ -54,8 +56,7 @@ class Market extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
-        const { citiesArr,  statesArr } = this.state;
-        
+        const { citiesArr,  statesArr } = this.state;      
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -78,7 +79,9 @@ class Market extends Component {
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await this.setState({
+        await 
+        this.setState({
+            // const ={ billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));}
             billboardData: data,
             rangeValzForDropdown: rangeValues,
             cities: city,
@@ -95,7 +98,7 @@ class Market extends Component {
             }
         }
         else {
-            arr.push(filter)
+                arr.push(filter)
         }
         this.handleFiltration(arr)
     }
@@ -149,21 +152,26 @@ class Market extends Component {
     handleChange = (data) => {
         this.filterBillBoard(data.value)
     }
-
+    onFlipData = () => {
+        this.setState({
+            i : this.state.i + 9
+        })
+    }
     render() {
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
+        const {filter} = this.props;
+        console.log(filter,'sssssssss');
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,i } = this.state;
+        let flexxData = billboardData.slice(0,i+9);
+        let filterPoint = billboardFilterdData.slice(0,i+9);
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
                 <div className='row '>
-                    {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
+                    {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
                         return (
                             <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                 <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
                                     <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-
-                                    
-
                                     <div className="div_efect">
                                         <div className="text_efect">
                                             <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -182,16 +190,11 @@ class Market extends Component {
                         )
                     })
                         :
-                        billboardData && billboardData.map((elem, key) => {
+                        flexxData && flexxData.map((elem, key) => {
                             return (
                                 <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
                                         <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-                                    
-                                    
-                                    
-
-
                                     <div className="div_efect">
                                         <div className="text_efect">
                                             <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -211,7 +214,6 @@ class Market extends Component {
                                 </div>
                             )
                         })}
-
                 </div>
             </div>
         );
@@ -612,7 +614,7 @@ class Market extends Component {
 
                         {billboardRendring}
                         <div className="d-flex justify-content-center">
-                            <button type="button" className="btn btn-primary btn-sm" onClick={this.onMoreData}>
+                            <button type="button" className="btn btn-primary btn-sm" onClick={this.onFlipData}>
                                 Load more
                         </button>
                         </div>

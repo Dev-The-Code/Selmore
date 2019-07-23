@@ -35,8 +35,7 @@ class Panel3 extends Component {
 		const { citiesArr , i} = this.state;
 
 		let slipCity = citiesArr.slice(0, i+12);
-
-
+		
 		return (
 			<div>
 				<div className="container up" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>

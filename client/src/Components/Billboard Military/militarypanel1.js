@@ -187,6 +187,10 @@ class Militarypanel1 extends Component {
 								address={this.props.data.address} /> 
 								// <Location
 								// address={this.props.data.address} />*/}
+								address={this.props.data.address} /> */}
+								<Location
+									address={this.props.data.address} 
+								/>
 								</div>
 						</div>
 					</div>
