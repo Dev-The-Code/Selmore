@@ -1034,7 +1034,7 @@
     BORDER-RADIUS: 10PX;
     PADDING: 2PX;
 }
-@media screen and (min-device-width: 360px) and (max-device-width: 660px){
+@media screen and (min-device-width: 360px) and (max-device-width: 767px){
 	.luxpure2{
 	    background: rgba(30, 22, 22, 0.58);
 	    position: relative;
@@ -1078,7 +1078,7 @@
 	    margin-bottom: -4%;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1020px){
+@media screen and (min-device-width: 768px) and (max-device-width: 1020px){
 	.luxpure2{
 	       background: rgba(30, 22, 22, 0.58);
 		    position: relative;
@@ -1122,7 +1122,7 @@
 	    margin-bottom: -6%;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
+@media screen and (min-device-width: 1024px) and (max-device-width: 1365px){
 	.luxpure2{
 	        background: rgba(30, 22, 22, 0.58);
 		    position: relative;
@@ -1165,13 +1165,13 @@
     	margin-top: 1%;
 	}
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
+@media screen and (min-device-width: 1366px) and (max-device-width: 1920px){
 	.luxpure2{
 	    background: rgba(30, 22, 22, 0.58);
 	    position: relative;
 	    color: white;
 	    margin-top: 34%;
-	    width: 92%;
+	    width: 91%;
 	}
 	.luxpure5{
 		font-size: 37px;

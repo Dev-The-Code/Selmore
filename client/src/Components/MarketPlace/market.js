@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import filtersImg from "./caret-down.png";
 import billboardMarket from '../Comman/billBoard_marketPlace';
 
@@ -43,6 +43,8 @@ class Market extends Component {
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
+            category:[],
+            categoryArr:['Billboard','Taxi','Bus','Bus Shelter','Airport','Shopping Mall','Total Cinima','Radio','Other'],
             states: [],
             billboardData: [],
             i:0,
@@ -56,7 +58,7 @@ class Market extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
-        const { citiesArr,  statesArr } = this.state;      
+        const { citiesArr,  statesArr , categoryArr } = this.state;
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -76,15 +78,19 @@ class Market extends Component {
         let city = citiesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
+        let catee = categoryArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await 
+        await
         this.setState({
             // const ={ billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));}
             billboardData: data,
             rangeValzForDropdown: rangeValues,
             cities: city,
+            category: catee,
             states: state
         })
     }
@@ -160,7 +166,7 @@ class Market extends Component {
     render() {
         const {filter} = this.props;
         console.log(filter,'sssssssss');
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,i } = this.state;
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,  i, category } = this.state;
         let flexxData = billboardData.slice(0,i+9);
         let filterPoint = billboardFilterdData.slice(0,i+9);
         const billboardRendring = (
@@ -277,10 +283,10 @@ class Market extends Component {
                                         <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" value="Front"></input>
                                         <label class="custom-control-label" for="customCheck" value="Front">Front</label>
                                     </div>
-                                    
+
                                 </form>
                                 <form action="/action_page.php">
-                                    
+
                                     <div class="custom-control custom-checkbox mb-3" value="Back">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1" value="Back"></input>
                                         <label class="custom-control-label" for="customCheck1" value="Back">Back</label>
@@ -301,7 +307,7 @@ class Market extends Component {
                                 </label>*/}
 
 
-                                
+
                                 <Col >
                                     <Checkbox className="fasla"  value="Front">&nbsp;Front</Checkbox>
                                 </Col>
@@ -348,6 +354,15 @@ class Market extends Component {
                                 </Col>
                             </Row>
                             <div className='col-md-9 dropdown'>
+                                <div className='filterDivs'>Category</div>
+                                <Row className="fasla1" >
+                                    <Col>
+                                        <Select onChange={this.handleChange}
+                                          options={category}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
                                 <div className='filterDivs'>Width</div>
                                 <Row className="fasla1" >
                                     <Col>
@@ -470,10 +485,10 @@ class Market extends Component {
                                                         <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" value="Front"></input>
                                                         <label class="custom-control-label" for="customCheck" value="Front">Front</label>
                                                     </div>
-                                                    
+
                                                 </form>
                                                 <form action="/action_page.php">
-                                                    
+
                                                     <div class="custom-control custom-checkbox mb-3" value="Back">
                                                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1" value="Back"></input>
                                                         <label class="custom-control-label" for="customCheck1" value="Back">Back</label>
@@ -494,7 +509,7 @@ class Market extends Component {
                                                 </label>*/}
 
 
-                                                
+
                                                 <Col >
                                                     <Checkbox className="fasla"  value="Front">&nbsp;Front</Checkbox>
                                                 </Col>
@@ -541,6 +556,15 @@ class Market extends Component {
                                                 </Col>
                                             </Row>
                                             <div className='col-md-9 dropdown'>
+                                                <div className='filterDivs'>Category</div>
+                                                <Row className="fasla1" >
+                                                    <Col>
+                                                        <Select onChange={this.handleChange}
+                                                            options={rangeValzForDropdown}
+                                                        >
+                                                        </Select>
+                                                    </Col>
+                                                </Row>
                                                 <div className='filterDivs'>Width</div>
                                                 <Row className="fasla1" >
                                                     <Col>
@@ -610,7 +634,7 @@ class Market extends Component {
 
                     <div className='col-xl-9 col-lg-9 col-md-8'>
                     <div className='col-12 d-block d-sm-none' style={{fontSize:'30px'}}>Billboards</div>
-                        
+
 
                         {billboardRendring}
                         <div className="d-flex justify-content-center">

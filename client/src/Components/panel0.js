@@ -10,7 +10,7 @@ class Panel0 extends Component {
       		<div className="container up">
   				<div className="row">
       				<div className="col-md-4"></div>
-  					<div className="col-md-4 line2"><h2 className="pakola1">BIDDING</h2></div>
+  					<div className="col-md-4 line2"><h2 className="pakola1">BILLBOARDS</h2></div>
       				<div className="col-md-4"></div>
 			   	</div>
 			    <div className="row">

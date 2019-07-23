@@ -50,7 +50,7 @@
 //                     defaultCenter={{ lat: 24.509642, lng: 67.280273 }}
 //                 >
 //                     {true && <Marker onPositionChanged={() => {
-//                         // This event will trigger the 
+//                         // This event will trigger the
 //                         // call to update the state where lat and lng will go.
 
 //                     }} draggable position={{ lat: 24.509642, lng: 67.280273 }} />}
@@ -151,12 +151,11 @@ class Location extends Component {
 }
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-<GoogleMap
-        defaultZoom={15}
-        // defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
-        // center={{ lat: 33.690980, lng: 73.091140 }}
-        center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-        
+        <GoogleMap
+            defaultZoom={15}
+            // defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
+            // center={{ lat: 33.690980, lng: 73.091140 }}
+            center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
         >
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}

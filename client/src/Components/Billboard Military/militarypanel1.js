@@ -27,6 +27,7 @@ class Militarypanel1 extends Component {
 	}
 	render() {
 		const { data, images, admin } = this.state;
+		 // console.log(this.props.data.latitude,'sssssssssssssssssss')
 		let image;
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
@@ -164,26 +165,28 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
-							{/* {admin ?
-								<Link to={{ pathname: `/list_add`, state: data }}>
-									<div className='editbtn'>
-										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
-									</div>
-								</Link>
-								: null
-							} */}
-							<div className="row soldier7" style={{ margin: '0px' }}>
-								<div><h3>Map</h3></div>
-
-							</div><br />
-							{/* render a map and show a location of the Billboard */}
-							<div>
-								{/* <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
-								address={this.props.data.address} /> */}
-								<Location
-									address={this.props.data.address} 
-								/>
+								<div className="row soldier7" style={{ margin: '0px' }}>
+									<h3 style={{color:'white'}}>Map</h3>
 								</div>
+								{/* render a map and show a location of the Billboard*/}
+								{/*<div style={{width: '100%'}}>
+										<iframe width="100%" height="300"
+											src={`https://maps.google.com/maps?q=${this.props.location.data.latitude},${this.props.location.data.longitude}&hl=es;z=14&amp;output=embed`}
+											frameborder="0"
+											scrolling="no"
+											marginheight="0"
+											marginwidth="0">
+											<a href="https://www.maps.ie/map-my-route/">
+												Plot a route map</a>
+										</iframe>
+								</div>*/}
+								{/* <div>
+									 <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
+									address={this.props.data.address} />
+									<Location		%2B38%C2%B0+34'+24.00%22,+-109%C2%B0+32'+57.00
+										address={this.props.data.address}
+									/>
+								</div>*/}
 						</div>
 					</div>
 				</div> <br />

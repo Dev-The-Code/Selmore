@@ -11,7 +11,7 @@ const option = Select.Option;
 const { Option } = Select;
 
 
-class Comman extends Component {
+class Comman2 extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -156,8 +156,8 @@ class Comman extends Component {
     }
     render() {
         const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,i} = this.state;
-        let flexxData = billboardData.slice(0,i+3);
-        let filterPoint = billboardFilterdData.slice(0,i+3);
+        let flexxData = billboardData.slice(3,i+9);
+        let filterPoint = billboardFilterdData.slice(3,i+9);
         const billboardRendring = (
             {/*<div>
                 { rendering the filtered billboard data on front end }
@@ -170,18 +170,34 @@ class Comman extends Component {
                     {flexxData && flexxData.map((elem, key) => {
                         return (
 
-				      		<div className="col-md-4 seth1">
-				      			<div className="key1">
-				      				<Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                    <img src={elem.images[0]} className='imgsizee' alt={key} /></Link>
-				      			</div>
-				      			<div className="init2">
-				      				<div style={{color: 'white'}}>
-						      			<p className="fanta1">{elem.companyName.substr(0,13)}...<br/>{elem.city}</p>
-						      			<p className="fanta2"><button type="button" className="btn btn-primary fanta3"><Link  rel="noopener noreferrer" to={`/billborad_Militry`} style={{color:"white"}}>Details..</Link></button></p>
-					      			</div>
-		      					</div>
-				      		</div>
+                          <div className="col-12 col-md-4 col-lg-4 col-xl-4 luxpure8">
+                              <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                		    			     <img src={elem.images[0]} className="luxpure1" alt={key}/>
+                              </Link>
+                  						<div className="luxpure2">
+                    							<div className="row">
+                    								<div className="col-10 col-md-9 col-lg-10 col-xl-9">
+                    									<p className="luxpure4"><span>{elem.companyName.substr(0,20)}...</span></p>
+                    	  								<p className="luxpure3"><span>{elem.city}</span></p>
+                      								</div>
+                      								<div className="col-2 col-md-3 col-lg-2 col-xl-3">
+                    									<i className="fa fa-heart-o luxpure5"></i>
+                    								</div>
+                    							</div>
+                  						</div>
+                  						<div className="row luxpure6">
+                    							<div className="col-6 col-md-6 col-lg-6 col-xl-6 luxpure7">
+                      								<div className="luxpure9">
+                        									<i class="material-icons starcircus">star</i>
+                        									<i class="material-icons starcircus">star</i>
+                        									<i class="material-icons starcircus">star</i>
+                        									<i class="material-icons starcircus">star</i>
+                        									<i class="material-icons starcircus">star</i>
+                      								</div>
+                    							</div>
+                  							<div className="col-6 col-md-6 col-lg-6 col-xl-6"></div>
+                  						</div><br/>
+              			    	</div>
                         )
                     })}
                 </div>
@@ -189,4 +205,4 @@ class Comman extends Component {
         )
     }
 }
-export default Comman;
+export default Comman2;
