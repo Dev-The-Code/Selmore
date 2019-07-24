@@ -7,7 +7,7 @@ class Panel6 extends Component {
   render() {
     return (
         <div>
-		      	<div className="container drn9 up">
+		      	<div className="container drn9 animated animatedFadeInUp fadeInUp">
 		      			<div className="row drn9">
 		      				<div className="col-md-12 line2"><h3 className="pakol">HOW IT WORKS</h3></div>
 		      			</div>

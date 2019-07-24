@@ -304,6 +304,7 @@ body {
 }
 .card{
   width: 118%;
+  height: 70%;
   margin-left: -8.8%;
   border-radius: 0px 0px 20px 20px;
 }
@@ -311,7 +312,7 @@ body {
  height: 85px;
 }
 .crdtxt{
-  margin-top: -9%;
+  margin-top: 0%;
 }
 }
 
@@ -324,4 +325,43 @@ a,u.crdtxt1:hover{
 }
 a.crdtxt1{
     color: white;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
 }

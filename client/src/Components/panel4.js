@@ -6,7 +6,7 @@ class Panel4 extends Component {
   render() {
     return (
       <div>
-      	<div className="row exi2 up" style={{margin:'0px'}}>
+      	<div className="row exi2 animated animatedFadeInUp fadeInUp" style={{margin:'0px'}}>
       		<div className="container exi2">
   				<div className="row">
 					<div className="col-md-1"></div>

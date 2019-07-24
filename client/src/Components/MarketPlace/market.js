@@ -198,7 +198,7 @@ class Market extends Component {
                         :
                         flexxData && flexxData.map((elem, key) => {
                             return (
-                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
+                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect animated animatedFadeInUp fadeInUp'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
                                         <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
                                     <div className="div_efect">
@@ -225,12 +225,12 @@ class Market extends Component {
         );
         return (
             <div className="container">
-                <div className='row billboard'>
+                <div className='row billboard animated animatedFadeInUp fadeInUp'>
                     {/*<div className="col-md-1"></div>*/}
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
                     <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>Billboards</div>
                 </div>
-                <div className='row filter'>
+                <div className='row filter animated animatedFadeInUp fadeInUp'>
                     {/*<div className="col-md-1"></div>*/}
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>
                         <CheckboxGroup
