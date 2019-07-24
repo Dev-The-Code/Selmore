@@ -23,6 +23,7 @@ body {
     font-weight: bold;
     font-family: Helvetica;
     margin-bottom: 20px;
+    margin-top: 3%;
 }
 .dropdown{
     padding-left: 0px
@@ -73,6 +74,7 @@ body {
   height: 170px;
   transition: .5s ease;
   backface-visibility: hidden;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }
 
 .div_efect {
@@ -106,6 +108,8 @@ body {
   width: 115%;
   margin-left: -6.8%;
   border-radius: 0px 0px 20px 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
 }
 .slow{
  height: 70px;
@@ -138,6 +142,7 @@ body {
   margin-left: -15px;
   height: 135px;
   transition: .5s ease;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
   backface-visibility: hidden;
 }
 
@@ -172,6 +177,8 @@ body {
   width: 125%;
   margin-left: -11.8%;
   border-radius: 0px 0px 20px 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
 }
 .slow{
  height: 64px;
@@ -205,6 +212,7 @@ body {
   margin-left: -15px;
   height: 170px;
   transition: .5s ease;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
   backface-visibility: hidden;
 }
 
@@ -239,6 +247,8 @@ body {
   width: 118%;
   margin-left: -8.8%;
   border-radius: 0px 0px 20px 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
 }
 .slow{
  height: 85px;
@@ -273,6 +283,8 @@ body {
   transition: .5s ease;
   backface-visibility: hidden;
   border-radius: 20px 20px 0px 0px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
 }
 
 .div_efect {
@@ -307,6 +319,8 @@ body {
   height: 70%;
   margin-left: -8.8%;
   border-radius: 0px 0px 20px 20px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
 }
 .slow{
  height: 85px;
@@ -354,6 +368,7 @@ a.crdtxt1{
     animation-fill-mode: both;
     -webkit-animation-duration: 2s;
     -webkit-animation-fill-mode: both
+
 }
 
 .animatedFadeInUp {
@@ -364,4 +379,8 @@ a.crdtxt1{
     opacity: 0;
     animation-name: fadeInUp;
     -webkit-animation-name: fadeInUp;
+}
+.pnl{
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
 }

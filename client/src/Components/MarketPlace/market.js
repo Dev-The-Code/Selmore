@@ -232,7 +232,7 @@ class Market extends Component {
                 </div>
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     {/*<div className="col-md-1"></div>*/}
-                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>
+                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
                         <CheckboxGroup
                             setFieldsValue={this.state.filterValue}
                             onChange={this.filterBillBoard.bind(this)}
