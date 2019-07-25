@@ -52,7 +52,7 @@ body {
 
   }
 .efect {
-  margin-bottom: 24%;
+  margin-bottom: 28%;
   margin-left: 20px;
   position: relative;
   width: 100px;
@@ -121,7 +121,7 @@ body {
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
 .efect {
-  margin-bottom: 15%;
+  margin-bottom: 18%;
   margin-right: 4%;
   position: relative;
   width: 100px;
@@ -260,7 +260,7 @@ body {
 
 @media only screen and (min-device-width : 1366px) and (max-device-width : 1920px){
 .efect {
-  margin-bottom: 15%;
+  margin-bottom: 18%;
   margin-right: 4%;
   position: relative;
   width: 100px;

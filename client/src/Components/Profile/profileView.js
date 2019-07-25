@@ -38,9 +38,6 @@ class ProfileView extends Component {
                 </div>
                 <Footer />
                 
-                <div className=" col-12 d-block d-sm-none">
-                    <h2 style={{textAlign: 'center'}}>My Profile</h2>
-                </div>
             </div>
         )
     }
