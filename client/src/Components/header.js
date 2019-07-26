@@ -107,7 +107,7 @@ openNav = ()=>{
                       Login
                   </button>
                     <div class="modal fade" id="myModal">
-                      <div class="modal-dialog" style={{ marginRight: '650px' }}>
+                      <div class="modal-dialog" style={{ marginRight: '49.5%' }}>
                         <div class="modal-content" style={{ width: '200%', height: '600px' }}>
                           <div class="modal-header">
                             <h4 class="modal-title">Login</h4>
@@ -115,7 +115,7 @@ openNav = ()=>{
                           </div>
                           <FormLogin showDropDown={this.props.showDropDown} />
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss'>Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{marginTop: '-0.5%'}}>Cancel</button>
                           </div>
                         </div>
                       </div>
