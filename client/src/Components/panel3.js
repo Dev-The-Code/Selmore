@@ -23,20 +23,17 @@ class Panel3 extends Component {
 				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
 				" Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
 				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
-			i:0
+			i: 0
 		}
 	}
-	billCity =()=>{
+	billCity = () => {
 		this.setState({
-			i : this.state.i + 12 
+			i: this.state.i + 12
 		})
 	}
 	render() {
-		const { citiesArr , i} = this.state;
-
-		let slipCity = citiesArr.slice(0, i+12);
-
-
+		const { citiesArr, i } = this.state;
+		let slipCity = citiesArr.slice(0, i + 12);
 		return (
 			<div>
 				<div className="container" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
@@ -63,7 +60,7 @@ class Panel3 extends Component {
 												<h5 className='divFont'>{elem.slice(0, 12)}</h5>
 												<h6 className="hani2">30 Ads available</h6>
 											</div>
-											
+
 										</div>
 									</div>
 								</Link>

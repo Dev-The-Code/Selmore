@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './billmilitary.css';
 import Location from './googlemap';
-import { Link } from "react-router-dom";
 
 class Militarypanel1 extends Component {
 	constructor(props) {
@@ -14,23 +13,16 @@ class Militarypanel1 extends Component {
 	}
 	async componentDidMount() {
 		let data = this.props.data;
-		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		await this.setState({
 			data: data,
 			images: data.images,
 		})
-		if (adminUser.role == 'admin') {
-			this.setState({
-				admin: true
-			})
-		}
 	}
 	render() {
-		const { data, images, admin } = this.state;
+		const { data, images } = this.state;
 		let image;
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
-				// console.log(key , 'key')
 				if (key == 0) {
 					return <div className="carousel-item active">
 						<img className="d-block w-100" src={elem} alt={key} />
@@ -181,8 +173,8 @@ class Militarypanel1 extends Component {
 								{/* <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
 								address={this.props.data.address} /> */}
 								<Location
-								address={this.props.data.address} />
-								</div>
+									address={this.props.data.address} />
+							</div>
 						</div>
 					</div>
 				</div> <br />

@@ -9,11 +9,11 @@ class Header extends Component {
     super(props);
   }
 
-  openNav = ()=>{
+  openNav = () => {
     document.getElementById("mySidenav").style.width = "100%";
   }
 
-  closeNav = () =>{
+  closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   }
 
@@ -23,10 +23,10 @@ class Header extends Component {
     let adminUser = JSON.parse(localStorage.getItem("userData"));
     return (
       <div>
-        <div className="container" style={{paddingLeft: '0px'}}>
+        <div className="container" style={{ paddingLeft: '0px' }}>
           <div className="row">
             <div className="col-md-3 col-lg-3 col-xl-3 d-none d-sm-block">
-              <img src="../images/selmore-logo.png" className="selmorelogo" />
+              <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
             </div>
             <div className="col-md-9 col-lg-9 col-xl-9 d-none d-sm-block">
               <ul className="nav navsm">
@@ -122,149 +122,117 @@ class Header extends Component {
             </div>
 
 
-{/*mobile_menu*/}
-        <div className="col-12 d-block d-sm-none">
-          <div id="mySidenav" class="menunav">
-            {/*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*/}
-            <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
-            <div className="menunav-content">
-              {/*<a href="#">About</a>
+            {/*mobile_menu*/}
+            <div className="col-12 d-block d-sm-none">
+              <div id="mySidenav" class="menunav">
+                {/*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*/}
+                <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
+                <div className="menunav-content">
+                  {/*<a href="#">About</a>
               <a href="#">Services</a>
               <a href="#">Clients</a>
               <a href="#">Contact</a>*/}
 
 
-              <ul className="" style={{marginTop: '-30px'}}>
-                <li className="mob_li" style={{listStyle: 'none'}}>
-                  <Link rel="noopener noreferrer" to={`/`}>
-                    HOME
+                  <ul className="" style={{ marginTop: '-30px' }}>
+                    <li className="mob_li" style={{ listStyle: 'none' }}>
+                      <Link rel="noopener noreferrer" to={`/`}>
+                        HOME
                   </Link>
-                </li>
-                <li className="mob_li">
-                  <Link rel="noopener noreferrer" to={`/about`}>
-                    ABOUT
+                    </li>
+                    <li className="mob_li">
+                      <Link rel="noopener noreferrer" to={`/about`}>
+                        ABOUT
                   </Link>
-                </li>
-                <li className="mob_li">
-                  <Link rel="noopener noreferrer" to={`/advertising_agency`}>
-                    AGENCY
+                    </li>
+                    <li className="mob_li">
+                      <Link rel="noopener noreferrer" to={`/advertising_agency`}>
+                        AGENCY
                   </Link>
-                </li>
-                {adminUser !== null && adminUser.role == 'admin' ?
-                  <li className="mob_li">
-                    <Link rel="noopener noreferrer" to={`/dashboard`}>
-                      DASHBOARD
+                    </li>
+                    {adminUser !== null && adminUser.role == 'admin' ?
+                      <li className="mob_li">
+                        <Link rel="noopener noreferrer" to={`/dashboard`}>
+                          DASHBOARD
                     </Link>
-                  </li>
-                  :
-                  <li className="mob_li">
-                    <Link rel="noopener noreferrer" to={`/faq`}>
-                      FAQ
+                      </li>
+                      :
+                      <li className="mob_li">
+                        <Link rel="noopener noreferrer" to={`/faq`}>
+                          FAQ
                     </Link>
-                  </li>
-                }
-                {adminUser !== null && adminUser.role == 'admin' ?
-                  null
-                  :
-                  <li className="mob_li">
-                    <a className="nav-link" href="#">
-                      BLOG
+                      </li>
+                    }
+                    {adminUser !== null && adminUser.role == 'admin' ?
+                      null
+                      :
+                      <li className="mob_li">
+                        <a className="nav-link" href="#">
+                          BLOG
                     </a>
-                  </li>
-                }
-                <li className="mob_li">
-                  <Link rel="noopener noreferrer" to={`/market_place`}>
-                    MARKETPLACE
+                      </li>
+                    }
+                    <li className="mob_li">
+                      <Link rel="noopener noreferrer" to={`/market_place`}>
+                        MARKETPLACE
                   </Link>
-                </li>
-                {adminUser !== null && adminUser.role == 'admin' ?
-                  <li className="nav-item mob_li">
-                    <Link rel="noopener noreferrer" to={`/list_add`}>
-                      <button type="button" className="btn btn-primary btn-sm mob_butn">
-                        <span> LIST AD </span>
+                    </li>
+                    {adminUser !== null && adminUser.role == 'admin' ?
+                      <li className="nav-item mob_li">
+                        <Link rel="noopener noreferrer" to={`/list_add`}>
+                          <button type="button" className="btn btn-primary btn-sm mob_butn">
+                            <span> LIST AD </span>
+                          </button>
+                        </Link>
+                      </li>
+                      :
+                      null
+                    }
+                    <li className="mob_li">
+                      <button type="button" className="btn btn-primary btn-sm  mob_butn">
+                        <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white", fontSize: '.875rem' }}>
+                          <span>BIDDING</span>
+                        </Link>
                       </button>
-                    </Link>
-                  </li>
-                  :
-                  null
-                }
-                <li className="mob_li">
-                  <button type="button" className="btn btn-primary btn-sm  mob_butn">
-                    <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white", fontSize: '.875rem'}}>
-                      <span>BIDDING</span>
-                    </Link>
+                    </li>
+                    {dropDownUser || value
+                      ?
+                      <li className="nav-item navbtnmargin mob_li">
+                        <Dropdown hideDropDown={this.props.hideDropDown} />
+                      </li>
+                      :
+                      <li className="nav-item navbtnmargin mob_li" >
+                        <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" >
+                          Login
                   </button>
-                </li>
-                {dropDownUser || value
-                  ?
-                  <li className="nav-item navbtnmargin mob_li">
-                    <Dropdown hideDropDown={this.props.hideDropDown} />
-                  </li>
-                  :
-                  <li className="nav-item navbtnmargin mob_li" >
-                    <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" >
-                      Login
-                  </button>
-                    <div class="modal fade" id="myModal1" style={{marginTop: '-10px'}}>
-                      <div class="modal-dialog">
-                        <div class="modal-content" style={{ width: '100%', height: '740px' }}>
-                          <div class="modal-header">
-                            <h4 class="modal-title">Login</h4>
-                            <button type="button" class="close" data-dismiss='modal'>&times;</button>
-                          </div>
-                          <FormLogin showDropDown={this.props.showDropDown} />
-                          <div class="modal-footer" style={{borderTop: '60px solid #e9ecef'}}>
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{marginTop: '-30%'}}>Cancel</button>
+                        <div class="modal fade" id="myModal1" style={{ marginTop: '-10px' }}>
+                          <div class="modal-dialog">
+                            <div class="modal-content" style={{ width: '100%', height: '740px' }}>
+                              <div class="modal-header">
+                                <h4 class="modal-title">Login</h4>
+                                <button type="button" class="close" data-dismiss='modal'>&times;</button>
+                              </div>
+                              <FormLogin showDropDown={this.props.showDropDown} />
+                              <div class="modal-footer" style={{ borderTop: '60px solid #e9ecef' }}>
+                                <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-30%' }}>Cancel</button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                }
-                {/*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
-
-                <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      ...
-                    </div>
-                  </div>
-                </div>*/}
-
-
-                {/*<li className="nav-item navbiddbtn">
-                </li>*/}
-              </ul>
-
-
-
-
-
-
-
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="col-12 d-block d-sm-none">
-          <div className="col-6">
-            <i onClick={this.openNav} className="fa fa-bars" style={{content:'\f0c9', color:'black',fontSize:'24px',marginTop:'20px'}}></i>
-          </div>
-          <div className="col-6 d-block d-sm-none">
-            <img src="../images/selmore-logo.png" className="mobileselmorelogo" />
-          </div>
-        </div>
-
-
-            
-
-
-
-
-
-
-
-
-
+            <div className="col-12 d-block d-sm-none">
+              <div className="col-6">
+                <i onClick={this.openNav} className="fa fa-bars" style={{ content: '\f0c9', color: 'black', fontSize: '24px', marginTop: '20px' }}></i>
+              </div>
+              <div className="col-6 d-block d-sm-none">
+                <img src="../images/selmore-logo.png" alt='img' className="mobileselmorelogo" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

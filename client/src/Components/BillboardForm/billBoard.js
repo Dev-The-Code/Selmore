@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './billboardDetail.css';
 import {
-    Form, Input, Icon, Button, Upload, Modal, notification, Cascader,
+    Form, Input, Icon, Button, Upload, notification,
 } from 'antd';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
@@ -12,8 +12,6 @@ import sha1 from "sha1";
 
 let id = 0;
 const FormItem = Form.Item;
-const option = Select.Option;
-const { Option } = Select;
 const country = [{
     value: 'Pakistan',
     label: 'Pakistan'
@@ -58,7 +56,6 @@ class BillBoard extends Component {
             imgArr: [],
             sumitDataAlert: false,
             id: '',
-            companyName: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
             categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall',
@@ -86,6 +83,7 @@ class BillBoard extends Component {
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
+            companyName: [],
             types: [],
             categories: [],
             facings: [],
@@ -102,7 +100,6 @@ class BillBoard extends Component {
     }
     async componentWillMount() {
         let data = this.props.data;
-        // console.log(data, 'data')
         await this.editDataShowns(data)
     }
     gettingDropDownValues = async () => {
@@ -188,6 +185,7 @@ class BillBoard extends Component {
             callback()
         }
     }
+
     handleCancel = () => this.setState({ previewVisible: false })
 
     handlePreview = (file) => {
@@ -249,7 +247,6 @@ class BillBoard extends Component {
     };
 
     handleSubmit(e) {
-        const { index } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -263,13 +260,12 @@ class BillBoard extends Component {
 
     async funcForUpload(values) {
         const { index } = this.state;
-        console.log(values)
+        console.log(values, 'seprate data')
         let arr = [];
         for (var i = 0; i <= index; i++) {
             let multipleBillbordObj = `billbordObj${i}`;
             multipleBillbordObj = {}
             for (var property in values) {
-
                 //seprate the billboard form data in user fill multiple form in one time
                 if (property == `traffic${i}`) {
                     multipleBillbordObj.traffic = values[property]
@@ -347,7 +343,6 @@ class BillBoard extends Component {
                 if (property == `images${i}`) {
                     multipleBillbordObj.images = values[property]
                 }
-
             }
             let fileListRef = `fileList${i}`;
             arr.push(this.state[fileListRef])
@@ -396,19 +391,10 @@ class BillBoard extends Component {
 
     async postData(response, obj) {
         //store imgs in array 
-        console.log(response)
-        // let img = response
-        // this.setState({
-        //     imgArr: [...imgArr, response],
-        // }, () => { obj.images = this.state.imgArr })
-        // console.log(imgArr)
-        //add img array in the obj
-        console.log(obj)
         this.fectSignUpApiFunc(obj)
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values, 'all arrays in one object');
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
         setTimeout(() => {
@@ -468,7 +454,6 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="category"></label>
@@ -490,7 +475,6 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="facing"></label>
@@ -512,7 +496,6 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="size"></label>
@@ -536,7 +519,6 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="latitude"></label>
@@ -562,7 +544,6 @@ class BillBoard extends Component {
                                                 </Form.Item>
                                             </div>
                                         </div>
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="longitude"></label>
@@ -588,8 +569,6 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
                                         <div className="col-md-4"></div>
-
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="vitalbox">
                                                 <div className="row">
@@ -625,10 +604,7 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <br />
-
                                         <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                             <div className="form-group">
                                                 <label for="traffic"></label>
@@ -653,12 +629,9 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div id='addWeiget'>
                                         <div> Billboard Road City Point Details </div>
-
                                         <br />
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -685,7 +658,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -712,7 +684,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -736,7 +707,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -762,7 +732,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -786,13 +755,9 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <br />
-
                                         <div> Military Road City Point Rate Card </div>
-
                                         <br />
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -819,7 +784,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -846,7 +810,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -873,7 +836,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -900,13 +862,9 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <br />
-
                                         <div> Military Road City Point Demographics </div>
-
                                         <br />
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -930,7 +888,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -957,7 +914,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -983,13 +939,9 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <br />
-
                                         <div> Military Road City Point Location </div>
-
                                         <br />
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -1015,7 +967,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -1039,7 +990,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -1063,7 +1013,6 @@ class BillBoard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="row">
                                             <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                 <div className="form-group">
@@ -1087,7 +1036,6 @@ class BillBoard extends Component {
                                             </div>
                                         </div>
                                     </div>
-
                                     {keys.length > 1 ? (
                                         <Icon
                                             className="dynamic-delete-button btn btn-danger iconBtn fa fa-minus"
@@ -1128,7 +1076,6 @@ class BillBoard extends Component {
                             </div>
                         </div>
                         {formItems}
-
                         <div className="col-md-1">
                             <FormItem >
                                 <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn'>
@@ -1137,19 +1084,14 @@ class BillBoard extends Component {
                             </FormItem>
                         </div>
                         <div className="col-md-11"></div>
-
-
-
                         <div className="col-md-2 col-4">
                             <Form.Item>
                                 <Button className="btn btn-primary btnapple"
                                     type="primary" htmlType="submit"
                                     data-toggle="modal" data-target="#biilbord"
                                 >Submit</Button>
-
                                 <br />
                                 <br />
-
                                 {sumitDataAlert ?
                                     <div class="alert alert-success" role="alert">
                                         <strong>Data Has Been Submitted </strong>

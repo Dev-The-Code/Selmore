@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Header from '../header';
 import Panel1 from '../panel1';
 import Panel2 from '../panel2';
@@ -22,9 +21,6 @@ class Profile extends Component {
                 <Panel2 />
                 <Footer />
             </div>
-            // <div>
-            //     <h1>My Profile</h1>
-            // </div>
         )
     }
 

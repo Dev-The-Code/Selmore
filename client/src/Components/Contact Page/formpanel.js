@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import './contact.css';
 import {
-	Form, Input,  Radio, 
+	Form, Input, Radio,
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Redirect } from 'react-router';
-
 const RadioGroup = Radio.Group;
 
 class Formpanel extends Component {
 	constructor(props) {
 		super(props)
-
 		//Initilize states
 		this.state = {
 			selectedOption: '',
@@ -40,7 +38,7 @@ class Formpanel extends Component {
 		let response = await HttpUtils.get('getemails');
 		let getEmail = response.content;
 		this.setState({
-			emailsArr: response.content
+			emailsArr: getEmail
 		})
 	}
 
@@ -129,7 +127,7 @@ class Formpanel extends Component {
 	}
 
 	render() {
-		const { selectedOption, username, buyer, loggedIn } = this.state
+		const { selectedOption, buyer, loggedIn } = this.state
 		const { getFieldDecorator } = this.props.form;
 		const formItemLayout = {
 			wrapperCol: {
