@@ -57,7 +57,6 @@ class Militarypanel1 extends Component {
 									</div>
 								</div>
 							</div><br />
-
 							{/*first panel1*/}
 							<div className="row ufone1" style={{ margin: '0px' }}>
 								<span className="ufone2">Billboard in {data.city} Millitary Road City Point Details</span>
@@ -143,11 +142,9 @@ class Militarypanel1 extends Component {
 							</div>
 							<br />
 							<div className="row">
+
 								<div className="col-md-4 col-lg-4 col-xl-4 col-6">
-									<p><span className="ufone3">0 Comments</span></p>
-								</div>
-								<div className="col-md-8 col-lg-8 col-xl-8 col-6" style={{ marginLeft: '-8%' }}>
-									<p><span className="ufone3">Selmore</span></p>
+									<h3>Contact Details</h3>
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
@@ -156,24 +153,17 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
-							{/* {admin ?
-								<Link to={{ pathname: `/list_add`, state: data }}>
-									<div className='editbtn'>
-										<i className='fa fa-pencil' style={{ fontSize: "32px" }}></i>
-									</div>
-								</Link>
-								: null
-							} */}
 							<div className="row soldier7" style={{ margin: '0px' }}>
 								<div><h3>Map</h3></div>
 
 							</div><br />
 							{/* render a map and show a location of the Billboard */}
 							<div>
-								{/* <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
-								address={this.props.data.address} /> */}
 								<Location
 									address={this.props.data.address} />
+							</div>
+							<div className="row soldier7" style={{ margin: '0px' }}>
+								<h3 style={{ color: 'white' }}>Map</h3>
 							</div>
 						</div>
 					</div>

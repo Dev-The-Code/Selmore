@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './headerfooter.css';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Dropdown from '../constant/dropdownmenu/Dropdown';
 import FormLogin from './Login Form/form';
 
@@ -9,6 +9,12 @@ class Header extends Component {
     super(props);
   }
 
+
+  openNav = () => {
+    console.log(document.getElementById("myNav"))
+    document.getElementById("mySideNav").style.width = "100%";
+
+  }
   openNav = () => {
     document.getElementById("mySidenav").style.width = "100%";
   }
@@ -101,7 +107,7 @@ class Header extends Component {
                       Login
                   </button>
                     <div class="modal fade" id="myModal">
-                      <div class="modal-dialog" style={{ marginRight: '650px' }}>
+                      <div class="modal-dialog" style={{ marginRight: '49.5%' }}>
                         <div class="modal-content" style={{ width: '200%', height: '600px' }}>
                           <div class="modal-header">
                             <h4 class="modal-title">Login</h4>
@@ -109,7 +115,7 @@ class Header extends Component {
                           </div>
                           <FormLogin showDropDown={this.props.showDropDown} />
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss'>Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-0.5%' }}>Cancel</button>
                           </div>
                         </div>
                       </div>
@@ -120,45 +126,36 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-
-
             {/*mobile_menu*/}
             <div className="col-12 d-block d-sm-none">
               <div id="mySidenav" class="menunav">
-                {/*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*/}
                 <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
                 <div className="menunav-content">
-                  {/*<a href="#">About</a>
-              <a href="#">Services</a>
-              <a href="#">Clients</a>
-              <a href="#">Contact</a>*/}
-
-
                   <ul className="" style={{ marginTop: '-30px' }}>
                     <li className="mob_li" style={{ listStyle: 'none' }}>
-                      <Link rel="noopener noreferrer" to={`/`}>
+                      <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
                         HOME
                   </Link>
                     </li>
                     <li className="mob_li">
-                      <Link rel="noopener noreferrer" to={`/about`}>
+                      <Link rel="noopener noreferrer" to={`/about`} onClick={this.closeNav}>
                         ABOUT
                   </Link>
                     </li>
                     <li className="mob_li">
-                      <Link rel="noopener noreferrer" to={`/advertising_agency`}>
+                      <Link rel="noopener noreferrer" to={`/advertising_agency`} onClick={this.closeNav}>
                         AGENCY
                   </Link>
                     </li>
                     {adminUser !== null && adminUser.role == 'admin' ?
                       <li className="mob_li">
-                        <Link rel="noopener noreferrer" to={`/dashboard`}>
+                        <Link rel="noopener noreferrer" to={`/dashboard`} onClick={this.closeNav}>
                           DASHBOARD
                     </Link>
                       </li>
                       :
                       <li className="mob_li">
-                        <Link rel="noopener noreferrer" to={`/faq`}>
+                        <Link rel="noopener noreferrer" to={`/faq`} onClick={this.closeNav}>
                           FAQ
                     </Link>
                       </li>
@@ -167,19 +164,19 @@ class Header extends Component {
                       null
                       :
                       <li className="mob_li">
-                        <a className="nav-link" href="#">
+                        <a className="nav-link" href="#" onClick={this.closeNav}>
                           BLOG
                     </a>
                       </li>
                     }
                     <li className="mob_li">
-                      <Link rel="noopener noreferrer" to={`/market_place`}>
+                      <Link rel="noopener noreferrer" to={`/market_place`} onClick={this.closeNav}>
                         MARKETPLACE
                   </Link>
                     </li>
                     {adminUser !== null && adminUser.role == 'admin' ?
                       <li className="nav-item mob_li">
-                        <Link rel="noopener noreferrer" to={`/list_add`}>
+                        <Link rel="noopener noreferrer" to={`/list_add`} onClick={this.closeNav}>
                           <button type="button" className="btn btn-primary btn-sm mob_butn">
                             <span> LIST AD </span>
                           </button>
@@ -190,7 +187,7 @@ class Header extends Component {
                     }
                     <li className="mob_li">
                       <button type="button" className="btn btn-primary btn-sm  mob_butn">
-                        <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white", fontSize: '.875rem' }}>
+                        <Link rel="noopener noreferrer" to={`/bidding`} onClick={this.closeNav} style={{ color: "white", fontSize: '.875rem' }}>
                           <span>BIDDING</span>
                         </Link>
                       </button>
@@ -202,7 +199,7 @@ class Header extends Component {
                       </li>
                       :
                       <li className="nav-item navbtnmargin mob_li" >
-                        <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" >
+                        <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" onClick={this.closeNav}>
                           Login
                   </button>
                         <div class="modal fade" id="myModal1" style={{ marginTop: '-10px' }}>

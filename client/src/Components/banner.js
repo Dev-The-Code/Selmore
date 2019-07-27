@@ -7,8 +7,8 @@ class Banner extends Component {
 	render() {
 		return (
 			<div>
-				<div className="container" style={{ paddingLeft: '0px' }}>
-					<div className="row rowcolor">
+				<div className="container animated animatedFadeInUp fadeInUp" style={{ paddingLeft: '0px' }}>
+					<div className="row rowcolor" style={{ marginLeft: '0px' }}>
 						<div className="col-md-8 col-sm-8 bannercol8">
 							<h1 className="weight"><strong><span className="textwhite1">PAKISTAN<br /> OUTDOOR ADVERTISING <br /> PORTAL</span></strong></h1><br />
 							<p className="right">Search for Unique Advertising opportising from 128 ad Listing in Pakistan</p><br />

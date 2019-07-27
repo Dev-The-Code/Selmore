@@ -5,7 +5,7 @@
 		position: relative;
 }
 /*.container{
-	padding-right: 0px; 
+	padding-right: 0px;
     padding-left: 25px;
     margin-right: auto;
 }*/
@@ -410,7 +410,7 @@
 		margin-left: 15px;
 		margin-top: -30px;
 	}
-	
+
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 	.funday{
@@ -449,9 +449,15 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1024px) and (max-width: 1366px){
 	.funday{
 	     margin-bottom: 13px;
+	}
+	.luxpure1 {
+    width: 84%!important;
+    height: 160px;
+    position: absolute;
 	}
 	.innerdiv{
 		float: left;
@@ -469,7 +475,7 @@
 		        width: 22%;
     			margin-left: 14px;
 				padding: 3px;
-				margin:14px
+				margin:13px
 	}
 	.locationbar{
 		font-size: 33px;
@@ -478,6 +484,7 @@
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 1366px) and (max-width: 1600px){
 	.funday{
 	     margin-bottom: 13px;
@@ -583,6 +590,7 @@
 .mouse1{
 		background-color: #29abe2;
 		margin-bottom: 7px;
+		color: white;
 }
 .mouse2{
 		color: white;
@@ -623,43 +631,32 @@
 @media screen and (min-width: 360px) and (max-width: 660px){
 
 	.fanta2{
-		margin-top: -42px;
+		margin-top: -6%;
 	    text-align: left;
-	    margin-left: 57%;
+	    margin-left: 70%;
 	}
 	.sim2{
 		text-align: center;
 	}
+	.fanta3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+    font-size: 10px;
+}
+.fanta1{
+	height: 29px;
+	margin-top: -19%;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: -5px;
+}
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
 
 	.fanta2{
-		margin-top: -42px;
-	    text-align: left;
-	    margin-left: 52%;
-	}
-	.sim2{
-		text-align: center;
-		margin-left: -4%;
-	}
-}
-@media screen and (min-width: 1024px) and (max-width: 1366px){
-
-	.fanta2{
-		margin-top: -42px;
-	    text-align: left;
-	    margin-left: 57%;
-	}
-	.sim2{
-		text-align: center;
-		margin-left: -4%;
-	}
-
-}
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-
-	.fanta2{
-		margin-top: -42px;
+		margin-top: -13%;
 	    text-align: left;
 	    margin-left: 62%;
 	}
@@ -667,6 +664,71 @@
 		text-align: center;
 		margin-left: -4%;
 	}
+	.fanta3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+    font-size: 10px;
+}
+.fanta1{
+	height: 30px;
+	margin-top: -19%;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: -5px;
+}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+
+	.fanta2{
+		margin-top: -9%;
+	    text-align: left;
+	    margin-left: 62%;
+	}
+	.sim2{
+		text-align: center;
+		margin-left: -4%;
+	}
+	.fanta3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+}
+.fanta1{
+	height: 30px;
+	margin-top: -19%;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: -5px;
+}
+
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+
+	.fanta2{
+		margin-top: -9%;
+	    text-align: left;
+	    margin-left: 62%;
+	}
+	.sim2{
+		text-align: center;
+		margin-left: -4%;
+	}
+	.fanta3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+}
+.fanta1{
+	height: 30px;
+	margin-top: -19%;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: -5px;
+}
 }
 
 .star{
@@ -678,17 +740,8 @@
 		font-size: 22px;
 }
 
-.fanta1{
-    margin-top: -20px;
-    text-align: left;
-    margin-left: 20px;
-    font-weight: 600;
-    font-size: 20px;
-}
-.fanta3{
-    border-radius: 13%;
-    margin-bottom: 5px;
-}
+
+
 .fanta4{
 	margin-bottom: 10px;
     margin-right: -3%;
@@ -798,7 +851,7 @@
     margin-top: 20px;
 }
 
-@media screen and (min-width: 360px) and (max-width: 660px){
+@media screen and (min-device-width: 360px) and (max-device-width: 767px){
 
 	.seth1{
 				text-align: center;
@@ -837,10 +890,10 @@
     margin-left: 57%;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px){
 
 	.seth1{
-				text-align: right;
+				text-align: center;
 	}
 	.seth2{
 				text-align: center;
@@ -855,10 +908,10 @@
 	}
 	.init2{
 			position: relative;
-		    margin-top: -47px;
-		    margin-left: 20px;
+		    margin-top: -19%;
+		    margin-left: 5%;
 		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: -1px;
+		    margin-right: 5%;
 	}
 	.imgsizee{
 			    height: 154px;
@@ -877,10 +930,10 @@
     margin-left: 52%;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
+@media screen and (min-device-width: 1024px) and (max-device-width: 1365px){
 
 	.seth1{
-				text-align: right;
+				text-align: center;
 	}
 	.seth2{
 				text-align: center;
@@ -889,16 +942,19 @@
 	.init7{
 		        position: relative;
 			     margin-top: -47px;
-			    margin-left: 44px;
+			    margin-left: 13%;
 			    background: rgba(30, 22, 22, 0.58);
 			    margin-right: 44px;
 	}
 	.init2{
-			position: relative;
-		     margin-top: -47px;
-		    margin-left: 87px;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 0px;
+      position: relative;
+      margin-top: -47px;
+      margin-left: 12.5%;
+      background: rgba(30, 22, 22, 0.58);
+      margin-right: 0px;
+      width: 74.5%;
+      height: 49px;
+
 	}
 	.imgsizee{
 			    height: 154px;
@@ -907,7 +963,7 @@
 	.init6{
 		position: relative;
 	     margin-top: -47px;
-	    margin-left: 43px;
+	    margin-left: 12%;
 	    background: rgba(30, 22, 22, 0.58);
 	    margin-right: 44px;
 	}
@@ -918,9 +974,9 @@
 	}
 
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
+@media screen and (min-device-width: 1366px) and (max-device-width: 1600px){
 	.seth1{
-				text-align: right;
+				text-align: center;
 	}
 	.seth2{
 				text-align: center;
@@ -936,9 +992,9 @@
 	.init2{
 		position: relative;
 	     margin-top: -47px;
-	    margin-left: 87px;
+	    margin-left: 43px;
 	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: 0px;
+	    margin-right: 44px;
 	}
 	.imgsizee{
 			    height: 154px;
@@ -969,7 +1025,7 @@
     BORDER-RADIUS: 10PX;
     PADDING: 2PX;
 }
-@media screen and (min-width: 360px) and (max-width: 660px){
+@media screen and (min-device-width: 360px) and (max-device-width: 767px){
 	.luxpure2{
 	    background: rgba(30, 22, 22, 0.58);
 	    position: relative;
@@ -1013,7 +1069,7 @@
 	    margin-bottom: -4%;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1020px){
+@media screen and (min-device-width: 768px) and (max-device-width: 1020px){
 	.luxpure2{
 	       background: rgba(30, 22, 22, 0.58);
 		    position: relative;
@@ -1057,13 +1113,13 @@
 	    margin-bottom: -6%;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
+@media screen and (min-device-width: 1024px) and (max-device-width: 1365px){
 	.luxpure2{
 	        background: rgba(30, 22, 22, 0.58);
 		    position: relative;
 		    color: white;
 		    margin-top: 42%;
-		    width: 323px;
+		    width: 92.5%;
 	}
 	.luxpure5{
 		font-size: 35px;
@@ -1100,13 +1156,13 @@
     	margin-top: 1%;
 	}
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
+@media screen and (min-device-width: 1366px) and (max-device-width: 1920px){
 	.luxpure2{
 	    background: rgba(30, 22, 22, 0.58);
 	    position: relative;
 	    color: white;
 	    margin-top: 34%;
-	    width: 92%;
+	    width: 91%;
 	}
 	.luxpure5{
 		font-size: 37px;
@@ -1144,4 +1200,45 @@
 		    margin-top: 5%;
 		    margin-left: 5%;
 	}
+}
+
+
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
 }
