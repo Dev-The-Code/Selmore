@@ -42,15 +42,6 @@ class Panel3 extends Component {
 		}
 	}
 
-	billCity =()=>{
-		this.setState({
-			i : this.state.i + 12
-		})
-	}
-	render() {
-		const { citiesArr , i} = this.state;
-
-		let slipCity = citiesArr.slice(0, i+12);
 
 	billCity = () => {
 		this.setState({
