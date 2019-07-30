@@ -6,7 +6,7 @@ class About extends Component {
   render() {
     return (
         <div>
-        <div className="col-4 col-md-4 col-lg-4 col-xl-4">      				
+            				
   						<h3  className="footertext1"><span>ABOUT</span></h3>
   							<div className="row">
 	  							<div className="col-4 col-md-4 col-lg-4 col-xl-4"></div>
@@ -21,7 +21,7 @@ class About extends Component {
 	      						<p className="footertext2"><span>selmore advertising is leading outdoor advertising portal in pakistan. selmore is home for outdoor advertising space.
 	      					 We connect ads buyer to ads seller</span></p>
       						</div>
-      				</div>
+      				
        </div>
     );
   }
