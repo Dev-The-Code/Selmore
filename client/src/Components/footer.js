@@ -3,31 +3,64 @@ import './headerfooter.css';
 import FooterMenu from './footerMenu.js'
 import About from './about.js';
 import QuickLinks from './quickLinks.js';
-import Connect from './connect.js'
+import Connect from './connect.js';
+
+
+let aboutObject = {
+  first:'selmore advertising is leading',
+  second:'outdoor advertising portal',
+	third:'in pakistan. selmore is home ',
+	fourth:'for outdoor advertising',
+	fifth:'space.',
+	sixth:'We connect ads buyer',
+	seventh:' to ads seller'
+}
+
+let connectObject = {
+  abc:'Blog',
+  def:'Forum',
+	ghi:'List your Ads',
+}
+
+let quicklinksObject = {
+  first1:'About Us',
+  second2:'FaQ',
+	third3:'Privacy Policy',
+	fourth4:'Advertise On Selmore',
+	fifth5:'Contact Us',
+}
 
 class Footer extends Component {
-	constructor(props) {
-		super(props);
-	
-		this.state = {
-		  list: [About],
-		  list1: [QuickLinks],
-		  list2: [Connect],
-		  
-		};
-	  }
-	
+	// constructor(props) {
+	// 	super(props);
+	//
+	// 	this.state = {
+	// 	  list: [About],
+	// 	  list1: [QuickLinks],
+	// 	  list2: [Connect],
+	//
+	// 	};
+	//   }
+
   render() {
+		console.log(aboutObject,'about');
+		console.log(connectObject,'connect');
+		console.log(quicklinksObject,'quicklinks');
     return (
         <div>
       		<div className="container true3">
 				  <div className="row">
-				  <div>
-				  		{this.state.list.map(item => (this.state=<About/> ))}
+				  <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+							<About about={aboutObject} />
 				  </div>
-				  
-				  
-      				{/*<div className="col-4 col-md-4 col-lg-4 col-xl-4">      				
+					<div className="col-12 col-md-4 col-lg-4 col-xl-4">
+							<Connect connect={connectObject} />
+					</div>
+					<div className="col-12 col-md-4 col-lg-4 col-xl-4">
+							<QuickLinks quicklinks={quicklinksObject}/>
+					</div>
+
+      				{/*<div className="col-4 col-md-4 col-lg-4 col-xl-4">
   						<h3  className="footertext1"><span>ABOUT</span></h3>
   							<div className="row">
 	  							<div className="col-4 col-md-4 col-lg-4 col-xl-4"></div>
@@ -57,8 +90,8 @@ class Footer extends Component {
 							  <li><a href="#">Privacy Policy</a></li>
 							  <li><a href="#">Advertise On Selmore</a></li>
 							  <li>Contact Us</li>
-							</ul>  							
-						</div>	
+							</ul>
+						</div>
       				</div>
       				<div className="col-4 col-md-4 col-lg-4 col-xl-4">
       					<h3  className="footertext1"><span>CONNECT</span></h3>
@@ -72,7 +105,7 @@ class Footer extends Component {
 							  <li><a href="#">Blog</a></li>
 							  <li><a href="#">Forum</a></li>
 							  <li><a href="#">List your Ads</a></li>
-							</ul>  							
+							</ul>
 						</div>
       				</div>*/}
       			</div>
@@ -82,9 +115,9 @@ class Footer extends Component {
       					<div className="col-12 col-md-12 col-lg-12 col-xl-12 true6"><span className="true5">Copyrights 2019 By Selmore. All Rights Reservered</span></div>
 
       					<div className="col-2 col-md-5 col-lg-5 col-xl-5"></div>
-      				</div>			
+      				</div>
 
-      		
+
        </div>
     );
   }

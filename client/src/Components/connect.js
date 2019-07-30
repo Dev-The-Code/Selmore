@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 
 class Connect extends Component {
-	state = {
-		text1: "Blog",
-		text2: 'Forum',
-		text3: "List your Ads"
-	}
-	
+	// state = {
+	// 	text1: "",
+	// 	text2: '',
+	// 	text3: ""
+	// }
+
   render() {
-	  const { text1, text2, text3 } = this.state;
+	  // const { text1, text2, text3 } = this.state;
     return (
         <div>
 
@@ -22,12 +22,12 @@ class Connect extends Component {
 						</div>
 						<div>
 							<ul className="true22">
-							  <li><a href="#">{text1}</a></li>
-							  <li><a href="#">{text2}</a></li>
-							  <li><a href="#">{text3}</a></li>
-							</ul>  							
+							  <li><a href="#">Blog</a></li>
+							  <li><a href="#">Forum</a></li>
+							  <li><a href="#">List your Ads</a></li>
+							</ul>
 						</div>
-      				
+
        </div>
     );
   }
