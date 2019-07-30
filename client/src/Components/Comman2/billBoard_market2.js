@@ -6,11 +6,6 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom";
 
-const CheckboxGroup = Checkbox.Group;
-const option = Select.Option;
-const { Option } = Select;
-
-
 class Comman2 extends Component {
     constructor(props) {
         super(props)

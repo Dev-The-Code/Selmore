@@ -4,14 +4,14 @@ import './faq.css';
 class Faqbanner extends Component {
   render() {
     return (
-        <div>	
-    		<div className="row water" style={{margin:'0px'}}> 	
-				<img src="./images/about-banner.png" className=""/>
-			</div> 
-			<div className="container water2">
-				 <h4><span className="water3">FREQUENTLY ASKED QUESTIONS</span></h4>						
-			</div>
-        </div>  	
+      <div>
+        <div className="row water" style={{ margin: '0px' }}>
+          <img src="./images/about-banner.png" alt='img' className="" />
+        </div>
+        <div className="container water2">
+          <h4><span className="water3">FREQUENTLY ASKED QUESTIONS</span></h4>
+        </div>
+      </div>
     );
   }
 }

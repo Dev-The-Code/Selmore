@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Header from '../header';
 import ProfileView from './profileView';
 import NewProfile from './newProfile';
@@ -22,9 +21,6 @@ class Profile extends Component {
                 <NewProfile/>
                 
             </div>
-            // <div>
-            //     <h1>My Profile</h1>
-            // </div>
         )
     }
 

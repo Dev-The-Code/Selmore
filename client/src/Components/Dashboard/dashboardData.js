@@ -3,10 +3,6 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
-
-// import { fileToObject } from 'antd/lib/upload/utils';
-// import filterImg from "./caret-down.png";
-
 var filteredObj = {};
 
 class DashboardData extends Component {
@@ -120,7 +116,6 @@ class DashboardData extends Component {
         const { billboardData } = this.state;
         console.log(filteredObj)
         var filteredData = [];
-
         if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.size !== undefined
             && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
             for (var i in billboardData) {
@@ -162,7 +157,6 @@ class DashboardData extends Component {
 
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
-        // console.log(billboardFilterdData, 'billboardFilterdData')
         const billboardRendring = (
             <div>
                 <br />
@@ -177,8 +171,6 @@ class DashboardData extends Component {
                             <th className='tableHead' scope="col">Size</th>
                             <th className='tableHead' scope="col">Action</th>
                         </thead>
-                        {/* {tableData} */}
-
                         {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                             return (<tbody>
                                 <tr>
@@ -214,18 +206,13 @@ class DashboardData extends Component {
         );
         return (
             <div className="container">
-
-
                 <div className='row' style={{ marginLeft: '0px' }}>
-
                     <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
                         <div>
                             <h2 className='text_topFilter filteration'>Filter</h2>
                         </div>
-
                     </div>
                     <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' >
-
                         <div className="row">
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
                                 <div className="filture">
@@ -295,7 +282,6 @@ class DashboardData extends Component {
                             </div>
                         </div>
                     </div>
-
                     <div className='col-lg-12 d-none d-lg-block d-xl-block'>
 
                         <div className="row">

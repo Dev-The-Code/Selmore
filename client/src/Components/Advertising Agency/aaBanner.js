@@ -12,12 +12,3 @@ class AaBanner extends Component {
   }
 }
 export default AaBanner;
-
-          /*<div className="row" style={{margin:'0px'}}>  
-            <img src="./images/about-banner.png" className="happy1"/>
-          </div> 
-          <div>
-            <div className="container happy2">
-              <h4><span className="happy3">ADVERTISING AGENCIES</span></h4>           
-            </div>
-          </div>*/

@@ -10,8 +10,8 @@ class AddBillboards extends Component {
     render() {
         return (
             <div>
-                 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
-                <BillBoard data ={this.props.location.state}/>
+                <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
+                <BillBoard data={this.props.location.state} />
                 <Footer />
             </div>
         )

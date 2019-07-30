@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './billmilitary.css';
 import Location from './googlemap';
-import { Link } from "react-router-dom";
 
 class Militarypanel1 extends Component {
 	constructor(props) {
@@ -14,24 +13,16 @@ class Militarypanel1 extends Component {
 	}
 	async componentDidMount() {
 		let data = this.props.data;
-		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		await this.setState({
 			data: data,
 			images: data.images,
 		})
-		if (adminUser.role == 'admin') {
-			this.setState({
-				admin: true
-			})
-		}
 	}
 	render() {
-		const { data, images, admin } = this.state;
-		 // console.log(this.props.data.latitude,'sssssssssssssssssss')
+		const { data, images } = this.state;
 		let image;
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
-				// console.log(key , 'key')
 				if (key == 0) {
 					return <div className="carousel-item active">
 						<img className="d-block w-100" src={elem} alt={key} />
@@ -66,7 +57,6 @@ class Militarypanel1 extends Component {
 									</div>
 								</div>
 							</div><br />
-
 							{/*first panel1*/}
 							<div className="row ufone1" style={{ margin: '0px' }}>
 								<span className="ufone2">Billboard in {data.city} Millitary Road City Point Details</span>
@@ -156,13 +146,6 @@ class Militarypanel1 extends Component {
 								<div className="col-md-4 col-lg-4 col-xl-4 col-6">
 									<h3>Contact Details</h3>
 								</div>
-
-								{/*<div className="col-md-4 col-lg-4 col-xl-4 col-6">
-									<p><span className="ufone3">0 Comments</span></p>
-								</div>
-								<div className="col-md-8 col-lg-8 col-xl-8 col-6" style={{ marginLeft: '-8%' }}>
-									<p><span className="ufone3">Selmore</span></p>
-								</div>*/}
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-11 col-10 ufone8"></div>
@@ -170,28 +153,18 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
-								<div className="row soldier7" style={{ margin: '0px' }}>
-									<h3 style={{color:'white'}}>Map</h3>
-								</div>
-								{/* render a map and show a location of the Billboard*/}
-								{/*<div style={{width: '100%'}}>
-										<iframe width="100%" height="300"
-											src={`https://maps.google.com/maps?q=${this.props.location.data.latitude},${this.props.location.data.longitude}&hl=es;z=14&amp;output=embed`}
-											frameborder="0"
-											scrolling="no"
-											marginheight="0"
-											marginwidth="0">
-											<a href="https://www.maps.ie/map-my-route/">
-												Plot a route map</a>
-										</iframe>
-								</div>*/}
-								{/* <div>
-									 <Location latitude={this.props.data.latitude} longitude={this.props.data.longitude}
+							<div className="row soldier7" style={{ margin: '0px' }}>
+								<div><h3>Map</h3></div>
+
+							</div><br />
+							{/* render a map and show a location of the Billboard */}
+							<div>
+								<Location
 									address={this.props.data.address} />
-									<Location		%2B38%C2%B0+34'+24.00%22,+-109%C2%B0+32'+57.00
-										address={this.props.data.address}
-									/>
-								</div>*/}
+							</div>
+							<div className="row soldier7" style={{ margin: '0px' }}>
+								<h3 style={{ color: 'white' }}>Map</h3>
+							</div>
 						</div>
 					</div>
 				</div> <br />
