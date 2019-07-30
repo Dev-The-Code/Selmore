@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { HttpUtils } from './../Services/HttpUtils';
 import './home.css';
 
 class Panel3 extends Component {
@@ -26,16 +27,31 @@ class Panel3 extends Component {
 			i:0
 		}
 	}
+
+	componentDidMount() {
+		this.billData();
+	}
+
+	billData = async () => {
+		let response = await HttpUtils.get('getbillboard');
+		let data = response.content;
+		let arr = [];
+		for(var i = 0; i < data.length; i++){
+				arr.push(data[i]);
+
+		}
+	}
+
 	billCity =()=>{
 		this.setState({
-			i : this.state.i + 12 
+			i : this.state.i + 12
 		})
 	}
 	render() {
 		const { citiesArr , i} = this.state;
 
 		let slipCity = citiesArr.slice(0, i+12);
-		
+
 		return (
 			<div>
 				<div className="container up" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
@@ -62,7 +78,7 @@ class Panel3 extends Component {
 												<h5 className='divFont'>{elem.slice(0, 12)}</h5>
 												<h6 className="hani2">30 Ads available</h6>
 											</div>
-											
+
 										</div>
 									</div>
 								</Link>

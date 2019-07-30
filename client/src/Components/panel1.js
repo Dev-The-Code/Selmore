@@ -12,9 +12,6 @@ class Panel1 extends Component {
           keyValuee: ''
       }
   }
-
-
-
   hoverAlert = (value) => {
       this.setState({
           directMarket : true,
