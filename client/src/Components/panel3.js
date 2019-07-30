@@ -24,7 +24,7 @@ class Panel3 extends Component {
 				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
 				" Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
 				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
-			i:0
+			i: 0
 		}
 	}
 
@@ -52,9 +52,17 @@ class Panel3 extends Component {
 
 		let slipCity = citiesArr.slice(0, i+12);
 
+	billCity = () => {
+		this.setState({
+			i: this.state.i + 12
+		})
+	}
+	render() {
+		const { citiesArr, i } = this.state;
+		let slipCity = citiesArr.slice(0, i + 12);
 		return (
 			<div>
-				<div className="container up" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
+				<div className="container animated animatedFadeInUp fadeInUp" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
 					<div className="row">
 						<div className="col-md-12 line2"><h3 className="pakola1">Top Cities In Pakistan for Billboards</h3></div>
 					</div>
@@ -78,7 +86,6 @@ class Panel3 extends Component {
 												<h5 className='divFont'>{elem.slice(0, 12)}</h5>
 												<h6 className="hani2">30 Ads available</h6>
 											</div>
-
 										</div>
 									</div>
 								</Link>

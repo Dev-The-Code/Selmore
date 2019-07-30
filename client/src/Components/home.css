@@ -1,14 +1,4 @@
-.up{
-  animation: Slide_Up 2.5s ease;
-}
-@keyframes Slide_Up{
-  0%{
-    transform: translate(250px);
-  }
-  100%{
-    transform: translate(0);
-  }
-}
+
 .rowcolor{
 		background-color: #29abe2;
 
@@ -601,6 +591,7 @@
 .mouse1{
 		background-color: #29abe2;
 		margin-bottom: 7px;
+		color: white;
 }
 .mouse2{
 		color: white;
@@ -1210,4 +1201,45 @@
 		    margin-top: 5%;
 		    margin-left: 5%;
 	}
+}
+
+
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
 }

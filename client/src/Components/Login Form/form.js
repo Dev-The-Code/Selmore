@@ -4,15 +4,13 @@ import './loginform.css';
 import { logUser } from '../../action';
 import store from '../../store';
 import {
-  Form, Icon, Input, Button, Checkbox,
+  Form, Input,
 } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
-// var modal = ReactBootstrap.Modal
 
 class FormLogin extends Component {
   constructor() {
     super()
-
     //initilize states
     this.state = {
       email: '',
@@ -31,12 +29,8 @@ class FormLogin extends Component {
       if (!err) {
         store.dispatch(logUser(this.state));
         this.setState({ isLoader: true }, () => {
-          // console.log(this.state.loggedIn, "logged in")
-          // localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         })
-        // console.log('Received values of form: ', values);
         this.fectSignInApiFunc(values)
-
       }
     });
   }
@@ -58,8 +52,6 @@ class FormLogin extends Component {
       this.props.showDropDown();
     }
     catch (error) {
-      console.log(error, 'catch')
-
       //error handling if user enter wrong email or password
       if (response === undefined) {
         this.setState({
@@ -77,9 +69,9 @@ class FormLogin extends Component {
       <div className="container">
         <div className="d-none d-sm-block">
           <div className="row school1">
-            
+
             <div className="col-md-4 school7">
-              <img src="../images/log-in.png" style={{ width: '100%', height: '257px' }} />
+              <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
             <div className="col-md-4 school6">
               <Form onSubmit={this.handleSubmit} className="login-form">
@@ -144,14 +136,10 @@ class FormLogin extends Component {
             </div>
           </div>
         </div>
-
-
-
         <div className="d-block d-sm-none">
           <div className="row school1">
-            
             <div className="col-md-4 school7">
-              <img src="../images/log-in.png" style={{ width: '100%', height: '257px' }} />
+              <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
             <div className="col-md-4 school6">
               <Form onSubmit={this.handleSubmit} className="login-form">

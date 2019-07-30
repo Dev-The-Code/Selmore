@@ -3,11 +3,10 @@ import './about.css';
 
 class AbBanner extends Component {
   render() {
-  	// console.log(this.props,'asdasdsadasdas');
     return (
         <div>				
 					<div className="row" style={{margin:'0px'}}>
-						<img src="./images/about-banner.png" className="glass1"/>
+						<img src="./images/about-banner.png" alt ='img' className="glass1"/>
 					</div>
 					<div>
 						<div className="container active2">

@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 import './headerfooter.css';
+import FooterMenu from './footerMenu.js'
+import About from './about.js';
+import QuickLinks from './quickLinks.js';
+import Connect from './connect.js'
 
 class Footer extends Component {
+	constructor(props) {
+		super(props);
+	
+		this.state = {
+		  list: [About],
+		  list1: [QuickLinks],
+		  list2: [Connect],
+		  
+		};
+	  }
+	
   render() {
     return (
         <div>
       		<div className="container true3">
-      			<div className="row">
-      				<div className="col-4 col-md-4 col-lg-4 col-xl-4">      				
+				  <div className="row">
+				  <div>
+				  		{this.state.list.map(item => (this.state=<About/> ))}
+				  </div>
+				  
+				  
+      				{/*<div className="col-4 col-md-4 col-lg-4 col-xl-4">      				
   						<h3  className="footertext1"><span>ABOUT</span></h3>
   							<div className="row">
 	  							<div className="col-4 col-md-4 col-lg-4 col-xl-4"></div>
@@ -54,7 +74,7 @@ class Footer extends Component {
 							  <li><a href="#">List your Ads</a></li>
 							</ul>  							
 						</div>
-      				</div>
+      				</div>*/}
       			</div>
       		</div>
       				<div className="row rowbackground true7" style={{margin:'0px'}}>

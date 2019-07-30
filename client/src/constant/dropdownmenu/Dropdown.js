@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 class Dropdown extends Component {
@@ -58,7 +58,7 @@ openNav = ()=>{
               <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
               <MDBDropdownItem onClick={this.logOut}>
                 <Link rel="noopener noreferrer" to={`/`}>
-                Log Out
+                  Log Out
                 </Link>
               </MDBDropdownItem>
             </MDBDropdownMenu>
