@@ -149,12 +149,12 @@ class BillBoard extends Component {
         });
     }
     editDataShowns = async (data) => {
-        console.log(data, 'data')
+        console.log(data, 'editDataShowns')
         if (data != undefined) {
             await this.setState({
                 compaNames: data.companyName,
                 type: data.type,
-                category: data.category,
+                category: data.category[0],
                 facing: data.facing,
                 lightning: data.lightning,
                 status: data.status,
@@ -450,6 +450,7 @@ class BillBoard extends Component {
                                                         <Form.Item>
                                                             <p>BillBoard Type:</p>
                                                             {getFieldDecorator(`type${index}`, {
+                                                                initialValue: { label: this.state.type, value: this.state.type },
                                                                 rules: [{
                                                                     required: true,
                                                                     message: 'Please enter a type',
@@ -458,7 +459,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={types}
-                                                                    defaultValue={{ label: this.state.type, value: this.state.type }}
+                                                                    // defaultValue={{ label: this.state.type, value: this.state.type }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -471,6 +472,7 @@ class BillBoard extends Component {
                                                         <Form.Item>
                                                             <p>Category:</p>
                                                             {getFieldDecorator(`category${index}`, {
+                                                                initialValue: { label: this.state.category, value: this.state.category },
                                                                 rules: [{
                                                                     required: true,
                                                                     message: 'Please enter a category',
@@ -479,7 +481,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={categories}
-                                                                    defaultValue={{ label: this.state.category, value: this.state.category }}
+                                                                    // defaultValue={{ label: this.state.category, value: this.state.category }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -492,6 +494,7 @@ class BillBoard extends Component {
                                                         <Form.Item>
                                                             <p>Facing:</p>
                                                             {getFieldDecorator(`facing${index}`, {
+                                                                initialValue: { label: this.state.facing, value: this.state.facing },
                                                                 rules: [{
                                                                     required: true,
                                                                     message: 'Please enter a facing',
@@ -500,7 +503,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={facings}
-                                                                    defaultValue={{ label: this.state.facing, value: this.state.facing }}
+                                                                    // defaultValue={{ label: this.state.facing, value: this.state.facing }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -604,11 +607,15 @@ class BillBoard extends Component {
                                                                 </FormItem>
                                                             </div>
                                                             <br />
-                                                            {imgArr.length >= 0 ? imgArr.map((elem, i) => {
-                                                                return (
-                                                                    <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px", margin: '10px' }} />
-                                                                )
-                                                            }) : null}
+                                                            <div className='row'>
+                                                                {imgArr.length >= 0 ? imgArr.map((elem, i) => {
+                                                                    return (
+                                                                        <div className='col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
+                                                                            <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px", margin: '10px' }} />
+                                                                        </div>
+                                                                    )
+                                                                }) : null}
+                                                            </div>
                                                             {this.state.noChooseFile ?
                                                                 null
                                                                 : <div >
@@ -705,6 +712,7 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>Lightning:</p>
                                                                 {getFieldDecorator(`lightning${index}`, {
+                                                                    initialValue: { label: this.state.lightning, value: this.state.lightning },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter Lightning',
@@ -713,7 +721,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={lightnings}
-                                                                        defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
+                                                                        // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -753,6 +761,7 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>Status:</p>
                                                                 {getFieldDecorator(`status${index}`, {
+                                                                    initialValue: { label: this.state.status, value: this.state.status },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter status',
@@ -761,7 +770,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={statuses}
-                                                                        defaultValue={{ label: this.state.status, value: this.state.status }}
+                                                                        // defaultValue={{ label: this.state.status, value: this.state.status }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -886,6 +895,7 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>Audiance Type:</p>
                                                                 {getFieldDecorator(`audianceType${index}`, {
+                                                                    initialValue: { label: this.state.audianceType, value: this.state.audianceType },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter audiance type',
@@ -894,7 +904,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={audianceTypes}
-                                                                        defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
+                                                                        // defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -988,6 +998,7 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>City:</p>
                                                                 {getFieldDecorator(`city${index}`, {
+                                                                    initialValue: { label: this.state.city, value: this.state.city },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter city',
@@ -996,7 +1007,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={cities}
-                                                                        defaultValue={{ label: this.state.city, value: this.state.city }}
+                                                                        // defaultValue={{ label: this.state.city, value: this.state.city }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1011,6 +1022,7 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>States:</p>
                                                                 {getFieldDecorator(`state${index}`, {
+                                                                    initialValue: { label: this.state.state, value: this.state.state },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter state',
@@ -1019,7 +1031,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={states}
-                                                                        defaultValue={{ label: this.state.state, value: this.state.state }}
+                                                                        // defaultValue={{ label: this.state.state, value: this.state.state }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1033,22 +1045,23 @@ class BillBoard extends Component {
                                                             <Form.Item>
                                                                 <p>Country:</p>
                                                                 {getFieldDecorator(`country${index}`, {
+                                                                    initialValue: { label: this.state.country, value: this.state.country },
                                                                     rules: [{
                                                                         required: true,
                                                                         message: 'Please enter country',
                                                                     }],
                                                                 })(
+                                                                    
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={country}
-                                                                        defaultValue={{ label: this.state.country, value: this.state.country }}
+                                                                        // defaultValue={{ label: this.state.country, value: this.state.country }}
                                                                     >
                                                                     </Select>
                                                                 )}
                                                             </Form.Item>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             {keys.length > 1 ? (
@@ -1075,17 +1088,19 @@ class BillBoard extends Component {
                                 <Form.Item className="list_form">
                                     <p style={{ fontWeight: 'bold' }}>Company Name:</p>
                                     {getFieldDecorator('company', {
+                                        initialValue:{ label: this.state.compaNames, value: this.state.compaNames },
                                         rules: [{
                                             required: true,
                                             message: 'Please enter your company name!',
                                         }],
                                     })(
                                         <Select
+                                            // initialValue={this.state.compaNames}
                                             onChange={this.handleChange}
                                             options={companyName}
                                             style={{ textAlign: 'left' }}
-                                            defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
-                                            Select-placeholder="Country"
+                                            // defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                            Select-placeholder="company"
                                         ></Select>
                                     )}
                                 </Form.Item>
