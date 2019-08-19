@@ -27,13 +27,13 @@ class Militarypanel1 extends Component {
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
 				if (key == 0) {
-					return <div className="carousel-item active">
-						<img className="d-block w-100" src={elem} alt={key} />
+					return <div className="carousel-item active" style={{ width: '720px', height: "450px"}}>
+						<img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px"}}/>
 					</div>
 				}
 				else {
-					return <div className="carousel-item">
-						<img className="d-block w-100" src={elem} alt={key} />
+					return <div className="carousel-item" style={{ width: '720px', height: "450px"}}>
+						<img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px"}}/>
 					</div>
 				}
 			})
