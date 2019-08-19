@@ -183,8 +183,8 @@ class Market extends Component {
 
                                 <div id="more_efect1" className="card">
                                     <div id="more_efect card-body slow">
-                                        <p className="crdtxt">{elem.companyName}</p>
-                                        <p className="crdtxt">{elem.city}</p>
+                                        <p className="crdtxt2">{elem.companyName}</p>
+                                        <p className="crdtxt2">{elem.city}</p>
                                     </div>
                                 </div>
                             </div>
