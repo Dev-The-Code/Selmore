@@ -149,7 +149,7 @@ class BillBoard extends Component {
         });
     }
     editDataShowns = async (data) => {
-        // console.log(data, 'data')
+        console.log(data, 'data')
         if (data != undefined) {
             await this.setState({
                 compaNames: data.companyName,
@@ -176,7 +176,8 @@ class BillBoard extends Component {
                 dailyVisitor: data.dailyVisitor,
                 nearBy: data.nearBy,
                 address: data.address,
-                objectId: data._id
+                objectId: data._id,
+                imgArr: data.images
             })
         }
     }
@@ -408,6 +409,9 @@ class BillBoard extends Component {
         }, 3000);
     }
     onChange(index, { file, fileList }) {
+        console.log(file, 'fileList')
+
+        console.log(fileList, 'fileList')
         if (file.status !== 'uploading') {
             let fileListRef = `fileList${index}`
             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
@@ -416,7 +420,8 @@ class BillBoard extends Component {
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
-            companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states } = this.state;
+            companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList } = this.state;
+        console.log(fileList, 'images')
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -590,11 +595,13 @@ class BillBoard extends Component {
                                                                         }],
                                                                     })(
                                                                         <div className="clearfix">
-                                                                            <Upload onChange={this.onChange.bind(this, index)}>
-                                                                                <Button
-                                                                                >
+                                                                            <Upload onChange={this.onChange.bind(this, index)}
+                                                                            // {...props}
+                                                                            // fileList={this.state.imgArr}
+                                                                            >
+                                                                                <Button>
                                                                                     <Icon type="upload" /> Upload
-                                                                                        </Button>
+                                                                                </Button>
                                                                             </Upload>
                                                                         </div>
                                                                     )}
