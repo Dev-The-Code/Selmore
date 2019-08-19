@@ -584,9 +584,7 @@ class BillBoard extends Component {
                                                     <div className="vitalbox">
                                                         <div className="row">
                                                             <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                                <FormItem
-                                                                    label="Images"
-                                                                >
+                                                                <FormItem label="Images">
                                                                     {getFieldDecorator(`images${index}`, {
                                                                         initialValue: this.state.imgArr,
                                                                         rules: [{
@@ -605,10 +603,10 @@ class BillBoard extends Component {
                                                                     )}
                                                                 </FormItem>
                                                             </div>
-                                                            <br/>
+                                                            <br />
                                                             {imgArr.length >= 0 ? imgArr.map((elem, i) => {
                                                                 return (
-                                                                    <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px" ,margin:'10px'}} />
+                                                                    <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px", margin: '10px' }} />
                                                                 )
                                                             }) : null}
                                                             {this.state.noChooseFile ?
