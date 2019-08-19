@@ -262,7 +262,7 @@ class BillBoard extends Component {
     }
 
     async funcForUpload(values) {
-        const { index } = this.state;
+        const { index, imgArr, objectId } = this.state;
         console.log(values)
         let arr = [];
         for (var i = 0; i <= index; i++) {
@@ -359,7 +359,10 @@ class BillBoard extends Component {
                     return result.body.url
                 })
             })).then((results) => {
-                multipleBillbordObj.images = results
+                let imagess = [...imgArr, ...results]
+                console.log(imagess, 'imagess')
+                multipleBillbordObj.images = imagess;
+                multipleBillbordObj.objectId = objectId;
                 this.postData(results, multipleBillbordObj)
             })
         }
@@ -385,7 +388,6 @@ class BillBoard extends Component {
             Object.keys(params).forEach((key) => {
                 uploadRequest.field(key, params[key])
             })
-
             uploadRequest.end((err, resp) => {
                 err ? rej(err) : res(resp);
             })
@@ -420,8 +422,8 @@ class BillBoard extends Component {
     render() {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
-            companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList } = this.state;
-        console.log(fileList, 'images')
+            companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList, imgArr } = this.state;
+        // console.log(fileList, 'images')
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -430,7 +432,6 @@ class BillBoard extends Component {
                     <div className="container">
                         <div className="row">
                             <div className='mainDive container'>
-
                                 <div className='formDiv up' key={index}>
                                     {/* animation of page */}
                                     <ReactCSSTransitionGroup transitionName="fade"
@@ -595,10 +596,7 @@ class BillBoard extends Component {
                                                                         }],
                                                                     })(
                                                                         <div className="clearfix">
-                                                                            <Upload onChange={this.onChange.bind(this, index)}
-                                                                            // {...props}
-                                                                            // fileList={this.state.imgArr}
-                                                                            >
+                                                                            <Upload onChange={this.onChange.bind(this, index)}>
                                                                                 <Button>
                                                                                     <Icon type="upload" /> Upload
                                                                                 </Button>
@@ -607,6 +605,12 @@ class BillBoard extends Component {
                                                                     )}
                                                                 </FormItem>
                                                             </div>
+                                                            <br/>
+                                                            {imgArr.length >= 0 ? imgArr.map((elem, i) => {
+                                                                return (
+                                                                    <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px" ,margin:'10px'}} />
+                                                                )
+                                                            }) : null}
                                                             {this.state.noChooseFile ?
                                                                 null
                                                                 : <div >
