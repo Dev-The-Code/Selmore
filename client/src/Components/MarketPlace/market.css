@@ -117,11 +117,16 @@ body {
 .crdtxt{
   margin-top: -6%;
 }
+.crdtxt2{
+  margin-top: 2%;
+  margin-left: 7%;
+
+}
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
 .efect {
-  margin-bottom: 18%;
+  margin-bottom: 27%;
   margin-right: 4%;
   position: relative;
   width: 100px;
@@ -186,6 +191,11 @@ body {
 .crdtxt{
   margin-top: -18%;
   font-size: 14px;
+}
+.crdtxt2{
+  margin-top: 2%;
+  margin-left: 7%;
+
 }
 }
 
@@ -255,6 +265,11 @@ body {
 }
 .crdtxt{
   margin-top: -9%;
+}
+.crdtxt2{
+  margin-top: 2%;
+  margin-left: 7%;
+
 }
 }
 
@@ -327,6 +342,11 @@ body {
 }
 .crdtxt{
   margin-top: 0%;
+}
+.crdtxt2{
+  margin-top: 2%;
+  margin-left: 7%;
+
 }
 }
 
