@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { HttpUtils } from './../Services/HttpUtils';
 import './home.css';
 
 class Panel3 extends Component {
@@ -26,6 +27,22 @@ class Panel3 extends Component {
 			i: 0
 		}
 	}
+
+	componentDidMount() {
+		this.billData();
+	}
+
+	billData = async () => {
+		let response = await HttpUtils.get('getbillboard');
+		let data = response.content;
+		let arr = [];
+		for(var i = 0; i < data.length; i++){
+				arr.push(data[i]);
+
+		}
+	}
+
+
 	billCity = () => {
 		this.setState({
 			i: this.state.i + 12

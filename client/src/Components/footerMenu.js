@@ -5,13 +5,29 @@ import Connect from './connect.js'
 
 
 
+class FooterMenu extends Component { 
+  
 
-class FooterMenu extends Component {
+  
   render() {
     return (
-        <div>
-        	<About/>
-       </div>
+        <div className="col-md-12">
+          <div className="row">
+            <div className="col-md-4">
+        	    {this.about()}
+            </div>
+            
+              <div className="col-md-4">
+                  {this.quickLinks()}
+              </div>
+           
+            
+              <div className="col-md-4">
+                  <Connect />
+              </div>
+            
+          </div>  
+        </div>
     );
   }
 }
