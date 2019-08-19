@@ -9,6 +9,7 @@ exports.postAddData = function(req,res,next){
       companyName:formData.companyName,
       images:formData.images,
       facing:formData.facing,
+      category:formData.category,
       type:formData.type,
       size:formData.size,
       latitude:formData.latitude,

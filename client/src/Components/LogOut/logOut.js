@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import './logOut.css';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 class LogOut extends Component {
@@ -8,11 +7,9 @@ class LogOut extends Component {
         super(props);
         this.signOut = this.signOut.bind(this)
     }
-
     signOut() {
         localStorage.removeItem('loggedIn');
         return <Redirect to='/' />
-
     }
     render() {
         return (
@@ -20,6 +17,5 @@ class LogOut extends Component {
             </div>
         )
     }
-
 }
 export default LogOut;

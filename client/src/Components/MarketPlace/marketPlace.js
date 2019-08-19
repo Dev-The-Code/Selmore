@@ -10,7 +10,7 @@ class MarketPlace extends Component {
     render() {
         return (
             <div>
-                 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
+                <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
                 <Market />
                 <Footer />
             </div>

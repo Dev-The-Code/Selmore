@@ -3,10 +3,6 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
-
-import { fileToObject } from 'antd/lib/upload/utils';
-import filterImg from "./caret-down.png";
-
 var filteredObj = {};
 
 class DashboardData extends Component {
@@ -17,7 +13,7 @@ class DashboardData extends Component {
             billboardFilterdData: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
-            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
@@ -28,13 +24,12 @@ class DashboardData extends Component {
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
                 " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
                 " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
-            statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             companyName: [],
             types: [],
             rangeValzForDropdown: [],
@@ -64,6 +59,7 @@ class DashboardData extends Component {
             rangeNumArr.push(i)
         }
         let response = await HttpUtils.get('getcompanyname');
+        console.log(response)
         let responseBillboardData = await HttpUtils.get('getbillboard');
         companyName = response.content.map((elem, i) => {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
@@ -120,7 +116,6 @@ class DashboardData extends Component {
         const { billboardData } = this.state;
         console.log(filteredObj)
         var filteredData = [];
-
         if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.size !== undefined
             && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
             for (var i in billboardData) {
@@ -162,14 +157,12 @@ class DashboardData extends Component {
 
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
-        console.log(billboardFilterdData, 'billboardFilterdData')
-        let tableData;
         const billboardRendring = (
             <div>
-                <br/>
+                <br />
                 <div className="scroll_table">
                     <table className='tableData table'>
-                        <thead className="thead-dark">
+                        <thead className="thead-dark" style={{width: '10px'}}>
                             <th className='tableHead' scope="col">#</th>
                             <th className='tableHead' scope="col">Company Name</th>
                             <th className='tableHead' scope="col">Address</th>
@@ -178,8 +171,6 @@ class DashboardData extends Component {
                             <th className='tableHead' scope="col">Size</th>
                             <th className='tableHead' scope="col">Action</th>
                         </thead>
-                        {/* {tableData} */}
-
                         {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                             return (<tbody>
                                 <tr>
@@ -215,175 +206,157 @@ class DashboardData extends Component {
         );
         return (
             <div className="container">
-                <div></div>
-                <div className='row'>
-                    <div className='filterOne d-none d-sm-block'>
-                        <div className='col-xl-3 col-lg-3 col-md-3 col-12'>
-                        </div><br/><br/>
-                        <div className='filter'>
-                            <div>
-                                <h2 className='text_topFilter filteration'>Filter</h2>
+                <div className='row' style={{ marginLeft: '0px' }}>
+                    <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
+                        <div>
+                            <h2 className='text_topFilter filteration'>Filter</h2>
+                        </div>
+                    </div>
+                    <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' >
+                        <div className="row">
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>Company Name</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeCompany}
+                                        options={companyName}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>Company Name</h4>
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>BillBoard Type</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeType}
+                                        options={types}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                            <div>
-                                <Select onChange={this.handleChangeCompany}
-                                    options={companyName}
-                                >
-                                </Select>
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>Size</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeSize}
+                                        options={rangeValzForDropdown}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>BillBoard Type</h4>
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>Address</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeAddress}
+                                        options={address}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                            <div>
-                                <Select onChange={this.handleChangeType}
-                                    options={types}
-                                >
-                                </Select>
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>City</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeCity}
+                                        options={cities}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>Size</h4>
+                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                <div className="filture">
+                                    <h4 className='text_topFilter'>State</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeState}
+                                        options={states}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                            <div>
-                                <Select onChange={this.handleChangeSize}
-                                    options={rangeValzForDropdown}
-                                >
-                                </Select>
+                        </div>
+                    </div>
+                    <div className='col-lg-12 d-none d-lg-block d-xl-block'>
+
+                        <div className="row">
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>Company Name</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeCompany}
+                                        options={companyName}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>Address</h4>
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>BillBoard Type</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeType}
+                                        options={types}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                            <div>
-                                <Select onChange={this.handleChangeAddress}
-                                    options={address}
-                                >
-                                </Select>
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>Size</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeSize}
+                                        options={rangeValzForDropdown}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>City</h4>
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>Address</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeAddress}
+                                        options={address}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                            <div>
-                                <Select onChange={this.handleChangeCity}
-                                    options={cities}
-                                >
-                                </Select>
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>City</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeCity}
+                                        options={cities}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div className='filter'>
-                            <div>
-                                <h4 className='text_topFilter'>State</h4>
-                            </div>
-                            <div>
-                                <Select onChange={this.handleChangeState}
-                                    options={states}
-                                >
-                                </Select>
+                            <div className='col-lg-2'>
+                                <div>
+                                    <h4 className='text_topFilter'>State</h4>
+                                </div>
+                                <div>
+                                    <Select onChange={this.handleChangeState}
+                                        options={states}
+                                    >
+                                    </Select>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-11 d-block d-sm-none">
-
-                        <div id="accordion">
-                            <div className="card">
-                              <div className="card-header">
-                                <a className="card-link" data-toggle="collapse" href="#collapseOne" style={{color: '#007bff'}}>
-                                  <h3>Filter<img src={filterImg} className="caret_downOne"></img></h3>
-                                </a>
-                              </div>
-                              <div id="collapseOne" className="collapse show" data-parent="#accordion">
-                                <div className="card-body">
-                                 
-                                <br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>Company Name</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeCompany}
-                                            options={companyName}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div><br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>BillBoard Type</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeType}
-                                            options={types}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div><br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>Size</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeSize}
-                                            options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div><br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>Address</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeAddress}
-                                            options={address}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div><br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>City</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeCity}
-                                            options={cities}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div><br/><br/>
-                                <div className='filter'>
-                                    <div>
-                                        <h4 className='text_topFilter'>State</h4>
-                                    </div>
-                                    <div>
-                                        <Select onChange={this.handleChangeState}
-                                            options={states}
-                                        >
-                                        </Select>
-                                    </div>
-                                </div>
-
-
-                                </div>
-                              </div>
-                            </div>
-                        </div><br/>
-                    </div>
-
-                    <div className='col-xl-9 col-lg-9 col-md-9 col-11'>
-                        {billboardRendring}
-                    </div>
+                </div>
+                <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
+                    {billboardRendring}
                 </div>
             </div>
         )

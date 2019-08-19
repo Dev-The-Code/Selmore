@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 class Dropdown extends Component {
@@ -29,23 +29,59 @@ class Dropdown extends Component {
     return <Redirect to={{ pathname: '/' }} />
   }
 
+
+openNav = ()=>{
+      console.log(document.getElementById("myNav"))
+     document.getElementById("mySideNav").style.width = "100%";
+
+  }
+  openNav = ()=>{
+    document.getElementById("mySidenav").style.width = "100%";
+  }
+
+  closeNav = () =>{
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
+
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
     return (
-      <MDBDropdown>
-        <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
-          <div className='userName dropdown-toggle'
-          >{userName}</div>
-        </MDBDropdownToggle>
-        <MDBDropdownMenu basic>
-          <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
-          <MDBDropdownItem onClick={this.logOut}>
-            <Link rel="noopener noreferrer" to={`/`}>
-            Log Out
-            </Link>
-          </MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown>
+      <div>
+        <div className="d-none d-sm-block">
+          <MDBDropdown>
+            <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
+              <div className='userName dropdown-toggle'
+              >{userName}</div>
+            </MDBDropdownToggle>
+            <MDBDropdownMenu basic>
+              <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
+              <MDBDropdownItem onClick={this.logOut}>
+                <Link rel="noopener noreferrer" to={`/`}>
+                  Log Out
+                </Link>
+              </MDBDropdownItem>
+            </MDBDropdownMenu>
+          </MDBDropdown>
+        </div>
+
+        <div className="d-block d-sm-none">
+          <MDBDropdown>
+            <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle mob_butn'>
+              <div className='userName dropdown-toggle'
+              >{userName}</div>
+            </MDBDropdownToggle>
+            <MDBDropdownMenu basic>
+              <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`} onClick={this.closeNav}><h5>Profile</h5></Link></MDBDropdownItem>
+              <MDBDropdownItem className="mob_butn_log" onClick={this.logOut} onClick={this.closeNav}>
+                <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
+                  <h5>Log Out</h5>
+                </Link>
+              </MDBDropdownItem>
+            </MDBDropdownMenu>
+          </MDBDropdown>
+        </div>
+      </div>
     );
   }
 }

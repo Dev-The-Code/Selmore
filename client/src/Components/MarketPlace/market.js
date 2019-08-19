@@ -5,18 +5,14 @@ import {
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import filtersImg from "./caret-down.png";
-
 const CheckboxGroup = Checkbox.Group;
-const option = Select.Option;
-const { Option } = Select;
 
 class Market extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            billboardData: [],
             billboardFilterdData: [],
             filterValue: '',
             from: 0,
@@ -24,7 +20,7 @@ class Market extends Component {
             inputValue: 1,
             value: 0,
             rangeValzForDropdown: [],
-            citiesArr: ["Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan",
@@ -35,15 +31,19 @@ class Market extends Component {
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
                 " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", " Rabwah",
+                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
                 " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
+            category: [],
+            categoryArr: ['Billboard', 'Taxi', 'Bus', 'Bus Shelter', 'Airport', 'Shopping Mall', 'Total Cinima', 'Radio', 'Other'],
             states: [],
+            billboardData: [],
+            i: 0,
         }
     }
     componentDidMount() {
@@ -54,8 +54,7 @@ class Market extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
-        const { citiesArr,  statesArr } = this.state;
-        
+        const { citiesArr, statesArr, categoryArr } = this.state;
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -75,15 +74,20 @@ class Market extends Component {
         let city = citiesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
+        let catee = categoryArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await this.setState({
-            billboardData: data,
-            rangeValzForDropdown: rangeValues,
-            cities: city,
-            states: state
-        })
+        await
+            this.setState({
+                billboardData: data,
+                rangeValzForDropdown: rangeValues,
+                cities: city,
+                category: catee,
+                states: state
+            })
     }
 
     //filtration the data with given values
@@ -112,9 +116,10 @@ class Market extends Component {
                     // console.log(billboardData[j])
                     for (var k in data) {
                         // console.log(data[k])
-                        if (data[k] == value[i]) {
+                        if (data[k] === value[i]) {
                             // console.log(data)
                             filteredData.push(data)
+                            break;
                         }
                     }
                 }
@@ -148,86 +153,82 @@ class Market extends Component {
     handleChange = (data) => {
         this.filterBillBoard(data.value)
     }
-
+    onFlipData = () => {
+        this.setState({
+            i: this.state.i + 9
+        })
+    }
     render() {
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown } = this.state;
+        const { filter } = this.props;
+        console.log(filter, 'sssssssss');
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown, i, category } = this.state;
+        let flexxData = billboardData.slice(0, i + 9);
+        let filterPoint = billboardFilterdData.slice(0, i + 9);
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
                 <div className='row '>
-                    {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
+                    {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
                         return (
                             <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                 <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
                                     <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-
-                                    
-
-                                    <div className="div_efect">
-                                        <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
-                                        </div>
+                                <div className="div_efect">
+                                    <div className="text_efect">
+                                        <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                     </div>
+                                </div>
 
-                                    <div id="more_efect1">
-                                        <div id="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
-                                        </div>
+                                <div id="more_efect1" className="card">
+                                    <div id="more_efect card-body slow">
+                                        <p className="crdtxt">{elem.companyName}</p>
+                                        <p className="crdtxt">{elem.city}</p>
                                     </div>
+                                </div>
                             </div>
                         )
                     })
                         :
-                        billboardData && billboardData.map((elem, key) => {
+                        flexxData && flexxData.map((elem, key) => {
                             return (
-                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
+                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect animated animatedFadeInUp fadeInUp'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
                                         <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-                                    
-                                    
-                                    
-
-
                                     <div className="div_efect">
                                         <div className="text_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                                <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                                <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
                                         </div>
                                     </div>
 
-                                    <div id="more_efect1">
-                                        <div className="more_efect">
-                                            <p>{elem.companyName}</p>
-                                            <p>{elem.city}</p>
+                                    <div id="more_efect1" className="card">
+                                        <div className="more_efect card-body slow">
+                                            <p className="crdtxt">{elem.companyName}</p>
+                                            <p className="crdtxt">{elem.city}</p>
                                         </div>
                                     </div>
-
-
                                 </div>
                             )
                         })}
-
                 </div>
             </div>
         );
         return (
             <div className="container">
-                <div className='row billboard'>
-                    {/*<div className="col-md-1"></div>*/}
-                    <div className='col-md-3'>Filters</div>
-                    <div className='col-md-9'>Billboards</div>
+                <div className='row billboard animated animatedFadeInUp fadeInUp'>
+                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
+                    <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>Billboards</div>
                 </div>
-                <div className='row filter'>
-                    {/*<div className="col-md-1"></div>*/}
-                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>
+                <div className='row filter animated animatedFadeInUp fadeInUp'>
+                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
                         <CheckboxGroup
                             setFieldsValue={this.state.filterValue}
                             onChange={this.filterBillBoard.bind(this)}
                         >
                             <div className='filterDivs'>Types</div>
-
                             <Row>
                                 <Col>
                                     <Checkbox className="fasla" value='Static'>&nbsp;Static</Checkbox>
@@ -260,89 +261,58 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
                                 </Col>
                             </Row>&emsp;
-
-
-
-
                             <Row>
                                 <div className='filterDivs'>Facing</div>
-
-                                {/*<form action="/action_page.php">
-                                    <div class="custom-control custom-checkbox mb-3" value="Front">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" value="Front"></input>
-                                        <label class="custom-control-label" for="customCheck" value="Front">Front</label>
-                                    </div>
-                                    
-                                </form>
-                                <form action="/action_page.php">
-                                    
-                                    <div class="custom-control custom-checkbox mb-3" value="Back">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1" value="Back"></input>
-                                        <label class="custom-control-label" for="customCheck1" value="Back">Back</label>
-                                    </div>
-                                </form>*/}
-
-
-                                {/*<label className="led">Front
-                                    <checkbox type="checkbox" value="Front">
-                                    <span id="checkmark"></span>
-
-                                    </checkbox>
-                                  </label>
-
-                                <label className="led">Back
-                                  <checkbox type="checkbox" value="Front"></checkbox>
-                                  <span id="checkmark"></span>
-                                </label>*/}
-
-
-                                
                                 <Col >
-                                    <Checkbox className="fasla"  value="Front">&nbsp;Front</Checkbox>
+                                    <Checkbox className="fasla" value="Front">&nbsp;Front</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Back">&nbsp;Back</Checkbox>
+                                    <Checkbox className="fasla" value="Back">&nbsp;Back</Checkbox>
                                 </Col>
                             </Row>
-
-
-
-
-
                             <div className='filterDivs'>Lightning</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Yes">&nbsp;Yes</Checkbox>
+                                    <Checkbox className="fasla" value="Yes">&nbsp;Yes</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="No">&nbsp;No</Checkbox>
+                                    <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                 </Col>
                             </Row>
                             <div className='filterDivs'>Status</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Available">&nbsp;Available</Checkbox>
+                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="No Available">&nbsp;No Available</Checkbox>
+                                    <Checkbox className="fasla" value="No Available">&nbsp;No Available</Checkbox>
                                 </Col>
                             </Row>
                             <div className='filterDivs'>Audience Type</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla"  value="All types of people">&nbsp;All types of people</Checkbox>
+                                    <Checkbox className="fasla" value="All types of people">&nbsp;All types of people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Office type of people">&nbsp;Office type of people</Checkbox>
+                                    <Checkbox className="fasla" value="Office type of people">&nbsp;Office type of people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Labour type people">&nbsp;Labour type people</Checkbox>
+                                    <Checkbox className="fasla" value="Labour type people">&nbsp;Labour type people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla"  value="Govt official type people">&nbsp;Govt official type people</Checkbox>
+                                    <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                 </Col>
                             </Row>
                             <div className='col-md-9 dropdown'>
+                                <div className='filterDivs'>Category</div>
+                                <Row className="fasla1" >
+                                    <Col>
+                                        <Select onChange={this.handleChange}
+                                            options={category}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
                                 <div className='filterDivs'>Width</div>
                                 <Row className="fasla1" >
                                     <Col>
@@ -404,13 +374,12 @@ class Market extends Component {
                             </div>
                         </CheckboxGroup>
                     </div>
-
-                    <div className="col-11 d-block d-sm-none">
+                    <div className="col-12 d-block d-sm-none">
                         <div id="accordion">
                             <div className="card">
                                 <div className="card-header">
-                                    <a className="card-link" data-toggle="collapse" href="#collapseOne" style={{color: '#007bff'}}>
-                                        <h3>Filters<img src={filtersImg} className="caret_down"></img></h3>
+                                    <a className="card-link" data-toggle="collapse" href="#collapseOne" style={{ color: '#007bff' }}>
+                                        <h3>Filters<img src={filtersImg} alt='img' className="caret_down"></img></h3>
                                     </a>
                                 </div>
                                 <div id="collapseOne" className="collapse show" data-parent="#accordion">
@@ -420,7 +389,6 @@ class Market extends Component {
                                             onChange={this.filterBillBoard.bind(this)}
                                         >
                                             <div className='filterDivs'>Types</div>
-
                                             <Row>
                                                 <Col>
                                                     <Checkbox className="fasla" value='Static'>&nbsp;Static</Checkbox>
@@ -453,89 +421,58 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
                                                 </Col>
                                             </Row>&emsp;
-
-
-
-
                                             <Row>
                                                 <div className='filterDivs'>Facing</div>
-
-                                                {/*<form action="/action_page.php">
-                                                    <div class="custom-control custom-checkbox mb-3" value="Front">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" value="Front"></input>
-                                                        <label class="custom-control-label" for="customCheck" value="Front">Front</label>
-                                                    </div>
-                                                    
-                                                </form>
-                                                <form action="/action_page.php">
-                                                    
-                                                    <div class="custom-control custom-checkbox mb-3" value="Back">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1" value="Back"></input>
-                                                        <label class="custom-control-label" for="customCheck1" value="Back">Back</label>
-                                                    </div>
-                                                </form>*/}
-
-
-                                                {/*<label className="led">Front
-                                                    <checkbox type="checkbox" value="Front">
-                                                    <span id="checkmark"></span>
-
-                                                    </checkbox>
-                                                  </label>
-
-                                                <label className="led">Back
-                                                  <checkbox type="checkbox" value="Front"></checkbox>
-                                                  <span id="checkmark"></span>
-                                                </label>*/}
-
-
-                                                
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Front">&nbsp;Front</Checkbox>
+                                                    <Checkbox className="fasla" value="Front">&nbsp;Front</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Back">&nbsp;Back</Checkbox>
+                                                    <Checkbox className="fasla" value="Back">&nbsp;Back</Checkbox>
                                                 </Col>
                                             </Row>
-
-
-
-
-
                                             <div className='filterDivs'>Lightning</div>
                                             <Row>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Yes">&nbsp;Yes</Checkbox>
+                                                    <Checkbox className="fasla" value="Yes">&nbsp;Yes</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="No">&nbsp;No</Checkbox>
+                                                    <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                                 </Col>
                                             </Row>
                                             <div className='filterDivs'>Status</div>
                                             <Row>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Available">&nbsp;Available</Checkbox>
+                                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="No Available">&nbsp;No Available</Checkbox>
+                                                    <Checkbox className="fasla" value="No Available">&nbsp;No Available</Checkbox>
                                                 </Col>
                                             </Row>
                                             <div className='filterDivs'>Audience Type</div>
                                             <Row>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="All types of people">&nbsp;All types of people</Checkbox>
+                                                    <Checkbox className="fasla" value="All types of people">&nbsp;All types of people</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Office type of people">&nbsp;Office type of people</Checkbox>
+                                                    <Checkbox className="fasla" value="Office type of people">&nbsp;Office type of people</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Labour type people">&nbsp;Labour type people</Checkbox>
+                                                    <Checkbox className="fasla" value="Labour type people">&nbsp;Labour type people</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla"  value="Govt official type people">&nbsp;Govt official type people</Checkbox>
+                                                    <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                                 </Col>
                                             </Row>
                                             <div className='col-md-9 dropdown'>
+                                                <div className='filterDivs'>Category</div>
+                                                <Row className="fasla1" >
+                                                    <Col>
+                                                        <Select onChange={this.handleChange}
+                                                            options={rangeValzForDropdown}
+                                                        >
+                                                        </Select>
+                                                    </Col>
+                                                </Row>
                                                 <div className='filterDivs'>Width</div>
                                                 <Row className="fasla1" >
                                                     <Col>
@@ -599,14 +536,14 @@ class Market extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                         </div>
                     </div>
-
                     <div className='col-xl-9 col-lg-9 col-md-8'>
+                        <div className='col-12 d-block d-sm-none' style={{ fontSize: '30px' }}>Billboards</div>
                         {billboardRendring}
                         <div className="d-flex justify-content-center">
-                            <button type="button" className="btn btn-primary btn-sm" onClick={this.onMoreData}>
+                            <button type="button" className="btn btn-primary btn-sm" onClick={this.onFlipData}>
                                 Load more
                         </button>
                         </div>

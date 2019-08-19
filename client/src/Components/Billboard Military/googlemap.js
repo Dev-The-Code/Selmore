@@ -50,7 +50,7 @@
 //                     defaultCenter={{ lat: 24.509642, lng: 67.280273 }}
 //                 >
 //                     {true && <Marker onPositionChanged={() => {
-//                         // This event will trigger the 
+//                         // This event will trigger the
 //                         // call to update the state where lat and lng will go.
 
 //                     }} draggable position={{ lat: 24.509642, lng: 67.280273 }} />}
@@ -95,9 +95,9 @@ class Location extends Component {
         this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     }
     componentWillMount() {
-        this.setPosition(this.props.latitude, this.props.longitude);
+        this.setPosition();
     }
-    setPosition(latitude, longitude) {
+    setPosition() {
         navigator.geolocation.getCurrentPosition(position => {
             // console.log(position)
             this.setState({
@@ -126,9 +126,9 @@ class Location extends Component {
         })
     }
     render() {
-        const { coords , position} = this.state;
-        console.log(coords)
-        console.log(this.props.latitude, this.props.longitude , 'props')
+        const { coords } = this.state;
+        // console.log(coords)
+        // console.log(this.props.latitude, this.props.longitude , 'props')
 
         return (
             <div>
@@ -142,7 +142,7 @@ class Location extends Component {
                     coords={coords}
                     onInfoWindowClose={this.onInfoWindowClose}
                     address={this.props.address}
-                    getCurrentPosition={this.getCurrPosition}
+                    // getCurrentPosition={this.getCurrPosition}
                     // position = {position}
                 />
             </div>
@@ -151,12 +151,11 @@ class Location extends Component {
 }
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-<GoogleMap
-        defaultZoom={15}
-        defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
-        // center={{ lat: 33.690980, lng: 73.091140 }}
-        center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-        
+        <GoogleMap
+            defaultZoom={15}
+            // defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
+            // center={{ lat: 33.690980, lng: 73.091140 }}
+            center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
         >
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
