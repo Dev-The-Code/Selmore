@@ -54,8 +54,8 @@ exports.postAddData = function(req,res,next){
 else if(formData.objectId != ''){
   console.log('hit app')
   listAdd.updateMany(
-        {"_id":objectId},
-        {$set: profileObj},
+        {"_id":formData.objectId},
+        {$set: formData},
         {multi:true}
     ).then((response) => {
         res.send({
