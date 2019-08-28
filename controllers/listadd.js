@@ -4,6 +4,8 @@ const listAdd = require('../models/addAgencyForm');
 
 exports.postAddData = function(req,res,next){
   var formData = req.body;
+  if(formData.objectId == ''){
+    console.log('insert')
   const postListData = new listAdd({
       companyId:formData.companyId,
       companyName:formData.companyName,
@@ -49,4 +51,20 @@ exports.postAddData = function(req,res,next){
       })
     }
   })
+}
+else if(formData.objectId != ''){
+  console.log('update')
+  console.log('hit app')
+  listAdd.updateMany(
+        {"_id":formData.objectId},
+        {$set: formData},
+        {multi:true}
+    ).then((response) => {
+        res.send({
+            code:200,
+            msg:'Billboard data updated successfully',
+            content:formData
+        });
+    }).catch(() => res.status(422).send({msg:'something went wrong'}));
+}
 }

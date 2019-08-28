@@ -31,16 +31,6 @@ let quicklinksObject = {
 }
 
 class Footer extends Component {
-	// constructor(props) {
-	// 	super(props);
-	//
-	// 	this.state = {
-	// 	  list: [About],
-	// 	  list1: [QuickLinks],
-	// 	  list2: [Connect],
-	//
-	// 	};
-	//   }
 
   render() {
 		console.log(aboutObject,'about');
@@ -49,16 +39,17 @@ class Footer extends Component {
     return (
         <div>
       		<div className="container true3">
-				  <div className="row">
-				  <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-							<About about={aboutObject} />
-				  </div>
-					<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-							<Connect connect={connectObject} />
-					</div>
-					<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-							<QuickLinks />
-					</div>
+
+				<div className="row">
+				<div className="col-12 col-md-4 col-lg-4 col-xl-4">
+						<About about={aboutObject} />
+				</div>
+				<div className="col-12 col-md-4 col-lg-4 col-xl-4">
+						<Connect connect={connectObject} />
+				</div>
+				<div className="col-12 col-md-4 col-lg-4 col-xl-4">
+						<QuickLinks quicklinks={quicklinksObject}/>
+				</div>
 
       				{/*<div className="col-4 col-md-4 col-lg-4 col-xl-4">
   						<h3  className="footertext1"><span>ABOUT</span></h3>

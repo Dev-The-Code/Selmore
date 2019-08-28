@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './billmilitary.css';
 import Location from './googlemap';
+import { Link } from "react-router-dom";
+
 
 class Militarypanel1 extends Component {
 	constructor(props) {
@@ -21,16 +23,17 @@ class Militarypanel1 extends Component {
 	render() {
 		const { data, images } = this.state;
 		let image;
+		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
 				if (key == 0) {
-					return <div className="carousel-item active">
-						<img className="d-block w-100" src={elem} alt={key} />
+					return <div className="carousel-item active" style={{ width: '720px', height: "450px"}}>
+						<img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px"}}/>
 					</div>
 				}
 				else {
-					return <div className="carousel-item">
-						<img className="d-block w-100" src={elem} alt={key} />
+					return <div className="carousel-item" style={{ width: '720px', height: "450px"}}>
+						<img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px"}}/>
 					</div>
 				}
 			})
@@ -153,23 +156,31 @@ class Militarypanel1 extends Component {
 							</div>
 						</div>
 						<div className="col-md-4">
+							<div></div>
+							{adminUser !== null && adminUser.role == 'admin' ?
+								<Link to={{ pathname: `/list_add`, state: data }}>
+									<div class="fa fa-pencil" style={{ fontSize: "24px", float: "right", marginLeft: '10px' }}></div>
+									</Link>
+									:
+									null
+								}
 							<div className="row soldier7" style={{ margin: '0px' }}>
-								<div><h3>Map</h3></div>
+										<div><h3>Map</h3></div>
 
-							</div><br />
-							{/* render a map and show a location of the Billboard */}
-							<div>
-								<Location
-									address={this.props.data.address} />
-							</div>
-							<div className="row soldier7" style={{ margin: '0px' }}>
-								<h3 style={{ color: 'white' }}>Map</h3>
-							</div>
+									</div><br />
+									{/* render a map and show a location of the Billboard */}
+									<div>
+										<Location
+											address={this.props.data.address} />
+									</div>
+									<div className="row soldier7" style={{ margin: '0px' }}>
+										<h3 style={{ color: 'white' }}>Map</h3>
+									</div>
 						</div>
 					</div>
 				</div> <br />
-			</div >
-		);
-	}
-}
-export default Militarypanel1;
+					</div >
+					);
+				}
+			}
+			export default Militarypanel1;

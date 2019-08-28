@@ -30,6 +30,7 @@ class DashboardData extends Component {
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal",],
+            statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             companyName: [],
             types: [],
             rangeValzForDropdown: [],
@@ -54,6 +55,7 @@ class DashboardData extends Component {
     gettingDropDownValues = async () => {
         let { companyName, citiesArr, typeArr, statesArr, address,
             types, cities, states } = this.state;
+        console.log(statesArr, 'statesArr')
         let rangeNumArr = [];
         for (var i = 0; i <= 5000; i = i + 5) {
             rangeNumArr.push(i)
@@ -135,9 +137,7 @@ class DashboardData extends Component {
                                                 for (var state in checkingCity) {
                                                     if (filteredObj.state == checkingCity[state]) {
                                                         let cheakingState = checkingCity;
-                                                        if (filteredObj.size == cheakingState.size) {
-                                                            filteredData.push(cheakingState)
-                                                        }
+                                                        filteredData.push(cheakingState)
                                                     }
                                                 }
                                             }
@@ -162,13 +162,13 @@ class DashboardData extends Component {
                 <br />
                 <div className="scroll_table">
                     <table className='tableData table'>
-                        <thead className="thead-dark" style={{width: '10px'}}>
+                        <thead className="thead-dark" style={{ width: '10px' }}>
                             <th className='tableHead' scope="col">#</th>
                             <th className='tableHead' scope="col">Company Name</th>
                             <th className='tableHead' scope="col">Address</th>
                             <th className='tableHead' scope="col">City</th>
                             <th className='tableHead' scope="col">State</th>
-                            <th className='tableHead' scope="col">Size</th>
+                            {/* <th className='tableHead' scope="col">Size</th> */}
                             <th className='tableHead' scope="col">Action</th>
                         </thead>
                         {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
@@ -179,7 +179,7 @@ class DashboardData extends Component {
                                     <td className='tableTd'>{elem.address}</td>
                                     <td className='tableTd'>{elem.city}</td>
                                     <td className='tableTd'>{elem.state}</td>
-                                    <td className='tableTd'>{elem.size}</td>
+                                    {/* <td className='tableTd'>{elem.size}</td> */}
                                     <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
                                 </tr>
                             </tbody>
@@ -194,7 +194,7 @@ class DashboardData extends Component {
                                         <td className='tableTd'>{elem.address}</td>
                                         <td className='tableTd'>{elem.city}</td>
                                         <td className='tableTd'>{elem.state}</td>
-                                        <td className='tableTd'>{elem.size}</td>
+                                        {/* <td className='tableTd'>{elem.size}</td> */}
                                         <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
                                     </tr>
                                 </tbody>)
@@ -236,7 +236,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                            {/* <div className='col-xl-3 col-md-3 col-5 filterOne'>
                                 <div className="filture">
                                     <h4 className='text_topFilter'>Size</h4>
                                 </div>
@@ -246,7 +246,7 @@ class DashboardData extends Component {
                                     >
                                     </Select>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
                                 <div className="filture">
                                     <h4 className='text_topFilter'>Address</h4>
@@ -307,7 +307,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-lg-2'>
+                            {/* <div className='col-lg-2'>
                                 <div>
                                     <h4 className='text_topFilter'>Size</h4>
                                 </div>
@@ -317,8 +317,8 @@ class DashboardData extends Component {
                                     >
                                     </Select>
                                 </div>
-                            </div>
-                            <div className='col-lg-2'>
+                            </div> */}
+                            <div className='col-lg-4'>
                                 <div>
                                     <h4 className='text_topFilter'>Address</h4>
                                 </div>

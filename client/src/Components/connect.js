@@ -3,14 +3,8 @@ import React, { Component } from 'react';
 
 
 class Connect extends Component {
-	// state = {
-	// 	text1: "",
-	// 	text2: '',
-	// 	text3: ""
-	// }
 
   render() {
-	  // const { text1, text2, text3 } = this.state;
     return (
         <div>
 
