@@ -112,11 +112,13 @@ class Location extends Component {
                 //      latitude: this.props.latitude,
                 //     longitude: this.props.longitude,
                 // }
+                
             });
+            
         })
     }
     getCurrPosition({ latitude, longitude }) {
-        // console.log(latitude)
+        //  console.log(latitude,'ssssssssssssss')
         this.setState({ coords: { latitude, longitude } })
     }
     onInfoWindowClose() {
@@ -127,7 +129,7 @@ class Location extends Component {
     }
     render() {
         const { coords } = this.state;
-        // console.log(coords)
+        //   console.log(coords)
         // console.log(this.props.latitude, this.props.longitude , 'props')
 
         return (
@@ -145,6 +147,7 @@ class Location extends Component {
                     // getCurrentPosition={this.getCurrPosition}
                     // position = {position}
                 />
+                
             </div>
         )
     }
@@ -156,7 +159,9 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
             // defaultCenter={{ lat: props.position.latitude, lng: props.position.longitude }}
             // center={{ lat: 33.690980, lng: 73.091140 }}
             center={{ lat: props.coords.latitude, lng: props.coords.longitude }}
+            
         >
+            
         {props.isMarkerShown && <Marker
             position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
             title={props.address}
@@ -187,6 +192,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     </GoogleMap>
 ))
 export default Location;
+
 // export default MyMapComponent({
 //     apiKey: 'AIzaSyAV77zKJtP5MeEAFIgi3YhdgIzsuYKBuxo'
 //   })(Location);

@@ -37,15 +37,19 @@
         font-size: 10px !important;
         color: white;
     }
-
+    .navbtnmargin{
+        /* margin-left: 10px; */
+        margin-top: 4.1%;
+        height: 31px;
+    }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
     .navsm{
         /* margin-left: -10%; */
     }
     .navmargin{
-            margin-top: 25px;
-            margin-right: 4%;
+            margin-top: 15px;
+            margin-right: 7%;
     }
     .selmorelogo{
         height: 101px;
@@ -76,12 +80,12 @@
     }
     .navbiddbtn{
                 /* margin-left: 17px; */
-            margin-top: 2%;
+            margin-top: 2.5%;
             margin-right: 4px;
 
     }
     .blgs{
-            margin: 17px 6px 0px -10px;
+            margin: 6px 6px 0px -10px;
         }
         .navbtnmargin{
             margin-top: 10px !important;
@@ -125,14 +129,18 @@
     }
     .navbiddbtn{
             /* margin-left: 10px; */
-            margin-top: 4.2%;
+            margin-top: 4.5%;
             margin-right: 4px;
 
     }
     .blgs{
             margin: 29px 6px 0px -10px;
         }
-
+    .navbtnmargin{
+            /* margin-left: 10px; */
+            margin-top: 6%;
+            height: 31px;
+    }    
 
 
 
@@ -186,13 +194,13 @@
     .blgs{
             margin: 28px 6px 0px -10px;
         }
+    .navbtnmargin{
+        /* margin-left: 10px; */
+        margin-top: 5.1%;
+        height: 31px;
+    }    
+}
 
-}
-.navbtnmargin{
-            /* margin-left: 10px; */
-            margin-top: 4.1%;
-            height: 31px;
-}
 
 
 .true3{
