@@ -137,15 +137,15 @@
             margin: 29px 6px 0px -10px;
         }
     .navbtnmargin{
-            /* margin-left: 10px; */
-            margin-top: 6%;
-            height: 31px;
+        margin-left: 10px;
+        margin-top: 4.8%;
+        height: 31px;
     }    
 
 
 
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
+@media screen and (min-width: 1366px) {
     .navsm{
             /* margin-left: 12% */
         color: #007bff !important;
@@ -195,8 +195,8 @@
             margin: 28px 6px 0px -10px;
         }
     .navbtnmargin{
-        /* margin-left: 10px; */
-        margin-top: 5.1%;
+        margin-left: -1%;
+        margin-top: 4.1%;
         height: 31px;
     }    
 }
@@ -308,13 +308,13 @@
              font-size: 22px;
     }
     .navmargin12{
-        margin-top: 4.2%;
+        margin-top: 5.2%;
         margin-left: 2%;
         margin-right: 4px;
 
     }
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
+@media screen and (min-width: 1366px) {
     .footertext2{
         width: 100%;
         text-align: center;
@@ -332,8 +332,8 @@
              font-size: 23px;
     }
     .navmargin12{
-        margin-top: 4%;
-        margin-right: 4px;
+        margin-top: 4.5%;
+        margin-right: 10px;
 
     }
 }

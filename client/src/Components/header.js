@@ -34,8 +34,8 @@ class Header extends Component {
             <div className="col-md-3 col-lg-3 col-xl-3 d-none d-sm-block">
               <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
             </div>
-            <div className="col-md-3 col-lg-3 col-xl-3"></div>
-            <div className="col-md-6 col-lg-6 col-xl-6 d-none d-sm-block">
+            <div className="col-md-3 col-lg-3 col-xl-2"></div>
+            <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-block">
               <ul className="nav navsm">
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
