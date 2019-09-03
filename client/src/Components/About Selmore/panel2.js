@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import './about.css';
 
 class Panel2 extends Component {
@@ -15,7 +16,7 @@ class Panel2 extends Component {
 									<p className="cel2"><span className="ex4">if you are ads/media owner and interested in listing your add on selmore.com ,
 									Just Click on <br/>Get Started and start listing you add</span></p>
 								<div className="row">
-									<button type="button" className="btn tissue5btn"><span className="tissue4btn">GET STARTED</span></button>
+									<Link to="/market_place"><button type="button" className="btn tissue5btn" ><span className="tissue4btn">GET STARTED</span></button></Link>
 								</div>
         				 	</div>
 	        				<div className="col-md-4 col-sm-4 floote1">

@@ -70,10 +70,10 @@ class FormLogin extends Component {
         <div className="d-none d-sm-block">
           <div className="row school1">
 
-            <div className="col-md-4 school7">
+            <div className="col-md-6 school7">
               <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
-            <div className="col-md-4 school6">
+            <div className="col-md-5 school6">
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <div className="form-group">
                   <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
@@ -132,8 +132,8 @@ class FormLogin extends Component {
             {isLoader ? <div class="loading"> 	</div>
               : null
             }
-            <div className="col-md-1">
-            </div>
+             <div className="col-md-1">
+            </div> 
           </div>
         </div>
         <div className="d-block d-sm-none">

@@ -34,7 +34,8 @@ class Header extends Component {
             <div className="col-md-3 col-lg-3 col-xl-3 d-none d-sm-block">
               <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
             </div>
-            <div className="col-md-9 col-lg-9 col-xl-9 d-none d-sm-block">
+            <div className="col-md-3 col-lg-3 col-xl-3"></div>
+            <div className="col-md-6 col-lg-6 col-xl-6 d-none d-sm-block">
               <ul className="nav navsm">
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
@@ -89,13 +90,14 @@ class Header extends Component {
                   :
                   null
                 }
+                {/*  not working right now but will work soon
                 <li className="nav-item navbiddbtn">
                   <button type="button" className="btn btn-primary btn-sm">
                     <Link rel="noopener noreferrer" to={`/bidding`} style={{ color: "white" }}>
                       <span>BIDDING</span>
                     </Link>
                   </button>
-                </li>
+                </li> */}
                 {dropDownUser || value
                   ?
                   <li className="nav-item navbtnmargin">
@@ -185,13 +187,13 @@ class Header extends Component {
                       :
                       null
                     }
-                    <li className="mob_li">
+                    {/* <li className="mob_li">
                       <button type="button" className="btn btn-primary btn-sm  mob_butn">
                         <Link rel="noopener noreferrer" to={`/bidding`} onClick={this.closeNav} style={{ color: "white", fontSize: '.875rem' }}>
                           <span>BIDDING</span>
                         </Link>
                       </button>
-                    </li>
+                    </li> */}
                     {dropDownUser || value
                       ?
                       <li className="nav-item navbtnmargin mob_li">
