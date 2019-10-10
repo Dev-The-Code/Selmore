@@ -49,41 +49,57 @@ class Routes extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
-              <Route exact path="/" render={props => { return <Home {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}} 
+              <Route exact path="/" render={props => {
+                return <Home {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+              }}
               ></Route>
-              <Route path="/about" render={props => { return <About {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}} 
+              <Route path="/about" render={props => {
+                return <About {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+              }}
               ></Route>
-              <Route path="/advertising_agency" render={props => { return <Advertising {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/advertising_agency" render={props => {
+                return <Advertising {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+              }}
               ></Route>
-              <Route path="/faq" render={props => { return <Faq {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/faq" render={props => {
+                return <Faq {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+              }}
               ></Route>
-              <Route path="/contact" render={props => { return <Contactpage {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/contact" render={props => { return <Contactpage {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/bidding" render={props => { return <Bidding {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/bidding" render={props => { return <Bidding {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/bidding_karachi" render={props => { return <Billofbidding1 {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/bidding_karachi" render={props => { return <Billofbidding1 {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/signin" render={props => { return <Login {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}/>}}
+              <Route path="/signin" render={props => { return <Login {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} /> }}
               ></Route>
-              <Route path="/seller" render={props => { return <Seller {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/seller" render={props => { return <Seller {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/buyer" render={props => { return <Buyer {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/buyer" render={props => { return <Buyer {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/city_bidding" render={props => { return <Billbidding {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/city_bidding" render={props => { return <Billbidding {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/billboard" render={props => { return <Billboardmardan {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/billboard" render={props => { return <Billboardmardan {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/profile" render={props => { return <ProfileView {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/profile" render={props => { return <ProfileView {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/" render={props => { return <LogOut {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/" render={props => { return <LogOut {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path="/list_add" render={props => { return <AddBillboards {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path="/list_add" render={props => { return <AddBillboards {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path='/billborad_Militry' render={props => { return <Billboardmilitary {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path='/billborad_Militry' render={props => { return <Billboardmilitary {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path='/market_place' render={props => { return <MarketPlace {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path='/market_place' render={props => { return <MarketPlace {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path='/dashboard' render={props => { return <Dashboard {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown}/>}}
+              <Route path='/dashboard' render={props => { return <Dashboard {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
             </div>
           </BrowserRouter>
