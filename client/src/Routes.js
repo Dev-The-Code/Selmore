@@ -49,11 +49,13 @@ class Routes extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
-              <Route exact path="/" render={props => {
-                return <Home {...props}
-                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                  hideDropDown={this.hideDropDown} />
-              }}
+              <Route exact path="/" 
+              // render={props => {
+              //   return <Home {...props}
+              //     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+              //     hideDropDown={this.hideDropDown} />
+              // }}
+              component={Home}
               ></Route>
               <Route path="/about" render={props => {
                 return <About {...props}
@@ -97,14 +99,22 @@ class Routes extends Component {
               ></Route>
               <Route path='/billborad_Militry' render={props => { return <Billboardmilitary {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
               ></Route>
-              <Route path='/market_place' render={props => { return <MarketPlace {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
-              ></Route>
-              <Route path='/dashboard' render={props => { return <Dashboard {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
-              ></Route>
+                      {/* <Route path="/market_place" component={MarketPlace}></Route> */}
+
+              <Route path='/market_place'
+              
+              render={props => {
+                return <MarketPlace {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+              hideDropDown={this.hideDropDown} />
+              }} 
+              ></Route> 
+            <Route path='/dashboard' render={props => { return <Dashboard {...props} showDropDown={this.showDropDown} dropDownUser={this.dropDownUser} hideDropDown={this.hideDropDown} /> }}
+            ></Route>
             </div>
           </BrowserRouter>
         </Provider>
-      </div>
+      </div >
     );
   }
 }

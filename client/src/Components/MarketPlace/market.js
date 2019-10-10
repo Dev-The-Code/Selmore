@@ -46,18 +46,34 @@ class Market extends Component {
             i: 0,
         }
     }
-    componentDidMount() {
-        //fetching billboard data
-        this.billBoradDetails();
-        // fetch('./cities.json')
-        //     .then(resp => resp.json())
-        //     .then(cities => console.log(cities, 'cities'));
+    componentWillMount() {
+        let data = this.props.data;
+        console.log(data, 'this.props')
+
+        if (data != '') {
+            this.setState({
+                billboardData: data,
+            })
+            localStorage.setItem('billboardData', JSON.stringify(data))
+        }
+        else {
+            this.billBoradDetails();
+        }
     }
+
+    // componentDidMount() {
+    //     //fetching billboard data
+    //     this.billBoradDetails();
+    //     // fetch('./cities.json')
+    //     //     .then(resp => resp.json())
+    //     //     .then(cities => console.log(cities, 'cities'));
+    // }
     billBoradDetails = async () => {
         const { citiesArr, statesArr, categoryArr } = this.state;
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
+        console.log(data, 'data')
         localStorage.setItem('billboardData', JSON.stringify(data))
 
         //slice for render some data and click on more button then show some next data

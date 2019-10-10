@@ -32,7 +32,9 @@ class Header extends Component {
         <div className="container" style={{ paddingLeft: '0px' }}>
           <div className="row">
             <div className="col-md-3 col-lg-3 col-xl-3 d-none d-sm-block">
-              <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
+              <Link rel="noopener noreferrer" to={`/`}>
+                <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
+              </Link>
             </div>
             <div className="col-md-3 col-lg-3 col-xl-2"></div>
             <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-block">

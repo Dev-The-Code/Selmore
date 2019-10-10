@@ -173,9 +173,9 @@ class Militarypanel1 extends Component {
 										<Location
 											address={this.props.data.address} />
 									</div>
-									<div className="row soldier7" style={{ margin: '0px' }}>
+									{/* <div className="row soldier7" style={{ margin: '0px' }}>
 										<h3 style={{ color: 'white' }}>Map</h3>
-									</div>
+									</div> */}
 						</div>
 					</div>
 				</div> <br />
