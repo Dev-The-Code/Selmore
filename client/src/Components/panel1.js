@@ -29,7 +29,8 @@ class Panel1 extends Component {
       radioAdscategoryCount: 0,
       othercategory: [],
       othercategoryCount: 0,
-      bilboardData: []
+      bilboardData: [],
+      nameBill: ''
     }
   }
   async componentWillMount() {
@@ -114,12 +115,14 @@ class Panel1 extends Component {
       othercategoryCount: othercategoryNumber,
     })
   }
-  hoverAlert = (value) => {
+  hoverAlert = (value, billName) => {
     console.log(value)
+    console.log(billName, 'daniyal work');
     this.setState({
       directMarket: true,
       keyValuee: value,
-      bilboardData: value
+      bilboardData: value,
+      nameBill: billName,
     })
   }
 
@@ -145,14 +148,15 @@ class Panel1 extends Component {
       othercategory,
       othercategoryCount,
       directMarket,
+      nameBill,
       keyValuee,
       bilboardData
     } = this.state;
-
+    console.log(nameBill, 'billName')
     if (directMarket) {
       return <Redirect to={{
         pathname: '/market_place',
-        state: { bilboardData: bilboardData }
+        state: { bilboardData: bilboardData, nameBill: nameBill }
       }} />
 
     }
@@ -178,7 +182,7 @@ class Panel1 extends Component {
               {/* <Link to={{ pathname: `/market_place`, state: keyValuee }}> */}
               {/* <Link to={{ pathname: `/market_place`, state: busAdscategory }}> */}
               <div className="col-md-4 divborder"
-                onClick={() => this.hoverAlert(busAdscategory)}
+                onClick={() => this.hoverAlert(busAdscategory, 'Bus Ads')}
               >
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
@@ -190,7 +194,7 @@ class Panel1 extends Component {
                 </div>
               </div>
               {/* </Link> */}
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(taxiAdscategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(taxiAdscategory, 'Taxi Ads')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/2.png" alt='img' className="lane1" />
@@ -200,7 +204,7 @@ class Panel1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(billboardcategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(billboardcategory, 'Billboard')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/3.png" alt='img' className="lane1" />
@@ -214,7 +218,7 @@ class Panel1 extends Component {
           </div>
           <div className="row">
             <div className="container space">
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(shoppingMallcategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(shoppingMallcategory, 'Shopping')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/4.png" alt='img' className="lane1" />
@@ -225,7 +229,7 @@ class Panel1 extends Component {
                 </div>
               </div>
 
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(airportAdscategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(airportAdscategory, 'Airport Ads')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/5.png" alt='img' className="lane1" />
@@ -235,7 +239,7 @@ class Panel1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(busShelterAdscategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(busShelterAdscategory, 'Bus Shelter')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/6.png" alt='img' className="lane1" />
@@ -249,7 +253,7 @@ class Panel1 extends Component {
           </div>
           <div className="row">
             <div className="container space">
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(othercategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(othercategory, 'Other')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/7.png" alt='img' className="lane1" />
@@ -259,7 +263,7 @@ class Panel1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(radioAdscategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(radioAdscategory, 'Radio Ads')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/8.png" alt='img' className="lane1" />
@@ -269,7 +273,7 @@ class Panel1 extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(cinimaAdscategory)}>
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(cinimaAdscategory, 'Total Cinema')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/9.png" alt='img' className="lane1" />

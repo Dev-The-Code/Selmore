@@ -94,11 +94,15 @@
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
     .navsm{
-        /* margin-left: 3%; */
+        margin-left: 17.2vw;
+        color: #007bff !important;
+        width: 37vw;       
     }
     .navmargin{
-                margin-top: 37px;
-                margin-right: 13px;
+        margin-top: 36px;
+        margin-right: 1.4vw;
+        color: #007bff !important;
+
     }
     .selmorelogo{
         height: 101px;
@@ -137,19 +141,85 @@
             margin: 29px 6px 0px -10px;
         }
     .navbtnmargin{
-        margin-left: 10px;
-        margin-top: 4.8%;
+        margin-left: -1%;
+        margin-top: 2.6vw;
         height: 31px;
     }    
+    .navbtnmarginLog{
+        margin-left: -1%; 
+        margin-top: 1.5vw; 
+        height: 31px; 
+        margin-bottom: 1vw;
+    } 
 
 
 
 }
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
     .navsm{
-            /* margin-left: 12% */
+        margin-left: 12vw;
         color: #007bff !important;
             
+    }
+    .navmargin{
+        margin-top: 36px;
+        margin-right: 1.4vw;
+        color: #007bff !important;
+
+    }
+    .selmorelogo{
+        height: 101px;
+        /* margin-left: 30px; */
+    }
+    .true2{
+        list-style-type: none;
+        text-align: center;
+        /* margin-left: 42px; */
+        font-family: Helvetica;
+        font-weight: 600;
+        font-size: 13px;
+        margin-top: 12px;
+        margin-bottom: 30px;
+        margin-left: -10%;
+    }
+    .bid_btn{
+        height: 30px !important;
+    }
+    .true22{
+        list-style-type: none;
+        text-align: center;
+        margin-left: -10%;
+        font-family: Helvetica;
+        font-weight: 600;
+        font-size: 13px;
+        margin-top: 12px;
+        margin-bottom: 30px;
+    }
+    .navbiddbtn{
+            /* margin-left: 10px; */
+            margin-top: 33px;
+            margin-right: 4px;
+
+    }
+    .blgs{
+            margin: 28px 6px 0px -10px;
+        }
+    .navbtnmargin{
+        margin-left: -1%;
+        margin-top: 2.3vw;
+        height: 31px;
+    }    
+    .navbtnmarginLog{
+        margin-left: -1%; 
+        margin-top: 1.5vw; 
+        height: 31px; 
+        margin-bottom: 1vw;
+    }
+}
+@media screen and (min-width: 1600px){
+    .navsm{
+        /* margin-left: 12% */
+    color: #007bff !important;    
     }
     .navmargin{
             margin-top: 36px;
@@ -308,13 +378,13 @@
              font-size: 22px;
     }
     .navmargin12{
-        margin-top: 5.2%;
-        margin-left: 2%;
-        margin-right: 4px;
-
+        margin-top: 4.5%;
+        margin-right: 10px;
+        margin-left: 0vw;
     }
+
 }
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1366px) and (max-width: 1600px){
     .footertext2{
         width: 100%;
         text-align: center;
@@ -334,7 +404,30 @@
     .navmargin12{
         margin-top: 4.5%;
         margin-right: 10px;
-
+        margin-left: 0vw;
+    }
+}
+@media screen and (min-width: 1600px){
+    .footertext2{
+        width: 100%;
+        text-align: center;
+         font-family: Helvetica;
+        font-size: 12px;
+         font-weight: 600;
+         margin-top: 12px;
+         margin-bottom: 30px;
+        line-height: 15px;
+    }
+    .footertext1{
+        text-align: center;
+         font-family: Helvetica;
+         font-weight: 600;
+             font-size: 23px;
+    }
+    .navmargin12{
+        margin-top: 4.5%;
+        margin-right: 10px;
+        margin-left: 0vw;
     }
 }
 

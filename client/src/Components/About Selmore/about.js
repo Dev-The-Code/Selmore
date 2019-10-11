@@ -7,6 +7,9 @@ import Footer from '../footer';
 import './about.css';
 
 class About extends Component {
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>

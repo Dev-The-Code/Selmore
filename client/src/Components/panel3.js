@@ -28,7 +28,8 @@ class Panel3 extends Component {
 			cities: [],
 			i: 0,
 			bilboardData: [],
-			directMarket: false
+			directMarket: false,
+			cityName:''
 		}
 	}
 	async componentWillMount() {
@@ -61,19 +62,20 @@ class Panel3 extends Component {
 			i: this.state.i + 12
 		})
 	}
-	redirectToMarketPlace = (e) => {
+	redirectToMarketPlace = (e , city) => {
 		this.setState({
 			directMarket: true,
-			bilboardData: e
+			bilboardData: e,
+			cityName:city
 		})
 	}
 	render() {
-		const { i, cities, bilboardData, directMarket } = this.state;
+		const { i, cities, bilboardData, directMarket , cityName } = this.state;
 		let slipCity = cities.slice(0, i + 12);
 		if (directMarket) {
 			return <Redirect to={{
 				pathname: '/market_place',
-				state: { bilboardData: bilboardData }
+				state: { bilboardData: bilboardData  , nameBill:cityName}
 			}} />
 		}
 		return (
@@ -94,7 +96,7 @@ class Panel3 extends Component {
 							{slipCity && slipCity.map((elem, key) => {
 								return (
 									<div className="col-md-4 col-sm-3 col-12 panel3div citbox divbordered"
-										onClick={this.redirectToMarketPlace.bind(this, elem)}>
+										onClick={this.redirectToMarketPlace.bind(this, elem, elem[0].city)}>
 										<div className=''>
 											<div className="col-md-2 col-sm-1 col-1 innerdiv">
 												<i class="material-icons locate_icon">place</i>

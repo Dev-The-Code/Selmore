@@ -10,16 +10,19 @@ import './advertising.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Advertising extends Component {
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
-        <div>
-        	 <Header showDropDown = {this.props.showDropDown} hideDropDown = {this.props.hideDropDown} dropDownUser = {this.props.dropDownUser} />
-        	<AbBanner advertise={'ADVERTISING'} bred={'Advertising'} />
-        	<Aa1 />
-        	<Aa2 />
-        	<Aa3 />
-          <Footer />
-  		</div> 
+      <div>
+        <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
+        <AbBanner advertise={'ADVERTISING'} bred={'Advertising'} />
+        <Aa1 />
+        <Aa2 />
+        <Aa3 />
+        <Footer />
+      </div>
     );
   }
 }
