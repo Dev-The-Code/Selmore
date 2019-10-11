@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { HttpUtils } from './../Services/HttpUtils';
 import './home.css';
+import { Redirect } from 'react-router-dom';
 
 class Panel3 extends Component {
 	constructor(props) {
@@ -25,94 +25,35 @@ class Panel3 extends Component {
 				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
 				" Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
 				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
-			i: 0
+			cities: [],
+			i: 0,
+			bilboardData: [],
+			directMarket: false
 		}
 	}
-
-	// componentDidMount() {
-	// 	this.billData();
-	// }
-
-	// billData = async () => {
-	// 	let response = await HttpUtils.get('getbillboard');
-	// 	let data = response.content;
-	// 	let arr = [];
-	// 	for(var i = 0; i < data.length; i++){
-	// 			arr.push(data[i]);
-
-	// 	}
-	// }
 	async componentWillMount() {
 		const { citiesArr } = this.state;
 
 		let response = await HttpUtils.get('getbillboard');
 		let data = response.content;
-		let citiesData = [];
-		let citiesArray = [];
-		for (var i in data) {
-			if (data[i].city != undefined) {
-				citiesArray.push(data[i])
+		let cities = []
+		let citiesData;
+		for (var i = 0; i < citiesArr.length; i++) {
+			let city = []
+			citiesData = {}
+			for (var j in data) {
+				if (citiesArr[i] == data[j].city) {
+					city.push(data[j])
+					citiesData[citiesArr[i]] = city;
+				}
+			}
+			if (city.length != 0) {
+				cities.push(city)
 			}
 		}
-
-
-		for (var j = 0; j < citiesArr.length; j++) {
-			console.log(citiesArr[j])
-			// if(citiesArr[j] == )
-		}
-		// for (var i in data) {
-		// 	// console.log(data[i].city, 'data')
-		// 	if (data[i].city != undefined) {
-		// 		// let arr = data[i]
-		// 		// citiesData[citiesArr[j]] = arr
-		// 		cities.push(data[i])
-		// 		// citiesData.push(data[i])
-		// 		// citiesData.push(data[i]);
-		// 		// citiesArray[citiesArr[j]] = citiesData
-		// 		// city =data[i];
-		// 		// // city.push(data[i])
-		// 		// // city[data[i].city] = data[i];
-		// 		// citiesArray[j].push(data[i])
-		// 	}
-		// }
-
-		// console.log(data, "data")
-		// let abbottabad = [];
-		// let ahmadpurEast = [];
-		// let ahmedNagerChatha = [];
-		// let AliKhanAbad = [];
-		// let Alipur = [];
-		// let Arifwala = [];
-
-		// let citiesArray = {};
-		// console.log(citiesArray, 'citiesArray')
-		// for (var j = 0; j < citiesArr.length; j++) {
-		// citiesData = `${citiesArr[j]}`;
-		// citiesData = {}
-		// citiesData[citiesArr[j]] = []
-		// cities.push(citiesData)
-		// for (var j=0; j<citiesArr.length; j++) {
-		// 	// console.log(data[i].city, 'data')
-		// 	if (cities[j].city == data[j].city) {
-		// 		// let arr = data[i]
-		// 		// citiesData[citiesArr[j]] = arr
-		// 		citiesData.push(cities[j])
-		// 		// citiesData.push(data[i])
-		// 		// citiesData.push(data[i]);
-		// 		// citiesArray[citiesArr[j]] = citiesData
-		// 		// city =data[i];
-		// 		// // city.push(data[i])
-		// 		// // city[data[i].city] = data[i];
-		// 		// citiesArray[j].push(data[i])
-		// 	}
-		// }
-		// }
-		// console.log(cities, 'cities')
-		// console.log(data, 'data')
-
-		// console.log(citiesName, 'citiesName')
-		// // for (var j = 0; j < citiesArr.length; j++) {
-		// // }
+		this.setState({
+			cities: cities
+		})
 	}
 
 	billCity = () => {
@@ -120,9 +61,21 @@ class Panel3 extends Component {
 			i: this.state.i + 12
 		})
 	}
+	redirectToMarketPlace = (e) => {
+		this.setState({
+			directMarket: true,
+			bilboardData: e
+		})
+	}
 	render() {
-		const { citiesArr, i } = this.state;
-		let slipCity = citiesArr.slice(0, i + 12);
+		const { i, cities, bilboardData, directMarket } = this.state;
+		let slipCity = cities.slice(0, i + 12);
+		if (directMarket) {
+			return <Redirect to={{
+				pathname: '/market_place',
+				state: { bilboardData: bilboardData }
+			}} />
+		}
 		return (
 			<div>
 				<div className="container animated animatedFadeInUp fadeInUp" style={{ "backgroundImage": "url('../images/dropdown2.png')" }}>
@@ -139,19 +92,20 @@ class Panel3 extends Component {
 						<div className="container funday">
 							{/* show the cities of the Billboards */}
 							{slipCity && slipCity.map((elem, key) => {
-								return <Link rel="noopener noreferrer" to={`/market_place`}>
-									<div className="col-md-4 col-sm-3 col-12 panel3div citbox">
+								return (
+									<div className="col-md-4 col-sm-3 col-12 panel3div citbox divbordered"
+										onClick={this.redirectToMarketPlace.bind(this, elem)}>
 										<div className=''>
 											<div className="col-md-2 col-sm-1 col-1 innerdiv">
 												<i class="material-icons locate_icon">place</i>
 											</div>
 											<div className="col-md-10 col-sm-11 col-11 innerdiv cittxt">
-												<h5 className='divFont'>{elem.slice(0, 12)}</h5>
-												<h6 className="hani2">30 Ads available</h6>
+												<h5 className='divFont'>{elem[0].city}</h5>
+												<h6 className="hani2">{` ${elem.length} Ads available`}</h6>
 											</div>
 										</div>
 									</div>
-								</Link>
+								)
 							})}
 						</div>
 					</div>
@@ -161,7 +115,7 @@ class Panel3 extends Component {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div >
 		);
 	}
 }
