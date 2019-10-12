@@ -6,6 +6,9 @@ import './billbidding.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billbidding extends Component {
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>

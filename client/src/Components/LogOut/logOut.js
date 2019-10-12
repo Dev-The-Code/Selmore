@@ -7,6 +7,9 @@ class LogOut extends Component {
         super(props);
         this.signOut = this.signOut.bind(this)
     }
+    componentWillMount() {
+        window.scrollTo(0,0);
+    }
     signOut() {
         localStorage.removeItem('loggedIn');
         return <Redirect to='/' />

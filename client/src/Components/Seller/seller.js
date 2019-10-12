@@ -6,6 +6,9 @@ import './seller.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Seller extends Component {
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>

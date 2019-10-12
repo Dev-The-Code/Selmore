@@ -6,6 +6,9 @@ import './faq.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Faq extends Component {
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>

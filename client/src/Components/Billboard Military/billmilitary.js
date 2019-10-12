@@ -10,6 +10,9 @@ class Billboardmilitary extends Component {
 	constructor(props) {
 		super(props)
 	}
+	componentWillMount() {
+        window.scrollTo(0,0);
+    }
 	render() {
 		return (
 			<div>

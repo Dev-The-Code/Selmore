@@ -67,7 +67,7 @@ class Header extends Component {
                     </Link>
                   </li>
                 }
-                {adminUser !== null && adminUser.role == 'admin' ?
+                {/* {adminUser !== null && adminUser.role == 'admin' ?
                   null
                   :
                   <li className="nav-item navmargin blgs">
@@ -75,7 +75,7 @@ class Header extends Component {
                       BLOG
                     </a>
                   </li>
-                }
+                } */}
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/market_place`}>
                     MARKETPLACE
@@ -102,7 +102,7 @@ class Header extends Component {
                 </li> */}
                 {dropDownUser || value
                   ?
-                  <li className="nav-item navbtnmargin">
+                  <li className="nav-item navbtnmarginLog">
                     <Dropdown hideDropDown={this.props.hideDropDown} />
                   </li>
                   :
