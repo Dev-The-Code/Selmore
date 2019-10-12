@@ -243,7 +243,7 @@ class Market extends Component {
                     {this.state.ac != '' ? 
                     <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.ac}</div>
                 :
-                <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBorad</div>}
+                <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>}
                 </div>
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>

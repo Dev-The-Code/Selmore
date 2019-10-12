@@ -45,7 +45,14 @@
 }
 @media screen and (min-width: 768px) and (max-width: 1024px){
     .navsm{
+        margin-left: -3vw;
+    }
+    .navsm2{
         /* margin-left: -10%; */
+    }
+    .navbtnmarginLog{
+        margin-top: 1vw;
+        color: #007bff !important;
     }
     .navmargin{
             margin-top: 15px;
@@ -94,6 +101,10 @@
 }
 @media screen and (min-width: 1024px) and (max-width: 1366px){
     .navsm{
+        margin-left: 0.5vw;
+        color: #007bff !important;      
+    }
+    .navsm2{
         margin-left: 17.2vw;
         color: #007bff !important;
         width: 37vw;       
@@ -146,9 +157,9 @@
         height: 31px;
     }    
     .navbtnmarginLog{
-        margin-left: -1%; 
-        margin-top: 1.5vw; 
-        height: 31px; 
+        margin-left: -1%;
+        margin-top: 2.2vw;
+        height: 31px;
         margin-bottom: 1vw;
     } 
 
@@ -157,9 +168,12 @@
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px) {
     .navsm{
+        margin-left: -1vw;
+        color: #007bff !important;           
+    }
+    .navsm2{
         margin-left: 12vw;
-        color: #007bff !important;
-            
+        color: #007bff !important;           
     }
     .navmargin{
         margin-top: 36px;
@@ -211,13 +225,17 @@
     }    
     .navbtnmarginLog{
         margin-left: -1%; 
-        margin-top: 1.5vw; 
+        margin-top: 2vw; 
         height: 31px; 
         margin-bottom: 1vw;
     }
 }
 @media screen and (min-width: 1600px){
     .navsm{
+        margin-left: -1.5vw;
+        color: #007bff !important; 
+    }
+    .navsm2{
         /* margin-left: 12% */
     color: #007bff !important;    
     }
@@ -269,6 +287,13 @@
         margin-top: 4.1%;
         height: 31px;
     }    
+    .navbtnmarginLog{
+        margin-left: -1%; 
+        margin-top: 1.8vw; 
+        height: 31px; 
+        margin-bottom: 1vw;
+    }
+
 }
 
 

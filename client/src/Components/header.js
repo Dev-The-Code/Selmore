@@ -11,7 +11,6 @@ class Header extends Component {
 
 
   openNav = () => {
-    console.log(document.getElementById("myNav"))
     document.getElementById("mySideNav").style.width = "100%";
 
   }
@@ -25,8 +24,10 @@ class Header extends Component {
 
   render() {
     const { dropDownUser } = this.props;
-    const value = localStorage.getItem("loggedIn");
+    const value = JSON.parse(localStorage.getItem("loggedIn"));
     let adminUser = JSON.parse(localStorage.getItem("userData"));
+    console.log(value, ' value')
+    console.log(dropDownUser, 'dropDownUser')
     return (
       <div>
         <div className="container" style={{ paddingLeft: '0px' }}>
@@ -38,7 +39,8 @@ class Header extends Component {
             </div>
             <div className="col-md-3 col-lg-3 col-xl-2"></div>
             <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-block">
-              <ul className="nav navsm">
+            
+              <ul className={value ? 'nav navsm' : 'nav navsm2'}>
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
                     HOME
@@ -67,15 +69,7 @@ class Header extends Component {
                     </Link>
                   </li>
                 }
-                {/* {adminUser !== null && adminUser.role == 'admin' ?
-                  null
-                  :
-                  <li className="nav-item navmargin blgs">
-                    <a className="nav-link" href="#">
-                      BLOG
-                    </a>
-                  </li>
-                } */}
+
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/market_place`}>
                     MARKETPLACE
