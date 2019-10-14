@@ -9,7 +9,7 @@ class Panel1 extends Component {
     this.state = {
       directMarket: false,
       keyValuee: '',
-      categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall',
+      categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Steamer',
         'Total Cinima Ads', 'Radio Ads', 'Other'],
       billboardcategory: [],
       taxiAdscategory: [],
@@ -17,6 +17,7 @@ class Panel1 extends Component {
       busShelterAdscategory: [],
       airportAdscategory: [],
       shoppingMallcategory: [],
+      steamerMallcategory: [],
       cinimaAdscategory: [],
       radioAdscategory: [],
       othercategory: [],
@@ -33,6 +34,7 @@ class Panel1 extends Component {
     let busShelterAdscategoryArr = [];
     let airportAdscategoryArr = [];
     let shoppingMallcategoryArr = [];
+    let steamerMallcategoryArr = [];
     let cinimaAdscategoryArr = [];
     let radioAdscategoryArr = [];
     let othercategoryArr = [];
@@ -56,6 +58,9 @@ class Panel1 extends Component {
 
         shoppingMallcategoryArr.push(data[i]);
       }
+      else if (data[i].category[0] == 'Steamer') {
+        steamerMallcategoryArr.push(data[i]);
+      }
       else if (data[i].category[0] == 'Total Cinima Ads') {
         cinimaAdscategoryArr.push(data[i]);
       }
@@ -74,12 +79,16 @@ class Panel1 extends Component {
       busShelterAdscategory: busShelterAdscategoryArr,
       airportAdscategory: airportAdscategoryArr,
       shoppingMallcategory: shoppingMallcategoryArr,
+      steamerMallcategory: steamerMallcategoryArr,
       cinimaAdscategory: cinimaAdscategoryArr,
       radioAdscategory: radioAdscategoryArr,
       othercategory: othercategoryArr,
     })
   }
   hoverAlert = (value, billName) => {
+    console.log(value , 'value')
+    console.log(billName , 'billName')
+
     this.setState({
       directMarket: true,
       bilboardData: value,
@@ -95,6 +104,7 @@ class Panel1 extends Component {
       busShelterAdscategory,
       airportAdscategory,
       shoppingMallcategory,
+      steamerMallcategory,
       cinimaAdscategory,
       radioAdscategory,
       othercategory,
@@ -107,8 +117,8 @@ class Panel1 extends Component {
         pathname: '/market_place',
         state: { bilboardData: bilboardData, nameBill: nameBill }
       }} />
-
     }
+    console.log(steamerMallcategory , 'steamerMallcategory')
     return (
       <div>
         <div className="container animated animatedFadeInUp fadeInUp" style={{ "backgroundImage": "url('../images/dropdown1.png')" }}>
@@ -174,7 +184,6 @@ class Panel1 extends Component {
                   </div>
                 </div>
               </div>
-
               <div className="col-md-4 divborder" onClick={() => this.hoverAlert(airportAdscategory, 'Airport Ads')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
@@ -226,6 +235,52 @@ class Panel1 extends Component {
                   </div>
                   <div className="col-md-9 col-9 col-sm-9">
                     <h5 className="lane2">Total Cinema<br />{`Ads (${cinimaAdscategory.length})`}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <div className="row">
+            <div className="container space">
+              <div className="col-md-4 divborder" 
+              // onClick={() => this.hoverAlert(steamerMallcategory, 'Steamer')}
+              >
+                <div className="row">
+                  <div className="col-md-3 col-3 col-sm-3">
+                    {/* <img src="../images/7.png" alt='img' className="lane1" /> */}
+                  </div>
+                  <div className="col-md-9 col-9 col-sm-9">
+                    {/* <h5 className="lane3">{`Steamer (${steamerMallcategory.length})`}</h5> */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4 divborder" 
+              // onClick={() => this.hoverAlert(steamerMallcategory, 'Steamer')}
+              >
+                <div className="row">
+                  <div className="col-md-3 col-3 col-sm-3">
+                    {/* <img src="../images/8.png" alt='img' className="lane1" /> */}
+                  </div>
+                  <div className="col-md-9 col-9 col-sm-9">
+                    {/* <h5 className="lane3">{`Steamer (${steamerMallcategory.length})`}</h5> */}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4 divborder" 
+              onClick={() => this.hoverAlert(steamerMallcategory, 'Steamer')}
+              >
+                <div className="row">
+                  <div className="col-md-3 col-3 col-sm-3">
+                    <img src="../images/9.png" alt='img' className="lane1" />
+                  </div>
+                  <div className="col-md-9 col-9 col-sm-9">
+                    <h5 className="lane2">{`Steamer (${steamerMallcategory.length})`}</h5>
                   </div>
                 </div>
               </div>

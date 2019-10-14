@@ -41,7 +41,8 @@ class Market extends Component {
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
             category: [],
-            categoryArr: ['Billboard', 'Taxi', 'Bus', 'Bus Shelter', 'Airport', 'Shopping Mall', 'Total Cinima', 'Radio', 'Other'],
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Steamer',
+                'Total Cinima Ads', 'Radio Ads', 'Other'],
             states: [],
             billboardData: [],
             i: 0,
@@ -53,7 +54,7 @@ class Market extends Component {
         let a = this.props.nameBill
         console.log(data, 'this.props')
 
-        if (data != '') {
+        if (data) {
             this.setState({
                 billboardData: data,
                 ac:a
@@ -276,9 +277,6 @@ class Market extends Component {
                                 </Col>
                                 <Col >
                                     <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
-                                </Col>
-                                <Col >
-                                    <Checkbox className="fasla" value="Steamer">&nbsp;Steamer</Checkbox>
                                 </Col>
                             </Row>&emsp;
                             <Row>

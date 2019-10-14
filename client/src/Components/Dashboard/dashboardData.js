@@ -12,7 +12,7 @@ class DashboardData extends Component {
             billBoradData: [],
             billboardFilterdData: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
-                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post' , 'Steamer'],
+                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
                 citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",

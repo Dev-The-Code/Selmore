@@ -16,6 +16,9 @@ class MarketPlace extends Component {
         console.log(data, 'data')
         if (data != undefined) {
             let adName = this.props.location.state.nameBill;
+            console.log(data.bilboardData , 'data.bilboardData')
+            console.log(adName , 'adName')
+
             this.setState({
                 data: data.bilboardData,
                 adName: adName
