@@ -59,7 +59,7 @@ class BillBoard extends Component {
             sumitDataAlert: false,
             id: '',
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
-                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
+                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post' , 'Steamer'],
             categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             facingArr: ['Front', 'Back'],
@@ -76,7 +76,7 @@ class BillBoard extends Component {
                 " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
-                " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+                "Larkana"," Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
                 " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
                 " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
@@ -412,7 +412,6 @@ class BillBoard extends Component {
     }
     onChange(index, { file, fileList }) {
         console.log(file, 'fileList')
-
         console.log(fileList, 'fileList')
         if (file.status !== 'uploading') {
             let fileListRef = `fileList${index}`
