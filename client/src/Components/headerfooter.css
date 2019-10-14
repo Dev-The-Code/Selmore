@@ -43,7 +43,7 @@
         height: 31px;
     }
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1023px){
     .navsm{
         margin-left: -3vw;
     }
@@ -99,9 +99,9 @@
             height: 31px;
         }
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
+@media screen and (min-width: 1024px) and (max-width: 1365px){
     .navsm{
-        margin-left: 0.5vw;
+        margin-left: -1vw;
         color: #007bff !important;      
     }
     .navsm2{
