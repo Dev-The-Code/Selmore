@@ -41,7 +41,7 @@ class Market extends Component {
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
             category: [],
-            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Steamer',
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Steamers',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             states: [],
             billboardData: [],
