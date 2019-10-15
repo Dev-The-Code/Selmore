@@ -32,7 +32,7 @@ class Comman extends Component {
                 " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
-                "Larkana"," Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+                "Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
                 " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
                 " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
                 " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
@@ -44,7 +44,7 @@ class Comman extends Component {
             cities: [],
             states: [],
             billboardData: [],
-            i:0,
+            i: 0,
         }
     }
     componentDidMount() {
@@ -55,7 +55,7 @@ class Comman extends Component {
         //     .then(cities => console.log(cities, 'cities'));
     }
     billBoradDetails = async () => {
-        const { citiesArr,  statesArr } = this.state;
+        const { citiesArr, statesArr } = this.state;
 
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
@@ -152,13 +152,13 @@ class Comman extends Component {
     }
     onFlipData = () => {
         this.setState({
-            i : this.state.i + 9
+            i: this.state.i + 9
         })
     }
     render() {
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,i} = this.state;
-        let flexxData = billboardData.slice(0,i+3);
-        let filterPoint = billboardFilterdData.slice(0,i+3);
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown, i } = this.state;
+        let flexxData = billboardData.slice(0, i + 3);
+        let filterPoint = billboardFilterdData.slice(0, i + 3);
         const billboardRendring = (
             {/*<div>
                 { rendering the filtered billboard data on front end }
@@ -167,22 +167,23 @@ class Comman extends Component {
         );
         return (
             <div>
-               <div className='row'>
+                <div className='row'>
                     {flexxData && flexxData.map((elem, key) => {
                         return (
-
-				      		<div className="col-md-4 seth1">
-				      			<div className="key1">
-				      				<Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                    <img src={elem.images[0]} className='imgsizee' alt={key} /></Link>
-				      			</div>
-				      			<div className="init2">
-				      				<div style={{color: 'white'}}>
-						      			<p className="fanta1">{elem.companyName.substr(0,13)}...<br/>{elem.city}</p>
-						      			<p className="fanta2"><button type="button" className="btn btn-primary fanta3"><Link  rel="noopener noreferrer" to={`/billborad_Militry`} style={{color:"white"}}>Details..</Link></button></p>
-					      			</div>
-		      					</div>
-				      		</div>
+                            <div className="col-md-4 seth1">
+                                <div className="key1">
+                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                        <img src={elem.images[0]} className='imgsizee' alt={key} /></Link>
+                                </div>
+                                <div className="init2">
+                                    <div style={{ color: 'white' }}>
+                                        <p className="fanta1">{elem.companyName.substr(0, 13)}...<br />{elem.city}</p>
+                                        <p className="fanta2"><button type="button"
+                                            className="btn btn-primary fanta3"><Link rel="noopener noreferrer" to={{ pathname: `/billborad_Militry`, state: elem }}
+                                                style={{ color: "white" }}>Details..</Link></button></p>
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

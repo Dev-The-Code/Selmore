@@ -16,10 +16,10 @@ class AbBanner extends Component {
 					<div className="active4">
 						<div className="container active8">
 							<ol className="olpad">
-								<ul className="active6"><a href="#"><span className="active5">HOME</span></a></ul>
-								<ul className="active7"><a href="#"><span className="active5">> {this.props.bred}</span></a></ul>
-								<ul className="active7"><a href="#"><span className="active5">{this.props.bred2}</span></a></ul>
-								<ul className="active7"><a href="#"><span className="active5">{this.props.bred3}</span></a></ul>
+								<ul className="active6"><span className="active5">HOME</span></ul>
+								<ul className="active7"><span className="active5">> {this.props.bred}</span></ul>
+								<ul className="active7"><span className="active5">{this.props.bred2}</span></ul>
+								<ul className="active7"><span className="active5">{this.props.bred3}</span></ul>
 							</ol>
 						</div>
 					</div>

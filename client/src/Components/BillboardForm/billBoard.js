@@ -149,7 +149,6 @@ class BillBoard extends Component {
         });
     }
     editDataShowns = async (data) => {
-        console.log(data, 'editDataShowns')
         if (data != undefined) {
             await this.setState({
                 compaNames: data.companyName,
@@ -253,7 +252,6 @@ class BillBoard extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 this.setState({ sumitDataAlert: true });
                 this.funcForUpload(values)
                 this.props.form.resetFields()
@@ -263,7 +261,6 @@ class BillBoard extends Component {
 
     async funcForUpload(values) {
         const { index, imgArr, objectId } = this.state;
-        console.log(values)
         let arr = [];
         for (var i = 0; i <= index; i++) {
             let multipleBillbordObj = `billbordObj${i}`;
@@ -360,7 +357,6 @@ class BillBoard extends Component {
                 })
             })).then((results) => {
                 let imagess = [...imgArr, ...results]
-                console.log(imagess, 'imagess')
                 multipleBillbordObj.images = imagess;
                 multipleBillbordObj.objectId = objectId;
                 this.postData(results, multipleBillbordObj)
@@ -401,7 +397,6 @@ class BillBoard extends Component {
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values, 'all arrays in one object');
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
         setTimeout(() => {
@@ -411,8 +406,6 @@ class BillBoard extends Component {
         }, 3000);
     }
     onChange(index, { file, fileList }) {
-        console.log(file, 'fileList')
-        console.log(fileList, 'fileList')
         if (file.status !== 'uploading') {
             let fileListRef = `fileList${index}`
             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
@@ -422,7 +415,6 @@ class BillBoard extends Component {
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
             companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList, imgArr } = this.state;
-        // console.log(fileList, 'images')
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -596,7 +588,9 @@ class BillBoard extends Component {
                                                                         }],
                                                                     })(
                                                                         <div className="clearfix">
-                                                                            <Upload onChange={this.onChange.bind(this, index)}>
+                                                                            <Upload 
+                                                                            // fileList={this.state.imgArr}
+                                                                            onChange={this.onChange.bind(this, index)}>
                                                                                 <Button>
                                                                                     <Icon type="upload" /> Upload
                                                                                 </Button>
