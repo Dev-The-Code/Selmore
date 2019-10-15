@@ -86,9 +86,6 @@ class Panel1 extends Component {
     })
   }
   hoverAlert = (value, billName) => {
-    console.log(value , 'value')
-    console.log(billName , 'billName')
-
     this.setState({
       directMarket: true,
       bilboardData: value,
@@ -118,7 +115,6 @@ class Panel1 extends Component {
         state: { bilboardData: bilboardData, nameBill: nameBill }
       }} />
     }
-    console.log(steamerMallcategory , 'steamerMallcategory')
     return (
       <div>
         <div className="container animated animatedFadeInUp fadeInUp" style={{ "backgroundImage": "url('../images/dropdown1.png')" }}>

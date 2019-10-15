@@ -11,17 +11,48 @@ class Militarypanel1 extends Component {
 			data: '',
 			images: [],
 			admin: false,
+			center: null
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
+		console.log(data, 'data')
 		await this.setState({
 			data: data,
 			images: data.images,
 		})
 	}
+	componentWillMount() {
+		console.log(navigator, 'navigator')
+		console.log(this.props.data.longitude, 'longitude')
+		console.log(this.props.latitude, 'latitude')
+
+		let latitude = Number(this.props.latitude)
+		let longitude = Number(this.props.latitude)
+
+		// let latitude = this.props.latitude
+		// let longitude = this.props.latitude
+		// // console.log(position)
+		this.setState({
+			center:
+			{
+				center: {
+					lat: latitude,
+					lng: longitude
+				},
+				zoom: 9,
+				// greatPlaces: [
+				// 	{ id: 'A', lat: latitude, lng: longitude },
+				// ]
+			}
+		});
+	}
+
+
+
+
 	render() {
-		const { data, images } = this.state;
+		const { data, images, center } = this.state;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		if (images.length > 0) {
@@ -165,20 +196,24 @@ class Militarypanel1 extends Component {
 								null
 							}
 							{/* {this.props.data.address && */}
-								<div>
-									<div className="row soldier7" style={{ margin: '0px' }}>
-										<div><h3>Map</h3></div>
+							<div>
+								<div className="row soldier7" style={{ margin: '0px' }}>
+									<div><h3>Map</h3></div>
 
-									</div><br />
-									 {/* render a map and show a location of the Billboard */}
-									<div>
-										<Location
-											address={this.props.data.address} />
-									</div>
-								 {/* <div className="row soldier7" style={{ margin: '0px' }}>
+								</div><br />
+								{/* render a map and show a location of the Billboard */}
+								<div>
+									<Location
+										address={this.props.data.address}
+										latitude={this.props.data.latitude}
+										longitude={this.props.data.longitude}
+										center={center}
+									/>
+								</div>
+								{/* <div className="row soldier7" style={{ margin: '0px' }}>
 								// 			<h3 style={{ color: 'white' }}>Map</h3>
 								// 		</div> */}
-								</div>
+							</div>
 							{/* } */}
 						</div>
 					</div>

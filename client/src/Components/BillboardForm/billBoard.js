@@ -59,8 +59,8 @@ class BillBoard extends Component {
             sumitDataAlert: false,
             id: '',
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
-                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post' ],
-            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Streamers',
+                'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             facingArr: ['Front', 'Back'],
             lightningArr: ['Yes', 'No'],
@@ -71,18 +71,18 @@ class BillBoard extends Component {
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
+                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
                 " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
                 " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
                 " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
-                "Larkana"," Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", " Multan", " Murree", " Muridke", " Mianwali Bangla",
+                "Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
                 " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
                 " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-                " Raiwind", " Rajanpur", " Rahim Yar Khan", " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
-                " Sialkot", " Sohawa", " Soianwala", " Siranwali", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+                " Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             companyName: [],
@@ -136,6 +136,7 @@ class BillBoard extends Component {
         states = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
+
         await this.setState({
             companyName: companyName,
             types: types,
@@ -450,7 +451,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={types}
-                                                                    // defaultValue={{ label: this.state.type, value: this.state.type }}
+                                                                // defaultValue={{ label: this.state.type, value: this.state.type }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -472,7 +473,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={categories}
-                                                                    // defaultValue={{ label: this.state.category, value: this.state.category }}
+                                                                // defaultValue={{ label: this.state.category, value: this.state.category }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -494,7 +495,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={facings}
-                                                                    // defaultValue={{ label: this.state.facing, value: this.state.facing }}
+                                                                // defaultValue={{ label: this.state.facing, value: this.state.facing }}
                                                                 >
                                                                 </Select>
                                                             )}
@@ -588,9 +589,9 @@ class BillBoard extends Component {
                                                                         }],
                                                                     })(
                                                                         <div className="clearfix">
-                                                                            <Upload 
-                                                                            // fileList={this.state.imgArr}
-                                                                            onChange={this.onChange.bind(this, index)}>
+                                                                            <Upload
+                                                                                // fileList={this.state.imgArr}
+                                                                                onChange={this.onChange.bind(this, index)}>
                                                                                 <Button>
                                                                                     <Icon type="upload" /> Upload
                                                                                 </Button>
@@ -714,7 +715,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={lightnings}
-                                                                        // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
+                                                                    // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -763,7 +764,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={statuses}
-                                                                        // defaultValue={{ label: this.state.status, value: this.state.status }}
+                                                                    // defaultValue={{ label: this.state.status, value: this.state.status }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -897,7 +898,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={audianceTypes}
-                                                                        // defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
+                                                                    // defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1000,7 +1001,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={cities}
-                                                                        // defaultValue={{ label: this.state.city, value: this.state.city }}
+                                                                    // defaultValue={{ label: this.state.city, value: this.state.city }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1024,7 +1025,7 @@ class BillBoard extends Component {
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={states}
-                                                                        // defaultValue={{ label: this.state.state, value: this.state.state }}
+                                                                    // defaultValue={{ label: this.state.state, value: this.state.state }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1044,11 +1045,11 @@ class BillBoard extends Component {
                                                                         message: 'Please enter country',
                                                                     }],
                                                                 })(
-                                                                    
+
                                                                     <Select
                                                                         onChange={this.handleChange}
                                                                         options={country}
-                                                                        // defaultValue={{ label: this.state.country, value: this.state.country }}
+                                                                    // defaultValue={{ label: this.state.country, value: this.state.country }}
                                                                     >
                                                                     </Select>
                                                                 )}
@@ -1081,7 +1082,7 @@ class BillBoard extends Component {
                                 <Form.Item className="list_form">
                                     <p style={{ fontWeight: 'bold' }}>Company Name:</p>
                                     {getFieldDecorator('company', {
-                                        initialValue:{ label: this.state.compaNames, value: this.state.compaNames },
+                                        initialValue: { label: this.state.compaNames, value: this.state.compaNames },
                                         rules: [{
                                             required: true,
                                             message: 'Please enter your company name!',
