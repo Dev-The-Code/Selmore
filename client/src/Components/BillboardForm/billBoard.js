@@ -60,7 +60,7 @@ class BillBoard extends Component {
             id: '',
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post' ],
-            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Steamers',
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Streamers',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             facingArr: ['Front', 'Back'],
             lightningArr: ['Yes', 'No'],

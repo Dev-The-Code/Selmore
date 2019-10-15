@@ -9,7 +9,7 @@ class Panel1 extends Component {
     this.state = {
       directMarket: false,
       keyValuee: '',
-      categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Steamers',
+      categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
         'Total Cinima Ads', 'Radio Ads', 'Other'],
       billboardcategory: [],
       taxiAdscategory: [],
@@ -58,7 +58,7 @@ class Panel1 extends Component {
 
         shoppingMallcategoryArr.push(data[i]);
       }
-      else if (data[i].category[0] == 'Steamers') {
+      else if (data[i].category[0] == 'Streamers') {
         steamerMallcategoryArr.push(data[i]);
       }
       else if (data[i].category[0] == 'Total Cinima Ads') {
@@ -273,14 +273,14 @@ class Panel1 extends Component {
                 </div>
               </div>
               <div className="col-md-4 divborder" 
-              onClick={() => this.hoverAlert(steamerMallcategory, 'Steamers')}
+              onClick={() => this.hoverAlert(steamerMallcategory, 'Streamers')}
               >
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/9.png" alt='img' className="lane1" />
                   </div>
                   <div className="col-md-9 col-9 col-sm-9">
-                    <h5 className="lane2">{`Steamers (${steamerMallcategory.length})`}</h5>
+                    <h5 className="lane2">{`Streamers (${steamerMallcategory.length})`}</h5>
                   </div>
                 </div>
               </div>
