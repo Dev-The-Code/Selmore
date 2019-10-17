@@ -14,7 +14,7 @@ class DashboardData extends Component {
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
                 citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
-                " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", " Burewala",
+                " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
@@ -117,10 +117,14 @@ class DashboardData extends Component {
     }
     filteredData = () => {
         const { billboardData } = this.state;
-        console.log(filteredObj)
+        // console.log(billboardData , 'billboardData')
+        // console.log(filteredObj , 'filteredObj')
         var filteredData = [];
-        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.size !== undefined
+        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined 
+            // && 
+            // filteredObj.size !== undefined
             && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
+                console.log('true condition')
             for (var i in billboardData) {
                 let data = billboardData[i]
                 for (var j in data) {
@@ -158,6 +162,7 @@ class DashboardData extends Component {
 
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
+        console.log(billboardFilterdData , 'billboardFilterdData')
         const billboardRendring = (
             <div>
                 <br />
