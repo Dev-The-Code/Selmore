@@ -64,7 +64,7 @@ class BillBoard extends Component {
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             facingArr: ['Front', 'Back'],
             lightningArr: ['Yes', 'No'],
-            statusArr: ['Available', 'No Available'],
+            statusArr: ['Available', 'Not Available'],
             audienceTypeArr: ['All types of people', 'Office type of people', 'Labour type people', 'Govt official type people'],
             citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",

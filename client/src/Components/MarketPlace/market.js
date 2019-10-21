@@ -303,7 +303,7 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="No Available">&nbsp;No Available</Checkbox>
+                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
                                 </Col>
                             </Row>
                             <div className='filterDivs'>Audience Type</div>
@@ -463,7 +463,7 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla" value="No Available">&nbsp;No Available</Checkbox>
+                                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
                                                 </Col>
                                             </Row>
                                             <div className='filterDivs'>Audience Type</div>
