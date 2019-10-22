@@ -22,31 +22,23 @@ class Militarypanel1 extends Component {
 			images: data.images,
 		})
 	}
-	componentWillMount() {
-		console.log(navigator, 'navigator')
-		console.log(this.props.data.longitude, 'longitude')
-		console.log(this.props.latitude, 'latitude')
 
-		let latitude = Number(this.props.latitude)
-		let longitude = Number(this.props.latitude)
+	// componentWillMount() {
 
-		// let latitude = this.props.latitude
-		// let longitude = this.props.latitude
-		// // console.log(position)
-		this.setState({
-			center:
-			{
-				center: {
-					lat: latitude,
-					lng: longitude
-				},
-				zoom: 9,
-				// greatPlaces: [
-				// 	{ id: 'A', lat: latitude, lng: longitude },
-				// ]
-			}
-		});
-	}
+
+	// 	let latitude = Number(this.props.data.latitude)
+	// 	let longitude = Number(this.props.data.longitude)
+	// 	this.setState({
+	// 		center:
+	// 		{
+	// 			center: {
+	// 				latitude: latitude,
+	// 				longitude: longitude
+	// 			},
+	// 			zoom: 9,
+	// 		}
+	// 	});
+	// }
 
 
 
@@ -207,7 +199,6 @@ class Militarypanel1 extends Component {
 										address={this.props.data.address}
 										latitude={this.props.data.latitude}
 										longitude={this.props.data.longitude}
-										center={center}
 									/>
 								</div>
 								{/* <div className="row soldier7" style={{ margin: '0px' }}>
