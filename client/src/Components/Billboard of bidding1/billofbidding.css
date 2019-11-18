@@ -71,3 +71,29 @@
     margin-left: 2%;
     border-radius: 0px !important;
 }
+@media screen and (min-width: 360px) and (max-width: 767px){
+    .bidPrice{
+        text-align: center !important;
+        margin-bottom: 4vw;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .bidPrice{
+        text-align: right !important;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px){
+    .bidPrice{
+        text-align: right !important;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+    .bidPrice{
+        text-align: right !important;
+    }
+}
+@media screen and (min-width: 1600px){
+    .bidPrice{
+        text-align: right !important;
+    }
+}

@@ -1,3 +1,15 @@
+
+.bidTiming{
+	font-size: 15px;
+    font-weight: 700;
+    font-family: Helvetica;
+    color: #007bff;
+}
+
+
+
+
+
 .cultus1{
 		width: 100%;
 		height: 300px;
@@ -30,25 +42,111 @@
 		background-color: #29abe2;
 }
 
-@media screen and (min-width: 360px) and (max-width: 660px){
-.cultus8{
-	margin-top: 183px;
-	padding: 0px;
-
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1020px){
+@media screen and (min-width: 360px) and (max-width: 767px){
 	.cultus8{
-	margin-top: 187px;
-	padding: 0px;
-
+		margin-top: 183px;
+		padding: 0px;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 50vw;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 68px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 22vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+		margin-top: 10vw;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
+@media screen and (min-width: 768px) and (max-width: 1023px){
+	.cultus8{
+		margin-top: 187px;
+		padding: 0px;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 177px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 17.4vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px){
 	.cultus8{
 	margin-top: 161px;
 	padding: 0px;
 
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 150px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 13.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
 	}
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
@@ -56,7 +154,71 @@
 		margin-top: 126px;
 		padding: 0px;
 
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 155px;
+    	padding: 0.1vw;
 	}	
+	.tag_listt{
+		margin-top: 1vw;
+	}
+	.baner_text{
+		margin-top: 11.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+}
+@media screen and (min-width: 1600px){
+	.cultus8{
+		margin-top: 126px;
+		padding: 0px;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 177px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 1vw;
+	}
+	.baner_text{
+		margin-top: 11.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
 }
 
 @media screen and (min-width: 360px) and (max-width: 660px){

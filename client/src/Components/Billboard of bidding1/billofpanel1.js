@@ -17,7 +17,7 @@ class Billofpanel1 extends Component {
 						<div className="col-md-1"></div>
 					</div>
 					<div className="row" style={{ margin: '0px' }}>
-						<div className="col-md-6 text-right">
+						<div className="col-md-6 bidPrice">
 							<button type="button" className="btn btn-primary"><span>Bid $ 2600.00</span></button>
 						</div>
 						<div className="col-md-3">

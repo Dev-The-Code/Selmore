@@ -6,18 +6,18 @@ class Biddingbanner extends Component {
 		return (
 			<div>
 				<div className="row" style={{ margin: '0px' }}>
-					<img src="./images/about-banner.png" alt ='img' className="cultus1" />
+					<img src="./images/biddingbaner.jpg" alt ='img' className="bannerImgg" />
 				</div>
 				<div>
-					<div className="container cultus2">
-						<h4><span className="cultus3">BIDDING</span></h4>
+					<div className="container baner_text">
+						<h4><span className="bannr_txtbid">BIDDING</span></h4>
 					</div>
 				</div>
 				<div className="cultus4">
-					<div className="container cultus8">
-						<ol>
+					<div className="container baner_bot_tag">
+						<ol className="tag_listt">
 							<ul className="cultus5"><a href="#"><span className="cultus7">HOME</span></a></ul>
-							<ul className="cultus6"><a href="#"><span className="cultus7">> LISTINGS</span></a></ul>
+							<ul className="cultus6"><a href="#"><span className="cultus7">> BIDDING</span></a></ul>
 						</ol>
 					</div>
 				</div><br />

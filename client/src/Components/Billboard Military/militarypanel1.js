@@ -209,7 +209,7 @@ class Militarypanel1 extends Component {
 						</div>
 					</div>
 				</div> <br />
-			</div >
+			</div>
 		);
 	}
 }

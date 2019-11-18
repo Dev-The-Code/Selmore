@@ -22,6 +22,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import AddBillboards from './Components/BillboardForm/addBillboards';
 import Billboardmilitary from './Components/Billboard Military/billmilitary';
+import Mega from '../src/Components/MegaSale/megaSale';
 import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
 import './App.css';
