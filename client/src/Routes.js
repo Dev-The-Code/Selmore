@@ -14,6 +14,7 @@ import Billboardmardan from './Components/Billboard Mardan/billmardan';
 import Bidding from './Components/Bidding/bidding';
 import Billbidding from './Components/Billbidding/billbidding';
 import Billofbidding1 from './Components/Billboard of bidding1/billofbidding';
+import BidForm from './Components/BiddingForm/bidForm';
 import './App.css';
 import Login from './Components/Login Form/loginform';
 import LogOut from './Components/LogOut/logOut'
@@ -22,7 +23,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import AddBillboards from './Components/BillboardForm/addBillboards';
 import Billboardmilitary from './Components/Billboard Military/billmilitary';
-import Mega from '../src/Components/MegaSale/megaSale';
+import MegaSale from './Components/MegaSale/megaSale';
+import MegaDetail from '../src/Components/MegaSaleDetail/megaDetail';
 import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
 import './App.css';
@@ -50,13 +52,34 @@ class Routes extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
-              <Route exact path="/"
+              <Route exact path="/bidding_form"
                 render={props => {
                   return <Home {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
               // component={Home}
+              ></Route>
+              <Route exact path="/"
+                render={props => {
+                  return <BidForm {...props}
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
+                }}
+              ></Route>
+              <Route exact path="/megaSale"
+                render={props => {
+                  return <MegaSale {...props}
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
+                }}
+              ></Route>
+              <Route exact path="/megaDetail"
+                render={props => {
+                  return <MegaDetail {...props}
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
+                }}
               ></Route>
               <Route path="/about"
                 render={props => {
@@ -93,7 +116,7 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route path="/bidding_karachi"
+              <Route path="/bidding_detail"
                 render={props => {
                   return <Billofbidding1 {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}

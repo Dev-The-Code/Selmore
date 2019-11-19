@@ -22,7 +22,7 @@ class Billofpanel1 extends Component {
 						</div>
 						<div className="col-md-3">
 							<div class="input-group">
-								<input type="text" className="form-control kurta3" data-toggle="modal" data-target="#myModal" placeholder="Post Your Bidding" />
+								<input type="text" className="form-control kurta3" placeholder="Post Your Bidding" />
 								<div className="input-group-append">
 									<button type="button" className="btn btn-primary"><span>Bid</span></button>
 								</div>

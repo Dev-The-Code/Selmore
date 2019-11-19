@@ -1,57 +1,639 @@
 
+.bidTiming{
+	font-size: 15px;
+    font-weight: 700;
+    font-family: Helvetica;
+    color: #007bff;
+}
+
+.extra1{
+	margin-right: -4vw;
+}
+.extra2{
+	margin-left: -4vw;
+}
+
+
+
+
+.cultus1{
+		width: 100%;
+		height: 300px;
+		margin-top: 5px;
+		position: absolute;
+}
+.cultus2{
+		margin-top: 10%;
+	    font-family: Helvetica;
+	    margin-left: 10%;
+    	position: relative;
+}
+.cultus3{
+		 font-size: 35px;
+	    font-weight: 600;
+	    color: white;
+}
+.cultus5{
+	display: inline;
+	margin-left: -55px;
+}
+.cultus6{
+	display: inline;
+	margin-left: -31px;
+}
+.cultus7{
+	color: white;
+}
+.cultus4{
+		background-color: #29abe2;
+}
+
 @media screen and (min-width: 360px) and (max-width: 767px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-family: Helvetica;
-        margin-top: 4vw;
-    }
+	.cultus8{
+		margin-top: 183px;
+		padding: 0px;
+	}
+	.cardImag{
+		width: 100%;
+		height: 50vw;
+	}
+	.cardImag_mega{
+		width: 111%;
+		height: 61.3vw;
+		border-bottom-left-radius: 1vw;
+		margin-left: -4.3vw;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 50vw;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 68px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 22vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+		margin-top: 10vw;
+	}
+	.card_mega1{
+		border-radius: 20px 20px 0px 0px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+		margin-top: 10vw;
+	}
+	.card_mega2{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.extra1{
+		margin-right: -14vw;
+		margin-left: 3vw;
+	}
+	.extra2{
+		margin-right: -14vw;
+		margin-left: 3vw;
+	}
 }
 @media screen and (min-width: 768px) and (max-width: 1023px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-size: 12.5px;
-        font-family: Helvetica;
-        margin-top: 0.5vw;
-    
-    }
+	.cultus8{
+		margin-top: 187px;
+		padding: 0px;
+	}
+	.cardImag{
+		width: 100%;
+		height: 17vw;
+	}
+	.cardImag_mega{
+		width: 114.5%;
+		height: 32.3vw;
+		border-bottom-left-radius: 3vw;
+		margin-left: -2vw;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 177px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 17.4vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega1{
+		border-radius: 0px 0px 0px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega2{
+		border-radius: 0px 0px 20px 0px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.extra1{
+		margin-right: 10vw;
+    	margin-left: 9vw;
+	}
+	.extra2{
+		margin-right: 10vw;
+		margin-left: 9vw;
+		margin-top: 6vw;
+	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-family: Helvetica;
-        margin-top: 0.4vw;
-    }
+	.cultus8{
+	margin-top: 161px;
+	padding: 0px;
+	}
+	.cardImag{
+		width: 100%;
+		height: 15vw;
+	}
+	.cardImag_mega{
+		width: 115%;
+		height: 22.7vw;
+		border-bottom-left-radius: 1vw;
+		margin-left: -1.2vw;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 150px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 2vw;
+	}
+	.baner_text{
+		margin-top: 13.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega1{
+		border-radius: 0px 0px 0px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega2{
+		border-radius: 0px 0px 20px 0px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.extra1{
+		margin-right: -6vw;
+	}
+	.extra2{
+		margin-left: -6vw;
+	}
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-family: Helvetica;
-        margin-top: 0.2vw;
-    }
-}
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-family: Helvetica;
-        margin-top: 0.2vw;
-    }
+	.cultus8{
+		margin-top: 126px;
+		padding: 0px;
+
+	}
+	.cardImag{
+		width: 100%;
+		height: 14vw;
+	}
+	.cardImag_mega{
+		width: 117%;
+		height: 20vw;
+		border-bottom-left-radius: 1vw;
+		margin-left: -1.1vw;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 155px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 1vw;
+	}
+	.baner_text{
+		margin-top: 11.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega1{
+		border-radius: 0px 0px 0px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega2{
+		border-radius: 0px 0px 20px 0px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.extra1{
+		margin-right: -4vw;
+	}
+	.extra2{
+		margin-left: -4vw;
+	}
 }
 @media screen and (min-width: 1600px){
-    .bookBtn_mega{
-        width: 100%;
-        padding: 1vw;
-        font-weight: 700;
-        font-family: Helvetica;
-        margin-top: 0.2vw;
-    }
+	.cultus8{
+		margin-top: 126px;
+		padding: 0px;
+	}
+	.cardImag{
+		width: 100%;
+		height: 14vw;
+	}
+	.cardImag_mega{
+		width: 100%;
+		height: 16.3vw;
+		border-bottom-left-radius: 1vw;
+		margin-left: -1.1vw;
+	}
+	.bannerImgg{
+		width: 100%;
+		height: 350px;
+		margin-top: 5px;
+		position: absolute;
+	}
+	.baner_bot_tag{
+		margin-top: 177px;
+    	padding: 0.1vw;
+	}	
+	.tag_listt{
+		margin-top: 1vw;
+	}
+	.baner_text{
+		margin-top: 11.5vw;
+		font-family: Helvetica;
+		text-align: center;
+		position: relative;
+	}
+	.bannr_txtbid{
+		 font-size: 35px;
+		font-weight: 600;
+		color: white;
+	}
+	.card_bidding{
+		border-radius: 0px 0px 20px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega1{
+		border-radius: 0px 0px 0px 20px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.card_mega2{
+		border-radius: 0px 0px 20px 0px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		font-family: Helvetica;
+	}
+	.extra1{
+		margin-right: -4vw;
+	}
+	.extra2{
+		margin-left: -4vw;
+	}
 }
+
+@media screen and (min-width: 360px) and (max-width: 660px){
+
+	.note1{
+				text-align: center;
+	}
+	.secure4{
+				text-align: center;
+	}
+	.note5{
+				    position: relative;
+				    margin-top: 128px;
+				    margin-left: 43px;
+				    background: rgba(30, 22, 22, 0.58);
+					margin-right: 29px;
+	}
+	.note3{
+				position: relative;
+			    margin-top: 126px;
+			    margin-left: 43px;
+			    background: rgba(30, 22, 22, 0.58);
+			    margin-right: 28px;
+			    margin-bottom: 21%;
+	}
+	.picsize{
+			    height: 154px;
+		   		width: 75%;
+	}
+	.note4{
+		    position: relative;
+		    margin-top: 128px;
+		    margin-left: 43px;
+		    background: rgba(30, 22, 22, 0.58);
+		    margin-right: 28px;
+	}
+	.secure3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+	}
+	.bango1{
+		text-align: left;
+	    font-size: 14px;
+	    margin-left: 17%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -40%;
+	    color: white;
+	    margin-right: 16%;
+
+	}
+	.bango3{
+	    text-align: left;
+	    font-size: 14px;
+	    margin-left: 16%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -40%;
+	    color: white;
+	    margin-right: 16%;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1024px){
+	
+	.note1{
+				text-align: right;
+	}
+	.secure4{
+				text-align: center;
+	}
+	.note5{
+		position: relative;
+	    margin-top: 126px;
+	    margin-left: 12px;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-right: -4px;
+	}
+	.note3{
+		position: relative;
+	    margin-top: 125px;
+	    margin-left: 23px;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-right: -14px;
+	}
+	.picsize {
+			    height: 154px;
+				width: 90%;
+	}
+	.note4{
+	position: relative;
+    margin-top: 127px;
+    margin-left: 13px;
+    background: rgba(30, 22, 22, 0.58);
+    margin-right: -5px;
+	}	
+	.secure3{
+        border-radius: 13%;
+	    margin-bottom: 5px;
+	    margin-left: -27%;
+	}
+	.bango1{
+		    text-align: left;
+		    font-size: 14px;
+		    margin-left: 14%;
+		    position: relative;
+		    background: rgba(30, 22, 22, 0.58);
+		    margin-top: -58%;
+		    color: white;
+		    margin-right: 5%;
+	}
+	.bango3{
+		text-align: left;
+	    font-size: 14px;
+	    margin-left: 9%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -58%;
+	    color: white;
+	    margin-right: 9%;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	
+	.note1{
+				text-align: right;
+	}
+	.secure4{
+				text-align: center;
+	}
+	.note5{
+		       position: relative;
+		    margin-top: 126px;
+		    margin-left: 50px;
+		    background: rgba(30, 22, 22, 0.58);
+		    margin-right: 45px;
+	}
+	.note3{
+		position: relative;
+	    margin-top: 127px;
+    	margin-left: 26%;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-right: -14px;
+	}
+	.picsize{
+			    height: 154px;
+		   		width: 75%;
+	}
+	.note4{
+		position: relative;
+	    margin-top: 126px;
+	    margin-left: 50px;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-right: 36px;
+	}
+	.secure3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+	}
+	.bango1{
+		text-align: left;
+		font-size: 14px;
+		margin-left: 30%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+	    margin-top: -43%;
+	    color: white;
+	}
+	.bango3{
+		text-align: left;
+	    font-size: 14px;
+	    margin-left: 17%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -43%;
+	    color: white;
+	    margin-right: 20%;
+	}
+
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+	.note1{
+					text-align: right;
+	}
+	.secure4{
+				text-align: center;
+	}
+	.note5{
+		    position: relative;
+		    margin-top: 128px;
+		    margin-left: 50px;
+		    background: rgba(30, 22, 22, 0.58);
+		    margin-right: 148px;
+	}
+	.note3{
+		position: relative;
+		margin-top: 127px;
+		margin-left: 113px;
+		background: rgba(30, 22, 22, 0.58);
+    	margin-right: 48px;
+	}
+	.picsize{
+			    height: 154px;
+		   		width: 75%;
+	}
+	.note4{
+		    position: relative;
+		    margin-top: 128px;
+		    margin-left: 56px;
+		    background: rgba(30, 22, 22, 0.58);
+		    margin-right: 104px;
+	}
+	.secure3{
+	    border-radius: 13%;
+	    margin-bottom: 5px;
+		}
+	.bango1{
+		text-align: left;
+	    font-size: 14px;
+	    margin-left: 28%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -33%;
+	    color: white;
+	    margin-right: 2%;
+	}
+	.bango3{
+		    text-align: left;
+	    font-size: 14px;
+	    margin-left: 16%;
+	    position: relative;
+	    background: rgba(30, 22, 22, 0.58);
+	    margin-top: -33%;
+	    color: white;
+	    margin-right: 16%;
+	}
+}
+.note2{
+		position: absolute;
+}
+.secure1{
+    margin-top: -20px;
+    text-align: left;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.secure2{
+	margin-top: -42px;
+    text-align: left;
+    margin-left: 64%;
+}
+.secure3{
+    border-radius: 13%;
+    margin-bottom: 5px;
+}
+.bango2{
+	position: absolute;
+}
+.shah2 >#shah1{
+	display: none;
+}
+.shah2:hover #shah1 {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

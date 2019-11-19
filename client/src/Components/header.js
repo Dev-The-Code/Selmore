@@ -43,56 +43,56 @@ class Header extends Component {
               <ul className={value ? 'nav navsm' : 'nav navsm2'}>
                 <li className="nav-item navmargin" >
                   <Link rel="noopener noreferrer" to={`/`}>
-                    HOME
+                    <span className="navFont">HOME</span>
                   </Link>
                 </li>
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/about`}>
-                    ABOUT
+                  <span className="navFont">ABOUT</span>
                   </Link>
                 </li>
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/advertising_agency`}>
-                    AGENCY
+                  <span className="navFont">AGENCY</span>
                   </Link>
                 </li>
                 {adminUser !== null && adminUser.role == 'admin' ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
-                      DASHBOARD
+                    <span className="navFont">DASHBOARD</span>
                     </Link>
                   </li>
                   :
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/faq`}>
-                      FAQ
+                    <span className="navFont">FAQ</span>
                     </Link>
                   </li>
                 }
                 <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/market_place`}>
-                    MARKETPLACE
+                  <span className="navFont">MARKETPLACE</span>
                   </Link>
                 </li>
                 <li className="nav-item navmargin13">
-                  <Link rel="noopener noreferrer" to={`/`}>
+                  <Link rel="noopener noreferrer" to={`/megaSale`}>
                     <button type="button" className="btn btn-primary">
-                      <span style={{ fontWeight: '500' }}> SALE </span>
+                      <span className="navFont"> MEGA SALE </span>
                     </button>
                   </Link>
                 </li>
                 <li className="nav-item navmargin13">
                   <Link rel="noopener noreferrer" to={`/bidding`}>
                     <button type="button" className="btn btn-primary">
-                      <span style={{ fontWeight: '500' }}> BIDDING </span>
+                      <span className="navFont"> BIDDING </span>
                     </button>
                   </Link>
                 </li>
                 {adminUser !== null && adminUser.role == 'admin' ?
-                  <li className="nav-item navmargin12">
+                  <li className="nav-item navmargin13">
                     <Link rel="noopener noreferrer" to={`/list_add`}>
                       <button type="button" className="btn btn-primary">
-                        <span style={{ fontWeight: '500' }}> LIST AD </span>
+                        <span className="navFont"> LIST AD </span>
                       </button>
                     </Link>
                   </li>
@@ -115,7 +115,7 @@ class Header extends Component {
                   :
                   <li className="nav-item navbtnmargin" >
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >
-                      <span style={{ fontWeight: '500' }}> LOGIN </span>
+                      <span className="navFont"> LOGIN </span>
                     </button>
                     <div class="modal fade" id="myModal">
                       <div class="modal-dialog" style={{ marginRight: '49.5%' }}>
@@ -149,29 +149,29 @@ class Header extends Component {
                   <ul className="" style={{ marginTop: '-30px' }}>
                     <li className="mob_li" style={{ listStyle: 'none' }}>
                       <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
-                        HOME
+                      <span className="navFont">Home</span>
                   </Link>
                     </li>
                     <li className="mob_li">
                       <Link rel="noopener noreferrer" to={`/about`} onClick={this.closeNav}>
-                        ABOUT
+                      <span className="navFont">About</span>
                   </Link>
                     </li>
                     <li className="mob_li">
                       <Link rel="noopener noreferrer" to={`/advertising_agency`} onClick={this.closeNav}>
-                        AGENCY
+                      <span className="navFont">Agency</span>
                   </Link>
                     </li>
                     {adminUser !== null && adminUser.role == 'admin' ?
                       <li className="mob_li">
                         <Link rel="noopener noreferrer" to={`/dashboard`} onClick={this.closeNav}>
-                          DASHBOARD
+                        <span className="navFont">Dashboard</span>
                     </Link>
                       </li>
                       :
                       <li className="mob_li">
                         <Link rel="noopener noreferrer" to={`/faq`} onClick={this.closeNav}>
-                          FAQ
+                        <span className="navFont">Faq</span>
                     </Link>
                       </li>
                     }
@@ -180,26 +180,26 @@ class Header extends Component {
                       :
                       <li className="mob_li">
                         <a className="nav-link" href="#" onClick={this.closeNav}>
-                          BLOG
+                        <span className="navFont">Blog</span>
                     </a>
                       </li>
                     }
                     <li className="mob_li">
                       <Link rel="noopener noreferrer" to={`/market_place`} onClick={this.closeNav}>
-                        MARKETPLACE
+                        <span className="navFont">Market Place</span>
                       </Link>
                     </li>
                     <li className="mob_li">
                       <button type="button" class="btn btn-primary btn-sm mob_Salebutn" data-toggle="modal" data-target="#myModal1" onClick={this.closeNav}>
-                        <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
-                          <span style={{fontSize: '30px'}}>Sale</span>
+                        <Link rel="noopener noreferrer" to={`/megaSale`} onClick={this.closeNav}>
+                          <span className="navFont"> Mega Sale</span>
                       </Link>
                       </button>
                     </li>
                     <li className="mob_li">
                       <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" onClick={this.closeNav}>
                         <Link rel="noopener noreferrer" to={`/bidding`} onClick={this.closeNav}>
-                          <span style={{fontSize: '30px'}}>Bidding</span>
+                          <span className="navFont">Bidding</span>
                       </Link>
                       </button>
                     </li>
@@ -207,7 +207,7 @@ class Header extends Component {
                       <li className="nav-item mob_li">
                         <Link rel="noopener noreferrer" to={`/list_add`} onClick={this.closeNav}>
                           <button type="button" className="btn btn-primary btn-sm mob_butn">
-                            <span style={{fontSize: '30px'}}> LIST AD </span>
+                            <span className="navFont"> List Ad </span>
                           </button>
                         </Link>
                       </li>
@@ -229,7 +229,7 @@ class Header extends Component {
                       :
                       <li className="nav-item navbtnmargin mob_li" >
                         <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#myModal1" onClick={this.closeNav}>
-                          <span style={{fontSize: '25px'}}>LOGIN</span>
+                        <span className="navFont">Login</span>
                     </button>
                         <div class="modal fade" id="myModal1" style={{ marginTop: '-10px' }}>
                           <div class="modal-dialog">

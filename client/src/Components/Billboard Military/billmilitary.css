@@ -156,9 +156,9 @@
 	font-weight: 600;
 	font-size: 15px;
 }
-::-webkit-input-placeholder {
+/* ::-webkit-input-placeholder {
    color: red;
-}
+} */
 .honda3{
 	color: #29abe2;
 	font-weight: 700;
@@ -224,4 +224,50 @@
 }
 .detail{
 
+}
+
+@media screen and (min-width: 360px) and (max-width: 767px){
+    .bookBtn_military{
+        width: 100%;
+        padding: 1vw;
+        font-weight: 700;
+        font-family: Helvetica;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .bookBtn_military{
+        width: 100%;
+        padding: 1vw;
+        font-weight: 700;
+        font-size: 12.5px;
+        font-family: Helvetica;   
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px){
+    .bookBtn_military{
+        width: 100%;
+        padding: 1vw;
+        font-weight: 700;
+        font-family: Helvetica;
+        margin-left: 1.1vw;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+    .bookBtn_military{
+        width: 100%;
+        padding: 1vw;
+        font-weight: 700;
+        font-family: Helvetica;
+        margin-left: 1vw;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    .bookBtn_military{
+        width: 100%;
+        padding: 1vw;
+        font-weight: 700;
+        font-family: Helvetica;
+        margin-left: 1vw;
+    }
 }

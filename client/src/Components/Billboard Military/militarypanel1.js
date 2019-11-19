@@ -167,6 +167,11 @@ class Militarypanel1 extends Component {
 								<div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
 							</div>
 							<br />
+							<div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-9"></div>
+                                <div className="col-md-3"><button className="btn btn-primary bookBtn_military">Book Now</button></div>
+                            </div>
+							<br />
 							<div className="row">
 
 								<div className="col-md-4 col-lg-4 col-xl-4 col-6">

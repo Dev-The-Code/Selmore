@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Header from '../header';
-import './bidDetail.css';
+import Footer from '../footer';
+import './megaDetail.css';
 import AbBanner from '../About Selmore/abBanner';
-import DetailPanel1 from './bid-detailPanel1';
-import DetailPanel2 from './bid-detailPanel2';
+import Megapanel1 from './megaDetailPanel1';
+import Megapanel2 from './megaDetailPanel2';
 
-class BidDetail extends Component {
+class MegaDetail extends Component {
 	constructor(props) {
 		super(props)
 	}
@@ -17,10 +18,11 @@ class BidDetail extends Component {
 			<div>
 				<Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
 				<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'} bred2={'> BILLBOARD'} bred3={'> MEGA SALE'} />
-                <DetailPanel1 data={this.props.location.state}/>
-				<DetailPanel2 />
+                <Megapanel1 data={this.props.location.state}/>
+				<Megapanel2 />
+				<Footer />
             </div>
 		);
 	}
 }
-export default BidDetail;
+export default MegaDetail;

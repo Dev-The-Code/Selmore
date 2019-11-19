@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './bidDetail.css';
+import './megaDetail.css';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
 
 
-class BidDetail1 extends Component {
+class Megapanel1 extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -63,25 +63,25 @@ class BidDetail1 extends Component {
         }
         return (
             <div>
-                <div className="container soldier8">
+                <div className="container">
                     <div className="row" style={{ margin: '0px' }}>
-                        <div className="col-md-8">
-                            <div className="row slidersoldier" style={{ margin: '0px' }}>
-                                <div className="">
-                                    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-                                        <div className="carousel-inner">
-                                            {image}
-                                        </div>
-                                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Previous</span>
-                                        </a>
-                                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Next</span>
-                                        </a>
+                        <div className="col-md-1"></div>
+                        <div className="col-md-10">
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-12">
+                                    <div className="kurta1">
+                                        <h3 className="kurta2">SLIDER</h3>
                                     </div>
                                 </div>
+                            </div><br />
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-2"></div>
+                                <div className="col-md-8">
+                                    <div className="kurta1">
+                                        <h3 className="kurta2">MAP</h3>
+                                    </div>
+                                </div>
+                                <div className="col-md-2"></div>
                             </div><br />
                             {/*first panel1*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
@@ -166,6 +166,7 @@ class BidDetail1 extends Component {
                                 <div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
                             </div>
+                            <br/>
                             {/*fifth panel*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
                                 <span className="ufone2">Military Road City Demographics</span>
@@ -187,39 +188,38 @@ class BidDetail1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-9"></div>
                                 <div className="col-md-3"><button className="btn btn-primary bookBtn_mega">Book Now</button></div>
                                 {/* <div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div> */}
                             </div>
                             <br />
                             <div className="row">
 
-                                <div className="col-md-4 col-lg-4 col-xl-4 col-6">
+                                <div className="col-md-4 col-lg-4 col-xl-4 col-12">
                                     <h3>Contact Details</h3>
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-11 col-10 ufone8"></div>
-                                <div className="col-md-1 col-2"></div>
+                                <div className="col-md-12 col-12 ufone8"></div>
                             </div>
                         </div>
-                        <div className="col-md-4">
-                            <div></div>
-                            {adminUser !== null && adminUser.role == 'admin' ?
+                        <div className="col-md-1">
+                            {/* {adminUser !== null && adminUser.role == 'admin' ?
                                 <Link to={{ pathname: `/list_add`, state: data }}>
                                     <div class="fa fa-pencil" style={{ fontSize: "24px", float: "right", marginLeft: '10px' }}></div>
                                 </Link>
                                 :
                                 null
-                            }
+                            } */}
                             {/* {this.props.data.address && */}
                             <div>
-                                <div className="row soldier7" style={{ margin: '0px' }}>
+                                {/* <div className="row soldier7" style={{ margin: '0px' }}>
                                     <div><h3>Map</h3></div>
 
-                                </div><br />
+                                </div><br /> */}
                                 {/* render a map and show a location of the Billboard */}
                                 <div>
-                                     {/* <Location 
+                                    {/* <Location 
                                         address={this.props.data.address}
                                         latitude={this.props.data.latitude}
                                         longitude={this.props.data.longitude}
@@ -229,7 +229,6 @@ class BidDetail1 extends Component {
                             // 			<h3 style={{ color: 'white' }}>Map</h3>
                             // 		</div> */}
                             </div>
-                            {/* } */}
                         </div>
                     </div>
                 </div> <br />
@@ -237,4 +236,4 @@ class BidDetail1 extends Component {
         );
     }
 }
-export default BidDetail1;
+export default Megapanel1;

@@ -30,16 +30,16 @@ class Dropdown extends Component {
   }
 
 
-openNav = ()=>{
-      console.log(document.getElementById("myNav"))
-     document.getElementById("mySideNav").style.width = "100%";
+  openNav = () => {
+    console.log(document.getElementById("myNav"))
+    document.getElementById("mySideNav").style.width = "100%";
 
   }
-  openNav = ()=>{
+  openNav = () => {
     document.getElementById("mySidenav").style.width = "100%";
   }
 
-  closeNav = () =>{
+  closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   }
 
@@ -51,8 +51,9 @@ openNav = ()=>{
         <div className="d-none d-sm-block">
           <MDBDropdown>
             <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
-              <div className='userName dropdown-toggle'
-              >{userName}</div>
+              <div className='userName dropdown-toggle'>
+                <span className="navFont">{userName}</span>
+              </div>
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>
               <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
