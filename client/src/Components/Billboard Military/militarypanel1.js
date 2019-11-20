@@ -168,9 +168,57 @@ class Militarypanel1 extends Component {
 							</div>
 							<br />
 							<div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-9"></div>
-                                <div className="col-md-3"><button className="btn btn-primary bookBtn_military">Book Now</button></div>
-                            </div>
+								<div className="col-md-9"></div>
+								<div className="col-md-3"><button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button></div>
+							</div>
+							<div class="modal" id="myBillBook">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Book Now</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<div className="row">
+												<div className="col-12 col-md-6 col-lg-6 col-xl-6">
+													<input
+														placeholder="Company Name"
+														className="bid_Input"
+													/>
+												</div>
+												<div className="col-12 col-md-6 col-lg-6 col-xl-6">
+													<input type="file" placeholder="upload" />
+												</div>
+											</div>
+											<div className="row">
+												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
+													<label class="radio-inline">
+														<p className="radio_price"><input type="radio" name="optradio" checked />day</p>
+													</label>
+													<label class="radio-inline">
+														<p className="radio_price"><input type="radio" name="optradio" />week</p>
+													</label>
+													<label class="radio-inline">
+														<p className="radio_price"><input type="radio" name="optradio" />month</p>
+													</label>
+													<label class="radio-inline">
+														<p className="radio_price"><input type="radio" name="optradio" />year</p>
+													</label>
+												</div>
+											</div>
+											{/* <div className="row">
+												<div className="col-12 col-md-9 col-lg-9 col-xl-9"></div>
+												<div className="col-12 col-md-3 col-lg-3 col-xl-3">
+													<button className="btn btn-primary bookBtn_military">Submit</button>
+												</div>
+											</div> */}
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+										</div>
+									</div>
+								</div>
+							</div>
 							<br />
 							<div className="row">
 

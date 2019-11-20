@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './billboardDetail.css';
 import {
-    Form, Input, Icon, Button, Upload, Modal, notification, Cascader,
+    DatePicker, Radio, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
 } from 'antd';
+import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
 import './billboardDetail.css';
@@ -23,6 +24,7 @@ class BillBoard extends Component {
     constructor() {
         super()
         this.state = {
+            radioValue: 1,
             compaNames: '',
             type: '',
             category: '',
@@ -93,9 +95,16 @@ class BillBoard extends Component {
             statuses: [],
             audienceTypes: [],
             cities: [],
-            states: []
+            states: [],
+            showForm: 'normal'
         }
     }
+    onChange = g => {
+        // console.log('radio checked', g.target.radioValue);
+        this.setState({
+            radioValue: g.target.radioValue,
+        });
+    };
 
     async componentDidMount() {
         this.gettingDropDownValues();
@@ -412,10 +421,19 @@ class BillBoard extends Component {
             this.setState({ [fileListRef]: fileList, noChooseFile: true, index: index })
         }
     }
+
+    drnShoww = (u, g) => {
+        console.log(u ,  'hhhhhhh')
+        this.setState({ showForm: u })
+    }
+
     render() {
+        const { showForm } = this.state;
+        const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
             companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList, imgArr } = this.state;
+        console.log(showForm, 'daniyalll');
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -434,9 +452,86 @@ class BillBoard extends Component {
                                             style={{ textAlign: 'left' }}
                                             required={false}
                                             key={k}
-                                        >
+                                        ><br />
                                             <div className="row">
                                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
+                                            
+                                                    <div className="row" style={{ marginTop: '2vw' }}>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <h5>Bidding Details</h5>
+                                                        </div>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
+                                                    </div>
+                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <Input
+                                                                placeholder="Min Bid Price"
+                                                                className="bid_Input"
+                                                            /><br />
+                                                        </div>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <TimePicker
+
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                            <RangePicker />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                
+                                                    <div className="row" style={{ marginTop: '2vw' }}>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <h5>Mega Sale</h5>
+                                                        </div>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
+                                                    </div>
+                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <Input
+                                                                placeholder="Actual Price"
+                                                                className="bid_Input"
+                                                            /><br />
+                                                        </div>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <Input
+                                                                placeholder="Percentage of discount"
+                                                                className="bid_Input"
+                                                            /><br />
+                                                        </div>
+                                                    </div>
+                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                            <TimePicker
+                                                                placeholder="Deal till"
+                                                            />
+                                                        </div>
+                                                    </div><br />
+                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                        <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                            <Input
+                                                                placeholder="Number"
+                                                                className="bid_Input"
+                                                            /><br />
+                                                        </div>
+                                                        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                                            <label class="radio-inline">
+                                                                <p className="radio_price"><input type="radio" name="optradio" checked />days</p>
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <p className="radio_price"><input type="radio" name="optradio" />weekly</p>
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <p className="radio_price"><input type="radio" name="optradio" />monthly</p>
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <p className="radio_price"><input type="radio" name="optradio" />yearly</p>
+                                                            </label>
+                                                        </div>
+                                                    </div><br />
+                                                
                                                     <div className="form-group up">
                                                         <label for="type"></label>
                                                         <Form.Item>
@@ -1070,12 +1165,24 @@ class BillBoard extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             )
         });
         return (
-            <div className='row'>
+            <div className='row' >
                 <div className='mainDive container shde'>
+                    <form>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'normal')} checked />Normal
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'bidd')} style={{ marginLeft: '5vw' }} />Bidding
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'mega')} style={{ marginLeft: '5vw' }} />Mega Sale
+                        </label>
+                    </form>
+                    <br />
                     <Form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="col-md-8 col-xl-8" style={{ paddingLeft: '0.6%' }}>
                             <div className="form-group up">
