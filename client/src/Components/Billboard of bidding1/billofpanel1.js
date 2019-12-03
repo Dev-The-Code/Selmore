@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Popform from '../Popform/popform';
+import NumberFormat from 'react-number-format';
 import './billofbidding.css';
 
 class Billofpanel1 extends Component {
@@ -22,7 +23,8 @@ class Billofpanel1 extends Component {
 						</div>
 						<div className="col-md-3">
 							<div class="input-group">
-								<input type="text" className="form-control kurta3" placeholder="Post Your Bidding" />
+								<NumberFormat className="form-control kurta3" thousandSeparator={true} prefix={'Rs.'}  placeholder="Enter bid price" />
+								{/* <input type="number" className="form-control kurta3" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Post Your Bidding" /> */}
 								<div className="input-group-append">
 									<button type="button" className="btn btn-primary"><span>Bid</span></button>
 								</div>

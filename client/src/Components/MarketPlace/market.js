@@ -41,12 +41,12 @@ class Market extends Component {
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
             cities: [],
             category: [],
-            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall','Streamers',
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
             states: [],
             billboardData: [],
             i: 0,
-            headingValue:''
+            headingValue: ''
         }
     }
     componentWillMount() {
@@ -57,7 +57,7 @@ class Market extends Component {
         if (data) {
             this.setState({
                 billboardData: data,
-                headingValue:headingValue
+                headingValue: headingValue
             })
             localStorage.setItem('billboardData', JSON.stringify(data))
         }
@@ -234,10 +234,10 @@ class Market extends Component {
             <div className="container">
                 <div className='row billboard animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
-                    {this.state.headingValue != '' ? 
-                    <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.headingValue}</div>
-                :
-                <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>}
+                    {this.state.headingValue != '' ?
+                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.headingValue}</div>
+                        :
+                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>}
                 </div>
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
@@ -245,6 +245,28 @@ class Market extends Component {
                             setFieldsValue={this.state.filterValue}
                             onChange={this.filterBillBoard.bind(this)}
                         >
+                            <button className="btn btn-primary">
+                            
+                            <i class='fas fa-arrow-circle-right'></i>
+                            </button>
+                            <div className='filterDivs'>Status</div>
+                            <Row>
+                                <Col >
+                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
+                                </Col>
+                                <Col >
+                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
+                                </Col>
+                            </Row>
+                            <div className='filterDivs'>Category</div>
+                            <Row className="fasla1" >
+                                <Col>
+                                    <Select onChange={this.handleChange}
+                                        options={category}
+                                    >
+                                    </Select>
+                                </Col>
+                            </Row>
                             <div className='filterDivs'>Types</div>
                             <Row>
                                 <Col>
@@ -296,15 +318,6 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='filterDivs'>Status</div>
-                            <Row>
-                                <Col >
-                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
-                                </Col>
-                                <Col >
-                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
-                                </Col>
-                            </Row>
                             <div className='filterDivs'>Audience Type</div>
                             <Row>
                                 <Col >
@@ -320,16 +333,28 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='col-md-9 dropdown'>
-                                <div className='filterDivs'>Category</div>
+                            <div className='filterDivs'>Cities</div>
                                 <Row className="fasla1" >
                                     <Col>
-                                        <Select onChange={this.handleChange}
-                                            options={category}
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={cities}
                                         >
                                         </Select>
                                     </Col>
                                 </Row>
+                                <div className='filterDivs'>States</div>
+                                <Row className="fasla1" >
+                                    <Col>
+                                        <Select
+                                            onChange={this.handleChange}
+                                            options={states}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
+                            <div className='col-md-9 dropdown'>
+
                                 <div className='filterDivs'>Width</div>
                                 <Row className="fasla1" >
                                     <Col>
@@ -364,26 +389,6 @@ class Market extends Component {
                                         <Select
                                             onChange={this.handleChange}
                                             options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>Cities</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={cities}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>States</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={states}
                                         >
                                         </Select>
                                     </Col>

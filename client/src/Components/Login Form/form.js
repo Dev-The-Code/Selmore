@@ -120,6 +120,7 @@ class FormLogin extends Component {
                 </div>
                 <p style={{ marginTop: '-4%' }}><span className="school8">Forget Password!?</span></p>
                 <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
+
                 <br />
                 {isAlert ?
                   <div class="alert alert-danger" role="alert">
@@ -132,8 +133,8 @@ class FormLogin extends Component {
             {isLoader ? <div class="loading"> 	</div>
               : null
             }
-             <div className="col-md-1">
-            </div> 
+            <div className="col-md-1">
+            </div>
           </div>
         </div>
         <div className="d-block d-sm-none">

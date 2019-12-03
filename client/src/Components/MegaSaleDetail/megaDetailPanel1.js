@@ -187,42 +187,7 @@ class Megapanel1 extends Component {
                                 <div className="col-md-3 ufone5"><span className="ufone3">Deal available till</span></div>
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
                             </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-9"></div>
-                                <div className="col-md-3">
-                                    <button className="btn btn-primary bookBtn_mega" data-toggle="modal" data-target="#myBook">
-                                        Book Now
-                                    </button>
-                                </div>
-                                {/* <div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div> */}
-                            </div>
-
-                            <div class="modal" id="myBook">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Book Now</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div className="row">
-                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <input
-                                                        placeholder="Company Name"
-                                                        className="bid_Input"
-                                                    />
-                                                </div>
-                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <input type="file" placeholder="upload" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <br />
                             <div className="row">

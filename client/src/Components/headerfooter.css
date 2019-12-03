@@ -115,8 +115,8 @@
         color: #007bff !important;     
     }
     .navsm2{
-        margin-left: 4vw;
-        color: #007bff !important;  
+        margin-left: -3vw;
+         color: #007bff !important;
     }
     .navmargin{
         margin-top: 36px;
@@ -165,7 +165,7 @@
             margin: 29px 6px 0px -10px;
         }
     .navbtnmargin{
-        margin-left: -1%;
+        margin-left: 0%;
         margin-top: 2.7vw;
         height: 31px;
     }    
@@ -185,8 +185,8 @@
         color: #007bff !important;           
     }
     .navsm2{
-        margin-left: -4vw;
-        color: #007bff !important;           
+        margin-left: -8vw;
+        color: #007bff !important;        
     }
     .navmargin{
         margin-top: 36px;
@@ -236,7 +236,7 @@
             margin: 28px 6px 0px -10px;
         }
     .navbtnmargin{
-        margin-left: -1%;
+        margin-left: -0.5%;
         margin-top: 2.3vw;
         height: 31px;
     }    
@@ -301,7 +301,7 @@
             margin: 28px 6px 0px -10px;
         }
     .navbtnmargin{
-        margin-left: -1%;
+        margin-left: -0.7%;
         margin-top: 4.1%;
         height: 31px;
     }    

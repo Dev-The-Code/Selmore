@@ -180,29 +180,22 @@ class Militarypanel1 extends Component {
 										</div>
 										<div class="modal-body">
 											<div className="row">
-												<div className="col-12 col-md-6 col-lg-6 col-xl-6">
-													<input
-														placeholder="Company Name"
-														className="bid_Input"
-													/>
-												</div>
-												<div className="col-12 col-md-6 col-lg-6 col-xl-6">
-													<input type="file" placeholder="upload" />
-												</div>
-											</div>
-											<div className="row">
 												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-													<label class="radio-inline">
-														<p className="radio_price"><input type="radio" name="optradio" checked />day</p>
+													<label class="checkdrn radio-inline">950,000 (per day)
+															<input type="radio" name="radio" />
+														<span class="checkmark"></span>
 													</label>
-													<label class="radio-inline">
-														<p className="radio_price"><input type="radio" name="optradio" />week</p>
+													<label class="checkdrn radio-inline">950,000 (per week)
+															<input type="radio" name="radio" />
+														<span class="checkmark"></span>
 													</label>
-													<label class="radio-inline">
-														<p className="radio_price"><input type="radio" name="optradio" />month</p>
+													<label class="checkdrn radio-inline">950,000 (per month)
+															<input type="radio" name="radio" />
+														<span class="checkmark"></span>
 													</label>
-													<label class="radio-inline">
-														<p className="radio_price"><input type="radio" name="optradio" />year</p>
+													<label class="checkdrn radio-inline">950,000 (per year)
+															<input type="radio" name="radio" />
+														<span class="checkmark"></span>
 													</label>
 												</div>
 											</div>
