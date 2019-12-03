@@ -423,7 +423,7 @@ class BillBoard extends Component {
     }
 
     drnShoww = (u, g) => {
-        console.log(u ,  'hhhhhhh')
+        console.log(u, 'hhhhhhh')
         this.setState({ showForm: u })
     }
 
@@ -455,7 +455,7 @@ class BillBoard extends Component {
                                         ><br />
                                             <div className="row">
                                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                            
+
                                                     <div className="row" style={{ marginTop: '2vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <h5>Bidding Details</h5>
@@ -481,7 +481,7 @@ class BillBoard extends Component {
                                                         </div>
                                                     </div>
                                                     <br />
-                                                
+
                                                     <div className="row" style={{ marginTop: '2vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <h5>Mega Sale</h5>
@@ -531,7 +531,7 @@ class BillBoard extends Component {
                                                             </label>
                                                         </div>
                                                     </div><br />
-                                                
+
                                                     <div className="form-group up">
                                                         <label for="type"></label>
                                                         <Form.Item>

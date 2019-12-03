@@ -13,7 +13,7 @@ class Bidform extends Component {
       <div>
         <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
         <BidForm />
-        {/* <Footer/> */}
+        <Footer/>
       </div>
     );
   }

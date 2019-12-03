@@ -8,13 +8,6 @@ class Biddpanel1 extends Component {
 			<div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12 text-right">
-							<button class="btn btn-primary">
-								<span style={{ fontWeight: '600', fontFamily: 'Helvetica' }}>Add Bidding</span>
-							</button>
-						</div>
-					</div><br /><br />
-					<div className="row">
 						<div className="col-12 col-md-4 col-lg-4 col-xl-4">
 							<div class="card_bidding">
 								<img class="card-img-top cardImag" src="./images/bill1.png" alt="Card image" style={{ width: '100%' }} />

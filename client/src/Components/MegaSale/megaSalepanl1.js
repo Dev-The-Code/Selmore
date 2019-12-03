@@ -8,13 +8,6 @@ class MegaSalepanel1 extends Component {
 			<div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12 text-right">
-							<button class="btn btn-primary">
-								<span style={{fontWeight:'600',fontFamily:'Helvetica'}}>Add Mega Deal</span>
-							</button>
-						</div>
-					</div><br/><br/>
-					<div className="row">
 						<div className="col-10 col-md-12 col-lg-5 col-xl-5">
 							<div className="row extra1">
 								<div className="col-12 col-md-5 col-lg-5 col-xl-5 card_mega1">
