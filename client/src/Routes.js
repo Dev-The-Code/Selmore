@@ -52,7 +52,7 @@ class Routes extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
-              <Route exact path="/bidding_form"
+              <Route exact path="/"
                 render={props => {
                   return <Home {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
@@ -60,7 +60,7 @@ class Routes extends Component {
                 }}
               // component={Home}
               ></Route>
-              <Route exact path="/"
+              <Route exact path="/bidding_form"
                 render={props => {
                   return <BidForm {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
