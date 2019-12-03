@@ -63,8 +63,8 @@ class Routes extends Component {
               <Route exact path="/bidding_form"
                 render={props => {
                   return <BidForm {...props}
-                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                    hideDropDown={this.hideDropDown} />
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
               <Route exact path="/megaSale"
