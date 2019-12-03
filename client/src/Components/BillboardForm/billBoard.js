@@ -24,7 +24,7 @@ class BillBoard extends Component {
     constructor() {
         super()
         this.state = {
-            radioValue: 1,
+            // radioValue: 1,
             compaNames: '',
             type: '',
             category: '',
@@ -96,15 +96,15 @@ class BillBoard extends Component {
             audienceTypes: [],
             cities: [],
             states: [],
-            showForm: 'normal'
+            // showForm: 'normal'
         }
     }
-    onChange = g => {
-        // console.log('radio checked', g.target.radioValue);
-        this.setState({
-            radioValue: g.target.radioValue,
-        });
-    };
+    // onChange = g => {
+    //     // console.log('radio checked', g.target.radioValue);
+    //     this.setState({
+    //         radioValue: g.target.radioValue,
+    //     });
+    // };
 
     async componentDidMount() {
         this.gettingDropDownValues();
@@ -422,18 +422,18 @@ class BillBoard extends Component {
         }
     }
 
-    drnShoww = (u, g) => {
-        console.log(u, 'hhhhhhh')
-        this.setState({ showForm: u })
-    }
+    // drnShoww = (u, g) => {
+    //     console.log(u, 'hhhhhhh')
+    //     this.setState({ showForm: u })
+    // }
 
     render() {
-        const { showForm } = this.state;
+        // const { showForm } = this.state;
         const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
             companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList, imgArr } = this.state;
-        console.log(showForm, 'daniyalll');
+        // console.log(showForm, 'daniyalll');
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -456,13 +456,13 @@ class BillBoard extends Component {
                                             <div className="row">
                                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
 
-                                                    <div className="row" style={{ marginTop: '2vw' }}>
+                                                    {/* <div className="row" style={{ marginTop: '2vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <h5>Bidding Details</h5>
                                                         </div>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
-                                                    </div>
-                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                    </div> */}
+                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <Input
                                                                 placeholder="Min Bid Price"
@@ -474,21 +474,21 @@ class BillBoard extends Component {
 
                                                             />
                                                         </div>
-                                                    </div>
-                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                    </div> */}
+                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
                                                         <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                                                             <RangePicker />
                                                         </div>
                                                     </div>
-                                                    <br />
+                                                    <br /> */}
 
-                                                    <div className="row" style={{ marginTop: '2vw' }}>
+                                                    {/* <div className="row" style={{ marginTop: '2vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <h5>Mega Sale</h5>
                                                         </div>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
-                                                    </div>
-                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                    </div> */}
+                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <Input
                                                                 placeholder="Actual Price"
@@ -501,15 +501,15 @@ class BillBoard extends Component {
                                                                 className="bid_Input"
                                                             /><br />
                                                         </div>
-                                                    </div>
-                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                    </div> */}
+                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
                                                         <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                                                             <TimePicker
                                                                 placeholder="Deal till"
                                                             />
                                                         </div>
-                                                    </div><br />
-                                                    <div className="row" style={{ marginTop: '1vw' }}>
+                                                    </div><br /> */}
+                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
                                                         <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                                                             <Input
                                                                 placeholder="Number"
@@ -530,7 +530,7 @@ class BillBoard extends Component {
                                                                 <p className="radio_price"><input type="radio" name="optradio" />yearly</p>
                                                             </label>
                                                         </div>
-                                                    </div><br />
+                                                    </div><br /> */}
 
                                                     <div className="form-group up">
                                                         <label for="type"></label>
@@ -1171,7 +1171,7 @@ class BillBoard extends Component {
         return (
             <div className='row' >
                 <div className='mainDive container shde'>
-                    <form>
+                    {/* <form>
                         <label class="radio-inline">
                             <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'normal')} checked />Normal
                         </label>
@@ -1181,7 +1181,7 @@ class BillBoard extends Component {
                         <label class="radio-inline">
                             <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'mega')} style={{ marginLeft: '5vw' }} />Mega Sale
                         </label>
-                    </form>
+                    </form> */}
                     <br />
                     <Form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="col-md-8 col-xl-8" style={{ paddingLeft: '0.6%' }}>
