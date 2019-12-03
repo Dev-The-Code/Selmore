@@ -8,74 +8,84 @@ class Panel3 extends Component {
 		super(props)
 		this.state = {
 			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
-			" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
-			" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
-			" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
-			" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-			" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-			" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
-			" Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
-			" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-			" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
-			"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-			" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
-			" Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
-			" Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-			" Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
-			" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
-			" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
-			" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
+				" Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
+				" Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+				" Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
+				" Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
 			cities: [],
 			i: 0,
 			bilboardData: [],
 			directMarket: false,
-			cityName:''
+			cityName: '',
+			sliceCities: []
 		}
 	}
 	async componentWillMount() {
-		const { citiesArr } = this.state;
+		const { citiesArr, i } = this.state;
 
 		let response = await HttpUtils.get('getbillboard');
 		let data = response.content;
 		let cities = []
 		let citiesData;
-		for (var i = 0; i < citiesArr.length; i++) {
+		for (var k = 0; k < citiesArr.length; k++) {
 			let city = []
 			citiesData = {}
 			for (var j in data) {
-				if (citiesArr[i] == data[j].city) {
+				if (citiesArr[k] == data[j].city) {
 					city.push(data[j])
-					citiesData[citiesArr[i]] = city;
+					citiesData[citiesArr[k]] = city;
 				}
 			}
 			if (city.length != 0) {
 				cities.push(city)
 			}
 		}
+		let sliceCities = cities.slice(0, i + 12);
+
 		this.setState({
-			cities: cities
+			cities: cities,
+			sliceCities: sliceCities,
+			i : 12
 		})
 	}
 
 	billCity = () => {
+		const { i, cities } = this.state;
+		let addition = i + 12;
+		let sliceCities = cities.slice(0, i + 12);
+
 		this.setState({
-			i: this.state.i + 12
+			i: addition,
+			sliceCities: sliceCities,
 		})
 	}
-	redirectToMarketPlace = (e , city) => {
+
+	redirectToMarketPlace = (e, city) => {
 		this.setState({
 			directMarket: true,
 			bilboardData: e,
-			cityName:city
+			cityName: city
 		})
 	}
 	render() {
-		const { i, cities, bilboardData, directMarket , cityName } = this.state;
-		let slipCity = cities.slice(0, i + 12);
+		const { bilboardData, directMarket, cityName, sliceCities } = this.state;
 		if (directMarket) {
 			return <Redirect to={{
 				pathname: '/market_place',
-				state: { bilboardData: bilboardData  , nameBill:cityName}
+				state: { bilboardData: bilboardData, showValueHead: cityName }
 			}} />
 		}
 		return (
@@ -93,7 +103,7 @@ class Panel3 extends Component {
 					<div className="row">
 						<div className="container funday">
 							{/* show the cities of the Billboards */}
-							{slipCity && slipCity.map((elem, key) => {
+							{sliceCities && sliceCities.map((elem, key) => {
 								return (
 									<div className="col-md-4 col-sm-3 col-12 panel3div citbox divbordered"
 										onClick={this.redirectToMarketPlace.bind(this, elem, elem[0].city)}>

@@ -8,31 +8,26 @@ class MarketPlace extends Component {
         super(props);
         this.state = {
             data: '',
-            adName: ''
+            showValueHead: ''
         }
     }
     componentWillMount() {
         let data = this.props.location.state;
-        console.log(data, 'data')
         if (data != undefined) {
-            let adName = this.props.location.state.nameBill;
-            console.log(data.bilboardData , 'data.bilboardData')
-            console.log(adName , 'adName')
-
+            let keyName = this.props.location.state.showValueHead;
             this.setState({
                 data: data.bilboardData,
-                adName: adName
+                showValueHead: keyName
             })
         }
         window.scrollTo(0, 0);
-        // console.log(this.props)
     }
     render() {
-        const { data, adName } = this.state;
+        const { data, showValueHead } = this.state;
         return (
             <div>
                 <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
-                <Market data={data} nameBill={adName} />
+                <Market data={data} showValueHead={showValueHead} />
                 <Footer />
             </div>
         )

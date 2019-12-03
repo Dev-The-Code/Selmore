@@ -46,18 +46,18 @@ class Market extends Component {
             states: [],
             billboardData: [],
             i: 0,
-            ac:''
+            headingValue:''
         }
     }
     componentWillMount() {
         let data = this.props.data;
-        let a = this.props.nameBill
+        let headingValue = this.props.showValueHead
         console.log(data, 'this.props')
 
         if (data) {
             this.setState({
                 billboardData: data,
-                ac:a
+                headingValue:headingValue
             })
             localStorage.setItem('billboardData', JSON.stringify(data))
         }
@@ -175,7 +175,6 @@ class Market extends Component {
     render() {
         const { filter } = this.props;
         // console.log(boardNames,'daniyal work');
-        console.log(filter, 'sssssssss');
         const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown, i, category } = this.state;
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
@@ -235,8 +234,8 @@ class Market extends Component {
             <div className="container">
                 <div className='row billboard animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
-                    {this.state.ac != '' ? 
-                    <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.ac}</div>
+                    {this.state.headingValue != '' ? 
+                    <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.headingValue}</div>
                 :
                 <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>}
                 </div>

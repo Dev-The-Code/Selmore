@@ -22,7 +22,7 @@ class Panel1 extends Component {
       radioAdscategory: [],
       othercategory: [],
       bilboardData: [],
-      nameBill: ''
+      showValueHead: ''
     }
   }
   async componentWillMount() {
@@ -85,11 +85,11 @@ class Panel1 extends Component {
       othercategory: othercategoryArr,
     })
   }
-  hoverAlert = (value, billName) => {
+  hoverAlert = (value, nameKey) => {
     this.setState({
       directMarket: true,
       bilboardData: value,
-      nameBill: billName,
+      showValueHead: nameKey,
     })
   }
 
@@ -106,13 +106,13 @@ class Panel1 extends Component {
       radioAdscategory,
       othercategory,
       directMarket,
-      nameBill,
+      showValueHead,
       bilboardData
     } = this.state;
     if (directMarket) {
       return <Redirect to={{
         pathname: '/market_place',
-        state: { bilboardData: bilboardData, nameBill: nameBill }
+        state: { bilboardData: bilboardData, showValueHead: showValueHead }
       }} />
     }
     return (
@@ -237,39 +237,10 @@ class Panel1 extends Component {
             </div>
           </div>
 
-
-
-
-
-
           <div className="row">
             <div className="container space">
-              <div className="col-md-4 divborder" 
-              // onClick={() => this.hoverAlert(steamerMallcategory, 'Steamer')}
-              >
-                <div className="row">
-                  <div className="col-md-3 col-3 col-sm-3">
-                    {/* <img src="../images/7.png" alt='img' className="lane1" /> */}
-                  </div>
-                  <div className="col-md-9 col-9 col-sm-9">
-                    {/* <h5 className="lane3">{`Steamer (${steamerMallcategory.length})`}</h5> */}
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4 divborder" 
-              // onClick={() => this.hoverAlert(steamerMallcategory, 'Steamer')}
-              >
-                <div className="row">
-                  <div className="col-md-3 col-3 col-sm-3">
-                    {/* <img src="../images/8.png" alt='img' className="lane1" /> */}
-                  </div>
-                  <div className="col-md-9 col-9 col-sm-9">
-                    {/* <h5 className="lane3">{`Steamer (${steamerMallcategory.length})`}</h5> */}
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4 divborder" 
-              onClick={() => this.hoverAlert(steamerMallcategory, 'Streamers')}
+              <div className="col-md-4 divborder"
+                onClick={() => this.hoverAlert(steamerMallcategory, 'Streamers')}
               >
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
