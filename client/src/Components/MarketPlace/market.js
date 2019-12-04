@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col,
+    Checkbox, Form, Row, Col, Input
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
@@ -237,7 +237,8 @@ class Market extends Component {
                     {this.state.headingValue != '' ?
                         <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.headingValue}</div>
                         :
-                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>}
+                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>
+                    }
                 </div>
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
@@ -245,10 +246,6 @@ class Market extends Component {
                             setFieldsValue={this.state.filterValue}
                             onChange={this.filterBillBoard.bind(this)}
                         >
-                            <button className="btn btn-primary">
-                            
-                            <i class='fas fa-arrow-circle-right'></i>
-                            </button>
                             <div className='filterDivs'>Status</div>
                             <Row>
                                 <Col >
@@ -258,6 +255,7 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
                                 </Col>
                             </Row>
+                            <div className='col-md-11 dropdown'>
                             <div className='filterDivs'>Category</div>
                             <Row className="fasla1" >
                                 <Col>
@@ -267,6 +265,7 @@ class Market extends Component {
                                     </Select>
                                 </Col>
                             </Row>
+                            </div>
                             <div className='filterDivs'>Types</div>
                             <Row>
                                 <Col>
@@ -333,7 +332,9 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                 </Col>
                             </Row>
-                            <div className='filterDivs'>Cities</div>
+
+                            <div className='col-md-11 dropdown'>
+                                <div className='filterDivs'>Cities</div>
                                 <Row className="fasla1" >
                                     <Col>
                                         <Select
@@ -353,9 +354,7 @@ class Market extends Component {
                                         </Select>
                                     </Col>
                                 </Row>
-                            <div className='col-md-9 dropdown'>
-
-                                <div className='filterDivs'>Width</div>
+                                {/* <div className='filterDivs'>Width</div>
                                 <Row className="fasla1" >
                                     <Col>
                                         <Select onChange={this.handleChange}
@@ -392,7 +391,87 @@ class Market extends Component {
                                         >
                                         </Select>
                                     </Col>
-                                </Row>
+                                </Row> */}
+                            </div>
+                            <div className='filterDivs'>Width</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Height</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Traffic Count</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Daily Visitor</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Input
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
                             </div>
                         </CheckboxGroup>
                     </div>

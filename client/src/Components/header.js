@@ -330,6 +330,11 @@ class Header extends Component {
                     />
                   </div>
                 </div>
+                <div className="row" style={{ marginTop: '1vw' }}>
+                  <div className="col-12 col-md-12 col-lg-12 col-xl-12" style={{textAlign:'right'}}>
+                      <button className="btn btn-primary">Submit</button>
+                  </div>
+                </div>
               </div>
 
               <div class="modal-footer">
