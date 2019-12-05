@@ -181,19 +181,19 @@ class Militarypanel1 extends Component {
 										<div class="modal-body">
 											<div className="row">
 												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-													<label class="checkdrn radio-inline">950,000 (per day)
+													<label class="checkdrn radio-inline">Rs.950,000 (per day)
 															<input type="radio" name="radio" />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">950,000 (per week)
+													<label class="checkdrn radio-inline">Rs.950,000 (per week)
 															<input type="radio" name="radio" />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">950,000 (per month)
+													<label class="checkdrn radio-inline">Rs.950,000 (per month)
 															<input type="radio" name="radio" />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">950,000 (per year)
+													<label class="checkdrn radio-inline">Rs.950,000 (per year)
 															<input type="radio" name="radio" />
 														<span class="checkmark"></span>
 													</label>

@@ -84,24 +84,32 @@ class Megapanel1 extends Component {
                                 <div className="col-md-2"></div>
                             </div><br />
                             {/*first panel1*/}
-                            <div className="row ufone1" style={{ margin: '0px' }}>
+                            <div className="row ufone1" style={{ margin: '0px' , backgroundColor: 'black' }}>
                                 <span className="ufone2">Military Road City Sale Detail</span>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Actual price</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">Rs.2400</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Discount price</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">Rs.1200</span></div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Percentage of discount</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">50%</span></div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Billboard availibilty</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">Friday, 20 Feb </span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Deal Start Time</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">Friday, 20 Feb , 6:00:00</span></div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Deal available till</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">10 hour 10 mins 10 second</span></div>
                             </div>
                             <br />
                             {/*second panel*/}
@@ -190,7 +198,13 @@ class Megapanel1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.nearBy}</span></div>
                             </div>
                             <br />
-
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-10"></div>
+                                <div className="col-md-2" style={{textAlign:'right'}}>
+                                    <button className="btn btn-primary">Book Now</button>
+                                </div>
+                            </div>
+                            <br />
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">

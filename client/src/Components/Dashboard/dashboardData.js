@@ -188,7 +188,17 @@ class DashboardData extends Component {
                                     <td className='tableTd'>{elem.city}</td>
                                     <td className='tableTd'>{elem.state}</td>
                                     {/* <td className='tableTd'>{elem.size}</td> */}
-                                    <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
+                                    <td className='tableTd'>
+                                            <div class="dropdown_dash">
+                                                <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
+                                                <div class="dropdown-content_dash">
+                                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
+                                                    <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText">Mega Sale</span></a>
+                                                    <a href="#"data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
+                                                </div>
+                                            </div>
+                                        {/* <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link> */}
+                                    </td>
                                 </tr>
                             </tbody>
                             )
@@ -203,7 +213,17 @@ class DashboardData extends Component {
                                         <td className='tableTd'>{elem.city}</td>
                                         <td className='tableTd'>{elem.state}</td>
                                         {/* <td className='tableTd'>{elem.size}</td> */}
-                                        <td className='tableTd'> <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link></td>
+                                        <td className='tableTd'>
+                                            <div class="dropdown_dash">
+                                                <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
+                                                <div class="dropdown-content_dash">
+                                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
+                                                    <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText">Mega Sale</span></a>
+                                                    <a href="#"data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
+                                                </div>
+                                            </div>
+                                            {/*  */}
+                                        </td>
                                     </tr>
                                 </tbody>)
                             })
@@ -368,63 +388,104 @@ class DashboardData extends Component {
                 </div>
                 <div class="modal fade" id="megaForm">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content modal_width">
                             <div class="modal-header">
                                 <h4 class="modal-title">Mega Sale</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <div className="row">
+                                <div className="row padInModal">
+                                    <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                        <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                    </div>
                                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <label className="modeLForm_labeL"> Actual Price :
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Actual Price :
                                             <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Actual price" />
-                                        </label>
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <label className="modeLForm_labeL"> Discount Price :
+                                                </label>
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Discount Price :
                                             <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Discount price" />
-                                        </label>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div className="row" style={{ marginTop: '0.4vw' }}>
+                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <label className="modeLForm_labeL">Billboard Availability :</label>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">From</label>
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">To</label>
+                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="Discount price" />
+                                            </div>
+                                        </div>
+                                        <div className="row" style={{ marginTop: '0.4vw' }}>
+                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <label className="modeLForm_labeL">Sale Availability :</label>
+                                            </div>
+                                        </div>
+                                        {/* <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
+                                            </div>
+                                        </div> */}
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_timlable">From</label><br />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">Start Date</label>
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">Start Time</label>
+                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_timlable">To</label><br />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">End Date</label>
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">End Time</label>
+                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                        </div>
+                                        <div className="row" style={{ marginTop: '0.5vw' }}>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right' }}>
+                                                <button className="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label className="modeLForm_labeL">Billboard Availability :</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
-                                    </div>
-                                </div>
-                                <div className="row" style={{ marginTop: '0.4vw' }}>
-                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label className="modeLForm_labeL">Sale Availability :</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
-                                    </div>
-                                </div>
-                                <div className="row" style={{ marginTop: '0.4vw' }}>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <label className="modeLForm_labeL"> Percentage of discount :
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="text" name="bday" className="form-control modeLForm_Input" placeholder="Percentage of discount %" />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <button className="btn btn-primary">Submit</button>
-                                    </div>
+                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -436,56 +497,81 @@ class DashboardData extends Component {
                 </div>
                 <div class="modal fade" id="biddingForm">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content modal_width">
                             <div class="modal-header">
                                 <h4 class="modal-title">Bidding</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <div className="row">
+                                <div className="row padInModal">
+                                    <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                        <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                    </div>
                                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <label className="modeLForm_labeL"> Min bid amount :
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Min bid amount :
                                             <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" />
-                                        </label>
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <label className="modeLForm_labeL"> Current amount :
+                                                </label>
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Current Bid amount :
                                             <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Current amount" />
-                                        </label>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {/* <div className="row" style={{marginTop:'0.5vw'}}>
+                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                <label className="modeLForm_labeL">Bidding Availability Date:</label>
+                                            </div>
+                                        </div> */}
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_timlable">From</label><br />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">Start Date</label>
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">Start Time</label>
+                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_timlable">To</label><br />
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">End Date</label>
+                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modaLSmalLable">End Time</label>
+                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+
+                                            </div>
+                                        </div>
+                                        <div className="row" style={{ marginTop: '0.6vw' }}>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right' }}>
+                                                <button className="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label className="modeLForm_labeL">Bidding Availability :</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
-                                    </div>
-                                </div>
-                                <div className="row" style={{ marginTop: '0.4vw' }}>
-                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                        <label className="modeLForm_labeL">Timing Availability :</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
-                                    </div>
-                                </div>
-                                <div className="row" style={{ marginTop: '0.6vw' }}>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{textAlign:'right'}}>
-                                        <button className="btn btn-primary">Submit</button>
-                                    </div>
+                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">

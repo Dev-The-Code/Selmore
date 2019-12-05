@@ -50,7 +50,7 @@
 }
 @media screen and (min-width: 768px) and (max-width: 1023px){
     .navsm{
-        margin-left: 0vw;
+        margin-left: -7vw;
     }
     .navsm2{
         margin-left: 0vw;
@@ -111,7 +111,7 @@
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px){
     .navsm{
-        margin-left: -20vw;
+        margin-left: -21vw;
         color: #007bff !important;     
     }
     .navsm2{
@@ -181,8 +181,8 @@
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px) {
     .navsm{
-        margin-left: -22vw;
-        color: #007bff !important;           
+        margin-left: -24vw;
+        color: #007bff !important;        
     }
     .navsm2{
         margin-left: -3vw;

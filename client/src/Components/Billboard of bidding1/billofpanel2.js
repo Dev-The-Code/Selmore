@@ -105,7 +105,7 @@ class Billofpanel2 extends Component {
 										</div>
 								</div>
 								<div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-									<table class="table">
+									<table class="table" style={{textAlign:'center'}}>
 										<thead>
 											<tr>
 												<th>S#N.o</th>

@@ -64,6 +64,13 @@ class Header extends Component {
                     </Link>
                   </li>
                   : null}
+                  {adminUser !== null && adminUser.role == 'admin' ?
+                  <li className="nav-item navmargin">
+                    <Link rel="noopener noreferrer" to={`/users`}>
+                      <span className="navFont">USERS</span>
+                    </Link>
+                  </li>
+                  : null}
                 {adminUser !== null && adminUser.role == 'admin' ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
@@ -82,18 +89,14 @@ class Header extends Component {
                     <span className="navFont">MARKETPLACE</span>
                   </Link>
                 </li>
-                <li className="nav-item navmargin13">
+                <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/megaSale`}>
-                    <button type="button" className="btn btn-primary">
                       <span className="navFont"> MEGA SALE </span>
-                    </button>
                   </Link>
                 </li>
-                <li className="nav-item navmargin13">
+                <li className="nav-item navmargin">
                   <Link rel="noopener noreferrer" to={`/bidding`}>
-                    <button type="button" className="btn btn-primary">
                       <span className="navFont"> BIDDING </span>
-                    </button>
                   </Link>
                 </li>
                 {adminUser !== null && adminUser.role == 'admin' ?
@@ -174,6 +177,13 @@ class Header extends Component {
                       <li className="mob_li">
                         <Link rel="noopener noreferrer" to={`/cart`}>
                           <span className="navFont">Cart</span>
+                        </Link>
+                      </li>
+                      : null}
+                      {adminUser !== null && adminUser.role == 'admin' ?
+                      <li className="mob_li">
+                        <Link rel="noopener noreferrer" to={`/users`}>
+                          <span className="navFont">Users</span>
                         </Link>
                       </li>
                       : null}
