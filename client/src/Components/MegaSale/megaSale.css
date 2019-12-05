@@ -1,11 +1,13 @@
 
-.bidTiming{
-	font-size: 15px;
+.megaPageTiming{
+	font-size: 12px;
     font-weight: 700;
     font-family: Helvetica;
     color: #007bff;
 }
-
+.megaPageText{
+	font-size: 1vw;
+}
 .extra1{
 	margin-right: -4vw;
 }

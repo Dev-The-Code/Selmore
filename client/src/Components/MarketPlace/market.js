@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom";
 import filtersImg from "./caret-down.png";
+import NumberFormat from 'react-number-format';
 const CheckboxGroup = Checkbox.Group;
 
 class Market extends Component {
@@ -256,15 +257,15 @@ class Market extends Component {
                                 </Col>
                             </Row>
                             <div className='col-md-11 dropdown'>
-                            <div className='filterDivs'>Category</div>
-                            <Row className="fasla1" >
-                                <Col>
-                                    <Select onChange={this.handleChange}
-                                        options={category}
-                                    >
-                                    </Select>
-                                </Col>
-                            </Row>
+                                <div className='filterDivs'>Category</div>
+                                <Row className="fasla1" >
+                                    <Col>
+                                        <Select onChange={this.handleChange}
+                                            options={category}
+                                        >
+                                        </Select>
+                                    </Col>
+                                </Row>
                             </div>
                             <div className='filterDivs'>Types</div>
                             <Row>
@@ -436,13 +437,17 @@ class Market extends Component {
                             <div className='filterDivs'>Traffic Count</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={''}
                                         placeholder="Min"
                                         className="marketFilter_Input"
                                     />
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={''}
                                         placeholder="Max"
                                         className="marketFilter_Input"
                                     />
@@ -455,14 +460,18 @@ class Market extends Component {
                             </div>
                             <div className='filterDivs'>Daily Visitor</div>
                             <div className="row fasla1">
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={''}
                                         placeholder="Min"
                                         className="marketFilter_Input"
                                     />
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={''}
                                         placeholder="Max"
                                         className="marketFilter_Input"
                                     />
@@ -489,6 +498,26 @@ class Market extends Component {
                                             setFieldsValue={this.state.filterValue}
                                             onChange={this.filterBillBoard.bind(this)}
                                         >
+                                            <div className='filterDivs'>Status</div>
+                                            <Row>
+                                                <Col >
+                                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
+                                                </Col>
+                                                <Col >
+                                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
+                                                </Col>
+                                            </Row>
+                                            <div className='col-md-9 dropdown'>
+                                                <div className='filterDivs'>Category</div>
+                                                <Row className="fasla1" >
+                                                    <Col>
+                                                        <Select onChange={this.handleChange}
+                                                            options={rangeValzForDropdown}
+                                                        >
+                                                        </Select>
+                                                    </Col>
+                                                </Row>
+                                            </div>
                                             <div className='filterDivs'>Types</div>
                                             <Row>
                                                 <Col>
@@ -540,15 +569,7 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                                 </Col>
                                             </Row>
-                                            <div className='filterDivs'>Status</div>
-                                            <Row>
-                                                <Col >
-                                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
-                                                </Col>
-                                                <Col >
-                                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
-                                                </Col>
-                                            </Row>
+
                                             <div className='filterDivs'>Audience Type</div>
                                             <Row>
                                                 <Col >
@@ -565,16 +586,27 @@ class Market extends Component {
                                                 </Col>
                                             </Row>
                                             <div className='col-md-9 dropdown'>
-                                                <div className='filterDivs'>Category</div>
+                                                <div className='filterDivs'>Cities</div>
                                                 <Row className="fasla1" >
                                                     <Col>
-                                                        <Select onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
+                                                        <Select
+                                                            onChange={this.handleChange}
+                                                            options={cities}
                                                         >
                                                         </Select>
                                                     </Col>
                                                 </Row>
-                                                <div className='filterDivs'>Width</div>
+                                                <div className='filterDivs'>States</div>
+                                                <Row className="fasla1" >
+                                                    <Col>
+                                                        <Select
+                                                            onChange={this.handleChange}
+                                                            options={states}
+                                                        >
+                                                        </Select>
+                                                    </Col>
+                                                </Row>
+                                                {/* <div className='filterDivs'>Width</div>
                                                 <Row className="fasla1" >
                                                     <Col>
                                                         <Select onChange={this.handleChange}
@@ -611,27 +643,87 @@ class Market extends Component {
                                                         >
                                                         </Select>
                                                     </Col>
-                                                </Row>
-                                                <div className='filterDivs'>Cities</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={cities}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                                <div className='filterDivs'>States</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={states}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
+                                                </Row> */}
+                                            </div>
+                                            <div className='filterDivs'>Width</div>
+                                            <div className="row fasla1">
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Min"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Max"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-2">
+                                                    <button className="btn btn-primary">
+                                                        <i class="fa fa-caret-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className='filterDivs'>Height</div>
+                                            <div className="row fasla1">
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Min"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Max"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-2">
+                                                    <button className="btn btn-primary">
+                                                        <i class="fa fa-caret-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className='filterDivs'>Traffic Count</div>
+                                            <div className="row fasla1">
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Min"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Max"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-2">
+                                                    <button className="btn btn-primary">
+                                                        <i class="fa fa-caret-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className='filterDivs'>Daily Visitor</div>
+                                            <div className="row fasla1">
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Min"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-5">
+                                                    <Input
+                                                        placeholder="Max"
+                                                        className="marketFilter_Input_mob"
+                                                    />
+                                                </div>
+                                                <div className="col-2">
+                                                    <button className="btn btn-primary">
+                                                        <i class="fa fa-caret-right"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </CheckboxGroup>
                                     </div>

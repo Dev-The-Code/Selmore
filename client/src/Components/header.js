@@ -59,6 +59,13 @@ class Header extends Component {
                 </li>
                 {adminUser !== null && adminUser.role == 'admin' ?
                   <li className="nav-item navmargin">
+                    <Link rel="noopener noreferrer" to={`/cart`}>
+                      <span className="navFont">CART</span>
+                    </Link>
+                  </li>
+                  : null}
+                {adminUser !== null && adminUser.role == 'admin' ?
+                  <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/dashboard`}>
                       <span className="navFont">DASHBOARD</span>
                     </Link>
@@ -88,11 +95,6 @@ class Header extends Component {
                       <span className="navFont"> BIDDING </span>
                     </button>
                   </Link>
-                </li>
-                <li className="nav-item navmargin13">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#signUpForm" >
-                      <span className="navFont">SIGN UP</span>
-                    </button>
                 </li>
                 {adminUser !== null && adminUser.role == 'admin' ?
                   <li className="nav-item navmargin13">
@@ -170,6 +172,13 @@ class Header extends Component {
                     </li>
                     {adminUser !== null && adminUser.role == 'admin' ?
                       <li className="mob_li">
+                        <Link rel="noopener noreferrer" to={`/cart`}>
+                          <span className="navFont">Cart</span>
+                        </Link>
+                      </li>
+                      : null}
+                    {adminUser !== null && adminUser.role == 'admin' ?
+                      <li className="mob_li">
                         <Link rel="noopener noreferrer" to={`/dashboard`} onClick={this.closeNav}>
                           <span className="navFont">Dashboard</span>
                         </Link>
@@ -207,11 +216,6 @@ class Header extends Component {
                         <Link rel="noopener noreferrer" to={`/bidding`} onClick={this.closeNav}>
                           <span className="navFont">Bidding</span>
                         </Link>
-                      </button>
-                    </li>
-                    <li className="mob_li">
-                      <button type="button" class="btn btn-primary btn-sm mob_butn" data-toggle="modal" data-target="#signUpForm" onClick={this.closeNav}>
-                          <span className="navFont">Sign Up</span>
                       </button>
                     </li>
                     {adminUser !== null && adminUser.role == 'admin' ?
@@ -269,78 +273,6 @@ class Header extends Component {
               <div className="col-6 d-block d-sm-none">
                 <img src="../images/selmore-logo.png" alt='img' className="mobileselmorelogo" />
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="signUpForm">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <div class="modal-header">
-                <h4 class="modal-title" style={{ color: '#007bff', fontWeight: '600' }}>Sign Up</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-
-              <div class="modal-body">
-                <div className="row" style={{ marginTop: '1vw' }}>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label style={{ marginBottom: '0px' }}>
-                      <span className="school10">
-                        Company name:
-                              </span>
-                    </label>
-                    <Input
-                      placeholder="Company name"
-                      className="bid_Input"
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label style={{ marginBottom: '0px' }}>
-                      <span className="school10">
-                        Email:
-                              </span>
-                    </label>
-                    <Input
-                      placeholder="Email"
-                      className="bid_Input"
-                    />
-                  </div>
-                </div><br />
-                <div className="row" style={{ marginTop: '1vw' }}>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label style={{ marginBottom: '0px' }}>
-                      <span className="school10">
-                        Landline no :
-                              </span>
-                    </label>
-                    <Input
-                      placeholder="Landline no"
-                      className="bid_Input"
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label style={{ marginBottom: '0px' }}>
-                      <span className="school10">
-                        Mobile no :
-                              </span>
-                    </label>
-                    <Input
-                      placeholder="Mobile no"
-                      className="bid_Input"
-                    />
-                  </div>
-                </div>
-                <div className="row" style={{ marginTop: '1vw' }}>
-                  <div className="col-12 col-md-12 col-lg-12 col-xl-12" style={{textAlign:'right'}}>
-                      <button className="btn btn-primary">Submit</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </div>
-
             </div>
           </div>
         </div>

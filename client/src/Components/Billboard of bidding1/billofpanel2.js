@@ -11,7 +11,7 @@ class Billofpanel2 extends Component {
 							<nav>
 								<div className="nav nav-tabs nav-fill doesit8" id="nav-tab" role="tablist">
 									<a className="nav-item nav-link active tikonduxx1" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><span className="doesit10">Detail</span></a>
-									<a className="nav-item nav-link tikonduxx2" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span className="doesit10">BidHistory (10 Bids)</span></a>
+									<a className="nav-item nav-link tikonduxx2" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span className="doesit10">Bid History</span></a>
 								</div>
 							</nav>
 						</div>
@@ -111,7 +111,7 @@ class Billofpanel2 extends Component {
 												<th>S#N.o</th>
 												<th>Bid Date.</th>
 												<th>Bid Amount</th>
-												<th>Bidder No.</th>
+												<th>Bidder Company</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -119,31 +119,31 @@ class Billofpanel2 extends Component {
 												<td>1</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>iJWR234</td>
+												<td>Devan Motor</td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>iJWR234</td>
+												<td>Devan Motor</td>
 											</tr>
 											<tr>
 												<td>3</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>iJWR234</td>
+												<td>Devan Motor</td>
 											</tr>
 											<tr>
 												<td>4</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>iJWR234</td>
+												<td>Devan Motor</td>
 											</tr>
 											<tr>
 												<td>5</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>iJWR234</td>
+												<td>Devan Motor</td>
 											</tr>
 										</tbody>
 									</table>

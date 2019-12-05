@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import NumberFormat from 'react-number-format';
+import { Input } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
@@ -13,7 +15,7 @@ class DashboardData extends Component {
             billboardFilterdData: [],
             typeArr: ['Static', 'Classic', 'Digital', 'Mobile', 'Bridge',
                 'Vinyl', 'Painted', 'Three Dimensional', 'Scented', 'Lamp Post'],
-                citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
@@ -120,11 +122,11 @@ class DashboardData extends Component {
         // console.log(billboardData , 'billboardData')
         // console.log(filteredObj , 'filteredObj')
         var filteredData = [];
-        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined 
+        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined
             // && 
             // filteredObj.size !== undefined
             && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
-                console.log('true condition')
+            console.log('true condition')
             for (var i in billboardData) {
                 let data = billboardData[i]
                 for (var j in data) {
@@ -162,7 +164,7 @@ class DashboardData extends Component {
 
     render() {
         const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
-        console.log(billboardFilterdData , 'billboardFilterdData')
+        console.log(billboardFilterdData, 'billboardFilterdData')
         const billboardRendring = (
             <div>
                 <br />
@@ -363,6 +365,135 @@ class DashboardData extends Component {
                 </div>
                 <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
                     {billboardRendring}
+                </div>
+                <div class="modal fade" id="megaForm">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Mega Sale</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <label className="modeLForm_labeL"> Actual Price :
+                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Actual price" />
+                                        </label>
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <label className="modeLForm_labeL"> Discount Price :
+                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Discount price" />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <label className="modeLForm_labeL">Billboard Availability :</label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
+                                    </div>
+                                </div>
+                                <div className="row" style={{ marginTop: '0.4vw' }}>
+                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <label className="modeLForm_labeL">Sale Availability :</label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
+                                    </div>
+                                </div>
+                                <div className="row" style={{ marginTop: '0.4vw' }}>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <label className="modeLForm_labeL"> Percentage of discount :
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="text" name="bday" className="form-control modeLForm_Input" placeholder="Percentage of discount %" />
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <button className="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="biddingForm">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Bidding</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <label className="modeLForm_labeL"> Min bid amount :
+                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" />
+                                        </label>
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <label className="modeLForm_labeL"> Current amount :
+                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Current amount" />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <label className="modeLForm_labeL">Bidding Availability :</label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                    </div>
+                                </div>
+                                <div className="row" style={{ marginTop: '0.4vw' }}>
+                                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <label className="modeLForm_labeL">Timing Availability :</label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                    </div>
+                                </div>
+                                <div className="row" style={{ marginTop: '0.6vw' }}>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                    </div>
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{textAlign:'right'}}>
+                                        <button className="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         )

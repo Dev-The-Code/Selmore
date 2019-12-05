@@ -18,10 +18,8 @@ class Billofpanel1 extends Component {
 						<div className="col-md-1"></div>
 					</div>
 					<div className="row" style={{ margin: '0px' }}>
-						<div className="col-md-6 bidPrice">
-							<button type="button" className="btn btn-primary"><span>Bid $ 2600.00</span></button>
-						</div>
-						<div className="col-md-3">
+						<div className="col-md-4"></div>
+						<div className="col-md-4">
 							<div class="input-group">
 								<NumberFormat className="form-control kurta3" thousandSeparator={true} prefix={'Rs.'}  placeholder="Enter bid price" />
 								{/* <input type="number" className="form-control kurta3" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Post Your Bidding" /> */}
@@ -30,9 +28,7 @@ class Billofpanel1 extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-1">
-						</div>
-						<div className="col-md-2"></div>
+						<div className="col-md-4"></div>
 					</div>
 					<div className="modal" id="myModal">
 						<Popform />
@@ -45,7 +41,11 @@ class Billofpanel1 extends Component {
 								<span className="doesit2">Billboard in Sukkur Millitary Road City Point Details</span>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
-								<div className="col-md-3 doesit5"><span className="doesit3">Current</span></div>
+								<div className="col-md-3 doesit5"><span className="doesit3">Current amount</span></div>
+								<div className="col-md-9 doesit6"><span className="doesit4">$ 2600.00</span></div>
+							</div>
+							<div className="row" style={{ margin: '0px' }}>
+								<div className="col-md-3 doesit5"><span className="doesit3">Current bid</span></div>
 								<div className="col-md-9 doesit6"><span className="doesit4">$ 2000.00</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>

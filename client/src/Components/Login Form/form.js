@@ -19,8 +19,18 @@ class FormLogin extends Component {
       isData: true,
       data: {},
       isLoader: false,
-      isAlert: false
+      isAlert: false,
+      createAcountform: true,
     }
+  }
+
+  CreateUserForm = () => {
+    this.setState({ createAcountform: false })
+    // console.log(this.state.createAcountform,'sssssss');
+  }
+
+  alreadyHaveacount = () => {
+    this.setState({ createAcountform: true })
   }
 
   handleSubmit = (e) => {
@@ -74,65 +84,132 @@ class FormLogin extends Component {
               <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
             <div className="col-md-5 school6">
-              <Form onSubmit={this.handleSubmit} className="login-form">
-                <div className="form-group">
-                  <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
-                    <span className="school3">
-                      Email address:
+              {this.state.createAcountform
+                ?
+                <Form onSubmit={this.handleSubmit} className="login-form">
+                  <div className="form-group">
+                    <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
+                      <span className="school3">
+                        Email address:
                   </span>
-                  </label>
-                  <Form.Item>
-                    {getFieldDecorator('email', {
-                      rules: [{
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
-                      }, {
-                        required: true,
-                        message: 'Please input your E-mail!',
-                      }],
-                    })(
+                    </label>
+                    <Form.Item>
+                      {getFieldDecorator('email', {
+                        rules: [{
+                          type: 'email',
+                          message: 'The input is not valid E-mail!',
+                        }, {
+                          required: true,
+                          message: 'Please input your E-mail!',
+                        }],
+                      })(
+                        <Input
+                          type="text"
+                          className={"form-control"}
+                          id={"exampleInputEmail1"}
+                          name="username"
+                          placeholder="Email:*"
+                        />
+                      )}
+                    </Form.Item>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1" style={{ marginBottom: '0px' }}>
+                      <span className="school3"
+                      >Password:
+                  </span>
+                    </label>
+                    <Form.Item>
+                      {getFieldDecorator('password', {
+                        rules: [{ required: true, message: 'Please input your Password!' }],
+                      })(
+                        <Input type="password"
+                          className={"form-control"}
+                          id={"exampleInputPassword1"}
+                          placeholder="Password" />
+                      )}
+                    </Form.Item>
+                  </div>
+                  <p style={{ marginTop: '-4%' }}><span className="school8">Forget Password!?</span></p>
+                  <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
+                  <p onClick={this.CreateUserForm} className="" style={{ margin: '1vw 0px 0px' }}>
+                    <span className="alreadyAcontText">Create Account ?</span>
+                  </p>
+                  <br />
+                  {isAlert ?
+                    <div class="alert alert-danger" role="alert">
+                      Please cheak your email or password
+                    </div>
+                    : null
+                  }
+                </Form>
+                :
+                <div>
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <label style={{ marginBottom: '0px' }}>
+                        <span className="school10">
+                          Company name:
+                              </span>
+                      </label>
                       <Input
-                        type="text"
-                        className={"form-control"}
-                        id={"exampleInputEmail1"}
-                        name="username"
-                        placeholder="Email:*"
+                        placeholder="Company name"
+                        className="bid_Input"
                       />
-                    )}
-                  </Form.Item>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <label style={{ marginBottom: '0px' }}>
+                        <span className="school10">
+                          Email:
+                              </span>
+                      </label>
+                      <Input
+                        placeholder="Email"
+                        className="bid_Input"
+                      />
+                    </div>
+                  </div><br />
+                  <div className="row" style={{ marginTop: '1vw' }}>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <label style={{ marginBottom: '0px' }}>
+                        <span className="school10">
+                          Landline no :
+                              </span>
+                      </label>
+                      <Input
+                        placeholder="Landline no"
+                        className="bid_Input"
+                      />
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <label style={{ marginBottom: '0px' }}>
+                        <span className="school10">
+                          Mobile no :
+                              </span>
+                      </label>
+                      <Input
+                        type="number"
+                        placeholder="Mobile no"
+                        className="bid_Input"
+                      />
+                    </div>
+                  </div><br />
+                  <div className="row">
+                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                      <button type="submit" className="btn btn-primary"><span className="school5">Sign Up</span></button>
+                      <p className="" style={{ margin: '1vw 0px 0px' }}>
+                        <span className="alreadyAcontTextSignup">Already have an account ?</span><span className="SignInformText" onClick={this.alreadyHaveacount}>Sign In</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1" style={{ marginBottom: '0px' }}>
-                    <span className="school3"
-                    >Password:
-                  </span>
-                  </label>
-                  <Form.Item>
-                    {getFieldDecorator('password', {
-                      rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                      <Input type="password"
-                        className={"form-control"}
-                        id={"exampleInputPassword1"}
-                        placeholder="Password" />
-                    )}
-                  </Form.Item>
-                </div>
-                <p style={{ marginTop: '-4%' }}><span className="school8">Forget Password!?</span></p>
-                <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
-
-                <br />
-                {isAlert ?
-                  <div class="alert alert-danger" role="alert">
-                    Please cheak your email or password
-            </div>
-                  : null
-                }
-              </Form>
+              }
             </div>
             {isLoader ? <div class="loading"> 	</div>
               : null
             }
+
+
             <div className="col-md-1">
             </div>
           </div>
@@ -143,6 +220,7 @@ class FormLogin extends Component {
               <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
             <div className="col-md-4 school6">
+             {this.state.createAcountform ?
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <div className="form-group">
                   <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
@@ -189,6 +267,9 @@ class FormLogin extends Component {
                 </div>
                 <p style={{ marginTop: '-4%' }}><span className="school8">Forget Password!?</span></p>
                 <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
+                <p onClick={this.CreateUserForm} className="" style={{ margin: '1vw 0px 0px' }}>
+                  <span className="alreadyAcontText">Create an account ?</span>
+                </p>
                 <br />
                 {isAlert ?
                   <div class="alert alert-danger" role="alert">
@@ -197,6 +278,67 @@ class FormLogin extends Component {
                   : null
                 }
               </Form>
+             :
+              <div>
+                <div className="row">
+                  <div className="col-12">
+                    <label style={{ marginBottom: '0px' }}>
+                      <span className="school10">
+                        Company name:
+                              </span>
+                    </label>
+                    <Input
+                      placeholder="Company name"
+                      className="bid_Input"
+                    />
+                  </div>
+                  <div className="col-12">
+                    <label style={{ marginBottom: '0px' }}>
+                      <span className="school10">
+                        Email:
+                              </span>
+                    </label>
+                    <Input
+                      placeholder="Email"
+                      className="bid_Input"
+                    />
+                  </div>
+                </div><br />
+                <div className="row" style={{marginTop: '-4vw'}}>
+                  <div className="col-12">
+                    <label style={{ marginBottom: '0px' }}>
+                      <span className="school10">
+                        Landline no :
+                              </span>
+                    </label>
+                    <Input
+                      placeholder="Landline no"
+                      className="bid_Input"
+                    />
+                  </div>
+                  <div className="col-12">
+                    <label style={{ marginBottom: '0px' }}>
+                      <span className="school10">
+                        Mobile no :
+                              </span>
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="Mobile no"
+                      className="bid_Input"
+                    />
+                  </div>
+                </div><br />
+                <div className="row">
+                  <div className="col-12">
+                    <button type="submit" className="btn btn-primary"><span className="school5">Sign Up</span></button>
+                    <p className="" style={{ margin: '1vw 0px 0px' }}>
+                      <span className="alreadyAcontText">Already have an account ?</span><span className="SignInformText" onClick={this.alreadyHaveacount}>Sign In</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+             } 
             </div>
             {isLoader ? <div class="loading1">   </div>
               : null

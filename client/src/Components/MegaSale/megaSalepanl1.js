@@ -16,8 +16,9 @@ class MegaSalepanel1 extends Component {
 								<div className="col-12 col-md-7 col-lg-7 col-xl-7 card_mega2">
 									<div class="card-body">
 										<h4 class="card-title">Mall road, Rawalpindi</h4>
-										<p class="card-text">Discount Upto <span className="bidTiming">70% Off</span></p>
-										<p class="card-text">Sale availability : <br />From <span className="bidTiming">21st Nov 2019</span> to <span className="bidTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Discount Upto <span className="megaPageTiming">70% Off</span></p>
+										<p class="card-text megaPageText">Sale availability : <br />From <span className="megaPageTiming">21nd Nov 2019</span> to <span className="megaPageTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">2nd Nov 2019</span> to <span className="megaPageTiming">8th Nov 2019</span></p> 
 										<Link to={`/megaDetail`}>
 											<button class="btn btn-primary">
 												More Details
@@ -36,8 +37,9 @@ class MegaSalepanel1 extends Component {
 								<div className="col-12 col-md-7 col-lg-7 col-xl-7 card_mega2">
 									<div class="card-body">
 										<h4 class="card-title">Mall road, Rawalpindi</h4>
-										<p class="card-text">Discount Upto <span className="bidTiming">70% Off</span></p>
-										<p class="card-text">Sale availability : <br />From <span className="bidTiming">21st Nov 2019</span> to <span className="bidTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Discount Upto <span className="megaPageTiming">70% Off</span></p>
+										<p class="card-text megaPageText">Sale availability : <br />From <span className="megaPageTiming">21st Nov 2019</span> to <span className="megaPageTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">2nd Nov 2019</span> to <span className="megaPageTiming">8th Nov 2019</span></p>
 										<Link to={`/megaDetail`}>
 											<button class="btn btn-primary">
 												More Details
@@ -57,8 +59,9 @@ class MegaSalepanel1 extends Component {
 								<div className="col-12 col-md-7 col-lg-7 col-xl-7 card_mega2">
 									<div class="card-body">
 										<h4 class="card-title">Mall road, Rawalpindi</h4>
-										<p class="card-text">Discount Upto <span className="bidTiming">70% Off</span></p>
-										<p class="card-text">Sale availability : <br />From <span className="bidTiming">21st Nov 2019</span> to <span className="bidTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Discount Upto <span className="megaPageTiming">70% Off</span></p>
+										<p class="card-text megaPageText">Sale availability : <br />From <span className="megaPageTiming">21st Nov 2019</span> to <span className="megaPageTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">2nd Nov 2019</span> to <span className="megaPageTiming">8th Nov 2019</span></p>
 										<Link to={`/megaDetail`}>
 											<button class="btn btn-primary">
 												More Details
@@ -77,8 +80,9 @@ class MegaSalepanel1 extends Component {
 								<div className="col-12 col-md-7 col-lg-7 col-xl-7 card_mega2">
 									<div class="card-body">
 										<h4 class="card-title">Mall road, Rawalpindi</h4>
-										<p class="card-text">Discount Upto <span className="bidTiming">70% Off</span></p>
-										<p class="card-text">Sale availability : <br />From <span className="bidTiming">21st Nov 2019</span> to <span className="bidTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Discount Upto <span className="megaPageTiming">70% Off</span></p>
+										<p class="card-text megaPageText">Sale availability : <br />From <span className="megaPageTiming">21st Nov 2019</span> to <span className="megaPageTiming">28th Nov 2019</span></p>
+										<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">2nd Nov 2019</span> to <span className="megaPageTiming">8th Nov 2019</span></p>
 										<Link to={`/megaDetail`}>
 											<button class="btn btn-primary">
 												More Details

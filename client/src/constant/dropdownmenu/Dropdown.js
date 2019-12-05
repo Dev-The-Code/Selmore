@@ -57,6 +57,13 @@ class Dropdown extends Component {
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>
               <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
+              <MDBDropdownItem>
+
+                    <Link rel="noopener noreferrer" to={`/users`}>
+                      <span className="">Users</span>
+                    </Link>
+   
+              </MDBDropdownItem>
               <MDBDropdownItem onClick={this.logOut}>
                 <Link rel="noopener noreferrer" to={`/`}>
                   Log Out

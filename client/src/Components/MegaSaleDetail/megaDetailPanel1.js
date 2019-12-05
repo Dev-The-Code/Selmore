@@ -85,6 +85,48 @@ class Megapanel1 extends Component {
                             </div><br />
                             {/*first panel1*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
+                                <span className="ufone2">Military Road City Sale Detail</span>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Actual price</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Percentage of discount</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Billboard availibilty</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Deal available till</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
+                            </div>
+                            <br />
+                            {/*second panel*/}
+                            <div className="row ufone1" style={{ margin: '0px' }}>
+                                <span className="ufone2">Military Road City Demographics</span>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">Country</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">State</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone5"><span className="ufone3">City</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
+                            </div>
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
+                                <div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
+                            </div>
+                            <br/>
+                            {/*third panel*/}
+                            <div className="row ufone1" style={{ margin: '0px' }}>
                                 <span className="ufone2">Billboard in {data.city} Millitary Road City Point Details</span>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
@@ -108,7 +150,8 @@ class Megapanel1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.status}</span></div>
                             </div>
                             <br />
-                            {/*Second panel*/}
+                            
+                            {/*fourth panel*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
                                 <span className="ufone2">Military Road City rate Card</span>
                             </div>
@@ -129,7 +172,8 @@ class Megapanel1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.yearlyRate}</span></div>
                             </div>
                             <br />
-                            {/*Third panel*/}
+                           
+                            {/*Fifth panel*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
                                 <span className="ufone2">Military Road City Demographics</span>
                             </div>
@@ -146,50 +190,7 @@ class Megapanel1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.nearBy}</span></div>
                             </div>
                             <br />
-                            {/*Fourth panel*/}
-                            <div className="row ufone1" style={{ margin: '0px' }}>
-                                <span className="ufone2">Military Road City Demographics</span>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">Country</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">State</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">City</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
-                            </div>
-                            <br />
-                            {/*fifth panel*/}
-                            <div className="row ufone1" style={{ margin: '0px' }}>
-                                <span className="ufone2">Military Road City Demographics</span>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">Actual price</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.country}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">Percentage of discount</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.state}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">Billboard availibilty</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
-                            </div>
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-3 ufone5"><span className="ufone3">Deal available till</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.city}</span></div>
-                            </div>
-                            
 
-                            <br />
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">

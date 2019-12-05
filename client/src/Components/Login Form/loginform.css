@@ -1,3 +1,26 @@
+.alreadyAcontTextSignup{
+	font-size: 17px;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:white;
+}
+.alreadyAcontText{
+	font-size: 17px;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:#244D5E;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.SignInformText{
+	font-size: 17px;
+	margin-left: 0.5vw;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:#244D5E;
+	cursor: pointer;
+	text-decoration: underline;
+}
 .school3{
 	font-size: 23px;
     font-family: Helvetica;
@@ -11,7 +34,8 @@
 }
 .school5{
 	font-size: 17px;
-    font-weight: 600;
+	font-weight: 600;
+	font-family: Helvetica;
 }
 .school6{
 	margin-top: 12%;
@@ -27,12 +51,11 @@
 	font-size: 17px;
     font-family: Helvetica;
     font-weight: 700;
-    color: black;
+    color: white;
 }
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.school1{
 	background-color: #29abe2;
-	height: 610px;
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 1020px){

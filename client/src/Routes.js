@@ -27,6 +27,8 @@ import MegaSale from './Components/MegaSale/megaSale';
 import MegaDetail from '../src/Components/MegaSaleDetail/megaDetail';
 import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
+import AdminUser from './Components/Admin Users/adminUser';
+import Carts from './Components/Carts of Book billboards/carts';
 import './App.css';
 
 class Routes extends Component {
@@ -59,6 +61,20 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               // component={Home}
+              ></Route>
+              <Route exact path="/cart"
+                render={props => {
+                  return <Carts {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+                }}
+              ></Route>
+              <Route exact path="/users"
+                render={props => {
+                  return <AdminUser {...props}
+                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                  hideDropDown={this.hideDropDown} />
+                }}
               ></Route>
               <Route exact path="/bidding_form"
                 render={props => {
