@@ -419,11 +419,11 @@ class DashboardData extends Component {
                                         <div className="row">
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                 <label className="modaLSmalLable">From</label>
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
+                                                <input type="date" name="" className="form-control modeLForm_Input" />
                                             </div>
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                 <label className="modaLSmalLable">To</label>
-                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="Discount price" />
+                                                <input type="date" name="" className="form-control modeLForm_Input"  />
                                             </div>
                                         </div>
                                         <div className="row" style={{ marginTop: '0.4vw' }}>
