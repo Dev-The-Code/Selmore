@@ -189,14 +189,14 @@ class DashboardData extends Component {
                                     <td className='tableTd'>{elem.state}</td>
                                     {/* <td className='tableTd'>{elem.size}</td> */}
                                     <td className='tableTd'>
-                                            <div class="dropdown_dash">
-                                                <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
-                                                <div class="dropdown-content_dash">
-                                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
-                                                    <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText">Mega Sale</span></a>
-                                                    <a href="#"data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
-                                                </div>
+                                        <div class="dropdown_dash">
+                                            <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
+                                            <div class="dropdown-content_dash">
+                                                <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
+                                                <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText">Mega Sale</span></a>
+                                                <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
                                             </div>
+                                        </div>
                                         {/* <Link to={{ pathname: `/billborad_Militry`, state: elem }}>View</Link> */}
                                     </td>
                                 </tr>
@@ -219,7 +219,7 @@ class DashboardData extends Component {
                                                 <div class="dropdown-content_dash">
                                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
                                                     <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText">Mega Sale</span></a>
-                                                    <a href="#"data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
+                                                    <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText">Bidding</span></a>
                                                 </div>
                                             </div>
                                             {/*  */}
@@ -423,7 +423,7 @@ class DashboardData extends Component {
                                             </div>
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                 <label className="modaLSmalLable">To</label>
-                                                <input type="date" name="" className="form-control modeLForm_Input"  />
+                                                <input type="date" name="" className="form-control modeLForm_Input" />
                                             </div>
                                         </div>
                                         <div className="row" style={{ marginTop: '0.4vw' }}>
@@ -510,23 +510,6 @@ class DashboardData extends Component {
                                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                         <div className="row">
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_labeL"> Min bid amount :
-                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" />
-                                                </label>
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_labeL"> Current Bid amount :
-                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Current amount" />
-                                                </label>
-                                            </div>
-                                        </div>
-                                        {/* <div className="row" style={{marginTop:'0.5vw'}}>
-                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <label className="modeLForm_labeL">Bidding Availability Date:</label>
-                                            </div>
-                                        </div> */}
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                 <label className="modeLForm_timlable">From</label><br />
                                             </div>
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -565,8 +548,11 @@ class DashboardData extends Component {
                                         </div>
                                         <div className="row" style={{ marginTop: '0.6vw' }}>
                                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Min bid amount :
+                                                    <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" />
+                                                </label>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right' }}>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right', marginTop: '2vw' }}>
                                                 <button className="btn btn-primary">Submit</button>
                                             </div>
                                         </div>

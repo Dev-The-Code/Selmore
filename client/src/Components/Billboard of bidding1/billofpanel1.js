@@ -45,10 +45,6 @@ class Billofpanel1 extends Component {
 								<div className="col-md-9 doesit6"><span className="doesit4">$ 2600.00</span></div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
-								<div className="col-md-3 doesit5"><span className="doesit3">Current bid</span></div>
-								<div className="col-md-9 doesit6"><span className="doesit4">$ 2000.00</span></div>
-							</div>
-							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit5"><span className="doesit3">Min.Bid</span></div>
 								<div className="col-md-9 doesit6"><span className="doesit4">$ 2500.00</span></div>
 							</div>

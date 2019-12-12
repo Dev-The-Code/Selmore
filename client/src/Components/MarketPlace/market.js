@@ -394,6 +394,37 @@ class Market extends Component {
                                     </Col>
                                 </Row> */}
                             </div>
+                            <div className='filterDivs'>Pricing</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={'Rs.'}
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <NumberFormat
+                                        thousandSeparator={true}
+                                        prefix={'Rs.'}
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div className='filterDivs'>Width</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
@@ -460,7 +491,7 @@ class Market extends Component {
                             </div>
                             <div className='filterDivs'>Daily Visitor</div>
                             <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                                     <NumberFormat
                                         thousandSeparator={true}
                                         prefix={''}

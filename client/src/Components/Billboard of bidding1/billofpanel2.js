@@ -111,7 +111,7 @@ class Billofpanel2 extends Component {
 												<th>S#N.o</th>
 												<th>Bid Date.</th>
 												<th>Bid Amount</th>
-												<th>Bidder Company</th>
+												<th>Bidder ID</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -119,31 +119,31 @@ class Billofpanel2 extends Component {
 												<td>1</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>Devan Motor</td>
+												<td>1876236376</td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>Devan Motor</td>
+												<td>1876236376</td>
 											</tr>
 											<tr>
 												<td>3</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>Devan Motor</td>
+												<td>1876236376</td>
 											</tr>
 											<tr>
 												<td>4</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>Devan Motor</td>
+												<td>1876236376</td>
 											</tr>
 											<tr>
 												<td>5</td>
 												<td>Jan 27, 2019 - 6:06:57 PM</td>
 												<td>$2045.00</td>
-												<td>Devan Motor</td>
+												<td>1876236376</td>
 											</tr>
 										</tbody>
 									</table>
