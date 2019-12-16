@@ -12,10 +12,12 @@ module.exports = function(app){
 app.post('/signup',Authentication.signup);
 app.post('/signin',requireSignin, Authentication.signin);
 app.post('/listadd',listAgencyForm.postAddData);
+app.post('/changeStatus',Authentication.changeStatus);
 //get routes
 
 app.get('/getemails',Authentication.getemails);
 app.get('/getcompanyname',Authentication.getcompanyname);
-app.get('/getbillboard',getAllBillboard.getBillboard)
+app.get('/getbillboard',getAllBillboard.getBillboard);
+app.get('/getalluser',Authentication.getAllUsers);
   //app.get('/getprofile',requireAuth, getprofile.getProfile)
 }

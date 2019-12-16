@@ -35,16 +35,24 @@ exports.signin = function(req, res, next){
   var user = req.body.email;
   User.findOne({email:user},function(err,user){
     console.log(user);
-    if(user){
+    if(user.userStatus == 'approved'){
       //var username = user.firstname +''+ user.lastname;
       res.send({
         token: tokenForUser(req.user),
         _id:req.user.id,
         email:req.user.email,
-        role:user.role,
         code:200,
-        username:user.firstName +''+ user.lastName
+        companyName:user.companyName,
+        RoleAsBuyer:user.RoleAsBuyer,
+        landlineNo:user.landlineNo,
+        userStatus:user.userStatus
       });
+    }
+    else{
+      res.send({
+        code:200,
+        msg:'Your are not approved user kindly contact admin or system administrator of selmore.com'
+      })
     }
   })
 }
@@ -62,6 +70,8 @@ exports.signup = function(req, res, next){
   const type = req.body.type;
   const role = req.body.role;
   const companyName = req.body.CompanyName;
+  const userStatus = "approved";
+  const RoleAsBuyer = req.body.RoleAsBuyer;
 
 
   if(!email || !password){
@@ -80,16 +90,12 @@ exports.signup = function(req, res, next){
       const user = new User({
         email:email,
         password:password,
-        firstName:firstName,
-        lastName:lastName,
-        contactNo:contactNo,
-        mobileNo:mobileNo,
         landlineNo:landlineNo,
-        fullName:fullName,
-        type:type,
-        role:role,
         randomno:rand,
-        companyName:companyName
+        companyName:companyName,
+        userStatus:userStatus,
+        RoleAsBuyer:RoleAsBuyer
+
       });
       console.log(user,'checkingggggggg');
       user.save(function(err){
@@ -165,9 +171,7 @@ exports.signup = function(req, res, next){
       //Respond to request indicating user was created
       res.json({
         token:tokenForUser(user),
-        username:user.firstName+''+user.lastName,
         _id:user._id,
-        role:user.role,
         code:200
       });
     });
@@ -220,4 +224,50 @@ exports.getcompanyname = function(req,res,next){
       })
     }
   })
+}
+
+
+exports.getAllUsers = function(req,res,next){
+  User.find(function(err,allUsers){
+    if(err){
+      res.send({
+        code:404,
+        content:err,
+        msg:'user will not get from server some internal issue.'
+      })
+    }
+    else if(allUsers){
+      //const comnpanynames = [];
+      var userData = allUsers;
+      for (let key in userData) {
+        delete userData[key].password;
+        //delete allUsers[key].type;
+      }
+      console.log(userData)
+      res.send({
+        code:200,
+        content:userData,
+        msg:'All user including approved and blocked'
+      })
+    }
+  })
+}
+
+exports.changeStatus = function(req,res,next){
+  const id = req.body.id;
+  const userStatus = req.body.userStatus;
+  User.update(
+    { _id: id },
+    {
+      $set: {
+        userStatus: userStatus
+      }
+    }
+ ).then((response) => {
+  res.send({
+      code:200,
+      msg:'Status updated successfully',
+      content:response
+  });
+}).catch(() => res.status(422).send({msg:'something went wrong'}));
 }

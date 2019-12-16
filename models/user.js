@@ -7,17 +7,12 @@ const userSchema = new Schema({
   email:{type:String, unique:true, lowercase:true},
   password:{type:String},
   companyName:{type:String},
-  firstName:{type:String},
-  lastName:{type:String},
   randomno: {type: String},
-  contactNo:{type:String},
-  mobileNo:{type:String},
   landlineNo:{type:String},
-  fullName:{type:String},
-  type:{type:String},
-  role:{type:String},
+  RoleAsBuyer:{type:String},
   resetPasswordToken:{type:String},
   resetPasswordExpires:{type:String},
+  userStatus:{type:String},
 });
 
 //on Save Hook, encrypt password
