@@ -1,18 +1,61 @@
 import React, { Component } from 'react';
 import './adminUser.css';
+import { HttpUtils } from '../../Services/HttpUtils';
 
 
 class UserPanel1 extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            newUsers: [],
+            approvedUsers: []
+        }
     }
 
+    componentDidMount() {
+        this.getAllUsers()
+
+    }
+
+    getAllUsers = async () => {
+        let newUsers = [];
+        let approvedUsers = [];
+
+        let response = await HttpUtils.get('getalluser');
+        let data = response.content;
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].userStatus == 'pending') {
+                newUsers.push(data[i])
+            }
+            else if (data[i].userStatus == "approved") {
+                approvedUsers.push(data[i])
+            }
+        }
+        this.setState({
+            newUsers: newUsers,
+            approvedUsers: approvedUsers
+        })
+    }
+
+    changeStatus = async (e, id) => {
+        let obj = {
+            id: id,
+            userStatus: e
+        }
+        let response = await HttpUtils.post('changeStatus', obj);
+        if (response.code == 200) {
+            this.getAllUsers()
+
+        }
+    }
 
     render() {
-        const { } = this.props;
+        const { newUsers, approvedUsers } = this.state;
+        // const { } = this.props;
         return (
             <div>
-                <div className="container" style={{marginTop:'3vw'}}>
+                <div className="container" style={{ marginTop: '3vw' }}>
                     <div className="row" style={{ margin: '0px' }}>
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
@@ -40,24 +83,28 @@ class UserPanel1 extends Component {
                                                 <th>Decline</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className="tablee_th">0</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devanmotor@gmail.com</td>
-                                                <td className="tablee_td">0321 23456 7</td>
-                                                <td className="tablee_td"><i class="fa fa-check-circle" style={{ fontSize: '25px' , color:'green' }}></i></td>
-                                                <td className="tablee_td"><i class="fa fa-close" style={{ fontSize: '25px', color:'red' }}></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td className="tablee_th">1</td>
-                                                <td className="tablee_td">Al Arcom Trading</td>
-                                                <td className="tablee_td">arcomintl@gmail.com</td>
-                                                <td className="tablee_td">0321 23456 7</td>
-                                                <td className="tablee_td"><i class="fa fa-check-circle" style={{ fontSize: '25px', color:'green' }}></i></td>
-                                                <td className="tablee_td"><i class="fa fa-close" style={{ fontSize: '25px', color:'red' }}></i></td>
-                                            </tr>
-                                        </tbody>
+                                        {newUsers && newUsers.map((elem, key) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.email}</td>
+                                                        <td className="tablee_td">{elem.landlineNo}</td>
+                                                        <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '25px', color: 'green' }} onClick={this.changeStatus.bind(this, 'approved', elem._id)}></button></td>
+                                                        <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '25px', color: 'red' }} onClick={this.changeStatus.bind(this, 'block', elem._id)}></button></td>
+                                                    </tr>
+                                                    {/* <tr>
+                                                 <td className="tablee_th">1</td>
+                                                 <td className="tablee_td">Al Arcom Trading</td>
+                                                 <td className="tablee_td">arcomintl@gmail.com</td>
+                                                 <td className="tablee_td">0321 23456 7</td>
+                                                 <td className="tablee_td"><i class="fa fa-check-circle" style={{ fontSize: '25px', color: 'green' }}></i></td>
+                                                 <td className="tablee_td"><i class="fa fa-close" style={{ fontSize: '25px', color: 'red' }}></i></td>
+                                             </tr> */}
+                                                </tbody>)
+                                        })}
+
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -71,22 +118,25 @@ class UserPanel1 extends Component {
                                                 <th>Block</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className="tablee_th">0</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devanmotor@gmail.com</td>
-                                                <td className="tablee_td">0321 23456 7</td>
-                                                <td className="tablee_td"><i class="fa fa-ban" style={{ fontSize: '25px' , color:'red' }}></i></td>
-                                            </tr>
-                                            <tr>
+                                        {approvedUsers && approvedUsers.map((elem, key) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.email}</td>
+                                                        <td className="tablee_td">{elem.landlineNo}</td>
+                                                        <td className="tablee_td"><button class="fa fa-ban" style={{ fontSize: '25px', color: 'red' }} onClick={this.changeStatus.bind(this, 'block', elem._id)}></button></td>
+                                                    </tr>
+                                                    {/* <tr>
                                                 <td className="tablee_th">1</td>
                                                 <td className="tablee_td">Al Arcom Trading</td>
                                                 <td className="tablee_td">arcomintl@gmail.com</td>
                                                 <td className="tablee_td">0321 23456 7</td>
-                                                <td className="tablee_td"><i class="fa fa-ban" style={{ fontSize: '25px' , color:'red' }}></i></td>
-                                            </tr>
-                                        </tbody>
+                                                <td className="tablee_td"><i class="fa fa-ban" style={{ fontSize: '25px', color: 'red' }}></i></td>
+                                            </tr> */}
+                                                </tbody>)
+                                        })}
                                     </table>
                                 </div>
                             </div>

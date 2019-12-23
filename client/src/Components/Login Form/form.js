@@ -45,22 +45,27 @@ class FormLogin extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        if (values.email != undefined && values.password != undefined) {
-          console.log("sing In hit")
-          // store.dispatch(logUser(this.state));
-          // this.setState({ isLoader: true }, () => {
-          // })
-          // this.fectSignInApiFunc(values)
+        store.dispatch(logUser(this.state));
+        this.setState({ isLoader: true }, () => {
+        })
+        this.fectSignInApiFunc(values)
 
-        }
-        else if (values.email != undefined && values.companyName != undefined && values.mobileNo != undefined && values.landlineNo != undefined) {
-          console.log('sing up hit')
-          // store.dispatch(logUser(this.state));
-          // this.setState({ isLoader: true }, () => {
-          // })
-          this.fectSignUpApiFunc(values)
+        console.log(values, 'values')
 
-        }
+
+
+        // if (values.email != undefined && values.password != undefined) {
+        //   console.log("sing In hit")
+
+        // }
+        // else if (values.email != undefined && values.companyName != undefined && values.mobileNo != undefined && values.landlineNo != undefined) {
+        //   console.log('sing up hit')
+        // store.dispatch(logUser(this.state));
+        // this.setState({ isLoader: true }, () => {
+        // })
+        // this.fectSignUpApiFunc(values)
+
+        // }
 
 
 
@@ -80,15 +85,28 @@ class FormLogin extends Component {
       }
     });
   }
+  handleSubmitSingUp = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        // store.dispatch(logUser(this.state));
+        // this.setState({ isLoader: true }, () => {
+        // })
+        this.fectSignUpApiFunc(values)
+        // console.log(values, 'values')
+      }
+    });
+  }
 
   fectSignInApiFunc = async (values) => {
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
+    console.log(response , 'response')
     try {
       if (response.code === 200) {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
         localStorage.setItem('userToken', JSON.stringify(response.token))
-        localStorage.setItem('userName', JSON.stringify(response.username))
+        localStorage.setItem('userName', JSON.stringify(response.companyName))
         localStorage.setItem('userData', JSON.stringify(response))
         this.setState({ isLoader: false });
       } else {
@@ -109,8 +127,19 @@ class FormLogin extends Component {
   }
 
   fectSignUpApiFunc = async (values) => {
+    let role = "buyer";
+    values.role = role;
     let response = await HttpUtils.post('signup', values);
-    console.log(response , 'response')
+    if (response.code === 200) {
+      this.setState({ isLoader: false });
+      document.getElementById('closss').click();
+    }
+    else if (response === undefined) {
+      this.setState({
+        isAlert: true,
+        isLoader: false
+      })
+    }
 
   }
 
@@ -188,7 +217,7 @@ class FormLogin extends Component {
                 </Form>
                 :
                 <div>
-                  <Form onSubmit={this.handleSubmit} className="login-form">
+                  <Form onSubmit={this.handleSubmitSingUp} className="login-form">
 
                     <div className="row">
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -226,10 +255,54 @@ class FormLogin extends Component {
                           })(
                             <Input
                               placeholder="Email"
-                              id={"exampleInputEmail1"}
                               className="bid_Input"
                             />
                           )}
+                        </Form.Item>
+                      </div>
+
+                    </div><br />
+
+
+                    <div className="row">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <label style={{ marginBottom: '0px' }}>
+                          <span className="school10">
+                            Password:
+                              </span>
+                        </label>
+                        <Form.Item hasFeedback>
+                          {getFieldDecorator('password', {
+                            rules: [
+                              {
+                                required: true,
+                                message: 'Please input your password!',
+                              },
+                              {
+                                validator: this.validateToNextPassword,
+                              },
+                            ],
+                          })(<Input.Password />)}
+                        </Form.Item>
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <label style={{ marginBottom: '0px' }}>
+                          <span className="school10">
+                            Confirm Password:
+                              </span>
+                        </label>
+                        <Form.Item hasFeedback>
+                          {getFieldDecorator('confirm', {
+                            rules: [
+                              {
+                                required: true,
+                                message: 'Please confirm your password!',
+                              },
+                              {
+                                validator: this.compareToFirstPassword,
+                              },
+                            ],
+                          })(<Input.Password onBlur={this.handleConfirmBlur} />)}
                         </Form.Item>
                       </div>
 

@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col, Input
+    Checkbox, Form, Row, Col, Input, Radio
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom";
 import filtersImg from "./caret-down.png";
 import NumberFormat from 'react-number-format';
+
 const CheckboxGroup = Checkbox.Group;
+
+let status;
+let filterTypesArr = [];
+let filterFacingArr = [];
+let filterLightningsArr = [];
+let filterAudienceTypeArr = [];
+let filterCategoryName;
+let filterCityName;
+let filterStateName;
 
 class Market extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            billboardFilterdData: [],
-            filterValue: '',
-            from: 0,
-            to: 2,
-            inputValue: 1,
-            value: 0,
-            rangeValzForDropdown: [],
+            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
+                'Total Cinima Ads', 'Radio Ads', 'Other'],
             citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
@@ -40,21 +45,34 @@ class Market extends Component {
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
             statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
-            cities: [],
+
             category: [],
-            categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
-                'Total Cinima Ads', 'Radio Ads', 'Other'],
+            cities: [],
             states: [],
+
             billboardData: [],
+            billboardFilterdData: [],
+
+            // filterValue: '',
+            headingValue: '',
+
             i: 0,
-            headingValue: ''
+            to: 2,
+
+            statusValue: '',
+            // filterTypesArr: [],
+            // filterFacingArr: [],
+            // filterLightningsArr: [],
+            // filterAudienceTypeArr: [],
+            // filterCategoryName: '',
+            // filterCityName: '',
+            // filterStateName: ''
         }
     }
+
     componentWillMount() {
         let data = this.props.data;
-        let headingValue = this.props.showValueHead
-        console.log(data, 'this.props')
-
+        let headingValue = this.props.showValueHead;
         if (data) {
             this.setState({
                 billboardData: data,
@@ -72,20 +90,13 @@ class Market extends Component {
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
-        console.log(data, 'data')
         localStorage.setItem('billboardData', JSON.stringify(data))
 
         //slice for render some data and click on more button then show some next data
         // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
         //create a range array value of width height daily visitor cities & states
-        let rangeNumArr = [];
-        for (var i = 0; i <= 5000; i = i + 5) {
-            rangeNumArr.push(i)
-        }
-        let rangeValues = rangeNumArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
+
         let city = citiesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
@@ -98,61 +109,273 @@ class Market extends Component {
         await
             this.setState({
                 billboardData: data,
-                rangeValzForDropdown: rangeValues,
                 cities: city,
                 category: catee,
                 states: state
             })
     }
 
-    //filtration the data with given values
-    filterBillBoard(filter) {
-        var arr = []
-        if (Array.isArray(filter)) {
-            for (var i = 0; i < filter.length; i++) {
-                arr.push(filter[i])
+    //get status Available or  Not Available
+
+    onChange = (e) => {
+        this.setState({
+            statusValue: e.target.value
+        })
+        status = e.target.value;
+        this.filterKeysGet();
+    }
+
+    //get checkboxes values
+    onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
+
+        if (checkboxParam == 'type') {
+            // this.setState({
+            //     filterTypesArr: checkboxValue
+            // })
+
+            filterTypesArr = checkboxValue;
+        }
+        else if (checkboxParam == 'facing') {
+            // this.setState({
+            //     filterFacingArr: checkboxValue
+            // })
+            filterFacingArr = checkboxValue;
+        }
+        else if (checkboxParam == 'lightning') {
+            // this.setState({
+            //     filterLightningsArr: checkboxValue
+            // })
+            filterLightningsArr = checkboxValue;
+
+        }
+        else if (checkboxParam == 'audienceType') {
+            // this.setState({
+            //     filterAudienceTypeArr: checkboxValue
+            // })
+            filterAudienceTypeArr = checkboxValue;
+
+        }
+        this.filterKeysGet();
+
+    }
+
+    //get dropdown values
+    handleChange = (dropDownParam, dropDownValueObj) => {
+
+        if (dropDownParam == 'category') {
+            // this.setState({
+            //     filterCategoryName: dropDownValueObj.value,
+            // })
+            filterCategoryName = dropDownValueObj.value;
+
+        }
+        else if (dropDownParam == 'city') {
+            // this.setState({
+            //     filterCityName: dropDownValueObj.value,
+            // })
+            filterCityName = dropDownValueObj.value;
+
+        }
+        else if (dropDownParam == 'state') {
+            // this.setState({
+            //     filterStateName: dropDownValueObj.value,
+            // })
+            filterStateName = dropDownValueObj.value;
+
+        }
+
+        this.filterKeysGet();
+        // this.filterBillBoard(data.value)
+    }
+
+
+    filterKeysGet = () => {
+        // const { status, filterCategoryName, filterCityName, filterStateName,
+        //     filterTypesArr, filterFacingArr, filterLightningsArr, filterAudienceTypeArr } = this.state;
+
+        let filterKeys = [];
+        if (status != undefined) {
+            filterKeys.push('status')
+        }
+        if (filterCategoryName != undefined) {
+            filterKeys.push('category')
+        }
+        if (filterCityName != undefined) {
+            filterKeys.push('city')
+        }
+        if (filterStateName != undefined) {
+            filterKeys.push('state')
+        }
+        if (filterTypesArr.length > 0) {
+            filterKeys.push('type')
+        }
+        if (filterFacingArr.length > 0) {
+            filterKeys.push('facing')
+        }
+        if (filterLightningsArr.length > 0) {
+            filterKeys.push('lightning')
+        }
+        if (filterAudienceTypeArr.length > 0) {
+            filterKeys.push('audianceType')
+        }
+
+        this.filterBillboardData(filterKeys)
+    }
+
+    filterBillboardData = (filterKeys) => {
+        if (filterKeys.length == 1) {
+            this.filterBillboardDataWithOneKey(filterKeys);
+        }
+        else if (filterKeys.length == 2) {
+            this.filterBillboardDataWithTwoKey(filterKeys);
+        }
+        else if (filterKeys.length == 3) {
+            this.filterBillboardDataWithThreeKey(filterKeys);
+        }
+        else if (filterKeys.length == 4) {
+            this.filterBillboardDataWithFourKey(filterKeys);
+        }
+        else if (filterKeys.length == 5) {
+            this.filterBillboardDataWithFiveKey(filterKeys);
+        }
+        else if (filterKeys.length == 6) {
+            this.filterBillboardDataWithSixKey(filterKeys);
+        }
+        else if (filterKeys.length == 7) {
+            this.filterBillboardDataWithSevenKey(filterKeys);
+        }
+        else if (filterKeys.length == 8) {
+            this.filterBillboardDataWithEightKey(filterKeys);
+        }
+    }
+
+
+
+    filterBillboardDataWithOneKey = (filterKeys) => {
+        const { billboardData } = this.state;
+        let filteredData = []
+        if (filterKeys[0] == 'status') {
+            for (var i = 0; i < billboardData.length; i++) {
+                if (billboardData[i].status.toLowerCase() == status.toLowerCase()) {
+                    filteredData.push(billboardData[i])
+                }
             }
         }
-        else {
-            arr.push(filter)
+        else if (filterKeys[0] == 'category') {
+            for (var i = 0; i < billboardData.length; i++) {
+
+                if (billboardData[i].category[0] == filterCategoryName) {
+                    filteredData.push(billboardData[i])
+                }
+            }
         }
-        this.handleFiltration(arr)
-    }
-    handleFiltration = (value) => {
-        //filter data with given values array
-        const { billboardData } = this.state;
-        var filteredData = [];
-        console.log(value, 'value')
-        if (value.length >= 1) {
-            //if user has filter values the run the code
-            for (var i = 0; i < value.length; i++) {
-                for (var j in billboardData) {
-                    let data = billboardData[j]
-                    // console.log(billboardData[j])
-                    for (var k in data) {
-                        // console.log(data[k])
-                        if (data[k] === value[i]) {
-                            // console.log(data)
-                            filteredData.push(data)
-                            break;
-                        }
+        else if (filterKeys[0] == 'city') {
+            for (var i = 0; i < billboardData.length; i++) {
+                if (billboardData[i].city.toLowerCase() == filterCityName.toLowerCase()) {
+                    filteredData.push(billboardData[i])
+                }
+            }
+        }
+        else if (filterKeys[0] == 'state') {
+            for (var i = 0; i < billboardData.length; i++) {
+                if (billboardData[i].state.toLowerCase() == filterStateName.toLowerCase()) {
+                    filteredData.push(billboardData[i])
+                }
+            }
+        }
+        else if (filterKeys[0] == 'type') {
+            for (var i = 0; i < filterTypesArr.length; i++) {
+                for (var j = 0; j < billboardData.length; j++) {
+                    if (billboardData[j].type.toLowerCase() == filterTypesArr[i].toLowerCase()) {
+                        filteredData.push(billboardData[i])
                     }
                 }
             }
-            this.setState({
-                billboardFilterdData: filteredData
-            })
         }
-        else {
-            // if user have not filter data then render orignal data in the page
-            let notFilterd = []
-            var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
-            this.setState({
-                billboardData: billboardDataFromLocalStorage,
-                billboardFilterdData: notFilterd
-            })
+        else if (filterKeys[0] == 'facing') {
+            for (var i = 0; i < filterFacingArr.length; i++) {
+                for (var j = 0; j < billboardData.length; j++) {
+                    if (billboardData[j].facing.toLowerCase() == filterFacingArr[i].toLowerCase()) {
+                        filteredData.push(billboardData[i])
+                    }
+                }
+            }
         }
+        else if (filterKeys[0] == 'lightning') {
+            for (var i = 0; i < filterLightningsArr.length; i++) {
+                for (var j = 0; j < billboardData.length; j++) {
+                    if (billboardData[j].lightning.toLowerCase() == filterLightningsArr[i].toLowerCase()) {
+                        filteredData.push(billboardData[i])
+                    }
+                }
+            }
+        }
+        else if (filterKeys[0] == 'audianceType') {
+            for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+                for (var j = 0; j < billboardData.length; j++) {
+                    if (billboardData[j].audianceType.toLowerCase() == filterAudienceTypeArr[i].toLowerCase()) {
+                        filteredData.push(billboardData[i])
+                    }
+                }
+            }
+        }
+        this.setState({
+            billboardFilterdData: filteredData
+        })
+        console.log(filteredData, 'filteredData')
     }
+
+
+
+    // //filtration the data with given values
+    // filterBillBoard(filter) {
+    //     var arr = []
+    //     if (Array.isArray(filter)) {
+    //         for (var i = 0; i < filter.length; i++) {
+    //             arr.push(filter[i])
+    //         }
+    //     }
+    //     else {
+    //         arr.push(filter)
+    //     }
+    //     this.handleFiltration(arr)
+    // }
+
+    // handleFiltration = (value) => {
+    //     //filter data with given values array
+    //     const { billboardData } = this.state;
+    //     var filteredData = [];
+    //     console.log(value, 'value')
+    //     if (value.length >= 1) {
+    //         //if user has filter values the run the code
+    //         for (var i = 0; i < value.length; i++) {
+    //             for (var j in billboardData) {
+    //                 let data = billboardData[j]
+    //                 // console.log(billboardData[j])
+    //                 for (var k in data) {
+    //                     // console.log(data[k])
+    //                     if (data[k] === value[i]) {
+    //                         // console.log(data)
+    //                         filteredData.push(data)
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         this.setState({
+    //             billboardFilterdData: filteredData
+    //         })
+    //     }
+    //     else {
+    //         // if user have not filter data then render orignal data in the page
+    //         let notFilterd = []
+    //         var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
+    //         this.setState({
+    //             billboardData: billboardDataFromLocalStorage,
+    //             billboardFilterdData: notFilterd
+    //         })
+    //     }
+    // }
 
     //for load more data
     onMoreData = () => {
@@ -165,18 +388,26 @@ class Market extends Component {
         this.billBoradDetails();
     }
     //filtration for drop down data
-    handleChange = (data) => {
-        this.filterBillBoard(data.value)
-    }
+
     onFlipData = () => {
         this.setState({
             i: this.state.i + 9
         })
     }
+
+
+
     render() {
         const { filter } = this.props;
         // console.log(boardNames,'daniyal work');
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown, i, category } = this.state;
+        const { billboardData, billboardFilterdData, cities, states, i, category
+            // ,filterTypesArr , filterFacingArr , filterLightningsArr , filterAudienceTypeArr
+        } = this.state;
+        // console.log(filterTypesArr, 'filterTypesArr')
+        // console.log(filterFacingArr, 'filterFacingArr')
+        // console.log(filterLightningsArr, 'filterLightningsArr')
+        // console.log(filterAudienceTypeArr, 'filterAudienceTypeArr')
+
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
         const billboardRendring = (
@@ -243,30 +474,34 @@ class Market extends Component {
                 </div>
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
-                        <CheckboxGroup
-                            setFieldsValue={this.state.filterValue}
-                            onChange={this.filterBillBoard.bind(this)}
-                        >
+                        <Radio.Group onChange={this.onChange} value={this.state.statusValue}>
                             <div className='filterDivs'>Status</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
+                                    <Radio className="fasla" value="Available">&nbsp;Available</Radio>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
+                                    <Radio className="fasla" value="Not Available">&nbsp;Not Available</Radio>
                                 </Col>
                             </Row>
-                            <div className='col-md-11 dropdown'>
-                                <div className='filterDivs'>Category</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select onChange={this.handleChange}
-                                            options={category}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                            </div>
+                        </Radio.Group>
+
+                        <div className='col-md-11 dropdown'>
+                            <div className='filterDivs'>Category</div>
+                            <Row className="fasla1" >
+                                <Col>
+                                    <Select onChange={this.handleChange.bind(this, 'category')}
+                                        options={category}
+                                    >
+                                    </Select>
+                                </Col>
+                            </Row>
+                        </div>
+
+                        <CheckboxGroup
+                            // setFieldsValue={this.state.filterValue}
+                            onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+                        >
                             <div className='filterDivs'>Types</div>
                             <Row>
                                 <Col>
@@ -300,6 +535,11 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
                                 </Col>
                             </Row>&emsp;
+                        </CheckboxGroup>
+
+                        <CheckboxGroup
+                            onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+                        >
                             <Row>
                                 <div className='filterDivs'>Facing</div>
                                 <Col >
@@ -309,6 +549,11 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Back">&nbsp;Back</Checkbox>
                                 </Col>
                             </Row>
+                        </CheckboxGroup>
+
+                        <CheckboxGroup
+                            onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
+                        >
                             <div className='filterDivs'>Lightning</div>
                             <Row>
                                 <Col >
@@ -318,6 +563,11 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                 </Col>
                             </Row>
+                        </CheckboxGroup>
+
+                        <CheckboxGroup
+                            onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+                        >
                             <div className='filterDivs'>Audience Type</div>
                             <Row>
                                 <Col >
@@ -333,187 +583,152 @@ class Market extends Component {
                                     <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                 </Col>
                             </Row>
-
-                            <div className='col-md-11 dropdown'>
-                                <div className='filterDivs'>Cities</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={cities}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>States</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={states}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                {/* <div className='filterDivs'>Width</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select onChange={this.handleChange}
-                                            options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>Height</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select onChange={this.handleChange}
-                                            options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>Traffic Count</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row>
-                                <div className='filterDivs'>Daily Visitor</div>
-                                <Row className="fasla1" >
-                                    <Col>
-                                        <Select
-                                            onChange={this.handleChange}
-                                            options={rangeValzForDropdown}
-                                        >
-                                        </Select>
-                                    </Col>
-                                </Row> */}
-                            </div>
-                            <div className='filterDivs'>Pricing</div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={'Rs.'}
-                                        placeholder="Min"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={'Rs.'}
-                                        placeholder="Max"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='filterDivs'>Width</div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
-                                        placeholder="Min"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
-                                        placeholder="Max"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='filterDivs'>Height</div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
-                                        placeholder="Min"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Input
-                                        placeholder="Max"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='filterDivs'>Traffic Count</div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={''}
-                                        placeholder="Min"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={''}
-                                        placeholder="Max"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='filterDivs'>Daily Visitor</div>
-                            <div className="row fasla1">
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={''}
-                                        placeholder="Min"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <NumberFormat
-                                        thousandSeparator={true}
-                                        prefix={''}
-                                        placeholder="Max"
-                                        className="marketFilter_Input"
-                                    />
-                                </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div>
-                            </div>
                         </CheckboxGroup>
+
+                        <div className='col-md-11 dropdown'>
+                            <div className='filterDivs'>Cities</div>
+                            <Row className="fasla1" >
+                                <Col>
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'city')}
+                                        options={cities}
+                                    >
+                                    </Select>
+                                </Col>
+                            </Row>
+
+                            <div className='filterDivs'>States</div>
+                            <Row className="fasla1" >
+                                <Col>
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'state')}
+                                        options={states}
+                                    >
+                                    </Select>
+                                </Col>
+                            </Row>
+
+                        </div>
+                        <div className='filterDivs'>Pricing</div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'Rs.'}
+                                    placeholder="Min"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={'Rs.'}
+                                    placeholder="Max"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className='filterDivs'>Width</div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Input
+                                    placeholder="Min"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Input
+                                    placeholder="Max"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className='filterDivs'>Height</div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Input
+                                    placeholder="Min"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Input
+                                    placeholder="Max"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className='filterDivs'>Traffic Count</div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={''}
+                                    placeholder="Min"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={''}
+                                    placeholder="Max"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className='filterDivs'>Daily Visitor</div>
+                        <div className="row fasla1">
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={''}
+                                    placeholder="Min"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <NumberFormat
+                                    thousandSeparator={true}
+                                    prefix={''}
+                                    placeholder="Max"
+                                    className="marketFilter_Input"
+                                />
+                            </div>
+                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                <button className="btn btn-primary">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {/* </CheckboxGroup> */}
                     </div>
                     <div className="col-12 d-block d-sm-none">
                         <div id="accordion">
@@ -526,8 +741,8 @@ class Market extends Component {
                                 <div id="collapseOne" className="collapse show" data-parent="#accordion">
                                     <div className="card-body">
                                         <CheckboxGroup
-                                            setFieldsValue={this.state.filterValue}
-                                            onChange={this.filterBillBoard.bind(this)}
+                                        // setFieldsValue={this.state.filterValue}
+                                        // onChange={this.filterBillBoard.bind(this)}
                                         >
                                             <div className='filterDivs'>Status</div>
                                             <Row>
@@ -543,7 +758,7 @@ class Market extends Component {
                                                 <Row className="fasla1" >
                                                     <Col>
                                                         <Select onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
+                                                            options={category}
                                                         >
                                                         </Select>
                                                     </Col>
@@ -637,44 +852,7 @@ class Market extends Component {
                                                         </Select>
                                                     </Col>
                                                 </Row>
-                                                {/* <div className='filterDivs'>Width</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                                <div className='filterDivs'>Height</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                                <div className='filterDivs'>Traffic Count</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                                <div className='filterDivs'>Daily Visitor</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={rangeValzForDropdown}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row> */}
+
                                             </div>
                                             <div className='filterDivs'>Width</div>
                                             <div className="row fasla1">
@@ -773,7 +951,7 @@ class Market extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
