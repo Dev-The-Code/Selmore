@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import NumberFormat from 'react-number-format';
-import { Input } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.css';
 import { Link } from "react-router-dom";
+import {
+    DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
+} from 'antd';
 var filteredObj = {};
 
 class DashboardData extends Component {
@@ -47,6 +49,7 @@ class DashboardData extends Component {
         this.billBoradData();
         await this.gettingDropDownValues();
     }
+
     billBoradData = async () => {
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -55,10 +58,10 @@ class DashboardData extends Component {
         })
         localStorage.setItem('billboardData', JSON.stringify(data))
     }
+
     gettingDropDownValues = async () => {
         let { companyName, citiesArr, typeArr, statesArr, address,
             types, cities, states } = this.state;
-        console.log(statesArr, 'statesArr')
         let rangeNumArr = [];
         for (var i = 0; i <= 5000; i = i + 5) {
             rangeNumArr.push(i)
@@ -93,39 +96,42 @@ class DashboardData extends Component {
             states: states
         });
     }
+
     handleChangeCompany = (data) => {
         filteredObj.companyName = data.value;
         this.filteredData();
     }
+
     handleChangeType = (data) => {
         filteredObj.type = data.value;
         this.filteredData();
     }
+
     handleChangeSize = (data) => {
         filteredObj.size = data.value;
         this.filteredData();
     }
+
     handleChangeAddress = (data) => {
         filteredObj.address = data.value;
         this.filteredData();
     }
+
     handleChangeCity = (data) => {
         filteredObj.city = data.value;
         this.filteredData();
     }
+
     handleChangeState = (data) => {
         filteredObj.state = data.value;
         this.filteredData();
     }
+
     filteredData = () => {
         const { billboardData } = this.state;
-        // console.log(billboardData , 'billboardData')
-        // console.log(filteredObj , 'filteredObj')
         var filteredData = [];
-        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined
-            // && 
-            // filteredObj.size !== undefined
-            && filteredObj.address !== undefined && filteredObj.city !== undefined && filteredObj.state !== undefined) {
+        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.address !== undefined &&
+            filteredObj.city !== undefined && filteredObj.state !== undefined) {
             console.log('true condition')
             for (var i in billboardData) {
                 let data = billboardData[i]
@@ -162,9 +168,37 @@ class DashboardData extends Component {
         })
     }
 
+    validateNumber(rule, value, callback) {
+        if (isNaN(value)) {
+            callback('Please type Numbers');
+        } else {
+            callback()
+        }
+    }
+
+    handleSubmitMegaSale = e => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
+
+    handleSubmitBidding = e => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
+
+    
+
     render() {
-        const { billboardData, companyName, types, rangeValzForDropdown, address, cities, states, billboardFilterdData } = this.state;
-        console.log(billboardFilterdData, 'billboardFilterdData')
+        const { billboardData, companyName, types, address, cities, states, billboardFilterdData } = this.state;
+        const { getFieldDecorator, getFieldValue } = this.props.form;
         const billboardRendring = (
             <div>
                 <br />
@@ -264,17 +298,6 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            {/* <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>Size</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeSize}
-                                        options={rangeValzForDropdown}
-                                    >
-                                    </Select>
-                                </div>
-                            </div> */}
                             <div className='col-xl-3 col-md-3 col-5 filterOne'>
                                 <div className="filture">
                                     <h4 className='text_topFilter'>Address</h4>
@@ -335,17 +358,6 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            {/* <div className='col-lg-2'>
-                                <div>
-                                    <h4 className='text_topFilter'>Size</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeSize}
-                                        options={rangeValzForDropdown}
-                                    >
-                                    </Select>
-                                </div>
-                            </div> */}
                             <div className='col-lg-4'>
                                 <div>
                                     <h4 className='text_topFilter'>Address</h4>
@@ -398,94 +410,195 @@ class DashboardData extends Component {
                                     <div className="col-12 col-md-5 col-lg-5 col-xl-5">
                                         <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
                                     </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_labeL"> Actual Price :
-                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Actual price" />
-                                                </label>
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_labeL"> Discount Price :
-                                            <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Discount price" />
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className="row" style={{ marginTop: '0.4vw' }}>
-                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <label className="modeLForm_labeL">Billboard Availability :</label>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">From</label>
-                                                <input type="date" name="" className="form-control modeLForm_Input" />
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">To</label>
-                                                <input type="date" name="" className="form-control modeLForm_Input" />
-                                            </div>
-                                        </div>
-                                        <div className="row" style={{ marginTop: '0.4vw' }}>
-                                            <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                <label className="modeLForm_labeL">Sale Availability :</label>
-                                            </div>
-                                        </div>
-                                        {/* <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Actual price" />
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="Discount price" />
-                                            </div>
-                                        </div> */}
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_timlable">From</label><br />
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">Start Date</label>
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                    <Form onSubmit={this.handleSubmitMegaSale}>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_labeL"> Actual Price :
+                                                    <Form.Item>
+                                                            {getFieldDecorator(`actualPrice`, {
+                                                                // initialValue: this.state.width,
+                                                                rules: [{
+                                                                    required: true,
+                                                                    message: 'Please enter Actual Price',
+                                                                    whitespace: true
+                                                                },
+                                                                { validator: this.validateNumber.bind(this) }]
+                                                            })(
+                                                                <Input
+                                                                    className="form-control modeLForm_Input"
+                                                                    placeholder="Actual price" />
+                                                            )}
+                                                        </Form.Item>
 
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">Start Time</label>
-                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                                    </label>
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_labeL"> Discount Price :
+                                                    <Form.Item>
+                                                            {getFieldDecorator(`discountPrice`, {
+                                                                // initialValue: this.state.width,
+                                                                rules: [{
+                                                                    required: true,
+                                                                    message: 'Please enter Discount Price',
+                                                                    whitespace: true
+                                                                },
+                                                                { validator: this.validateNumber.bind(this) }]
+                                                            })(
+                                                                <Input
+                                                                    className="form-control modeLForm_Input"
+                                                                    placeholder="Discount price" />
+                                                            )}
+                                                        </Form.Item>
 
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_timlable">To</label><br />
+                                            <div className="row" style={{ marginTop: '0.4vw' }}>
+                                                <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <label className="modeLForm_labeL">Billboard Availability :</label>
+                                                </div>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">End Date</label>
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">From</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`billboardAvailabilityFrom`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="" className="form-control modeLForm_Input" />
+                                                        )}
+                                                    </Form.Item>
 
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">To</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`billboardAvailabilityTo`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="" className="form-control modeLForm_Input" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="date" name="" className="form-control modeLForm_Input" /> */}
+                                                </div>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">End Time</label>
-                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                            <div className="row" style={{ marginTop: '0.4vw' }}>
+                                                <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <label className="modeLForm_labeL">Sale Availability :</label>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_timlable">From</label><br />
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">Start Date</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`saleStartDate`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" /> */}
 
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">Start Time</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`saleStartTime`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="time" name="" className="form-control modeLForm_Input" placeholder="" /> */}
+
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_timlable">To</label><br />
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">End Date</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`saleEndDate`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" /> */}
+
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">End Time</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`saleEndTime`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="time" name="" className="form-control modeLForm_Input" placeholder="" /> */}
+
+                                                </div>
+                                            </div>
+                                            <div className="row" style={{ marginTop: '0.5vw' }}>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right' }}>
+                                                    <Form.Item>
+                                                        <Button className="btn btn-primary"
+                                                            type="primary" htmlType="submit"
+                                                        >Submit</Button>
+                                                    </Form.Item>
+                                                    {/* <button className="btn btn-primary">Submit</button> */}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="row" style={{ marginTop: '0.5vw' }}>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right' }}>
-                                                <button className="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                                    </Form>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -507,56 +620,125 @@ class DashboardData extends Component {
                                     <div className="col-12 col-md-5 col-lg-5 col-xl-5">
                                         <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
                                     </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_timlable">From</label><br />
+                                    <Form onSubmit={this.handleSubmitBidding}>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_timlable">From</label><br />
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                </div>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">Start Date</label>
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">Start Date</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`biddingStartDate`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" /> */}
 
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">Start Time</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`biddingStartTime`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="time" name="" className="form-control modeLForm_Input" placeholder="" /> */}
+                                                </div>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">Start Time</label>
-                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_timlable">To</label><br />
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">End Date</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`biddingEndDate`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" /> */}
 
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_timlable">To</label><br />
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">End Date</label>
-                                                <input type="date" name="bday" className="form-control modeLForm_Input" placeholder="" />
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modaLSmalLable">End Time</label>
+                                                    <Form.Item>
+                                                        {getFieldDecorator(`biddingEndTime`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please select date',
+                                                                whitespace: true
+                                                            }]
+                                                        })(
+                                                            <Input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
+                                                        )}
+                                                    </Form.Item>
+                                                    {/* <input type="time" name="" className="form-control modeLForm_Input" placeholder="" /> */}
 
+                                                </div>
                                             </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modaLSmalLable">End Time</label>
-                                                <input type="time" name="" className="form-control modeLForm_Input" placeholder="" />
-
+                                            <div className="row" style={{ marginTop: '0.6vw' }}>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <label className="modeLForm_labeL"> Min bid amount :
+                                                    <Form.Item>
+                                                            {getFieldDecorator(`minBidAmount`, {
+                                                                // initialValue: this.state.width,
+                                                                rules: [{
+                                                                    required: true,
+                                                                    message: 'Please enter Min bid amount ',
+                                                                    whitespace: true
+                                                                },
+                                                                { validator: this.validateNumber.bind(this) }]
+                                                            })(
+                                                                <Input
+                                                                    className="form-control modeLForm_Input"
+                                                                    placeholder="Discount price" />
+                                                            )}
+                                                        </Form.Item>
+                                                    {/* <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" /> */}
+                                                    </label>
+                                                </div>
+                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right', marginTop: '2vw' }}>
+                                                    <Form.Item>
+                                                        <Button className="btn btn-primary"
+                                                            type="primary" htmlType="submit"
+                                                        >Submit</Button>
+                                                    </Form.Item>
+                                                    {/* <button className="btn btn-primary">Submit</button> */}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="row" style={{ marginTop: '0.6vw' }}>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                <label className="modeLForm_labeL"> Min bid amount :
-                                                    <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" />
-                                                </label>
-                                            </div>
-                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right', marginTop: '2vw' }}>
-                                                <button className="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </Form>
                                     <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
                             </div>
@@ -571,4 +753,6 @@ class DashboardData extends Component {
         )
     }
 }
-export default DashboardData;
+// export default DashboardData;
+const WrappedDynamicFieldSet = Form.create()(DashboardData);
+export default WrappedDynamicFieldSet;

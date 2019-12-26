@@ -49,39 +49,6 @@ class FormLogin extends Component {
         this.setState({ isLoader: true }, () => {
         })
         this.fectSignInApiFunc(values)
-
-        console.log(values, 'values')
-
-
-
-        // if (values.email != undefined && values.password != undefined) {
-        //   console.log("sing In hit")
-
-        // }
-        // else if (values.email != undefined && values.companyName != undefined && values.mobileNo != undefined && values.landlineNo != undefined) {
-        //   console.log('sing up hit')
-        // store.dispatch(logUser(this.state));
-        // this.setState({ isLoader: true }, () => {
-        // })
-        // this.fectSignUpApiFunc(values)
-
-        // }
-
-
-
-        // store.dispatch(logUser(this.state));
-        // this.setState({ isLoader: true }, () => {
-        // })
-        // this.fectSignInApiFunc(values)
-
-        // console.log(values, 'values')
-        // console.log(values.password, 'values')
-        // console.log(values.email, 'values')
-        // console.log(values.companyName, 'values')
-        // console.log(values.mobileNo, 'values')
-        // console.log(values.landlineNo, 'values')
-
-
       }
     });
   }
@@ -93,7 +60,6 @@ class FormLogin extends Component {
         // this.setState({ isLoader: true }, () => {
         // })
         this.fectSignUpApiFunc(values)
-        // console.log(values, 'values')
       }
     });
   }

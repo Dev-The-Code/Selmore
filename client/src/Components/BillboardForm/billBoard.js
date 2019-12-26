@@ -408,8 +408,11 @@ class BillBoard extends Component {
     }
 
     fectSignUpApiFunc = async (values) => {
+        console.log(values , 'values');
+
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
+
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,
@@ -456,83 +459,6 @@ class BillBoard extends Component {
                                         ><br />
                                             <div className="row">
                                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-
-                                                    {/* <div className="row" style={{ marginTop: '2vw' }}>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <h5>Bidding Details</h5>
-                                                        </div>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
-                                                    </div> */}
-                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <Input
-                                                                placeholder="Min Bid Price"
-                                                                className="bid_Input"
-                                                            /><br />
-                                                        </div>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <TimePicker
-
-                                                            />
-                                                        </div>
-                                                    </div> */}
-                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
-                                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                            <RangePicker />
-                                                        </div>
-                                                    </div>
-                                                    <br /> */}
-
-                                                    {/* <div className="row" style={{ marginTop: '2vw' }}>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <h5>Mega Sale</h5>
-                                                        </div>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"></div>
-                                                    </div> */}
-                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <Input
-                                                                placeholder="Actual Price"
-                                                                className="bid_Input"
-                                                            /><br />
-                                                        </div>
-                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                            <Input
-                                                                placeholder="Percentage of discount"
-                                                                className="bid_Input"
-                                                            /><br />
-                                                        </div>
-                                                    </div> */}
-                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
-                                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
-                                                            <TimePicker
-                                                                placeholder="Deal till"
-                                                            />
-                                                        </div>
-                                                    </div><br /> */}
-                                                    {/* <div className="row" style={{ marginTop: '1vw' }}>
-                                                        <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                                            <Input
-                                                                placeholder="Number"
-                                                                className="bid_Input"
-                                                            /><br />
-                                                        </div>
-                                                        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                                            <label class="radio-inline">
-                                                                <p className="radio_price"><input type="radio" name="optradio" checked />days</p>
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <p className="radio_price"><input type="radio" name="optradio" />weekly</p>
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <p className="radio_price"><input type="radio" name="optradio" />monthly</p>
-                                                            </label>
-                                                            <label class="radio-inline">
-                                                                <p className="radio_price"><input type="radio" name="optradio" />yearly</p>
-                                                            </label>
-                                                        </div>
-                                                    </div><br /> */}
-
                                                     <div className="form-group up">
                                                         <label for="type"></label>
                                                         <Form.Item>
