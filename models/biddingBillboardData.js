@@ -5,13 +5,15 @@ const Schema = mongoose.Schema;
 
 //Define model
 const biddingBillboard = new Schema({
-    minimumBidAmount:{type:String},
-    billboardAmount:{type:String},
-    biddingStartDate:{type:String},
-    biddingStartTime:{type:String},
-    biddingEndDate:{type:String},
-    biddingEndTime:{type:String},
-    bilboardDetailData:{type:String}
+    biddingStartDate: { type: String },
+    biddingStartTime: { type: String },
+    biddingEndDate: { type: String },
+    biddingEndTime: { type: String },
+    minBidAmount: { type: String },
+    images: { type: Array },
+    billboardId: { type: String },
+    billboardAddress: { type: String },
+    billboardCity: { type: String },
 });
 
 //model class

@@ -33,7 +33,7 @@ const addSchema = new Schema({
     images: { type: Array },
     companyId: { type: String },
     companyName: { type: String },
-    category: { type: String },
+    category: { type: Array },
     facing: { type: String },
     type: { type: String },
     size: { type: String },

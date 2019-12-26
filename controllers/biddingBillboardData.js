@@ -6,13 +6,15 @@ exports.postBiddingBillboard = function(req,res,next){
   var formData = req.body;
   if(formData.objectId == ''){
   const postBillboardData = new BiddingbillboardData({
-    minimumBidAmount:formData.minimumBidAmount,
-    billboardAmount:formData.billboardAmount,
     biddingStartDate:formData.biddingStartDate,
     biddingStartTime:formData.biddingStartTime,
     biddingEndDate:formData.biddingEndDate,
     biddingEndTime:formData.biddingEndTime,
-    bilboardDetailData:formData.bilboardDetailData
+    minBidAmount:formData.minBidAmount,
+    images:formData.images,
+    billboardId:formData.billboardId,
+    billboardAddress:formData.billboardAddress,
+    billboardCity:formData.billboardCity,
   })
   
   postBillboardData.save((err,data) => {

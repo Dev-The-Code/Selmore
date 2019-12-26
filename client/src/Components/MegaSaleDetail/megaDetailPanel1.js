@@ -40,10 +40,6 @@ class Megapanel1 extends Component {
 
     render() {
         const { data, billboardData } = this.state;
-        console.log(billboardData, 'billboardData')
-        console.log(data, 'data')
-        console.log(billboardData.latitude)
-        console.log(billboardData.longitude)
 
         let image;
         if (data.images && data.images.length > 0) {
@@ -133,10 +129,10 @@ class Megapanel1 extends Component {
                                 <div className="col-md-3 ufone5"><span className="ufone3">Deal End </span></div>
                                 <div className="col-md-9 ufone6"><span className="ufone4">{data.saleEndDate} , {data.saleEndTime}</span></div>
                             </div>
-                            <div className="row" style={{ margin: '0px' }}>
+                            {/* <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Deal available till</span></div>
                                 <div className="col-md-9 ufone6"><span className="ufone4">10 hour 10 mins 10 second</span></div>
-                            </div>
+                            </div> */}
                             <br />
                             {/*second panel*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>

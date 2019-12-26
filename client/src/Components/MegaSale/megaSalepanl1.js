@@ -57,6 +57,7 @@ class MegaSalepanel1 extends Component {
 								</div>
 							)
 						})}
+						
 						{/* <div className="col-10 col-md-12 col-lg-5 col-xl-5">
 							<div className="row extra1">
 								<div className="col-12 col-md-5 col-lg-5 col-xl-5 card_mega1">

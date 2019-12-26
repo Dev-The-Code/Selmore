@@ -1,8 +1,49 @@
 import React, { Component } from 'react';
 import './billofbidding.css';
+import { HttpUtils } from '../../Services/HttpUtils';
 
 class Billofpanel2 extends Component {
-	render() {	
+	constructor(props) {
+		super(props)
+		this.state = {
+			billboardData: '',
+			biddersCompanyDetails: []
+		}
+	}
+
+	componentDidMount() {
+		this.billboardData()
+		this.biddersDetails()
+	}
+
+	billboardData = async () => {
+		let data = this.props.data;
+		if (data != undefined) {
+			let obj = {
+				id: data.billboardId
+			}
+			let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
+			if (response.code == 200) {
+				this.setState({
+					billboardData: response.content[0]
+				})
+
+			}
+		}
+	}
+
+	biddersDetails = () => {
+		let biddersCompany = JSON.parse(localStorage.getItem('bidderDetail'));
+		if (biddersCompany != null || biddersCompany != undefined) {
+			this.setState({
+				biddersCompanyDetails: biddersCompany
+			})
+		}
+	}
+
+	render() {
+		const { billboardData, biddersCompanyDetails } = this.state;
+		console.log(biddersCompanyDetails, 'biddersCompanyDetails')
 		return (
 			<div>
 				<div className="container">
@@ -21,91 +62,91 @@ class Billofpanel2 extends Component {
 						<div className="col-md-11 doesit9">
 							<div className="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 								<div className="tab-pane fade show active text-justify" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-										<div className="row ufone1" style={{ margin: '0px' }}>
-											<span className="ufone2">Billboard in Karachi Millitary Road City Point Details</span>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Ad Width</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">20 - Feet</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Ad Height</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">30 - Feet</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Lightning</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">No</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Description</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">Good location</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone7"><span className="ufone3">Ad Status</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">available</span></div>
-										</div>
-										<br />
-										{/*Second panel*/}
-										<div className="row ufone1" style={{ margin: '0px' }}>
-											<span className="ufone2">Military Road City rate Card</span>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">$125</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">$300</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">$800</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">$10000</span></div>
-										</div>
-										<br />
-										{/*Third panel*/}
-										<div className="row ufone1" style={{ margin: '0px' }}>
-											<span className="ufone2">Military Road City Demographics</span>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Audiance Type</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">nan</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">nan</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">nan</span></div>
-										</div>
-										<br />
-										{/*Fourth panel*/}
-										<div className="row ufone1" style={{ margin: '0px' }}>
-											<span className="ufone2">Military Road City Demographics</span>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">Country</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">Pakistan</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">State</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">Sindh</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone5"><span className="ufone3">City</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">Karachi</span></div>
-										</div>
-										<div className="row" style={{ margin: '0px' }}>
-											<div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
-											<div className="col-md-9 ufone6"><span className="ufone4">Gurumandir</span></div>
-										</div>
+									<div className="row ufone1" style={{ margin: '0px' }}>
+										<span className="ufone2">Billboard in {billboardData.city} Millitary Road City Point Details</span>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Ad Width</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.width} - Feet</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Ad Height</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.height} - Feet</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Lightning</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.lightning}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Description</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.description}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone7"><span className="ufone3">Ad Status</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.status}</span></div>
+									</div>
+									<br />
+									{/*Second panel*/}
+									<div className="row ufone1" style={{ margin: '0px' }}>
+										<span className="ufone2">Military Road City rate Card</span>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.dailyRate}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.weeklyRate}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.monthlyRate}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.yearlyRate}</span></div>
+									</div>
+									<br />
+									{/*Third panel*/}
+									<div className="row ufone1" style={{ margin: '0px' }}>
+										<span className="ufone2">Military Road City Demographics</span>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Audiance Type</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.audianceType}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.dailyVisitor}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.nearBy}</span></div>
+									</div>
+									<br />
+									{/*Fourth panel*/}
+									<div className="row ufone1" style={{ margin: '0px' }}>
+										<span className="ufone2">Military Road City Demographics</span>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.address}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">City</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.city}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">State</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.state}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Country</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.country}</span></div>
+									</div>
 								</div>
 								<div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-									<table class="table" style={{textAlign:'center'}}>
+									<table class="table" style={{ textAlign: 'center' }}>
 										<thead>
 											<tr>
 												<th>S#N.o</th>
@@ -114,38 +155,19 @@ class Billofpanel2 extends Component {
 												<th>Bidder ID</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>Jan 27, 2019 - 6:06:57 PM</td>
-												<td>$2045.00</td>
-												<td>1876236376</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>Jan 27, 2019 - 6:06:57 PM</td>
-												<td>$2045.00</td>
-												<td>1876236376</td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>Jan 27, 2019 - 6:06:57 PM</td>
-												<td>$2045.00</td>
-												<td>1876236376</td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td>Jan 27, 2019 - 6:06:57 PM</td>
-												<td>$2045.00</td>
-												<td>1876236376</td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td>Jan 27, 2019 - 6:06:57 PM</td>
-												<td>$2045.00</td>
-												<td>1876236376</td>
-											</tr>
-										</tbody>
+
+										{biddersCompanyDetails && biddersCompanyDetails.map((elem, key) => {
+											return (
+												<tbody>
+													<tr>
+														<td>{key}</td>
+														<td>{elem.date} - {elem.time}</td>
+														<td>Rs.{elem.bidAamount}</td>
+														<td>{elem.bidderId}</td>
+													</tr>
+												</tbody>
+											)
+										})}
 									</table>
 								</div>
 							</div>
