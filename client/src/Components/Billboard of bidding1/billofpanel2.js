@@ -43,7 +43,6 @@ class Billofpanel2 extends Component {
 
 	render() {
 		const { billboardData, biddersCompanyDetails } = this.state;
-		console.log(biddersCompanyDetails, 'biddersCompanyDetails')
 		return (
 			<div>
 				<div className="container">

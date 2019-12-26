@@ -11,7 +11,9 @@ class Militarypanel1 extends Component {
 			data: '',
 			images: [],
 			admin: false,
-			center: null
+			center: null,
+			billboardAmount: '',
+			bookedFor: ''
 		}
 	}
 	async componentDidMount() {
@@ -23,23 +25,39 @@ class Militarypanel1 extends Component {
 		})
 	}
 
-	// componentWillMount() {
+	billboardAmount = (amount, days) => {
+		this.setState({
+			billboardAmount: amount,
+			bookedFor: days
+		})
+	}
 
-
-	// 	let latitude = Number(this.props.data.latitude)
-	// 	let longitude = Number(this.props.data.longitude)
-	// 	this.setState({
-	// 		center:
-	// 		{
-	// 			center: {
-	// 				latitude: latitude,
-	// 				longitude: longitude
-	// 			},
-	// 			zoom: 9,
-	// 		}
-	// 	});
-	// }
-
+	bookedBillboard = () => {
+		const { data, bookedFor, billboardAmount } = this.state;
+		let bookedBillboard = [];
+		let booked = {}
+		let userDetail = JSON.parse(localStorage.getItem('userData'));
+		let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
+		booked.companyName = userDetail.companyName;
+		booked.companyId = userDetail._id;
+		booked.address = data.address;
+		booked.city = data.city;
+		booked.state = data.state;
+		booked.booked = bookedFor;
+		booked.billboardAmount = billboardAmount;
+		
+		if(bookedAvalibleBillboards == null || bookedAvalibleBillboards == undefined){
+			bookedBillboard.push(booked)
+			localStorage.setItem('bookedAvalibleBillboards', JSON.stringify(bookedBillboard))
+		}
+		else{
+			for (var i = 0; i < bookedAvalibleBillboards.length; i++) {
+				bookedBillboard.push(bookedAvalibleBillboards[i])
+			}
+			bookedBillboard.push(booked)
+			localStorage.setItem('bookedAvalibleBillboards', JSON.stringify(bookedBillboard))
+		}
+	}
 
 
 
@@ -181,33 +199,28 @@ class Militarypanel1 extends Component {
 										<div class="modal-body">
 											<div className="row">
 												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-													<label class="checkdrn radio-inline">Rs.950,000 (per day)
-															<input type="radio" name="radio" />
+													<label class="checkdrn radio-inline">Rs.{data.dailyRate} (per day)
+															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.950,000 (per week)
-															<input type="radio" name="radio" />
+													<label class="checkdrn radio-inline">Rs.{data.weeklyRate} (per week)
+															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.950,000 (per month)
-															<input type="radio" name="radio" />
+													<label class="checkdrn radio-inline">Rs.{data.monthlyRate} (per month)
+															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.950,000 (per year)
-															<input type="radio" name="radio" />
+													<label class="checkdrn radio-inline">Rs.{data.yearlyRate} (per year)
+															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} />
 														<span class="checkmark"></span>
 													</label>
 												</div>
 											</div>
-											{/* <div className="row">
-												<div className="col-12 col-md-9 col-lg-9 col-xl-9"></div>
-												<div className="col-12 col-md-3 col-lg-3 col-xl-3">
-													<button className="btn btn-primary bookBtn_military">Submit</button>
-												</div>
-											</div> */}
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+											<button type="button" class="btn btn-primary" data-dismiss="modal"
+												onClick={this.bookedBillboard}>Submit</button>
 										</div>
 									</div>
 								</div>

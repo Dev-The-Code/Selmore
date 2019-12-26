@@ -2,10 +2,47 @@ import React, { Component } from 'react';
 import './carts.css';
 
 class CartPanel1 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            bidBillboards: [],
+            megaSaleBillboard: [],
+            avalibleBillboard: []
+        }
+    }
+
+    componentDidMount() {
+        this.getBokkedBillboards()
+    }
+
     componentWillMount() {
         window.scrollTo(0, 0);
     }
+
+    getBokkedBillboards = () => {
+        let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
+        let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
+        let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
+
+        if (bookedAvalibleBillboards != null || bookedAvalibleBillboards != undefined) {
+            this.setState({
+                avalibleBillboard: bookedAvalibleBillboards
+            })
+        }
+        if (bookedMegaSaleBillboards != null || bookedMegaSaleBillboards != undefined) {
+            this.setState({
+                megaSaleBillboard: bookedMegaSaleBillboards
+            })
+        }
+        if (bidBillboards != null || bidBillboards != undefined) {
+            this.setState({
+                bidBillboards: bidBillboards
+            })
+        }
+
+    }
     render() {
+        const { bidBillboards, megaSaleBillboard, avalibleBillboard } = this.state;
         return (
             <div>
                 <div className="container" style={{ marginTop: '3vw' }}>
@@ -36,10 +73,26 @@ class CartPanel1 extends Component {
                                                 <th>State</th>
                                                 <th>Booked days</th>
                                                 <th>Amount</th>
-                                                <th>Action</th>
+                                                {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {avalibleBillboard && avalibleBillboard.map((elem, key) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.address}</td>
+                                                        <td className="tablee_td">{elem.city}</td>
+                                                        <td className="tablee_td">{elem.state}</td>
+                                                        <td className="tablee_th">One {elem.booked}</td>
+                                                        <td className="tablee_td">Rs.{elem.billboardAmount}</td>
+                                                        {/* <td className="tablee_td">View</td> */}
+                                                    </tr>
+                                                </tbody>
+                                            )
+                                        })}
+                                        {/* <tbody>
                                             <tr>
                                                 <td className="tablee_th">0</td>
                                                 <td className="tablee_td">Devan Motors</td>
@@ -48,7 +101,7 @@ class CartPanel1 extends Component {
                                                 <td className="tablee_td">Sindh</td>
                                                 <td className="tablee_th">10</td>
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
                                             <tr>
                                                 <td className="tablee_th">1</td>
@@ -58,9 +111,9 @@ class CartPanel1 extends Component {
                                                 <td className="tablee_td">Sindh</td>
                                                 <td className="tablee_th">10</td>
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
-                                        </tbody>
+                                        </tbody> */}
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -72,21 +125,35 @@ class CartPanel1 extends Component {
                                                 <th>Address</th>
                                                 <th>City</th>
                                                 <th>State</th>
-                                                <th>Booked days</th>
+                                                {/* <th>Booked days</th> */}
                                                 <th>Sale Amount</th>
-                                                <th>Action</th>
+                                                {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {megaSaleBillboard && megaSaleBillboard.map((elem, key) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.address}</td>
+                                                        <td className="tablee_td">{elem.city}</td>
+                                                        <td className="tablee_td">{elem.state}</td>
+                                                        <td className="tablee_td">Rs.{elem.billboardAmount}</td>
+                                                    </tr>
+                                                </tbody>
+                                            )
+                                        })}
+                                        {/* <tbody>
                                             <tr>
                                                 <td className="tablee_th">0</td>
                                                 <td className="tablee_td">Devan Motors</td>
                                                 <td className="tablee_td">devan motor front shahrah e faisal</td>
                                                 <td className="tablee_td">Karachi</td>
                                                 <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_th">10</td>
+                                                {/* <td className="tablee_th">10</td> 
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
                                             <tr>
                                                 <td className="tablee_th">1</td>
@@ -94,11 +161,11 @@ class CartPanel1 extends Component {
                                                 <td className="tablee_td">devan motor front shahrah e faisal</td>
                                                 <td className="tablee_td">Karachi</td>
                                                 <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_th">10</td>
+                                                {/* <td className="tablee_th">10</td> 
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
-                                        </tbody>
+                                        </tbody> */}
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-bid" role="tabpanel" aria-labelledby="nav-bid-tab">
@@ -111,10 +178,24 @@ class CartPanel1 extends Component {
                                                 <th>City</th>
                                                 <th>State</th>
                                                 <th>Bid Amount</th>
-                                                <th>Action</th>
+                                                {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {bidBillboards && bidBillboards.map((elem, key) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.address}</td>
+                                                        <td className="tablee_td">{elem.city}</td>
+                                                        <td className="tablee_td">{elem.state}</td>
+                                                        <td className="tablee_td">Rs.{elem.bidAamount}</td>
+                                                    </tr>
+                                                </tbody>
+                                            )
+                                        })}
+                                        {/* <tbody>
                                             <tr>
                                                 <td className="tablee_th">0</td>
                                                 <td className="tablee_td">Devan Motors</td>
@@ -122,7 +203,7 @@ class CartPanel1 extends Component {
                                                 <td className="tablee_td">Karachi</td>
                                                 <td className="tablee_td">Sindh</td>
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
                                             <tr>
                                                 <td className="tablee_th">1</td>
@@ -131,9 +212,9 @@ class CartPanel1 extends Component {
                                                 <td className="tablee_td">Karachi</td>
                                                 <td className="tablee_td">Sindh</td>
                                                 <td className="tablee_td">$2500</td>
-                                                <td className="tablee_td">View</td>
+                                                {/* <td className="tablee_td">View</td> 
                                             </tr>
-                                        </tbody>
+                                        </tbody> */}
                                     </table>
                                 </div>
                             </div>

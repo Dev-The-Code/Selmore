@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Popform from '../Popform/popform';
 import NumberFormat from 'react-number-format';
 import './billofbidding.css';
+import { HttpUtils } from '../../Services/HttpUtils';
 
 class Billofpanel1 extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class Billofpanel1 extends Component {
 			todayDate: '',
 			time: '',
 			monthName: ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-
+			billboardData: []
 		}
 	}
 
@@ -78,7 +79,7 @@ class Billofpanel1 extends Component {
 		})
 
 		this.lastBidingAmount()
-
+		this.billboardData()
 	}
 
 	lastBidingAmount = () => {
@@ -97,8 +98,26 @@ class Billofpanel1 extends Component {
 	}
 
 
+	billboardData = async () => {
+		let data = this.props.data;
+		if (data != undefined) {
+			let obj = {
+				id: data.billboardId
+			}
+			let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
+			if (response.code == 200) {
+				this.setState({
+					billboardData: response.content[0]
+				})
+
+			}
+		}
+	}
+
 	bidingAmount = () => {
-		const { bidValue, lastBidAmount, todayDate, time } = this.state;
+		const { bidValue, lastBidAmount, todayDate, time, billboardData } = this.state;
+		const { data } = this.props;
+
 		if (Number(lastBidAmount) >= Number(bidValue)) {
 			this.setState({
 				enterGreaterAmount: true
@@ -135,6 +154,28 @@ class Billofpanel1 extends Component {
 					lastBidAmount: bidValue,
 					bidValue: ''
 				})
+			}
+
+			let bookedBillboard = [];
+			let booked = {}
+			let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
+			booked.companyName = userDetail.companyName;
+			booked.companyId = userDetail._id;
+			booked.address = billboardData.address;
+			booked.city = billboardData.city;
+			booked.state = billboardData.state;
+			booked.bidAamount = bidValue;
+
+			if (bidBillboards == null || bidBillboards == undefined) {
+				bookedBillboard.push(booked)
+				localStorage.setItem('bidBillboards', JSON.stringify(bookedBillboard))
+			}
+			else {
+				for (var i = 0; i < bidBillboards.length; i++) {
+					bookedBillboard.push(bidBillboards[i])
+				}
+				bookedBillboard.push(booked)
+				localStorage.setItem('bidBillboards', JSON.stringify(bookedBillboard))
 			}
 
 		}
@@ -177,7 +218,7 @@ class Billofpanel1 extends Component {
 			<div>
 				<div className="container">
 					{enterGreaterAmount ? alert("Please Enter Greater amount from current bid amount") : null}
-					<div className="row" style={{ margin: '0px' , marginBottom:'1vw' }}>
+					<div className="row" style={{ margin: '0px', marginBottom: '1vw' }}>
 						<div className="col-md-1"></div>
 						<div className="col-md-10">
 							<div id="carouselExampleControls" className="carousel slide" data-ride="carousel">

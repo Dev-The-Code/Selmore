@@ -20,6 +20,7 @@ class Megapanel1 extends Component {
         this.billboardData()
 
     }
+
     billboardData = async () => {
         let data = this.props.data;
         if (data != undefined) {
@@ -37,10 +38,34 @@ class Megapanel1 extends Component {
         }
     }
 
+    bookedBillboard = () => {
+        const { data, billboardData } = this.state;
+        let bookedBillboard = [];
+		let booked = {}
+		let userDetail = JSON.parse(localStorage.getItem('userData'));
+		let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
+		booked.companyName = userDetail.companyName;
+		booked.companyId = userDetail._id;
+		booked.address = billboardData.address;
+		booked.city = billboardData.city;
+		booked.state = billboardData.state;
+		booked.billboardAmount = data.discountPrice;
+		
+		if(bookedMegaSaleBillboards == null || bookedMegaSaleBillboards == undefined){
+			bookedBillboard.push(booked)
+			localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+		}
+		else{
+			for (var i = 0; i < bookedMegaSaleBillboards.length; i++) {
+				bookedBillboard.push(bookedMegaSaleBillboards[i])
+			}
+			bookedBillboard.push(booked)
+			localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+		}
+    }
 
     render() {
         const { data, billboardData } = this.state;
-
         let image;
         if (data.images && data.images.length > 0) {
             image = data.images.map((elem, key) => {
@@ -216,7 +241,7 @@ class Megapanel1 extends Component {
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-10"></div>
                                 <div className="col-md-2" style={{ textAlign: 'right' }}>
-                                    <button className="btn btn-primary">Book Now</button>
+                                    <button className="btn btn-primary" onClick={this.bookedBillboard}>Book Now</button>
                                 </div>
                             </div>
                             <br />
