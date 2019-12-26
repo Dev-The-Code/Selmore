@@ -132,7 +132,7 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route path="/bidding_detail"
+              <Route path="/bidding_detail/:value"
                 render={props => {
                   return <Billofbidding1 {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}

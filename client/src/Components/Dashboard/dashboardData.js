@@ -226,12 +226,15 @@ class DashboardData extends Component {
     };
 
     handleSubmitBidding = e => {
-        const { billboardImage, billboardId } = this.state;
+        const { billboardImage, billboardId, billboardAddress, billboardCity } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 values.images = billboardImage;
                 values.billboardId = billboardId;
+                values.billboardAddress = billboardAddress;
+                values.billboardCity = billboardCity;
+                values.objectId = ''
                 this.biddingUpload(values)
             }
         });
@@ -243,8 +246,10 @@ class DashboardData extends Component {
 
     }
 
-    biddingUpload = (values) => {
+    biddingUpload = async (values) => {
         console.log(values, 'values bidding billboard')
+        let response = await HttpUtils.post('postbiddingbillboard', values);
+        console.log(response, 'response')
 
     }
 
@@ -301,8 +306,12 @@ class DashboardData extends Component {
                                                 <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
                                                 <div class="dropdown-content_dash">
                                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
-                                                    <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
-                                                    <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
+                                                    <a data-toggle="modal" data-target="#megaForm" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>
+                                                        <span className="dropText" >Mega Sale</span>
+                                                    </a>
+                                                    <a data-toggle="modal" data-target="#biddingForm" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>
+                                                        <span className="dropText" >Bidding</span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -447,21 +456,21 @@ class DashboardData extends Component {
                 <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
                     {billboardRendring}
                 </div>
+                {megaSaleFormShow ?
+                    <div class="modal fade" id="megaForm">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal_width">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Mega Sale</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div className="row padInModal">
+                                        <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                            <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                        </div>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
 
-                <div class="modal fade" id="megaForm">
-                    <div class="modal-dialog">
-                        <div class="modal-content modal_width">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Mega Sale</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div className="row padInModal">
-                                    <div className="col-12 col-md-5 col-lg-5 col-xl-5">
-                                        <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                        {megaSaleFormShow ?
                                             <Form onSubmit={this.handleSubmitMegaSale}>
                                                 <div className="row">
                                                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -641,38 +650,40 @@ class DashboardData extends Component {
                                                     </div>
                                                 </div>
                                             </Form>
-                                        : null
-                                        }
+
+                                        </div>
+                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                     </div>
                                     <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
-                                <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-            {/* </div> */}
+                    : null
+                }
+                {/* </div> */}
 
-
-            <div class="modal fade" id="biddingForm">
-                <div class="modal-dialog">
-                    <div class="modal-content modal_width">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Bidding</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div className="row padInModal">
-                                <div className="col-12 col-md-5 col-lg-5 col-xl-5">
-                                    <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                {biddingFormShow ?
+                    <div class="modal fade" id="biddingForm">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal_width">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Bidding</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                    {biddingFormShow ?
-                                        <Form onSubmit={this.handleSubmitBidding}>
+
+                                <div class="modal-body">
+                                    <div className="row padInModal">
+                                        <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                            <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                        </div>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+
+                                            <Form onSubmit={this.handleSubmitBidding}>
                                                 <div className="row">
                                                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                         <label className="modeLForm_timlable">From</label><br />
@@ -786,20 +797,22 @@ class DashboardData extends Component {
                                                         </Form.Item>
                                                     </div>
                                                 </div>
-                                        </Form>
-                                            : null
-                                        }
+                                            </Form>
+
+                                        </div>
+                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                                    </div>
                                 </div>
-                                <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
                     </div>
-                </div>
-            </div>
+                    : null
+                }
             </div >
         )
     }

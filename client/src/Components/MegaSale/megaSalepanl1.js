@@ -61,7 +61,7 @@ class MegaSalepanel1 extends Component {
 									</div>									
 						<div class="col-1 col-md-2 col-lg-2 col-xl-2"></div>
 					</div>
-				</div>
+				</div>	
 			</div>
 		);
 	}
