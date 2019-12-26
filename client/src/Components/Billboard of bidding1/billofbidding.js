@@ -4,6 +4,7 @@ import Footer from '../footer';
 import Billofpanel1 from './billofpanel1';
 import Billofpanel2 from './billofpanel2';
 import './billofbidding.css';
+import BannerBid from './biddingBanner';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billbidding extends Component {
@@ -24,7 +25,7 @@ class Billbidding extends Component {
     return (
       <div>
         <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
-        <AbBanner advertise={'BILLBOARDS FOR BIDDING'} bred={'CATEGORY'} bred2={'> FOR BIDDING'} />
+        <BannerBid/>
         <Billofpanel1 data={this.props.location.state} />
         <Billofpanel2 data={this.props.location.state}/>
         <Footer />

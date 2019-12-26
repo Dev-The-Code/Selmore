@@ -37,8 +37,8 @@ class Biddpanel1 extends Component {
 									<div class="card_bidding">
 										<img class="card-img-top cardImag" src={elem.images[0]} alt="Card image" style={{ width: '100%' }} />
 										<div class="card-body">
-											<h4 class="card-title">{elem.billboardAddress},</h4>
-											<h4 class="card-title"> {elem.billboardCity}</h4>
+											<h4 class="card-title">{elem.billboardAddress}, {elem.billboardCity}</h4>
+											<h4 class="card-title"> </h4>
 											<p class="card-text">Bidding availability : <br />From
 									<span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span> to
 									<span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span></p>

@@ -45,12 +45,12 @@ class Megapanel1 extends Component {
         if (data.images && data.images.length > 0) {
             image = data.images.map((elem, key) => {
                 if (key == 0) {
-                    return <div className="carousel-item active" style={{ width: '720px', height: "450px" }}>
+                    return <div className="carousel-item active">
                         <img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px" }} />
                     </div>
                 }
                 else {
-                    return <div className="carousel-item" style={{ width: '720px', height: "450px" }}>
+                    return <div className="carousel-item">
                         <img className="d-block w-100" src={elem} alt={key} style={{ width: '720px', height: "450px" }} />
                     </div>
                 }
@@ -64,25 +64,18 @@ class Megapanel1 extends Component {
                         <div className="col-md-10">
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-12">
-                                    <div className="kurta1">
-                                        <div className="row slidersoldier" style={{ margin: '0px' }}>
-                                            <div className="">
-                                                <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-                                                    <div className="carousel-inner">
-                                                        {image}
-                                                    </div>
-                                                    <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span className="sr-only">Previous</span>
-                                                    </a>
-                                                    <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span className="sr-only">Next</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div><br />
-                                        {/* <h3 className="kurta2">SLIDER</h3> */}
+                                    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+                                        <div className="carousel-inner">
+                                            {image}
+                                        </div>
+                                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="sr-only">Previous</span>
+                                        </a>
+                                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="sr-only">Next</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div><br />
