@@ -10,6 +10,7 @@
 }
 .extra1{
 	margin-right: -4vw;
+    margin-bottom: 4vw;
 }
 .extra2{
 	margin-left: -4vw;
@@ -107,8 +108,8 @@
 		font-family: Helvetica;
 	}
 	.extra1{
-		margin-right: -14vw;
-		margin-left: 3vw;
+		/* margin-right: -14vw;/ */
+		margin-left: -2vw;
 	}
 	.extra2{
 		margin-right: -14vw;
@@ -170,8 +171,8 @@
 		font-family: Helvetica;
 	}
 	.extra1{
-		margin-right: 10vw;
-    	margin-left: 9vw;
+		/* margin-right: 10vw;
+    	margin-left: 9vw; */
 	}
 	.extra2{
 		margin-right: 10vw;
@@ -189,10 +190,11 @@
 		height: 15vw;
 	}
 	.cardImag_mega{
-		width: 115%;
-		height: 22.7vw;
+		width: 108%;
 		border-bottom-left-radius: 1vw;
-		margin-left: -1.2vw;
+		margin-left: -1.1vw;
+		padding: 1vw;
+		height: 19vmax;
 	}
 	.bannerImgg{
 		width: 100%;
@@ -234,7 +236,8 @@
 		font-family: Helvetica;
 	}
 	.extra1{
-		margin-right: -6vw;
+		margin-right: -4vw;
+		margin-bottom: 4vw;
 	}
 	.extra2{
 		margin-left: -6vw;
@@ -251,10 +254,11 @@
 		height: 14vw;
 	}
 	.cardImag_mega{
-		width: 117%;
-		height: 20vw;
+		width: 108%;
 		border-bottom-left-radius: 1vw;
 		margin-left: -1.1vw;
+		padding: 1vw;
+		height: 20.5vmax;
 	}
 	.bannerImgg{
 		width: 100%;
@@ -297,6 +301,7 @@
 	}
 	.extra1{
 		margin-right: -4vw;
+		margin-bottom: 4vw;
 	}
 	.extra2{
 		margin-left: -4vw;

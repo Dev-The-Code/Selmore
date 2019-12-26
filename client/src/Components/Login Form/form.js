@@ -121,9 +121,9 @@ class FormLogin extends Component {
             <div className="col-md-6 school7">
               <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
             </div>
-            <div className="col-md-5 school6">
               {this.state.createAcountform
                 ?
+                <div className="col-md-5 school6">
                 <Form onSubmit={this.handleSubmit} className="login-form">
                   <div className="form-group">
                     <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
@@ -181,8 +181,9 @@ class FormLogin extends Component {
                     : null
                   }
                 </Form>
+                </div>
                 :
-                <div>
+                <div className="col-md-5" style={{marginTop:'2vw'}}>
                   <Form onSubmit={this.handleSubmitSingUp} className="login-form">
 
                     <div className="row">
@@ -230,7 +231,7 @@ class FormLogin extends Component {
                     </div><br />
 
 
-                    <div className="row">
+                    <div className="row" style={{marginTop:'-1.5vw'}}>
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                         <label style={{ marginBottom: '0px' }}>
                           <span className="school10">
@@ -248,7 +249,7 @@ class FormLogin extends Component {
                                 validator: this.validateToNextPassword,
                               },
                             ],
-                          })(<Input.Password />)}
+                          })(<Input.Password  />)}
                         </Form.Item>
                       </div>
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -273,7 +274,7 @@ class FormLogin extends Component {
                       </div>
 
                     </div><br />
-                    <div className="row" style={{ marginTop: '1vw' }}>
+                    <div className="row" style={{ marginTop: '-1.5vw' }}>
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                         <label style={{ marginBottom: '0px' }}>
                           <span className="school10">
@@ -322,7 +323,7 @@ class FormLogin extends Component {
                         </Form.Item>
                       </div>
                     </div><br />
-                    <div className="row">
+                    <div className="row" style={{marginTop:'-1.5vw'}}>
                       <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                         <button type="submit" className="btn btn-primary"><span className="school5">Sign Up</span></button>
                         <p className="" style={{ margin: '1vw 0px 0px' }}>
@@ -333,7 +334,6 @@ class FormLogin extends Component {
                   </Form>
                 </div>
               }
-            </div>
             {isLoader ? <div class="loading"> 	</div>
               : null
             }
