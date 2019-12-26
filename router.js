@@ -17,6 +17,9 @@ app.post('/listadd',listAgencyForm.postAddData);
 app.post('/changeStatus',Authentication.changeStatus);
 app.post('/sendmegabillboard',megaBillboardData.postmegaSaleBillboard);
 app.post('/postbiddingbillboard',biddingBillboardData.postBiddingBillboard);
+app.post('/getspecificbiddingbillboard',getAllBillboard.getspecificBillboard);
+
+
 //get routes
 
 app.get('/getemails',Authentication.getemails);

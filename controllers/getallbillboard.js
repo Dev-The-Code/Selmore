@@ -19,3 +19,22 @@ listAdd.find(function(err,data){
   }
 })
 }
+exports.getspecificBillboard = function(req, res, next){
+  let id = req.body.id;
+  listAdd.find({"_id":id},function(err,data){
+    if(err){
+      res.send({
+        msg:'Error getting billboard',
+        code:404,
+        err:err
+      })
+    }
+    else if(data){
+      res.send({
+        content:data,
+        msg:'Get billboard data',
+        code:200
+      })
+    }
+  })
+  }

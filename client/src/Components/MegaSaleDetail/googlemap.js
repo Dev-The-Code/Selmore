@@ -17,6 +17,9 @@ class Location extends Component {
     setPosition() {
         let latitude = Number(this.props.latitude)
         let longitude = Number(this.props.longitude)
+        console.log(this.props.latitude , 'latitude')
+        console.log(this.props.longitude , 'longitude')
+
         this.setState({
             coords:
             {
@@ -41,7 +44,7 @@ class Location extends Component {
 
             <GoogleMap
             defaultCenter ={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-            defaultZoom={15}
+            defaultZoom={12}
             >
                 {props.isMarkerShown && <Marker
                     position={{ lat: props.coords.latitude, lng: props.coords.longitude }}

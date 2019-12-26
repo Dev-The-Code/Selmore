@@ -90,7 +90,7 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route exact path="/megaDetail"
+              <Route exact path="/megaDetail/:value"
                 render={props => {
                   return <MegaDetail {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}

@@ -5,17 +5,19 @@ const Schema = mongoose.Schema;
 
 //Define model
 const megasalebillboard = new Schema({
-    actualPrice:{type:String},
-    discountPrice:{type:String},
-    percantageOfDisscount:{type:String},
-    billboardAvaliableStartDate:{type:String},
-    billboardAvaliableEndDate:{type:String},
-    saleStartDate:{type:String},
-    saleStartTime:{type:String},
-    saleEndDate:{type:String},
-    saleEndTime:{type:String},
-    bilboardDetailData:{type:String}
-
+    actualPrice: { type: String },
+    discountPrice: { type: String },
+    percantageOffDisscount: { type: Number },
+    billboardAvailabilityFrom: { type: String },
+    billboardAvailabilityTo: { type: String },
+    saleStartDate: { type: String },
+    saleStartTime: { type: String },
+    saleEndDate: { type: String },
+    saleEndTime: { type: String },
+    images: { type: Array },
+    billboardId: { type: String },
+    billboardAddress: { type: String },
+    billboardCity: { type: String }
 });
 
 //model class

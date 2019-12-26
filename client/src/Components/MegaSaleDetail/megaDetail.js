@@ -11,17 +11,17 @@ class MegaDetail extends Component {
 		super(props)
 	}
 	componentWillMount() {
-        window.scrollTo(0,0);
-    }
+		window.scrollTo(0, 0);
+	}
 	render() {
 		return (
 			<div>
 				<Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
 				<AbBanner advertise={'BILLBOARD'} bred={'CATEGORY'} bred2={'> BILLBOARD'} bred3={'> MEGA SALE'} />
-                <Megapanel1 data={this.props.location.state}/>
+				<Megapanel1 data={this.props.location.state} />
 				<Megapanel2 />
 				<Footer />
-            </div>
+			</div>
 		);
 	}
 }
