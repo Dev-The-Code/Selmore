@@ -411,7 +411,7 @@ class DashboardData extends Component {
                                         <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
                                     </div>
                                     <Form onSubmit={this.handleSubmitMegaSale}>
-                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                                             <div className="row">
                                                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                     <label className="modeLForm_labeL"> Actual Price :
@@ -597,8 +597,8 @@ class DashboardData extends Component {
                                                 </div>
                                             </div>
                                         </div>
+                                    </Form>    
                                         <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
-                                    </Form>
                                 </div>
                             </div>
                             <div class="modal-footer">
