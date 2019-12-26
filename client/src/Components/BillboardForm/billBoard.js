@@ -536,8 +536,7 @@ class BillBoard extends Component {
                                                                     whitespace: true
                                                                 }],
                                                             })(
-                                                                <NumberFormat
-                                                                    thousandSeparator={true}
+                                                                <Input
                                                                     type="text"
                                                                     className={'form-control backcolor'}
                                                                     id={"size"}
@@ -653,10 +652,10 @@ class BillBoard extends Component {
                                                                     required: true,
                                                                     message: 'Please enter a type',
                                                                     whitespace: true
-                                                                }],
+                                                                },
+                                                                { validator: this.validateNumber.bind(this) }],
                                                             })(
-                                                                <NumberFormat
-                                                                    thousandSeparator={true}
+                                                                <Input
                                                                     type="text"
                                                                     className={'form-control backcolor'}
                                                                     id={"traffic"}
@@ -812,13 +811,11 @@ class BillBoard extends Component {
                                                                         whitespace: true
                                                                     },
                                                                     { 
-                                                                        // validator: this.validateNumber.bind(this) 
+                                                                        validator: this.validateNumber.bind(this) 
                                                                     }
                                                                 ]
                                                                 })(
-                                                                    <NumberFormat
-                                                                        thousandSeparator={true}
-                                                                        prefix={'Rs.'}
+                                                                    <Input
                                                                         type="text"
                                                                         className={'form-control backcolor'}
                                                                         id={"dailyRate"}
@@ -843,12 +840,10 @@ class BillBoard extends Component {
                                                                         whitespace: true
                                                                     },
                                                                     { 
-                                                                        // validator: this.validateNumber.bind(this) 
+                                                                        validator: this.validateNumber.bind(this) 
                                                                     }]
                                                                 })(
-                                                                    <NumberFormat
-                                                                        thousandSeparator={true}
-                                                                        prefix={'Rs.'}
+                                                                    <Input
                                                                         type="text"
                                                                         className={'form-control backcolor'}
                                                                         id={"weeklyRate"}
@@ -873,12 +868,10 @@ class BillBoard extends Component {
                                                                         whitespace: true
                                                                     },
                                                                     { 
-                                                                        // validator: this.validateNumber.bind(this) 
+                                                                        validator: this.validateNumber.bind(this) 
                                                                     }]
                                                                 })(
-                                                                    <NumberFormat
-                                                                        thousandSeparator={true}
-                                                                        prefix={'Rs.'}
+                                                                    <Input
                                                                         type="text"
                                                                         className={'form-control backcolor'}
                                                                         id={"monthlyRate"}
@@ -903,12 +896,10 @@ class BillBoard extends Component {
                                                                         whitespace: true
                                                                     },
                                                                     { 
-                                                                        // validator: this.validateNumber.bind(this) 
+                                                                        validator: this.validateNumber.bind(this) 
                                                                     }]
                                                                 })(
-                                                                    <NumberFormat
-                                                                        thousandSeparator={true}
-                                                                        prefix={'Rs.'}
+                                                                    <Input
                                                                         type="text"
                                                                         className={'form-control backcolor'}
                                                                         id={"yearlyRate"}
@@ -960,12 +951,10 @@ class BillBoard extends Component {
                                                                         whitespace: true
                                                                     },
                                                                     { 
-                                                                        // validator: this.validateNumber.bind(this) 
+                                                                        validator: this.validateNumber.bind(this) 
                                                                     }]
                                                                 })(
-                                                                    <NumberFormat
-                                                                        thousandSeparator={true}
-                                                                        type="text"
+                                                                    <Input
                                                                         className={'form-control backcolor'}
                                                                         id={"dailyVisitor"}
                                                                         name="dailyVisitor"
