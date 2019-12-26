@@ -16,7 +16,7 @@ let filterTypesArr = [];
 let filterFacingArr = [];
 let filterLightningsArr = [];
 let filterAudienceTypeArr = [];
-let filterCategoryName = [];
+// let filterCategoryName = [];
 let filterCityName = [];
 let filterStateName = [];
 
@@ -54,6 +54,8 @@ class Market extends Component {
             i: 0,
             to: 2,
             statusValue: '',
+            minValue: '',
+            maxValue: ''
         }
     }
 
@@ -132,10 +134,11 @@ class Market extends Component {
     handleChange = (dropDownParam, dropDownValueObj) => {
         let dropDownValue = []
         dropDownValue.push(dropDownValueObj.value)
-        if (dropDownParam == 'category') {
-            filterCategoryName = dropDownValue;
+        // if (dropDownParam == 'category') {
+        //     filterCategoryName = dropDownValue;
 
-        } else if (dropDownParam == 'city') {
+        // } else 
+        if (dropDownParam == 'city') {
             filterCityName = dropDownValue;
 
         } else if (dropDownParam == 'state') {
@@ -150,9 +153,9 @@ class Market extends Component {
         if (status.length > 0) {
             filterKeys.push('status')
         }
-        if (filterCategoryName.length > 0) {
-            filterKeys.push('category')
-        }
+        // if (filterCategoryName.length > 0) {
+        //     filterKeys.push('category')
+        // }
         if (filterTypesArr.length > 0) {
             filterKeys.push('type')
         }
@@ -179,9 +182,9 @@ class Market extends Component {
             if (filterKeys[0] == 'status') {
                 this.filterBillboardDataWithOneKey(status, 'status');
             }
-            else if (filterKeys[0] == 'category') {
-                this.filterBillboardDataWithOneKey(filterCategoryName, 'category');
-            }
+            // else if (filterKeys[0] == 'category') {
+            //     this.filterBillboardDataWithOneKey(filterCategoryName, 'category');
+            // }
             else if (filterKeys[0] == 'type') {
                 this.filterBillboardDataWithOneKey(filterTypesArr, 'type');
             }
@@ -202,10 +205,11 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 2) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCategoryName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type') {
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category') {
+            //     this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCategoryName, filterKeys[1]);
+            // }
+            // else 
+            if (filterKeys[0] == 'status' && filterKeys[1] == 'type') {
                 this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterTypesArr, filterKeys[1]);
             }
             else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing') {
@@ -223,24 +227,24 @@ class Market extends Component {
             else if (filterKeys[0] == 'status' && filterKeys[1] == 'state') {
                 this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterStateName, filterKeys[1]);
             }
-            else if (filterKeys[0] == 'category' && filterKeys[0] == 'type') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterStateName, filterKeys[1]);
-            }
+            // else if (filterKeys[0] == 'category' && filterKeys[0] == 'type') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'state') {
+            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterStateName, filterKeys[1]);
+            // }
             else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing') {
                 this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1]);
             }
@@ -288,25 +292,26 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 3) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'lightning') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterLightningsArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'audianceType') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'city') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterCityName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
+            // else 
+            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
                 this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
             }
             else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
@@ -351,51 +356,51 @@ class Market extends Component {
             else if (filterKeys[0] == 'status' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
                 this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
             }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+            // }
             else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
                 this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
             }
@@ -458,27 +463,28 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 4) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-                    filterTypesArr, filterKeys[2], filterFacingArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-                    filterTypesArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-                    filterTypesArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-                    filterTypesArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-                    filterTypesArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing') {
+            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+            //         filterTypesArr, filterKeys[2], filterFacingArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning') {
+            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+            //         filterTypesArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'audianceType') {
+            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+            //         filterTypesArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'city') {
+            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+            //         filterTypesArr, filterKeys[2], filterCityName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'state') {
+            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+            //         filterTypesArr, filterKeys[2], filterStateName, filterKeys[3]);
+            // }
+            // else 
+            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
                 this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
                     filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
             }
@@ -518,46 +524,46 @@ class Market extends Component {
                 this.filterBillboardDataWithFourKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
                     filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
             }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-                    filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+            //         filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+            //         filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+            //         filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
+            //         filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
+            //         filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+            //         filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+            // }
             else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
                 this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
                     filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
@@ -600,27 +606,28 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 5) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-                filterKeys[3] == 'facing', filterKeys[4] == 'lightning') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-                filterKeys[3] == 'facing', filterKeys[4] == 'audianceType') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-                filterKeys[3] == 'facing', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-                filterKeys[3] == 'facing', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+            //     filterKeys[3] == 'facing', filterKeys[4] == 'lightning') {
+            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+            //     filterKeys[3] == 'facing', filterKeys[4] == 'audianceType') {
+            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+            //     filterKeys[3] == 'facing', filterKeys[4] == 'city') {
+            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterCityName, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+            //     filterKeys[3] == 'facing', filterKeys[4] == 'state') {
+            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterStateName, filterKeys[4]);
+            // }
+            // else 
+            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
                 filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
                 this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
                     filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
@@ -650,36 +657,36 @@ class Market extends Component {
                 this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
                     filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
             }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
-                filterKeys[3] == 'city', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
-                    filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
-            }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            //     filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            //     filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            //     filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+            //     filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+            //         filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+            //     filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+            //         filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
+            //     filterKeys[3] == 'city', filterKeys[4] == 'state') {
+            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
+            //         filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
+            // }
             else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
                 filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
                 this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
@@ -702,22 +709,23 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 6) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'city') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterStateName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType') {
+            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city') {
+            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'state') {
+            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterStateName, filterKeys[5]);
+            // }
+            // else 
+            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
                 filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
                 this.filterBillboardDataWithSixKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
                     filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
@@ -732,22 +740,22 @@ class Market extends Component {
                 this.filterBillboardDataWithSixKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
                     filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
             }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
-                this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' &&
-                filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0],
-                    filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
-                    filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
-            }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
+            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+            //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
+            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' &&
+            //     filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
+            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0],
+            //         filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
+            //         filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
+            // }
             else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' &&
                 filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
                 this.filterBillboardDataWithSixKey(filterTypesArr, filterKeys[0],
@@ -756,45 +764,48 @@ class Market extends Component {
             }
         }
         else if (filterKeys.length == 7) {
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'city') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-                filterKeys[4] == 'lightning' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                    filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-            else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-                this.filterBillboardDataWithSevenKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            }
-        } else if (filterKeys.length == 8) {
-            this.filterBillboardDataWithEightKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-                filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6], filterStateName, filterKeys[7]);
+            this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+                filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'city') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning' &&
+            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
+            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+            //     this.filterBillboardDataWithSevenKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+            // }
         }
+        // else if (filterKeys.length == 8) {
+        //     this.filterBillboardDataWithEightKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+        //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6], filterStateName, filterKeys[7]);
+        // }
     }
 
     filterBillboardDataWithOneKey = (values, filterKey) => {
@@ -831,6 +842,9 @@ class Market extends Component {
                 }
             })
         }
+        this.setState({
+            billboardFilterdData: filteredData
+        })
         console.log(filteredData, 'filteredData')
     }
 
@@ -1146,55 +1160,91 @@ class Market extends Component {
         console.log(filteredData, 'filteredData')
     }
 
-    // //filtration the data with given values
-    // filterBillBoard(filter) {
-    //     var arr = []
-    //     if (Array.isArray(filter)) {
-    //         for (var i = 0; i < filter.length; i++) {
-    //             arr.push(filter[i])
-    //         }
-    //     }
-    //     else {
-    //         arr.push(filter)
-    //     }
-    //     this.handleFiltration(arr)
-    // }
+    onChangeMin = (e) => {
+        this.setState({
+            minValue: e.target.value
+        })
+    }
 
-    // handleFiltration = (value) => {
-    //     //filter data with given values array
-    //     const { billboardData } = this.state;
-    //     var filteredData = [];
-    //     console.log(value, 'value')
-    //     if (value.length >= 1) {
-    //         //if user has filter values the run the code
-    //         for (var i = 0; i < value.length; i++) {
-    //             for (var j in billboardData) {
-    //                 let data = billboardData[j]
-    //                 // console.log(billboardData[j])
-    //                 for (var k in data) {
-    //                     // console.log(data[k])
-    //                     if (data[k] === value[i]) {
-    //                         // console.log(data)
-    //                         filteredData.push(data)
-    //                         break;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         this.setState({
-    //             billboardFilterdData: filteredData
-    //         })
-    //     }
-    //     else {
-    //         // if user have not filter data then render orignal data in the page
-    //         let notFilterd = []
-    //         var billboardDataFromLocalStorage = JSON.parse(localStorage.getItem("billboardData"));
-    //         this.setState({
-    //             billboardData: billboardDataFromLocalStorage,
-    //             billboardFilterdData: notFilterd
-    //         })
-    //     }
-    // }
+    onChangeMax = (e) => {
+        this.setState({
+            maxValue: e.target.value
+        })
+    }
+
+    filterBillboardWithMinToMax = (param, e) => {
+        const { minValue, maxValue, billboardFilterdData, billboardData } = this.state;
+        let rangeValues = [];
+        if (billboardFilterdData.length > 0) {
+            for (var i = 0; i < billboardFilterdData.length; i++) {
+                if (param == 'price') {
+                    if (billboardFilterdData[i].monthlyRate >= minValue && billboardFilterdData[i].monthlyRate <= maxValue) {
+                        rangeValues.push(billboardFilterdData[i])
+                    }
+                }
+                else if (param == 'width') {
+                    if (billboardFilterdData[i].width >= minValue && billboardFilterdData[i].width <= maxValue) {
+                        rangeValues.push(billboardFilterdData[i])
+                    }
+                }
+                else if (param == 'height') {
+                    if (billboardFilterdData[i].height >= minValue && billboardFilterdData[i].height <= maxValue) {
+                        rangeValues.push(billboardFilterdData[i])
+                    }
+                }
+                else if (param == 'trafic') {
+                    if (billboardFilterdData[i].traffic >= minValue && billboardFilterdData[i].traffic <= maxValue) {
+                        rangeValues.push(billboardFilterdData[i])
+                    }
+                }
+                else if (param == 'visitor') {
+                    if (billboardFilterdData[i].dailyVisitor >= minValue && billboardFilterdData[i].dailyVisitor <= maxValue) {
+                        rangeValues.push(billboardFilterdData[i])
+                    }
+                }
+            }
+            this.setState({
+                billboardFilterdData: rangeValues,
+                minValue:'',
+                maxValue:''
+            })
+        }
+        else {
+            for (var i = 0; i < billboardData.length; i++) {
+                if (param == 'price') {
+                    if (billboardData[i].monthlyRate >= minValue && billboardData[i].monthlyRate <= maxValue) {
+                        rangeValues.push(billboardData[i])
+                    }
+                }
+                else if (param == 'width') {
+                    if (billboardData[i].width >= minValue && billboardData[i].width <= maxValue) {
+                        rangeValues.push(billboardData[i])
+                    }
+                }
+                else if (param == 'height') {
+                    if (billboardData[i].height >= minValue && billboardData[i].height <= maxValue) {
+                        rangeValues.push(billboardData[i])
+                    }
+                }
+                else if (param == 'trafic') {
+                    if (billboardData[i].traffic >= minValue && billboardData[i].traffic <= maxValue) {
+                        rangeValues.push(billboardData[i])
+                    }
+                }
+                else if (param == 'visitor') {
+                    if (billboardData[i].dailyVisitor >= minValue && billboardData[i].dailyVisitor <= maxValue) {
+                        rangeValues.push(billboardData[i])
+                    }
+                }
+            }
+            this.setState({
+                billboardFilterdData: rangeValues,
+                minValue:'',
+                maxValue:''
+            })
+        }
+        console.log(rangeValues ,'rangeValues')
+    }
 
     //for load more data
     onMoreData = () => {
@@ -1223,10 +1273,7 @@ class Market extends Component {
     }
 
     render() {
-        const { filter } = this.props;
-        // console.log(boardNames,'daniyal work');
         const { billboardData, billboardFilterdData, cities, states, i, category } = this.state;
-        const { getFieldDecorator } = this.props.form;
 
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
@@ -1433,50 +1480,34 @@ class Market extends Component {
                             <div className='filterDivs'>Pricing</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                    <Form.Item>
-                                            {getFieldDecorator(`minPrice`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Min Price',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Min"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>
+
+                                    <input
+                                        onChange={this.onChangeMin}
+                                        type="Number"
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
                                 </div>
-                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2">
                                     <button className="btn btn-primary">
                                         <i class="fa fa-caret-right"></i>
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                    <Form.Item>
-                                            {getFieldDecorator(`maxPrice`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Max Price',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Max"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>
+
+                                    <input
+                                        onChange={this.onChangeMax}
+
+                                        type="Number"
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "price")}>
                                         <i class="fa fa-caret-right"></i>
                                     </button>
                                 </div>
@@ -1484,43 +1515,29 @@ class Market extends Component {
                             <div className='filterDivs'>Width</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`minWidth`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Min Width',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Min"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>    
+
+                                    <input
+                                        onChange={this.onChangeMin}
+
+                                        type="Number"
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`maxWidth`, {
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Max Width',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Max"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>     
+
+                                    <input
+                                        onChange={this.onChangeMax}
+
+                                        type="Number"
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, 'width')}>
                                         <i class="fa fa-caret-right"></i>
                                     </button>
                                 </div>
@@ -1528,43 +1545,29 @@ class Market extends Component {
                             <div className='filterDivs'>Height</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`minHeight`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Min Height',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Min"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>     
+
+                                    <input
+                                        onChange={this.onChangeMin}
+
+                                        type="Number"
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`maxHeight`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Max Height',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Max"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>  
+
+                                    <input
+                                        onChange={this.onChangeMax}
+
+                                        type="Number"
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "height")}>
                                         <i class="fa fa-caret-right"></i>
                                     </button>
                                 </div>
@@ -1572,91 +1575,62 @@ class Market extends Component {
                             <div className='filterDivs'>Traffic Count</div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`minTraffic`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Min Traffic',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Min"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>    
+
+                                    <input
+                                        onChange={this.onChangeMin}
+
+                                        type="Number"
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <Form.Item>
-                                            {getFieldDecorator(`maxTraffic`,{
-                                                // initialValue: this.state.width,
-                                                rules: [{
-                                                    required: true,
-                                                    message: 'Please enter Max Traffic',
-                                                    whitespace: true
-                                                },
-                                                { validator: this.validateNumber.bind(this) }]
-                                            })(
-                                                <Input
-                                                    placeholder="Max"
-                                                    className="marketFilter_Input"
-                                                />
-                                            )}
-                                    </Form.Item>    
+
+                                    <input
+                                        onChange={this.onChangeMax}
+
+                                        type="Number"
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+
                                 </div>
                                 <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "trafic")}>
                                         <i class="fa fa-caret-right"></i>
                                     </button>
                                 </div>
                             </div>
                             <div className='filterDivs'>Daily Visitor</div>
                             <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Form.Item>
-                                        {getFieldDecorator(`minVisitor`,{
-                                            // initialValue: this.state.width,
-                                            rules: [{
-                                                required: true,
-                                                message: 'Please enter Min Visitor',
-                                                whitespace: true
-                                            },
-                                            { validator: this.validateNumber.bind(this) }]
-                                        })(
-                                            <Input
-                                                placeholder="Min"
-                                                className="marketFilter_Input"
-                                            />
-                                        )}
-                                </Form.Item>   
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                    <input
+                                        onChange={this.onChangeMin}
+
+                                        type="Number"
+                                        placeholder="Min"
+                                        className="marketFilter_Input"
+                                    />
+
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <input
+                                        onChange={this.onChangeMax}
+
+                                        type="Number"
+                                        placeholder="Max"
+                                        className="marketFilter_Input"
+                                    />
+
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "visitor")}>
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Form.Item>
-                                    {getFieldDecorator(`maxVisitor`,{
-                                        // initialValue: this.state.width,
-                                        rules: [{
-                                            required: true,
-                                            message: 'Please enter Max Visitor',
-                                            whitespace: true
-                                        },
-                                        { validator: this.validateNumber.bind(this) }]
-                                    })(
-                                        <Input
-                                            placeholder="Max"
-                                            className="marketFilter_Input"
-                                        />
-                                    )}
-                                </Form.Item>    
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
                         </Form>
                         {/* </CheckboxGroup> */}
                     </div>
