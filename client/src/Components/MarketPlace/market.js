@@ -1214,12 +1214,19 @@ class Market extends Component {
         })
     }
 
-
+    validateNumber(rule, value, callback) {
+        if (isNaN(value)) {
+            callback('Please type Numbers');
+        } else {
+            callback()
+        }
+    }
 
     render() {
         const { filter } = this.props;
         // console.log(boardNames,'daniyal work');
         const { billboardData, billboardFilterdData, cities, states, i, category } = this.state;
+        const { getFieldDecorator } = this.props.form;
 
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
@@ -1422,15 +1429,227 @@ class Market extends Component {
                             </Row>
 
                         </div>
-                        <div className='filterDivs'>Pricing</div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={'Rs.'}
-                                    placeholder="Min"
-                                    className="marketFilter_Input"
-                                />
+                        <Form>
+                            <div className='filterDivs'>Pricing</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <Form.Item>
+                                            {getFieldDecorator(`minPrice`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Min Price',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                    <Form.Item>
+                                            {getFieldDecorator(`maxPrice`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Max Price',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Width</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`minWidth`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Min Width',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>    
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`maxWidth`, {
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Max Width',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>     
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Height</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`minHeight`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Min Height',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>     
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`maxHeight`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Max Height',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>  
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Traffic Count</div>
+                            <div className="row fasla1">
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`minTraffic`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Min Traffic',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>    
+                                </div>
+                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <Form.Item>
+                                            {getFieldDecorator(`maxTraffic`,{
+                                                // initialValue: this.state.width,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter Max Traffic',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+                                            )}
+                                    </Form.Item>    
+                                </div>
+                                <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button className="btn btn-primary">
+                                        <i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='filterDivs'>Daily Visitor</div>
+                            <div className="row fasla1">
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Form.Item>
+                                        {getFieldDecorator(`minVisitor`,{
+                                            // initialValue: this.state.width,
+                                            rules: [{
+                                                required: true,
+                                                message: 'Please enter Min Visitor',
+                                                whitespace: true
+                                            },
+                                            { validator: this.validateNumber.bind(this) }]
+                                        })(
+                                            <Input
+                                                placeholder="Min"
+                                                className="marketFilter_Input"
+                                            />
+                                        )}
+                                </Form.Item>   
+                            </div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                <Form.Item>
+                                    {getFieldDecorator(`maxVisitor`,{
+                                        // initialValue: this.state.width,
+                                        rules: [{
+                                            required: true,
+                                            message: 'Please enter Max Visitor',
+                                            whitespace: true
+                                        },
+                                        { validator: this.validateNumber.bind(this) }]
+                                    })(
+                                        <Input
+                                            placeholder="Max"
+                                            className="marketFilter_Input"
+                                        />
+                                    )}
+                                </Form.Item>    
                             </div>
                             <div className="col-12 col-md-2 col-lg-2 col-xl-2">
                                 <button className="btn btn-primary">
@@ -1438,109 +1657,7 @@ class Market extends Component {
                                 </button>
                             </div>
                         </div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={'Rs.'}
-                                    placeholder="Max"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='filterDivs'>Width</div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Input
-                                    placeholder="Min"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Input
-                                    placeholder="Max"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='filterDivs'>Height</div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Input
-                                    placeholder="Min"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <Input
-                                    placeholder="Max"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='filterDivs'>Traffic Count</div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={''}
-                                    placeholder="Min"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={''}
-                                    placeholder="Max"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='filterDivs'>Daily Visitor</div>
-                        <div className="row fasla1">
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={''}
-                                    placeholder="Min"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
-                                <NumberFormat
-                                    thousandSeparator={true}
-                                    prefix={''}
-                                    placeholder="Max"
-                                    className="marketFilter_Input"
-                                />
-                            </div>
-                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                <button className="btn btn-primary">
-                                    <i class="fa fa-caret-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                        </Form>
                         {/* </CheckboxGroup> */}
                     </div>
                     <div className="col-12 d-block d-sm-none">
