@@ -98,7 +98,7 @@ div.scroll_table a {
 
 .padInModal{
   padding-top: 3vw;
-  padding-bottom: 3vw;
+  padding-bottom: 2vw;
   background-color: #29abe2;
 }
 @media screen and (min-width: 360px) and (max-width: 767px){
