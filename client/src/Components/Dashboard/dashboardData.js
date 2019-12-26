@@ -410,8 +410,8 @@ class DashboardData extends Component {
                                     <div className="col-12 col-md-5 col-lg-5 col-xl-5">
                                         <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
                                     </div>
-                                    <Form onSubmit={this.handleSubmitMegaSale}>
-                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <Form onSubmit={this.handleSubmitMegaSale}>
                                             <div className="row">
                                                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                     <label className="modeLForm_labeL"> Actual Price :
@@ -596,9 +596,9 @@ class DashboardData extends Component {
                                                     {/* <button className="btn btn-primary">Submit</button> */}
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Form>    
-                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                                        </Form>    
+                                    </div>
+                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -620,8 +620,8 @@ class DashboardData extends Component {
                                     <div className="col-12 col-md-5 col-lg-5 col-xl-5">
                                         <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
                                     </div>
-                                    <Form onSubmit={this.handleSubmitBidding}>
-                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <Form onSubmit={this.handleSubmitBidding}>
                                             <div className="row">
                                                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                     <label className="modeLForm_timlable">From</label><br />
@@ -708,37 +708,37 @@ class DashboardData extends Component {
                                                 </div>
                                             </div>
                                             <div className="row" style={{ marginTop: '0.6vw' }}>
-                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <label className="modeLForm_labeL"> Min bid amount :
-                                                    <Form.Item>
-                                                            {getFieldDecorator(`minBidAmount`, {
-                                                                // initialValue: this.state.width,
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter Min bid amount ',
-                                                                    whitespace: true
-                                                                },
-                                                                { validator: this.validateNumber.bind(this) }]
-                                                            })(
-                                                                <Input
-                                                                    className="form-control modeLForm_Input"
-                                                                    placeholder="Discount price" />
-                                                            )}
-                                                        </Form.Item>
-                                                    {/* <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" /> */}
-                                                    </label>
-                                                </div>
-                                                <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right', marginTop: '2vw' }}>
-                                                    <Form.Item>
-                                                        <Button className="btn btn-primary"
-                                                            type="primary" htmlType="submit"
-                                                        >Submit</Button>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                <label className="modeLForm_labeL"> Min bid amount :
+                                                <Form.Item>
+                                                        {getFieldDecorator(`minBidAmount`, {
+                                                            // initialValue: this.state.width,
+                                                            rules: [{
+                                                                required: true,
+                                                                message: 'Please enter Min bid amount ',
+                                                                whitespace: true
+                                                            },
+                                                            { validator: this.validateNumber.bind(this) }]
+                                                        })(
+                                                            <Input
+                                                                className="form-control modeLForm_Input"
+                                                                placeholder="Discount price" />
+                                                        )}
                                                     </Form.Item>
-                                                    {/* <button className="btn btn-primary">Submit</button> */}
-                                                </div>
+                                                {/* <NumberFormat thousandSeparator={true} prefix={'Rs.'} className="form-control modeLForm_Input" placeholder="Min bid amount" /> */}
+                                                </label>
+                                            </div>
+                                            <div className="col-12 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: 'right', marginTop: '2vw' }}>
+                                                <Form.Item>
+                                                    <Button className="btn btn-primary"
+                                                        type="primary" htmlType="submit"
+                                                    >Submit</Button>
+                                                </Form.Item>
+                                                {/* <button className="btn btn-primary">Submit</button> */}
                                             </div>
                                         </div>
-                                    </Form>
+                                        </Form>
+                                    </div>
                                     <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                                 </div>
                             </div>
