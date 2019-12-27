@@ -276,7 +276,7 @@ class Megapanel1 extends Component {
                                 <div className="col-md-10"></div>
                                 <div className="col-md-2" style={{ textAlign: 'right' }}>
                                     {value ?
-                                        <button className="btn btn-primary" onClick={this.bookedBillboard} disabled >Book Now</button>
+                                        <button className="btn btn-primary" onClick={this.bookedBillboard} >Book Now</button>
                                         :
                                         <button className="btn btn-primary"  disabled >Book Now</button>}
                                 </div>
