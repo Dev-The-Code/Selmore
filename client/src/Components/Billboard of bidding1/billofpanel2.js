@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './billofbidding.css';
 import { HttpUtils } from '../../Services/HttpUtils';
+import NumberFormat from 'react-number-format';
 
 class Billofpanel2 extends Component {
 	constructor(props) {
@@ -91,19 +92,35 @@ class Billofpanel2 extends Component {
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
-										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.dailyRate}</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={billboardData.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+											{/* <span className="ufone4">Rs.{billboardData.dailyRate}</span> */}
+										</div>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
-										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.weeklyRate}</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={billboardData.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+											{/* <span className="ufone4">Rs.{billboardData.weeklyRate}</span> */}
+										</div>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
-										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.monthlyRate}</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={billboardData.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+											{/* <span className="ufone4">Rs.{billboardData.monthlyRate}</span> */}
+										</div>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
-										<div className="col-md-9 ufone6"><span className="ufone4">Rs.{billboardData.yearlyRate}</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={billboardData.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+											{/* <span className="ufone4">Rs.{billboardData.yearlyRate}</span> */}
+										</div>
 									</div>
 									<br />
 									{/*Third panel*/}
@@ -116,7 +133,11 @@ class Billofpanel2 extends Component {
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.dailyVisitor}</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={billboardData.dailyVisitor} displayType={'text'} thousandSeparator={true} />
+
+											{/* <span className="ufone4">{billboardData.dailyVisitor}</span> */}
+										</div>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
 										<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
@@ -161,7 +182,11 @@ class Billofpanel2 extends Component {
 													<tr>
 														<td>{key}</td>
 														<td>{elem.date} - {elem.time}</td>
-														<td>Rs.{elem.bidAamount}</td>
+														<td>
+															<NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+															{/* Rs.{elem.bidAamount} */}
+														</td>
 														<td>{elem.bidderId}</td>
 													</tr>
 												</tbody>

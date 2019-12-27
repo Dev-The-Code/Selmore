@@ -3,6 +3,7 @@ import './megaDetail.css';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
 import { HttpUtils } from '../../Services/HttpUtils';
+import NumberFormat from 'react-number-format';
 
 
 class Megapanel1 extends Component {
@@ -41,27 +42,27 @@ class Megapanel1 extends Component {
     bookedBillboard = () => {
         const { data, billboardData } = this.state;
         let bookedBillboard = [];
-		let booked = {}
-		let userDetail = JSON.parse(localStorage.getItem('userData'));
-		let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
-		booked.companyName = userDetail.companyName;
-		booked.companyId = userDetail._id;
-		booked.address = billboardData.address;
-		booked.city = billboardData.city;
-		booked.state = billboardData.state;
-		booked.billboardAmount = data.discountPrice;
-		
-		if(bookedMegaSaleBillboards == null || bookedMegaSaleBillboards == undefined){
-			bookedBillboard.push(booked)
-			localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
-		}
-		else{
-			for (var i = 0; i < bookedMegaSaleBillboards.length; i++) {
-				bookedBillboard.push(bookedMegaSaleBillboards[i])
-			}
-			bookedBillboard.push(booked)
-			localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
-		}
+        let booked = {}
+        let userDetail = JSON.parse(localStorage.getItem('userData'));
+        let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
+        booked.companyName = userDetail.companyName;
+        booked.companyId = userDetail._id;
+        booked.address = billboardData.address;
+        booked.city = billboardData.city;
+        booked.state = billboardData.state;
+        booked.billboardAmount = data.discountPrice;
+
+        if (bookedMegaSaleBillboards == null || bookedMegaSaleBillboards == undefined) {
+            bookedBillboard.push(booked)
+            localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+        }
+        else {
+            for (var i = 0; i < bookedMegaSaleBillboards.length; i++) {
+                bookedBillboard.push(bookedMegaSaleBillboards[i])
+            }
+            bookedBillboard.push(booked)
+            localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+        }
     }
 
     render() {
@@ -125,15 +126,25 @@ class Megapanel1 extends Component {
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Actual price</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">Rs.{data.actualPrice}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={data.actualPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">Rs.{data.actualPrice}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Discount price</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">Rs.{data.discountPrice}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={data.discountPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">Rs.{data.discountPrice}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Percentage of discount</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{data.percantageOffDisscount}%</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <span className="ufone4">{data.percantageOffDisscount}%</span>
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Billboard availibilty</span></div>
@@ -205,19 +216,35 @@ class Megapanel1 extends Component {
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{billboardData.dailyRate}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={billboardData.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">{billboardData.dailyRate}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{billboardData.weeklyRate}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={billboardData.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">{billboardData.weeklyRate}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{billboardData.monthlyRate}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={billboardData.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">{billboardData.monthlyRate}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{billboardData.yearlyRate}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={billboardData.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                    {/* <span className="ufone4">{billboardData.yearlyRate}</span> */}
+                                </div>
                             </div>
                             <br />
 
@@ -231,7 +258,11 @@ class Megapanel1 extends Component {
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-                                <div className="col-md-9 ufone6"><span className="ufone4">{billboardData.dailyVisitor}</span></div>
+                                <div className="col-md-9 ufone6">
+                                    <NumberFormat value={billboardData.dailyVisitor} displayType={'text'} thousandSeparator={true} />
+
+                                    {/* <span className="ufone4">{billboardData.dailyVisitor}</span> */}
+                                </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>

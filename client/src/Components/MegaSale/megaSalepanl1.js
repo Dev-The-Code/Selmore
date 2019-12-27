@@ -43,7 +43,7 @@ class MegaSalepanel1 extends Component {
 													<h4 class="card-title">{elem.billboardAddress},{ elem.billboardCity} </h4>
 													<h4 class="card-title"> </h4>
 
-													<p class="card-text megaPageText">Discount Upto <span className="megaPageTiming">{elem.percantageOffDisscount}</span></p>
+													<p class="card-text megaPageText">Discount Up to <span className="megaPageTiming">{elem.percantageOffDisscount}%</span></p>
 													<p class="card-text megaPageText">Sale availability : <br />From <span className="megaPageTiming">{elem.saleStartDate}</span> to
 												<span className="megaPageTiming"> {elem.saleEndDate}</span></p>
 													<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom}</span> to

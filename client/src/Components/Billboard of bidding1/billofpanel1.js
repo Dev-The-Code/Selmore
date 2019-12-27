@@ -19,6 +19,7 @@ class Billofpanel1 extends Component {
 	}
 
 	componentDidMount() {
+		const { monthName } = this.state;
 		let date = new Date().getDate();
 		let month = new Date().getMonth() + 1;
 		const year = new Date().getFullYear();
@@ -74,7 +75,7 @@ class Billofpanel1 extends Component {
 		}
 
 		this.setState({
-			todayDate: month + '-' + date + '-' + year,
+			todayDate: monthName[month] + '-' + date + '-' + year,
 			time: time,
 		})
 
@@ -258,11 +259,19 @@ class Billofpanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit5"><span className="doesit3">Current amount</span></div>
-								<div className="col-md-9 doesit6"><span className="doesit4">Rs. {lastBidAmount}</span></div>
+								<div className="col-md-9 doesit6">
+									<NumberFormat value={lastBidAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									{/* <span className="doesit4">Rs. {lastBidAmount}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit5"><span className="doesit3">Min.Bid</span></div>
-								<div className="col-md-9 doesit6"><span className="doesit4">Rs. {data.minBidAmount}</span></div>
+								<div className="col-md-9 doesit6">
+									<NumberFormat value={data.minBidAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									{/* <span className="doesit4">Rs. {data.minBidAmount}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit7"><span className="doesit3">Bid Start</span></div>

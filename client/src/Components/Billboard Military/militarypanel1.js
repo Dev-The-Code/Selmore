@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './billmilitary.css';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
+import NumberFormat from 'react-number-format';
 
 
 class Militarypanel1 extends Component {
@@ -45,12 +46,12 @@ class Militarypanel1 extends Component {
 		booked.state = data.state;
 		booked.booked = bookedFor;
 		booked.billboardAmount = billboardAmount;
-		
-		if(bookedAvalibleBillboards == null || bookedAvalibleBillboards == undefined){
+
+		if (bookedAvalibleBillboards == null || bookedAvalibleBillboards == undefined) {
 			bookedBillboard.push(booked)
 			localStorage.setItem('bookedAvalibleBillboards', JSON.stringify(bookedBillboard))
 		}
-		else{
+		else {
 			for (var i = 0; i < bookedAvalibleBillboards.length; i++) {
 				bookedBillboard.push(bookedAvalibleBillboards[i])
 			}
@@ -132,19 +133,35 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data.dailyRate}</span></div>
+								<div className="col-md-9 ufone6">
+									<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									{/* <span className="ufone4">{data.dailyRate}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data.weeklyRate}</span></div>
+								<div className="col-md-9 ufone6">
+									<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									{/* <span className="ufone4">{data.weeklyRate}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data.monthlyRate}</span></div>
+								<div className="col-md-9 ufone6">
+									<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									{/* <span className="ufone4">{data.monthlyRate}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data.yearlyRate}</span></div>
+								<div className="col-md-9 ufone6">
+									<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+									<span className="ufone4">{data.yearlyRate}</span>
+								</div>
 							</div>
 							<br />
 							{/*Third panel*/}
@@ -157,7 +174,11 @@ class Militarypanel1 extends Component {
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
-								<div className="col-md-9 ufone6"><span className="ufone4">{data.dailyVisitor}</span></div>
+								<div className="col-md-9 ufone6">
+									<NumberFormat value={data.dailyVisitor} displayType={'text'} thousandSeparator={true} />
+
+									{/* <span className="ufone4">{data.dailyVisitor}</span> */}
+								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Near By</span></div>
@@ -199,20 +220,32 @@ class Militarypanel1 extends Component {
 										<div class="modal-body">
 											<div className="row">
 												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-													<label class="checkdrn radio-inline">Rs.{data.dailyRate} (per day)
-															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} />
+													<label class="checkdrn radio-inline">
+														<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+														(per day)
+														{/* Rs.{data.dailyRate}  */}
+														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.{data.weeklyRate} (per week)
-															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} />
+													<label class="checkdrn radio-inline">
+														<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+														(per week)
+														{/* Rs.{data.weeklyRate} (per week) */}
+														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.{data.monthlyRate} (per month)
-															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} />
+													<label class="checkdrn radio-inline">
+														<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+														(per month)
+														{/* Rs.{data.monthlyRate} (per month) */}
+														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} />
 														<span class="checkmark"></span>
 													</label>
-													<label class="checkdrn radio-inline">Rs.{data.yearlyRate} (per year)
-															<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} />
+													<label class="checkdrn radio-inline">
+														<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+														(per year)
+														{/* Rs.{data.yearlyRate} (per year) */}
+														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} />
 														<span class="checkmark"></span>
 													</label>
 												</div>

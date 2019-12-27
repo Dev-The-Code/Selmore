@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './carts.css';
+import NumberFormat from 'react-number-format';
 
 class CartPanel1 extends Component {
     constructor(props) {
@@ -86,34 +87,16 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
                                                         <td className="tablee_th">One {elem.booked}</td>
-                                                        <td className="tablee_td">Rs.{elem.billboardAmount}</td>
+                                                        <td className="tablee_td">
+                                                        <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                                            {/* Rs.{elem.billboardAmount} */}
+                                                            </td>
                                                         {/* <td className="tablee_td">View</td> */}
                                                     </tr>
                                                 </tbody>
                                             )
                                         })}
-                                        {/* <tbody>
-                                            <tr>
-                                                <td className="tablee_th">0</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_th">10</td>
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                            <tr>
-                                                <td className="tablee_th">1</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_th">10</td>
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                        </tbody> */}
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -139,33 +122,16 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.address}</td>
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
-                                                        <td className="tablee_td">Rs.{elem.billboardAmount}</td>
+                                                        <td className="tablee_td">
+                                                        <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                                            {/* Rs.{elem.billboardAmount} */}
+                                                            </td>
                                                     </tr>
                                                 </tbody>
                                             )
                                         })}
-                                        {/* <tbody>
-                                            <tr>
-                                                <td className="tablee_th">0</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                {/* <td className="tablee_th">10</td> 
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                            <tr>
-                                                <td className="tablee_th">1</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                {/* <td className="tablee_th">10</td> 
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                        </tbody> */}
+                                      
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-bid" role="tabpanel" aria-labelledby="nav-bid-tab">
@@ -190,31 +156,15 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.address}</td>
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
-                                                        <td className="tablee_td">Rs.{elem.bidAamount}</td>
+                                                        <td className="tablee_td">
+                                                        <NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                                            {/* Rs.{elem.bidAamount} */}
+                                                            </td>
                                                     </tr>
                                                 </tbody>
                                             )
                                         })}
-                                        {/* <tbody>
-                                            <tr>
-                                                <td className="tablee_th">0</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                            <tr>
-                                                <td className="tablee_th">1</td>
-                                                <td className="tablee_td">Devan Motors</td>
-                                                <td className="tablee_td">devan motor front shahrah e faisal</td>
-                                                <td className="tablee_td">Karachi</td>
-                                                <td className="tablee_td">Sindh</td>
-                                                <td className="tablee_td">$2500</td>
-                                                {/* <td className="tablee_td">View</td> 
-                                            </tr>
-                                        </tbody> */}
                                     </table>
                                 </div>
                             </div>
