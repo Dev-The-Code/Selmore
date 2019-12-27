@@ -65,20 +65,17 @@ class Header extends Component {
                     <span className="navFont">MARKETPLACE</span>
                   </Link>
                 </li>
-                {value ?
+                
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/megaSale`}>
                       <span className="navFont"> MEGA SALE </span>
                     </Link>
                   </li>
-                  : null}
-                {value ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/bidding`}>
                       <span className="navFont"> BIDDING </span>
                     </Link>
                   </li>
-                  : null}
                 {adminUser !== null && adminUser.role == 'admin' ?
                   <li className="nav-item navmargin">
                     <Link rel="noopener noreferrer" to={`/users`}>

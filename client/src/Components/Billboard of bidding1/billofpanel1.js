@@ -199,6 +199,7 @@ class Billofpanel1 extends Component {
 	render() {
 		const { lastBidAmount, enterGreaterAmount, bidValue } = this.state;
 		const { data } = this.props;
+        const value = JSON.parse(localStorage.getItem("loggedIn"));
 
 		let image;
 		if (data.images && data.images.length > 0) {
@@ -244,8 +245,12 @@ class Billofpanel1 extends Component {
 							<div class="input-group">
 								<input type="Number" className="form-control kurta3" placeholder="Enter bid price" value={bidValue} onChange={this.onChange} />
 								<div className="input-group-append">
+									{value? 
 									<button type="button" className="btn btn-primary" onClick={this.bidingAmount}><span>Bid</span></button>
-								</div>
+										:
+										<button type="button" className="btn btn-primary" disabled><span>Bid</span></button>
+									}
+									</div>
 							</div>
 						</div>
 						<div className="col-md-4"></div>

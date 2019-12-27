@@ -68,6 +68,9 @@ class Megapanel1 extends Component {
     render() {
         const { data, billboardData } = this.state;
         let image;
+        const value = JSON.parse(localStorage.getItem("loggedIn"));
+		console.log(value, 'value')
+
         if (data.images && data.images.length > 0) {
             image = data.images.map((elem, key) => {
                 if (key == 0) {
@@ -272,7 +275,10 @@ class Megapanel1 extends Component {
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-10"></div>
                                 <div className="col-md-2" style={{ textAlign: 'right' }}>
-                                    <button className="btn btn-primary" onClick={this.bookedBillboard}>Book Now</button>
+                                    {value ?
+                                        <button className="btn btn-primary" onClick={this.bookedBillboard} disabled >Book Now</button>
+                                        :
+                                        <button className="btn btn-primary"  disabled >Book Now</button>}
                                 </div>
                             </div>
                             <br />

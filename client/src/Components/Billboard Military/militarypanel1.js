@@ -66,6 +66,7 @@ class Militarypanel1 extends Component {
 		const { data, images, center } = this.state;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
+		const valueUser = JSON.parse(localStorage.getItem("loggedIn"));
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
 				if (key == 0) {
@@ -160,7 +161,7 @@ class Militarypanel1 extends Component {
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
-									<span className="ufone4">{data.yearlyRate}</span>
+									{/* <span className="ufone4">{data.yearlyRate}</span> */}
 								</div>
 							</div>
 							<br />
@@ -208,14 +209,22 @@ class Militarypanel1 extends Component {
 							<br />
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-9"></div>
-								<div className="col-md-3"><button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button></div>
+								<div className="col-md-3">
+									{valueUser ?
+										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button>
+										:
+										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Book Now</button>
+									}
+								</div>
 							</div>
 							<div class="modal" id="myBillBook">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">Book Now</h4>
+
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
+
 										</div>
 										<div class="modal-body">
 											<div className="row">
@@ -254,6 +263,7 @@ class Militarypanel1 extends Component {
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary" data-dismiss="modal"
 												onClick={this.bookedBillboard}>Submit</button>
+
 										</div>
 									</div>
 								</div>
