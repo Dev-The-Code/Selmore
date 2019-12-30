@@ -342,9 +342,9 @@ class Billofpanel1 extends Component {
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit5"><span className="doesit3">Min.Bid</span></div>
 								<div className="col-md-9 doesit6">
-									<NumberFormat value={data.minBidAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+									{/* <NumberFormat value={data.minBidAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} /> */}
 
-									{/* <span className="doesit4">Rs. {data.minBidAmount}</span> */}
+									<span className="doesit4">Not Met</span>
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
