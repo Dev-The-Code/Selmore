@@ -4,6 +4,8 @@ import Location from './googlemap';
 import { Link } from "react-router-dom";
 import { HttpUtils } from '../../Services/HttpUtils';
 import NumberFormat from 'react-number-format';
+import moment from 'moment';
+import './coundown.css';
 
 
 class Megapanel1 extends Component {
@@ -13,7 +15,12 @@ class Megapanel1 extends Component {
             data: '',
             billboardData: '',
             admin: false,
-            center: null
+            center: null,
+            days: undefined,
+            hours: undefined,
+            minutes: undefined,
+            seconds: undefined,
+            mapFalse: true
         }
     }
 
@@ -22,21 +29,41 @@ class Megapanel1 extends Component {
 
     }
 
+    componentWillMount() {
+        this.countdownTime()
+    }
+
+    componentWillUnmount() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+    }
+
+    countdownTime = () => {
+        this.interval = setInterval(() => {
+            let data = this.props.data;
+            let saleData = data.megasaleDetail
+            let timeTillDateStart = `${`${saleData.saleEndDate}, ${saleData.saleEndTime}`}`;
+            const now = moment();
+            const then = moment(timeTillDateStart);
+            const countdown = moment(then - now);
+            const days = countdown.format('D');
+            const hours = countdown.format('HH');
+            const minutes = countdown.format('mm');
+            const seconds = countdown.format('ss');
+            this.setState({ days, hours, minutes, seconds });
+        }, 1000);
+    }
+
     billboardData = async () => {
         let data = this.props.data;
         if (data != undefined) {
-            let obj = {
-                id: data.billboardId
-            }
-            let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
-            if (response.code == 200) {
-                this.setState({
-                    data: data,
-                    billboardData: response.content[0]
-                })
-
-            }
+            this.setState({
+                data: data.megasaleDetail,
+                billboardData: data.bilboardDetail
+            })
         }
+
     }
 
     bookedBillboard = () => {
@@ -65,11 +92,27 @@ class Megapanel1 extends Component {
         }
     }
 
+    mapfalse = (param) => {
+        this.setState({
+            mapFalse: param,
+        })
+    }
+
     render() {
-        const { data, billboardData } = this.state;
+        const { data, billboardData, days, hours, minutes, seconds, mapFalse } = this.state;
+
+        // Mapping the date values to radius values
+        const daysRadius = mapNumber(days, 30, 0, 0, 360);
+        const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
+        const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
+        const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
+
+        if (!seconds) {
+            return null;
+        }
+
         let image;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
-		console.log(value, 'value')
 
         if (data.images && data.images.length > 0) {
             image = data.images.map((elem, key) => {
@@ -93,37 +136,41 @@ class Megapanel1 extends Component {
                         <div className="col-md-10">
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-12">
-                                    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-                                        <div className="carousel-inner">
-                                            {image}
-                                        </div>
-                                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Previous</span>
-                                        </a>
-                                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span className="sr-only">Next</span>
-                                        </a>
+                                    <h1>Countdown</h1>
+                                    <div className="countdown-wrapper">
+                                        {days && (
+                                            <div className="countdown-item">
+                                                <SVGCircle radius={daysRadius} />
+                                                {days}
+                                                <span>days</span>
+                                            </div>
+                                        )}
+                                        {hours && (
+                                            <div className="countdown-item">
+                                                <SVGCircle radius={hoursRadius} />
+                                                {hours}
+                                                <span>hours</span>
+                                            </div>
+                                        )}
+                                        {minutes && (
+                                            <div className="countdown-item">
+                                                <SVGCircle radius={minutesRadius} />
+                                                {minutes}
+                                                <span>minutes</span>
+                                            </div>
+                                        )}
+                                        {seconds && (
+                                            <div className="countdown-item">
+                                                <SVGCircle radius={secondsRadius} />
+                                                {seconds}
+                                                <span>seconds</span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                            </div><br />
-                            <div className="row" style={{ margin: '0px' }}>
-                                <div className="col-md-2"></div>
-                                <div className="col-md-8">
-                                    <div className="kurta1">
-                                        {billboardData && <Location
-                                            address={billboardData.address}
-                                            latitude={billboardData.latitude}
-                                            longitude={billboardData.longitude}
-                                        />
-                                        }
-                                        {/* <h3 className="kurta2">MAP</h3> */}
-                                    </div>
-                                </div>
-                                <div className="col-md-2"></div>
                             </div><br />
                             {/*first panel1*/}
+
                             <div className="row ufone1" style={{ margin: '0px', backgroundColor: 'black' }}>
                                 <span className="ufone2">Military Road {data.billboardCity} City Sale Detail</span>
                             </div>
@@ -131,16 +178,12 @@ class Megapanel1 extends Component {
                                 <div className="col-md-3 ufone5"><span className="ufone3">Actual price</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={data.actualPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">Rs.{data.actualPrice}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Discount price</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={data.discountPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">Rs.{data.discountPrice}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
@@ -166,6 +209,40 @@ class Megapanel1 extends Component {
                                 <div className="col-md-9 ufone6"><span className="ufone4">10 hour 10 mins 10 second</span></div>
                             </div> */}
                             <br />
+                            <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-12">
+                                    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+                                        <div className="carousel-inner">
+                                            {image}
+                                        </div>
+                                        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="sr-only">Previous</span>
+                                        </a>
+                                        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><br />
+                            {/* <div className="row" style={{ margin: '0px' }}>
+                                <div className="col-md-2"></div>
+                                <div className="col-md-8">
+                                    <div className="kurta1">
+                                        {billboardData && <Location
+                                            address={billboardData.address}
+                                            latitude={billboardData.latitude}
+                                            longitude={billboardData.longitude}
+                                            mapfalse={this.mapfalse}
+                                            mapFalse={mapFalse}
+                                        />
+                                        }
+                                    </div>
+                                </div>
+                                <div className="col-md-2"></div>
+                            </div><br /> */}
+
                             {/*second panel*/}
                             <div className="row ufone1" style={{ margin: '0px' }}>
                                 <span className="ufone2">Military Road City Demographics</span>
@@ -221,32 +298,24 @@ class Megapanel1 extends Component {
                                 <div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={billboardData.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">{billboardData.dailyRate}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={billboardData.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">{billboardData.weeklyRate}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={billboardData.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">{billboardData.monthlyRate}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={billboardData.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                    {/* <span className="ufone4">{billboardData.yearlyRate}</span> */}
                                 </div>
                             </div>
                             <br />
@@ -263,8 +332,6 @@ class Megapanel1 extends Component {
                                 <div className="col-md-3 ufone5"><span className="ufone3">Daily Visitor</span></div>
                                 <div className="col-md-9 ufone6">
                                     <NumberFormat value={billboardData.dailyVisitor} displayType={'text'} thousandSeparator={true} />
-
-                                    {/* <span className="ufone4">{billboardData.dailyVisitor}</span> */}
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
@@ -278,7 +345,7 @@ class Megapanel1 extends Component {
                                     {value ?
                                         <button className="btn btn-primary" onClick={this.bookedBillboard} >Book Now</button>
                                         :
-                                        <button className="btn btn-primary"  disabled >Book Now</button>}
+                                        <button className="btn btn-primary" disabled >Book Now</button>}
                                 </div>
                             </div>
                             <br />
@@ -301,3 +368,54 @@ class Megapanel1 extends Component {
     }
 }
 export default Megapanel1;
+
+const SVGCircle = ({ radius }) => (
+    <svg className="countdown-svg">
+        <path
+            fill="none"
+            stroke="#333"
+            stroke-width="4"
+        // d={describeArc(50, 50, 48, 0, radius)}
+        />
+    </svg>
+);
+
+// From StackOverflow: https://stackoverflow.cm/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+
+    return {
+        x: centerX + radius * Math.cos(angleInRadians),
+        y: centerY + radius * Math.sin(angleInRadians)
+    };
+}
+
+function describeArc(x, y, radius, startAngle, endAngle) {
+    var start = polarToCartesian(x, y, radius, endAngle);
+    var end = polarToCartesian(x, y, radius, startAngle);
+    var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+    var d = [
+        'M',
+        start.x,
+        start.y,
+        'A',
+        radius,
+        radius,
+        0,
+        largeArcFlag,
+        0,
+        end.x,
+        end.y
+    ].join(' ');
+
+    return d;
+}
+
+// From StackOverflow: https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+
+function mapNumber(number, in_min, in_max, out_min, out_max) {
+    return (
+        ((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+    );
+}

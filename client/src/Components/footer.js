@@ -33,9 +33,6 @@ let quicklinksObject = {
 class Footer extends Component {
 
   render() {
-		console.log(aboutObject,'about');
-		console.log(connectObject,'connect');
-		console.log(quicklinksObject,'quicklinks');
     return (
         <div>
       		<div className="container true3">

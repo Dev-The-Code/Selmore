@@ -7,7 +7,7 @@ class Location extends Component {
             coords: null,
             showingInfoWindow: true,
             activeMarker: '',
-            position: null
+            position: null,
         };
         this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     }
@@ -17,16 +17,19 @@ class Location extends Component {
     setPosition() {
         let latitude = Number(this.props.latitude)
         let longitude = Number(this.props.longitude)
-        console.log(this.props.latitude , 'latitude')
-        console.log(this.props.longitude , 'longitude')
-
-        this.setState({
-            coords:
-            {
-                latitude: latitude,
-                longitude: longitude,
-            },
-        });
+        let mapFalse = this.props.mapFalse;
+        if (mapFalse) {
+            console.log(mapFalse, 'mapFalse')
+            this.setState({
+                coords:
+                {
+                    latitude: latitude,
+                    longitude: longitude,
+                    mapFalse: false
+                },
+            });
+        }
+        this.props.mapfalse(false)
     }
 
 
@@ -39,12 +42,11 @@ class Location extends Component {
 
     render() {
         const { coords } = this.state;
-        console.log(coords , 'coords')
         const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
             <GoogleMap
-            defaultCenter ={{ lat: props.coords.latitude, lng: props.coords.longitude }}
-            defaultZoom={12}
+                defaultCenter={{ lat: props.coords.latitude, lng: props.coords.longitude }}
+                defaultZoom={12}
             >
                 {props.isMarkerShown && <Marker
                     position={{ lat: props.coords.latitude, lng: props.coords.longitude }}

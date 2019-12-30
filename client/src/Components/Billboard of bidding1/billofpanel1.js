@@ -3,6 +3,7 @@ import Popform from '../Popform/popform';
 import NumberFormat from 'react-number-format';
 import './billofbidding.css';
 import { HttpUtils } from '../../Services/HttpUtils';
+import moment from 'moment';
 
 class Billofpanel1 extends Component {
 	constructor(props) {
@@ -14,7 +15,11 @@ class Billofpanel1 extends Component {
 			todayDate: '',
 			time: '',
 			monthName: ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-			billboardData: []
+			billboardData: [],
+			days: undefined,
+			hours: undefined,
+			minutes: undefined,
+			seconds: undefined,
 		}
 	}
 
@@ -81,6 +86,7 @@ class Billofpanel1 extends Component {
 
 		this.lastBidingAmount()
 		this.billboardData()
+		this.countdownTime()
 	}
 
 	lastBidingAmount = () => {
@@ -196,10 +202,37 @@ class Billofpanel1 extends Component {
 		})
 	}
 
+	componentWillUnmount() {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+	}
+
+	countdownTime = () => {
+		this.interval = setInterval(() => {
+			let data = this.props.data;
+			let timeTillDateStart = `${`${data.biddingEndDate}, ${data.biddingEndTime}`}`;
+			const now = moment();
+			const then = moment(timeTillDateStart);
+			const countdown = moment(then - now);
+			const days = countdown.format('D');
+			const hours = countdown.format('HH');
+			const minutes = countdown.format('mm');
+			const seconds = countdown.format('ss');
+			this.setState({ days, hours, minutes, seconds });
+		}, 1000);
+	}
+
 	render() {
-		const { lastBidAmount, enterGreaterAmount, bidValue } = this.state;
+		const { lastBidAmount, enterGreaterAmount, bidValue, days, hours, minutes, seconds, } = this.state;
 		const { data } = this.props;
-        const value = JSON.parse(localStorage.getItem("loggedIn"));
+		// Mapping the date values to radius values
+		const daysRadius = mapNumber(days, 30, 0, 0, 360);
+		const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
+		const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
+		const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
+
+		const value = JSON.parse(localStorage.getItem("loggedIn"));
 
 		let image;
 		if (data.images && data.images.length > 0) {
@@ -220,6 +253,42 @@ class Billofpanel1 extends Component {
 			<div>
 				<div className="container">
 					{enterGreaterAmount ? alert("Please Enter Greater amount from current bid amount") : null}
+
+					<div className="row" style={{ margin: '0px' }}>
+						<div className="col-md-12">
+							<h1>Countdown</h1>
+							<div className="countdown-wrapper">
+								{days && (
+									<div className="countdown-item">
+										<SVGCircle radius={daysRadius} />
+										{days}
+										<span>days</span>
+									</div>
+								)}
+								{hours && (
+									<div className="countdown-item">
+										<SVGCircle radius={hoursRadius} />
+										{hours}
+										<span>hours</span>
+									</div>
+								)}
+								{minutes && (
+									<div className="countdown-item">
+										<SVGCircle radius={minutesRadius} />
+										{minutes}
+										<span>minutes</span>
+									</div>
+								)}
+								{seconds && (
+									<div className="countdown-item">
+										<SVGCircle radius={secondsRadius} />
+										{seconds}
+										<span>seconds</span>
+									</div>
+								)}
+							</div>
+						</div>
+					</div><br />
 					<div className="row" style={{ margin: '0px', marginBottom: '1vw' }}>
 						<div className="col-md-1"></div>
 						<div className="col-md-10">
@@ -245,12 +314,12 @@ class Billofpanel1 extends Component {
 							<div class="input-group">
 								<input type="Number" className="form-control kurta3" placeholder="Enter bid price" value={bidValue} onChange={this.onChange} />
 								<div className="input-group-append">
-									{value? 
-									<button type="button" className="btn btn-primary" onClick={this.bidingAmount}><span>Bid</span></button>
+									{value ?
+										<button type="button" className="btn btn-primary" onClick={this.bidingAmount}><span>Bid</span></button>
 										:
 										<button type="button" className="btn btn-primary" disabled><span>Bid</span></button>
 									}
-									</div>
+								</div>
 							</div>
 						</div>
 						<div className="col-md-4"></div>
@@ -299,3 +368,55 @@ class Billofpanel1 extends Component {
 	}
 }
 export default Billofpanel1;
+
+
+const SVGCircle = ({ radius }) => (
+	<svg className="countdown-svg">
+		<path
+			fill="none"
+			stroke="#333"
+			stroke-width="4"
+			// d={describeArc(50, 50, 48, 0, radius)}
+		/>
+	</svg>
+);
+
+// From StackOverflow: https://stackoverflow.cm/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+	var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+
+	return {
+		x: centerX + radius * Math.cos(angleInRadians),
+		y: centerY + radius * Math.sin(angleInRadians)
+	};
+}
+
+function describeArc(x, y, radius, startAngle, endAngle) {
+	var start = polarToCartesian(x, y, radius, endAngle);
+	var end = polarToCartesian(x, y, radius, startAngle);
+	var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+	var d = [
+		'M',
+		start.x,
+		start.y,
+		'A',
+		radius,
+		radius,
+		0,
+		largeArcFlag,
+		0,
+		end.x,
+		end.y
+	].join(' ');
+
+	return d;
+}
+
+// From StackOverflow: https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+
+function mapNumber(number, in_min, in_max, out_min, out_max) {
+	return (
+		((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+	);
+}

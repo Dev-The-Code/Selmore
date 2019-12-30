@@ -10,6 +10,7 @@ import Megapanel2 from './megaDetailPanel2';
 class MegaDetail extends Component {
 	
 	componentWillMount() {
+		console.log(this.props , 'this.props')
 		window.scrollTo(0, 0);
 	}
 	render() {
