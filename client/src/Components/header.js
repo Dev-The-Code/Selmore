@@ -135,7 +135,7 @@ class Header extends Component {
                     </button>
                     <div class="modal fade" id="myModal">
                       <div class="modal-dialog" style={{ marginRight: '49.5%' }}>
-                        <div class="modal-content" style={{ width: '200%', height: '600px' }}>
+                        <div class="modal-content" style={{ width: '200%' }}>
                           <div class="modal-header">
                             <h4 class="modal-title">Login</h4>
                             <button type="button" class="close" data-dismiss='modal'>&times;</button>

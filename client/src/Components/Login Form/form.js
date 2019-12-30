@@ -170,7 +170,7 @@ class FormLogin extends Component {
                   </div>
                   <p style={{ marginTop: '-4%' }}><span className="school8">Forget Password!?</span></p>
                   <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
-                  <p onClick={this.CreateUserForm} className="" style={{ margin: '1vw 0px 0px' }}>
+                  <p onClick={this.CreateUserForm} className="" style={{ margin: '1vw 0px 3vw' }}>
                     <span className="alreadyAcontText">Create Account ?</span>
                   </p>
                   <br />
@@ -183,7 +183,7 @@ class FormLogin extends Component {
                 </Form>
                 </div>
                 :
-                <div className="col-md-5" style={{marginTop:'2vw'}}>
+                <div className="col-md-5" style={{marginTop:'5vw'}}>
                   <Form onSubmit={this.handleSubmitSingUp} className="login-form">
 
                     <div className="row">
@@ -323,10 +323,10 @@ class FormLogin extends Component {
                         </Form.Item>
                       </div>
                     </div><br />
-                    <div className="row" style={{marginTop:'-1.5vw'}}>
+                    <div className="row" style={{marginTop:'-0.5vw'}}>
                       <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                         <button type="submit" className="btn btn-primary"><span className="school5">Sign Up</span></button>
-                        <p className="" style={{ margin: '1vw 0px 0px' }}>
+                        <p className="" style={{ margin: '1vw 0px 3vw' }}>
                           <span className="alreadyAcontTextSignup">Already have an account ?</span><span className="SignInformText" onClick={this.alreadyHaveacount}>Sign In</span>
                         </p>
                       </div>
