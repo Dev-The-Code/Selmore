@@ -93,10 +93,9 @@ class Login extends Component {
                                 </div>
                                 {this.props.isAlert ?
                                     <div class="alert alert-danger" role="alert">
-                                        Please cheak your email or password
+                                        {this.props.mgs}
                                     </div>
-                                    : null
-                                }
+                                    : null}
 
                             </Form>
                         </div>
@@ -170,7 +169,7 @@ class Login extends Component {
                                 <br />
                                 {this.props.isAlert ?
                                     <div class="alert alert-danger" role="alert">
-                                        Please cheak your email or password
+                                        {this.props.mgs}
                                     </div>
                                     : null}
                             </Form>

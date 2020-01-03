@@ -20,6 +20,7 @@ class FormLogin extends Component {
       isLoader: false,
       isAlert: false,
       createAcountform: true,
+      mgs: ''
     }
   }
 
@@ -37,6 +38,7 @@ class FormLogin extends Component {
     })
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
+    console.log(response, 'response')
     try {
       if (response.code === 200) {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
@@ -44,42 +46,58 @@ class FormLogin extends Component {
         localStorage.setItem('userName', JSON.stringify(response.companyName))
         localStorage.setItem('userData', JSON.stringify(response))
         this.setState({ isLoader: false });
+        document.getElementById('closss').click();
+        this.props.showDropDown();
       } else {
-        this.setState({ isLoader: true })
+        console.log(response.msg ,'response.msg')
+        this.setState({
+          isLoader: false,
+          mgs: response.msg
+        })
       }
-      document.getElementById('closss').click();
-      this.props.showDropDown();
     }
     catch (error) {
       //error handling if user enter wrong email or password
       if (response === undefined) {
         this.setState({
           isAlert: true,
-          isLoader: false
+          isLoader: false,
+          mgs: ' Please cheak your email or password'
         })
       }
     }
   }
 
   fectSignUpApiFunc = async (values) => {
-    console.log(values , 'values')
+    console.log(values, 'values')
     this.setState({
       isLoader: true
     })
     let role = "buyer";
     values.role = role;
     let response = await HttpUtils.post('signup', values);
+    console.log(response, 'response')
+
     try {
       if (response.code === 200) {
         this.setState({
           isLoader: false,
           createAcountform: true
         });
-      } else {
-        this.setState({ isLoader: true })
       }
+      else{
+        console.log('else')
+        this.setState({
+          isAlert:true,
+          mgs:response.error,
+          isLoader:false,
+        })
+      }
+      // else {
+      //   this.setState({ isLoader: true })
+      // }
       // document.getElementById('closss').click();
-      this.props.showDropDown();
+      // this.props.showDropDown();
     }
     catch (error) {
       //error handling if user enter wrong email or password
@@ -95,7 +113,7 @@ class FormLogin extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoader, isAlert, createAcountform } = this.state
+    const { isLoader, isAlert, createAcountform, mgs } = this.state
     return (
       <div className="container">
         <div className="d-none d-sm-block">
@@ -109,12 +127,12 @@ class FormLogin extends Component {
                 ?
                 <div>
                   <LoginForm CreateUserForm={this.CreateUserForm} fectSignInApiFunc={this.fectSignInApiFunc}
-                    isLoader={isLoader} isAlert={isAlert} />
+                    isLoader={isLoader} isAlert={isAlert} mgs={mgs} />
                 </div>
                 :
                 <div>
                   <SingUPForm alreadyHaveacount={this.alreadyHaveacount} fectSignUpApiFunc={this.fectSignUpApiFunc}
-                    isLoader={isLoader} isAlert={isAlert} />
+                    isLoader={isLoader} isAlert={isAlert}  mgs={mgs}/>
                 </div>
               }
             </div>

@@ -256,6 +256,11 @@ class SingUpForm extends Component {
                                             </p>
                                         </div>
                                     </div>
+                                    {this.props.isAlert ?
+                                        <div class="alert alert-danger" role="alert">
+                                            {this.props.mgs}
+                                        </div>
+                                        : null}
                                 </Form>
                                 {this.props.isLoader ? <div class="loading"> 	</div>
                                     : null
@@ -420,7 +425,11 @@ class SingUpForm extends Component {
                                         </p>
                                     </div>
                                 </div>
-
+                                {this.props.isAlert ?
+                                    <div class="alert alert-danger" role="alert">
+                                        {this.props.mgs}
+                                    </div>
+                                    : null}
                             </Form>
                         </div>
 
