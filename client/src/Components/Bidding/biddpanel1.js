@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './bidding.css';
 import { Link } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
+import moment from 'moment';
 
 class Biddpanel1 extends Component {
 	constructor(props) {
@@ -15,18 +16,49 @@ class Biddpanel1 extends Component {
 		this.getBiddingBillboard()
 	}
 
+	componentWillUnmount() {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+	}
+
 	getBiddingBillboard = async () => {
 		let response = await HttpUtils.get('getbiddingbillboard');
 		console.log(response, 'response')
+		let biddingBillboards = []
 		if (response.code == 200) {
-			this.setState({
-				biddingBillboards: response.content
-			})
+			this.interval = setInterval(() => {
+				let data = response.content;
+				data.map((elem, key) => {
+					let elemObj = elem;
+					let timeTillDateStart = `${`${elemObj.biddingEndDate}, ${elemObj.biddingEndTime}`}`;
+					const now = moment();
+					const then = moment(timeTillDateStart);
+					const countdown = moment(then - now);
+					const days = countdown.format('D');
+					const hours = countdown.format('HH');
+					const minutes = countdown.format('mm');
+					const seconds = countdown.format('ss');
+					elemObj.days = days;
+					elemObj.hours = hours;
+					elemObj.minutes = minutes;
+					elemObj.seconds = seconds;
+					biddingBillboards.push(elemObj)
+					console.log(elemObj, 'elemObj');
+				})
+				console.log(biddingBillboards, 'MegaSaleBillboards')
+				this.setState({
+					biddingBillboards: biddingBillboards
+				})
+				biddingBillboards = [];
+			}, 1000);
+			// this.setState({
+			// 	biddingBillboards: response.content
+			// })
 		}
 	}
 	render() {
 		const { biddingBillboards } = this.state;
-		console.log(biddingBillboards, 'biddingBillboards')
 		return (
 			<div>
 				<div className="container">
@@ -39,9 +71,16 @@ class Biddpanel1 extends Component {
 										<div class="card-body">
 											<h4 class="card-title">{elem.billboardAddress}, {elem.billboardCity}</h4>
 											<h4 class="card-title"> </h4>
-											<p class="card-text">Bidding availability : <br />From
-									<span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span> to
-									<span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span></p>
+											<p class="card-text">Bidding Time Remaining :
+											<br />
+												<span className="bidTiming"> {elem.days}</span> DAYS
+													<span className="bidTiming"> {elem.hours}</span> HOURS
+													<span className="bidTiming"> {elem.minutes}</span> MINUTES
+													<br />
+													<span className="bidTiming"> {elem.seconds}</span> SECONDS
+											{/* From <span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span> 
+											to <span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span> */}
+											</p>
 											<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
 												<button class="btn btn-primary">
 													Start Bidding
