@@ -24,7 +24,6 @@ class Biddpanel1 extends Component {
 
 	getBiddingBillboard = async () => {
 		let response = await HttpUtils.get('getbiddingbillboard');
-		console.log(response, 'response')
 		let biddingBillboards = []
 		if (response.code == 200) {
 			this.interval = setInterval(() => {
@@ -34,19 +33,24 @@ class Biddpanel1 extends Component {
 					let timeTillDateStart = `${`${elemObj.biddingEndDate}, ${elemObj.biddingEndTime}`}`;
 					const now = moment();
 					const then = moment(timeTillDateStart);
-					const countdown = moment(then - now);
-					const days = countdown.format('D');
-					const hours = countdown.format('HH');
-					const minutes = countdown.format('mm');
-					const seconds = countdown.format('ss');
-					elemObj.days = days;
-					elemObj.hours = hours;
-					elemObj.minutes = minutes;
-					elemObj.seconds = seconds;
+					// const countdown = moment(then - now);
+					// const days = countdown.format('D');
+					// const hours = countdown.format('HH');
+					// const minutes = countdown.format('mm');
+					// const seconds = countdown.format('ss');
+					// elemObj.days = days;
+					// elemObj.hours = hours;
+					// elemObj.minutes = minutes;
+					// elemObj.seconds = seconds;
+
+					var totalSec = then.diff(now, 'seconds');
+					var hours = parseInt(totalSec / 3600);
+					var minutes = parseInt(totalSec / 60) % 60;
+					var seconds = totalSec % 60;
+					var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+					elemObj.calculateTime = calculateTime;
 					biddingBillboards.push(elemObj)
-					console.log(elemObj, 'elemObj');
 				})
-				console.log(biddingBillboards, 'MegaSaleBillboards')
 				this.setState({
 					biddingBillboards: biddingBillboards
 				})
@@ -71,13 +75,15 @@ class Biddpanel1 extends Component {
 										<div class="card-body">
 											<h4 class="card-title">{elem.billboardAddress}, {elem.billboardCity}</h4>
 											<h4 class="card-title"> </h4>
-											<p class="card-text">Bidding Time Remaining :
-											<br />
+											<p class="card-text">DEAL EXPIRE IN: 
+											<span className="bidTiming"> {`${elem.calculateTime}`}</span>
+
+											{/* <br />
 												<span className="bidTiming"> {elem.days}</span> DAYS
 													<span className="bidTiming"> {elem.hours}</span> HOURS
 													<span className="bidTiming"> {elem.minutes}</span> MINUTES
 													<br />
-													<span className="bidTiming"> {elem.seconds}</span> SECONDS
+													<span className="bidTiming"> {elem.seconds}</span> SECONDS */}
 											{/* From <span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span> 
 											to <span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span> */}
 											</p>

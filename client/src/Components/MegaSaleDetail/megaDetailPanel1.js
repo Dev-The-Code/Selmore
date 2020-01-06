@@ -46,11 +46,18 @@ class Megapanel1 extends Component {
             let timeTillDateStart = `${`${saleData.saleEndDate}, ${saleData.saleEndTime}`}`;
             const now = moment();
             const then = moment(timeTillDateStart);
-            const countdown = moment(then - now);
-            const days = countdown.format('D');
-            const hours = countdown.format('HH');
-            const minutes = countdown.format('mm');
-            const seconds = countdown.format('ss');
+            // const countdown = moment(then - now);
+            // const days = countdown.format('D');
+            // const hours = countdown.format('HH');
+            // const minutes = countdown.format('mm');
+            // const seconds = countdown.format('ss');
+            // // var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+            let duration = moment.duration(then.diff(now))
+            const days = (duration._data.days < 10 ? "0" + duration._data.days : duration._data.days);
+            const hours = (duration._data.hours < 10 ? "0" + duration._data.hours : duration._data.hours);
+            const minutes =(duration._data.minutes < 10 ? "0" + duration._data.minutes : duration._data.minutes);
+            const seconds = (duration._data.seconds < 10 ? "0" + duration._data.seconds : duration._data.seconds);
             this.setState({ days, hours, minutes, seconds });
         }, 1000);
     }

@@ -39,28 +39,27 @@ class MegaSalepanel1 extends Component {
 					let timeTillDateStart = `${`${elemObj.saleEndDate}, ${elemObj.saleEndTime}`}`;
 					const now = moment();
 					const then = moment(timeTillDateStart);
-					const countdown = moment(then - now);
-					const days = countdown.format('D');
-					const hours = countdown.format('HH');
-					const minutes = countdown.format('mm');
-					const seconds = countdown.format('ss');
-					elemObj.days = days;
-					elemObj.hours = hours;
-					elemObj.minutes = minutes;
-					elemObj.seconds = seconds;
+					// const countdown = moment(then - now);
+					// const days = countdown.format('D');
+					// const hours = countdown.format('HH');
+					// const minutes = countdown.format('mm');
+					// const seconds = countdown.format('ss');
+					// elemObj.minutes = minutes;
+					// elemObj.seconds = seconds;
+					
+					var totalSec = then.diff(now, 'seconds');
+					var hours = parseInt(totalSec / 3600);
+					var minutes = parseInt(totalSec / 60) % 60;
+					var seconds = totalSec % 60;
+					var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+					elemObj.calculateTime = calculateTime;
 					MegaSaleBillboards.push(elemObj)
-					console.log(elemObj, 'elemObj');
 				})
-				console.log(MegaSaleBillboards, 'MegaSaleBillboards')
 				this.setState({
 					megaSaleBiilboards: MegaSaleBillboards
 				})
 				MegaSaleBillboards = [];
 			}, 1000);
-			// this.setState({ days, hours, minutes, seconds });
-			// this.setState({
-			// 	megaSaleBiilboards: response.content
-			// })
 		}
 	}
 
@@ -87,7 +86,6 @@ class MegaSalepanel1 extends Component {
 
 	render() {
 		const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData } = this.state;
-		console.log(billboardData, 'billboardData')
 		if (goForDetail) {
 			return (
 				<Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
@@ -112,14 +110,16 @@ class MegaSalepanel1 extends Component {
 												<p class="card-text megaPageText">Discount Up to <span className="megaPageTiming">{elem.percantageOffDisscount}%</span></p>
 												<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom}</span> to
 												<span className="megaPageTiming"> {elem.billboardAvailabilityTo}</span></p>
-												<p class="card-text megaPageText">Sale Available Till:
-												<br />
+												<p class="card-text megaPageText">DEAL EXPIRE IN: 
+												{/* <span className="megaPageTiming"> {`${elem.hours}:${elem.minutes}:${elem.seconds}`}</span> */}
+												<span className="megaPageTiming"> {`${elem.calculateTime}`}</span>
+
+													{/* <br /> */}
 													{/* From <span className="megaPageTiming">{elem.saleStartDate}</span>
 													to <span className="megaPageTiming"> {elem.saleEndDate}</span> */}
-													<span className="megaPageTiming"> { elem.days}</span> DAYS 
-													<span className="megaPageTiming"> { elem.hours}</span> HOURS 
-													<span className="megaPageTiming"> { elem.minutes}</span> MINUTES 
-													<span className="megaPageTiming"> { elem.seconds}</span> SECONDS 
+													{/* <span className="megaPageTiming"> {elem.hours}</span>:
+													<span className="megaPageTiming"> {elem.minutes}</span>:
+													<span className="megaPageTiming"> {elem.seconds}</span> */}
 
 												</p>
 												{/* <Link to={{ pathname: `/megaDetail/${elem._id}`, state: elem }}>
