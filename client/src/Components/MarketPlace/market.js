@@ -15,7 +15,7 @@ let filterTypesArr = [];
 let filterFacingArr = [];
 let filterLightningsArr = [];
 let filterAudienceTypeArr = [];
-// let filterCategoryName = [];
+let filterCategoryName = [];
 let filterCityName = [];
 let filterStateName = [];
 
@@ -116,7 +116,6 @@ class Market extends Component {
     }
 
     removeValue = (param) => {
-        console.log(param, 'param')
         let arr = []
         if (param == "status") {
             this.setState({
@@ -130,7 +129,6 @@ class Market extends Component {
         else if (param == "state") {
             filterStateName = arr
         }
-        console.log(filterStateName, 'filterCityName')
         this.filterKeysGet();
 
     }
@@ -153,14 +151,15 @@ class Market extends Component {
     handleChange = (dropDownParam, dropDownValueObj) => {
         let dropDownValue = []
         dropDownValue.push(dropDownValueObj.value)
-        // if (dropDownParam == 'category') {
-        //     filterCategoryName = dropDownValue;
+        if (dropDownParam == 'category') {
+            filterCategoryName = dropDownValue;
 
-        // } else 
-        if (dropDownParam == 'city') {
+        }
+        else if (dropDownParam == 'city') {
             filterCityName = dropDownValue;
 
-        } else if (dropDownParam == 'state') {
+        }
+        else if (dropDownParam == 'state') {
             filterStateName = dropDownValue;
         }
         this.filterKeysGet();
@@ -172,9 +171,9 @@ class Market extends Component {
         if (status.length > 0) {
             filterKeys.push('status')
         }
-        // if (filterCategoryName.length > 0) {
-        //     filterKeys.push('category')
-        // }
+        if (filterCategoryName.length > 0) {
+            filterKeys.push('category')
+        }
         if (filterTypesArr.length > 0) {
             filterKeys.push('type')
         }
@@ -199,797 +198,1215 @@ class Market extends Component {
 
     filterBillboardData = (filterKeys) => {
         if (filterKeys.length == 1) {
-            if (filterKeys[0] == 'status') {
-                this.filterBillboardDataWithOneKey(status, 'status');
-            }
-            // else if (filterKeys[0] == 'category') {
-            //     this.filterBillboardDataWithOneKey(filterCategoryName, 'category');
-            // }
-            else if (filterKeys[0] == 'type') {
-                this.filterBillboardDataWithOneKey(filterTypesArr, 'type');
-            }
-            else if (filterKeys[0] == 'facing') {
-                this.filterBillboardDataWithOneKey(filterFacingArr, 'facing');
-            }
-            else if (filterKeys[0] == 'lightning') {
-                this.filterBillboardDataWithOneKey(filterLightningsArr, 'lightning');
-            }
-            else if (filterKeys[0] == 'audianceType') {
-                this.filterBillboardDataWithOneKey(filterAudienceTypeArr, 'audianceType');
-            }
-            else if (filterKeys[0] == 'city') {
-                this.filterBillboardDataWithOneKey(filterCityName, 'city');
-            }
-            else if (filterKeys[0] == 'state') {
-                this.filterBillboardDataWithOneKey(filterStateName, 'state');
-            }
+            this.filterBillboardDataWithOneKey(filterKeys);
         }
         else if (filterKeys.length == 2) {
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category') {
-            //     this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCategoryName, filterKeys[1]);
-            // }
-            // else 
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'type') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterTypesArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterFacingArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterLightningsArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterStateName, filterKeys[1]);
-            }
-            // else if (filterKeys[0] == 'category' && filterKeys[0] == 'type') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'state') {
-            //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterStateName, filterKeys[1]);
-            // }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing') {
-                this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning') {
-                this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType') {
-                this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterStateName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning') {
-                this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType') {
-                this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterStateName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType') {
-                this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterStateName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'city') {
-                this.filterBillboardDataWithTwoKey(filterAudienceTypeArr, filterKeys[0], filterCityName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterAudienceTypeArr, filterKeys[0], filterStateName, filterKeys[1]);
-            }
-            else if (filterKeys[0] == 'city' && filterKeys[1] == 'state') {
-                this.filterBillboardDataWithTwoKey(filterCityName, filterKeys[0], filterStateName, filterKeys[1]);
-            }
+            this.filterBillboardDataWithTwoKeys(filterKeys);
         }
         else if (filterKeys.length == 3) {
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'lightning') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'audianceType') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'city') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterCityName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            // else 
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-            //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            // }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
-                this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
-            else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
-                this.filterBillboardDataWithThreeKey(filterAudienceTypeArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
-            }
+            this.filterBillboardDataWithThreeKeys(filterKeys);
         }
         else if (filterKeys.length == 4) {
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing') {
-            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-            //         filterTypesArr, filterKeys[2], filterFacingArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning') {
-            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-            //         filterTypesArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'audianceType') {
-            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-            //         filterTypesArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'city') {
-            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-            //         filterTypesArr, filterKeys[2], filterCityName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'state') {
-            //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
-            //         filterTypesArr, filterKeys[2], filterStateName, filterKeys[3]);
-            // }
-            // else 
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
-                    filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-                    filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-            //         filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-            //         filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
-            //         filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
-            //         filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
-            //         filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-            //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-            //         filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            // }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
-                    filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-                    filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
-                this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-                    filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            }
-            else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
-                this.filterBillboardDataWithFourKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
-                    filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
-            }
+            this.filterBillboardDataWithFourKeys(filterKeys)
         }
         else if (filterKeys.length == 5) {
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-            //     filterKeys[3] == 'facing', filterKeys[4] == 'lightning') {
-            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-            //     filterKeys[3] == 'facing', filterKeys[4] == 'audianceType') {
-            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-            //     filterKeys[3] == 'facing', filterKeys[4] == 'city') {
-            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterCityName, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
-            //     filterKeys[3] == 'facing', filterKeys[4] == 'state') {
-            //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterStateName, filterKeys[4]);
-            // }
-            // else 
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-                filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
-                filterKeys[3] == 'city', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
-                    filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-            //     filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-            //     filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-            //     filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-            //     filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-            //         filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-            //     filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-            //         filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
-            //     filterKeys[3] == 'city', filterKeys[4] == 'state') {
-            //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
-            //         filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
-            // }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
-                this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
-                filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
-                filterKeys[3] == 'city', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
-                    filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
-            }
-            else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
-                filterKeys[3] == 'city', filterKeys[4] == 'state') {
-                this.filterBillboardDataWithFiveKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
-                    filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
-            }
+            this.filterBillboardDataWithFiveKeys(filterKeys)
         }
         else if (filterKeys.length == 6) {
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType') {
-            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city') {
-            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'state') {
-            //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterStateName, filterKeys[5]);
-            // }
-            // else 
-            if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-                filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-                    filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
-            }
-            else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' &&
-                filterKeys[4] == 'city' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
-                    filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
-            }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-            //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
-            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
-            //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
-            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
-            //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' &&
-            //     filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
-            //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0],
-            //         filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
-            //         filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
-            // }
-            else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' &&
-                filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
-                this.filterBillboardDataWithSixKey(filterTypesArr, filterKeys[0],
-                    filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
-                    filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
-            }
+            this.filterBillboardDataWithSixKeys(filterKeys)
         }
         else if (filterKeys.length == 7) {
-            this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
-                filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'city') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning' &&
-            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
-            //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-            //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
-            // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
-            //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
-            //     this.filterBillboardDataWithSevenKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
-            //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
-            // }
+            this.filterBillboardDataWithSevenKeys(filterKeys)
         }
-        // else if (filterKeys.length == 8) {
-        //     this.filterBillboardDataWithEightKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
-        //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6], filterStateName, filterKeys[7]);
-        // }
+        else if (filterKeys.length == 8) {
+            this.filterBillboardDataWithEightKeys(filterKeys)
+        }
     }
 
-    filterBillboardDataWithOneKey = (values, filterKey) => {
+    filterBillboardDataWithOneKey = (filterKeys) => {
         const { billboardData } = this.state;
         let filteredData = [];
-        for (var i = 0; i < values.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey].toLowerCase() == values[i].toLowerCase()) {
-                    filteredData.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (filterKeys[i] == 'status') {
+                for (var j = 0; j < status.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
                 }
-            })
+            }
+            else if (filterKeys[i] == 'category') {
+                for (var j = 0; j < filterCategoryName.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'type') {
+                for (var j = 0; j < filterTypesArr.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'facing') {
+                for (var j = 0; j < filterFacingArr.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'lightning') {
+                for (var j = 0; j < filterLightningsArr.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'audianceType') {
+                for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'city') {
+                for (var j = 0; j < filterCityName.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
+            else if (filterKeys[i] == 'state') {
+                for (var j = 0; j < filterStateName.length; j++) {
+                    billboardData.map((elem, key) => {
+                        if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                            filteredData.push(elem)
+                        }
+                    })
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
 
-    filterBillboardDataWithTwoKey = (values1, filterKey1, values2, filterKey2) => {
+
+    filterBillboardDataWithTwoKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            console.log(i, 'i')
+            if (i == 0) {
+                console.log('get first value')
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
 
-    filterBillboardDataWithThreeKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3) => {
+
+    filterBillboardDataWithThreeKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let arr2 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
 
-
-    filterBillboardDataWithFourKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4) => {
+    filterBillboardDataWithFourKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let arr2 = [];
         let arr3 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    arr3.push(elem)
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values4.length; i++) {
-            arr3.map((elem, key) => {
-                if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
 
-    filterBillboardDataWithFiveKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5) => {
+
+    filterBillboardDataWithFiveKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let arr2 = [];
         let arr3 = [];
         let arr4 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    arr3.push(elem)
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values4.length; i++) {
-            arr3.map((elem, key) => {
-                if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
-                    arr4.push(elem)
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values5.length; i++) {
-            arr4.map((elem, key) => {
-                if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 4) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
     }
 
-    filterBillboardDataWithSixKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6) => {
+    
+    filterBillboardDataWithSixKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let arr2 = [];
@@ -997,54 +1414,462 @@ class Market extends Component {
         let arr4 = [];
         let arr5 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    arr3.push(elem)
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values4.length; i++) {
-            arr3.map((elem, key) => {
-                if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
-                    arr4.push(elem)
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values5.length; i++) {
-            arr4.map((elem, key) => {
-                if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
-                    arr5.push(elem)
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values6.length; i++) {
-            arr5.map((elem, key) => {
-                if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 4) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 5) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
-    filterBillboardDataWithSevenKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6, values7, filterKey7) => {
+
+
+    
+    filterBillboardDataWithSevenKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
         let arr2 = [];
@@ -1053,60 +1878,1450 @@ class Market extends Component {
         let arr5 = [];
         let arr6 = [];
         let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    arr3.push(elem)
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values4.length; i++) {
-            arr3.map((elem, key) => {
-                if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
-                    arr4.push(elem)
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values5.length; i++) {
-            arr4.map((elem, key) => {
-                if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
-                    arr5.push(elem)
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values6.length; i++) {
-            arr5.map((elem, key) => {
-                if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
-                    arr6.push(elem)
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
-        }
-        for (var i = 0; i < values7.length; i++) {
-            arr6.map((elem, key) => {
-                if (elem[filterKey7].toLowerCase() == values7[i].toLowerCase()) {
-                    filteredData.push(elem)
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
                 }
-            })
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        billboardData.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr1.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr1.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr2.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr2.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr3.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr3.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr4.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 4) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr4.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr5.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 5) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr5.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                arr6.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
+            if (i == 6) {
+                if (filterKeys[i] == 'status') {
+                    for (var j = 0; j < status.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'category') {
+                    for (var j = 0; j < filterCategoryName.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'type') {
+                    for (var j = 0; j < filterTypesArr.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'facing') {
+                    for (var j = 0; j < filterFacingArr.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'lightning') {
+                    for (var j = 0; j < filterLightningsArr.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'audianceType') {
+                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'city') {
+                    for (var j = 0; j < filterCityName.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+                else if (filterKeys[i] == 'state') {
+                    for (var j = 0; j < filterStateName.length; j++) {
+                        arr6.map((elem, key) => {
+                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
+                                filteredData.push(elem)
+                            }
+                        })
+                    }
+                }
+            }
         }
+        console.log(filteredData, 'filteredData')
         this.setState({
             billboardFilterdData: filteredData
         })
-        console.log(filteredData, 'filteredData')
+
     }
+    // filterBillboardData = (filterKeys) => {
+    //     if (filterKeys.length == 1) {
+    //         if (filterKeys[0] == 'status') {
+    //             this.filterBillboardDataWithOneKey(status, 'status');
+    //         }
+    //         // else if (filterKeys[0] == 'category') {
+    //         //     this.filterBillboardDataWithOneKey(filterCategoryName, 'category');
+    //         // }
+    //         else if (filterKeys[0] == 'type') {
+    //             this.filterBillboardDataWithOneKey(filterTypesArr, 'type');
+    //         }
+    //         else if (filterKeys[0] == 'facing') {
+    //             this.filterBillboardDataWithOneKey(filterFacingArr, 'facing');
+    //         }
+    //         else if (filterKeys[0] == 'lightning') {
+    //             this.filterBillboardDataWithOneKey(filterLightningsArr, 'lightning');
+    //         }
+    //         else if (filterKeys[0] == 'audianceType') {
+    //             this.filterBillboardDataWithOneKey(filterAudienceTypeArr, 'audianceType');
+    //         }
+    //         else if (filterKeys[0] == 'city') {
+    //             this.filterBillboardDataWithOneKey(filterCityName, 'city');
+    //         }
+    //         else if (filterKeys[0] == 'state') {
+    //             this.filterBillboardDataWithOneKey(filterStateName, 'state');
+    //         }
+    //     }
+    //     else if (filterKeys.length == 2) {
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category') {
+    //         //     this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCategoryName, filterKeys[1]);
+    //         // }
+    //         // else 
+    //         if (filterKeys[0] == 'status' && filterKeys[1] == 'type') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterTypesArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterFacingArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterLightningsArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'city') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterCityName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(status, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[0] == 'type') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'state') {
+    //         //     this.filterBillboardDataWithTwoKey(filterCategoryName, filterKeys[0], filterStateName, filterKeys[1]);
+    //         // }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing') {
+    //             this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning') {
+    //             this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType') {
+    //             this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'city') {
+    //             this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterCityName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(filterTypesArr, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning') {
+    //             this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType') {
+    //             this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'city') {
+    //             this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterCityName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(filterFacingArr, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType') {
+    //             this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'city') {
+    //             this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterCityName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(filterLightningsArr, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'city') {
+    //             this.filterBillboardDataWithTwoKey(filterAudienceTypeArr, filterKeys[0], filterCityName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(filterAudienceTypeArr, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //         else if (filterKeys[0] == 'city' && filterKeys[1] == 'state') {
+    //             this.filterBillboardDataWithTwoKey(filterCityName, filterKeys[0], filterStateName, filterKeys[1]);
+    //         }
+    //     }
+    //     else if (filterKeys.length == 3) {
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type') {
+    //           
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing') {
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'lightning') {
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'audianceType') {
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'city') {
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterCityName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         // else 
+    //         if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(status, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'lightning') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'audianceType') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'city') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //         //     this.filterBillboardDataWithThreeKey(filterCategoryName, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         // }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterTypesArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterFacingArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city') {
+    //             this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterCityName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterLightningsArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //         else if (filterKeys[0] == 'audianceType' && filterKeys[1] == 'city' && filterKeys[2] == 'state') {
+    //             this.filterBillboardDataWithThreeKey(filterAudienceTypeArr, filterKeys[0], filterCityName, filterKeys[1], filterStateName, filterKeys[2]);
+    //         }
+    //     }
+    //     else if (filterKeys.length == 4) {
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing') {
+    //         //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+    //         //         filterTypesArr, filterKeys[2], filterFacingArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning') {
+    //         //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+    //         //         filterTypesArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'audianceType') {
+    //         //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+    //         //         filterTypesArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'city') {
+    //         //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+    //         //         filterTypesArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'state') {
+    //         //     this.filterBillboardDataWithFourKey(status, filterKeys[0], filterCategoryName, filterKeys[1],
+    //         //         filterTypesArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         // }
+    //         // else 
+    //         if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+    //                 filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+    //                 filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+    //                 filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+    //                 filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(status, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+    //                 filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'audianceType') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'city') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'state') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+    //         //         filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+    //         //         filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1],
+    //         //         filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //         //         filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //         //         filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+    //         //     this.filterBillboardDataWithFourKey(filterCategoryName, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+    //         //         filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+    //         // }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1],
+    //                 filterLightningsArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterTypesArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+    //                 filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'city') {
+    //             this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterFacingArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+    //                 filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //         else if (filterKeys[0] == 'lightning' && filterKeys[1] == 'audianceType' && filterKeys[2] == 'city' && filterKeys[3] == 'state') {
+    //             this.filterBillboardDataWithFourKey(filterLightningsArr, filterKeys[0], filterAudienceTypeArr, filterKeys[1],
+    //                 filterCityName, filterKeys[2], filterStateName, filterKeys[3]);
+    //         }
+    //     }
+    //     else if (filterKeys.length == 5) {
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+    //         //     filterKeys[3] == 'facing', filterKeys[4] == 'lightning') {
+    //         //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+    //         //     filterKeys[3] == 'facing', filterKeys[4] == 'audianceType') {
+    //         //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+    //         //     filterKeys[3] == 'facing', filterKeys[4] == 'city') {
+    //         //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' &&
+    //         //     filterKeys[3] == 'facing', filterKeys[4] == 'state') {
+    //         //     this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         // }
+    //         // else 
+    //         if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //             filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
+    //             console.log('one')
+    //                 this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //                 filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //             filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
+    //                 console.log('two')
+
+    //             this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //                 filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //             filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
+    //                 console.log('three')
+
+    //             this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //                 filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //             filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
+    //                 console.log('four')
+
+    //             this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //                 filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //             filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
+    //             this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //                 filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
+    //             filterKeys[3] == 'city', filterKeys[4] == 'state') {
+    //             this.filterBillboardDataWithFiveKey(status, filterKeys[0], filterLightningsArr, filterKeys[1],
+    //                 filterAudienceTypeArr, filterKeys[2], filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //         //     filterKeys[3] == 'lightning', filterKeys[4] == 'audianceType') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //         //     filterKeys[3] == 'lightning', filterKeys[4] == 'city') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //         //     filterKeys[3] == 'lightning', filterKeys[4] == 'state') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //         //     filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //         //         filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //         //     filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //         //         filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
+    //         //     filterKeys[3] == 'city', filterKeys[4] == 'state') {
+    //         //     this.filterBillboardDataWithFiveKey(filterCategoryName, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
+    //         //         filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
+    //         // }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //             filterKeys[3] == 'audianceType', filterKeys[4] == 'city') {
+    //             this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //                 filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' &&
+    //             filterKeys[3] == 'audianceType', filterKeys[4] == 'state') {
+    //             this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //                 filterAudienceTypeArr, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
+    //             filterKeys[3] == 'city', filterKeys[4] == 'state') {
+    //             this.filterBillboardDataWithFiveKey(filterTypesArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
+    //                 filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //         else if (filterKeys[0] == 'facing' && filterKeys[1] == 'lightning' && filterKeys[2] == 'audianceType' &&
+    //             filterKeys[3] == 'city', filterKeys[4] == 'state') {
+    //             this.filterBillboardDataWithFiveKey(filterFacingArr, filterKeys[0], filterLightningsArr, filterKeys[1], filterAudienceTypeArr, filterKeys[2],
+    //                 filterCityName, filterKeys[3], filterStateName, filterKeys[4]);
+    //         }
+    //     }
+    //     else if (filterKeys.length == 6) {
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType') {
+    //         //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city') {
+    //         //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'state') {
+    //         //     this.filterBillboardDataWithSixKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterStateName, filterKeys[5]);
+    //         // }
+    //         // else 
+    //         if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+    //             filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
+    //             this.filterBillboardDataWithSixKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //                 filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+    //             filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
+    //             this.filterBillboardDataWithSixKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //                 filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
+    //         }
+    //         else if (filterKeys[0] == 'status' && filterKeys[1] == 'facing' && filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' &&
+    //             filterKeys[4] == 'city' && filterKeys[5] == 'state') {
+    //             this.filterBillboardDataWithSixKey(status, filterKeys[0], filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2],
+    //                 filterAudienceTypeArr, filterKeys[3], filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
+    //         }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //         //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'city') {
+    //         //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' &&
+    //         //     filterKeys[3] == 'lightning' && filterKeys[4] == 'audianceType' && filterKeys[5] == 'state') {
+    //         //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1],
+    //         //         filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterStateName, filterKeys[5]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'facing' &&
+    //         //     filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
+    //         //     this.filterBillboardDataWithSixKey(filterCategoryName, filterKeys[0],
+    //         //         filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
+    //         //         filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
+    //         // }
+    //         else if (filterKeys[0] == 'type' && filterKeys[1] == 'facing' &&
+    //             filterKeys[2] == 'lightning' && filterKeys[3] == 'audianceType' && filterKeys[4] == 'city' && filterKeys[5] == 'state') {
+    //             this.filterBillboardDataWithSixKey(filterTypesArr, filterKeys[0],
+    //                 filterFacingArr, filterKeys[1], filterLightningsArr, filterKeys[2], filterAudienceTypeArr, filterKeys[3],
+    //                 filterCityName, filterKeys[4], filterStateName, filterKeys[5]);
+    //         }
+    //     }
+    //     else if (filterKeys.length == 7) {
+    //         this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1],
+    //             filterFacingArr, filterKeys[2], filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'city') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'audianceType' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+    //         //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+    //         //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'lightning' &&
+    //         //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'status' && filterKeys[1] == 'category' && filterKeys[2] == 'type' && filterKeys[3] == 'facing' &&
+    //         //     filterKeys[4] == 'lightning' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //         //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //         // else if (filterKeys[0] == 'category' && filterKeys[1] == 'type' && filterKeys[2] == 'facing' && filterKeys[3] == 'lightning' &&
+    //         //     filterKeys[4] == 'audianceType' && filterKeys[5] == 'city' && filterKeys[6] == 'state') {
+    //         //     this.filterBillboardDataWithSevenKey(filterCategoryName, filterKeys[0], filterTypesArr, filterKeys[1], filterFacingArr, filterKeys[2],
+    //         //         filterLightningsArr, filterKeys[3], filterAudienceTypeArr, filterKeys[4], filterCityName, filterKeys[5], filterStateName, filterKeys[6]);
+    //         // }
+    //     }
+    //     // else if (filterKeys.length == 8) {
+    //     //     this.filterBillboardDataWithEightKey(status, filterKeys[0], filterCategoryName, filterKeys[1], filterTypesArr, filterKeys[2],
+    //     //         filterFacingArr, filterKeys[3], filterLightningsArr, filterKeys[4], filterAudienceTypeArr, filterKeys[5], filterCityName, filterKeys[6], filterStateName, filterKeys[7]);
+    //     // }
+    // }
+
+    // filterBillboardDataWithOneKey = (values, filterKey) => {
+    //     const { billboardData } = this.state;
+    //     let filteredData = [];
+    //     for (var i = 0; i < values.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey].toLowerCase() == values[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+
+    // filterBillboardDataWithTwoKey = (values1, filterKey1, values2, filterKey2) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+
+    // filterBillboardDataWithThreeKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+
+
+    // filterBillboardDataWithFourKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let arr3 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 arr3.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values4.length; i++) {
+    //         arr3.map((elem, key) => {
+    //             if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+
+    // filterBillboardDataWithFiveKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let arr3 = [];
+    //     let arr4 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 arr3.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values4.length; i++) {
+    //         arr3.map((elem, key) => {
+    //             if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
+    //                 arr4.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values5.length; i++) {
+    //         arr4.map((elem, key) => {
+    //             if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+
+    // filterBillboardDataWithSixKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let arr3 = [];
+    //     let arr4 = [];
+    //     let arr5 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 arr3.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values4.length; i++) {
+    //         arr3.map((elem, key) => {
+    //             if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
+    //                 arr4.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values5.length; i++) {
+    //         arr4.map((elem, key) => {
+    //             if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
+    //                 arr5.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values6.length; i++) {
+    //         arr5.map((elem, key) => {
+    //             if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
+    // filterBillboardDataWithSevenKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6, values7, filterKey7) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let arr3 = [];
+    //     let arr4 = [];
+    //     let arr5 = [];
+    //     let arr6 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 arr3.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values4.length; i++) {
+    //         arr3.map((elem, key) => {
+    //             if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
+    //                 arr4.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values5.length; i++) {
+    //         arr4.map((elem, key) => {
+    //             if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
+    //                 arr5.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values6.length; i++) {
+    //         arr5.map((elem, key) => {
+    //             if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
+    //                 arr6.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values7.length; i++) {
+    //         arr6.map((elem, key) => {
+    //             if (elem[filterKey7].toLowerCase() == values7[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
 
     // filterBillboardDataWithEightKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6, values7, filterKey7, values8, filterKey8) => {
     //     const { billboardData } = this.state;
@@ -1387,7 +3602,7 @@ class Market extends Component {
                                     <Radio className="fasla" value="Available">&nbsp;Available</Radio>
                                 </Col>
                                 <Col >
-                                    <Radio className="fasla" value="Not Available">&nbsp;Not Available</Radio>
+                                    <Radio className="fasla" value="No Available">&nbsp;No Available</Radio>
                                 </Col>
                             </Row>
                         </Radio.Group>
@@ -1673,7 +3888,7 @@ class Market extends Component {
                                                     <Radio className="fasla" value="Available">&nbsp;Available</Radio>
                                                 </Col>
                                                 <Col >
-                                                    <Radio className="fasla" value="Not Available">&nbsp;Not Available</Radio>
+                                                    <Radio className="fasla" value="No Available">&nbsp;No Available</Radio>
                                                 </Col>
                                             </Row>
                                         </Radio.Group>
