@@ -45,13 +45,14 @@ class FormLogin extends Component {
         localStorage.setItem('userToken', JSON.stringify(response.token))
         localStorage.setItem('userName', JSON.stringify(response.companyName))
         localStorage.setItem('userData', JSON.stringify(response))
-        this.setState({ isLoader: false });
+        this.setState({ isLoader: false, isAlert: false });
         document.getElementById('closss').click();
         this.props.showDropDown();
       } else {
-        console.log(response.msg ,'response.msg')
+        console.log(response.msg, 'response.msg')
         this.setState({
           isLoader: false,
+          isAlert: true,
           mgs: response.msg
         })
       }
@@ -82,15 +83,15 @@ class FormLogin extends Component {
       if (response.code === 200) {
         this.setState({
           isLoader: false,
-          createAcountform: true
+          createAcountform: true,
+          isAlert : false
         });
       }
-      else{
-        console.log('else')
+      else {
         this.setState({
-          isAlert:true,
-          mgs:response.error,
-          isLoader:false,
+          isAlert: true,
+          mgs: response.error,
+          isLoader: false,
         })
       }
       // else {
@@ -132,7 +133,7 @@ class FormLogin extends Component {
                 :
                 <div>
                   <SingUPForm alreadyHaveacount={this.alreadyHaveacount} fectSignUpApiFunc={this.fectSignUpApiFunc}
-                    isLoader={isLoader} isAlert={isAlert}  mgs={mgs}/>
+                    isLoader={isLoader} isAlert={isAlert} mgs={mgs} />
                 </div>
               }
             </div>

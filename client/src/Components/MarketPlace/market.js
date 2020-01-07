@@ -7,7 +7,6 @@ import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
 import { Link } from "react-router-dom";
 import filtersImg from "./caret-down.png";
-import NumberFormat from 'react-number-format';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -116,6 +115,26 @@ class Market extends Component {
         this.filterKeysGet();
     }
 
+    removeValue = (param) => {
+        console.log(param, 'param')
+        let arr = []
+        if (param == "status") {
+            this.setState({
+                statusValue: ''
+            })
+            status = arr
+        }
+        else if (param == "city") {
+            filterCityName = arr
+        }
+        else if (param == "state") {
+            filterStateName = arr
+        }
+        console.log(filterStateName, 'filterCityName')
+        this.filterKeysGet();
+
+    }
+
     //get checkboxes values
     onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
         if (checkboxParam == 'type') {
@@ -174,6 +193,7 @@ class Market extends Component {
         if (filterStateName.length > 0) {
             filterKeys.push('state')
         }
+        console.log(filterKeys, 'filterKeys')
         this.filterBillboardData(filterKeys)
     }
 
@@ -1088,77 +1108,77 @@ class Market extends Component {
         console.log(filteredData, 'filteredData')
     }
 
-    filterBillboardDataWithEightKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6, values7, filterKey7, values8, filterKey8) => {
-        const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let arr3 = [];
-        let arr4 = [];
-        let arr5 = [];
-        let arr6 = [];
-        let arr7 = [];
-        let filteredData = [];
-        for (var i = 0; i < values1.length; i++) {
-            billboardData.map((elem, key) => {
-                if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
-                    arr1.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values2.length; i++) {
-            arr1.map((elem, key) => {
-                if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
-                    arr2.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values3.length; i++) {
-            arr2.map((elem, key) => {
-                if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
-                    arr3.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values4.length; i++) {
-            arr3.map((elem, key) => {
-                if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
-                    arr4.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values5.length; i++) {
-            arr4.map((elem, key) => {
-                if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
-                    arr5.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values6.length; i++) {
-            arr5.map((elem, key) => {
-                if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
-                    arr6.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values7.length; i++) {
-            arr6.map((elem, key) => {
-                if (elem[filterKey7].toLowerCase() == values7[i].toLowerCase()) {
-                    arr7.push(elem)
-                }
-            })
-        }
-        for (var i = 0; i < values8.length; i++) {
-            arr7.map((elem, key) => {
-                if (elem[filterKey8].toLowerCase() == values8[i].toLowerCase()) {
-                    filteredData.push(elem)
-                }
-            })
-        }
-        this.setState({
-            billboardFilterdData: filteredData
-        })
-        console.log(filteredData, 'filteredData')
-    }
+    // filterBillboardDataWithEightKey = (values1, filterKey1, values2, filterKey2, values3, filterKey3, values4, filterKey4, values5, filterKey5, values6, filterKey6, values7, filterKey7, values8, filterKey8) => {
+    //     const { billboardData } = this.state;
+    //     let arr1 = [];
+    //     let arr2 = [];
+    //     let arr3 = [];
+    //     let arr4 = [];
+    //     let arr5 = [];
+    //     let arr6 = [];
+    //     let arr7 = [];
+    //     let filteredData = [];
+    //     for (var i = 0; i < values1.length; i++) {
+    //         billboardData.map((elem, key) => {
+    //             if (elem[filterKey1].toLowerCase() == values1[i].toLowerCase()) {
+    //                 arr1.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values2.length; i++) {
+    //         arr1.map((elem, key) => {
+    //             if (elem[filterKey2].toLowerCase() == values2[i].toLowerCase()) {
+    //                 arr2.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values3.length; i++) {
+    //         arr2.map((elem, key) => {
+    //             if (elem[filterKey3].toLowerCase() == values3[i].toLowerCase()) {
+    //                 arr3.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values4.length; i++) {
+    //         arr3.map((elem, key) => {
+    //             if (elem[filterKey4].toLowerCase() == values4[i].toLowerCase()) {
+    //                 arr4.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values5.length; i++) {
+    //         arr4.map((elem, key) => {
+    //             if (elem[filterKey5].toLowerCase() == values5[i].toLowerCase()) {
+    //                 arr5.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values6.length; i++) {
+    //         arr5.map((elem, key) => {
+    //             if (elem[filterKey6].toLowerCase() == values6[i].toLowerCase()) {
+    //                 arr6.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values7.length; i++) {
+    //         arr6.map((elem, key) => {
+    //             if (elem[filterKey7].toLowerCase() == values7[i].toLowerCase()) {
+    //                 arr7.push(elem)
+    //             }
+    //         })
+    //     }
+    //     for (var i = 0; i < values8.length; i++) {
+    //         arr7.map((elem, key) => {
+    //             if (elem[filterKey8].toLowerCase() == values8[i].toLowerCase()) {
+    //                 filteredData.push(elem)
+    //             }
+    //         })
+    //     }
+    //     this.setState({
+    //         billboardFilterdData: filteredData
+    //     })
+    //     console.log(filteredData, 'filteredData')
+    // }
 
     onChangeMin = (e) => {
         this.setState({
@@ -1205,8 +1225,8 @@ class Market extends Component {
             }
             this.setState({
                 billboardFilterdData: rangeValues,
-                minValue:'',
-                maxValue:''
+                minValue: '',
+                maxValue: ''
             })
         }
         else {
@@ -1239,11 +1259,11 @@ class Market extends Component {
             }
             this.setState({
                 billboardFilterdData: rangeValues,
-                minValue:'',
-                maxValue:''
+                minValue: '',
+                maxValue: ''
             })
         }
-        console.log(rangeValues ,'rangeValues')
+        console.log(rangeValues, 'rangeValues')
     }
 
     //for load more data
@@ -1339,6 +1359,25 @@ class Market extends Component {
                         <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>
                     }
                 </div>
+
+                {this.state.statusValue != '' ?
+                    <div>
+                        <li>{this.state.statusValue}<span class="close"
+                            onClick={this.removeValue.bind(this, 'status')}
+                        >x</span></li>
+                    </div> : null}
+                {filterCityName && filterCityName.length > 0 ?
+                    <div>
+                        <li>{filterCityName[0]}<span class="close"
+                            onClick={this.removeValue.bind(this, 'city')}
+                        >x</span></li>
+                    </div> : null}
+                {filterCityName && filterStateName.length > 0 ?
+                    <div>
+                        <li>{filterStateName[0]}<span class="close"
+                            onClick={this.removeValue.bind(this, 'state')}
+                        >x</span></li>
+                    </div> : null}
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
                         <Radio.Group onChange={this.onChange} value={this.state.statusValue}>
@@ -1352,18 +1391,6 @@ class Market extends Component {
                                 </Col>
                             </Row>
                         </Radio.Group>
-
-                        {/* <div className='col-md-11 dropdown'>
-                            <div className='filterDivs'>Category</div>
-                            <Row className="fasla1" >
-                                <Col>
-                                    <Select onChange={this.handleChange.bind(this, 'category')}
-                                        options={category}
-                                    >
-                                    </Select>
-                                </Col>
-                            </Row>
-                        </div> */}
 
                         <CheckboxGroup
                             // setFieldsValue={this.state.filterValue}
@@ -1488,11 +1515,6 @@ class Market extends Component {
                                         className="marketFilter_Input"
                                     />
                                 </div>
-                                {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-                                    <button className="btn btn-primary">
-                                        <i class="fa fa-caret-right"></i>
-                                    </button>
-                                </div> */}
                             </div>
                             <div className="row fasla1">
                                 <div className="col-12 col-md-8 col-lg-8 col-xl-8">
@@ -1644,30 +1666,21 @@ class Market extends Component {
                                 </div>
                                 <div id="collapseOne" className="collapse show" data-parent="#accordion">
                                     <div className="card-body">
-                                        <CheckboxGroup
-                                        // setFieldsValue={this.state.filterValue}
-                                        // onChange={this.filterBillBoard.bind(this)}
-                                        >
+                                        <Radio.Group onChange={this.onChange} value={this.state.statusValue}>
                                             <div className='filterDivs'>Status</div>
                                             <Row>
                                                 <Col >
-                                                    <Checkbox className="fasla" value="Available">&nbsp;Available</Checkbox>
+                                                    <Radio className="fasla" value="Available">&nbsp;Available</Radio>
                                                 </Col>
                                                 <Col >
-                                                    <Checkbox className="fasla" value="Not Available">&nbsp;Not Available</Checkbox>
+                                                    <Radio className="fasla" value="Not Available">&nbsp;Not Available</Radio>
                                                 </Col>
                                             </Row>
-                                            <div className='col-md-9 dropdown'>
-                                                <div className='filterDivs'>Category</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select onChange={this.handleChange}
-                                                            options={category}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                            </div>
+                                        </Radio.Group>
+                                        <CheckboxGroup
+                                            // setFieldsValue={this.state.filterValue}
+                                            onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+                                        >
                                             <div className='filterDivs'>Types</div>
                                             <Row>
                                                 <Col>
@@ -1701,6 +1714,11 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
                                                 </Col>
                                             </Row>&emsp;
+                        </CheckboxGroup>
+
+                                        <CheckboxGroup
+                                            onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+                                        >
                                             <Row>
                                                 <div className='filterDivs'>Facing</div>
                                                 <Col >
@@ -1710,6 +1728,11 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="Back">&nbsp;Back</Checkbox>
                                                 </Col>
                                             </Row>
+                                        </CheckboxGroup>
+
+                                        <CheckboxGroup
+                                            onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
+                                        >
                                             <div className='filterDivs'>Lightning</div>
                                             <Row>
                                                 <Col >
@@ -1719,7 +1742,11 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
                                                 </Col>
                                             </Row>
+                                        </CheckboxGroup>
 
+                                        <CheckboxGroup
+                                            onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+                                        >
                                             <div className='filterDivs'>Audience Type</div>
                                             <Row>
                                                 <Col >
@@ -1735,110 +1762,185 @@ class Market extends Component {
                                                     <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
                                                 </Col>
                                             </Row>
-                                            <div className='col-md-9 dropdown'>
-                                                <div className='filterDivs'>Cities</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={cities}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
-                                                <div className='filterDivs'>States</div>
-                                                <Row className="fasla1" >
-                                                    <Col>
-                                                        <Select
-                                                            onChange={this.handleChange}
-                                                            options={states}
-                                                        >
-                                                        </Select>
-                                                    </Col>
-                                                </Row>
+                                        </CheckboxGroup>
+                                        <div className='col-md-11 dropdown'>
+                                            <div className='filterDivs'>Cities</div>
+                                            <Row className="fasla1" >
+                                                <Col>
+                                                    <Select
+                                                        onChange={this.handleChange.bind(this, 'city')}
+                                                        options={cities}
+                                                    >
+                                                    </Select>
+                                                </Col>
+                                            </Row>
+
+                                            <div className='filterDivs'>States</div>
+                                            <Row className="fasla1" >
+                                                <Col>
+                                                    <Select
+                                                        onChange={this.handleChange.bind(this, 'state')}
+                                                        options={states}
+                                                    >
+                                                    </Select>
+                                                </Col>
+                                            </Row>
+
+                                        </div>
+
+                                        orm>
+                            <div className='filterDivs'>Pricing</div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+
+                                                <input
+                                                    onChange={this.onChangeMin}
+                                                    type="Number"
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+
+                                                <input
+                                                    onChange={this.onChangeMax}
+
+                                                    type="Number"
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
 
                                             </div>
-                                            <div className='filterDivs'>Width</div>
-                                            <div className="row fasla1">
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Min"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Max"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <button className="btn btn-primary">
-                                                        <i class="fa fa-caret-right"></i>
-                                                    </button>
-                                                </div>
+                                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                                <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "price")}>
+                                                    <i class="fa fa-caret-right"></i>
+                                                </button>
                                             </div>
-                                            <div className='filterDivs'>Height</div>
-                                            <div className="row fasla1">
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Min"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Max"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <button className="btn btn-primary">
-                                                        <i class="fa fa-caret-right"></i>
-                                                    </button>
-                                                </div>
+                                        </div>
+                                        <div className='filterDivs'>Width</div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMin}
+
+                                                    type="Number"
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+
                                             </div>
-                                            <div className='filterDivs'>Traffic Count</div>
-                                            <div className="row fasla1">
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Min"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Max"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <button className="btn btn-primary">
-                                                        <i class="fa fa-caret-right"></i>
-                                                    </button>
-                                                </div>
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMax}
+
+                                                    type="Number"
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+
                                             </div>
-                                            <div className='filterDivs'>Daily Visitor</div>
-                                            <div className="row fasla1">
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Min"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-5">
-                                                    <Input
-                                                        placeholder="Max"
-                                                        className="marketFilter_Input_mob"
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <button className="btn btn-primary">
-                                                        <i class="fa fa-caret-right"></i>
-                                                    </button>
-                                                </div>
+                                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                                <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, 'width')}>
+                                                    <i class="fa fa-caret-right"></i>
+                                                </button>
                                             </div>
-                                        </CheckboxGroup>
+                                        </div>
+                                        <div className='filterDivs'>Height</div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMin}
+
+                                                    type="Number"
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMax}
+
+                                                    type="Number"
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                                <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "height")}>
+                                                    <i class="fa fa-caret-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className='filterDivs'>Traffic Count</div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMin}
+
+                                                    type="Number"
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMax}
+
+                                                    type="Number"
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                                <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "trafic")}>
+                                                    <i class="fa fa-caret-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className='filterDivs'>Daily Visitor</div>
+                                        <div className="row fasla1">
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                                                <input
+                                                    onChange={this.onChangeMin}
+
+                                                    type="Number"
+                                                    placeholder="Min"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                <input
+                                                    onChange={this.onChangeMax}
+
+                                                    type="Number"
+                                                    placeholder="Max"
+                                                    className="marketFilter_Input"
+                                                />
+
+                                            </div>
+                                            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+                                                <button className="btn btn-primary" onClick={this.filterBillboardWithMinToMax.bind(this, "visitor")}>
+                                                    <i class="fa fa-caret-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
