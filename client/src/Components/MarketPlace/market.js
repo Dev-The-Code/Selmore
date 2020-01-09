@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './market.css';
 import {
-    Checkbox, Form, Row, Col, Input, Radio
+    Checkbox, Form, Row, Col, Input, Radio, Button
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
@@ -60,6 +60,7 @@ class Market extends Component {
             facingOfBillboard: [],
             lightningOfBillboard: [],
             audienceTypeOfBillboard: [],
+            showRecord: true
 
         }
     }
@@ -171,8 +172,39 @@ class Market extends Component {
             }
             filterAudienceTypeArr = arr1;
         }
-        this.filterKeysGet();
+
+        if (status.length == 0 && filterCityName.length == 0 && filterStateName.length == 0 && filterTypesArr.length == 0 && filterFacingArr.length == 0 &&
+            filterLightningsArr.length == 0 && filterAudienceTypeArr.length == 0) {
+            this.setState({
+                showRecord: true,
+                notFoundFilterData: false,
+                billboardFilterdData: [],
+            })
+        }
+        else {
+            this.filterKeysGet();
+        }
     }
+
+    showAllBillboards = () => {
+        status = [];
+        filterTypesArr = [];
+        filterFacingArr = [];
+        filterLightningsArr = [];
+        filterAudienceTypeArr = [];
+        filterCategoryName = [];
+        filterCityName = [];
+        filterStateName = [];
+        this.setState({
+            showRecord: true,
+            notFoundFilterData: false,
+            billboardFilterdData: [],
+            statusValue: ''
+        })
+        this.filterKeysGet();
+
+    }
+
 
     //get checkboxes values
     onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
@@ -259,7 +291,6 @@ class Market extends Component {
         for (var i = 0; i < filterAudienceTypeArr.length; i++) {
             audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
         }
-        console.log(filterTypesArr, 'filterTypesArr for state')
         this.setState({
             typesOfBillboard: typesOfBillboard,
             facingOfBillboard: facingOfBillboard,
@@ -374,10 +405,26 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
 
@@ -387,9 +434,9 @@ class Market extends Component {
         let arr1 = [];
         let filteredData = [];
         for (var i = 0; i < filterKeys.length; i++) {
-            console.log(i, 'i')
+            // console.log(i, 'i')
             if (i == 0) {
-                console.log('get first value')
+                // console.log('get first value')
                 if (filterKeys[i] == 'status') {
                     for (var j = 0; j < status.length; j++) {
                         billboardData.map((elem, key) => {
@@ -538,10 +585,26 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
 
@@ -775,10 +838,26 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
 
@@ -1086,10 +1165,28 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
 
@@ -1473,10 +1570,26 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
     }
 
 
@@ -1934,10 +2047,26 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
 
@@ -2472,10 +2601,28 @@ class Market extends Component {
                 }
             }
         }
-        console.log(filteredData, 'filteredData')
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+        // console.log(filteredData, 'filteredData')
+        // this.setState({
+        //     billboardFilterdData: filteredData
+        // })
 
     }
     // filterBillboardData = (filterKeys) => {
@@ -3512,11 +3659,24 @@ class Market extends Component {
                     }
                 }
             }
-            this.setState({
-                billboardFilterdData: rangeValues,
-                minValue: '',
-                maxValue: ''
-            })
+            if (rangeValues.length == 0) {
+                this.setState({
+                    notFoundFilterData: true,
+                    billboardFilterdData: rangeValues,
+                    showRecord: false
+
+                })
+            }
+            else {
+                this.setState({
+                    notFoundFilterData: false,
+                    billboardFilterdData: rangeValues,
+                    minValue: '',
+                    maxValue: '',
+                    showRecord: false
+
+                })
+            }
         }
         else {
             for (var i = 0; i < billboardData.length; i++) {
@@ -3546,13 +3706,28 @@ class Market extends Component {
                     }
                 }
             }
-            this.setState({
-                billboardFilterdData: rangeValues,
-                minValue: '',
-                maxValue: ''
-            })
+            if (rangeValues.length == 0) {
+                this.setState({
+                    notFoundFilterData: true,
+                    billboardFilterdData: rangeValues,
+                    showRecord: false
+
+                })
+            }
+            else {
+                this.setState({
+                    notFoundFilterData: false,
+                    billboardFilterdData: rangeValues,
+                    minValue: '',
+                    maxValue: '',
+                    showRecord: false
+
+                })
+            }
         }
-        console.log(rangeValues, 'rangeValues')
+        // console.log(rangeValues, 'rangeValues')
+        // console.log(rangeValues.length, 'rangeValues length')
+
     }
 
     //for load more data
@@ -3582,17 +3757,73 @@ class Market extends Component {
     }
 
     render() {
-        const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData,
+        const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard } = this.state;
-        console.log(typesOfBillboard, 'typesOfBillboard')
+        // console.log(notFoundFilterData, 'notFoundFilterData')
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
                 <div className='row '>
+                    {notFoundFilterData && filterPoint.length == 0 ?
+                        <div>
+                            <p>
+                                No Record Found
+                            </p>
+                            <button onClick={this.showAllBillboards}>Back</button>
+                        </div>
+                        : filterPoint && filterPoint.map((elem, key) => {
+                            return (
+                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
+                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                        <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
+                                    <div className="div_efect">
+                                        <div className="text_efect">
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                                <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                                <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
+                                        </div>
+                                    </div>
 
-                    {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
+                                    <div id="more_efect1" className="card">
+                                        <div id="more_efect card-body slow">
+                                            <p className="crdtxt2">{elem.companyName}</p>
+                                            <p className="crdtxt2">{elem.city}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+                    {notFoundFilterData == false && filterPoint.length == 0 && showRecord ?
+                        flexxData && flexxData.map((elem, key) => {
+                            return (
+                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
+                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                        <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
+                                    <div className="div_efect">
+                                        <div className="text_efect">
+                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                                <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
+                                                <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
+                                        </div>
+                                    </div>
+
+                                    <div id="more_efect1" className="card">
+                                        <div id="more_efect card-body slow">
+                                            <p className="crdtxt2">{elem.companyName}</p>
+                                            <p className="crdtxt2">{elem.city}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        :
+                        null
+                    }
+                    {/* {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
                         return (
                             <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                 <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -3636,7 +3867,7 @@ class Market extends Component {
                                     </div>
                                 </div>
                             )
-                        })}
+                        })} */}
                 </div>
             </div>
         );
@@ -3848,6 +4079,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMin}
+                                        // value={minValue}
                                         type="Number"
                                         placeholder="Min"
                                         className="marketFilter_Input"
@@ -3859,6 +4091,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMax}
+                                        // value={maxValue}
 
                                         type="Number"
                                         placeholder="Max"
@@ -3878,7 +4111,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMin}
-
+                                        // value={minValue}
                                         type="Number"
                                         placeholder="Min"
                                         className="marketFilter_Input"
@@ -3889,7 +4122,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMax}
-
+                                        // value={maxValue}
                                         type="Number"
                                         placeholder="Max"
                                         className="marketFilter_Input"
@@ -3908,6 +4141,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMin}
+                                        // value={minValue}
 
                                         type="Number"
                                         placeholder="Min"
@@ -3919,6 +4153,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMax}
+                                        // value={maxValue}
 
                                         type="Number"
                                         placeholder="Max"
@@ -3938,6 +4173,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMin}
+                                        // value={minValue}
 
                                         type="Number"
                                         placeholder="Min"
@@ -3949,6 +4185,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMax}
+                                        // value={maxValue}
 
                                         type="Number"
                                         placeholder="Max"
@@ -3968,6 +4205,7 @@ class Market extends Component {
 
                                     <input
                                         onChange={this.onChangeMin}
+                                        // value={minValue}
 
                                         type="Number"
                                         placeholder="Min"
@@ -3978,6 +4216,7 @@ class Market extends Component {
                                 <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                                     <input
                                         onChange={this.onChangeMax}
+                                        // value={maxValue}
 
                                         type="Number"
                                         placeholder="Max"
@@ -4189,11 +4428,12 @@ class Market extends Component {
                                             </Row>
 
                                         </div>
-                            <div className='filterDivs'>Pricing</div>
+                                        <div className='filterDivs'>Pricing</div>
                                         <div className="row fasla1">
                                             <div className="col-12 col-md-8 col-lg-8 col-xl-8">
 
                                                 <input
+                                                    // value={minValue}
                                                     onChange={this.onChangeMin}
                                                     type="Number"
                                                     placeholder="Min"
@@ -4206,6 +4446,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMax}
+                                                    // value={maxValue}
 
                                                     type="Number"
                                                     placeholder="Max"
@@ -4225,6 +4466,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMin}
+                                                    // value={minValue}
 
                                                     type="Number"
                                                     placeholder="Min"
@@ -4236,6 +4478,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMax}
+                                                    // value={maxValue}
 
                                                     type="Number"
                                                     placeholder="Max"
@@ -4255,6 +4498,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMin}
+                                                    // value={minValue}
 
                                                     type="Number"
                                                     placeholder="Min"
@@ -4266,6 +4510,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMax}
+                                                    // value={maxValue}
 
                                                     type="Number"
                                                     placeholder="Max"
@@ -4285,6 +4530,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMin}
+                                                    // value={minValue}
 
                                                     type="Number"
                                                     placeholder="Min"
@@ -4296,6 +4542,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMax}
+                                                    // value={maxValue}
 
                                                     type="Number"
                                                     placeholder="Max"
@@ -4315,6 +4562,7 @@ class Market extends Component {
 
                                                 <input
                                                     onChange={this.onChangeMin}
+                                                    // value={minValue}
 
                                                     type="Number"
                                                     placeholder="Min"
@@ -4325,6 +4573,7 @@ class Market extends Component {
                                             <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                                                 <input
                                                     onChange={this.onChangeMax}
+                                                    // value={maxValue}
 
                                                     type="Number"
                                                     placeholder="Max"
