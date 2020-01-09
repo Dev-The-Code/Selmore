@@ -54,7 +54,13 @@ class Market extends Component {
             to: 2,
             statusValue: '',
             minValue: '',
-            maxValue: ''
+            maxValue: '',
+            notFoundFilterData: false,
+            typesOfBillboard: [],
+            facingOfBillboard: [],
+            lightningOfBillboard: [],
+            audienceTypeOfBillboard: [],
+
         }
     }
 
@@ -66,7 +72,7 @@ class Market extends Component {
                 billboardData: data,
                 headingValue: headingValue
             })
-            localStorage.setItem('billboardData', JSON.stringify(data))
+            // localStorage.setItem('billboardData', JSON.stringify(data))
         }
         else {
             this.billBoradDetails();
@@ -78,7 +84,7 @@ class Market extends Component {
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
-        localStorage.setItem('billboardData', JSON.stringify(data))
+        // localStorage.setItem('billboardData', JSON.stringify(data))
 
         //slice for render some data and click on more button then show some next data
         // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
@@ -115,8 +121,8 @@ class Market extends Component {
         this.filterKeysGet();
     }
 
-    removeValue = (param) => {
-        let arr = []
+    removeValue = (param, value) => {
+        let arr = [];
         if (param == "status") {
             this.setState({
                 statusValue: ''
@@ -129,12 +135,49 @@ class Market extends Component {
         else if (param == "state") {
             filterStateName = arr
         }
+        else if (param == 'types') {
+            let arr1 = [];
+            for (var i = 0; i < filterTypesArr.length; i++) {
+                if (filterTypesArr[i] != value) {
+                    arr1.push(filterTypesArr[i])
+                }
+            }
+            filterTypesArr = arr1;
+        }
+        else if (param == 'facing') {
+            let arr1 = [];
+            for (var i = 0; i < filterFacingArr.length; i++) {
+                if (filterFacingArr[i] != value) {
+                    arr1.push(filterFacingArr[i])
+                }
+            }
+            filterFacingArr = arr1;
+        }
+        else if (param == 'lightning') {
+            let arr1 = [];
+            for (var i = 0; i < filterLightningsArr.length; i++) {
+                if (filterLightningsArr[i] != value) {
+                    arr1.push(filterLightningsArr[i])
+                }
+            }
+            filterLightningsArr = arr1;
+        }
+        else if (param == 'audienceType') {
+            let arr1 = [];
+            for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+                if (filterAudienceTypeArr[i] != value) {
+                    arr1.push(filterAudienceTypeArr[i])
+                }
+            }
+            filterAudienceTypeArr = arr1;
+        }
         this.filterKeysGet();
-
     }
 
     //get checkboxes values
     onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
+        // const { checkBoxValues } = this.state
+        // let arr = []
         if (checkboxParam == 'type') {
             filterTypesArr = checkboxValue;
         } else if (checkboxParam == 'facing') {
@@ -144,6 +187,13 @@ class Market extends Component {
         } else if (checkboxParam == 'audienceType') {
             filterAudienceTypeArr = checkboxValue;
         }
+        // for (var i = 0; i < checkBoxValues.length; i++) {
+        //     arr.push(checkBoxValues[i])
+        // }
+        // for (var j = 0; j < checkboxValue.length; j++) {
+        //     arr.push(checkboxValue[j])
+        // }
+        // this.setState({ checkBoxValues: arr })
         this.filterKeysGet();
     }
 
@@ -167,6 +217,11 @@ class Market extends Component {
 
 
     filterKeysGet = () => {
+        let typesOfBillboard = [];
+        let facingOfBillboard = [];
+        let lightningOfBillboard = [];
+        let audienceTypeOfBillboard = [];
+
         let filterKeys = [];
         if (status.length > 0) {
             filterKeys.push('status')
@@ -192,7 +247,26 @@ class Market extends Component {
         if (filterStateName.length > 0) {
             filterKeys.push('state')
         }
-        console.log(filterKeys, 'filterKeys')
+        for (var i = 0; i < filterTypesArr.length; i++) {
+            typesOfBillboard.push(filterTypesArr[i])
+        }
+        for (var i = 0; i < filterFacingArr.length; i++) {
+            facingOfBillboard.push(filterFacingArr[i])
+        }
+        for (var i = 0; i < filterLightningsArr.length; i++) {
+            lightningOfBillboard.push(filterLightningsArr[i])
+        }
+        for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+            audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
+        }
+        console.log(filterTypesArr, 'filterTypesArr for state')
+        this.setState({
+            typesOfBillboard: typesOfBillboard,
+            facingOfBillboard: facingOfBillboard,
+            lightningOfBillboard: lightningOfBillboard,
+            audienceTypeOfBillboard: audienceTypeOfBillboard,
+        })
+
         this.filterBillboardData(filterKeys)
     }
 
@@ -1405,7 +1479,7 @@ class Market extends Component {
         })
     }
 
-    
+
     filterBillboardDataWithSixKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
@@ -1868,7 +1942,7 @@ class Market extends Component {
     }
 
 
-    
+
     filterBillboardDataWithSevenKeys = (filterKeys) => {
         const { billboardData } = this.state;
         let arr1 = [];
@@ -3508,14 +3582,16 @@ class Market extends Component {
     }
 
     render() {
-        const { billboardData, billboardFilterdData, cities, states, i, category } = this.state;
-
+        const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData,
+            typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard } = this.state;
+        console.log(typesOfBillboard, 'typesOfBillboard')
         let flexxData = billboardData.slice(0, i + 9);
         let filterPoint = billboardFilterdData.slice(0, i + 9);
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
                 <div className='row '>
+
                     {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
                         return (
                             <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
@@ -3587,12 +3663,53 @@ class Market extends Component {
                             onClick={this.removeValue.bind(this, 'city')}
                         >x</span></li>
                     </div> : null}
-                {filterCityName && filterStateName.length > 0 ?
+                {filterStateName && filterStateName.length > 0 ?
                     <div>
                         <li>{filterStateName[0]}<span class="close"
                             onClick={this.removeValue.bind(this, 'state')}
                         >x</span></li>
                     </div> : null}
+
+                {typesOfBillboard && typesOfBillboard.length > 0 ?
+                    typesOfBillboard.map((elem, key) => {
+                        return (
+                            <div>
+                                <li>{elem}<span class="close"
+                                    onClick={this.removeValue.bind(this, 'types', elem)}
+                                >x</span></li>
+                            </div>)
+                    })
+                    : null}
+                {facingOfBillboard && facingOfBillboard.length > 0 ?
+                    facingOfBillboard.map((elem, key) => {
+                        return (
+                            <div>
+                                <li>{elem}<span class="close"
+                                    onClick={this.removeValue.bind(this, 'facing', elem)}
+                                >x</span></li>
+                            </div>)
+                    })
+                    : null}
+                {lightningOfBillboard && lightningOfBillboard.length > 0 ?
+                    lightningOfBillboard.map((elem, key) => {
+                        return (
+                            <div>
+                                <li>{elem}<span class="close"
+                                    onClick={this.removeValue.bind(this, 'lightning', elem)}
+                                >x</span></li>
+                            </div>)
+                    })
+                    : null}
+                {audienceTypeOfBillboard && audienceTypeOfBillboard.length > 0 ?
+                    audienceTypeOfBillboard.map((elem, key) => {
+                        return (
+                            <div>
+                                <li>{elem}<span class="close"
+                                    onClick={this.removeValue.bind(this, 'audienceType', elem)}
+                                >x</span></li>
+                            </div>)
+                    })
+                    : null}
                 <div className='row filter animated animatedFadeInUp fadeInUp'>
                     <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block pnl'>
                         <Radio.Group onChange={this.onChange} value={this.state.statusValue}>
@@ -3608,6 +3725,9 @@ class Market extends Component {
                         </Radio.Group>
 
                         <CheckboxGroup
+                            // defaultValue={[typesOfBillboard]}
+                            value={typesOfBillboard}
+                            //   defaultValue={['Static']}
                             // setFieldsValue={this.state.filterValue}
                             onChange={this.onChangeCheckBoxes.bind(this, 'type')}
                         >
@@ -3647,6 +3767,7 @@ class Market extends Component {
                         </CheckboxGroup>
 
                         <CheckboxGroup
+                            value={facingOfBillboard}
                             onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
                         >
                             <Row>
@@ -3661,6 +3782,7 @@ class Market extends Component {
                         </CheckboxGroup>
 
                         <CheckboxGroup
+                            value={lightningOfBillboard}
                             onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
                         >
                             <div className='filterDivs'>Lightning</div>
@@ -3675,6 +3797,7 @@ class Market extends Component {
                         </CheckboxGroup>
 
                         <CheckboxGroup
+                            value={audienceTypeOfBillboard}
                             onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
                         >
                             <div className='filterDivs'>Audience Type</div>
@@ -3879,6 +4002,66 @@ class Market extends Component {
                                         <h3>Filters<img src={filtersImg} alt='img' className="caret_down"></img></h3>
                                     </a>
                                 </div>
+
+                                {this.state.statusValue != '' ?
+                                    <div>
+                                        <li>{this.state.statusValue}<span class="close"
+                                            onClick={this.removeValue.bind(this, 'status')}
+                                        >x</span></li>
+                                    </div> : null}
+                                {filterCityName && filterCityName.length > 0 ?
+                                    <div>
+                                        <li>{filterCityName[0]}<span class="close"
+                                            onClick={this.removeValue.bind(this, 'city')}
+                                        >x</span></li>
+                                    </div> : null}
+                                {filterStateName && filterStateName.length > 0 ?
+                                    <div>
+                                        <li>{filterStateName[0]}<span class="close"
+                                            onClick={this.removeValue.bind(this, 'state')}
+                                        >x</span></li>
+                                    </div> : null}
+
+                                {typesOfBillboard && typesOfBillboard.length > 0 ?
+                                    typesOfBillboard.map((elem, key) => {
+                                        return (
+                                            <div>
+                                                <li>{elem}<span class="close"
+                                                    onClick={this.removeValue.bind(this, 'types', elem)}
+                                                >x</span></li>
+                                            </div>)
+                                    })
+                                    : null}
+                                {facingOfBillboard && facingOfBillboard.length > 0 ?
+                                    facingOfBillboard.map((elem, key) => {
+                                        return (
+                                            <div>
+                                                <li>{elem}<span class="close"
+                                                    onClick={this.removeValue.bind(this, 'facing', elem)}
+                                                >x</span></li>
+                                            </div>)
+                                    })
+                                    : null}
+                                {lightningOfBillboard && lightningOfBillboard.length > 0 ?
+                                    lightningOfBillboard.map((elem, key) => {
+                                        return (
+                                            <div>
+                                                <li>{elem}<span class="close"
+                                                    onClick={this.removeValue.bind(this, 'lightning', elem)}
+                                                >x</span></li>
+                                            </div>)
+                                    })
+                                    : null}
+                                {audienceTypeOfBillboard && audienceTypeOfBillboard.length > 0 ?
+                                    audienceTypeOfBillboard.map((elem, key) => {
+                                        return (
+                                            <div>
+                                                <li>{elem}<span class="close"
+                                                    onClick={this.removeValue.bind(this, 'audienceType', elem)}
+                                                >x</span></li>
+                                            </div>)
+                                    })
+                                    : null}
                                 <div id="collapseOne" className="collapse show" data-parent="#accordion">
                                     <div className="card-body">
                                         <Radio.Group onChange={this.onChange} value={this.state.statusValue}>
@@ -3893,6 +4076,7 @@ class Market extends Component {
                                             </Row>
                                         </Radio.Group>
                                         <CheckboxGroup
+                                            value={typesOfBillboard}
                                             // setFieldsValue={this.state.filterValue}
                                             onChange={this.onChangeCheckBoxes.bind(this, 'type')}
                                         >
@@ -3932,6 +4116,7 @@ class Market extends Component {
                         </CheckboxGroup>
 
                                         <CheckboxGroup
+                                            value={facingOfBillboard}
                                             onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
                                         >
                                             <Row>
@@ -3946,6 +4131,7 @@ class Market extends Component {
                                         </CheckboxGroup>
 
                                         <CheckboxGroup
+                                            value={lightningOfBillboard}
                                             onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
                                         >
                                             <div className='filterDivs'>Lightning</div>
@@ -3960,6 +4146,7 @@ class Market extends Component {
                                         </CheckboxGroup>
 
                                         <CheckboxGroup
+                                            value={audienceTypeOfBillboard}
                                             onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
                                         >
                                             <div className='filterDivs'>Audience Type</div>
@@ -4002,8 +4189,6 @@ class Market extends Component {
                                             </Row>
 
                                         </div>
-
-                                        orm>
                             <div className='filterDivs'>Pricing</div>
                                         <div className="row fasla1">
                                             <div className="col-12 col-md-8 col-lg-8 col-xl-8">
@@ -4164,6 +4349,9 @@ class Market extends Component {
                     </div>
                     <div className='col-xl-9 col-lg-9 col-md-8'>
                         <div className='col-12 d-block d-sm-none' style={{ fontSize: '30px' }}>Billboards</div>
+                        <div>
+                            {/* {billboardFilterdData.length == 0 ? <div> </div> : <div>Data Not Show</div>} */}
+                        </div>
                         {billboardRendring}
                         <div className="d-flex justify-content-center">
                             <button type="button" className="btn btn-primary btn-sm" onClick={this.onFlipData}>
