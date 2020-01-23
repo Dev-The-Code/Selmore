@@ -34,7 +34,7 @@ class Header extends Component {
         <div className="container" style={{ paddingLeft: '0px' }}>
           <div className="row">
             <div className="col-md-2 col-lg-2 col-xl-2 d-none d-sm-block">
-              <Link rel="noopener noreferrer" to={`/`}>
+              <Link rel="noopener noreferrer" to={`/home`}>
                 <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
               </Link>
             </div>
@@ -43,7 +43,7 @@ class Header extends Component {
 
               <ul className={value ? 'nav navsm' : 'nav navsm2'}>
                 <li className="nav-item navmargin" >
-                  <Link rel="noopener noreferrer" to={`/`}>
+                  <Link rel="noopener noreferrer" to={`/home`}>
                     <span className="navFont">HOME</span>
                   </Link>
                 </li>
@@ -164,7 +164,7 @@ class Header extends Component {
                 <div className="menunav-content">
                   <ul className="" style={{ marginTop: '-30px' }}>
                     <li className="mob_li" style={{ listStyle: 'none' }}>
-                      <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
+                      <Link rel="noopener noreferrer" to={`/home`} onClick={this.closeNav}>
                         <span className="navFont">Home</span>
                       </Link>
                     </li>

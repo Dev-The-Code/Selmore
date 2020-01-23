@@ -29,13 +29,15 @@ import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
 import AdminUser from './Components/Admin Users/adminUser';
 import Carts from './Components/Carts of Book billboards/carts';
+import RootPage from './Components/RootPage';
 import './App.css';
 
 class Routes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropDownUser: false
+      dropDownUser: false,
+      showHome: false,
     }
   }
   showDropDown = () => {
@@ -54,43 +56,54 @@ class Routes extends Component {
         <Provider store={store}>
           <BrowserRouter>
             <div>
+
+              {/* <Route exact path="/"
+                  render={props => {
+                    return <RootPage {...props}
+                      showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                      hideDropDown={this.hideDropDown} />
+                  }}
+                // component={Home}
+                ></Route> */}
+
               <Route exact path="/"
                 render={props => {
+                  console.log(props , 'props')
                   return <Home {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
               // component={Home}
               ></Route>
-              <Route exact path="/cart"
+              <Route  path="/cart"
                 render={props => {
                   return <Carts {...props}
-                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                  hideDropDown={this.hideDropDown} />
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route exact path="/users"
+              <Route  path="/users"
                 render={props => {
                   return <AdminUser {...props}
-                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                  hideDropDown={this.hideDropDown} />
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route exact path="/bidding_form"
+              <Route  path="/bidding_form"
                 render={props => {
                   return <BidForm {...props}
-                  showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                  hideDropDown={this.hideDropDown} />
+                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                    hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route exact path="/megaSale"
+              <Route  path="/megaSale"
                 render={props => {
                   return <MegaSale {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route exact path="/megaDetail/:value"
+              <Route  path="/megaDetail/:value"
                 render={props => {
                   return <MegaDetail {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}

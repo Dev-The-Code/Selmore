@@ -58,7 +58,7 @@ class Dropdown extends Component {
             <MDBDropdownMenu basic>
               <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
               <MDBDropdownItem onClick={this.logOut}>
-                <Link rel="noopener noreferrer" to={`/`}>
+                <Link rel="noopener noreferrer" to={`/home`}>
                   Log Out
                 </Link>
               </MDBDropdownItem>
@@ -75,7 +75,7 @@ class Dropdown extends Component {
             <MDBDropdownMenu basic>
               <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`} onClick={this.closeNav}><h5>Profile</h5></Link></MDBDropdownItem>
               <MDBDropdownItem className="mob_butn_log" onClick={this.logOut} onClick={this.closeNav}>
-                <Link rel="noopener noreferrer" to={`/`} onClick={this.closeNav}>
+                <Link rel="noopener noreferrer" to={`/home`} onClick={this.closeNav}>
                   <h5>Log Out</h5>
                 </Link>
               </MDBDropdownItem>
