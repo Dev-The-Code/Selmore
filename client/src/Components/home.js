@@ -36,6 +36,7 @@ class Home extends Component {
 
   render() {
     const { dropDownUser } = this.state;
+    console.log('home')
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
