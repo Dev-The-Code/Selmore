@@ -1,0 +1,314 @@
+
+@media screen and (min-width: 360px) and (max-width: 767px){
+    .backImgee_baner{
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1579870370/erik-mclean-wj_Tjw7oV-g-unsplash_ybrkre.jpg");
+       /* border-radius: 1vw; */
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover;
+       background-position-x: center;
+       padding-top: 40vw;
+       height: 100vh;
+       /* filter: brightness(0.5); */
+    }
+    .mainTextBaner{
+        color: white;
+        font-size: 23px;
+        font-weight: 700;
+        margin-bottom: 6vw;
+    }
+}
+@media screen and (min-width: 768px){
+    .backImgee_baner{
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1579870370/erik-mclean-wj_Tjw7oV-g-unsplash_ybrkre.jpg");
+       /* border-radius: 1vw; */
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover;
+       background-position-x: center;
+       padding-top: 17vw;
+       height: 100vh;
+       /* filter: brightness(0.5); */
+    }
+    .mainTextBaner{
+        color: white;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 2vw;
+    }
+}
+
+.alreadyAcontTextSignup{
+	font-size: 17px;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:white;
+}
+.alreadyAcontText{
+	font-size: 17px;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:#244D5E;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.SignInformText{
+	font-size: 17px;
+	margin-left: 0.5vw;
+	font-weight: 600;
+	font-family: Helvetica;
+	color:#244D5E;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.school3{
+	font-size: 23px;
+    font-family: Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+}
+.school4{
+	margin-left: 102px;
+    background-color: white;
+    width: 110px;
+}
+.school5{
+	font-size: 17px;
+	font-weight: 600;
+	font-family: Helvetica;
+}
+.school6{
+	margin-top: 5vw;
+}
+.school7{
+	margin-top: 9%;
+}
+.school8{
+	font-weight: 500;
+	color: white;
+}
+.school10{
+	font-size: 17px;
+    font-family: Helvetica;
+    font-weight: 700;
+    color: white;
+}
+.field{
+    margin-left: 40rem;
+    margin-right: 40rem;
+    /* margin-top: 30rem;
+    margin-bottom: 30rem; */
+
+}
+.btn-center{
+    margin-left: 50rem;
+    margin-right: 40rem;
+}
+.alertError{
+    margin-left: 40rem;
+    margin-right: 40rem;
+    margin-top: 1rem;
+                
+}
+
+@media screen and (min-width: 360px) and (max-width: 660px){
+	.school1{
+	background-color: #29abe2;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1020px){
+	.school1{
+	background-color: #29abe2;
+	height: auto;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+	.school1{
+	background-color: #29abe2;
+	height: auto;
+	}
+}
+@media screen and (min-width: 1366px){
+	.school1{
+	background-color: #29abe2;
+	height: auto;
+	}
+}
+
+
+
+
+/* Absolute Center Spinner */
+.loading {
+	position: fixed;
+	z-index: 999;
+	height: 2em;
+	width: 2em;
+	overflow: visible;
+	margin: auto;
+	top: 0;
+	left: 100% !important;
+	bottom: 0;
+	right: 0;
+  }
+  
+  /* Transparent Overlay */
+  .loading:before {
+	content: '';
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 200% !important;
+	height: 100%;
+	background-color: rgba(0,0,0,0.3);
+  }
+  
+  /* :not(:required) hides these rules from IE9 and below */
+  .loading:not(:required) {
+	/* hide "loading..." text */
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+  }
+  
+  .loading:not(:required):after {
+	content: '';
+	display: block;
+	font-size: 10px;
+	width: 1em;
+	height: 1em;
+	margin-top: -0.5em;
+	-webkit-animation: spinner 1500ms infinite linear;
+	-moz-animation: spinner 1500ms infinite linear;
+	-ms-animation: spinner 1500ms infinite linear;
+	-o-animation: spinner 1500ms infinite linear;
+	animation: spinner 1500ms infinite linear;
+	border-radius: 0.5em;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+	box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  }
+
+  /*mobile*/
+  
+  .loading1 {
+	position: fixed;
+	z-index: 999;
+	height: 2em;
+	width: 2em;
+	overflow: visible;
+	margin: auto;
+	top: 0;
+	left: 0!important;
+	bottom: 0;
+	right: 0;
+  }
+  
+  /* Transparent Overlay */
+  .loading1:before {
+	content: '';
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100%;
+	background-color: rgba(0,0,0,0.3);
+  }
+  
+  /* :not(:required) hides these rules from IE9 and below */
+  .loading:not(:required) {
+	/* hide "loading..." text */
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+  }
+  
+  .loading1:not(:required):after {
+	content: '';
+	display: block;
+	font-size: 10px;
+	width: 1em;
+	height: 1em;
+	margin-top: -0.5em;
+	-webkit-animation: spinner 1500ms infinite linear;
+	-moz-animation: spinner 1500ms infinite linear;
+	-ms-animation: spinner 1500ms infinite linear;
+	-o-animation: spinner 1500ms infinite linear;
+	animation: spinner 1500ms infinite linear;
+	border-radius: 0.5em;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+	box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  }
+  /* Animation */
+  
+  @-webkit-keyframes spinner {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  -moz-transform: rotate(0deg);
+	  -ms-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  -moz-transform: rotate(360deg);
+	  -ms-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+  }
+  @-moz-keyframes spinner {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  -moz-transform: rotate(0deg);
+	  -ms-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  -moz-transform: rotate(360deg);
+	  -ms-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+  }
+  @-o-keyframes spinner {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  -moz-transform: rotate(0deg);
+	  -ms-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  -moz-transform: rotate(360deg);
+	  -ms-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+  }
+  @keyframes spinner {
+	0% {
+	  -webkit-transform: rotate(0deg);
+	  -moz-transform: rotate(0deg);
+	  -ms-transform: rotate(0deg);
+	  -o-transform: rotate(0deg);
+	  transform: rotate(0deg);
+	}
+	100% {
+	  -webkit-transform: rotate(360deg);
+	  -moz-transform: rotate(360deg);
+	  -ms-transform: rotate(360deg);
+	  -o-transform: rotate(360deg);
+	  transform: rotate(360deg);
+	}
+  }

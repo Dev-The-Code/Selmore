@@ -12,7 +12,7 @@ class LogOut extends Component {
     }
     signOut() {
         localStorage.removeItem('loggedIn');
-        return <Redirect to='/' />
+        return <Redirect to='/home' />
     }
     render() {
         return (

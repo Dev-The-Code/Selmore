@@ -8,7 +8,9 @@ class MarketPlace extends Component {
         super(props);
         this.state = {
             data: '',
-            showValueHead: ''
+            showValueHead: '',
+            dropDownUser: false,
+
         }
     }
     componentWillMount() {
@@ -22,11 +24,24 @@ class MarketPlace extends Component {
         }
         window.scrollTo(0, 0);
     }
+    
+      showDropDown = () => {
+        this.setState({
+          dropDownUser: true
+        })
+      }
+    
+      hideDropDown = () => {
+        this.setState({
+          dropDownUser: false
+        })
+      }
+    
     render() {
-        const { data, showValueHead } = this.state;
+        const { data, showValueHead , dropDownUser} = this.state;
         return (
             <div>
-                <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
+                <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
                 <Market data={data} showValueHead={showValueHead} />
                 <Footer />
             </div>

@@ -12,7 +12,6 @@ import Buyer from './Components/Buyer/buyer';
 import Contactpage from './Components/Contact Page/contact';
 import Billboardmardan from './Components/Billboard Mardan/billmardan';
 import Bidding from './Components/Bidding/bidding';
-import Billbidding from './Components/Billbidding/billbidding';
 import Billofbidding1 from './Components/Billboard of bidding1/billofbidding';
 import BidForm from './Components/BiddingForm/bidForm';
 import './App.css';
@@ -31,6 +30,11 @@ import AdminUser from './Components/Admin Users/adminUser';
 import Carts from './Components/Carts of Book billboards/carts';
 import RootPage from './Components/RootPage';
 import './App.css';
+import { PrivateRoute } from './Components/Login Form/PrivateRoute';
+import { AdminAccess } from './Components/Login Form/AdminAccess';
+
+// import Billbidding from './Components/Billbidding/billbidding';
+// import CenteralStore from './Components/centeralStore';
 
 class Routes extends Component {
   constructor(props) {
@@ -50,60 +54,87 @@ class Routes extends Component {
       dropDownUser: false
     })
   }
+
   render() {
     return (
       <div className='App'>
         <Provider store={store}>
+          {/* <CenteralStore> */}
           <BrowserRouter>
             <div>
 
               {/* <Route exact path="/"
-                  render={props => {
-                    return <RootPage {...props}
-                      showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                      hideDropDown={this.hideDropDown} />
-                  }}
-                // component={Home}
-                ></Route> */}
-
-              <Route exact path="/"
                 render={props => {
-                  console.log(props , 'props')
-                  return <Home {...props}
+                  return <RootPage {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
               // component={Home}
-              ></Route>
-              <Route  path="/cart"
+              ></Route> */}
+              <AdminAccess exact path="/" component={RootPage}></AdminAccess>
+              
+              <PrivateRoute exact path="/home" component={Home}></PrivateRoute>
+              <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
+              <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
+              <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute>
+              <PrivateRoute  path="/megaSale" component={MegaSale}></PrivateRoute>
+              <PrivateRoute  path="/megaDetail/:value" component={MegaDetail}></PrivateRoute>
+              <PrivateRoute  path="/about" component={About}></PrivateRoute>
+              <PrivateRoute  path="/advertising_agency" component={Advertising}></PrivateRoute>
+              <PrivateRoute  path="/faq" component={Faq}></PrivateRoute>
+              <PrivateRoute  path="/contact" component={Contactpage}></PrivateRoute>
+              <PrivateRoute  path="/bidding" component={Bidding}></PrivateRoute>
+              <PrivateRoute  path="/bidding_detail/:value" component={Billofbidding1}></PrivateRoute>
+              <PrivateRoute  path="/signin" component={Login}></PrivateRoute>
+              <PrivateRoute  path="/seller" component={Seller}></PrivateRoute>
+              <PrivateRoute  path="/buyer" component={Buyer}></PrivateRoute>
+              <PrivateRoute  path="/billboard" component={Billboardmardan}></PrivateRoute>
+              <PrivateRoute  path="/profile" component={ProfileView}></PrivateRoute>
+              <PrivateRoute  path="/home" component={LogOut}></PrivateRoute>
+              <PrivateRoute  path="/list_add" component={AddBillboards}></PrivateRoute>
+              <PrivateRoute  path="/billborad_Militry" component={Billboardmilitary}></PrivateRoute>
+              <PrivateRoute  path="/market_place" component={MarketPlace}></PrivateRoute>
+              <PrivateRoute  path="/dashboard" component={Dashboard}></PrivateRoute>
+             
+
+              {/* <PrivateRoute exact path="/home"
+                  render={props => {
+                    return <Home {...props}
+                      showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
+                      hideDropDown={this.hideDropDown} />
+                  }}
+                // component={Home}
+                ></PrivateRoute> */}
+              {/* <PrivateRoute path="/cart"
                 render={props => {
                   return <Carts {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
-              ></Route>
-              <Route  path="/users"
+              ></PrivateRoute> */}
+
+              {/* <Route path="/users"
                 render={props => {
                   return <AdminUser {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
-              ></Route>
-              <Route  path="/bidding_form"
+              ></Route> */}
+              {/* <Route path="/bidding_form"
                 render={props => {
                   return <BidForm {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              <Route  path="/megaSale"
+              <Route path="/megaSale"
                 render={props => {
                   return <MegaSale {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
-              ></Route>
-              <Route  path="/megaDetail/:value"
+              ></Route> */}
+              {/* <Route path="/megaDetail/:value"
                 render={props => {
                   return <MegaDetail {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
@@ -171,7 +202,7 @@ class Routes extends Component {
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
-              ></Route>
+              ></Route> */}
               {/* <Route path="/city_bidding"
                 render={props => {
                   return <Billbidding {...props}
@@ -179,7 +210,7 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route> */}
-              <Route path="/billboard"
+              {/* <Route path="/billboard"
                 render={props => {
                   return <Billboardmardan {...props}
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
@@ -214,7 +245,6 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route>
-              {/* <Route path="/market_place" component={MarketPlace}></Route> */}
 
               <Route path='/market_place'
 
@@ -230,9 +260,10 @@ class Routes extends Component {
                     showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
                     hideDropDown={this.hideDropDown} />
                 }}
-              ></Route>
+              ></Route> */}
             </div>
           </BrowserRouter>
+          {/* </CenteralStore> */}
         </Provider>
       </div >
     );

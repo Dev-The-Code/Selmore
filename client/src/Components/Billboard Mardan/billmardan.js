@@ -7,13 +7,34 @@ import './billmardan.css';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billmardan extends Component {
-  componentWillMount() {
-    window.scrollTo(0,0);
+  constructor(props) {
+    super(props)
+    this.state = {
+      dropDownUser: false,
+    }
   }
+
+  componentWillMount() {
+    window.scrollTo(0, 0);
+  }
+
+  showDropDown = () => {
+    this.setState({
+      dropDownUser: true
+    })
+  }
+
+  hideDropDown = () => {
+    this.setState({
+      dropDownUser: false
+    })
+  }
+
   render() {
+    const { dropDownUser } = this.state;
     return (
       <div>
-        <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
+        <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <AbBanner advertise={'BILLBOARDS'} bred={'LISTING'} bred2={'> MARDAN'} />
         <Mardanpanel1 />
         <Mardanpanel2 />

@@ -11,7 +11,7 @@ class Billbidding extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: ''
+      dropDownUser: false,
     }
   }
 
@@ -19,12 +19,23 @@ class Billbidding extends Component {
     window.scrollTo(0, 0);
   }
 
+  showDropDown = () => {
+    this.setState({
+      dropDownUser: true
+    })
+  }
+
+  hideDropDown = () => {
+    this.setState({
+      dropDownUser: false
+    })
+  }
 
   render() {
-    const { data } = this.state;
+    const { dropDownUser } = this.state;
     return (
       <div>
-        <Header showDropDown={this.props.showDropDown} hideDropDown={this.props.hideDropDown} dropDownUser={this.props.dropDownUser} />
+        <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <BannerBid/>
         <Billofpanel1 data={this.props.location.state} />
         <Billofpanel2 data={this.props.location.state}/>
