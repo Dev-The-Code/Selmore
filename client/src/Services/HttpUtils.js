@@ -4,7 +4,6 @@ import { AsyncStorage } from '@callstack/async-storage'
 // const BASE_URL = 'https://salmore.herokuapp.com';
 const BASE_URL = 'https://selmoremedia.com';
 
-
 const headersFor = (token) => {
     let headers = {
         'Accept': 'application/json',
@@ -35,6 +34,7 @@ const handleErrors = (response) => {
 
     });
 }
+
 
 const hitEndpoint = (method, endpoint, token, body) => {
     let headers = headersFor(token)
