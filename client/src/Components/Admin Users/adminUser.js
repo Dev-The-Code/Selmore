@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './adminUser.css';
+import './adminUser.scss';
 import Header from '../header';
 import Footer from '../footer';
 import UserPanel1 from './adminUserPanel1';

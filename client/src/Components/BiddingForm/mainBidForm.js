@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './bidForm.css';
+import './bidForm.scss';
 import { Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker } from 'antd';
 import Select from 'react-select';
 import moment from 'moment';

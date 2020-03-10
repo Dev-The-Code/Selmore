@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './market.css';
+import './market.scss';
 import {
     Checkbox, Form, Row, Col, Input, Radio, Button
 } from 'antd';
@@ -3874,11 +3874,16 @@ class Market extends Component {
         return (
             <div className="container">
                 <div className='row billboard animated animatedFadeInUp fadeInUp'>
-                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>Filters</div>
+                    <div className='col-xl-3 col-lg-3 col-md-4 d-none d-sm-block'>
+                        <span className="filteMarkt">Filters</span>
+                    </div>
                     {this.state.headingValue != '' ?
-                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>{this.state.headingValue}</div>
+                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>
+                            <span className="billMarkt">{this.state.headingValue}</span></div>
                         :
-                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>BillBoards</div>
+                        <div className='col-xl-8 col-lg-8 col-md-8 d-none d-sm-block'>
+                            <span className="billMarkt">BillBoards</span>
+                        </div>
                     }
                 </div>
 
@@ -3947,10 +3952,10 @@ class Market extends Component {
                             <div className='filterDivs'>Status</div>
                             <Row>
                                 <Col >
-                                    <Radio className="fasla" value="Available">&nbsp;Available</Radio>
+                                    <Radio className="fasla" value="Available" className="radioText">&nbsp;Available</Radio>
                                 </Col>
                                 <Col >
-                                    <Radio className="fasla" value="No Available">&nbsp;No Available</Radio>
+                                    <Radio className="fasla" value="No Available" className="radioText">&nbsp;No Available</Radio>
                                 </Col>
                             </Row>
                         </Radio.Group>
@@ -3965,34 +3970,34 @@ class Market extends Component {
                             <div className='filterDivs'>Types</div>
                             <Row>
                                 <Col>
-                                    <Checkbox className="fasla" value='Static'>&nbsp;Static</Checkbox>
+                                    <Checkbox className="fasla" value='Static' className="radioText">&nbsp;Static</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Classic">&nbsp;Classic</Checkbox>
+                                    <Checkbox className="fasla" value="Classic" className="radioText">&nbsp;Classic</Checkbox>
                                 </Col>
                                 <Col>
-                                    <Checkbox className="fasla" value='Digital'>&nbsp;Digital</Checkbox>
+                                    <Checkbox className="fasla" value='Digital' className="radioText">&nbsp;Digital</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Mobile">&nbsp;Mobile</Checkbox>
+                                    <Checkbox className="fasla" value="Mobile" className="radioText">&nbsp;Mobile</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Bridge">&nbsp;Bridge</Checkbox>
+                                    <Checkbox className="fasla" value="Bridge" className="radioText">&nbsp;Bridge</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Vinyl">&nbsp;Vinyl</Checkbox>
+                                    <Checkbox className="fasla" value="Vinyl" className="radioText">&nbsp;Vinyl</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Painted">&nbsp;Painted</Checkbox>
+                                    <Checkbox className="fasla" value="Painted" className="radioText">&nbsp;Painted</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Three Dimensional">&nbsp;Three Dimensional</Checkbox>
+                                    <Checkbox className="fasla" value="Three Dimensional" className="radioText">&nbsp;Three Dimensional</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Scented">&nbsp;Scented</Checkbox>
+                                    <Checkbox className="fasla" value="Scented" className="radioText">&nbsp;Scented</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Lamp post">&nbsp;Lamp Post</Checkbox>
+                                    <Checkbox className="fasla" value="Lamp post" className="radioText">&nbsp;Lamp Post</Checkbox>
                                 </Col>
                             </Row>&emsp;
                         </CheckboxGroup>
@@ -4004,10 +4009,10 @@ class Market extends Component {
                             <Row>
                                 <div className='filterDivs'>Facing</div>
                                 <Col >
-                                    <Checkbox className="fasla" value="Front">&nbsp;Front</Checkbox>
+                                    <Checkbox className="fasla" value="Front" className="radioText">&nbsp;Front</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Back">&nbsp;Back</Checkbox>
+                                    <Checkbox className="fasla" value="Back" className="radioText">&nbsp;Back</Checkbox>
                                 </Col>
                             </Row>
                         </CheckboxGroup>
@@ -4019,10 +4024,10 @@ class Market extends Component {
                             <div className='filterDivs'>Lightning</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla" value="Yes">&nbsp;Yes</Checkbox>
+                                    <Checkbox className="fasla" value="Yes" className="radioText">&nbsp;Yes</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="No">&nbsp;No</Checkbox>
+                                    <Checkbox className="fasla" value="No" className="radioText">&nbsp;No</Checkbox>
                                 </Col>
                             </Row>
                         </CheckboxGroup>
@@ -4034,16 +4039,16 @@ class Market extends Component {
                             <div className='filterDivs'>Audience Type</div>
                             <Row>
                                 <Col >
-                                    <Checkbox className="fasla" value="All types of people">&nbsp;All types of people</Checkbox>
+                                    <Checkbox className="fasla" value="All types of people" className="radioText">&nbsp;All types of people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Office type of people">&nbsp;Office type of people</Checkbox>
+                                    <Checkbox className="fasla" value="Office type of people" className="radioText">&nbsp;Office type of people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Labour type people">&nbsp;Labour type people</Checkbox>
+                                    <Checkbox className="fasla" value="Labour type people" className="radioText">&nbsp;Labour type people</Checkbox>
                                 </Col>
                                 <Col >
-                                    <Checkbox className="fasla" value="Govt official type people">&nbsp;Govt official type people</Checkbox>
+                                    <Checkbox className="fasla" value="Govt official type people" className="radioText">&nbsp;Govt official type people</Checkbox>
                                 </Col>
                             </Row>
                         </CheckboxGroup>

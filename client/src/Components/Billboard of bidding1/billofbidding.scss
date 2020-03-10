@@ -1,3 +1,12 @@
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
+.BidhistoryTH{
+    font-family: $font-stack;
+}
 .kurta1{
 	background-color: #E4D9D9;
 }
@@ -20,15 +29,15 @@
 	color: white;
 	font-weight: 500;
 	font-size: 20px;
-	font-family: Helvetica;
+	font-family: $font-stack;
 }
 .doesit3{
 	font-weight: 700;
-	font-family: Helvetica;
+	font-family: $font-stack;
 }
 .doesit4{
 	font-weight: 600;
-	font-family: Helvetica;
+	font-family: $font-stack;
 }
 .doesit5{
     background-color: #E1DEDE;
@@ -38,7 +47,8 @@
 .doesit6{
 	padding: 8px;
 	border-bottom: 3px solid #E1DEDE;
-	border-right: 2px solid #E1DEDE;
+    border-right: 2px solid #E1DEDE;
+    font-family: $font-regular;
 }
 .doesit7{
 	background-color: #E1DEDE;
@@ -56,6 +66,7 @@
 .doesit10{
 	    font-size: 17px;
     font-weight: 500;
+    font-family: $font-stack;
 }
 .table>tbody>tr>td {
 	padding: 0px;

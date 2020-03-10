@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './megaSale.css';
+import './megaSale.scss';
 import { Link, Redirect } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
 import moment from 'moment';
@@ -128,7 +128,7 @@ class MegaSalepanel1 extends Component {
 												</button>
 												</Link> */}
 												<button class="btn btn-primary" onClick={this.billboardData.bind(this, elem)}>
-													More Details
+													<span className="moredetailMegabtn">More Details</span>
 												</button>
 											</div>
 										</div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './singposted.css';
+import './singposted.scss';
 
 class Singbanner extends Component {
 	render() {

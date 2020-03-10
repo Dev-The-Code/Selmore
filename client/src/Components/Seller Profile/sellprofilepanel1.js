@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './sellprofile.css';
+import './sellprofile.scss';
 
 class Sellprofilepanel1 extends Component {
 	render() {

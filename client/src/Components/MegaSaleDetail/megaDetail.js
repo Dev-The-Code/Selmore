@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
-import './megaDetail.css';
+import './megaDetail.scss';
 import AbBanner from '../About Selmore/abBanner';
 import Banner1 from './megaDetailBanner';
 import Megapanel1 from './megaDetailPanel1';

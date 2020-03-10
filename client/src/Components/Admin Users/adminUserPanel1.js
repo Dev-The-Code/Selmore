@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './adminUser.css';
+import './adminUser.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
 
 
@@ -81,12 +81,12 @@ class UserPanel1 extends Component {
                                     <table class="table" style={{ textAlign: 'center' }}>
                                         <thead className="tablee_Head">
                                             <tr>
-                                                <th>#</th>
-                                                <th>Company name</th>
-                                                <th>Email</th>
-                                                <th>Landline no.</th>
-                                                <th>Approve</th>
-                                                <th>Decline</th>
+                                                <th className="BidhistoryTH">#</th>
+                                                <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Email</th>
+                                                <th className="BidhistoryTH">Landline no.</th>
+                                                <th className="BidhistoryTH">Approve</th>
+                                                <th className="BidhistoryTH">Decline</th>
                                             </tr>
                                         </thead>
                                         {newUsers && newUsers.map((elem, key) => {
@@ -117,11 +117,11 @@ class UserPanel1 extends Component {
                                     <table class="table" style={{ textAlign: 'center' }}>
                                         <thead className="tablee_Head">
                                             <tr>
-                                                <th>#</th>
-                                                <th>Company name</th>
-                                                <th>Email</th>
-                                                <th>Landline no.</th>
-                                                <th>Block</th>
+                                                <th className="BidhistoryTH">#</th>
+                                                <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Email</th>
+                                                <th className="BidhistoryTH">Landline no.</th>
+                                                <th className="BidhistoryTH">Block</th>
                                             </tr>
                                         </thead>
                                         {approvedUsers && approvedUsers.map((elem, key) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billmilitary.css';
+import './billmilitary.scss';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
 import NumberFormat from 'react-number-format';
@@ -272,7 +272,7 @@ class Militarypanel1 extends Component {
 							<div className="row">
 
 								<div className="col-md-4 col-lg-4 col-xl-4 col-6">
-									<h3>Contact Details</h3>
+									<h3 className="contactDetailHead">Contact Details</h3>
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
@@ -292,7 +292,7 @@ class Militarypanel1 extends Component {
 							{/* {this.props.data.address && */}
 							<div>
 								<div className="row soldier7" style={{ margin: '0px' }}>
-									<div><h3>Map</h3></div>
+									<div><h3 className="mapMilitary">Map</h3></div>
 
 								</div><br />
 								{/* render a map and show a location of the Billboard */}

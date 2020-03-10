@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './home.css';
+import './home.scss';
 
 class Panel4 extends Component {
 	render() {

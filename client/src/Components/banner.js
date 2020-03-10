@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './home.css';
+import './home.scss';
 import { Link } from 'react-router-dom';
 
 
 class Banner extends Component {
 	render() {
 		return (
-			<div>
+			<div style={{backgoundColor:'#19303a'}}>
 				<div className="container animated animatedFadeInUp fadeInUp" style={{ paddingLeft: '0px' }}>
 					<div className="row rowcolor" style={{ marginLeft: '0px' }}>
 						<div className="col-md-8 col-sm-8 bannercol8">

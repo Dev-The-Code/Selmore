@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Formpanel from './formpanel';
 import Contpanel1 from './contpanel1';
-import './contact.css';
+import './contact.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Contact extends Component {

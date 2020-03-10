@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './headerfooter.css';
+import './headerfooter.scss';
 import FooterMenu from './footerMenu.js'
 import About from './about.js';
 import QuickLinks from './quickLinks.js';

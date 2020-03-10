@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billmardan.css';
+import './billmardan.scss';
 
 class Mardanbanner extends Component {
 	render() {

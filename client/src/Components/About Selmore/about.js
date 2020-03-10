@@ -4,7 +4,7 @@ import Panel1 from './panel1';
 import Panel2 from './panel2';
 import Header from '../header';
 import Footer from '../footer';
-import './about.css';
+import './about.scss';
 
 class About extends Component {
   constructor(props) {

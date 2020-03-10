@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AbBanner from '../About Selmore/abBanner'; 
-import './advertising.css';
+import './advertising.scss';
 
 class AaBanner extends Component {
   render() {

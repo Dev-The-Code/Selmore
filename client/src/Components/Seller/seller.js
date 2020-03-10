@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Sellpanel1 from './sellpanel1';
-import './seller.css';
+import './seller.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Seller extends Component {

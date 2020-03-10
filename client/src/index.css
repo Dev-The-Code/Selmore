@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@font-face{
+  font-family: 'visby-bold';
+  font-style : normal;
+  font-weight : 800;
+  src: url('./assets/fonts/VisbyCF/VisbyCF-Bold.otf');  
+}
+@font-face{ 
+  font-family: 'visby-regular';
+  font-style : normal;
+  font-weight : 400;
+  src: url('./assets/fonts/VisbyCF/VisbyCF-Regular.otf');  
+}

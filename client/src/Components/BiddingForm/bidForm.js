@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import BidForm from './mainBidForm';
-import './bidForm.css';
+import './bidForm.scss';
 
 class Bidform extends Component {
   constructor(props) {

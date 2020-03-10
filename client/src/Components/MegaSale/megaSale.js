@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
-import './megaSale.css';
+import './megaSale.scss';
 import Banner from './megaBanner';
 import MegaSalePanel from './megaSalepanl1'
 

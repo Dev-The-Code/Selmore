@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './megaDetail.css';
+import './megaDetail.scss';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
 import { HttpUtils } from '../../Services/HttpUtils';
 import NumberFormat from 'react-number-format';
 import moment from 'moment';
-import './coundown.css';
+import './coundown.scss';
 
 
 class Megapanel1 extends Component {
@@ -143,7 +143,7 @@ class Megapanel1 extends Component {
                         <div className="col-md-10">
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-12">
-                                    <h1>Countdown</h1>
+                                    <h1 className="countDownMega">Countdown</h1>
                                     <div className="countdown-wrapper">
                                         {days && (
                                             <div className="countdown-item">
@@ -178,7 +178,7 @@ class Megapanel1 extends Component {
                             </div><br />
                             {/*first panel1*/}
 
-                            <div className="row ufone1" style={{ margin: '0px', backgroundColor: 'black' }}>
+                            <div className="row ufone1" style={{ margin: '0px', backgroundColor: '#29abe2' }}>
                                 <span className="ufone2">Military Road {data.billboardCity} City Sale Detail</span>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>
@@ -350,16 +350,16 @@ class Megapanel1 extends Component {
                                 <div className="col-md-10"></div>
                                 <div className="col-md-2" style={{ textAlign: 'right' }}>
                                     {value ?
-                                        <button className="btn btn-primary" onClick={this.bookedBillboard} >Book Now</button>
+                                        <button className="btn btn-primary bookBtnMEga" onClick={this.bookedBillboard}>Book Now</button>
                                         :
-                                        <button className="btn btn-primary" disabled >Book Now</button>}
+                                        <button className="btn btn-primary bookBtnMEga" disabled >Book Now</button>}
                                 </div>
                             </div>
                             <br />
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">
-                                    <h3>Contact Details</h3>
+                                    <h3 className="contactDetailHead">Contact Details</h3>
                                 </div>
                             </div>
                             <div className="row" style={{ margin: '0px' }}>

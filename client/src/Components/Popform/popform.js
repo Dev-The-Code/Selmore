@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './popform.css';
+import './popform.scss';
 
 class Popform extends Component {
   render() {

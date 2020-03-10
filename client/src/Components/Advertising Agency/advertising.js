@@ -6,7 +6,7 @@ import Bannerfooter from './bannerfooter';
 import Aa1 from './aa1';
 import Aa2 from './aa2';
 import Aa3 from './aa3';
-import './advertising.css';
+import './advertising.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Advertising extends Component {

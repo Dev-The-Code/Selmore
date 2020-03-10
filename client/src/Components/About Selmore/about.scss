@@ -1,3 +1,8 @@
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
 
 @media screen and (min-width: 360px) and (max-width: 767px){
 .glass1{
@@ -9,15 +14,16 @@
 .active2{
     position: relative;
     margin-top: 31%;
-    font-family: Helvetica;
+    font-family: $font-regular;
 }
 .active3{
 	    font-size: 35px;
 	    font-weight: 600;
-	    color: white;
+		color: white;
+		font-family: $font-stack;
 }
 .active4{
-		background-color: #29abe2;
+		background-color: $secondary-color;
 	    margin-top: 151px !important;
 	    width: 100%;
 }
@@ -27,10 +33,12 @@
 .active6{
 	display: inline;
 	margin-left: -10px;
+	font-family: $font-regular;
 }
 .active7{
 	display: inline;
 	margin-left: -33px;
+	font-family: $font-regular;
 }
 .active8{
 	    padding-top: 4px;
@@ -49,15 +57,16 @@
 .active2{
 		position: relative;
 		margin-top: 15%;
-	    font-family: Helvetica;
+	    font-family: $font-regular;
 }
 .active3{
 	    font-size: 35px;
 	    font-weight: 600;
-	    color: white;
+		color: white;
+		font-family: $font-stack;
 }
 .active4{
-		background-color: #29abe2;
+		background-color: $secondary-color;
 	    margin-top: 146px !important;
 	    width: 100%;
 }
@@ -67,10 +76,12 @@
 .active6{
 	display: inline;
 	margin-left: -10px;
+	font-family: $font-regular;
 }
 .active7{
 	display: inline;
 	margin-left: -33px;
+	font-family: $font-regular;
 }
 .active8{
 	padding-top: 4px;
@@ -87,16 +98,17 @@
 .active2{
 		position: relative;
 	    margin-top: 13%;
-	    font-family: Helvetica;
+	    font-family: $font-regular;
 	    margin-left: 7%;
 }
 .active3{
 	    font-size: 35px;
 	    font-weight: 600;
-	    color: white;
+		color: white;
+		font-family: $font-stack;
 }
 .active4{
-		 background-color: #29abe2;
+		 background-color: $secondary-color;
 		 margin-top: 107px !important;
 }
 .active5{
@@ -105,10 +117,12 @@
 .active6{
 	display: inline;
 	margin-left: -10px;
+	font-family: $font-regular;
 }
 .active7{
 	display: inline;
 	margin-left: -33px;
+	font-family: $font-regular;
 }
 .active8{
 	padding-top: 4px;
@@ -125,15 +139,16 @@
 .active2{
 		position: relative;
 		margin-top: 10%;
-	    font-family: Helvetica;
+	    font-family: $font-regular;
 }
 .active3{
 	    font-size: 35px;
 	    font-weight: 600;
-	    color: white;
+		color: white;
+		font-family: $font-stack;
 }
 .active4{
-		 background-color: #29abe2;
+		 background-color: $secondary-color;
 		 margin-top: 128px !important;
 }
 .active5{
@@ -142,10 +157,12 @@
 .active6{
 	display: inline;
 	margin-left: -10px;
+	font-family: $font-regular;
 }
 .active7{
 	display: inline;
 	margin-left: -33px;
+	font-family: $font-regular;
 }
 .active8{
 	padding-top: 4px;
@@ -153,8 +170,8 @@
 }
 }
 .tissue1{
-	color: #29abe2;
-	font-family: Helvetica;
+	color: $secondary-color;
+	font-family: $font-stack;
 	font-size: 25px;
 	 font-weight: 600;
 }
@@ -162,13 +179,15 @@
 	font-size: 14px;
 	font-weight: 500;
 	text-align: justify;
+	color:$light-color;
+	font-family: $font-regular;
 }
 .tissue3{
-	background-color: #29abe2;
+	background-color: $secondary-color;
 }
 .ex3{
 		color: white;
-	  font-family: Helvetica; 
+	  font-family: $font-regular; 
 	  font-weight: 600;
 	  margin-top: 17px;
 	  font-size: 23px;
@@ -177,9 +196,8 @@
 	margin-top: -11px;
 }
 .tissue4btn{
-	color: white;
-	border-bottom: 2px solid white;
-	font-family: Helvetica;
+	color: $primary-color;
+	font-family: $font-stack;
     font-size: 19px;
     font-weight: 500;
 }
@@ -198,6 +216,7 @@
 	.ex4{
 		font-size: 12px;
 		color: white;
+		font-family: $font-regular;
 	}
 	.olpad2{
 		margin-left: 0%;
@@ -218,6 +237,7 @@
 	.ex4{
 		font-size: 8px;
 		color: white;
+		font-family: $font-regular;
 	}
 	.olpad2{
 		margin-left: 0%;
@@ -238,6 +258,7 @@
 	.ex4{
 		font-size: 11px;
 		color: white;
+		font-family: $font-regular;
 	}
 	.olpad2{
 		margin-left: 4%;
@@ -258,14 +279,15 @@
 	.ex4{
 		font-size: 11px;
 		color: white;
+		font-family: $font-regular;
 	}
 	.olpad2{
 		margin-left: -1%;
 	}
 	.olpad{
-	padding: 12px;
-    margin-left: 21px;
-}
+		padding: 12px;
+		margin-left: 21px;
+	}
 }
 
 

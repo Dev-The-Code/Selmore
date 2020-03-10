@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Billbiddpanel1 from './billbiddpanel1';
 import Billbiddpanel2 from './billbiddpanel2';
-import './billbidding.css';
+import './billbidding.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billbidding extends Component {

@@ -1,21 +1,37 @@
+
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
+.dashBoadFilter{
+  font-size: 25px;
+  font-family: visby-bold;
+  color: #19303a;
+}
+
+
 .tableData{
     justify-content: center;
     text-align: center;
     color: black;
-
 }
 .tableHead{
+  font-family: $font-stack;
 }
 .tableTd{
     padding: 13px !important; 
     /* font-weight: bold */
     font-size: 15px;
     border-left: 1px solid #dee2e6;
+    font-family: $font-regular;
 }
 
 .text_topFilter{
     font-size: 17px;
     font-weight: 400;
+    font-family: $font-stack;
     text-align: left;
     margin-bottom: 15px;
 }
@@ -103,7 +119,9 @@ div.scroll_table a {
 }
 @media screen and (min-width: 360px) and (max-width: 767px){
   .modal_width{
-   
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 600;
   }
   .modeLForm_labeL{
     font-family: Helvetica;
@@ -118,7 +136,7 @@ div.scroll_table a {
   }
   .modaLSmalLable{
     margin-bottom: 0vw;
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 13px;
       font-weight: 600;
   }
@@ -129,19 +147,19 @@ div.scroll_table a {
     margin-left: -16vw;
   }
   .modeLForm_labeL{
-    font-family: Helvetica;
+    font-family: $font-stack;
       font-size: 14px;
       font-weight: 600;
   }
   .modeLForm_timlable{
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 15px;
       margin-bottom: 0vw;
       font-weight: 600;
   }
   .modaLSmalLable{
     margin-bottom: 0vw;
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 13px;
       font-weight: 600;
   }
@@ -152,19 +170,19 @@ div.scroll_table a {
     margin-left: -21vw;
   }
   .modeLForm_labeL{
-    font-family: Helvetica;
+    font-family: $font-stack;
       font-size: 18px;
       font-weight: 600;
   }
   .modeLForm_timlable{
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 15px;
       margin-bottom: 0vw;
       font-weight: 600;
   }
   .modaLSmalLable{
     margin-bottom: 0vw;
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 13px;
       font-weight: 600;
   }
@@ -175,19 +193,19 @@ div.scroll_table a {
     margin-left: -17vw;
   }
   .modeLForm_labeL{
-    font-family: Helvetica;
+    font-family: $font-stack;
       font-size: 18px;
       font-weight: 600;
   }
   .modeLForm_timlable{
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 15px;
       margin-bottom: 0vw;
       font-weight: 600;
   }
   .modaLSmalLable{
     margin-bottom: 0vw;
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 13px;
       font-weight: 600;
   }
@@ -198,19 +216,19 @@ div.scroll_table a {
     margin-left: -17vw;
   }
   .modeLForm_labeL{
-    font-family: Helvetica;
+   font-family: $font-stack;
       font-size: 18px;
       font-weight: 600;
   }
   .modeLForm_timlable{
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 15px;
       margin-bottom: 0vw;
       font-weight: 600;
   }
   .modaLSmalLable{
     margin-bottom: 0vw;
-    font-family: Helvetica;
+    font-family: $font-regular;
       font-size: 13px;
       font-weight: 600;
   }
@@ -218,7 +236,7 @@ div.scroll_table a {
 .dropText{
     font-size: 17px;
     font-weight: 600;
-    font-family: Helvetica;
+    font-family: $font-stack;
     color: black;
 }
 .arowIcon{

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './faq.scss';
 class Space extends Component {
 
     render() {

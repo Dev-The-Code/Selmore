@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './faq.css';
+import './faq.scss';
 
 class Faqbanner extends Component {
   render() {

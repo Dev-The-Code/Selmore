@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './headerfooter.css';
+import './headerfooter.scss';
 import { Link } from 'react-router-dom';
 import { Input } from 'antd';
 import Dropdown from '../constant/dropdownmenu/Dropdown';
@@ -108,7 +108,7 @@ class Header extends Component {
                   <li className="nav-item navmargin13">
                     <Link rel="noopener noreferrer" to={`/list_add`}>
                       <button type="button" className="btn btn-primary">
-                        <span className="navFont"> LIST AD </span>
+                        <span className="navFont" style={{color:'white'}}> LIST AD </span>
                       </button>
                     </Link>
                   </li>
@@ -131,7 +131,7 @@ class Header extends Component {
                   :
                   <li className="nav-item navbtnmargin" >
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >
-                      <span className="navFont"> LOGIN </span>
+                      <span className="navFont" style={{color:'white'}}> LOGIN </span>
                     </button>
                     <div class="modal fade" id="myModal">
                       <div class="modal-dialog" style={{ marginRight: '49.5%' }}>
@@ -142,7 +142,7 @@ class Header extends Component {
                           </div>
                           <FormLogin showDropDown={this.props.showDropDown} />
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-0.5%' }}>Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-0.5%' , color:'white'}}>Cancel</button>
                           </div>
                         </div>
                       </div>
@@ -237,7 +237,7 @@ class Header extends Component {
                       <li className="nav-item mob_li">
                         <Link rel="noopener noreferrer" to={`/list_add`} onClick={this.closeNav}>
                           <button type="button" className="btn btn-primary btn-sm mob_butn">
-                            <span className="navFont"> List Ad </span>
+                            <span className="navFont" style={{color:'white'}}> List Ad </span>
                           </button>
                         </Link>
                       </li>
@@ -266,11 +266,11 @@ class Header extends Component {
                             <div class="modal-content" style={{ width: '100%', height: '740px' }}>
                               <div class="modal-header">
                                 <h4 class="modal-title">Login</h4>
-                                <button type="button" class="close" data-dismiss='modal'>&times;</button>
+                                <button type="button" class="close" data-dismiss='modal' style={{color:'white'}}>&times;</button>
                               </div>
                               <FormLogin showDropDown={this.props.showDropDown} />
                               <div class="modal-footer" style={{ borderTop: '60px solid #e9ecef' }}>
-                                <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-30%' }}>Cancel</button>
+                                <button type="button" class="btn btn-danger" data-dismiss='modal' id='closss' style={{ marginTop: '-30%' ,color:'white'}} style={{}}>Cancel</button>
                               </div>
                             </div>
                           </div>

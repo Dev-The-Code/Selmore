@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Biddpanel1 from './biddpanel1';
 import Bidbanner from './biddingbanner';
-import './bidding.css';
+import './bidding.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Bidding extends Component {

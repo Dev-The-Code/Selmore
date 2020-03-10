@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Billofpanel1 from './billofpanel1';
 import Billofpanel2 from './billofpanel2';
-import './billofbidding.css';
+import './billofbidding.scss';
 import BannerBid from './biddingBanner';
 import AbBanner from '../About Selmore/abBanner';
 

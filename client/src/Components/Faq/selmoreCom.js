@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './faq.scss';
 class SelmoreCom extends Component {
 
     render() {
@@ -9,7 +10,7 @@ class SelmoreCom extends Component {
 					</div>
 					<div className="row">
 						<div className="col-md-9">
-							<p className="text-justify"><span className="">Lorem Ipsum is simply dummy text of the printing and typesetting
+							<p className="text-justify"><span className="water7">Lorem Ipsum is simply dummy text of the printing and typesetting
 							industry. Lorem Ipsum has been the industry's standard dummy text ever
 							since the 1500s, when an unknown printer took a galley of type and scrambled
 							it to make a type specimen book. It has survived not only five centuries,

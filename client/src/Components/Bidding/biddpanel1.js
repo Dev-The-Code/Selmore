@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './bidding.css';
+import './bidding.scss';
 import { Link } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
 import moment from 'moment';
@@ -89,7 +89,7 @@ class Biddpanel1 extends Component {
 											</p>
 											<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
 												<button class="btn btn-primary">
-													Start Bidding
+													<span className="startBidBtn">Start Bidding</span>
 										</button>
 											</Link>
 										</div>

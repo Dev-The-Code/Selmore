@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Singpanel1 from './singpanel1';
-import './singposted.css';
+import './singposted.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Singposted extends Component {

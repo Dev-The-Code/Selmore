@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './bidding.css';
+import './bidding.scss';
 
 class Biddingbanner extends Component {
 	render() {

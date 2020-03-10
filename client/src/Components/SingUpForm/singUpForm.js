@@ -3,7 +3,7 @@ import store from '../../store';
 import {
     Form, Input,
 } from 'antd';
-import '../Login Form/loginform.css';
+import '../Login Form/loginform.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
 
 class SingUpForm extends Component {

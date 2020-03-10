@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './megaDetail.css';
+import './megaDetail.scss';
 
 class Megapanel2 extends Component {
     render() {
