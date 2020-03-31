@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './billboardDetail.css';
-import NumberFormat from 'react-number-format';
 import {
     DatePicker, Radio, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
 } from 'antd';
@@ -14,8 +13,7 @@ import sha1 from "sha1";
 
 let id = 0;
 const FormItem = Form.Item;
-const option = Select.Option;
-const { Option } = Select;
+
 const country = [{
     value: 'Pakistan',
     label: 'Pakistan'
