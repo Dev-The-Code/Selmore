@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Cartpanel1 from './cartPanel1';
-import './carts.css';
+import './carts.scss';
 
 class Carts extends Component {
   constructor(props) {

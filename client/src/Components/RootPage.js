@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Form, Input,
 } from 'antd';
-import './rootPage.css';
+import './rootPage.scss';
 import { HttpUtils } from '../Services/HttpUtils';
 import { Redirect } from 'react-router';
 

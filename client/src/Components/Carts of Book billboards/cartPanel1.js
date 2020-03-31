@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './carts.css';
+import './carts.scss';
 import NumberFormat from 'react-number-format';
 
 class CartPanel1 extends Component {
@@ -67,13 +67,13 @@ class CartPanel1 extends Component {
                                     <table class="table" style={{ textAlign: 'center' }}>
                                         <thead className="tablee_Head">
                                             <tr>
-                                                <th>#</th>
-                                                <th>Company name</th>
-                                                <th>Address</th>
-                                                <th>City</th>
-                                                <th>State</th>
-                                                <th>Booked days</th>
-                                                <th>Amount</th>
+                                                <th className="BidhistoryTH">#</th>
+                                                <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Address</th>
+                                                <th className="BidhistoryTH">City</th>
+                                                <th className="BidhistoryTH">State</th>
+                                                <th className="BidhistoryTH">Booked days</th>
+                                                <th className="BidhistoryTH">Amount</th>
                                                 {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
@@ -103,13 +103,13 @@ class CartPanel1 extends Component {
                                     <table class="table" style={{ textAlign: 'center' }}>
                                         <thead className="tablee_Head">
                                             <tr>
-                                                <th>#</th>
-                                                <th>Company name</th>
-                                                <th>Address</th>
-                                                <th>City</th>
-                                                <th>State</th>
+                                                <th className="BidhistoryTH">#</th>
+                                                <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Address</th>
+                                                <th className="BidhistoryTH">City</th>
+                                                <th className="BidhistoryTH">State</th>
                                                 {/* <th>Booked days</th> */}
-                                                <th>Sale Amount</th>
+                                                <th className="BidhistoryTH">Sale Amount</th>
                                                 {/* <th>Action</th> */}
                                             </tr>
                                         </thead>

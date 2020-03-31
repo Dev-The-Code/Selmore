@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../MegaSale/megaSale.css';
+import '../MegaSale/megaSale.scss';
 
 class MegaDetailbanner extends Component {
 	render() {

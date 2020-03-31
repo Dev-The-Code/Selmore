@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billofbidding.css';
+import './billofbidding.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
 import NumberFormat from 'react-number-format';
 
@@ -149,7 +149,7 @@ class Billofpanel2 extends Component {
 										<span className="ufone2">Military Road City Demographics</span>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
-										<div className="col-md-3 ufone7"><span className="ufone3">Address</span></div>
+										<div className="col-md-3 ufone5"><span className="ufone3">Address</span></div>
 										<div className="col-md-9 ufone6"><span className="ufone4">{billboardData.address}</span></div>
 									</div>
 									<div className="row" style={{ margin: '0px' }}>
@@ -169,10 +169,10 @@ class Billofpanel2 extends Component {
 									<table class="table" style={{ textAlign: 'center' }}>
 										<thead>
 											<tr>
-												<th>S#N.o</th>
-												<th>Bid Date.</th>
-												<th>Bid Amount</th>
-												<th>Bidder ID</th>
+												<th className="BidhistoryTH">S#N.o</th>
+												<th className="BidhistoryTH">Bid Date.</th>
+												<th className="BidhistoryTH">Bid Amount</th>
+												<th className="BidhistoryTH">Bidder ID</th>
 											</tr>
 										</thead>
 
@@ -180,14 +180,14 @@ class Billofpanel2 extends Component {
 											return (
 												<tbody>
 													<tr>
-														<td>{key}</td>
-														<td>{elem.date} - {elem.time}</td>
-														<td>
+														<td className="BidhistoryTH">{key}</td>
+														<td className="BidhistoryTH">{elem.date} - {elem.time}</td>
+														<td className="BidhistoryTH">
 															<NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
 															{/* Rs.{elem.bidAamount} */}
 														</td>
-														<td>{elem.bidderId}</td>
+														<td className="BidhistoryTH">{elem.bidderId}</td>
 													</tr>
 												</tbody>
 											)

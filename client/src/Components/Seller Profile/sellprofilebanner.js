@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './sellprofile.css';
+import './sellprofile.scss';
 
 class Sellprofilebanner extends Component {
 	render() {

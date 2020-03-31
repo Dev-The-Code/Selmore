@@ -3,7 +3,7 @@ import Header from '../header';
 import Militarypanel1 from './militarypanel1';
 import Militarypanel2 from './militarypanel2';
 import Militarypanel3 from './militarypanel3';
-import './billmilitary.css';
+import './billmilitary.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billboardmilitary extends Component {

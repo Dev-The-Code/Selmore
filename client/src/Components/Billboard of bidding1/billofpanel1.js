@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Popform from '../Popform/popform';
 import NumberFormat from 'react-number-format';
-import './billofbidding.css';
+import './billofbidding.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
 import moment from 'moment';
 
@@ -262,7 +262,7 @@ class Billofpanel1 extends Component {
 
 					<div className="row" style={{ margin: '0px' }}>
 						<div className="col-md-12">
-							<h1>Countdown</h1>
+							<h1 className="countDownMega">Countdown</h1>
 							<div className="countdown-wrapper">
 								{days && (
 									<div className="countdown-item">

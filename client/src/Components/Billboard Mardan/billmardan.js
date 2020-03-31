@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Mardanpanel1 from './mardanpanel1';
 import Mardanpanel2 from './mardanpanel2';
-import './billmardan.css';
+import './billmardan.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billmardan extends Component {

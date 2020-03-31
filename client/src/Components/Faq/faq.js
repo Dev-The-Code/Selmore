@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import Footer from '../footer';
 import Faqpanel1 from './faqpanel1';
-import './faq.css';
+import './faq.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Faq extends Component {

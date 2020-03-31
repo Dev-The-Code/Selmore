@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import './billboardDetail.css';
+// import './billboardDetail.css';
+import './billboardDetail.scss';
+import NumberFormat from 'react-number-format';
 import {
     DatePicker, Radio, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
 } from 'antd';
 import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
-import './billboardDetail.css';
 import { HttpUtils } from '../../Services/HttpUtils';
 import superagent from "superagent";
 import sha1 from "sha1";
@@ -450,6 +451,7 @@ class BillBoard extends Component {
                                         transitionAppear={true} transitionAppearTimeout={500}
                                         transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                                         <Form.Item
+                                            className="FormListLable"
                                             label={index === 0 ? 'BillBoard Detail' : ''}
                                             style={{ textAlign: 'left' }}
                                             required={false}
@@ -460,7 +462,7 @@ class BillBoard extends Component {
                                                     <div className="form-group up">
                                                         <label for="type"></label>
                                                         <Form.Item>
-                                                            <p>BillBoard Type:</p>
+                                                            <p className="FormListLable">BillBoard Type:</p>
                                                             {getFieldDecorator(`type${index}`, {
                                                                 initialValue: { label: this.state.type, value: this.state.type },
                                                                 rules: [{
@@ -482,7 +484,7 @@ class BillBoard extends Component {
                                                     <div className="form-group  up">
                                                         <label for="category"></label>
                                                         <Form.Item>
-                                                            <p>Category:</p>
+                                                            <p className="FormListLable">Category:</p>
                                                             {getFieldDecorator(`category${index}`, {
                                                                 initialValue: { label: this.state.category, value: this.state.category },
                                                                 rules: [{
@@ -504,7 +506,7 @@ class BillBoard extends Component {
                                                     <div className="form-group up">
                                                         <label for="facing"></label>
                                                         <Form.Item>
-                                                            <p>Facing:</p>
+                                                            <p className="FormListLable">Facing:</p>
                                                             {getFieldDecorator(`facing${index}`, {
                                                                 initialValue: { label: this.state.facing, value: this.state.facing },
                                                                 rules: [{
@@ -725,7 +727,7 @@ class BillBoard extends Component {
                                                         <div className="form-group up">
                                                             <label for="lightning"></label>
                                                             <Form.Item>
-                                                                <p>Lightning:</p>
+                                                                <p className="FormListLable">Lightning:</p>
                                                                 {getFieldDecorator(`lightning${index}`, {
                                                                     initialValue: { label: this.state.lightning, value: this.state.lightning },
                                                                     rules: [{
@@ -774,7 +776,7 @@ class BillBoard extends Component {
                                                         <div className="form-group up">
                                                             <label for="status"></label>
                                                             <Form.Item>
-                                                                <p>Status:</p>
+                                                                <p className="FormListLable">Status:</p>
                                                                 {getFieldDecorator(`status${index}`, {
                                                                     initialValue: { label: this.state.status, value: this.state.status },
                                                                     rules: [{
@@ -917,7 +919,7 @@ class BillBoard extends Component {
                                                         <div className="form-group up">
                                                             <label for="audianceType"></label>
                                                             <Form.Item>
-                                                                <p>Audiance Type:</p>
+                                                                <p className="FormListLable">Audiance Type:</p>
                                                                 {getFieldDecorator(`audianceType${index}`, {
                                                                     initialValue: { label: this.state.audianceType, value: this.state.audianceType },
                                                                     rules: [{
@@ -1021,7 +1023,7 @@ class BillBoard extends Component {
                                                         <div className="form-group up">
                                                             <label for="city"></label>
                                                             <Form.Item>
-                                                                <p>City:</p>
+                                                                <p className="FormListLable">City:</p>
                                                                 {getFieldDecorator(`city${index}`, {
                                                                     initialValue: { label: this.state.city, value: this.state.city },
                                                                     rules: [{
@@ -1045,7 +1047,7 @@ class BillBoard extends Component {
                                                         <div className="form-group up">
                                                             <label for="state"></label>
                                                             <Form.Item>
-                                                                <p>States:</p>
+                                                                <p className="FormListLable">States:</p>
                                                                 {getFieldDecorator(`state${index}`, {
                                                                     initialValue: { label: this.state.state, value: this.state.state },
                                                                     rules: [{
@@ -1068,7 +1070,7 @@ class BillBoard extends Component {
                                                     <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                                                         <div className="form-group up">
                                                             <Form.Item>
-                                                                <p>Country:</p>
+                                                                <p className="FormListLable">Country:</p>
                                                                 {getFieldDecorator(`country${index}`, {
                                                                     initialValue: { label: this.state.country, value: this.state.country },
                                                                     rules: [{
@@ -1123,7 +1125,7 @@ class BillBoard extends Component {
                         <div className="col-md-8 col-xl-8" style={{ paddingLeft: '0.6%' }}>
                             <div className="form-group up">
                                 <Form.Item className="list_form">
-                                    <p style={{ fontWeight: 'bold' }}>Company Name:</p>
+                                    <p  className="FormListLable">Company Name:</p>
                                     {getFieldDecorator('company', {
                                         initialValue: { label: this.state.compaNames, value: this.state.compaNames },
                                         rules: [{

@@ -3,7 +3,7 @@ import Header from '../header';
 import Footer from '../footer';
 import Billpanel1 from './billpanel1';
 import Billpanel2 from './billpanel2';
-import './billboards.css';
+import './billboards.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billboards extends Component {

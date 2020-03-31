@@ -1,12 +1,19 @@
 
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
 .megaPageTiming{
 	font-size: 14px;
     font-weight: 750;
-    font-family: Helvetica;
+    font-family: $font-regular;
     color: #007bff;
 }
 .megaPageText{
 	font-size: 1vw;
+	font-family: $font-regular;
 }
 .extra1{
 	margin-right: -4vw;
@@ -15,7 +22,9 @@
 .extra2{
 	margin-left: -4vw;
 }
-
+.moredetailMegabtn{
+	font-family: $font-stack;
+}
 
 
 
@@ -39,16 +48,18 @@
 .cultus5{
 	display: inline;
 	margin-left: -55px;
+	font-family: $font-regular;
 }
 .cultus6{
 	display: inline;
 	margin-left: -31px;
+	font-family: $font-regular;
 }
 .cultus7{
 	color: white;
 }
 .cultus4{
-		background-color: #29abe2;
+		background-color: $secondary-color;
 }
 
 @media screen and (min-width: 360px) and (max-width: 767px){
@@ -89,6 +100,8 @@
 		 font-size: 35px;
 		font-weight: 600;
 		color: white;
+		
+		font-family: $font-stack;
 	}
 	.card_bidding{
 		border-radius: 0px 0px 20px 20px;
@@ -154,6 +167,7 @@
 		 font-size: 35px;
 		font-weight: 600;
 		color: white;
+		font-family: $font-stack;
 	}
 	.card_bidding{
 		border-radius: 0px 0px 20px 20px;
@@ -219,6 +233,7 @@
 		 font-size: 35px;
 		font-weight: 600;
 		color: white;
+		font-family: $font-stack;
 	}
 	.card_bidding{
 		border-radius: 0px 0px 20px 20px;
@@ -282,6 +297,7 @@
 	.bannr_txtbid{
 		 font-size: 35px;
 		font-weight: 600;
+		font-family: $font-stack;
 		color: white;
 	}
 	.card_bidding{
@@ -344,6 +360,7 @@
 	.bannr_txtbid{
 		 font-size: 35px;
 		font-weight: 600;
+		font-family: $font-stack;
 		color: white;
 	}
 	.card_bidding{
@@ -635,7 +652,9 @@
 
 
 
-
+.card-title{
+	font-family: $font-stack;
+}
 
 
 

@@ -1,4 +1,16 @@
 
+
+
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
+.mapMilitary{
+	font-family: $font-stack;
+}
+
 .soldier3{
 	 	font-size: 35px;
 	    font-weight: 600;
@@ -113,22 +125,22 @@
     margin-left: 43%;
 }
 .ufone1{
-	background-color: #29abe2;
+	background-color: $secondary-color;
     padding: 9px;
 }
 .ufone2{
 	color: white;
 	font-weight: 500;
 	font-size: 20px;
-	font-family: Helvetica;
+	font-family: $font-stack;
 }
 .ufone3{
 	font-weight: 700;
-	font-family: Helvetica;
+	font-family: $font-stack;
 }
 .ufone4{
 	font-weight: 500;
-	font-family: Helvetica;
+	font-family: $font-regular;
 }
 .ufone5{
     background-color: #E1DEDE;
@@ -139,6 +151,7 @@
 	padding: 8px;
 	border-bottom: 3px solid #E1DEDE;
 	border-right: 2px solid #E1DEDE;
+	font-family: $font-regular;
 }
 .ufone7{
 	background-color: #E1DEDE;
@@ -240,7 +253,7 @@
         padding: 1vw;
         font-weight: 700;
         font-size: 12.5px;
-        font-family: Helvetica;   
+        font-family: $font-stack;   
     }
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px){
@@ -248,7 +261,7 @@
         width: 100%;
         padding: 1vw;
         font-weight: 700;
-        font-family: Helvetica;
+        font-family: $font-stack; 
         margin-left: 1.1vw;
     }
 }
@@ -257,7 +270,7 @@
         width: 100%;
         padding: 1vw;
         font-weight: 700;
-        font-family: Helvetica;
+        font-family: $font-stack; 
         margin-left: 1vw;
     }
 }
@@ -267,7 +280,7 @@
         width: 100%;
         padding: 1vw;
         font-weight: 700;
-        font-family: Helvetica;
+        font-family: $font-stack; 
         margin-left: 1vw;
     }
 }
@@ -279,7 +292,7 @@
 	margin-bottom: 12px;
 	cursor: pointer;
 	font-weight: 600;
-        font-family: Helvetica;
+	font-family: $font-stack; 
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Biddbanner from '../Bidding/biddingbanner';
-import './billofbidding.css';
+import './billofbidding.scss';
 
 class Billofbanner extends Component {
   render() {

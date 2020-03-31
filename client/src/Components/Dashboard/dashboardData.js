@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import NumberFormat from 'react-number-format';
 import { HttpUtils } from '../../Services/HttpUtils';
-import './dashboard.css';
+import './dashboard.scss';
 import { Link } from "react-router-dom";
 import {
     DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
@@ -338,7 +338,7 @@ class DashboardData extends Component {
                 <div className='row' style={{ marginLeft: '0px' }}>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
                         <div>
-                            <h2 className='text_topFilter filteration'>Filter</h2>
+                            <h2 className='text_topFilter filteration dashBoadFilter'>Filter</h2>
                         </div>
                     </div>
                     <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' >

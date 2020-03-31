@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billboards.css';
+import './billboards.scss';
 import Billmardanpanel2 from '../Billboard Mardan/mardanpanel2';
 
 class billpanel2 extends Component {

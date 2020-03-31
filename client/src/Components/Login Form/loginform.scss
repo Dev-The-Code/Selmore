@@ -1,44 +1,9 @@
 
-@media screen and (min-width: 360px) and (max-width: 767px){
-    .backImgee_baner{
-        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1579870370/erik-mclean-wj_Tjw7oV-g-unsplash_ybrkre.jpg");
-       /* border-radius: 1vw; */
-       -webkit-background-size: cover;
-       -moz-background-size: cover;
-       -o-background-size: cover;
-       background-size: cover;
-       background-position-x: center;
-       padding-top: 40vw;
-       height: 100vh;
-       /* filter: brightness(0.5); */
-    }
-    .mainTextBaner{
-        color: white;
-        font-size: 23px;
-        font-weight: 700;
-        margin-bottom: 6vw;
-    }
-}
-@media screen and (min-width: 768px){
-    .backImgee_baner{
-        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1579870370/erik-mclean-wj_Tjw7oV-g-unsplash_ybrkre.jpg");
-       /* border-radius: 1vw; */
-       -webkit-background-size: cover;
-       -moz-background-size: cover;
-       -o-background-size: cover;
-       background-size: cover;
-       background-position-x: center;
-       padding-top: 17vw;
-       height: 100vh;
-       /* filter: brightness(0.5); */
-    }
-    .mainTextBaner{
-        color: white;
-        font-size: 40px;
-        font-weight: 700;
-        margin-bottom: 2vw;
-    }
-}
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
 
 .alreadyAcontTextSignup{
 	font-size: 17px;
@@ -63,12 +28,11 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
-
 .school3{
 	font-size: 23px;
-    font-family: Helvetica;
+    font-family: $font-stack;
     font-weight: 700;
-    color: #ffffff;
+    color: white;
 }
 .school4{
 	margin-left: 102px;
@@ -89,6 +53,7 @@
 .school8{
 	font-weight: 500;
 	color: white;
+	font-family: $font-regular;
 }
 .school10{
 	font-size: 17px;
@@ -96,24 +61,6 @@
     font-weight: 700;
     color: white;
 }
-.field{
-    margin-left: 40rem;
-    margin-right: 40rem;
-    /* margin-top: 30rem;
-    margin-bottom: 30rem; */
-
-}
-.btn-center{
-    margin-left: 50rem;
-    margin-right: 40rem;
-}
-.alertError{
-    margin-left: 40rem;
-    margin-right: 40rem;
-    margin-top: 1rem;
-                
-}
-
 @media screen and (min-width: 360px) and (max-width: 660px){
 	.school1{
 	background-color: #29abe2;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billbidding.css';
+import './billbidding.scss';
 import AbBanner from '../About Selmore/abBanner';
 
 class Billbiddbanner extends Component {

@@ -1,14 +1,24 @@
 
+
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
+.startBidBtn{
+	font-family: $font-stack;
+}
 .bidTiming{
 	font-size: 15px;
     font-weight: 700;
-    font-family: Helvetica;
+    font-family: $font-regular;
     color: #007bff;
 }
 
-
-
-
+.card-text{
+	font-family: $font-regular;
+}
 
 .cultus1{
 		width: 100%;

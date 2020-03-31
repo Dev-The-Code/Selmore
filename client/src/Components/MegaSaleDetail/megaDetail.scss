@@ -1,6 +1,28 @@
+
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
 .card_megadetail{
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-  }
+}
+.detail{
+    font-family: $font-regular;
+}
+.bookBtnMEga{
+    font-family: $font-stack;
+    background-color: $primary-color;
+}
+.countDownMega{
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+.contactDetailHead{
+    font-family: $font-stack;
+}
+
 @media screen and (min-width: 360px) and (max-width: 767px){
     .bookBtn_mega{
         width: 100%;

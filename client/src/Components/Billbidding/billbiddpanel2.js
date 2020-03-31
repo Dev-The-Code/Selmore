@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './billbidding.css';
+import './billbidding.scss';
 
 class Billbiddpanel2 extends Component {
 	render() {

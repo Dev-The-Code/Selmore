@@ -1,3 +1,21 @@
+
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
+.filteMarkt{
+  font-size: 25px;
+  font-family: $font-stack;
+  color: $secondary-color;
+}
+.billMarkt{
+  font-size: 25px;
+  font-family: $font-stack;
+  color: $secondary-color;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -22,10 +40,18 @@ body {
 .filterDivs{
     font-size: 20px;
     font-weight: bold;
-    font-family: Helvetica;
+    font-family: $font-stack;
+    color: $secondary-color;
     margin-bottom: 20px;
     margin-top: 3%;
 }
+
+.radioText{
+  font-size: 16px;
+  font-family: $font-regular;
+  color: $light-color;
+}
+
 .dropdown{
     padding-left: 0px
 }
@@ -148,7 +174,7 @@ body {
 .crdtxt2{
   margin-top: 2%;
   margin-left: 7%;
-
+  font-family: $font-stack;
 }
 }
 
@@ -223,7 +249,7 @@ body {
 .crdtxt2{
   margin-top: 2%;
   margin-left: 7%;
-
+  font-family: $font-stack;
 }
 }
 
@@ -298,7 +324,7 @@ body {
   margin-top: 2%;
     margin-left: 9%;
     margin-bottom: 2%;
-
+    font-family: $font-stack;
 }
 }
 
@@ -374,7 +400,7 @@ body {
   .crdtxt2{
     margin-top: 2%;
     margin-left: 7%;
-
+    font-family: $font-stack;
   }
 }
 

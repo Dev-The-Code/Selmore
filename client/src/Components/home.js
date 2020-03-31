@@ -10,7 +10,7 @@ import Panel5 from './panel5';
 import Panel6 from './panel6';
 import Panel7 from './panel7';
 import Footer from './footer';
-import './home.css';
+import './home.scss';
 
 class Home extends Component {
   constructor(props) {

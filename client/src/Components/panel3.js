@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { HttpUtils } from './../Services/HttpUtils';
-import './home.css';
+import './home.scss';
 import { Redirect } from 'react-router-dom';
 
 class Panel3 extends Component {

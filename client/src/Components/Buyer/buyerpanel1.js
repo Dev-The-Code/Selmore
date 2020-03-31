@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Homepanel4 from '../panel4';
-import './buyer.css';
+import './buyer.scss';
 
 class Buyerpanel1 extends Component {
 	render() {

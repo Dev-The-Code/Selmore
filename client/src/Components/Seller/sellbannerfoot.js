@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './seller.css';
+import './seller.scss';
 
 class Sellbannerfoot extends Component {
 	render() {

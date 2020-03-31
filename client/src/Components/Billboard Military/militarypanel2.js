@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billmilitary.css';
+import './billmilitary.scss';
 
 class Militarypanel2 extends Component {
     render() {

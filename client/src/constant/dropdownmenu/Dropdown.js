@@ -52,7 +52,7 @@ class Dropdown extends Component {
           <MDBDropdown>
             <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
               <div className='userName dropdown-toggle'>
-                <span className="navFont">{userName}</span>
+                <span className="navFont" style={{color:'white'}}>{userName}</span>
               </div>
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Comman2 from './Comman2/billBoard_market2';
-import './home.css';
+import './home.scss';
 
 class Panel7 extends Component {
 	render() {

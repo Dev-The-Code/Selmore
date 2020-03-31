@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './advertising.css';
+import './advertising.scss';
 
 class Panel1 extends Component {
   render() {

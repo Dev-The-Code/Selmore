@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
+
 body {
     font-family: 'Lato', sans-serif;
 }
@@ -23,7 +29,7 @@ h1 {
 
 .countdown-item {
     color: #111;
-    font-size: 40px;
+    font-size: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,6 +40,7 @@ h1 {
     position: relative;
     width: 100px;
     height: 100px;
+    font-family: $font-stack;
 }
 
 .countdown-item span {

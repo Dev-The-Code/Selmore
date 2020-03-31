@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './home.css';
+import './home.scss';
 import { Redirect } from 'react-router-dom';
 import { HttpUtils } from '../Services/HttpUtils';
 

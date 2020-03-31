@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './billmardan.css';
+import './billmardan.scss';
 
 class Mardanpanel1 extends Component {
 	render() {
