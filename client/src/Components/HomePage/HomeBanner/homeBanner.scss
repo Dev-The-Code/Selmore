@@ -1,0 +1,82 @@
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #00334f;
+$primary-color: #0088d1;
+$light-color: #6e8796;
+
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .mainBannerBackImg {
+        background-image: url("../../../assets/images/homeBanner.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 60vh;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .mainBannerBackImg {
+        background-image: url("../../../assets/images/homeBanner.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 45vh;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .mainBannerBackImg {
+        background-image: url("../../../assets/images/homeBanner.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 60vh;
+        margin-top: 5px;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+    .mainBannerBackImg {
+        background-image: url("../../../assets/images/homeBanner.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 65vh;
+    }
+}
+@media screen and (min-width: 1600px) {
+    .mainBannerBackImg {
+        background-image: url("../../../assets/images/homeBanner.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 55vh;
+        margin-top: 10px;
+    }
+}
+
+.bannerMainText {
+    font-weight: 500;
+    font-size: 40px;
+    font-family: visby-bold;
+    color: white;
+    letter-spacing: 1px;
+    padding-top: 7vw;
+}
+.bannerSmallText {
+    font-size: 18px;
+    color: white;
+    font-family: $font-regular;
+}

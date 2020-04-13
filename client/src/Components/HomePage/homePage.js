@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header/mainheader';
+import Banner from '../HomePage/HomeBanner/homeBanner';
 
 class Home extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Home extends Component {
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        
+        <Banner />
       </div>
     );
   }

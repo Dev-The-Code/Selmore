@@ -63,7 +63,7 @@ class MainHeader extends Component {
                 <div className="d-none d-sm-block">
                     <div className="row">
                         <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-                        <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2" style={{padding: '0'}}>
                             <Link rel="noopener noreferrer" to={`/home`}>
                                 <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
                             </Link>
