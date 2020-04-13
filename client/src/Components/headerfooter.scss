@@ -533,7 +533,6 @@ $light-color:#4a5964;
 .menunav {
   height: 100%;
   width: 100%;
-
   position: fixed;
   z-index: 1;
   top: 0;
@@ -545,7 +544,6 @@ $light-color:#4a5964;
 }
 
 .menunav a {
-  padding: 2px;
   
   text-decoration: none;
   font-size: 40px;
@@ -570,14 +568,7 @@ $light-color:#4a5964;
   .menunav {padding-top: 15px;}
   .menunav a {font-size: 18px;}
 }
-.menunav-content {
-  position: relative;
-  top: 15%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-  color:white;
-}
+
 
 .mob_butn{
     background-color: #223971!important;

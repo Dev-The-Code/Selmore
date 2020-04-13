@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 //Components//
 import Home from './Components/home';
+import MainPage from './Components/HomePage/homePage';
 import About from './Components/About Selmore/about';
 import Advertising from './Components/Advertising Agency/advertising';
 import Faq from './Components/Faq/faq';
@@ -72,6 +73,7 @@ class Routes extends Component {
               // component={Home}
               ></Route> */}
               <AdminAccess exact path="/" component={RootPage}></AdminAccess>
+              {/* <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute> */}
               <PrivateRoute exact path="/home" component={Home}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>

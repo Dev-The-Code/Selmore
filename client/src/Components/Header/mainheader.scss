@@ -1,0 +1,87 @@
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #00334f;
+$primary-color: #0088d1;
+$light-color: #6e8796;
+
+.inLineMenu {
+    list-style: none;
+    display: inline-flex;
+    padding-left: 0;
+}
+.inLineMenuMOB{
+    list-style: none;
+    padding-left: 0;
+}
+.menuLiTag{
+    padding-right: 1.5vw;
+    margin-top: 3vw;
+}
+.menuText{
+    color: $secondary-color;
+    font-family: $font-stack;
+}
+.menuTextMOB{
+    color: #ffffff;
+    font-family: visby-bold;
+    font-size: 20px;
+}
+.buyMediaBtn{
+    background-color: #00334f;
+    color: white;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    font-family: $font-stack;
+}
+.buyMediaBtnMOB{
+    background-color: #000b10;
+    color: white;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    font-family: visby-bold;
+    font-size: 23px;
+}
+.loginBtnMenu{
+    height: 30px;
+    font-size: 14px;
+    font-family: visby-bold;
+    color: white;
+    padding: 3px 10px 5px 10px;
+    margin-top: -2px;
+}
+.listAdBtn{
+    height: 30px;
+    font-size: 14px;
+    font-family: $font-stack;
+    color: white;
+    padding: 3px 10px 5px 10px;
+    margin-top: -2px;
+}
+.dropdownTextHover{
+    background-color: #00334f;
+}
+.dropdownTextHover:hover{
+    background-color: #8c8e91 !important;
+}
+
+.menunav-content {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    color:white;
+  }
+
+  .menunav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #223971;
+    overflow-x: hidden;
+    transition: 0.5s;
+    color: white;
+  }

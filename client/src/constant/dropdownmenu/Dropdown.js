@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './style.css';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Link, Redirect } from 'react-router-dom';
+import { Menu, Dropdown } from 'antd';
+import './style.scss';
 
 
-class Dropdown extends Component {
+class Dropdownn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,17 +47,57 @@ class Dropdown extends Component {
 
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
+    const Dropmenu = (
+      <Menu>
+        <Menu.Item className="dropdownTextHover">
+          <Link rel="noopener noreferrer" to={`/profile`}>
+            <span className="menuTextinDrop">Profile</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item className="dropdownTextHover">
+          <Link rel="noopener noreferrer" to={`/dashboard`}>
+            <span className="menuTextinDrop">Dashboard</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item onClick={this.logOut} className="dropdownTextHover">
+          <Link rel="noopener noreferrer" to={`/home`} onClick={this.closeNav}>
+            <span className="menuTextinDrop">Log Out</span>
+          </Link>
+        </Menu.Item>
+      </Menu>
+    );
     return (
       <div>
+
         <div className="d-none d-sm-block">
+          <Dropdown overlay={Dropmenu} >
+            <div className='ant-dropdown-link' onClick={e => e.preventDefault()}>
+              <button className="btn userControlBtn">{userName} <i class="fa fa-arrow-down"></i></button>
+            </div>
+          </Dropdown>
+        </div>
+        <div className="d-block d-sm-none">
+          <Dropdown overlay={Dropmenu} >
+            <div className='ant-dropdown-link' onClick={e => e.preventDefault()}>
+              <button className="btn userControlBtnMOB">{userName} <i class="fa fa-arrow-down"></i></button>
+            </div>
+          </Dropdown>
+        </div>
+
+        {/* <div className="d-none d-sm-block">
           <MDBDropdown>
             <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle'>
               <div className='userName dropdown-toggle'>
-                <span className="navFont" style={{color:'white'}}>{userName}</span>
+                <span className="navFont" style={{ color: 'white' }}>{userName}</span>
               </div>
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>
-              <MDBDropdownItem> <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link></MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link rel="noopener noreferrer" to={`/profile`}>Profile</Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link rel="noopener noreferrer" to={`/dashboard`}>Dashboard</Link>
+              </MDBDropdownItem>
               <MDBDropdownItem onClick={this.logOut}>
                 <Link rel="noopener noreferrer" to={`/home`}>
                   Log Out
@@ -64,16 +105,20 @@ class Dropdown extends Component {
               </MDBDropdownItem>
             </MDBDropdownMenu>
           </MDBDropdown>
-        </div>
+        </div> */}
 
-        <div className="d-block d-sm-none">
+        {/* <div className="d-block d-sm-none">
           <MDBDropdown>
             <MDBDropdownToggle caret color="primary" className='toogle dropdown-toggle mob_butn'>
               <div className='userName dropdown-toggle'
               >{userName}</div>
             </MDBDropdownToggle>
             <MDBDropdownMenu basic>
-              <MDBDropdownItem className="mob_butn_pro"> <Link rel="noopener noreferrer" to={`/profile`} onClick={this.closeNav}><h5>Profile</h5></Link></MDBDropdownItem>
+              <MDBDropdownItem className="mob_butn_pro">
+                <Link rel="noopener noreferrer" to={`/profile`} onClick={this.closeNav}>
+                  <h5>Profile</h5>
+                </Link>
+              </MDBDropdownItem>
               <MDBDropdownItem className="mob_butn_log" onClick={this.logOut} onClick={this.closeNav}>
                 <Link rel="noopener noreferrer" to={`/home`} onClick={this.closeNav}>
                   <h5>Log Out</h5>
@@ -81,12 +126,12 @@ class Dropdown extends Component {
               </MDBDropdownItem>
             </MDBDropdownMenu>
           </MDBDropdown>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
-export default Dropdown;
+export default Dropdownn;
 
 
 

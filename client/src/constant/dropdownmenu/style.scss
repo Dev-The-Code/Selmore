@@ -1,0 +1,98 @@
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #00334f;
+$primary-color: #0088d1;
+$light-color: #6e8796;
+@media screen and (min-width: 360px) and (max-width: 767px){
+    .toogle{
+        height: 31px;
+        margin-top: -2vw;
+        padding: 2.1vw 2vw 7vw 4vw;
+        color: white;
+        font-weight: 600;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .toogle{
+        height: 38px;
+        margin-top: 0.2vw;
+        padding: 1.1vw 1vw 3vw 1vw;
+        color: white;
+        font-weight: 400;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px){
+    .toogle{
+        margin-top: 0.5vw;
+        height: 0.8vw;
+        padding: 0.9vw 1vw 2.1vw 1vw;
+        margin-left: 0.8vw;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px){
+    .toogle{
+        margin-top: 0.3vw;
+        height: 0.8vw;
+        padding: 0.8vw 1vw 1.8vw 1vw;
+    }
+}
+.userName{
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    color: white;
+     font-size: 12px;
+}
+.mob_butn_pro{
+    background-color: #223971;
+    font-size: 18px;
+}
+.mob_butn_log{
+   background-color: #223971; 
+}
+
+.userControlBtn{
+    height: 30px;
+    font-size: 14px;
+    font-family: visby-bold;
+    color: $secondary-color;
+    padding: 3px 10px 5px 10px;
+    margin-top: -2px;
+    background: none;
+    border: 1.5px solid $secondary-color;
+}
+.userControlBtnMOB{
+    height: 33px;
+    font-size: 17px;
+    font-family: visby-bold;
+    color: #ffffff;
+    padding: 3px 10px 5px 10px;
+    margin-top: 7px;
+    background: none;
+    border: 1.5px solid #ffffff;
+}
+.menuTextinDrop{
+    color: white;
+    font-family: $font-stack;
+}
+.dropdownTextHover{
+    background-color: $secondary-color;
+}
+.dropdownTextHover:hover{
+    background-color: #8c8e91 !important;
+}
+.ant-dropdown-menu {
+    position: relative;
+    margin: 0;
+    padding: 4px 0;
+    text-align: left;
+    list-style-type: none;
+    background-color: #00334f !important;
+    background-clip: padding-box;
+    border-radius: 4px;
+    outline: none;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    -webkit-transform: translate3d(0, 0, 0);
+}

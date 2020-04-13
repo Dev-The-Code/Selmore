@@ -27,6 +27,8 @@ body{
   color: #61dafb;
 }
 
+@import '~antd/dist/antd.css';
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
