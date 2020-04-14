@@ -73,8 +73,8 @@ class Routes extends Component {
               // component={Home}
               ></Route> */}
               <AdminAccess exact path="/" component={RootPage}></AdminAccess>
-              <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute>
-              {/* <PrivateRoute exact path="/home" component={Home}></PrivateRoute> */}
+              {/* <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute> */}
+              <PrivateRoute exact path="/home" component={Home}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
               <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute>
