@@ -3,3 +3,12 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.filterPanel{
+    background-color: #fff;
+    border-radius: 5px!important;
+    padding-left: 10px;
+    padding-right: 10px;
+    -webkit-box-shadow: 1px 0 11px 0;
+    box-shadow: 1px 0 11px 0;
+}
