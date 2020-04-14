@@ -13,7 +13,19 @@ $light-color: #6e8796;
         background-size: cover;
         background-repeat: no-repeat;
         background-position-x: center;
-        height: 60vh;
+        height: 65vh;
+    }
+    .bannerMainText {
+        font-weight: 500;
+        font-size: 32px;
+        font-family: visby-bold;
+        color: white;
+        padding-top: 20vw;
+    }
+    .bannerSmallText {
+        font-size: 15px;
+        color: white;
+        font-family: $font-regular;
     }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -26,6 +38,19 @@ $light-color: #6e8796;
         background-repeat: no-repeat;
         background-position-x: center;
         height: 45vh;
+    }
+    .bannerMainText {
+        font-weight: 500;
+        font-size: 50px;
+        font-family: visby-bold;
+        color: white;
+        letter-spacing: 1px;
+        padding-top: 8vw;
+    }
+    .bannerSmallText {
+        font-size: 24px;
+        color: white;
+        font-family: $font-regular;
     }
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px) {
@@ -40,6 +65,19 @@ $light-color: #6e8796;
         height: 60vh;
         margin-top: 5px;
     }
+    .bannerMainText {
+        font-weight: 500;
+        font-size: 50px;
+        font-family: visby-bold;
+        color: white;
+        letter-spacing: 1px;
+        padding-top: 8vw;
+    }
+    .bannerSmallText {
+        font-size: 24px;
+        color: white;
+        font-family: $font-regular;
+    }
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px) {
     .mainBannerBackImg {
@@ -50,7 +88,20 @@ $light-color: #6e8796;
         background-size: cover;
         background-repeat: no-repeat;
         background-position-x: center;
-        height: 65vh;
+        height: 70vh;
+    }
+    .bannerMainText {
+        font-weight: 500;
+        font-size: 50px;
+        font-family: visby-bold;
+        color: white;
+        letter-spacing: 1px;
+        padding-top: 8vw;
+    }
+    .bannerSmallText {
+        font-size: 24px;
+        color: white;
+        font-family: $font-regular;
     }
 }
 @media screen and (min-width: 1600px) {
@@ -65,18 +116,17 @@ $light-color: #6e8796;
         height: 55vh;
         margin-top: 10px;
     }
-}
-
-.bannerMainText {
-    font-weight: 500;
-    font-size: 40px;
-    font-family: visby-bold;
-    color: white;
-    letter-spacing: 1px;
-    padding-top: 7vw;
-}
-.bannerSmallText {
-    font-size: 18px;
-    color: white;
-    font-family: $font-regular;
+    .bannerMainText {
+        font-weight: 500;
+        font-size: 70px;
+        font-family: visby-bold;
+        color: white;
+        letter-spacing: 2px;
+        padding-top: 8vw;
+    }
+    .bannerSmallText {
+        font-size: 30px;
+        color: white;
+        font-family: $font-regular;
+    }
 }

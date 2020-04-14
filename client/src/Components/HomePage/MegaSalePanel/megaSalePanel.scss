@@ -3,3 +3,215 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.mainRwPanel{
+    background-image: linear-gradient(45deg,  #0088D1, #2937D6);
+    margin-top: 4vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+}
+.megaCardName{
+    margin: 0;
+    color: $secondary-color;
+    font-size: 15px;
+    font-family: $font-stack;
+}
+.megaCardCity{
+    margin: 0;
+    color: $secondary-color;
+    font-size: 14px;
+    font-family: $font-regular;
+}
+
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .megaCardImgs{
+        width: 80%;
+        height: 135px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    .megaDetailCardDiv{
+        background-color: white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: 10px 0px 10px 10px;
+        width: 80%;
+        margin-bottom: 10vw;
+    }
+    .discountTag{
+        padding: 5px;
+        background-color: #D62929;
+        width: 18%;
+        color: white;
+        font-family: visby-regular;
+        position: absolute;
+        margin-top: -30vw;
+    }
+    .mainMegaCardDiv{
+        margin-left: 15vw;
+    }
+    .megaSalHeading{
+        font-size: 30px;
+        font-family: $font-stack;
+        color: #ffffff;
+        padding-left: 5vw;
+    }
+    .seeAllMega{
+        font-size: 18px;
+        font-family: $font-regular;
+        color: white;
+        text-decoration: underline;
+        margin-top: 9vw;
+        padding-left: 5vw;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .megaCardImgs{
+        width: 100%;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    .megaDetailCardDiv{
+        background-color: white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: 10px 0px 10px 10px;
+    }
+    .discountTag{
+        padding: 5px;
+        background-color: #D62929;
+        width: 30%;
+        color: white;
+        font-family: $font-regular;
+        position: absolute;
+        margin-top: -8.5vw;
+    }
+    .mainMegaCardDiv{
+        // margin-left: 20vw;
+    }
+    .megaSalHeading{
+        font-size: 30px;
+        font-family: $font-stack;
+        color: #ffffff;
+    }
+    .seeAllMega{
+        font-size: 18px;
+        font-family: $font-regular;
+        color: white;
+        text-decoration: underline;
+        margin-top: 9vw;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .megaCardImgs{
+        width: 100%;
+        height: 115px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    .megaDetailCardDiv{
+        background-color: white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: 10px 0px 10px 10px;
+    }
+    .discountTag{
+        padding: 5px;
+        background-color: #D62929;
+        width: 30%;
+        color: white;
+        font-family: $font-regular;
+        position: absolute;
+        margin-top: -7.5vw;
+    }
+    .mainMegaCardDiv{
+        // margin-left: 20vw;
+    }
+    .megaSalHeading{
+        font-size: 30px;
+        font-family: $font-stack;
+        color: #ffffff;
+    }
+    .seeAllMega{
+        font-size: 18px;
+        font-family: $font-regular;
+        color: white;
+        text-decoration: underline;
+        margin-top: 9vw;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+    .megaCardImgs{
+        width: 100%;
+        height: 130px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    .megaDetailCardDiv{
+        background-color: white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: 10px 0px 10px 10px;
+    }
+    .discountTag{
+        padding: 5px;
+        background-color: #D62929;
+        width: 30%;
+        color: white;
+        font-family: $font-regular;
+        position: absolute;
+        margin-top: -7.5vw;
+    }
+    .mainMegaCardDiv{
+        // margin-left: 20vw;
+    }
+    .megaSalHeading{
+        font-size: 30px;
+        font-family: $font-stack;
+        color: #ffffff;
+    }
+    .seeAllMega{
+        font-size: 18px;
+        font-family: $font-regular;
+        color: white;
+        text-decoration: underline;
+        margin-top: 9vw;
+    }
+}
+@media screen and (min-width: 1600px) {
+    .megaCardImgs{
+        width: 100%;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+    .megaDetailCardDiv{
+        background-color: white;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: 10px 0px 10px 10px;
+    }
+    .discountTag{
+        padding: 5px;
+        background-color: #D62929;
+        width: 30%;
+        color: white;
+        font-family: $font-regular;
+        position: absolute;
+        margin-top: -7.5vw;
+    }
+    .mainMegaCardDiv{
+        // margin-left: 20vw;
+    }
+    .megaSalHeading{
+        font-size: 30px;
+        font-family: $font-stack;
+        color: #ffffff;
+    }
+    .seeAllMega{
+        font-size: 18px;
+        font-family: $font-regular;
+        color: white;
+        text-decoration: underline;
+        margin-top: 9vw;
+    }
+}

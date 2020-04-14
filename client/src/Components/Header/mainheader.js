@@ -11,26 +11,29 @@ import { Menu, Dropdown } from 'antd';
 class MainHeader extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            navbar: false,
+        }
     }
 
 
     openNav = () => {
-        document.getElementById("mySideNav").style.width = "100%";
-
-    }
-    openNav = () => {
-        document.getElementById("mySidenav").style.width = "100%";
+        this.setState({
+            navbar : true
+        })    
     }
 
     closeNav = () => {
-        document.getElementById("mySidenav").style.width = "0";
+        this.setState({
+            navbar : false,
+        })
     }
 
     render() {
         const { dropDownUser } = this.props;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
         let adminUser = JSON.parse(localStorage.getItem("userData"));
-
+    
         const menu = (
             <Menu>
                 <Menu.Item className="dropdownTextHover">
@@ -63,7 +66,7 @@ class MainHeader extends Component {
                 <div className="d-none d-sm-block">
                     <div className="row">
                         <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-                        <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2" style={{padding: '0'}}>
+                        <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2" style={{ padding: '0' }}>
                             <Link rel="noopener noreferrer" to={`/home`}>
                                 <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
                             </Link>
@@ -162,7 +165,7 @@ class MainHeader extends Component {
                             </div>
                         </div>
                         <div className="col-12">
-                            <div id="mySidenav" class="menunav">
+                            <div id={this.state.navbar == true ? 'mySidenav' : 'mySidenavNO'} class="menunav">
                                 <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
                                 <div className="menunav-content">
                                     <ul class="inLineMenuMOB">
@@ -219,7 +222,7 @@ class MainHeader extends Component {
                                                 <Dropdownn hideDropDown={this.props.hideDropDown} />
                                             </li>
                                             :
-                                            <li className="" style={{ textAlign: 'left' }}>
+                                            <li className="" style={{ marginTop: '16px' }}>
                                                 <button type="button" class="btn btn-primary loginBtnMenu" data-toggle="modal" data-target="#myModal" >
                                                     <span className=""> LOGIN </span>
                                                 </button>

@@ -1,14 +1,66 @@
-$font-stack:  visby-bold;
-$font-regular:  visby-regular;
-$secondary-color: #00334F;
-$primary-color: #0088D1;
-$light-color:#6E8796;
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #00334f;
+$primary-color: #0088d1;
+$light-color: #6e8796;
 
-.filterPanel{
+.filterPanelHeading {
+    font-size: 21px;
+    font-family: $font-stack;
+    color: $secondary-color;
+    padding-top: 1vw;
+}
+.filterPanel {
     background-color: #fff;
-    border-radius: 5px!important;
+    border-radius: 5px !important;
     padding-left: 10px;
     padding-right: 10px;
     -webkit-box-shadow: 1px 0 11px 0;
     box-shadow: 1px 0 11px 0;
 }
+.checkBoxText {
+    color: #00334f;
+    font-family: $font-regular;
+}
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .selectDropDown{
+        width: 100%;
+        margin-top: 12px !important;
+    }
+    .radioCheckBanner{
+        width: 100%;
+        margin-top: 12px !important;
+    }
+    .broweBTnBanner {
+        width: 100%;
+        background-color: #00334f;
+        color: white;
+        padding: 3px;
+        border-radius: 5px;
+        font-family: $font-stack;
+        margin-top: 12px !important;
+    }
+    .filterUpWthBaner{
+        margin-top: -110px;
+    }
+}
+@media screen and (min-width: 768px){
+    .selectDropDown{
+        width: 100%;
+    }
+    .radioCheckBanner{
+        width: 100%;
+    }
+    .broweBTnBanner {
+        width: 100%;
+        background-color: #00334f;
+        color: white;
+        padding: 3px;
+        border-radius: 5px;
+        font-family: visby-bold;
+    }
+    .filterUpWthBaner{
+        margin-top: -40px;
+    }
+}
+

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/mainheader';
-import Banner from '../HomePage/HomeBanner/homeBanner';
+import Banner from './HomeBanner/homeBanner';
+import MegaSale from './MegaSalePanel/megaSalePanel';
 
 class Home extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Home extends Component {
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner />
+        <MegaSale />
       </div>
     );
   }
