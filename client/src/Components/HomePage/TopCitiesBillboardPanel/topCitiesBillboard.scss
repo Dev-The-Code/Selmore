@@ -3,3 +3,43 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+
+.mainRwTopCities{
+    margin-top: 4vw;
+}
+.mainTopCitiespanel{
+    margin-top: 2vw;
+}
+.TopCitiesHead{
+    text-align: center;
+    font-size: 33px;
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+.topCitiesImgs{
+    width: 100%;
+    height: 140px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .seeAllTopCities{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: center;
+        margin-top: 1vw;
+    }
+}
+@media screen and (min-width: 768px){
+    .seeAllTopCities{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: right;
+        margin-top: 0.6vw;
+    }
+}

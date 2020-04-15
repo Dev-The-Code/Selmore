@@ -5,6 +5,8 @@ import MegaSale from './MegaSalePanel/megaSalePanel';
 import BrowseCategory from './BrowseByCategoryPanel/browseByCate';
 import NewiestBill from './NewestBillboardsPanel/newestBillboards';
 import PrestigiousClients from './PrestigiousClientsPanel/prestigiousClientsPanel';
+import BrowseTopCity from './TopCitiesBillboardPanel/topCitiesBillboard';
+import ListingAdPanel from './ListingAdPanel/listingAd';
 
 class Home extends Component {
   constructor(props) {
@@ -37,7 +39,9 @@ class Home extends Component {
         <MegaSale />
         <BrowseCategory />
         <NewiestBill />
-        <PrestigiousClients />
+        {/* <PrestigiousClients /> */}
+        <BrowseTopCity />
+        <ListingAdPanel />
       </div>
     );
   }

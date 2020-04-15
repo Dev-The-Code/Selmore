@@ -3,3 +3,22 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.mainRwClients{
+    margin-top: 4vw;
+}
+.mainRwClientsCarosel{
+    margin-top: 2vw;
+}
+.clientsHead{
+    text-align: center;
+    font-size: 33px;
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    
+}
+@media screen and (min-width: 768px){
+    
+}

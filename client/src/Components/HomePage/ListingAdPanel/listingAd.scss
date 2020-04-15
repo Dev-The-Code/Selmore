@@ -3,3 +3,35 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.mainRwofList{
+    margin-top: 4vw;
+    margin-bottom: 5vw;
+}
+.questSec{
+    background-color: #e4e4e4;
+    padding-bottom: 2vw;
+}
+.startSec{
+    background-color: $primary-color;
+    padding-bottom: 2vw;
+}
+.interestedHead{
+    color: $secondary-color;
+    font-size: 33px;
+    font-family: $font-stack;
+    padding-top: 3vw;
+}
+.interestedBottomPara{
+    font-size: 19px;
+    width: 80%;
+    font-family: $font-regular;
+    color: $light-color;
+}
+.getStartedText{
+    text-align: center;
+    color: white;
+    font-size: 33px;
+    font-family: $font-stack;
+    padding-top: 6vw;
+}
