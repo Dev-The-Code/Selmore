@@ -3,3 +3,42 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .seeAllCate{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: center;
+        margin-top: 1vw;
+    }
+}
+@media screen and (min-width: 768px){
+    .seeAllCate{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: right;
+        margin-top: 0.6vw;
+    }
+}
+
+.mainRwBrowseCate{
+    margin-top: 4vw;
+}
+.mainRwBrowseCateImgs{
+    margin-top: 2vw;
+}
+.browseCateHead{
+    text-align: center;
+    font-size: 33px;
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+.browseCateImgs{
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}

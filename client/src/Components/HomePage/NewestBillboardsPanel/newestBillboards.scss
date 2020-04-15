@@ -3,3 +3,66 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.mainRwNewestBill{
+    margin-top: 4vw;
+}
+.mainRwBilboards{
+    margin-top: 2vw;
+}
+.newestBillHead{
+    text-align: center;
+    font-size: 33px;
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .seeAllnewestBill{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: center;
+        margin-top: 1vw;
+    }
+}
+@media screen and (min-width: 768px){
+    .seeAllnewestBill{
+        font-size: 18px;
+        font-family: $font-stack;
+        color: $primary-color;
+        text-decoration: underline;
+        text-align: right;
+        margin-top: 0.6vw;
+    }
+}
+
+.mainNewestBillCardDiv{
+
+}
+.newestBillCardImgs{
+    width: 100%;
+    height: 150px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.newestBillDetailCardDiv{
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px 0px 10px 10px;
+    border: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+}
+.newestBillCardName{
+    margin: 0;
+    color: $secondary-color;
+    font-size: 16px;
+    font-family: $font-stack;
+}
+.newestBillCardCity{
+    margin: 0;
+    color: $secondary-color;
+    font-size: 15px;
+    font-family: $font-regular;
+}

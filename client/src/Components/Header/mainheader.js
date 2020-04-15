@@ -71,8 +71,8 @@ class MainHeader extends Component {
                                 <img src="../images/selmore-logo.png" alt='img' className="selmorelogo" />
                             </Link>
                         </div>
-                        <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2"></div>
-                        <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6" style={{ textAlign: "right" }}>
+                        <div className="col-sm-2 col-md-1 col-lg-2 col-xl-2"></div>
+                        <div className="col-sm-6 col-md-8 col-lg-6 col-xl-6" style={{ textAlign: "right" }}>
                             <ul class="list-inline inLineMenu">
                                 <li className="menuLiTag">
                                     <Link rel="noopener noreferrer" to={`/home`}>
@@ -148,7 +148,7 @@ class MainHeader extends Component {
                                     </li>}
                             </ul>
                         </div>
-                        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                        <div className="col-sm-1 col-md-0 col-lg-1 col-xl-1"></div>
                     </div>
                 </div>
 

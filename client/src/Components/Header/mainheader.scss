@@ -9,31 +9,53 @@ $light-color: #6e8796;
     display: inline-flex;
     padding-left: 0;
 }
-.inLineMenuMOB{
+.inLineMenuMOB {
     list-style: none;
     padding-left: 0;
 }
-.menuLiTag{
+.menuLiTag {
     padding-right: 1.5vw;
     margin-top: 3vw;
 }
-.menuText{
+.menuText {
     color: $secondary-color;
     font-family: $font-stack;
 }
-.menuTextMOB{
+.menuTextMOB {
     color: #ffffff;
     font-family: visby-bold;
     font-size: 20px;
 }
-.buyMediaBtn{
-    background-color: #00334f;
-    color: white;
-    padding: 5px 5px 5px 5px;
-    border-radius: 5px;
-    font-family: $font-stack;
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .buyMediaBtn {
+        background-color: #00334f;
+        color: white;
+        padding: 5px 5px 5px 5px;
+        border-radius: 5px;
+        font-family: $font-stack;
+    }
 }
-.buyMediaBtnMOB{
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .buyMediaBtn {
+        background-color: #00334f;
+        color: white;
+        padding: 5px 5px 5px 5px;
+        border-radius: 5px;
+        font-family: $font-stack;
+        font-size: 10px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .buyMediaBtn {
+        background-color: #00334f;
+        color: white;
+        padding: 5px 5px 5px 5px;
+        border-radius: 5px;
+        font-family: $font-stack;
+    }
+}
+
+.buyMediaBtnMOB {
     background-color: #000b10;
     color: white;
     padding: 5px 5px 5px 5px;
@@ -41,7 +63,7 @@ $light-color: #6e8796;
     font-family: visby-bold;
     font-size: 23px;
 }
-.loginBtnMenu{
+.loginBtnMenu {
     height: 30px;
     font-size: 14px;
     font-family: visby-bold;
@@ -49,7 +71,7 @@ $light-color: #6e8796;
     padding: 3px 10px 5px 10px;
     margin-top: -2px;
 }
-.listAdBtn{
+.listAdBtn {
     height: 30px;
     font-size: 14px;
     font-family: $font-stack;
@@ -57,10 +79,10 @@ $light-color: #6e8796;
     padding: 3px 10px 5px 10px;
     margin-top: -2px;
 }
-.dropdownTextHover{
+.dropdownTextHover {
     background-color: #00334f;
 }
-.dropdownTextHover:hover{
+.dropdownTextHover:hover {
     background-color: #8c8e91 !important;
 }
 
@@ -70,10 +92,10 @@ $light-color: #6e8796;
     width: 100%;
     text-align: center;
     margin-top: 30px;
-    color:white;
-  }
+    color: white;
+}
 
-  .menunav {
+.menunav {
     height: 100%;
     width: 100%;
     position: fixed;
@@ -84,7 +106,7 @@ $light-color: #6e8796;
     overflow-x: hidden;
     transition: 0.5s;
     color: white;
-  }
-#mySidenavNO{
+}
+#mySidenavNO {
     width: 0%;
 }

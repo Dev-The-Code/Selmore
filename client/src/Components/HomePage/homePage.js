@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Header from '../Header/mainheader';
 import Banner from './HomeBanner/homeBanner';
 import MegaSale from './MegaSalePanel/megaSalePanel';
+import BrowseCategory from './BrowseByCategoryPanel/browseByCate';
+import NewiestBill from './NewestBillboardsPanel/newestBillboards';
+import PrestigiousClients from './PrestigiousClientsPanel/prestigiousClientsPanel';
 
 class Home extends Component {
   constructor(props) {
@@ -32,6 +35,9 @@ class Home extends Component {
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner />
         <MegaSale />
+        <BrowseCategory />
+        <NewiestBill />
+        <PrestigiousClients />
       </div>
     );
   }
