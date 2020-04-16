@@ -9,8 +9,8 @@ class TopCitiesBillboard extends Component {
             <div className="animated animatedFadeInUp fadeInUp">
                 <div className="row mainRwTopCities">
                     <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
-                    <div className="col-12 col-md-1 col-lg-2 col-xl-2"></div>
-                    <div className="col-12 col-md-8 col-lg-6 col-xl-6">
+                    <div className="col-1 col-md-1 col-lg-2 col-xl-2"></div>
+                    <div className="col-10 col-md-8 col-lg-6 col-xl-6">
                         <h3 className="TopCitiesHead">Browse Billboards From Top Cities</h3>
                     </div>
                     <div className="col-12 col-md-1 col-lg-2 col-xl-2">

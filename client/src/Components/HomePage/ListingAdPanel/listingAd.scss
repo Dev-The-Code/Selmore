@@ -16,22 +16,108 @@ $light-color:#6E8796;
     background-color: $primary-color;
     padding-bottom: 2vw;
 }
-.interestedHead{
-    color: $secondary-color;
-    font-size: 33px;
-    font-family: $font-stack;
-    padding-top: 3vw;
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .interestedHead{
+        color: $secondary-color;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 6vw;
+    }
+    .interestedBottomPara{
+        font-size: 19px;
+        width: 100%;
+        font-family: $font-regular;
+        color: $light-color;
+    }
+    .getStartedText{
+        text-align: center;
+        color: white;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 6vw;
+    }
 }
-.interestedBottomPara{
-    font-size: 19px;
-    width: 80%;
-    font-family: $font-regular;
-    color: $light-color;
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .interestedHead{
+        color: $secondary-color;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 3vw;
+    }
+    .interestedBottomPara{
+        font-size: 19px;
+        width: 80%;
+        font-family: $font-regular;
+        color: $light-color;
+    }
+    .getStartedText{
+        text-align: center;
+        color: white;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 12vw;
+    }
 }
-.getStartedText{
-    text-align: center;
-    color: white;
-    font-size: 33px;
-    font-family: $font-stack;
-    padding-top: 6vw;
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .interestedHead{
+        color: $secondary-color;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 3vw;
+    }
+    .interestedBottomPara{
+        font-size: 19px;
+        width: 80%;
+        font-family: $font-regular;
+        color: $light-color;
+    }
+    .getStartedText{
+        text-align: center;
+        color: white;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 7vw;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+    .interestedHead{
+        color: $secondary-color;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 3vw;
+    }
+    .interestedBottomPara{
+        font-size: 19px;
+        width: 80%;
+        font-family: $font-regular;
+        color: $light-color;
+    }
+    .getStartedText{
+        text-align: center;
+        color: white;
+        font-size: 33px;
+        font-family: $font-stack;
+        padding-top: 6vw;
+    }
+}
+@media screen and (min-width: 1600px){
+    .interestedHead{
+        color: $secondary-color;
+        font-size: 40px;
+        font-family: $font-stack;
+        padding-top: 3vw;
+    }
+    .interestedBottomPara{
+        font-size: 21px;
+        width: 70%;
+        font-family: $font-regular;
+        color: $light-color;
+    }
+    .getStartedText{
+        text-align: center;
+        color: white;
+        font-size: 40px;
+        font-family: $font-stack;
+        padding-top: 5vw;
+    }
 }

@@ -5,6 +5,8 @@ $primary-color: #0088D1;
 $light-color:#6E8796;
 
 .mainRwClients{
+    background-color: #e4e4e4;
+    height: 40vh;
     margin-top: 4vw;
 }
 .mainRwClientsCarosel{
@@ -15,6 +17,11 @@ $light-color:#6E8796;
     font-size: 33px;
     font-family: $font-stack;
     color: $secondary-color;
+    margin-top: 25px;
+}
+.logosClient{
+    width: 100%;
+    height: 150px;
 }
 @media screen and (min-width: 360px) and (max-width: 767px) {
     

@@ -7,6 +7,8 @@ import NewiestBill from './NewestBillboardsPanel/newestBillboards';
 import PrestigiousClients from './PrestigiousClientsPanel/prestigiousClientsPanel';
 import BrowseTopCity from './TopCitiesBillboardPanel/topCitiesBillboard';
 import ListingAdPanel from './ListingAdPanel/listingAd';
+import HowItWork from './HowItWorkPanel/howItWork';
+import Footer from '../Footer/mainFooter';
 
 class Home extends Component {
   constructor(props) {
@@ -33,15 +35,17 @@ class Home extends Component {
   render() {
     const { dropDownUser } = this.state;
     return (
-      <div>
+      <div style={{backgroundColor:'white'}}>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner />
         <MegaSale />
         <BrowseCategory />
         <NewiestBill />
-        {/* <PrestigiousClients /> */}
+        <PrestigiousClients />
         <BrowseTopCity />
         <ListingAdPanel />
+        <HowItWork />
+        <Footer />
       </div>
     );
   }

@@ -11,12 +11,113 @@ class PrestigiousClients extends Component {
                     <div className="col-12 col-md-12 col-lg-12 col-xl-12">
                         <h3 className="clientsHead">Our Prestigious Clients</h3>
                     </div>
+                    <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                        <div id="demo" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div className="row">
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                            <div className="row">
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/jazz_j2fitm.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/candy_jkuvpb.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/hbl_oyekbh.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div className="row">
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                            <div className="row">
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/hbl_oyekbh.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/candy_jkuvpb.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/jazz_j2fitm.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div className="row">
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+                                            <div className="row">
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/hbl_oyekbh.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/jazz_j2fitm.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                                <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                                                    <img
+                                                        src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1587021009/candy_jkuvpb.png"
+                                                        alt="logos"
+                                                        className="logosClient"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-2 col-lg-2 col-xl-2"></div>
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#demo" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-               
-               <div className="row mainRwClientsCarosel">
-
-               </div>
-            </div>
+            </div>    
         );
     }
 }

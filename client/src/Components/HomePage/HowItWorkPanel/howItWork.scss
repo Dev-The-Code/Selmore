@@ -3,3 +3,120 @@ $font-regular:  visby-regular;
 $secondary-color: #00334F;
 $primary-color: #0088D1;
 $light-color:#6E8796;
+
+.mainTenDivbord{
+    border: 2px solid #e1e1e1;
+}
+.howWorkHead{
+    text-align: center;
+    color: $secondary-color;
+    font-size: 23px;
+    font-family: $font-stack;
+    padding-top: 2vw;
+}
+.howWorkBtomPara{
+    font-size: 19px;
+    text-align: center;
+    font-family: $font-regular;
+    color: $light-color;
+    padding-top: 1vw;
+}
+
+.twoBoxesInside{
+    background: #e4e4e4;
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+.sellerBuyerText{
+    font-size: 19px;
+    text-align: center;
+    font-family: $font-regular;
+    color: $light-color;
+}
+
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .sellerBuyerHead{
+        text-align: center;
+        color: $secondary-color;
+        font-size: 26px;
+        font-family: $font-stack;
+        padding-top: 5vw;
+    }
+    .buySellBtn{
+        width: 100%;
+        font-size: 21px;
+        font-family: $font-stack;
+        background-color: $secondary-color;
+        color: white;
+        margin-bottom: 5vw;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .sellerBuyerHead{
+        text-align: center;
+        color: $secondary-color;
+        font-size: 25px;
+        font-family: $font-stack;
+        padding-top: 3vw;
+    }
+    .buySellBtn{
+        width: 100%;
+        font-size: 21px;
+        font-family: $font-stack;
+        background-color: $secondary-color;
+        color: white;
+        margin-bottom: 2vw;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .sellerBuyerHead{
+        text-align: center;
+        color: $secondary-color;
+        font-size: 26px;
+        font-family: $font-stack;
+        padding-top: 2vw;
+    }
+    .buySellBtn{
+        width: 100%;
+        font-size: 21px;
+        font-family: $font-stack;
+        background-color: $secondary-color;
+        color: white;
+        margin-bottom: 1vw;
+    }
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+    .sellerBuyerHead{
+        text-align: center;
+        color: $secondary-color;
+        font-size: 26px;
+        font-family: $font-stack;
+        padding-top: 2vw;
+    }
+    .buySellBtn{
+        width: 100%;
+        font-size: 21px;
+        font-family: $font-stack;
+        background-color: $secondary-color;
+        color: white;
+        margin-bottom: 1vw;
+    }
+}
+@media screen and (min-width: 1600px){
+    .sellerBuyerHead{
+        text-align: center;
+        color: $secondary-color;
+        font-size: 30px;
+        font-family: $font-stack;
+        padding-top: 2vw;
+    }
+    .buySellBtn{
+        width: 100%;
+        font-size: 25px;
+        font-family: $font-stack;
+        background-color: $secondary-color;
+        color: white;
+        margin-bottom: 1vw;
+    }
+}

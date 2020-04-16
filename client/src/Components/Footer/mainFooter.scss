@@ -1,0 +1,33 @@
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #00334F;
+$primary-color: #0088D1;
+$light-color:#6E8796;
+
+.wholeFooterBack{
+    background-color: #f1efef;
+    margin-top: 4vw;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.footerHeads{
+    font-size: 25px;
+    font-family: $font-stack;
+    color: $secondary-color;
+}
+.listulSty{
+    padding: 0;
+    list-style: none;
+    font-size: 19px;
+    font-family: $font-regular;
+    color: $secondary-color;
+}
+
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .centerMob{
+        text-align: center;
+    }
+}
+@media screen and (min-width: 768px){
+    .centerMob{}
+}
