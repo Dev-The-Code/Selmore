@@ -134,9 +134,7 @@ class Panel1 extends Component {
           </div><br />
           <div className="row">
             <div className="container space">
-              <div className="col-md-4 divborder"
-                onClick={() => this.hoverAlert(busAdscategory, 'Bus Ads')}
-              >
+              <div className="col-md-4 divborder" onClick={() => this.hoverAlert(busAdscategory, 'Bus Ads')}>
                 <div className="row">
                   <div className="col-md-3 col-3 col-sm-3">
                     <img src="../images/1.png" alt='img' className="lane1" />

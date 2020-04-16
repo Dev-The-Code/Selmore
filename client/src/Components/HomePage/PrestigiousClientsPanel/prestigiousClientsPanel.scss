@@ -6,13 +6,20 @@ $light-color:#6E8796;
 
 .mainRwClients{
     background-color: #e4e4e4;
-    height: 40vh;
     margin-top: 4vw;
+    padding-bottom: 3vw;
 }
 .mainRwClientsCarosel{
     margin-top: 2vw;
 }
 .clientsHead{
+    text-align: center;
+    font-size: 33px;
+    font-family: $font-stack;
+    color: $secondary-color;
+    margin-top: 25px;
+}
+.clientsHeadMob{
     text-align: center;
     font-size: 33px;
     font-family: $font-stack;

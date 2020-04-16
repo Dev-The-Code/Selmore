@@ -1,11 +1,11 @@
-$font-stack:  visby-bold;
-$font-regular:  visby-regular;
-$secondary-color: #00334F;
-$primary-color: #0088D1;
-$light-color:#6E8796;
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #00334f;
+$primary-color: #0088d1;
+$light-color: #6e8796;
 
 @media screen and (min-width: 360px) and (max-width: 767px) {
-    .seeAllCate{
+    .seeAllCate {
         font-size: 18px;
         font-family: $font-stack;
         color: $primary-color;
@@ -14,8 +14,8 @@ $light-color:#6E8796;
         margin-top: 1vw;
     }
 }
-@media screen and (min-width: 768px){
-    .seeAllCate{
+@media screen and (min-width: 768px) {
+    .seeAllCate {
         font-size: 18px;
         font-family: $font-stack;
         color: $primary-color;
@@ -25,19 +25,30 @@ $light-color:#6E8796;
     }
 }
 
-.mainRwBrowseCate{
+.mainRwBrowseCate {
     margin-top: 4vw;
 }
-.mainRwBrowseCateImgs{
+.mainRwBrowseCateImgs {
     margin-top: 2vw;
 }
-.browseCateHead{
+.browseCateHead {
     text-align: center;
     font-size: 33px;
     font-family: $font-stack;
     color: $secondary-color;
 }
-.browseCateImgs{
+.browseCateImgs {
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1586936694/roomRenting_f8w1st.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    height: 20vh;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.browseimage{
     width: 100%;
     margin-bottom: 15px;
     border-radius: 5px;
