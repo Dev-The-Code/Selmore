@@ -54,19 +54,20 @@ class TopCitiesBillboard extends Component {
                 cities.push(city)
             }
         }
-        let sliceCities = cities.slice(0, i + 12);
+        // console.log(cities)
+        let sliceCities = cities.slice(0, i + 8);
 
         this.setState({
             cities: cities,
             sliceCities: sliceCities,
-            i: 12
+            i: 8
         })
     }
 
     billCity = () => {
         const { i, cities } = this.state;
-        let addition = i + 12;
-        let sliceCities = cities.slice(0, i + 12);
+        let addition = i + 8;
+        let sliceCities = cities.slice(0, i + 8);
 
         this.setState({
             i: addition,
@@ -83,6 +84,7 @@ class TopCitiesBillboard extends Component {
     }
     render() {
         const { bilboardData, directMarket, cityName, sliceCities } = this.state;
+        // console.log("TopCitiesBillboard -> render -> sliceCities", sliceCities)
         if (directMarket) {
             return <Redirect to={{
                 pathname: '/market_place',
