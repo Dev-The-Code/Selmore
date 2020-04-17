@@ -25,9 +25,6 @@ $light-color:#4a5964;
 .moredetailMegabtn{
 	font-family: $font-stack;
 }
-
-
-
 .cultus1{
 		width: 100%;
 		height: 300px;
@@ -648,16 +645,23 @@ $light-color:#4a5964;
 .shah2:hover #shah1 {
   display: block;
 }
-
-
-
-
 .card-title{
 	font-family: $font-stack;
 }
 
 
+$font-stack:  visby-bold;
+$font-regular:  visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color:#4a5964;
 
+/*New UI*/
+
+.filterTextHead{
+	font-family: $font-stack;
+	color: $secondary-color;
+}
 
 
 
