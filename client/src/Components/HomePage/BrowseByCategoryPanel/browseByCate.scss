@@ -37,19 +37,129 @@ $light-color: #6e8796;
     font-family: $font-stack;
     color: $secondary-color;
 }
-.browseCateImgs {
-    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1586936694/roomRenting_f8w1st.jpg");
+.allBillboardAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587101486/billboard-min_xiayac.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-position-x: center;
-    height: 20vh;
     margin-bottom: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: pointer;
 }
-.browseimage{
-    width: 100%;
+.streamerAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587101487/streamers-min_z2afoi.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
     margin-bottom: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cinemaAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/cinema-min_fr0d89.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.otherAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/misc-min_fufudh.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.mallAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/mall-min_uwjzoi.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.airportAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/airport-min_g9atvi.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.busStandAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/bus-stand-min_lne9ch.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.taxiCarAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/taxi-min_qfjyzo.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.busTransportAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/bus-min_vyn7yb.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.RadiominAd{
+    background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587100766/radio-min_voqpxx.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.headingTextonImg{
+    font-family: $font-stack;
+    color: white;
+    text-align: center;
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+.headingTextonImgForLarge{
+    font-family: $font-stack;
+    color: white;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }

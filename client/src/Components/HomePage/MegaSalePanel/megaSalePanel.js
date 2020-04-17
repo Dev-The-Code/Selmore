@@ -103,7 +103,7 @@ class MegaSaleHome extends Component {
                         <div className="col-12 col-sm-1 col-lg-1 col-xl-1"></div>
                         <div className="col-12 col-sm-2 col-lg-2 col-xl-2">
                             <h3 className="megaSalHeading">Mega Sale</h3>
-                            <Link><p className="seeAllMega">See All ></p></Link>
+                            <Link to={`/megaSale`}><p className="seeAllMega">See All ></p></Link>
                         </div>
                         {megaData && megaData.map((elem, key) => {
                             return (

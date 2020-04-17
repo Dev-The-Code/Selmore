@@ -161,7 +161,7 @@ class NewestBillboards extends Component {
                         <h3 className="newestBillHead">Newest Billboards</h3>
                     </div>
                     <div className="col-12 col-md-2 col-lg-3 col-xl-3">
-                        <Link><p className="seeAllnewestBill">See All ></p></Link>
+                        <Link to={`/market_place`}><p className="seeAllnewestBill">See All ></p></Link>
                     </div>
                     <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>

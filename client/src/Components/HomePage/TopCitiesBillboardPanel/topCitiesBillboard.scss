@@ -17,12 +17,6 @@ $light-color:#6E8796;
     font-family: $font-stack;
     color: $secondary-color;
 }
-.topCitiesImgs{
-    width: 100%;
-    height: 140px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
 @media screen and (min-width: 360px) and (max-width: 767px) {
     .seeAllTopCities{
         font-size: 18px;
@@ -42,4 +36,29 @@ $light-color:#6E8796;
         text-align: right;
         margin-top: 0.6vw;
     }
+}
+
+.cityDivBorder{
+    border: 2px solid #e4e4e4;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.cityDivBorder:hover{
+    background-color: #e4e4e4;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.cityNames{
+    font-size: 20px;
+    text-align: center;
+    font-family: $font-stack;
+    color: $secondary-color;
+    padding-top: 7px;
+    margin: 0;
+}
+.cityNoAds{
+    text-align: center;
+    font-size: 13px;
+    font-family: $font-regular;
+    color: $light-color;
 }

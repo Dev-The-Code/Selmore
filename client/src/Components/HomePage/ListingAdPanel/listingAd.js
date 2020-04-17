@@ -14,7 +14,9 @@ class ListingAd extends Component {
                         <p className="interestedBottomPara">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
                     </div>
                     <div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 startSec">
-                        <h3 className="getStartedText">Get Started ></h3>
+                        <Link to={`/contact`}>
+                            <h3 className="getStartedText">Get Started ></h3>
+                        </Link>
                     </div>
                 </div>
             </div>

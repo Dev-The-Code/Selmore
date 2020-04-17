@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HttpUtils } from './../Services/HttpUtils';
-import './home.scss';
 import { Redirect } from 'react-router-dom';
+import './home.scss';
 
 class Panel3 extends Component {
 	constructor(props) {
