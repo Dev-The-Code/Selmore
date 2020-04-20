@@ -1,669 +1,1037 @@
-
-$font-stack:  visby-bold;
-$font-regular:  visby-regular;
+$font-stack: visby-bold;
+$font-regular: visby-regular;
 $secondary-color: #19303a;
 $primary-color: #19b3e8;
-$light-color:#4a5964;
+$light-color: #4a5964;
 
-.megaPageTiming{
-	font-size: 14px;
-    font-weight: 750;
-    font-family: $font-regular;
-    color: #007bff;
-}
-.megaPageText{
+
+.megaPageText {
 	font-size: 1vw;
 	font-family: $font-regular;
 }
-.extra1{
+.extra1 {
 	margin-right: -4vw;
-    margin-bottom: 4vw;
+	margin-bottom: 4vw;
 }
-.extra2{
+.extra2 {
 	margin-left: -4vw;
 }
-.moredetailMegabtn{
+.moredetailMegabtn {
 	font-family: $font-stack;
 }
-.cultus1{
-		width: 100%;
-		height: 300px;
-		margin-top: 5px;
-		position: absolute;
+.cultus1 {
+	width: 100%;
+	height: 300px;
+	margin-top: 5px;
+	position: absolute;
 }
-.cultus2{
-		margin-top: 10%;
-	    font-family: Helvetica;
-	    margin-left: 10%;
-    	position: relative;
+.cultus2 {
+	margin-top: 10%;
+	font-family: Helvetica;
+	margin-left: 10%;
+	position: relative;
 }
-.cultus3{
-		 font-size: 35px;
-	    font-weight: 600;
-	    color: white;
+.cultus3 {
+	font-size: 35px;
+	font-weight: 600;
+	color: white;
 }
-.cultus5{
+.cultus5 {
 	display: inline;
 	margin-left: -55px;
 	font-family: $font-regular;
 }
-.cultus6{
+.cultus6 {
 	display: inline;
 	margin-left: -31px;
 	font-family: $font-regular;
 }
-.cultus7{
+.cultus7 {
 	color: white;
 }
-.cultus4{
-		background-color: $secondary-color;
+.cultus4 {
+	background-color: $secondary-color;
 }
 
-@media screen and (min-width: 360px) and (max-width: 767px){
-	.cultus8{
+@media screen and (min-width: 360px) and (max-width: 767px) {
+	.cultus8 {
 		margin-top: 183px;
 		padding: 0px;
 	}
-	.cardImag{
+	.cardImag {
 		width: 100%;
 		height: 50vw;
 	}
-	.cardImag_mega{
+	.cardImag_mega {
 		width: 111%;
 		height: 61.3vw;
 		border-bottom-left-radius: 1vw;
 		margin-left: -4.3vw;
 	}
-	.bannerImgg{
+	.bannerImgg {
 		width: 100%;
 		height: 50vw;
 		margin-top: 5px;
 		position: absolute;
 	}
-	.baner_bot_tag{
+	.baner_bot_tag {
 		margin-top: 68px;
-    	padding: 0.1vw;
-	}	
-	.tag_listt{
+		padding: 0.1vw;
+	}
+	.tag_listt {
 		margin-top: 2vw;
 	}
-	.baner_text{
+	.baner_text {
 		margin-top: 22vw;
 		font-family: Helvetica;
 		text-align: center;
 		position: relative;
 	}
-	.bannr_txtbid{
-		 font-size: 35px;
+	.bannr_txtbid {
+		font-size: 35px;
 		font-weight: 600;
 		color: white;
-		
+
 		font-family: $font-stack;
 	}
-	.card_bidding{
+	.card_bidding {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 		margin-top: 10vw;
 	}
-	.card_mega1{
+	.card_mega1 {
 		border-radius: 20px 20px 0px 0px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 		margin-top: 10vw;
 	}
-	.card_mega2{
+	.card_mega2 {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.extra1{
+	.extra1 {
 		/* margin-right: -14vw;/ */
 		margin-left: -2vw;
 	}
-	.extra2{
+	.extra2 {
 		margin-right: -14vw;
 		margin-left: 3vw;
 	}
 }
-@media screen and (min-width: 768px) and (max-width: 1023px){
-	.cultus8{
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+	.cultus8 {
 		margin-top: 187px;
 		padding: 0px;
 	}
-	.cardImag{
+	.cardImag {
 		width: 100%;
 		height: 17vw;
 	}
-	.cardImag_mega{
+	.cardImag_mega {
 		width: 114.5%;
 		height: 32.3vw;
 		border-bottom-left-radius: 3vw;
 		margin-left: -2vw;
 	}
-	.bannerImgg{
+	.bannerImgg {
 		width: 100%;
 		height: 350px;
 		margin-top: 5px;
 		position: absolute;
 	}
-	.baner_bot_tag{
+	.baner_bot_tag {
 		margin-top: 177px;
-    	padding: 0.1vw;
-	}	
-	.tag_listt{
+		padding: 0.1vw;
+	}
+	.tag_listt {
 		margin-top: 2vw;
 	}
-	.baner_text{
+	.baner_text {
 		margin-top: 17.4vw;
 		font-family: Helvetica;
 		text-align: center;
 		position: relative;
 	}
-	.bannr_txtbid{
-		 font-size: 35px;
+	.bannr_txtbid {
+		font-size: 35px;
 		font-weight: 600;
 		color: white;
 		font-family: $font-stack;
 	}
-	.card_bidding{
+	.card_bidding {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega1{
+	.card_mega1 {
 		border-radius: 0px 0px 0px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega2{
+	.card_mega2 {
 		border-radius: 0px 0px 20px 0px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.extra1{
+	.extra1 {
 		/* margin-right: 10vw;
     	margin-left: 9vw; */
 	}
-	.extra2{
+	.extra2 {
 		margin-right: 10vw;
 		margin-left: 9vw;
 		margin-top: 6vw;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1365px){
-	.cultus8{
-	margin-top: 161px;
-	padding: 0px;
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+	.cultus8 {
+		margin-top: 161px;
+		padding: 0px;
 	}
-	.cardImag{
+	.cardImag {
 		width: 100%;
 		height: 15vw;
 	}
-	.cardImag_mega{
+	.cardImag_mega {
 		width: 108%;
 		border-bottom-left-radius: 1vw;
 		margin-left: -1.1vw;
 		padding: 1vw;
 		height: 19vmax;
 	}
-	.bannerImgg{
+	.bannerImgg {
 		width: 100%;
 		height: 350px;
 		margin-top: 5px;
 		position: absolute;
 	}
-	.baner_bot_tag{
+	.baner_bot_tag {
 		margin-top: 150px;
-    	padding: 0.1vw;
-	}	
-	.tag_listt{
+		padding: 0.1vw;
+	}
+	.tag_listt {
 		margin-top: 2vw;
 	}
-	.baner_text{
+	.baner_text {
 		margin-top: 13.5vw;
 		font-family: Helvetica;
 		text-align: center;
 		position: relative;
 	}
-	.bannr_txtbid{
-		 font-size: 35px;
+	.bannr_txtbid {
+		font-size: 35px;
 		font-weight: 600;
 		color: white;
 		font-family: $font-stack;
 	}
-	.card_bidding{
+	.card_bidding {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega1{
+	.card_mega1 {
 		border-radius: 0px 0px 0px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega2{
+	.card_mega2 {
 		border-radius: 0px 0px 20px 0px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.extra1{
+	.extra1 {
 		margin-right: -4vw;
 		margin-bottom: 4vw;
 	}
-	.extra2{
+	.extra2 {
 		margin-left: -6vw;
 	}
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-	.cultus8{
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+	.cultus8 {
 		margin-top: 126px;
 		padding: 0px;
-
 	}
-	.cardImag{
+	.cardImag {
 		width: 100%;
 		height: 14vw;
 	}
-	.cardImag_mega{
+	.cardImag_mega {
 		width: 108%;
 		border-bottom-left-radius: 1vw;
 		margin-left: -1.1vw;
 		padding: 1vw;
 		height: 20.5vmax;
 	}
-	.bannerImgg{
+	.bannerImgg {
 		width: 100%;
 		height: 350px;
 		margin-top: 5px;
 		position: absolute;
 	}
-	.baner_bot_tag{
+	.baner_bot_tag {
 		margin-top: 155px;
-    	padding: 0.1vw;
-	}	
-	.tag_listt{
+		padding: 0.1vw;
+	}
+	.tag_listt {
 		margin-top: 1vw;
 	}
-	.baner_text{
+	.baner_text {
 		margin-top: 11.5vw;
 		font-family: Helvetica;
 		text-align: center;
 		position: relative;
 	}
-	.bannr_txtbid{
-		 font-size: 35px;
+	.bannr_txtbid {
+		font-size: 35px;
 		font-weight: 600;
 		font-family: $font-stack;
 		color: white;
 	}
-	.card_bidding{
+	.card_bidding {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega1{
+	.card_mega1 {
 		border-radius: 0px 0px 0px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega2{
+	.card_mega2 {
 		border-radius: 0px 0px 20px 0px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.extra1{
+	.extra1 {
 		margin-right: -4vw;
 		margin-bottom: 4vw;
 	}
-	.extra2{
+	.extra2 {
 		margin-left: -4vw;
 	}
 }
-@media screen and (min-width: 1600px){
-	.cultus8{
+@media screen and (min-width: 1600px) {
+	.cultus8 {
 		margin-top: 126px;
 		padding: 0px;
 	}
-	.cardImag{
+	.cardImag {
 		width: 100%;
 		height: 14vw;
 	}
-	.cardImag_mega{
+	.cardImag_mega {
 		width: 100%;
 		height: 16.3vw;
 		border-bottom-left-radius: 1vw;
 		margin-left: -1.1vw;
 	}
-	.bannerImgg{
+	.bannerImgg {
 		width: 100%;
 		height: 350px;
 		margin-top: 5px;
 		position: absolute;
 	}
-	.baner_bot_tag{
+	.baner_bot_tag {
 		margin-top: 177px;
-    	padding: 0.1vw;
-	}	
-	.tag_listt{
+		padding: 0.1vw;
+	}
+	.tag_listt {
 		margin-top: 1vw;
 	}
-	.baner_text{
+	.baner_text {
 		margin-top: 11.5vw;
 		font-family: Helvetica;
 		text-align: center;
 		position: relative;
 	}
-	.bannr_txtbid{
-		 font-size: 35px;
+	.bannr_txtbid {
+		font-size: 35px;
 		font-weight: 600;
 		font-family: $font-stack;
 		color: white;
 	}
-	.card_bidding{
+	.card_bidding {
 		border-radius: 0px 0px 20px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega1{
+	.card_mega1 {
 		border-radius: 0px 0px 0px 20px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.card_mega2{
+	.card_mega2 {
 		border-radius: 0px 0px 20px 0px;
-		box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 		font-family: Helvetica;
 	}
-	.extra1{
+	.extra1 {
 		margin-right: -4vw;
 	}
-	.extra2{
+	.extra2 {
 		margin-left: -4vw;
 	}
 }
 
-@media screen and (min-width: 360px) and (max-width: 660px){
-
-	.note1{
-				text-align: center;
+@media screen and (min-width: 360px) and (max-width: 660px) {
+	.note1 {
+		text-align: center;
 	}
-	.secure4{
-				text-align: center;
+	.secure4 {
+		text-align: center;
 	}
-	.note5{
-				    position: relative;
-				    margin-top: 128px;
-				    margin-left: 43px;
-				    background: rgba(30, 22, 22, 0.58);
-					margin-right: 29px;
-	}
-	.note3{
-				position: relative;
-			    margin-top: 126px;
-			    margin-left: 43px;
-			    background: rgba(30, 22, 22, 0.58);
-			    margin-right: 28px;
-			    margin-bottom: 21%;
-	}
-	.picsize{
-			    height: 154px;
-		   		width: 75%;
-	}
-	.note4{
-		    position: relative;
-		    margin-top: 128px;
-		    margin-left: 43px;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 28px;
-	}
-	.secure3{
-    border-radius: 13%;
-    margin-bottom: 5px;
-	}
-	.bango1{
-		text-align: left;
-	    font-size: 14px;
-	    margin-left: 17%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -40%;
-	    color: white;
-	    margin-right: 16%;
-
-	}
-	.bango3{
-	    text-align: left;
-	    font-size: 14px;
-	    margin-left: 16%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -40%;
-	    color: white;
-	    margin-right: 16%;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1024px){
-	
-	.note1{
-				text-align: right;
-	}
-	.secure4{
-				text-align: center;
-	}
-	.note5{
+	.note5 {
 		position: relative;
-	    margin-top: 126px;
-	    margin-left: 12px;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: -4px;
+		margin-top: 128px;
+		margin-left: 43px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 29px;
 	}
-	.note3{
+	.note3 {
 		position: relative;
-	    margin-top: 125px;
-	    margin-left: 23px;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: -14px;
+		margin-top: 126px;
+		margin-left: 43px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 28px;
+		margin-bottom: 21%;
 	}
 	.picsize {
-			    height: 154px;
-				width: 90%;
+		height: 154px;
+		width: 75%;
 	}
-	.note4{
-	position: relative;
-    margin-top: 127px;
-    margin-left: 13px;
-    background: rgba(30, 22, 22, 0.58);
-    margin-right: -5px;
-	}	
-	.secure3{
-        border-radius: 13%;
-	    margin-bottom: 5px;
-	    margin-left: -27%;
+	.note4 {
+		position: relative;
+		margin-top: 128px;
+		margin-left: 43px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 28px;
 	}
-	.bango1{
-		    text-align: left;
-		    font-size: 14px;
-		    margin-left: 14%;
-		    position: relative;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-top: -58%;
-		    color: white;
-		    margin-right: 5%;
+	.secure3 {
+		border-radius: 13%;
+		margin-bottom: 5px;
 	}
-	.bango3{
+	.bango1 {
 		text-align: left;
-	    font-size: 14px;
-	    margin-left: 9%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -58%;
-	    color: white;
-	    margin-right: 9%;
+		font-size: 14px;
+		margin-left: 17%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -40%;
+		color: white;
+		margin-right: 16%;
+	}
+	.bango3 {
+		text-align: left;
+		font-size: 14px;
+		margin-left: 16%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -40%;
+		color: white;
+		margin-right: 16%;
 	}
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
-	
-	.note1{
-				text-align: right;
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.note1 {
+		text-align: right;
 	}
-	.secure4{
-				text-align: center;
+	.secure4 {
+		text-align: center;
 	}
-	.note5{
-		       position: relative;
-		    margin-top: 126px;
-		    margin-left: 50px;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 45px;
-	}
-	.note3{
+	.note5 {
 		position: relative;
-	    margin-top: 127px;
-    	margin-left: 26%;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: -14px;
+		margin-top: 126px;
+		margin-left: 12px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: -4px;
 	}
-	.picsize{
-			    height: 154px;
-		   		width: 75%;
-	}
-	.note4{
+	.note3 {
 		position: relative;
-	    margin-top: 126px;
-	    margin-left: 50px;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-right: 36px;
+		margin-top: 125px;
+		margin-left: 23px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: -14px;
 	}
-	.secure3{
-    border-radius: 13%;
-    margin-bottom: 5px;
+	.picsize {
+		height: 154px;
+		width: 90%;
 	}
-	.bango1{
+	.note4 {
+		position: relative;
+		margin-top: 127px;
+		margin-left: 13px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: -5px;
+	}
+	.secure3 {
+		border-radius: 13%;
+		margin-bottom: 5px;
+		margin-left: -27%;
+	}
+	.bango1 {
+		text-align: left;
+		font-size: 14px;
+		margin-left: 14%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -58%;
+		color: white;
+		margin-right: 5%;
+	}
+	.bango3 {
+		text-align: left;
+		font-size: 14px;
+		margin-left: 9%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -58%;
+		color: white;
+		margin-right: 9%;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+	.note1 {
+		text-align: right;
+	}
+	.secure4 {
+		text-align: center;
+	}
+	.note5 {
+		position: relative;
+		margin-top: 126px;
+		margin-left: 50px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 45px;
+	}
+	.note3 {
+		position: relative;
+		margin-top: 127px;
+		margin-left: 26%;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: -14px;
+	}
+	.picsize {
+		height: 154px;
+		width: 75%;
+	}
+	.note4 {
+		position: relative;
+		margin-top: 126px;
+		margin-left: 50px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 36px;
+	}
+	.secure3 {
+		border-radius: 13%;
+		margin-bottom: 5px;
+	}
+	.bango1 {
 		text-align: left;
 		font-size: 14px;
 		margin-left: 30%;
 		position: relative;
 		background: rgba(30, 22, 22, 0.58);
-	    margin-top: -43%;
-	    color: white;
+		margin-top: -43%;
+		color: white;
 	}
-	.bango3{
+	.bango3 {
 		text-align: left;
-	    font-size: 14px;
-	    margin-left: 17%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -43%;
-	    color: white;
-	    margin-right: 20%;
+		font-size: 14px;
+		margin-left: 17%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -43%;
+		color: white;
+		margin-right: 20%;
 	}
-
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-	.note1{
-					text-align: right;
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+	.note1 {
+		text-align: right;
 	}
-	.secure4{
-				text-align: center;
+	.secure4 {
+		text-align: center;
 	}
-	.note5{
-		    position: relative;
-		    margin-top: 128px;
-		    margin-left: 50px;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 148px;
+	.note5 {
+		position: relative;
+		margin-top: 128px;
+		margin-left: 50px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 148px;
 	}
-	.note3{
+	.note3 {
 		position: relative;
 		margin-top: 127px;
 		margin-left: 113px;
 		background: rgba(30, 22, 22, 0.58);
-    	margin-right: 48px;
+		margin-right: 48px;
 	}
-	.picsize{
-			    height: 154px;
-		   		width: 75%;
+	.picsize {
+		height: 154px;
+		width: 75%;
 	}
-	.note4{
-		    position: relative;
-		    margin-top: 128px;
-		    margin-left: 56px;
-		    background: rgba(30, 22, 22, 0.58);
-		    margin-right: 104px;
+	.note4 {
+		position: relative;
+		margin-top: 128px;
+		margin-left: 56px;
+		background: rgba(30, 22, 22, 0.58);
+		margin-right: 104px;
 	}
-	.secure3{
-	    border-radius: 13%;
-	    margin-bottom: 5px;
-		}
-	.bango1{
+	.secure3 {
+		border-radius: 13%;
+		margin-bottom: 5px;
+	}
+	.bango1 {
 		text-align: left;
-	    font-size: 14px;
-	    margin-left: 28%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -33%;
-	    color: white;
-	    margin-right: 2%;
+		font-size: 14px;
+		margin-left: 28%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -33%;
+		color: white;
+		margin-right: 2%;
 	}
-	.bango3{
-		    text-align: left;
-	    font-size: 14px;
-	    margin-left: 16%;
-	    position: relative;
-	    background: rgba(30, 22, 22, 0.58);
-	    margin-top: -33%;
-	    color: white;
-	    margin-right: 16%;
+	.bango3 {
+		text-align: left;
+		font-size: 14px;
+		margin-left: 16%;
+		position: relative;
+		background: rgba(30, 22, 22, 0.58);
+		margin-top: -33%;
+		color: white;
+		margin-right: 16%;
 	}
 }
-.note2{
-		position: absolute;
-}
-.secure1{
-    margin-top: -20px;
-    text-align: left;
-    margin-left: 20px;
-    font-weight: 600;
-    font-size: 20px;
-}
-.secure2{
-	margin-top: -42px;
-    text-align: left;
-    margin-left: 64%;
-}
-.secure3{
-    border-radius: 13%;
-    margin-bottom: 5px;
-}
-.bango2{
+.note2 {
 	position: absolute;
 }
-.shah2 >#shah1{
+.secure1 {
+	margin-top: -20px;
+	text-align: left;
+	margin-left: 20px;
+	font-weight: 600;
+	font-size: 20px;
+}
+.secure2 {
+	margin-top: -42px;
+	text-align: left;
+	margin-left: 64%;
+}
+.secure3 {
+	border-radius: 13%;
+	margin-bottom: 5px;
+}
+.bango2 {
+	position: absolute;
+}
+.shah2 > #shah1 {
 	display: none;
 }
 .shah2:hover #shah1 {
-  display: block;
+	display: block;
 }
-.card-title{
+.card-title {
 	font-family: $font-stack;
 }
 
-
-$font-stack:  visby-bold;
-$font-regular:  visby-regular;
+$font-stack: visby-bold;
+$font-regular: visby-regular;
 $secondary-color: #19303a;
 $primary-color: #19b3e8;
-$light-color:#4a5964;
+$light-color: #4a5964;
 
 /*New UI*/
 
-.filterTextHead{
+.filterTextHead {
 	font-family: $font-stack;
 	color: $secondary-color;
 }
 
 
+@media screen and (min-width: 360px) and (max-width: 767px) {
+	.mainBannerMegaSale {
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587372557/megaSale1_eyit2j.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 30vh;
+	}
+	.megaHeadTextbanner{
+		text-align: center;
+		color: white;
+		font-size: 35px;
+		font-family: visby-bold;
+		padding-top: 25vw;
+	}
+	.megaCardImgs {
+		width: 100%;
+		height: 135px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.megaDetailCardDiv {
+		background-color: white;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 10px 0px 10px 10px;
+		width: 100%;
+	}
+	.discountTag {
+		padding: 5px;
+		background-color: #d62929;
+		width: 20%;
+		color: white;
+		font-family: visby-regular;
+		position: absolute;
+		margin-top: -30vw;
+	}
+	.mainMegaCardDiv {
+		margin-left: 10vw;
+		border: 1px solid #e4e4e4;
+		margin-bottom: 20px;
+	}
+	.megaCardName{
+		margin-bottom: 7px;
+		color: $secondary-color;
+		font-size: 18px;
+		font-family: $font-stack;
+	}
+	.megaSaleCardText{
+		color: $secondary-color;
+		font-size: 14px;
+		font-weight: 800;
+		font-family: $font-regular;
+	}
+	.megaCardDisText{
+		margin-bottom: 7px;
+		color: #d62929;
+		font-size: 15px;
+		font-weight: 600;
+		font-family: $font-regular;
+	}
+	.megaPageTiming {
+		font-size: 14px;
+		font-weight: 700;
+		font-family: $font-regular;
+		color: #007bff;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+	.mainBannerMegaSale {
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587372557/megaSale1_eyit2j.jpg");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+		height: 30vh;
+		margin-bottom: 3vw;
+	}
+	.megaHeadTextbanner{
+		text-align: center;
+		color: white;
+		font-size: 35px;
+		font-family: visby-bold;
+		padding-top: 17vw;
+	}
+	.megaCardImgs {
+		width: 100%;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.megaDetailCardDiv {
+		background-color: white;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 10px 0px 10px 10px;
+		margin-bottom: 3vw;
+	}
+	.discountTag {
+		padding: 5px;
+		background-color: #d62929;
+		width: 30%;
+		color: white;
+		font-family: $font-regular;
+		position: absolute;
+		margin-top: -10.5vw;
+	}
+	.mainMegaCardDiv {
+		border: 1px solid #e4e4e4;
+		margin-bottom: 20px;
+	}
+	.megaCardName{
+		margin-bottom: 7px;
+		color: $secondary-color;
+		font-size: 15px;
+		font-family: $font-stack;
+	}
+	.megaSaleCardText{
+		color: $secondary-color;
+		font-size: 14px;
+		font-weight: 800;
+		font-family: $font-regular;
+	}
+	.megaCardDisText{
+		margin-bottom: 7px;
+		color: #d62929;
+		font-size: 15px;
+		font-weight: 600;
+		font-family: $font-regular;
+	}
+	.megaPageTiming {
+		font-size: 14px;
+		font-weight: 700;
+		font-family: $font-regular;
+		color: #007bff;
+	}
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+	.mainBannerMegaSale {
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587372557/megaSale1_eyit2j.jpg");
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: center;
+		height: 35vh;
+		margin-top: 5px;
+	}
+	.megaHeadTextbanner{
+		text-align: center;
+		color: white;
+		font-size: 35px;
+		font-family: visby-bold;
+		padding-top: 9vw;
+	}
+	.megaCardImgs {
+		width: 100%;
+		height: 160px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.megaDetailCardDiv {
+		background-color: white;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 10px 0px 10px 10px;
+	}
+	.discountTag {
+		padding: 5px;
+		background-color: #d62929;
+		width: 30%;
+    	font-size: 20px;
+		font-family: $font-regular;
+		position: absolute;
+		margin-top: -10.5vw;
+		color: white;
+	}
+	.mainMegaCardDiv {
+		border: 1px solid #e4e4e4;
+		margin-bottom: 20px;
+	}
+	.megaCardName{
+		margin-bottom: 7px;
+		color: $secondary-color;
+		font-size: 18px;
+		font-family: $font-stack;
+	}
+	.megaSaleCardText{
+		color: $secondary-color;
+		font-size: 14px;
+		font-weight: 800;
+		font-family: $font-regular;
+	}
+	.megaCardDisText{
+		margin-bottom: 7px;
+		color: #d62929;
+		font-size: 15px;
+		font-weight: 600;
+		font-family: $font-regular;
+	}
+	.megaPageTiming {
+		font-size: 14px;
+		font-weight: 700;
+		font-family: $font-regular;
+		color: #007bff;
+	}
+}
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+	.mainBannerMegaSale {
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587372557/megaSale1_eyit2j.jpg");
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: center;
+		height: 50vh;
+	}
+	.megaHeadTextbanner{
+		text-align: center;
+		color: white;
+		font-size: 35px;
+		font-family: visby-bold;
+		padding-top: 110px;
+	}
+	.megaCardImgs {
+		width: 100%;
+		height: 170px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		filter: brightness(0.8);
+	}
+	.megaDetailCardDiv {
+		background-color: white;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 10px 0px 10px 10px;
+	}
+	.discountTag {
+		padding: 5px;
+		background-color: #d62929;
+		width: 25%;
+		font-size: 17px;
+		color: white;
+		font-family: $font-regular;
+		position: absolute;
+		margin-top: -9.5vw;
+	}
+	.mainMegaCardDiv {
+		border: 1px solid #e4e4e4;
+		margin-bottom: 20px;
+	}
+	.megaCardName{
+		margin-bottom: 7px;
+		color: $secondary-color;
+		font-size: 18px;
+		font-family: $font-stack;
+	}
+	.megaSaleCardText{
+		color: $secondary-color;
+		font-size: 14px;
+		font-weight: 800;
+		font-family: $font-regular;
+	}
+	.megaCardDisText{
+		margin-bottom: 7px;
+		color: #d62929;
+		font-size: 15px;
+		font-weight: 600;
+		font-family: $font-regular;
+	}
+	.megaPageTiming {
+		font-size: 14px;
+		font-weight: 700;
+		font-family: $font-regular;
+		color: #007bff;
+	}
+}
+@media screen and (min-width: 1600px) {
+	.mainBannerMegaSale {
+        background-image: url("https://res.cloudinary.com/dxk0bmtei/image/upload/v1587372557/megaSale1_eyit2j.jpg");
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        height: 37vh;
+    	margin-top: 10px;
+	}
+	.megaHeadTextbanner{
+		text-align: center;
+		color: white;
+		font-size: 35px;
+		font-family: visby-bold;
+		padding-top: 10vw;
+	}
+	.megaCardImgs {
+		width: 100%;
+		height: 220px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.megaDetailCardDiv {
+		background-color: white;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 10px 0px 10px 10px;
+	}
+	.discountTag {
+		padding: 5px;
+		background-color: #d62929;
+		width: 20%;
+		font-size: 20px;
+		color: white;
+		font-family: $font-regular;
+		position: absolute;
+		margin-top: -8.5vw;
+	}
+	.mainMegaCardDiv {
+		border: 1px solid #e4e4e4;
+		margin-bottom: 20px;
+	}
+	.megaCardName{
+		margin-bottom: 7px;
+		color: $secondary-color;
+		font-size: 22px;
+		font-family: $font-stack;
+	}
+	.megaSaleCardText{
+		color: $secondary-color;
+		font-size: 16px;
+		font-weight: 800;
+		font-family: $font-regular;
+	}
+	.megaCardDisText{
+		margin-bottom: 7px;
+		color: #d62929;
+		font-size: 17px;
+		font-weight: 600;
+		font-family: $font-regular;
+	}
+	.megaPageTiming {
+		font-size: 15px;
+		font-weight: 700;
+		font-family: $font-regular;
+		color: #007bff;
+	}
+}
 
-
+.megaSaleFilter_Input_mob{
+	display: block;
+	width: 100%;
+	height: calc(2.25rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .megaSaleFilter_Input{
+	display: block;
+	width: 117%;
+	height: calc(2.25rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
 

@@ -86,14 +86,14 @@ class MegaSaleHome extends Component {
 
     }
     render() {
-        const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData ,i} = this.state;
+        const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData, i } = this.state;
         if (goForDetail) {
             return (
                 <Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
             )
         }
         let megaData = megaSaleBiilboards.slice(0, i + 4);
-        console.log('mega bill board data',megaData)
+        console.log('mega bill board data', megaData)
         return (
             <div className="animated animatedFadeInUp fadeInUp">
 
@@ -108,13 +108,13 @@ class MegaSaleHome extends Component {
                         {megaData && megaData.map((elem, key) => {
                             return (
                                 <div className="col-12 col-sm-2 col-lg-2 col-xl-2">
-                                    <div className="mainMegaCardDiv"  onClick={this.billboardData.bind(this, elem)}>
-                                        <img src={elem.images[0]} alt="card" className="megaCardImgs" />
+                                    <div className="mainMegaCardDivHome" onClick={this.billboardData.bind(this, elem)}>
+                                        <img src={elem.images[0]} alt="card" className="megaCardImgsHome" />
                                         {/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
-                                        <p className="discountTag">40% off</p>
-                                        <div className="megaDetailCardDiv">
-                                            <p className="megaCardName">{elem.billboardAddress.slice(0, 12)}...</p>
-                                            <p className="megaCardCity">{elem.billboardCity}</p>
+                                        <p className="discountTagHome">40% off</p>
+                                        <div className="megaDetailCardDivHome">
+                                            <p className="megaCardNameHome">{elem.billboardAddress.slice(0, 12)}...</p>
+                                            <p className="megaCardCityHome">{elem.billboardCity}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -144,46 +144,24 @@ class MegaSaleHome extends Component {
                         </div>
                         <div className="col-md-8">
                             <div className="row">
-                                <div className="col-md-4">
-                                    <div className="mainMegaCardDiv">
-                                        <img src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1586885904/Picture20_nql7cc_n15zrl.jpg" alt="card" className="megaCardImgs" />
-                                        <p className="discountTag">10% off</p>
-                                        <div className="megaDetailCardDiv">
-                                            <p className="megaCardName">Hafiz Brother</p>
-                                            <p className="megaCardCity">Lahore</p>
+
+                                {megaData && megaData.map((elem, key) => {
+                                    return (
+
+                                        <div className="col-md-4">
+                                            <div className="mainMegaCardDivHome" onClick={this.billboardData.bind(this, elem)}>
+                                                <img src={elem.images[0]} alt="card" className="megaCardImgsHome" />
+                                                {/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
+                                                <p className="discountTagHome">40% off</p>
+                                                <div className="megaDetailCardDivHome">
+                                                    <p className="megaCardNameHome">{elem.billboardAddress.slice(0, 12)}...</p>
+                                                    <p className="megaCardCityHome">{elem.billboardCity}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="mainMegaCardDiv">
-                                        <img src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1586885904/Picture20_nql7cc_n15zrl.jpg" alt="card" className="megaCardImgs" />
-                                        <p className="discountTag">10% off</p>
-                                        <div className="megaDetailCardDiv">
-                                            <p className="megaCardName">Hafiz Brother</p>
-                                            <p className="megaCardCity">Lahore</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="mainMegaCardDiv">
-                                        <img src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1586885904/Picture20_nql7cc_n15zrl.jpg" alt="card" className="megaCardImgs" />
-                                        <p className="discountTag">10% off</p>
-                                        <div className="megaDetailCardDiv">
-                                            <p className="megaCardName">Hafiz Brother</p>
-                                            <p className="megaCardCity">Lahore</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="mainMegaCardDiv">
-                                        <img src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1586885904/Picture20_nql7cc_n15zrl.jpg" alt="card" className="megaCardImgs" />
-                                        <p className="discountTag">10% off</p>
-                                        <div className="megaDetailCardDiv">
-                                            <p className="megaCardName">Hafiz Brother</p>
-                                            <p className="megaCardCity">Lahore</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    )
+                                })}
+
                             </div>
                         </div>
 
