@@ -37,3 +37,10 @@ body{
     transform: rotate(360deg);
   }
 }
+
+/*global ant design clas*/
+.ant-form-item-control {
+  position: relative;
+  line-height:  3px !important;
+  zoom: 1;
+}

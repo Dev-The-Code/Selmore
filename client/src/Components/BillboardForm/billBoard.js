@@ -473,6 +473,7 @@ class BillBoard extends Component {
                                                                 <Select
                                                                     onChange={this.handleChange}
                                                                     options={types}
+                                                                    style={{height:'20px'}}
                                                                 // defaultValue={{ label: this.state.type, value: this.state.type }}
                                                                 >
                                                                 </Select>
