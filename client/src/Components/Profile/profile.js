@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import ProfileView from './profileView';
 import NewProfile from './newProfile';
 import Panel1 from '../panel1';

@@ -64,6 +64,9 @@ class Militarypanel1 extends Component {
 
 	render() {
 		const { data, images, center } = this.state;
+		console.log(data.status , 'data')
+		// Available
+		// No Available
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		const valueUser = JSON.parse(localStorage.getItem("loggedIn"));
@@ -210,7 +213,7 @@ class Militarypanel1 extends Component {
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-9"></div>
 								<div className="col-md-3">
-									{valueUser ?
+									{valueUser && data.status && data.status == 'Available'?
 										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button>
 										:
 										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Book Now</button>

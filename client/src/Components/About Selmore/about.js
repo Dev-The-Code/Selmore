@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AbBanner from './abBanner';
 import Panel1 from './panel1';
 import Panel2 from './panel2';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Footer from '../footer';
 import './about.scss';
 

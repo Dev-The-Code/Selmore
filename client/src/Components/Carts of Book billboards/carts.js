@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Footer from '../footer';
 import Cartpanel1 from './cartPanel1';
 import './carts.scss';

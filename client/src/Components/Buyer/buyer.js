@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Footer from '../footer';
 import Buyerpanel1 from './buyerpanel1';
 import './buyer.scss';

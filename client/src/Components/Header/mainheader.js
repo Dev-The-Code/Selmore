@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Input } from 'antd';
-// import Dropdown from '../constant/dropdownmenu/Dropdown';
 import Dropdownn from '../../constant/dropdownmenu/Dropdown';
 import FormLogin from '../Login Form/form';
 import './mainheader.scss';
@@ -96,7 +94,7 @@ class MainHeader extends Component {
                                         <span className="menuText">FAQ</span>
                                     </Link>
                                 </li>
-                                {adminUser !== null && adminUser.role == 'admin' ?
+                                {/* {adminUser !== null && adminUser.role == 'admin' ?
                                     <li className="menuLiTag">
                                         <Link rel="noopener noreferrer" to={`/users`}>
                                             <span className="menuText">Users</span>
@@ -109,7 +107,7 @@ class MainHeader extends Component {
                                             <span className="menuText">Cart</span>
                                         </Link>
                                     </li>
-                                    : null}
+                                    : null} */}
                                 {adminUser !== null && adminUser.role == 'admin' ?
                                     <li className="menuLiTag">
                                         <Link rel="noopener noreferrer" to={`/list_add`}>

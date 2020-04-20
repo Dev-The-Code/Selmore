@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Militarypanel1 from './militarypanel1';
 import Militarypanel2 from './militarypanel2';
 import Militarypanel3 from './militarypanel3';

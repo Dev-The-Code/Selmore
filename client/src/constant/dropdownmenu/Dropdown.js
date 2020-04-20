@@ -47,6 +47,8 @@ class Dropdownn extends Component {
 
   render() {
     let userName = JSON.parse(localStorage.getItem('userName'));
+    let adminUser = JSON.parse(localStorage.getItem("userData"));
+
     const Dropmenu = (
       <Menu>
         <Menu.Item className="dropdownTextHover">
@@ -54,11 +56,28 @@ class Dropdownn extends Component {
             <span className="menuTextinDrop">Profile</span>
           </Link>
         </Menu.Item>
-        <Menu.Item className="dropdownTextHover">
-          <Link rel="noopener noreferrer" to={`/dashboard`}>
-            <span className="menuTextinDrop">Dashboard</span>
-          </Link>
-        </Menu.Item>
+        {adminUser !== null && adminUser.role == 'admin' ?
+          <Menu.Item className="dropdownTextHover">
+            <Link rel="noopener noreferrer" to={`/dashboard`}>
+              <span className="menuTextinDrop">Dashboard</span>
+            </Link>
+          </Menu.Item> : null
+        }
+        {adminUser !== null && adminUser.role == 'admin' ?
+          <Menu.Item className="dropdownTextHover">
+            <Link rel="noopener noreferrer" to={`/cart`}>
+              <span className="menuTextinDrop">Cart</span>
+            </Link>
+          </Menu.Item> : null
+        }
+        {adminUser !== null && adminUser.role == 'admin' ?
+          <Menu.Item className="dropdownTextHover">
+            <Link rel="noopener noreferrer" to={`/users`}>
+              <span className="menuTextinDrop">Users</span>
+            </Link>
+          </Menu.Item> : null
+        }
+
         <Menu.Item onClick={this.logOut} className="dropdownTextHover">
           <Link rel="noopener noreferrer" to={`/home`} onClick={this.closeNav}>
             <span className="menuTextinDrop">Log Out</span>

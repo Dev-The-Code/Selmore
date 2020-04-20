@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AaBanner from './aaBanner';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Footer from '../footer';
 import Bannerfooter from './bannerfooter';
 import Aa1 from './aa1';

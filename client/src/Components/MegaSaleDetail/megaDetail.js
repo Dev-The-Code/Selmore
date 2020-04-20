@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../header';
+import Header from '../Header/mainheader';
 import Footer from '../footer';
 import './megaDetail.scss';
 import AbBanner from '../About Selmore/abBanner';
