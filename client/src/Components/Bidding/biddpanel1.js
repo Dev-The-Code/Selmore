@@ -715,41 +715,7 @@ class Biddpanel1 extends Component {
 					</div>
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 				</div>
-				<div className="container">
-					<div className="row">
-
-
-						{biddingBillboards && biddingBillboards.map((elem, key) => {
-							return (
-								<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-									<div class="card_bidding">
-										<img class="card-img-top cardImag" src={elem.images[0]} alt="Card image" style={{ width: '100%' }} />
-										<div class="card-body">
-											<h4 class="card-title">{elem.billboardAddress}, {elem.billboardCity}</h4>
-											<h4 class="card-title"> </h4>
-											<p class="card-text">DEAL EXPIRE IN:
-											<span className="bidTiming"> {`${elem.calculateTime}`}</span>
-
-												<br />
-												<span className="bidTiming"> {elem.days}</span> DAYS
-													<span className="bidTiming"> {elem.hours}</span> HOURS
-													<span className="bidTiming"> {elem.minutes}</span> MINUTES
-													<br />
-												<span className="bidTiming"> {elem.seconds}</span> SECONDS
-													From <span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span>
-											to <span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span>
-											</p>
-											<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
-												<button class="btn btn-primary">
-													<span className="startBidBtn">Start Bidding</span>
-												</button>
-											</Link>
-										</div>
-									</div>
-								</div>)
-						})}
-					</div>
-				</div><br />
+				
 			</div>
 		);
 	}
