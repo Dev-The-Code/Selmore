@@ -69,7 +69,7 @@ class Biddpanel1 extends Component {
 	}
 	render() {
 		const { biddingBillboards } = this.state;
-		// console.log('biddingBillboards',biddingBillboards.hours)
+		console.log('biddingBillboards',biddingBillboards)
 		return (
 			<div>
 				<div className="row">
@@ -666,9 +666,9 @@ class Biddpanel1 extends Component {
 									<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 										<div className="mainbiddingCardDiv">
 											<img src={elem.images[0]} alt="card" className="biddingCardImgs" />
-											<p className="hoursLeftTag">{`${elem.hours} Left`}</p>
+											<p className="hoursLeftTag">{`${elem.calculateTime.slice(0,2)}hrs Left`}</p>
 											<div className="biddingDetailCardDiv">
-												<p className="biddingCardName">{elem.billboardAddress.slice(0, 17)} , {elem.billboardCity}</p>
+												{elem &&  <p className="biddingCardName">{elem.billboardAddress} , {elem.billboardCity}</p>}
 												<p class="biddingCardText">DEAL EXPIRE IN:
 												<span className="biddingPageTiming"> {`${elem.calculateTime}`}</span>
 												</p>
