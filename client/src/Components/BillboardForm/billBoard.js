@@ -5,6 +5,7 @@ import NumberFormat from 'react-number-format';
 import {
     DatePicker, Radio, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
 } from 'antd';
+// import { PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
@@ -1151,7 +1152,8 @@ class BillBoard extends Component {
                         <div className="col-md-1" style={{ paddingLeft: '0.6%' }}>
                             <FormItem >
                                 <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn up'>
-                                    <Icon className='fa fa-plus' />
+                                    {/* <Icon className='fa fa-plus' /> */}
+                                    {/* <PlusOutlined /> */}
                                 </Button>
                             </FormItem>
                         </div>

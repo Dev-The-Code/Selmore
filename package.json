@@ -10,6 +10,7 @@
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.6",
     "@callstack/async-storage": "^1.1.0",
     "add": "^2.0.6",
     "animate.css": "^3.7.0",
