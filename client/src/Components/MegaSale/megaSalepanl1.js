@@ -694,7 +694,7 @@ class MegaSalepanel1 extends Component {
 										<div className="mainMegaCardDiv">
 											<img src={elem.images[0]} alt="card" className="megaCardImgs" />
 											{/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
-											<p className="discountTag">40% off</p>
+											<p className="discountTag">{elem.percantageOffDisscount}% off</p>
 											<div className="megaDetailCardDiv">
 												<p className="megaCardName">{elem.billboardAddress.slice(0, 13)} , {elem.billboardCity}</p>
 												<p class="megaCardDisText">Discount Up to <span className="megaCardDisText">{elem.percantageOffDisscount}%</span></p>
