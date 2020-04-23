@@ -2,19 +2,36 @@ import React, { Component } from 'react';
 import './billmilitary.scss';
 import Location from './googlemap';
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router';
 import NumberFormat from 'react-number-format';
+import {
+	Form,
+	Input,
+	Select,
+	DatePicker,
+	Spin,
+	Icon
+} from 'antd';
+import moment from 'moment';
+import { HttpUtils } from '../../Services/HttpUtils';
 
+const RangePicker = DatePicker.RangePicker;
+const FormItem = Form.Item;
+const { Option } = Select;
 
 class Militarypanel1 extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			data: '',
+			billboardTotalAmount: 0,
 			images: [],
 			admin: false,
 			center: null,
-			billboardAmount: '',
-			bookedFor: ''
+			loader: false,
+			isAlert: false,
+			mgs: '',
+			redirectMarketPlace:false
 		}
 	}
 	async componentDidMount() {
@@ -26,50 +43,163 @@ class Militarypanel1 extends Component {
 		})
 	}
 
-	billboardAmount = (amount, days) => {
+
+	validateNumber(rule, value, callback) {
+		if (isNaN(value)) {
+			callback('Please type Numbers');
+		} else {
+			callback()
+		}
+	}
+
+
+	validateDate(rule, value, callback) {
+		if (!value.length) {
+			callback('Please select your Date Range!');
+		} else {
+			callback();
+		}
+	}
+
+
+	onChangeDate(dates, dateStrings) {
 		this.setState({
-			billboardAmount: amount,
-			bookedFor: days
+			dateObj: {
+				from: dateStrings[0],
+				to: dateStrings[1]
+			}
 		})
 	}
 
-	bookedBillboard = () => {
-		const { data, bookedFor, billboardAmount } = this.state;
-		let bookedBillboard = [];
-		let booked = {}
+	handleSubmit = (e) => {
+		e.preventDefault();
+		const { fileList } = this.state;
+		this.props.form.validateFieldsAndScroll((err, values) => {
+			if (!err) {
+				this.setState({
+					loader: true,
+					isAlert: false,
+					redirectMarketPlace:false
+				})
+				this.calculateAmount(values)
+			}
+		})
+	}
+
+	calculateAmount = (values) => {
+		const { data } = this.state;
+		let calculateTotalAmount;
+		if (values.selectDays == 'days') {
+			calculateTotalAmount = Number(data.dailyRate) * Number(values.noOfDays);
+			this.setState({ billboardTotalAmount: calculateTotalAmount })
+
+		}
+		else if (values.selectDays == 'week') {
+			calculateTotalAmount = Number(data.weeklyRate) * Number(values.noOfDays);
+			this.setState({ billboardTotalAmount: calculateTotalAmount })
+
+		}
+		else if (values.selectDays == 'month') {
+			calculateTotalAmount = Number(data.monthlyRate) * Number(values.noOfDays);
+			this.setState({ billboardTotalAmount: calculateTotalAmount })
+		}
+		else if (values.selectDays == 'year') {
+			calculateTotalAmount = Number(data.yearlyRate) * Number(values.noOfDays);
+			this.setState({ billboardTotalAmount: calculateTotalAmount })
+		}
+
+		this.checkCalculateAmount(values)
+	}
+
+	checkCalculateAmount = async (values) => {
+		const { data } = this.state;
+		let updateBillboard = {
+			objectId: data._id,
+			status: 'No Available'
+		}
+		let response = await HttpUtils.post('listadd', updateBillboard);
+		console.log(response, 'response')
+		if (response) {
+			if (response.code == 200) {
+				this.bookedBillboard(values);
+
+			}
+			else {
+				this.setState({
+					loader: false,
+					isAlert: false,
+					mgs: response.msg,
+					redirectMarketPlace:false
+				})
+			}
+		}
+		else {
+			this.setState({
+				loader: false,
+				isAlert: false,
+				mgs: response.msg,
+				redirectMarketPlace:false
+
+			})
+		}
+
+	}
+
+	bookedBillboard = async (values) => {
+		const { data, billboardTotalAmount } = this.state;
 		let userDetail = JSON.parse(localStorage.getItem('userData'));
-		let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
+
+		let booked = {}
 		booked.companyName = userDetail.companyName;
 		booked.companyId = userDetail._id;
+		booked.companyEmail = userDetail.email;
+		booked.companyLandlineNo = userDetail.landlineNo
 		booked.address = data.address;
 		booked.city = data.city;
 		booked.state = data.state;
-		booked.booked = bookedFor;
-		booked.billboardAmount = billboardAmount;
-
-		if (bookedAvalibleBillboards == null || bookedAvalibleBillboards == undefined) {
-			bookedBillboard.push(booked)
-			localStorage.setItem('bookedAvalibleBillboards', JSON.stringify(bookedBillboard))
+		booked.billboardId = data._id
+		booked.bookedDays = values.noOfDays;
+		booked.selectDays = values.selectDays;
+		booked.dateRange = values.dateRange
+		booked.amountCharge = billboardTotalAmount;
+		booked.objectId = '';
+		let response = await HttpUtils.post('postmarketPlaceBookedbillboard', booked);
+		if (response) {
+			if (response.code == 200) {
+				this.setState({
+					loader: false,
+					isAlert: true,
+					mgs: 'We Will contact with you shortly',
+					redirectMarketPlace:true
+				})
+			}
+			else {
+				this.setState({
+					loader: false,
+					isAlert: false,
+					mgs: response.msg,
+					redirectMarketPlace:false
+				})
+			}
 		}
 		else {
-			for (var i = 0; i < bookedAvalibleBillboards.length; i++) {
-				bookedBillboard.push(bookedAvalibleBillboards[i])
-			}
-			bookedBillboard.push(booked)
-			localStorage.setItem('bookedAvalibleBillboards', JSON.stringify(bookedBillboard))
+			this.setState({
+				loader: false,
+				isAlert: false,
+				mgs: response.msg,
+				redirectMarketPlace:false
+			})
 		}
 	}
 
-
-
 	render() {
-		const { data, images, center } = this.state;
-		console.log(data.status , 'data')
-		// Available
-		// No Available
+		const { data, images, loader, alert, mgs , redirectMarketPlace} = this.state;
+		const { getFieldDecorator } = this.props.form;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		const valueUser = JSON.parse(localStorage.getItem("loggedIn"));
+		const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
+
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
 				if (key == 0) {
@@ -83,6 +213,9 @@ class Militarypanel1 extends Component {
 					</div>
 				}
 			})
+		}
+		if (redirectMarketPlace) {
+			return <Redirect to={{ pathname: '/market_place' }} />
 		}
 		return (
 			<div>
@@ -213,10 +346,10 @@ class Militarypanel1 extends Component {
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-9"></div>
 								<div className="col-md-3">
-									{valueUser && data.status && data.status == 'Available'?
+									{valueUser && data.status && data.status == 'Available' ?
 										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button>
 										:
-										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Book Now</button>
+										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Already Booked</button>
 									}
 								</div>
 							</div>
@@ -229,45 +362,122 @@ class Militarypanel1 extends Component {
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 
 										</div>
-										<div class="modal-body">
-											<div className="row">
-												<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-													<label class="checkdrn radio-inline">
-														<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+										<Form onSubmit={this.handleSubmit}>
+											<div class="modal-body">
+												<div className="row">
+													<div className="col-12 col-md-12 col-lg-12 col-xl-12">
+														{/* <label class="checkdrn radio-inline"> */}
+														<div className='row'>
+															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
+																<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per day)
 														{/* Rs.{data.dailyRate}  */}
-														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} />
-														<span class="checkmark"></span>
-													</label>
-													<label class="checkdrn radio-inline">
-														<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} /> */}
+																{/* <span class="checkmark"></span> */}
+																{/* </label> */}
+															</div>
+															{/* <label class="checkdrn radio-inline"> */}
+															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
+
+																<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per week)
 														{/* Rs.{data.weeklyRate} (per week) */}
-														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} />
-														<span class="checkmark"></span>
-													</label>
-													<label class="checkdrn radio-inline">
-														<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} /> */}
+																{/* <span class="checkmark"></span> */}
+																{/* </label> */}
+															</div>
+															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
+
+																{/* <label class="checkdrn radio-inline"> */}
+																<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per month)
 														{/* Rs.{data.monthlyRate} (per month) */}
-														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} />
-														<span class="checkmark"></span>
-													</label>
-													<label class="checkdrn radio-inline">
-														<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} /> */}
+																{/* <span class="checkmark"></span> */}
+																{/* </label> */}
+															</div>
+															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
+
+																{/* <label class="checkdrn radio-inline"> */}
+																<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per year)
 														{/* Rs.{data.yearlyRate} (per year) */}
-														<input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} />
-														<span class="checkmark"></span>
-													</label>
+																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} /> */}
+																{/* <span class="checkmark"></span> */}
+																{/* </label> */}
+
+
+																<div >
+																	<label htmlFor="sel1">No Of Days</label>
+																	<FormItem>
+																		{getFieldDecorator('noOfDays', {
+																			// initialValue: contactnumber,
+																			rules: [{
+																				required: true, message: 'Please input your Number!',
+																				whitespace: true
+																			},
+																			{ validator: this.validateNumber.bind(this) }]
+																		})(
+																			<Input placeholder='No of Booked' />
+																		)}
+																	</FormItem>
+																</div>
+																<div className="form-group">
+																	<label htmlFor="sel1">Select Day/Week/Month/Year</label>
+																	<FormItem>
+																		{getFieldDecorator('selectDays', {
+																			// initialValue: contactnumber,
+																			rules: [{
+																				required: true, message: 'Please input your Number!',
+																				whitespace: true
+																			},
+																				// { validator: this.validateNumber.bind(this) }
+																			]
+																		})(
+																			<Select style={{ width: 70 }} >
+																				{data.dailyRate != '0' && <Option value="days">Days</Option>}
+																				{data.weeklyRate != '0' && <Option value="week">Week</Option>}
+																				{data.monthlyRate != '0' && <Option value="month">Month</Option>}
+																				{data.yearlyRate != '0' && <Option value="year">Year</Option>}
+																			</Select>
+																		)}
+																	</FormItem>
+																</div>
+																<div className="form-group">
+																	<label htmlFor="sel1">No Of Days</label>
+																	<FormItem style={{ padding: '2% 0%' }}>
+																		{getFieldDecorator('dateRange', {
+																			// initialValue: [(this.state.startDate),
+																			// (this.state.endDate)],
+																			rules: [{ validator: this.validateDate.bind(this) }],
+																		})(
+																			<RangePicker
+																				ranges={{
+																					Today: [moment(), moment()],
+																					'This Month': [moment(), moment().endOf('month')]
+																				}}
+																				onChange={this.onChangeDate.bind(this)}
+																			/>
+																		)}
+																	</FormItem>
+																</div>
+																{/* </Form> */}
+
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" data-dismiss="modal"
-												onClick={this.bookedBillboard}>Submit</button>
-
-										</div>
+											<div class="modal-footer">
+												<div className="col-md-12 col-sm-12 col-xs-12">
+													{loader && <Spin className="col-xs-2 col-md-6" indicator={antIcon} />}
+													{mgs != '' && <span>{mgs}</span>}
+													<button style={{ textAlign: 'center', width: '19%' }}
+														disabled={!!this.state.loader}
+													>Submit</button>
+												</div>
+											</div>
+										</Form>
 									</div>
 								</div>
 							</div>
@@ -318,4 +528,7 @@ class Militarypanel1 extends Component {
 		);
 	}
 }
-export default Militarypanel1;
+// export default Militarypanel1;
+
+const WrappedJobPortalForm = Form.create()(Militarypanel1);
+export default WrappedJobPortalForm;

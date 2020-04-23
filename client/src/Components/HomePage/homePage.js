@@ -40,7 +40,7 @@ class Home extends Component {
         <Banner />
         <MegaSale />
         <BrowseCategory />
-        <NewiestBill />
+        {/* <NewiestBill /> */}
         <PrestigiousClients />
         <BrowseTopCity />
         <ListingAdPanel />

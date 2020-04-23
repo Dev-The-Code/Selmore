@@ -86,7 +86,8 @@ class BrowseByCate extends Component {
             othercategory: othercategoryArr,
         })
     }
-    hoverAlert = (value, nameKey) => {
+
+    routeMarkePlace = (value, nameKey) => {
         this.setState({
             directMarket: true,
             bilboardData: value,
@@ -123,9 +124,6 @@ class BrowseByCate extends Component {
                     <div className="col-12 col-md-6 col-lg-4 col-xl-4">
                         <h3 className="browseCateHead">Browse By Category</h3>
                     </div>
-                    {/* <div className="col-12 col-md-2 col-lg-3 col-xl-3">
-                        <Link><p className="seeAllCate">See All ></p></Link>
-                    </div> */}
                     <div className="col-12 col-md-4 col-lg-4 col-xl-4"></div>
                 </div>
                 <div className="row mainRwBrowseCateImgs">
@@ -133,55 +131,55 @@ class BrowseByCate extends Component {
                     <div className="col-10 col-md-10 col-lg-10 col-xl-10">
                         <div className="row">
                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <div className="allBillboardAd" onClick={() => this.hoverAlert(billboardcategory, 'Billboard')}>
+                                <div className="allBillboardAd" onClick={() => this.routeMarkePlace(billboardcategory, 'Billboard')}>
                                     <h4 className="headingTextonImgForLarge">{`Billboards Ad(${billboardcategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <div className="streamerAd" onClick={() => this.hoverAlert(steamerMallcategory, 'Streamers')}>
+                                <div className="streamerAd" onClick={() => this.routeMarkePlace(steamerMallcategory, 'Streamers')}>
                                     <h4 className="headingTextonImgForLarge">{`Streamers Ad(${steamerMallcategory.length})`}</h4>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="cinemaAd" onClick={() => this.hoverAlert(cinimaAdscategory, 'Total Cinema')}>
+                                <div className="cinemaAd" onClick={() => this.routeMarkePlace(cinimaAdscategory, 'Total Cinema')}>
                                     <h4 className="headingTextonImg">{`Cinema Ad(${cinimaAdscategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="mallAd" onClick={() => this.hoverAlert(shoppingMallcategory, 'Shopping')}>
+                                <div className="mallAd" onClick={() => this.routeMarkePlace(shoppingMallcategory, 'Shopping')}>
                                     <h4 className="headingTextonImg">{`Mall Ad(${shoppingMallcategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="airportAd" onClick={() => this.hoverAlert(airportAdscategory, 'Airport Ads')}>
+                                <div className="airportAd" onClick={() => this.routeMarkePlace(airportAdscategory, 'Airport Ads')}>
                                     <h4 className="headingTextonImg">{`Airport Ad(${airportAdscategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="busStandAd" onClick={() => this.hoverAlert(busShelterAdscategory, 'Bus Shelter')}>
+                                <div className="busStandAd" onClick={() => this.routeMarkePlace(busShelterAdscategory, 'Bus Shelter')}>
                                     <h4 className="headingTextonImg">{`Bus Shelter Ad(${busShelterAdscategory.length})`}</h4>
                                 </div>
                             </div>
 
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="taxiCarAd" onClick={() => this.hoverAlert(taxiAdscategory, 'Taxi Ads')}>
+                                <div className="taxiCarAd" onClick={() => this.routeMarkePlace(taxiAdscategory, 'Taxi Ads')}>
                                     <h4 className="headingTextonImg">{`Taxi Ad(${taxiAdscategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="busTransportAd" onClick={() => this.hoverAlert(busAdscategory, 'Bus Ads')}>
+                                <div className="busTransportAd" onClick={() => this.routeMarkePlace(busAdscategory, 'Bus Ads')}>
                                     <h4 className="headingTextonImg">{`Bus Ad(${busAdscategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="RadiominAd" onClick={() => this.hoverAlert(radioAdscategory, 'Radio Ads')}>
+                                <div className="RadiominAd" onClick={() => this.routeMarkePlace(radioAdscategory, 'Radio Ads')}>
                                     <h4 className="headingTextonImg">{`Radio Ad(${radioAdscategory.length})`}</h4>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 col-lg-3 col-xl-3">
-                                <div className="otherAd" onClick={() => this.hoverAlert(othercategory, 'Other')}>
+                                <div className="otherAd" onClick={() => this.routeMarkePlace(othercategory, 'Other')}>
                                     <h4 className="headingTextonImg">{`Other Ad(${othercategory.length})`}</h4>
                                 </div>
                             </div>
