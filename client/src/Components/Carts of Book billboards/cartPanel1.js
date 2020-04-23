@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './carts.scss';
 import NumberFormat from 'react-number-format';
+import { HttpUtils } from '../../Services/HttpUtils'
 
 class CartPanel1 extends Component {
     constructor(props) {
@@ -20,7 +21,9 @@ class CartPanel1 extends Component {
         window.scrollTo(0, 0);
     }
 
-    getBokkedBillboards = () => {
+    getBokkedBillboards = async () => {
+        let response = await HttpUtils.get('getallbookedbillboard');
+        console.log(response, 'response')
         let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
         let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
         let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
@@ -88,10 +91,10 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.state}</td>
                                                         <td className="tablee_th">One {elem.booked}</td>
                                                         <td className="tablee_td">
-                                                        <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
                                                             {/* Rs.{elem.billboardAmount} */}
-                                                            </td>
+                                                        </td>
                                                         {/* <td className="tablee_td">View</td> */}
                                                     </tr>
                                                 </tbody>
@@ -123,15 +126,15 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
                                                         <td className="tablee_td">
-                                                        <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
                                                             {/* Rs.{elem.billboardAmount} */}
-                                                            </td>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             )
                                         })}
-                                      
+
                                     </table>
                                 </div>
                                 <div className="tab-pane fade" id="nav-bid" role="tabpanel" aria-labelledby="nav-bid-tab">
@@ -157,10 +160,10 @@ class CartPanel1 extends Component {
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
                                                         <td className="tablee_td">
-                                                        <NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            <NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
                                                             {/* Rs.{elem.bidAamount} */}
-                                                            </td>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             )

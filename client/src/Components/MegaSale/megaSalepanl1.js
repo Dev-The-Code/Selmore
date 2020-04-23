@@ -45,14 +45,6 @@ class MegaSalepanel1 extends Component {
 					let timeTillDateStart = `${`${elemObj.saleEndDate}, ${elemObj.saleEndTime}`}`;
 					const now = moment();
 					const then = moment(timeTillDateStart);
-					// const countdown = moment(then - now);
-					// const days = countdown.format('D');
-					// const hours = countdown.format('HH');
-					// const minutes = countdown.format('mm');
-					// const seconds = countdown.format('ss');
-					// elemObj.minutes = minutes;
-					// elemObj.seconds = seconds;
-
 					var totalSec = then.diff(now, 'seconds');
 					var hours = parseInt(totalSec / 3600);
 					var minutes = parseInt(totalSec / 60) % 60;
@@ -74,7 +66,7 @@ class MegaSalepanel1 extends Component {
 		let obj = {
 			id: data.billboardId
 		}
-		let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
+		let response = await HttpUtils.post('getspecificbillboard', obj);
 		let dataOfBillboard = {
 			megasaleDetail: data,
 			bilboardDetail: response.content[0]
@@ -694,11 +686,11 @@ class MegaSalepanel1 extends Component {
 										<div className="mainMegaCardDiv">
 											<img src={elem.images[0]} alt="card" className="megaCardImgs" />
 											{/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
-											<p className="discountTag">40% off</p>
+											<p className="discountTag">{`${elem.percantageOffDisscount}% off`}</p>
 											<div className="megaDetailCardDiv">
 												<p className="megaCardName">{elem.billboardAddress.slice(0, 13)} , {elem.billboardCity}</p>
-												<p class="megaCardDisText">Discount Up to <span className="megaCardDisText">{elem.percantageOffDisscount}%</span></p>
-												<p class="megaSaleCardText">Billboard availability : <br />From <span className="megaPageTiming">2020-02-15</span> to
+												{/* <p class="megaCardDisText">Discount Up to <span className="megaCardDisText">{elem.percantageOffDisscount}%</span></p> */}
+												<p class="megaSaleCardText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom} </span> to
 												<span className="megaPageTiming">{elem.billboardAvailabilityTo}</span></p>
 												<p class="megaSaleCardText">DEAL EXPIRE IN:
 												<span className="megaPageTiming"> {`${elem.calculateTime}`}</span>

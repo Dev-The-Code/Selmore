@@ -34,34 +34,26 @@ class MegaSaleHome extends Component {
         let response = await HttpUtils.get('getallmegabillboard');
         let MegaSaleBillboards = [];
         if (response.code == 200) {
-            this.interval = setInterval(() => {
-                let data = response.content;
-                data.map((elem, key) => {
-                    let elemObj = elem;
-                    let timeTillDateStart = `${`${elemObj.saleEndDate}, ${elemObj.saleEndTime}`}`;
-                    const now = moment();
-                    const then = moment(timeTillDateStart);
-                    // const countdown = moment(then - now);
-                    // const days = countdown.format('D');
-                    // const hours = countdown.format('HH');
-                    // const minutes = countdown.format('mm');
-                    // const seconds = countdown.format('ss');
-                    // elemObj.minutes = minutes;
-                    // elemObj.seconds = seconds;
-
-                    var totalSec = then.diff(now, 'seconds');
-                    var hours = parseInt(totalSec / 3600);
-                    var minutes = parseInt(totalSec / 60) % 60;
-                    var seconds = totalSec % 60;
-                    var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-                    elemObj.calculateTime = calculateTime;
-                    MegaSaleBillboards.push(elemObj)
-                })
-                this.setState({
-                    megaSaleBiilboards: MegaSaleBillboards
-                })
-                MegaSaleBillboards = [];
-            }, 1000);
+            // this.interval = setInterval(() => {
+            let data = response.content;
+            data.map((elem, key) => {
+                let elemObj = elem;
+                let timeTillDateStart = `${`${elemObj.saleEndDate}, ${elemObj.saleEndTime}`}`;
+                const now = moment();
+                const then = moment(timeTillDateStart);
+                var totalSec = then.diff(now, 'seconds');
+                var hours = parseInt(totalSec / 3600);
+                var minutes = parseInt(totalSec / 60) % 60;
+                var seconds = totalSec % 60;
+                var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                elemObj.calculateTime = calculateTime;
+                MegaSaleBillboards.push(elemObj)
+            })
+            this.setState({
+                megaSaleBiilboards: response.content
+            })
+            MegaSaleBillboards = [];
+            // }, 1000);
         }
     }
 
@@ -70,7 +62,7 @@ class MegaSaleHome extends Component {
         let obj = {
             id: data.billboardId
         }
-        let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
+        let response = await HttpUtils.post('getspecificbillboard', obj);
         let dataOfBillboard = {
             megasaleDetail: data,
             bilboardDetail: response.content[0]
@@ -111,7 +103,7 @@ class MegaSaleHome extends Component {
                                     <div className="mainMegaCardDivHome" onClick={this.billboardData.bind(this, elem)}>
                                         <img src={elem.images[0]} alt="card" className="megaCardImgsHome" />
                                         {/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
-                                        <p className="discountTagHome">40% off</p>
+                                        <p className="discountTagHome">{`${elem.percantageOffDisscount}% off`}</p>
                                         <div className="megaDetailCardDivHome">
                                             <p className="megaCardNameHome">{elem.billboardAddress.slice(0, 12)}...</p>
                                             <p className="megaCardCityHome">{elem.billboardCity}</p>
@@ -120,16 +112,6 @@ class MegaSaleHome extends Component {
                                 </div>
                             )
                         })}
-                        {/* <div className="col-12 col-sm-2 col-lg-2 col-xl-2">
-                            <div className="mainMegaCardDiv">
-                                <img src="https://res.cloudinary.com/dxk0bmtei/image/upload/v1586885904/Picture20_nql7cc_n15zrl.jpg" alt="card" className="megaCardImgs" />
-                                <p className="discountTag">10% off</p>
-                                <div className="megaDetailCardDiv">
-                                    <p className="megaCardName">Hafiz Brother</p>
-                                    <p className="megaCardCity">Lahore</p>
-                                </div>
-                            </div>
-                        </div> */}
                         <div className="col-12 col-sm-1 col-lg-1 col-xl-1"></div>
                     </div>
                 </div>

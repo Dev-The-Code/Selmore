@@ -7,6 +7,8 @@ const listAgencyForm = require('./controllers/listadd');
 const getAllBillboard = require('./controllers/getallbillboard');
 const megaBillboardData= require('./controllers/megaSaleBillboard');
 const biddingBillboardData = require('./controllers/biddingBillboardData');
+const bookedMarketPlaceBillboard = require('./controllers/bookedMarketPlaceBillboards');
+
 module.exports = function(app){
 
   //post routes
@@ -17,7 +19,10 @@ app.post('/listadd',listAgencyForm.postAddData);
 app.post('/changeStatus',Authentication.changeStatus);
 app.post('/sendmegabillboard',megaBillboardData.postmegaSaleBillboard);
 app.post('/postbiddingbillboard',biddingBillboardData.postBiddingBillboard);
-app.post('/getspecificbiddingbillboard',getAllBillboard.getspecificBillboard);
+app.post('/getspecificbillboard',getAllBillboard.getspecificBillboard);
+
+app.post('/postmarketPlaceBookedbillboard',bookedMarketPlaceBillboard.postBookedBillboard);
+
 
 
 //get routes
@@ -28,5 +33,7 @@ app.get('/getbillboard',getAllBillboard.getBillboard);
 app.get('/getalluser',Authentication.getAllUsers);
 app.get('/getallmegabillboard',megaBillboardData.getAllMegaBillBoardData);
 app.get('/getbiddingbillboard',biddingBillboardData.getBiddingbillboard);
+app.get('/getallbookedbillboard',bookedMarketPlaceBillboard.getBookedbillboard);
+
   //app.get('/getprofile',requireAuth, getprofile.getProfile)
 }

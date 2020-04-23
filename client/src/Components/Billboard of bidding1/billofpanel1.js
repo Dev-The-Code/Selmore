@@ -111,7 +111,7 @@ class Billofpanel1 extends Component {
 			let obj = {
 				id: data.billboardId
 			}
-			let response = await HttpUtils.post('getspecificbiddingbillboard', obj);
+			let response = await HttpUtils.post('getspecificbillboard', obj);
 			if (response.code == 200) {
 				this.setState({
 					billboardData: response.content[0]
