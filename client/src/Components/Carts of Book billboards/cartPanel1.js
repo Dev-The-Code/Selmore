@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './carts.scss';
 import NumberFormat from 'react-number-format';
 import { HttpUtils } from '../../Services/HttpUtils'
+import { Link } from "react-router-dom";
 
 class CartPanel1 extends Component {
     constructor(props) {
@@ -22,22 +23,31 @@ class CartPanel1 extends Component {
     }
 
     getBokkedBillboards = async () => {
-        let response = await HttpUtils.get('getallbookedbillboard');
-        console.log(response, 'response')
-        let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
-        let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
+        let responseBookedData = await HttpUtils.get('getallbookedbillboard');
+        // console.log(response, 'response')
+        let responseMegaSaleData = await HttpUtils.get('getallbookedMeagSalebillboard');
+        // console.log(respon , 'respon')
+        // let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
+        // let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
         let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
 
-        if (bookedAvalibleBillboards != null || bookedAvalibleBillboards != undefined) {
-            this.setState({
-                avalibleBillboard: bookedAvalibleBillboards
-            })
+        if (responseBookedData) {
+            if (responseBookedData.code == 200) {
+                this.setState({
+                    avalibleBillboard: responseBookedData.content
+                })
+
+            }
         }
-        if (bookedMegaSaleBillboards != null || bookedMegaSaleBillboards != undefined) {
-            this.setState({
-                megaSaleBillboard: bookedMegaSaleBillboards
-            })
+        if (responseMegaSaleData) {
+            if (responseMegaSaleData.code == 200) {
+                this.setState({
+                    megaSaleBillboard: responseMegaSaleData.content
+                })
+
+            }
         }
+
         if (bidBillboards != null || bidBillboards != undefined) {
             this.setState({
                 bidBillboards: bidBillboards
@@ -72,11 +82,16 @@ class CartPanel1 extends Component {
                                             <tr>
                                                 <th className="BidhistoryTH">#</th>
                                                 <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Company Email</th>
+                                                <th className="BidhistoryTH">Company Phone</th>
                                                 <th className="BidhistoryTH">Address</th>
                                                 <th className="BidhistoryTH">City</th>
                                                 <th className="BidhistoryTH">State</th>
                                                 <th className="BidhistoryTH">Booked days</th>
+                                                <th className="BidhistoryTH">Date Range</th>
                                                 <th className="BidhistoryTH">Amount</th>
+                                                <th className="BidhistoryTH">View</th>
+
                                                 {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
@@ -84,18 +99,24 @@ class CartPanel1 extends Component {
                                             return (
                                                 <tbody>
                                                     <tr>
-                                                        <td className="tablee_th">{key}</td>
+                                                        <td className="tablee_th">{key + 1}</td>
                                                         <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.companyEmail}</td>
+                                                        <td className="tablee_td">{elem.companyLandlineNo}</td>
+
                                                         <td className="tablee_td">{elem.address}</td>
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
-                                                        <td className="tablee_th">One {elem.booked}</td>
-                                                        <td className="tablee_td">
-                                                            <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                        <td className="tablee_th">{`${elem.bookedDays} ${elem.selectDays}`}</td>
+                                                        <td className="tablee_th">{`From ${elem.dateRange[0].slice(0, 10)} To ${elem.dateRange[1].slice(0, 10)}`}</td>
 
-                                                            {/* Rs.{elem.billboardAmount} */}
+                                                        <td className="tablee_td">
+                                                            <NumberFormat value={elem.amountCharge} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
                                                         </td>
-                                                        {/* <td className="tablee_td">View</td> */}
+                                                        <td className="tablee_th">
+                                                            <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                        </td>
+
                                                     </tr>
                                                 </tbody>
                                             )
@@ -107,13 +128,15 @@ class CartPanel1 extends Component {
                                         <thead className="tablee_Head">
                                             <tr>
                                                 <th className="BidhistoryTH">#</th>
-                                                <th className="BidhistoryTH">Company name</th>
+                                                <th className="BidhistoryTH">Company Name</th>
+                                                <th className="BidhistoryTH">Company Email</th>
+                                                <th className="BidhistoryTH">Company Phone</th>
                                                 <th className="BidhistoryTH">Address</th>
                                                 <th className="BidhistoryTH">City</th>
                                                 <th className="BidhistoryTH">State</th>
-                                                {/* <th>Booked days</th> */}
+                                                <th className="BidhistoryTH">Book Date</th>
                                                 <th className="BidhistoryTH">Sale Amount</th>
-                                                {/* <th>Action</th> */}
+                                                <th className="BidhistoryTH">View</th>
                                             </tr>
                                         </thead>
                                         {megaSaleBillboard && megaSaleBillboard.map((elem, key) => {
@@ -122,13 +145,17 @@ class CartPanel1 extends Component {
                                                     <tr>
                                                         <td className="tablee_th">{key}</td>
                                                         <td className="tablee_td">{elem.companyName}</td>
+                                                        <td className="tablee_td">{elem.companyEmail}</td>
+                                                        <td className="tablee_td">{elem.companyLandlineNo}</td>
                                                         <td className="tablee_td">{elem.address}</td>
                                                         <td className="tablee_td">{elem.city}</td>
                                                         <td className="tablee_td">{elem.state}</td>
+                                                        <td className="tablee_td">{elem.bookedDate}</td>
                                                         <td className="tablee_td">
                                                             <NumberFormat value={elem.billboardAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                                            {/* Rs.{elem.billboardAmount} */}
+                                                        </td>
+                                                        <td className="tablee_th">
+                                                            <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                         </td>
                                                     </tr>
                                                 </tbody>

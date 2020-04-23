@@ -31,16 +31,34 @@ class Militarypanel1 extends Component {
 			loader: false,
 			isAlert: false,
 			mgs: '',
-			redirectMarketPlace:false
+			redirectMarketPlace: false
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
-		console.log(data, 'data')
-		await this.setState({
-			data: data,
-			images: data.images,
-		})
+		if (data.images && data.images.length > 0) {
+			console.log(data, 'data')
+			await this.setState({
+				data: data,
+				images: data.images,
+			})
+		}
+		else {
+			let obj = {
+				id: data
+			}
+			let response = await HttpUtils.post('getspecificbillboard', obj);
+			console.log(response, 'response')
+			if (response) {
+				if (response.code == 200) {
+					this.setState({
+						data: response.content[0],
+						images: response.content[0].images
+					})
+				}
+			}
+
+		}
 	}
 
 
@@ -79,7 +97,7 @@ class Militarypanel1 extends Component {
 				this.setState({
 					loader: true,
 					isAlert: false,
-					redirectMarketPlace:false
+					redirectMarketPlace: false
 				})
 				this.calculateAmount(values)
 			}
@@ -129,7 +147,7 @@ class Militarypanel1 extends Component {
 					loader: false,
 					isAlert: false,
 					mgs: response.msg,
-					redirectMarketPlace:false
+					redirectMarketPlace: false
 				})
 			}
 		}
@@ -138,7 +156,7 @@ class Militarypanel1 extends Component {
 				loader: false,
 				isAlert: false,
 				mgs: response.msg,
-				redirectMarketPlace:false
+				redirectMarketPlace: false
 
 			})
 		}
@@ -170,7 +188,7 @@ class Militarypanel1 extends Component {
 					loader: false,
 					isAlert: true,
 					mgs: 'We Will contact with you shortly',
-					redirectMarketPlace:true
+					redirectMarketPlace: true
 				})
 			}
 			else {
@@ -178,7 +196,7 @@ class Militarypanel1 extends Component {
 					loader: false,
 					isAlert: false,
 					mgs: response.msg,
-					redirectMarketPlace:false
+					redirectMarketPlace: false
 				})
 			}
 		}
@@ -187,13 +205,13 @@ class Militarypanel1 extends Component {
 				loader: false,
 				isAlert: false,
 				mgs: response.msg,
-				redirectMarketPlace:false
+				redirectMarketPlace: false
 			})
 		}
 	}
 
 	render() {
-		const { data, images, loader, alert, mgs , redirectMarketPlace} = this.state;
+		const { data, images, loader, alert, mgs, redirectMarketPlace } = this.state;
 		const { getFieldDecorator } = this.props.form;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
@@ -272,32 +290,24 @@ class Militarypanel1 extends Component {
 								<div className="col-md-3 ufone5"><span className="ufone3">Daily Rate</span></div>
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-									{/* <span className="ufone4">{data.dailyRate}</span> */}
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Weely Rate</span></div>
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-									{/* <span className="ufone4">{data.weeklyRate}</span> */}
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone5"><span className="ufone3">Monthly Rate</span></div>
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-									{/* <span className="ufone4">{data.monthlyRate}</span> */}
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 ufone7"><span className="ufone3">Yearly Rate</span></div>
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-									{/* <span className="ufone4">{data.yearlyRate}</span> */}
 								</div>
 							</div>
 							<br />
@@ -314,7 +324,6 @@ class Militarypanel1 extends Component {
 								<div className="col-md-9 ufone6">
 									<NumberFormat value={data.dailyVisitor} displayType={'text'} thousandSeparator={true} />
 
-									{/* <span className="ufone4">{data.dailyVisitor}</span> */}
 								</div>
 							</div>
 							<div className="row" style={{ margin: '0px' }}>
@@ -353,6 +362,8 @@ class Militarypanel1 extends Component {
 									}
 								</div>
 							</div>
+
+							{/* billboard booked modal form  */}
 							<div class="modal" id="myBillBook">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -366,47 +377,23 @@ class Militarypanel1 extends Component {
 											<div class="modal-body">
 												<div className="row">
 													<div className="col-12 col-md-12 col-lg-12 col-xl-12">
-														{/* <label class="checkdrn radio-inline"> */}
 														<div className='row'>
 															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
 																<NumberFormat value={data.dailyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per day)
-														{/* Rs.{data.dailyRate}  */}
-																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.dailyRate, 'day')} /> */}
-																{/* <span class="checkmark"></span> */}
-																{/* </label> */}
 															</div>
-															{/* <label class="checkdrn radio-inline"> */}
 															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
 
 																<NumberFormat value={data.weeklyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per week)
-														{/* Rs.{data.weeklyRate} (per week) */}
-																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.weeklyRate, 'week')} /> */}
-																{/* <span class="checkmark"></span> */}
-																{/* </label> */}
 															</div>
 															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
-
-																{/* <label class="checkdrn radio-inline"> */}
 																<NumberFormat value={data.monthlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per month)
-														{/* Rs.{data.monthlyRate} (per month) */}
-																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.monthlyRate, 'month')} /> */}
-																{/* <span class="checkmark"></span> */}
-																{/* </label> */}
 															</div>
 															<div className="col-3 col-md-3 col-lg-3 col-xl-3">
-
-																{/* <label class="checkdrn radio-inline"> */}
 																<NumberFormat value={data.yearlyRate} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 														(per year)
-														{/* Rs.{data.yearlyRate} (per year) */}
-																{/* <input type="radio" name="radio" onChange={this.billboardAmount.bind(this, data.yearlyRate, 'year')} /> */}
-																{/* <span class="checkmark"></span> */}
-																{/* </label> */}
-
-
 																<div >
 																	<label htmlFor="sel1">No Of Days</label>
 																	<FormItem>
@@ -447,8 +434,6 @@ class Militarypanel1 extends Component {
 																	<label htmlFor="sel1">No Of Days</label>
 																	<FormItem style={{ padding: '2% 0%' }}>
 																		{getFieldDecorator('dateRange', {
-																			// initialValue: [(this.state.startDate),
-																			// (this.state.endDate)],
 																			rules: [{ validator: this.validateDate.bind(this) }],
 																		})(
 																			<RangePicker
@@ -461,7 +446,6 @@ class Militarypanel1 extends Component {
 																		)}
 																	</FormItem>
 																</div>
-																{/* </Form> */}
 
 															</div>
 														</div>
@@ -502,7 +486,6 @@ class Militarypanel1 extends Component {
 								:
 								null
 							}
-							{/* {this.props.data.address && */}
 							<div>
 								<div className="row soldier7" style={{ margin: '0px' }}>
 									<div><h3 className="mapMilitary">Map</h3></div>
@@ -510,17 +493,15 @@ class Militarypanel1 extends Component {
 								</div><br />
 								{/* render a map and show a location of the Billboard */}
 								<div>
-									<Location
-										address={this.props.data.address}
-										latitude={this.props.data.latitude}
-										longitude={this.props.data.longitude}
-									/>
+									{data &&
+										<Location
+											address={data.address}
+											latitude={data.latitude}
+											longitude={data.longitude}
+										/>
+									}
 								</div>
-								{/* <div className="row soldier7" style={{ margin: '0px' }}>
-								// 			<h3 style={{ color: 'white' }}>Map</h3>
-								// 		</div> */}
 							</div>
-							{/* } */}
 						</div>
 					</div>
 				</div> <br />
@@ -528,7 +509,6 @@ class Militarypanel1 extends Component {
 		);
 	}
 }
-// export default Militarypanel1;
 
 const WrappedJobPortalForm = Form.create()(Militarypanel1);
 export default WrappedJobPortalForm;

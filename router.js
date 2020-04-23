@@ -8,6 +8,8 @@ const getAllBillboard = require('./controllers/getallbillboard');
 const megaBillboardData= require('./controllers/megaSaleBillboard');
 const biddingBillboardData = require('./controllers/biddingBillboardData');
 const bookedMarketPlaceBillboard = require('./controllers/bookedMarketPlaceBillboards');
+const bookedMegaSaleBillboard = require('./controllers/bookedMegaSaleBillboards');
+
 
 module.exports = function(app){
 
@@ -20,8 +22,9 @@ app.post('/changeStatus',Authentication.changeStatus);
 app.post('/sendmegabillboard',megaBillboardData.postmegaSaleBillboard);
 app.post('/postbiddingbillboard',biddingBillboardData.postBiddingBillboard);
 app.post('/getspecificbillboard',getAllBillboard.getspecificBillboard);
-
 app.post('/postmarketPlaceBookedbillboard',bookedMarketPlaceBillboard.postBookedBillboard);
+app.post('/postMegaSalebillboard',bookedMegaSaleBillboard.postBookedMegaSaleBillboard);
+
 
 
 
@@ -34,6 +37,8 @@ app.get('/getalluser',Authentication.getAllUsers);
 app.get('/getallmegabillboard',megaBillboardData.getAllMegaBillBoardData);
 app.get('/getbiddingbillboard',biddingBillboardData.getBiddingbillboard);
 app.get('/getallbookedbillboard',bookedMarketPlaceBillboard.getBookedbillboard);
+app.get('/getallbookedMeagSalebillboard',bookedMegaSaleBillboard.getBookedMegaSalebillboard);
+
 
   //app.get('/getprofile',requireAuth, getprofile.getProfile)
 }

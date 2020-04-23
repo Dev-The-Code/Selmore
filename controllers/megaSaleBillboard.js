@@ -19,6 +19,8 @@ exports.postmegaSaleBillboard = function (req, res, next) {
       billboardId: formData.billboardId,
       billboardAddress: formData.billboardAddress,
       billboardCity: formData.billboardCity,
+      billboardStatus: formData.billboardStatus,
+
     })
 
     postBillboardData.save((err, data) => {

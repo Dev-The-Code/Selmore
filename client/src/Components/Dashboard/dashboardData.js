@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.scss';
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router';
 import {
     DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
 } from 'antd';
@@ -47,7 +48,11 @@ class DashboardData extends Component {
             billboardAddress: '',
             billboardCity: '',
             megaSaleFormShow: false,
-            biddingFormShow: false
+            biddingFormShow: false,
+            loader: false,
+            isAlert: false,
+            mgs: '',
+            redirectDashboard: false
         }
     }
 
@@ -182,7 +187,6 @@ class DashboardData extends Component {
     }
 
     billboardImageAndId = (billboardDetail, param, e) => {
-        console.log(param, 'param')
         if (param == 'megaSale') {
             this.setState({
                 billboardImage: billboardDetail.images,
@@ -221,11 +225,18 @@ class DashboardData extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.setState({
+                    loader: true,
+                    isAlert: false,
+                    mgs: '',
+                    redirectDashboard: false
+                })
                 values.images = billboardImage;
                 values.billboardId = billboardId;
                 values.billboardAddress = billboardAddress;
                 values.billboardCity = billboardCity;
-                values.objectId = ''
+                values.objectId = '';
+                values.billboardStatus = 'Available';
                 let disscount = values.actualPrice - values.discountPrice;
                 let percantageOffDisscount = Math.round((disscount / values.actualPrice) * 100);
                 values.percantageOffDisscount = percantageOffDisscount;
@@ -239,6 +250,12 @@ class DashboardData extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.setState({
+                    loader: true,
+                    isAlert: false,
+                    mgs: '',
+                    redirectDashboard: false
+                })
                 values.images = billboardImage;
                 values.billboardId = billboardId;
                 values.billboardAddress = billboardAddress;
@@ -250,22 +267,78 @@ class DashboardData extends Component {
     };
 
     megaSaleUpload = async (values) => {
-        console.log(values, 'values')
         let response = await HttpUtils.post('sendmegabillboard', values);
         console.log(response, 'response')
+        if (response) {
+            if (response.code == 200) {
+                this.setState({
+                    loader: false,
+                    isAlert: true,
+                    mgs: 'Your billboard has been publish on mega sale',
+                    redirectDashboard: true
+                })
+                window.location.reload(true);
+            }
+            else {
+                this.setState({
+                    loader: false,
+                    isAlert: true,
+                    mgs: response.msg,
+                    redirectDashboard: false
+                })
+            }
+        }
+        else {
+            this.setState({
+                loader: false,
+                isAlert: true,
+                mgs: 'Kindly check your connection',
+                redirectDashboard: false
+
+            })
+        }
 
     }
 
     biddingUpload = async (values) => {
-        console.log(values, 'values bidding billboard')
         let response = await HttpUtils.post('postbiddingbillboard', values);
-        console.log(response, 'response')
+        if (response) {
+            if (response.code == 200) {
+                this.setState({
+                    loader: false,
+                    isAlert: true,
+                    mgs: 'Your billboard has been publish on bidding',
+                    redirectDashboard: true
+                })
+                window.location.reload(true);
 
+            }
+            else {
+                this.setState({
+                    loader: false,
+                    isAlert: true,
+                    mgs: response.msg,
+                    redirectDashboard: false
+                })
+            }
+        }
+        else {
+            this.setState({
+                loader: false,
+                isAlert: true,
+                mgs: 'Kindly check your connection',
+                redirectDashboard: false
+
+            })
+        }
     }
 
     render() {
-        const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
+        const { redirectDashboard, billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
         const { getFieldDecorator } = this.props.form;
+        // if (redirectDashboard) {
+        //     return <Redirect to={{ pathname: '/dashboard', state:'abc' }} />
+        // }
 
         const billboardRendring = (
             <div>
@@ -782,18 +855,28 @@ class DashboardData extends Component {
                                         </Form>
 
                                     </div>
-                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1">
+
+                                    </div>
                                 </div>
+
                                 <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            {this.state.isAlert ?
+                                <div class="alert alert-danger" role="alert">
+                                    {this.state.mgs}
+                                </div>
+                                : null}
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
-
+                        {this.state.isLoader ? <div class="loading">   </div>
+                            : null
+                        }
                     </div>
                 </div>
-               
+
             </div >
         )
     }

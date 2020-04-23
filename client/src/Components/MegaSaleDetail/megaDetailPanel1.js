@@ -6,7 +6,8 @@ import { HttpUtils } from '../../Services/HttpUtils';
 import NumberFormat from 'react-number-format';
 import moment from 'moment';
 import './coundown.scss';
-
+import { Spin, Icon } from 'antd';
+import { Redirect } from 'react-router';
 
 class Megapanel1 extends Component {
     constructor(props) {
@@ -20,7 +21,11 @@ class Megapanel1 extends Component {
             hours: undefined,
             minutes: undefined,
             seconds: undefined,
-            mapFalse: true
+            mapFalse: true,
+            loader: false,
+            mgs: '',
+            isAlert: false,
+            redirectMegaSale: false
         }
     }
 
@@ -46,17 +51,10 @@ class Megapanel1 extends Component {
             let timeTillDateStart = `${`${saleData.saleEndDate}, ${saleData.saleEndTime}`}`;
             const now = moment();
             const then = moment(timeTillDateStart);
-            // const countdown = moment(then - now);
-            // const days = countdown.format('D');
-            // const hours = countdown.format('HH');
-            // const minutes = countdown.format('mm');
-            // const seconds = countdown.format('ss');
-            // // var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-
             let duration = moment.duration(then.diff(now))
             const days = (duration._data.days < 10 ? "0" + duration._data.days : duration._data.days);
             const hours = (duration._data.hours < 10 ? "0" + duration._data.hours : duration._data.hours);
-            const minutes =(duration._data.minutes < 10 ? "0" + duration._data.minutes : duration._data.minutes);
+            const minutes = (duration._data.minutes < 10 ? "0" + duration._data.minutes : duration._data.minutes);
             const seconds = (duration._data.seconds < 10 ? "0" + duration._data.seconds : duration._data.seconds);
             this.setState({ days, hours, minutes, seconds });
         }, 1000);
@@ -73,41 +71,62 @@ class Megapanel1 extends Component {
 
     }
 
-    bookedBillboard = () => {
+    bookedBillboard = async () => {
         const { data, billboardData } = this.state;
-        let bookedBillboard = [];
         let booked = {}
         let userDetail = JSON.parse(localStorage.getItem('userData'));
-        let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
         booked.companyName = userDetail.companyName;
+        booked.companyEmail = userDetail.email;
+        booked.companyLandlineNo = userDetail.landlineNo;
         booked.companyId = userDetail._id;
         booked.address = billboardData.address;
         booked.city = billboardData.city;
         booked.state = billboardData.state;
+        booked.billboardId = billboardData._id
         booked.billboardAmount = data.discountPrice;
+        booked.bookedDate = 'From ' + data.billboardAvailabilityFrom + ' to ' + data.billboardAvailabilityTo;
+        booked.objectId = '';
+        console.log(booked, 'booked')
+        let response = await HttpUtils.post('postMegaSalebillboard', booked);
+        console.log(response, 'response')
 
-        if (bookedMegaSaleBillboards == null || bookedMegaSaleBillboards == undefined) {
-            bookedBillboard.push(booked)
-            localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+        if (response) {
+            if (response.code == 200) {
+                let obj = {
+                    objectId: data._id,
+                    billboardStatus: 'No Available'
+                }
+                let responseUpdate = await HttpUtils.post('sendmegabillboard', obj);
+                this.setState({
+                    loader: false,
+                    isAlert: true,
+                    mgs: 'We Will contact with you shortly',
+                    redirectMegaSale: true
+                })
+
+            }
+            else {
+                this.setState({
+                    loader: false,
+                    isAlert: false,
+                    mgs: response.msg,
+                    redirectMegaSale: false
+                })
+            }
         }
         else {
-            for (var i = 0; i < bookedMegaSaleBillboards.length; i++) {
-                bookedBillboard.push(bookedMegaSaleBillboards[i])
-            }
-            bookedBillboard.push(booked)
-            localStorage.setItem('bookedMegaSaleBillboards', JSON.stringify(bookedBillboard))
+            this.setState({
+                loader: false,
+                isAlert: false,
+                mgs: response.msg,
+                redirectMegaSale: false
+            })
         }
     }
 
-    mapfalse = (param) => {
-        this.setState({
-            mapFalse: param,
-        })
-    }
 
     render() {
-        const { data, billboardData, days, hours, minutes, seconds, mapFalse } = this.state;
-
+        const { data, billboardData, days, hours, minutes, seconds, loader, mgs, isAlert, redirectMegaSale } = this.state;
         // Mapping the date values to radius values
         const daysRadius = mapNumber(days, 30, 0, 0, 360);
         const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
@@ -120,6 +139,7 @@ class Megapanel1 extends Component {
 
         let image;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
+        const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
 
         if (data.images && data.images.length > 0) {
             image = data.images.map((elem, key) => {
@@ -134,6 +154,9 @@ class Megapanel1 extends Component {
                     </div>
                 }
             })
+        }
+        if (redirectMegaSale) {
+            return <Redirect to={{ pathname: '/megaSale' }} />
         }
         return (
             <div>
@@ -349,13 +372,55 @@ class Megapanel1 extends Component {
                             <div className="row" style={{ margin: '0px' }}>
                                 <div className="col-md-10"></div>
                                 <div className="col-md-2" style={{ textAlign: 'right' }}>
-                                    {value ?
-                                        <button className="btn btn-primary bookBtnMEga" onClick={this.bookedBillboard}>Book Now</button>
+                                    {value && data && data.billboardStatus == "Available" ?
+                                        <button className="btn btn-primary bookBtnMEga" data-toggle="modal" data-target="#megaSaleBook">Book Now</button>
+
                                         :
-                                        <button className="btn btn-primary bookBtnMEga" disabled >Book Now</button>}
+                                        <button className="btn btn-primary bookBtnMEga" disabled >Already Booked</button>}
+
                                 </div>
                             </div>
                             <br />
+                            <div class="modal" id="megaSaleBook">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Book Now</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <div>
+                                            <NumberFormat value={data.actualPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                        </div>
+                                        <div>
+                                            <NumberFormat value={data.discountPrice} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+
+                                        </div>
+                                        <div>
+                                            <span className="ufone4">{data.percantageOffDisscount}%</span>
+
+                                        </div>
+                                        <div>
+                                            <div className="col-md-3 ufone5"><span className="ufone3">Billboard availibilty</span></div>
+                                            <div className="col-md-9 ufone6"><span className="ufone4">From {data.billboardAvailabilityFrom} to {data.billboardAvailabilityTo} </span></div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div className="col-md-12 col-sm-12 col-xs-12">
+                                                {loader && <Spin className="col-xs-2 col-md-6" indicator={antIcon} />}
+                                                {mgs != '' && <span>{mgs}</span>}
+                                                {/* <Popconfirm placement="top" title={"Are you ready to proceed"} onConfirm={this.confirm} okText="Yes" cancelText="No"> */}
+                                                <button style={{ textAlign: 'center', width: '19%' }}
+                                                    onClick={this.bookedBillboard}
+                                                    disabled={!!this.state.loader}
+                                                >Bookeed</button>
+                                                {/* </Popconfirm> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">

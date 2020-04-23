@@ -17,7 +17,8 @@ const megasalebillboard = new Schema({
     images: { type: Array },
     billboardId: { type: String },
     billboardAddress: { type: String },
-    billboardCity: { type: String }
+    billboardCity: { type: String },
+    billboardStatus: { type: String },
 });
 
 //model class
