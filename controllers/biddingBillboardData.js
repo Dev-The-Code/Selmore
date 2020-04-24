@@ -6,6 +6,8 @@ exports.postBiddingBillboard = function(req,res,next){
   var formData = req.body;
   if(formData.objectId == ''){
   const postBillboardData = new BiddingbillboardData({
+    billboardAvailabilityFrom:formData.billboardAvailabilityFrom,
+    billboardAvailabilityTo:formData.billboardAvailabilityTo,
     biddingStartDate:formData.biddingStartDate,
     biddingStartTime:formData.biddingStartTime,
     biddingEndDate:formData.biddingEndDate,

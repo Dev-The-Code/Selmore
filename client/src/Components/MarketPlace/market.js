@@ -3760,20 +3760,20 @@ class Market extends Component {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard } = this.state;
         // console.log(notFoundFilterData, 'notFoundFilterData')
-        let flexxData = billboardData.slice(0, i + 9);
-        let filterPoint = billboardFilterdData.slice(0, i + 9);
+        // let billboardData = billboardData.slice(0, i + 9);
+        // let billboardFilterdData = billboardFilterdData.slice(0, i + 9);
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
                 <div className='row '>
-                    {notFoundFilterData && filterPoint.length == 0 ?
+                    {notFoundFilterData && billboardFilterdData.length == 0 ?
                         <div>
                             <p>
                                 No Record Found
                             </p>
                             <button onClick={this.showAllBillboards}>Back</button>
                         </div>
-                        : filterPoint && filterPoint.map((elem, key) => {
+                        : billboardFilterdData && billboardFilterdData.map((elem, key) => {
                             return (
                                 <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -3797,8 +3797,8 @@ class Market extends Component {
                         })
                     }
 
-                    {notFoundFilterData == false && filterPoint.length == 0 && showRecord ?
-                        flexxData && flexxData.map((elem, key) => {
+                    {notFoundFilterData == false && billboardFilterdData.length == 0 && showRecord ?
+                        billboardData && billboardData.map((elem, key) => {
                             return (
                                 <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -3823,7 +3823,7 @@ class Market extends Component {
                         :
                         null
                     }
-                    {/* {filterPoint.length !== 0 ? filterPoint && filterPoint.map((elem, key) => {
+                    {/* {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                         return (
                             <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
                                 <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
@@ -3846,7 +3846,7 @@ class Market extends Component {
                         )
                     })
                         :
-                        flexxData && flexxData.map((elem, key) => {
+                        billboardData && billboardData.map((elem, key) => {
                             return (
                                 <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect animated animatedFadeInUp fadeInUp'>
                                     <Link to={{ pathname: `/billborad_Militry`, state: elem }}>

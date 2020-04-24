@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 
 //Define model
 const biddingBillboard = new Schema({
+    billboardAvailabilityFrom: { type: String },
+    billboardAvailabilityTo: { type: String },
     biddingStartDate: { type: String },
     biddingStartTime: { type: String },
     biddingEndDate: { type: String },

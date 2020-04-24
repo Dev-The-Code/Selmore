@@ -33,12 +33,18 @@ class Billofpanel2 extends Component {
 		}
 	}
 
-	biddersDetails = () => {
-		let biddersCompany = JSON.parse(localStorage.getItem('bidderDetail'));
-		if (biddersCompany != null || biddersCompany != undefined) {
-			this.setState({
-				biddersCompanyDetails: biddersCompany
-			})
+	biddersDetails = async () => {
+		const { data } = this.props;
+		let obj = {
+			id: data._id
+		}
+		let response = await HttpUtils.post('getspecificBiddingbillboardHistory', obj);
+		if (response) {
+			if (response.code == 200) {
+				this.setState({
+					biddersCompanyDetails: response.content
+				})
+			}
 		}
 	}
 
@@ -180,14 +186,14 @@ class Billofpanel2 extends Component {
 											return (
 												<tbody>
 													<tr>
-														<td className="BidhistoryTH">{key}</td>
+														<td className="BidhistoryTH">{key + 1}</td>
 														<td className="BidhistoryTH">{elem.date} - {elem.time}</td>
 														<td className="BidhistoryTH">
 															<NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
 
 															{/* Rs.{elem.bidAamount} */}
 														</td>
-														<td className="BidhistoryTH">{elem.bidderId}</td>
+														<td className="BidhistoryTH">{elem.companyId}</td>
 													</tr>
 												</tbody>
 											)

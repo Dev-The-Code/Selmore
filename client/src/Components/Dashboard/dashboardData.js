@@ -737,6 +737,44 @@ class DashboardData extends Component {
 
 
                                                 <div>
+                                                    <div className="row" style={{ marginTop: '0.4vw' }}>
+                                                        <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                            <label className="modeLForm_labeL">Billboard Availability :</label>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <label className="modaLSmalLable">From</label>
+                                                            <Form.Item>
+                                                                {getFieldDecorator(`billboardAvailabilityFrom`, {
+                                                                    // initialValue: this.state.width,
+                                                                    rules: [{
+                                                                        required: true,
+                                                                        message: 'Please select date',
+                                                                        whitespace: true
+                                                                    }]
+                                                                })(
+                                                                    <Input type="date" name="" className="form-control modeLForm_Input" />
+                                                                )}
+                                                            </Form.Item>
+
+                                                        </div>
+                                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <label className="modaLSmalLable">To</label>
+                                                            <Form.Item>
+                                                                {getFieldDecorator(`billboardAvailabilityTo`, {
+                                                                    // initialValue: this.state.width,
+                                                                    rules: [{
+                                                                        required: true,
+                                                                        message: 'Please select date',
+                                                                        whitespace: true
+                                                                    }]
+                                                                })(
+                                                                    <Input type="date" name="" className="form-control modeLForm_Input" />
+                                                                )}
+                                                            </Form.Item>
+                                                        </div>
+                                                    </div>
                                                     <div className="row">
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                                             <label className="modeLForm_timlable">From</label><br />
