@@ -5,26 +5,6 @@ $secondary-color: #19303a;
 $primary-color: #19b3e8;
 $light-color:#4a5964;
 
-.rowcustom{
-	margin-right: 0px !important;
-}
-.water>img{
-	width: 100%;
-	height: 300px;
-	margin-top: 5px;
-	position: absolute;
-}
-.water2{
-	margin-top: 10%;
-    font-family: Helvetica;
-    margin-left: 5%;
-	position: relative;
-}
-.water3{
- 	font-size: 40px;
-    font-weight: 600;
-    color: white;
-}
 
 .water4{
 	color: $primary-color;
@@ -34,13 +14,11 @@ $light-color:#4a5964;
 }
 .water5{
 	border-bottom: 3px solid #29abe2;
-	margin-left: 15px;
 }
 .water6{
 	font-size: 23px;
     font-weight: 600;
     font-family: $font-stack;
-	margin-left: 15px;
 	color: $secondary-color;
 }
 .water7{
@@ -49,29 +27,7 @@ $light-color:#4a5964;
 	font-family: $font-regular;
 	color: $light-color;
 }
-.water8{
-	background-color:  #29abe2;
-}
-@media screen and (min-width: 360px) and (max-width: 660px){
-	.superp1{
-		
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1024px){
-	.superp1{
-		
-	}
-}
-@media screen and (min-width: 1024px) and (max-width: 1366px){
-	.superp1{
-		margin-left: 7%;
-	}
-}
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-	.superp1{
-		margin-left: 7%;
-	}
-}
+
 
 
 

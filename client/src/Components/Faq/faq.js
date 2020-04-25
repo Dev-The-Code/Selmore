@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header/mainheader';
-import Footer from '../footer';
+import Footer from '../Footer/mainFooter';
 import Faqpanel1 from './faqpanel1';
 import './faq.scss';
 import AbBanner from '../About Selmore/abBanner';
@@ -34,7 +34,6 @@ class Faq extends Component {
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        <AbBanner advertise={'FREQUENTLY ASKED QUESTIONS'} bred={'FAQ'} />
         <Faqpanel1 />
         <Footer />
       </div>

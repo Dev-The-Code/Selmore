@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import AbBanner from './abBanner';
 import Panel1 from './panel1';
 import Panel2 from './panel2';
+import ListAdHome from '../HomePage/ListingAdPanel/listingAd';
 import Header from '../Header/mainheader';
-import Footer from '../footer';
+
+import Footer from '../Footer/mainFooter';
 import './about.scss';
 
 class About extends Component {
@@ -35,9 +37,9 @@ class About extends Component {
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        <AbBanner advertise={'ABOUT SELMORE'} bred={'About'} />
         <Panel1 />
-        <Panel2 />
+        {/* <Panel2 /> */}
+        <ListAdHome />
         <Footer />
       </div>
     );
