@@ -39,22 +39,13 @@ class Biddpanel1 extends Component {
 					let timeTillDateStart = `${`${elemObj.biddingEndDate}, ${elemObj.biddingEndTime}`}`;
 					const now = moment();
 					const then = moment(timeTillDateStart);
-					// const countdown = moment(then - now);
-					// const days = countdown.format('D');
-					// const hours = countdown.format('HH');
-					// const minutes = countdown.format('mm');
-					// const seconds = countdown.format('ss');
-					// elemObj.days = days;
-					// elemObj.hours = hours;
-					// elemObj.minutes = minutes;
-					// elemObj.seconds = seconds;
-
 					var totalSec = then.diff(now, 'seconds');
 					var hours = parseInt(totalSec / 3600);
 					var minutes = parseInt(totalSec / 60) % 60;
 					var seconds = totalSec % 60;
 					var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 					elemObj.calculateTime = calculateTime;
+					elemObj.hours = hours;
 					biddingBillboards.push(elemObj)
 				})
 				this.setState({
@@ -62,14 +53,11 @@ class Biddpanel1 extends Component {
 				})
 				biddingBillboards = [];
 			}, 1000);
-			// this.setState({
-			// 	biddingBillboards: response.content
-			// })
+
 		}
 	}
 	render() {
 		const { biddingBillboards } = this.state;
-		console.log('biddingBillboards',biddingBillboards)
 		return (
 			<div>
 				<div className="row">
@@ -666,9 +654,9 @@ class Biddpanel1 extends Component {
 									<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 										<div className="mainbiddingCardDiv">
 											<img src={elem.images[0]} alt="card" className="biddingCardImgs" />
-											<p className="hoursLeftTag">{`${elem.calculateTime.slice(0,2)}hrs Left`}</p>
+											<p className="hoursLeftTag">{`${elem.hours} Hrs Left`}</p>
 											<div className="biddingDetailCardDiv">
-												{elem &&  <p className="biddingCardName">{elem.billboardAddress} , {elem.billboardCity}</p>}
+												{elem && <p className="biddingCardName">{elem.billboardAddress} , {elem.billboardCity}</p>}
 												<p class="biddingCardText">DEAL EXPIRE IN:
 												<span className="biddingPageTiming"> {`${elem.calculateTime}`}</span>
 												</p>
@@ -715,7 +703,7 @@ class Biddpanel1 extends Component {
 					</div>
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 				</div>
-				
+
 			</div>
 		);
 	}

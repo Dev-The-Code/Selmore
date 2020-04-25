@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format';
 import './billofbidding.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
 import moment from 'moment';
+import { Input, Spin, Icon, notification } from 'antd';
 
 class Billofpanel1 extends Component {
 	constructor(props) {
@@ -14,23 +15,26 @@ class Billofpanel1 extends Component {
 			enterGreaterAmount: false,
 			todayDate: '',
 			time: '',
-			monthName: ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			monthName: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			billboardData: [],
 			days: undefined,
 			hours: undefined,
 			minutes: undefined,
 			seconds: undefined,
+			loader: false,
+			mgs: '',
+			isAlert: false,
 		}
 	}
 
 	componentDidMount() {
 		const { monthName } = this.state;
 		let date = new Date().getDate();
-		let month = new Date().getMonth() + 1;
+		let month = new Date().getMonth();
 		const year = new Date().getFullYear();
-		if (month == 1 || month == 2 || month == 3 || month == 4 || month == 5 || month == 6 || month == 7 || month == 8 || month == 9) {
-			month = `0${month}`
-		}
+		// if (month == 1 || month == 2 || month == 3 || month == 4 || month == 5 || month == 6 || month == 7 || month == 8 || month == 9) {
+		// 	month = `0${month}`
+		// }
 		if (date == 1 || date == 2 || date == 3 || date == 4 || date == 5 || date == 6 || date == 7 || date == 8 || date == 9) {
 			date = `0${date}`
 		}
@@ -80,27 +84,44 @@ class Billofpanel1 extends Component {
 		}
 
 		this.setState({
-			todayDate: monthName[month] + '-' + date + '-' + year,
+			todayDate: date + '-' + monthName[month] + '-' + year,
 			time: time,
 		})
 
-		this.lastBidingAmount()
+		this.lastBidingData()
 		this.billboardData()
 		this.countdownTime()
 	}
 
-	lastBidingAmount = () => {
+	lastBidingData = async () => {
 		const { data } = this.props;
-		let lastBidAmount = JSON.parse(localStorage.getItem('lastBidAmount'));
-		if (lastBidAmount == null || lastBidAmount == undefined) {
-			this.setState({
-				lastBidAmount: data.minBidAmount
-			})
+		let obj = {
+			id: data._id
 		}
-		else {
-			this.setState({
-				lastBidAmount: lastBidAmount
-			})
+		let biddingBiggerAmount = 0;
+		let response = await HttpUtils.post('getspecificBiddingbillboardHistory', obj);
+		if (response) {
+			if (response.code == 200) {
+				if (response.content.length > 0) {
+					let biddingData = response.content;
+					for (var i in biddingData) {
+						if (Number(biddingData[i].bidAamount) > Number(biddingBiggerAmount)) {
+							biddingBiggerAmount = biddingData[i].bidAamount;
+							this.setState({
+								lastBidAmount: biddingBiggerAmount
+							})
+						}
+						else {
+							console.log('less than amount')
+						}
+					}
+				}
+				else {
+					this.setState({
+						lastBidAmount: data.minBidAmount
+					})
+				}
+			}
 		}
 	}
 
@@ -114,97 +135,10 @@ class Billofpanel1 extends Component {
 			let response = await HttpUtils.post('getspecificbillboard', obj);
 			if (response.code == 200) {
 				this.setState({
-					billboardData: response.content[0]
+					billboardData: response.content[0],
 				})
 
 			}
-		}
-	}
-
-	bidingAmount = () => {
-		const { bidValue, lastBidAmount, todayDate, time, billboardData } = this.state;
-		const { data } = this.props;
-
-		if (Number(lastBidAmount) >= Number(bidValue)) {
-			this.setState({
-				enterGreaterAmount: true
-			})
-		}
-		else {
-			let usersData = []
-			let userDetail = JSON.parse(localStorage.getItem('userData'));
-			let bidderDetail = JSON.parse(localStorage.getItem('bidderDetail'));
-			let userData = {}
-			userData.bidAamount = bidValue;
-			userData.bidderId = userDetail._id;
-			userData.date = todayDate;
-			userData.time = time;
-			if (bidderDetail == null || bidderDetail == undefined) {
-				usersData.push(userData)
-				localStorage.setItem('bidderDetail', JSON.stringify(usersData))
-				localStorage.setItem('lastBidAmount', JSON.stringify(bidValue))
-				this.setState({
-					enterGreaterAmount: false,
-					lastBidAmount: bidValue,
-					bidValue: ''
-				})
-			}
-			else {
-				for (var i = 0; i < bidderDetail.length; i++) {
-					usersData.push(bidderDetail[i])
-				}
-				usersData.push(userData)
-				localStorage.setItem('bidderDetail', JSON.stringify(usersData))
-				localStorage.setItem('lastBidAmount', JSON.stringify(bidValue))
-				this.setState({
-					enterGreaterAmount: false,
-					lastBidAmount: bidValue,
-					bidValue: ''
-				})
-			}
-
-			let bookedBillboard = [];
-			let booked = {}
-			let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
-			booked.companyName = userDetail.companyName;
-			booked.companyId = userDetail._id;
-			booked.address = billboardData.address;
-			booked.city = billboardData.city;
-			booked.state = billboardData.state;
-			booked.bidAamount = bidValue;
-
-			if (bidBillboards == null || bidBillboards == undefined) {
-				bookedBillboard.push(booked)
-				localStorage.setItem('bidBillboards', JSON.stringify(bookedBillboard))
-			}
-			else {
-				for (var i = 0; i < bidBillboards.length; i++) {
-					bookedBillboard.push(bidBillboards[i])
-				}
-				bookedBillboard.push(booked)
-				localStorage.setItem('bidBillboards', JSON.stringify(bookedBillboard))
-			}
-
-		}
-	}
-
-	onChange = (e) => {
-		const { enterGreaterAmount } = this.state;
-
-		if (enterGreaterAmount) {
-			this.setState({
-				enterGreaterAmount: false,
-			})
-		}
-
-		this.setState({
-			bidValue: e.target.value,
-		})
-	}
-
-	componentWillUnmount() {
-		if (this.interval) {
-			clearInterval(this.interval);
 		}
 	}
 
@@ -214,24 +148,91 @@ class Billofpanel1 extends Component {
 			let timeTillDateStart = `${`${data.biddingEndDate}, ${data.biddingEndTime}`}`;
 			const now = moment();
 			const then = moment(timeTillDateStart);
-			// const countdown = moment(then - now);
-			// const days = countdown.format('D');
-			// const hours = countdown.format('HH');
-			// const minutes = countdown.format('mm');
-			// const seconds = countdown.format('ss');
-
 			let duration = moment.duration(then.diff(now))
-            const days = (duration._data.days < 10 ? "0" + duration._data.days : duration._data.days);
-            const hours = (duration._data.hours < 10 ? "0" + duration._data.hours : duration._data.hours);
-            const minutes =(duration._data.minutes < 10 ? "0" + duration._data.minutes : duration._data.minutes);
-            const seconds = (duration._data.seconds < 10 ? "0" + duration._data.seconds : duration._data.seconds);
+			const days = (duration._data.days < 10 ? "0" + duration._data.days : duration._data.days);
+			const hours = (duration._data.hours < 10 ? "0" + duration._data.hours : duration._data.hours);
+			const minutes = (duration._data.minutes < 10 ? "0" + duration._data.minutes : duration._data.minutes);
+			const seconds = (duration._data.seconds < 10 ? "0" + duration._data.seconds : duration._data.seconds);
 			this.setState({ days, hours, minutes, seconds });
 		}, 1000);
 	}
 
-	render() {
-		const { lastBidAmount, enterGreaterAmount, bidValue, days, hours, minutes, seconds, } = this.state;
+	onChange = (e) => {
+		this.setState({
+			bidValue: e.target.value,
+		})
+	}
+
+
+
+	bidingAmount = async () => {
+		const { bidValue, lastBidAmount, todayDate, time, billboardData } = this.state;
 		const { data } = this.props;
+		this.setState({
+			loader: false
+		})
+		if (Number(bidValue) > Number(lastBidAmount)) {
+			this.setState({
+				enterGreaterAmount: false
+			})
+			let userDetail = JSON.parse(localStorage.getItem('userData'));
+			let bidderData = {}
+			bidderData.bidAamount = bidValue;
+			bidderData.date = todayDate;
+			bidderData.time = time;
+			bidderData.biddingBillboardId = data._id;
+			bidderData.billboardAvailabilityFrom = data.billboardAvailabilityFrom;
+			bidderData.billboardAvailabilityTo = data.billboardAvailabilityTo;
+			bidderData.companyName = userDetail.companyName;
+			bidderData.companyEmail = userDetail.email;
+			bidderData.companyLandlineNo = userDetail.landlineNo;
+			bidderData.companyId = userDetail._id;
+			bidderData.address = billboardData.address;
+			bidderData.city = billboardData.city;
+			bidderData.state = billboardData.state;
+			bidderData.billboardId = billboardData._id;
+			bidderData.objectId = '';
+
+			let response = await HttpUtils.post('biddingHistory', bidderData);
+
+			if (response) {
+				if (response.code == 200) {
+					this.setState({
+						loader: false,
+						// isAlert: true,
+						// mgs: 'Your bid amount submitted Sucessfully',
+					})
+					this.openNotification()
+				}
+			}
+
+		}
+		else {
+			this.setState({
+				enterGreaterAmount: true
+			})
+		}
+	}
+
+	openNotification() {
+		notification.open({
+			message: 'Success ',
+			description: 'Your amount simitted succesfully',
+		});
+		window.location.reload(true);
+	};
+
+
+	componentWillUnmount() {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+	}
+
+	render() {
+		const { lastBidAmount, enterGreaterAmount, bidValue, days, hours, minutes, seconds, loader } = this.state;
+		const { data } = this.props;
+
 		// Mapping the date values to radius values
 		const daysRadius = mapNumber(days, 30, 0, 0, 360);
 		const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
@@ -239,6 +240,7 @@ class Billofpanel1 extends Component {
 		const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
 
 		const value = JSON.parse(localStorage.getItem("loggedIn"));
+		const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
 
 		let image;
 		if (data.images && data.images.length > 0) {
@@ -258,7 +260,7 @@ class Billofpanel1 extends Component {
 		return (
 			<div>
 				<div className="container">
-					{enterGreaterAmount ? alert("Please Enter Greater amount from current bid amount") : null}
+					{/* {enterGreaterAmount ? alert("Please Enter Greater amount from current bid amount") : null} */}
 
 					<div className="row" style={{ margin: '0px' }}>
 						<div className="col-md-12">
@@ -318,15 +320,19 @@ class Billofpanel1 extends Component {
 						<div className="col-md-4"></div>
 						<div className="col-md-4">
 							<div class="input-group">
-								<input type="Number" className="form-control kurta3" placeholder="Enter bid price" value={bidValue} onChange={this.onChange} />
+								<Input type="Number" className="form-control kurta3" placeholder="Enter bid price" value={bidValue} onChange={this.onChange} />
 								<div className="input-group-append">
-									{value ?
+									{value && !loader ?
 										<button type="button" className="btn btn-primary" onClick={this.bidingAmount}><span>Bid</span></button>
 										:
 										<button type="button" className="btn btn-primary" disabled><span>Bid</span></button>
 									}
 								</div>
+								{loader && <Spin className="col-xs-2 col-md-6" indicator={antIcon} />}
+
 							</div>
+							{enterGreaterAmount ? <span>Please Enter Greater amount from current bid amount</span> : null}
+
 						</div>
 						<div className="col-md-4"></div>
 					</div>
@@ -382,7 +388,7 @@ const SVGCircle = ({ radius }) => (
 			fill="none"
 			stroke="#333"
 			stroke-width="4"
-			// d={describeArc(50, 50, 48, 0, radius)}
+		// d={describeArc(50, 50, 48, 0, radius)}
 		/>
 	</svg>
 );
