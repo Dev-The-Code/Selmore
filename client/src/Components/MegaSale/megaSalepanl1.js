@@ -1930,6 +1930,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
+																value={cityValue}
 																	onChange={this.handleChange.bind(this, 'city')}
 																	options={cities}
 																>
@@ -1941,6 +1942,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
+																value={stateValue}
 																	onChange={this.handleChange.bind(this, 'state')}
 																	options={states}
 																>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './market.scss';
 import {
-    Checkbox, Form, Row, Col, Input, Radio, Button
+    Checkbox, Form, Row, Col, Radio, Spin, Icon
 } from 'antd';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
@@ -60,7 +60,10 @@ class Market extends Component {
             facingOfBillboard: [],
             lightningOfBillboard: [],
             audienceTypeOfBillboard: [],
-            showRecord: true
+            showRecord: true,
+            categoryValue: '',
+            cityValue: '',
+            stateValue: ''
 
         }
     }
@@ -122,19 +125,66 @@ class Market extends Component {
         this.filterKeysGet();
     }
 
+    //get checkboxes values
+    onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
+        if (checkboxParam == 'type') {
+            filterTypesArr = checkboxValue;
+        } else if (checkboxParam == 'facing') {
+            filterFacingArr = checkboxValue;
+        } else if (checkboxParam == 'lightning') {
+            filterLightningsArr = checkboxValue;
+        } else if (checkboxParam == 'audienceType') {
+            filterAudienceTypeArr = checkboxValue;
+        }
+        this.filterKeysGet();
+    }
+
+    //get dropdown values
+    handleChange = (dropDownParam, dropDownValueObj) => {
+        let dropDownValue = []
+        dropDownValue.push(dropDownValueObj.value)
+        if (dropDownParam == 'category') {
+            filterCategoryName = dropDownValue;
+            this.setState({
+                categoryValue: dropDownValueObj
+            })
+
+        }
+        else if (dropDownParam == 'city') {
+            filterCityName = dropDownValue;
+            this.setState({
+                cityValue: dropDownValueObj
+            })
+        }
+        else if (dropDownParam == 'state') {
+            filterStateName = dropDownValue;
+            this.setState({
+                stateValue: dropDownValueObj
+            })
+        }
+        this.filterKeysGet();
+    }
+
+
     removeValue = (param, value) => {
         let arr = [];
         if (param == "status") {
+            status = arr
             this.setState({
                 statusValue: ''
             })
-            status = arr
         }
         else if (param == "city") {
             filterCityName = arr
+            this.setState({
+                cityValue: ''
+            })
         }
         else if (param == "state") {
             filterStateName = arr
+            this.setState({
+                stateValue: ''
+            })
         }
         else if (param == 'types') {
             let arr1 = [];
@@ -172,6 +222,7 @@ class Market extends Component {
             }
             filterAudienceTypeArr = arr1;
         }
+        this.filterKeysGet();
 
         if (status.length == 0 && filterCityName.length == 0 && filterStateName.length == 0 && filterTypesArr.length == 0 && filterFacingArr.length == 0 &&
             filterLightningsArr.length == 0 && filterAudienceTypeArr.length == 0) {
@@ -198,54 +249,15 @@ class Market extends Component {
         this.setState({
             showRecord: true,
             notFoundFilterData: false,
-            billboardFilterdData: [],
-            statusValue: ''
+            statusValue: '',
+            cityValue: '',
+            stateValue: ''
         })
         this.filterKeysGet();
 
     }
 
 
-    //get checkboxes values
-    onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
-        // const { checkBoxValues } = this.state
-        // let arr = []
-        if (checkboxParam == 'type') {
-            filterTypesArr = checkboxValue;
-        } else if (checkboxParam == 'facing') {
-            filterFacingArr = checkboxValue;
-        } else if (checkboxParam == 'lightning') {
-            filterLightningsArr = checkboxValue;
-        } else if (checkboxParam == 'audienceType') {
-            filterAudienceTypeArr = checkboxValue;
-        }
-        // for (var i = 0; i < checkBoxValues.length; i++) {
-        //     arr.push(checkBoxValues[i])
-        // }
-        // for (var j = 0; j < checkboxValue.length; j++) {
-        //     arr.push(checkboxValue[j])
-        // }
-        // this.setState({ checkBoxValues: arr })
-        this.filterKeysGet();
-    }
-
-    //get dropdown values
-    handleChange = (dropDownParam, dropDownValueObj) => {
-        let dropDownValue = []
-        dropDownValue.push(dropDownValueObj.value)
-        if (dropDownParam == 'category') {
-            filterCategoryName = dropDownValue;
-
-        }
-        else if (dropDownParam == 'city') {
-            filterCityName = dropDownValue;
-
-        }
-        else if (dropDownParam == 'state') {
-            filterStateName = dropDownValue;
-        }
-        this.filterKeysGet();
-    }
 
 
     filterKeysGet = () => {
@@ -323,260 +335,157 @@ class Market extends Component {
         else if (filterKeys.length == 7) {
             this.filterBillboardDataWithSevenKeys(filterKeys)
         }
-        // else if (filterKeys.length == 8) {
-        //     this.filterBillboardDataWithEightKeys(filterKeys)
-        // }
     }
 
     filterBillboardDataWithOneKey = (filterKeys) => {
         const { billboardData } = this.state;
-        let filteredData = [];
+        let data;
         for (var i = 0; i < filterKeys.length; i++) {
             if (filterKeys[i] == 'status') {
-                for (var j = 0; j < status.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.status && status.includes(elem.status)
+                })
             }
             else if (filterKeys[i] == 'category') {
-                for (var j = 0; j < filterCategoryName.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                })
             }
             else if (filterKeys[i] == 'type') {
-                for (var j = 0; j < filterTypesArr.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.type && filterTypesArr.includes(elem.type)
+                })
             }
             else if (filterKeys[i] == 'facing') {
-                for (var j = 0; j < filterFacingArr.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.facing && filterFacingArr.includes(elem.facing)
+                })
             }
             else if (filterKeys[i] == 'lightning') {
-                for (var j = 0; j < filterLightningsArr.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                })
             }
             else if (filterKeys[i] == 'audianceType') {
-                for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                })
             }
             else if (filterKeys[i] == 'city') {
-                for (var j = 0; j < filterCityName.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.city && filterCityName.includes(elem.city)
+                })
             }
             else if (filterKeys[i] == 'state') {
-                for (var j = 0; j < filterStateName.length; j++) {
-                    billboardData.map((elem, key) => {
-                        if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                            filteredData.push(elem)
-                        }
-                    })
-                }
+                data = billboardData.filter((elem) => {
+                    return elem.state && filterStateName.includes(elem.state)
+                })
             }
         }
 
-
-        if (filteredData.length == 0) {
+        if (data.length == 0) {
             this.setState({
                 notFoundFilterData: true,
-                billboardFilterdData: filteredData,
+                billboardFilterdData: data,
                 showRecord: false
             })
         }
         else {
             this.setState({
                 notFoundFilterData: false,
-                billboardFilterdData: filteredData,
+                billboardFilterdData: data,
                 showRecord: false
             })
         }
     }
-
 
     filterBillboardDataWithTwoKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let filteredData = [];
+        let data1;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
-            // console.log(i, 'i')
             if (i == 0) {
-                // console.log('get first value')
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
@@ -596,240 +505,138 @@ class Market extends Component {
 
             })
         }
-        // console.log(filteredData, 'filteredData')
-        // this.setState({
-        //     billboardFilterdData: filteredData
-        // })
-
     }
-
 
     filterBillboardDataWithThreeKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let filteredData = [];
+        let data1;
+        let data2;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
             if (i == 0) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 2) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
@@ -849,314 +656,181 @@ class Market extends Component {
                 showRecord: false
             })
         }
-        // console.log(filteredData, 'filteredData')
-        // this.setState({
-        //     billboardFilterdData: filteredData
-        // })
-
     }
 
     filterBillboardDataWithFourKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let arr3 = [];
-        let filteredData = [];
+        let data1;
+        let data2;
+        let data3;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
             if (i == 0) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 2) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 3) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
@@ -1178,390 +852,226 @@ class Market extends Component {
 
             })
         }
-        // console.log(filteredData, 'filteredData')
-        // this.setState({
-        //     billboardFilterdData: filteredData
-        // })
 
     }
 
 
     filterBillboardDataWithFiveKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let arr3 = [];
-        let arr4 = [];
-        let filteredData = [];
+        let data1;
+        let data2;
+        let data3;
+        let data4;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
             if (i == 0) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 2) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 3) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 4) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data4.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
@@ -1581,464 +1091,268 @@ class Market extends Component {
 
             })
         }
-        // console.log(filteredData, 'filteredData')
-        // this.setState({
-        //     billboardFilterdData: filteredData
-        // })
     }
 
 
     filterBillboardDataWithSixKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let arr3 = [];
-        let arr4 = [];
-        let arr5 = [];
-        let filteredData = [];
+        let data1;
+        let data2;
+        let data3;
+        let data4;
+        let data5;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
             if (i == 0) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 2) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 3) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 4) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 5) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data5.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
@@ -2058,545 +1372,315 @@ class Market extends Component {
                 showRecord: false
             })
         }
-        // console.log(filteredData, 'filteredData')
-        // this.setState({
-        //     billboardFilterdData: filteredData
-        // })
-
     }
 
 
 
     filterBillboardDataWithSevenKeys = (filterKeys) => {
         const { billboardData } = this.state;
-        let arr1 = [];
-        let arr2 = [];
-        let arr3 = [];
-        let arr4 = [];
-        let arr5 = [];
-        let arr6 = [];
-        let filteredData = [];
+        let data1;
+        let data2;
+        let data3;
+        let data4;
+        let data5;
+        let data6;
+        let filteredData;
         for (var i = 0; i < filterKeys.length; i++) {
             if (i == 0) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        billboardData.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr1.push(elem)
-                            }
-                        })
-                    }
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 1) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr1.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr2.push(elem)
-                            }
-                        })
-                    }
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 2) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr2.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr3.push(elem)
-                            }
-                        })
-                    }
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 3) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr3.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr4.push(elem)
-                            }
-                        })
-                    }
+                    data4 = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 4) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr4.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr5.push(elem)
-                            }
-                        })
-                    }
+                    data5 = data4.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 5) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr5.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                arr6.push(elem)
-                            }
-                        })
-                    }
+                    data6 = data5.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
             if (i == 6) {
                 if (filterKeys[i] == 'status') {
-                    for (var j = 0; j < status.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.status.toLowerCase() == status[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.status && status.includes(elem.status)
+                    })
                 }
                 else if (filterKeys[i] == 'category') {
-                    for (var j = 0; j < filterCategoryName.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.category[0].toLowerCase() == filterCategoryName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.category[0] && filterCategoryName.includes(elem.category[0])
+                    })
                 }
                 else if (filterKeys[i] == 'type') {
-                    for (var j = 0; j < filterTypesArr.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.type.toLowerCase() == filterTypesArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
                 }
                 else if (filterKeys[i] == 'facing') {
-                    for (var j = 0; j < filterFacingArr.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.facing.toLowerCase() == filterFacingArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.facing && filterFacingArr.includes(elem.facing)
+                    })
                 }
                 else if (filterKeys[i] == 'lightning') {
-                    for (var j = 0; j < filterLightningsArr.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.lightning.toLowerCase() == filterLightningsArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.lightning && filterLightningsArr.includes(elem.lightning)
+                    })
                 }
                 else if (filterKeys[i] == 'audianceType') {
-                    for (var j = 0; j < filterAudienceTypeArr.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.audianceType.toLowerCase() == filterAudienceTypeArr[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.audianceType && filterAudienceTypeArr.includes(elem.audianceType)
+                    })
                 }
                 else if (filterKeys[i] == 'city') {
-                    for (var j = 0; j < filterCityName.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.city.toLowerCase() == filterCityName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
                 }
                 else if (filterKeys[i] == 'state') {
-                    for (var j = 0; j < filterStateName.length; j++) {
-                        arr6.map((elem, key) => {
-                            if (elem.state.toLowerCase() == filterStateName[j].toLowerCase()) {
-                                filteredData.push(elem)
-                            }
-                        })
-                    }
+                    filteredData = data6.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
-
 
         if (filteredData.length == 0) {
             this.setState({
@@ -2615,7 +1699,7 @@ class Market extends Component {
             })
         }
     }
-    
+
     onChangeMin = (e) => {
         this.setState({
             minValue: e.target.value
@@ -2755,102 +1839,65 @@ class Market extends Component {
 
     render() {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
-            typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard } = this.state;
+            typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cityValue, stateValue } = this.state;
+        const antIcon =
+            <Icon type="loading" style={{ fontSize: '110px' }} spin />;
+
         const billboardRendring = (
             <div>
                 {/* rendering the filtered billboard data on front end */}
-                <div className='row '>
-                    {notFoundFilterData && billboardFilterdData.length == 0 ?
-                        <div>
-                            <p>
-                                No Record Found
+                {billboardData.length == 0 ?
+                    <div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+                    :
+                    <div className='row '>
+                        {notFoundFilterData && billboardFilterdData.length == 0 ?
+                            <div>
+                                <p>
+                                    No Record Found
                             </p>
-                            <button onClick={this.showAllBillboards}>Back</button>
-                        </div>
-                        : billboardFilterdData && billboardFilterdData.map((elem, key) => {
-                            return (
-                                <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                                    <Link rel="noopener noreferrer" to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                        <div className="mainNewestBillCardDiv">
-                                            <img src={elem.images[0]} alt={key} className="newestBillCardImgs" />
-                                            <div className="newestBillDetailCardDiv">
-                                                <p className="newestBillCardName">{elem.companyName.substr(0, 13)}...</p>
-                                                <p className="newestBillCardCity">{elem.nearBy.substr(0, 18)}..</p>
-                                                <p className="newestBillCardCity">{elem.city}</p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                    }
-
-                    {notFoundFilterData == false && billboardFilterdData.length == 0 && showRecord ?
-                        billboardData && billboardData.map((elem, key) => {
-                            return (
-                                <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                                    <Link rel="noopener noreferrer" to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                        <div className="mainNewestBillCardDiv">
-                                            <img src={elem.images[0]} alt={key} className="newestBillCardImgs" />
-                                            <div className="newestBillDetailCardDiv">
-                                                <p className="newestBillCardName">{elem.companyName.substr(0, 13)}...</p>
-                                                <p className="newestBillCardCity">{elem.nearBy.substr(0, 18)}</p>
-                                                <p className="newestBillCardCity">{elem.city}</p>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        })
-                        :
-                        null
-                    }
-                    {/* {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
-                        return (
-                            <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect'>
-                                <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                    <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-                                <div className="div_efect">
-                                    <div className="text_efect">
-                                        <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                            <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
-                                            <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
-                                    </div>
-                                </div>
-
-                                <div id="more_efect1" className="card">
-                                    <div id="more_efect card-body slow">
-                                        <p className="crdtxt2">{elem.companyName}</p>
-                                        <p className="crdtxt2">{elem.city}</p>
-                                    </div>
-                                </div>
+                                <button onClick={this.showAllBillboards}>Back</button>
                             </div>
-                        )
-                    })
-                        :
-                        billboardData && billboardData.map((elem, key) => {
-                            return (
-                                <div className='col-xl-3 col-lg-3 col-md-4 col-10 activeClass efect animated animatedFadeInUp fadeInUp'>
-                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                        <img src={elem.images[0]} className='imgBillBoard im_efect' alt={key} /></Link>
-                                    <div className="div_efect">
-                                        <div className="text_efect">
-                                            <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                                                <p><a href="" className="crdtxt1">{elem.companyName}</a></p>
-                                                <p><a href="" className="crdtxt1">{elem.city}</a></p></Link>
-                                        </div>
+                            : billboardFilterdData && billboardFilterdData.map((elem, key) => {
+                                return (
+                                    <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                                        <Link rel="noopener noreferrer" to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <div className="mainNewestBillCardDiv">
+                                                <img src={elem.images[0]} alt={key} className="newestBillCardImgs" />
+                                                <div className="newestBillDetailCardDiv">
+                                                    <p className="newestBillCardName">{elem.companyName.substr(0, 13)}...</p>
+                                                    <p className="newestBillCardCity">{elem.nearBy.substr(0, 18)}..</p>
+                                                    <p className="newestBillCardCity">{elem.city}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </div>
+                                )
+                            })
+                        }
 
-                                    <div id="more_efect1" className="card">
-                                        <div className="more_efect card-body slow">
-                                            <p className="crdtxt">{elem.companyName}</p>
-                                            <p className="crdtxt">{elem.city}</p>
-                                        </div>
+                        {notFoundFilterData == false && billboardFilterdData.length == 0 && showRecord ?
+                            billboardData && billboardData.map((elem, key) => {
+                                return (
+                                    <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                                        <Link rel="noopener noreferrer" to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                            <div className="mainNewestBillCardDiv">
+                                                <img src={elem.images[0]} alt={key} className="newestBillCardImgs" />
+                                                <div className="newestBillDetailCardDiv">
+                                                    <p className="newestBillCardName">{elem.companyName.substr(0, 13)}...</p>
+                                                    <p className="newestBillCardCity">{elem.nearBy.substr(0, 18)}</p>
+                                                    <p className="newestBillCardCity">{elem.city}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </div>
-                            )
-                        })} */}
-                </div>
+                                )
+                            })
+                            :
+                            null
+                        }
+
+                    </div>
+                }
             </div>
         );
         return (
@@ -2978,6 +2025,7 @@ class Market extends Component {
                                 <Row className="fasla1" >
                                     <Col>
                                         <Select
+                                            value={cityValue}
                                             onChange={this.handleChange.bind(this, 'city')}
                                             options={cities}
                                         >
@@ -2988,6 +2036,7 @@ class Market extends Component {
                                 <Row className="fasla1" >
                                     <Col>
                                         <Select
+                                            value={stateValue}
                                             onChange={this.handleChange.bind(this, 'state')}
                                             options={states}
                                         >
@@ -3326,6 +2375,8 @@ class Market extends Component {
                                                         <Row className="fasla1">
                                                             <Col>
                                                                 <Select
+                                                                    value={cityValue}
+
                                                                     onChange={this.handleChange.bind(this, 'city')}
                                                                     options={cities}
                                                                 >
@@ -3336,6 +2387,8 @@ class Market extends Component {
                                                         <Row className="fasla1">
                                                             <Col>
                                                                 <Select
+                                                                    value={stateValue}
+
                                                                     onChange={this.handleChange.bind(this, 'state')}
                                                                     options={states}
                                                                 >
