@@ -18,8 +18,13 @@ exports.postmegaSaleBillboard = function (req, res, next) {
       images: formData.images,
       billboardId: formData.billboardId,
       billboardAddress: formData.billboardAddress,
-      billboardCity: formData.billboardCity,
       billboardStatus: formData.billboardStatus,
+      billboardType: formData.billboardType,
+      billboardFacing: formData.billboardFacing,
+      billboardLighting: formData.billboardLighting,
+      billboardAudienceType: formData.billboardAudienceType,
+      billboardCity: formData.billboardCity,
+      billboardState: formData.billboardState,
 
     })
 
