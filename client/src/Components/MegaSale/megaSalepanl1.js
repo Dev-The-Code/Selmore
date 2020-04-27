@@ -3,7 +3,7 @@ import './megaSale.scss';
 import { Link, Redirect } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
 import {
-	Checkbox, Form, Row, Col, Input, Radio, Button
+	Checkbox, Row, Col, Radio, Spin, Icon
 } from 'antd';
 import moment from 'moment';
 import Select from 'react-select';
@@ -58,7 +58,11 @@ class MegaSalepanel1 extends Component {
 			facingOfBillboard: [],
 			lightningOfBillboard: [],
 			audienceTypeOfBillboard: [],
-
+			filteredData: [],
+			notFoundFilterData: false,
+			showRecord: true,
+			cityValue: '',
+			stateValue: ''
 		}
 	}
 	componentDidMount() {
@@ -143,7 +147,7 @@ class MegaSalepanel1 extends Component {
 		})
 		statusArr.push(e.target.value)
 		status = statusArr;
-		// this.filterKeysGet();
+		this.filterKeysGet();
 	}
 
 	//get checkboxes values
@@ -158,7 +162,7 @@ class MegaSalepanel1 extends Component {
 			filterAudienceTypeArr = checkboxValue;
 		}
 
-		// this.filterKeysGet();
+		this.filterKeysGet();
 	}
 
 	//get dropdown values
@@ -167,74 +171,1502 @@ class MegaSalepanel1 extends Component {
 		dropDownValue.push(dropDownValueObj.value)
 		if (dropDownParam == 'city') {
 			filterCityName = dropDownValue;
-
+			this.setState({
+				cityValue: dropDownValueObj
+			})
 		}
 		else if (dropDownParam == 'state') {
 			filterStateName = dropDownValue;
+			this.setState({
+				stateValue: dropDownValueObj
+			})
 		}
-		// this.filterKeysGet();
+		this.filterKeysGet();
 	}
 
+	removeValue = (param, value) => {
+		let arr = [];
+		if (param == "status") {
+			status = arr
+			this.setState({
+				statusValue: ''
+			})
+		}
+		else if (param == "city") {
+			filterCityName = arr
+			this.setState({
+				cityValue: ''
+			})
+		}
+		else if (param == "state") {
+			filterStateName = arr
+			this.setState({
+				stateValue: ''
+			})
+		}
+		else if (param == 'type') {
+			let arr1 = [];
+			for (var i = 0; i < filterTypesArr.length; i++) {
+				if (filterTypesArr[i] != value) {
+					arr1.push(filterTypesArr[i])
+				}
+			}
+			filterTypesArr = arr1;
+		}
+		else if (param == 'facing') {
+			let arr1 = [];
+			for (var i = 0; i < filterFacingArr.length; i++) {
+				if (filterFacingArr[i] != value) {
+					arr1.push(filterFacingArr[i])
+				}
+			}
+			filterFacingArr = arr1;
+		}
+		else if (param == 'lightning') {
+			let arr1 = [];
+			for (var i = 0; i < filterLightningsArr.length; i++) {
+				if (filterLightningsArr[i] != value) {
+					arr1.push(filterLightningsArr[i])
+				}
+			}
+			filterLightningsArr = arr1;
+		}
+		else if (param == 'audienceType') {
+			let arr1 = [];
+			for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+				if (filterAudienceTypeArr[i] != value) {
+					arr1.push(filterAudienceTypeArr[i])
+				}
+			}
+			filterAudienceTypeArr = arr1;
+		}
+		this.filterKeysGet();
+		if (status.length == 0 && filterCityName.length == 0 && filterStateName.length == 0 && filterTypesArr.length == 0
+			&& filterFacingArr.length == 0 && filterLightningsArr.length == 0 && filterAudienceTypeArr.length == 0) {
+			this.setState({
+				showRecord: true,
+				notFoundFilterData: false,
+				filteredData: [],
+			})
+		}
+		else {
+			this.filterKeysGet();
+		}
+	}
+
+	showAllRooms = () => {
+		status = [];
+		filterTypesArr = [];
+		filterFacingArr = [];
+		filterLightningsArr = [];
+		filterAudienceTypeArr = [];
+		filterCityName = [];
+		filterStateName = [];
+
+		this.setState({
+			showRecord: true,
+			notFoundFilterData: false,
+			statusValue: '',
+			cityValue: '',
+			stateValue: ''
+		})
+		this.filterKeysGet();
+	}
+
+
 	filterKeysGet = () => {
-        let typesOfBillboard = [];
-        let facingOfBillboard = [];
-        let lightningOfBillboard = [];
-        let audienceTypeOfBillboard = [];
+		let typesOfBillboard = [];
+		let facingOfBillboard = [];
+		let lightningOfBillboard = [];
+		let audienceTypeOfBillboard = [];
 
-        let filterKeys = [];
-        if (status.length > 0) {
-            filterKeys.push('status')
-        }
-        if (filterTypesArr.length > 0) {
-            filterKeys.push('type')
-        }
-        if (filterFacingArr.length > 0) {
-            filterKeys.push('facing')
-        }
-        if (filterLightningsArr.length > 0) {
-            filterKeys.push('lightning')
-        }
-        if (filterAudienceTypeArr.length > 0) {
-            filterKeys.push('audianceType')
-        }
-        if (filterCityName.length > 0) {
-            filterKeys.push('city')
-        }
-        if (filterStateName.length > 0) {
-            filterKeys.push('state')
-        }
-        for (var i = 0; i < filterTypesArr.length; i++) {
-            typesOfBillboard.push(filterTypesArr[i])
-        }
-        for (var i = 0; i < filterFacingArr.length; i++) {
-            facingOfBillboard.push(filterFacingArr[i])
-        }
-        for (var i = 0; i < filterLightningsArr.length; i++) {
-            lightningOfBillboard.push(filterLightningsArr[i])
-        }
-        for (var i = 0; i < filterAudienceTypeArr.length; i++) {
-            audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
-        }
-        this.setState({
-            typesOfBillboard: typesOfBillboard,
-            facingOfBillboard: facingOfBillboard,
-            lightningOfBillboard: lightningOfBillboard,
-            audienceTypeOfBillboard: audienceTypeOfBillboard,
-        })
+		let filterKeys = [];
+		if (status.length > 0) {
+			filterKeys.push('status')
+		}
+		if (filterTypesArr.length > 0) {
+			filterKeys.push('type')
+		}
+		if (filterFacingArr.length > 0) {
+			filterKeys.push('facing')
+		}
+		if (filterLightningsArr.length > 0) {
+			filterKeys.push('lightning')
+		}
+		if (filterAudienceTypeArr.length > 0) {
+			filterKeys.push('audianceType')
+		}
+		if (filterCityName.length > 0) {
+			filterKeys.push('city')
+		}
+		if (filterStateName.length > 0) {
+			filterKeys.push('state')
+		}
+		for (var i = 0; i < filterTypesArr.length; i++) {
+			typesOfBillboard.push(filterTypesArr[i])
+		}
+		for (var i = 0; i < filterFacingArr.length; i++) {
+			facingOfBillboard.push(filterFacingArr[i])
+		}
+		for (var i = 0; i < filterLightningsArr.length; i++) {
+			lightningOfBillboard.push(filterLightningsArr[i])
+		}
+		for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+			audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
+		}
+		this.setState({
+			typesOfBillboard: typesOfBillboard,
+			facingOfBillboard: facingOfBillboard,
+			lightningOfBillboard: lightningOfBillboard,
+			audienceTypeOfBillboard: audienceTypeOfBillboard,
+		})
 
-        // this.filterBillboardData(filterKeys)
-    }
+		this.filterBillboardData(filterKeys)
+	}
+
+	filterBillboardData = (filterKeys) => {
+		if (filterKeys.length == 1) {
+			this.filterBillboardDataWithOneKey(filterKeys);
+		}
+		else if (filterKeys.length == 2) {
+			this.filterBillboardDataWithTwoKeys(filterKeys);
+		}
+		else if (filterKeys.length == 3) {
+			this.filterBillboardDataWithThreeKeys(filterKeys);
+		}
+		else if (filterKeys.length == 4) {
+			this.filterBillboardDataWithFourKeys(filterKeys)
+		}
+		else if (filterKeys.length == 5) {
+			this.filterBillboardDataWithFiveKeys(filterKeys)
+		}
+		else if (filterKeys.length == 6) {
+			this.filterBillboardDataWithSixKeys(filterKeys)
+		}
+		else if (filterKeys.length == 7) {
+			this.filterBillboardDataWithSevenKeys(filterKeys)
+		}
+	}
+
+
+
+	filterBillboardDataWithOneKey = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data;
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (filterKeys[i] == 'status') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardStatus && status.includes(elem.billboardStatus)
+				})
+			}
+			else if (filterKeys[i] == 'type') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+				})
+			}
+			else if (filterKeys[i] == 'facing') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+				})
+			}
+			else if (filterKeys[i] == 'lightning') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+				})
+			}
+			else if (filterKeys[i] == 'audianceType') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+				})
+			}
+			else if (filterKeys[i] == 'city') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+				})
+			}
+			else if (filterKeys[i] == 'state') {
+				data = megaSaleBiilboards.filter((elem) => {
+					return elem.billboardState && filterStateName.includes(elem.billboardState)
+				})
+			}
+		}
+		console.log(data, 'filteredData with 1 keys')
+		if (data.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: data,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: data,
+				showRecord: false
+			})
+		}
+
+	}
+
+	filterBillboardDataWithTwoKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+	}
+
+	filterBillboardDataWithThreeKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let data2
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+	filterBillboardDataWithFourKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'status') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+	filterBillboardDataWithFiveKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let data4;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'status') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'status') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 4) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+
+	filterBillboardDataWithSixKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let data4;
+		let data5;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'status') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'status') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 4) {
+				if (filterKeys[i] == 'status') {
+					data5 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 5) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+
+	filterBillboardDataWithSevenKeys = (filterKeys) => {
+		const { megaSaleBiilboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let data4;
+		let data5;
+		let data6;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'status') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = megaSaleBiilboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'status') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'status') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'status') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 4) {
+				if (filterKeys[i] == 'status') {
+					data5 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 5) {
+				if (filterKeys[i] == 'status') {
+					data6 = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data6 = data5.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 6) {
+				if (filterKeys[i] == 'status') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardStatus && status.includes(elem.billboardStatus)
+					})
+				}
+				else if (filterKeys[i] == 'type') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data6.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
 
 	render() {
 		const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData, statusValue, typesOfBillboard,
-			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cities, states, } = this.state;
+			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cities, states, notFoundFilterData, filteredData, showRecord,
+			cityValue, stateValue } = this.state;
 		if (goForDetail) {
 			return (
 				<Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
 			)
 		}
+		const antIcon =
+			<Icon type="loading" style={{ fontSize: '110px' }} spin />;
 		return (
 			<div>
+				<div className="row">
+					<div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3"></div>
+					{status && status.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{status.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'status', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{typesOfBillboard && typesOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{typesOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'type', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{facingOfBillboard && facingOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{facingOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'facing', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{lightningOfBillboard && lightningOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{lightningOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'lightning', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{audienceTypeOfBillboard && audienceTypeOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{audienceTypeOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'audienceType', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{filterCityName && filterCityName.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{filterCityName.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'city', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{filterStateName && filterStateName.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{filterStateName.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'state', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+
+
+				</div>
 				<div className="row">
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 					<div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
@@ -352,6 +1784,8 @@ class MegaSalepanel1 extends Component {
 								<Row className="fasla1" >
 									<Col>
 										<Select
+											value={cityValue}
+
 											onChange={this.handleChange.bind(this, 'city')}
 											options={cities}
 										>
@@ -362,6 +1796,8 @@ class MegaSalepanel1 extends Component {
 								<Row className="fasla1" >
 									<Col>
 										<Select
+											value={stateValue}
+
 											onChange={this.handleChange.bind(this, 'state')}
 											options={states}
 										>
@@ -384,7 +1820,7 @@ class MegaSalepanel1 extends Component {
 											<div className="row">
 												<div className="col-1"></div>
 												<div className="col-10">
-													<Radio.Group>
+													<Radio.Group onChange={this.onChange} value={statusValue}>
 														<div className='filterDivs'>Status</div>
 														<Row>
 															<Col >
@@ -397,7 +1833,10 @@ class MegaSalepanel1 extends Component {
 													</Radio.Group>
 													<div className="row">
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+																value={typesOfBillboard}
+															>
 																<div className='filterDivs'>Types</div>
 																<Row>
 																	<Col>
@@ -431,10 +1870,13 @@ class MegaSalepanel1 extends Component {
 																		<Checkbox className="fasla" value="Lamp post" className="radioText">&nbsp;Lamp Post</Checkbox>
 																	</Col>
 																</Row>&emsp;
-                        			</CheckboxGroup>
+                        									</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																value={facingOfBillboard}
+																onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+															>
 																<Row>
 																	<div className='filterDivs'>Facing</div>
 																	<Col >
@@ -447,7 +1889,8 @@ class MegaSalepanel1 extends Component {
 															</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup value={lightningOfBillboard}
+																onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}>
 																<div className='filterDivs'>Lightning</div>
 																<Row>
 																	<Col >
@@ -460,7 +1903,10 @@ class MegaSalepanel1 extends Component {
 															</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																value={audienceTypeOfBillboard}
+																onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+															>
 																<div className='filterDivs'>Audience Type</div>
 																<Row>
 																	<Col >
@@ -484,8 +1930,8 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																// onChange={this.handleChange.bind(this, 'city')}
-																// options={cities}
+																	onChange={this.handleChange.bind(this, 'city')}
+																	options={cities}
 																>
 																</Select>
 															</Col>
@@ -495,174 +1941,13 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																// onChange={this.handleChange.bind(this, 'state')}
-																// options={states}
+																	onChange={this.handleChange.bind(this, 'state')}
+																	options={states}
 																>
 																</Select>
 															</Col>
 														</Row>
-
 													</div>
-
-													<Form>
-														<div className='filterDivs'>Pricing</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-															</div>
-														</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Width</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Height</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Traffic Count</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Daily Visitor</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-													</Form>
 												</div>
 												<div className="col-1"></div>
 											</div>
@@ -673,57 +1958,78 @@ class MegaSalepanel1 extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
-						<div className="row">
-							{megaSaleBiilboards && megaSaleBiilboards.map((elem, key) => {
-								return (
-									<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-										<div className="mainMegaCardDiv">
-											<img src={elem.images[0]} alt="card" className="megaCardImgs" />
-											{/* <p className="discountTag">{elem.percantageOffDisscount.round()}% off</p> */}
-											<p className="discountTag">{`${elem.percantageOffDisscount}% off`}</p>
 
-											<div className="megaDetailCardDiv">
-												<p className="megaCardName">{elem.billboardAddress.slice(0, 13)} , {elem.billboardCity}</p>
-												{/* <p class="megaCardDisText">Discount Up to <span className="megaCardDisText">{elem.percantageOffDisscount}%</span></p> */}
-												<p class="megaSaleCardText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom} </span> to
+					<div className="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+						{megaSaleBiilboards.length == 0 ?
+							<div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+							:
+							<div className="row">
+								{/* filterd data render */}
+								{notFoundFilterData && filteredData.length == 0 ?
+									<div className="noRecrdTxt">
+										<p className="noRecordText">
+											No Record Found
+                                </p>
+										<button
+											className="backBtn"
+											onClick={this.showAllRooms}
+										>Back</button>
+									</div>
+									:
+									filteredData && filteredData.map((elem, key) => {
+										return (
+											<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+												<div className="mainMegaCardDiv">
+													<img src={elem.images[0]} alt="card" className="megaCardImgs" />
+													<p className="discountTag">{`${elem.percantageOffDisscount}% off`}</p>
+
+													<div className="megaDetailCardDiv">
+														<p className="megaCardName">{elem.billboardAddress.slice(0, 13)} , {elem.billboardCity}</p>
+														<p class="megaSaleCardText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom} </span> to
 												<span className="megaPageTiming">{elem.billboardAvailabilityTo}</span></p>
-												<p class="megaSaleCardText">DEAL EXPIRE IN:
+														<p class="megaSaleCardText">DEAL EXPIRE IN:
 												<span className="megaPageTiming"> {`${elem.calculateTime}`}</span>
-												</p>
-												<button class="btn btn-primary" onClick={this.billboardData.bind(this, elem)}>
-													<span className="moredetailMegabtn">More Details</span>
-												</button>
+														</p>
+														<button class="btn btn-primary" onClick={this.billboardData.bind(this, elem)}>
+															<span className="moredetailMegabtn">More Details</span>
+														</button>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-								)
-							})}
-							{/* {megaSaleBiilboards && megaSaleBiilboards.map((elem, key) => {
-								return (
-									<div className="row extra1">
-										<div className="col-12 col-md-5 col-lg-5 col-xl-5 card_mega1">
-											<img class="card-img-top cardImag_mega" src={elem.images[0]} alt="Card image" />
-										</div>
-										<div className="col-12 col-md-7 col-lg-7 col-xl-7 card_mega2">
-											<div class="card-body">
-												<h4 class="card-title">{elem.billboardAddress},{elem.billboardCity} </h4>
-												<h4 class="card-title"> </h4>
-												<p class="card-text megaPageText">Discount Up to <span className="megaPageTiming">{elem.percantageOffDisscount}%</span></p>
-												<p class="card-text megaPageText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom}</span> to
-												<span className="megaPageTiming"> {elem.billboardAvailabilityTo}</span></p>
-												<p class="card-text megaPageText">DEAL EXPIRE IN:
+										)
+									})
+								}
+
+
+								{/* all data render */}
+								{notFoundFilterData == false && filteredData.length == 0 && showRecord ?
+									megaSaleBiilboards && megaSaleBiilboards.map((elem, key) => {
+
+										return (
+											<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+												<div className="mainMegaCardDiv">
+													<img src={elem.images[0]} alt="card" className="megaCardImgs" />
+													<p className="discountTag">{`${elem.percantageOffDisscount}% off`}</p>
+
+													<div className="megaDetailCardDiv">
+														<p className="megaCardName">{elem.billboardAddress.slice(0, 13)} , {elem.billboardCity}</p>
+														<p class="megaSaleCardText">Billboard availability : <br />From <span className="megaPageTiming">{elem.billboardAvailabilityFrom} </span> to
+												<span className="megaPageTiming">{elem.billboardAvailabilityTo}</span></p>
+														<p class="megaSaleCardText">DEAL EXPIRE IN:
 												<span className="megaPageTiming"> {`${elem.calculateTime}`}</span>
-												</p>
-												<button class="btn btn-primary" onClick={this.billboardData.bind(this, elem)}>
-													<span className="moredetailMegabtn">More Details</span>
-												</button>
+														</p>
+														<button class="btn btn-primary" onClick={this.billboardData.bind(this, elem)}>
+															<span className="moredetailMegabtn">More Details</span>
+														</button>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-								)
-							})} */}
-						</div>
+										)
+									})
+									: null
+								}
+							</div>
+						}
 					</div>
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 				</div>
