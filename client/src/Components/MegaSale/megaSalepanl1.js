@@ -10,10 +10,40 @@ import Select from 'react-select';
 
 const CheckboxGroup = Checkbox.Group;
 
+let status = [];
+let filterTypesArr = [];
+let filterFacingArr = [];
+let filterLightningsArr = [];
+let filterAudienceTypeArr = [];
+let filterCityName = [];
+let filterStateName = [];
+
 class MegaSalepanel1 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+
+			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
+				" Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
+				" Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+				" Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
+				" Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+			statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
+			cities: [],
+			states: [],
 			megaSaleBiilboards: [],
 			days: undefined,
 			hours: undefined,
@@ -21,17 +51,39 @@ class MegaSalepanel1 extends Component {
 			seconds: undefined,
 			goForDetail: false,
 			billboardData: '',
-			megaSaleId: ''
+			megaSaleId: '',
+
+			statusValue: '',
+			typesOfBillboard: [],
+			facingOfBillboard: [],
+			lightningOfBillboard: [],
+			audienceTypeOfBillboard: [],
+
 		}
 	}
 	componentDidMount() {
-		this.megaSalebillBoardData()
+		this.megaSalebillBoardData();
+		this.getCitiesAndStates()
 	}
 
 	componentWillUnmount() {
 		if (this.interval) {
 			clearInterval(this.interval);
 		}
+	}
+	getCitiesAndStates = () => {
+		const { citiesArr, statesArr } = this.state;
+
+		let city = citiesArr.map((elem, i) => {
+			return { label: elem, value: elem, id: i }
+		})
+		let state = statesArr.map((elem, i) => {
+			return { label: elem, value: elem, id: i }
+		})
+		this.setState({
+			cities: city,
+			states: state
+		})
 	}
 
 	megaSalebillBoardData = async () => {
@@ -82,8 +134,100 @@ class MegaSalepanel1 extends Component {
 
 	}
 
+	//start of filtration work
+	//get status Available or  Not Available
+	onChange = (e) => {
+		let statusArr = []
+		this.setState({
+			statusValue: e.target.value
+		})
+		statusArr.push(e.target.value)
+		status = statusArr;
+		// this.filterKeysGet();
+	}
+
+	//get checkboxes values
+	onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
+		if (checkboxParam == 'type') {
+			filterTypesArr = checkboxValue;
+		} else if (checkboxParam == 'facing') {
+			filterFacingArr = checkboxValue;
+		} else if (checkboxParam == 'lightning') {
+			filterLightningsArr = checkboxValue;
+		} else if (checkboxParam == 'audienceType') {
+			filterAudienceTypeArr = checkboxValue;
+		}
+
+		// this.filterKeysGet();
+	}
+
+	//get dropdown values
+	handleChange = (dropDownParam, dropDownValueObj) => {
+		let dropDownValue = []
+		dropDownValue.push(dropDownValueObj.value)
+		if (dropDownParam == 'city') {
+			filterCityName = dropDownValue;
+
+		}
+		else if (dropDownParam == 'state') {
+			filterStateName = dropDownValue;
+		}
+		// this.filterKeysGet();
+	}
+
+	filterKeysGet = () => {
+        let typesOfBillboard = [];
+        let facingOfBillboard = [];
+        let lightningOfBillboard = [];
+        let audienceTypeOfBillboard = [];
+
+        let filterKeys = [];
+        if (status.length > 0) {
+            filterKeys.push('status')
+        }
+        if (filterTypesArr.length > 0) {
+            filterKeys.push('type')
+        }
+        if (filterFacingArr.length > 0) {
+            filterKeys.push('facing')
+        }
+        if (filterLightningsArr.length > 0) {
+            filterKeys.push('lightning')
+        }
+        if (filterAudienceTypeArr.length > 0) {
+            filterKeys.push('audianceType')
+        }
+        if (filterCityName.length > 0) {
+            filterKeys.push('city')
+        }
+        if (filterStateName.length > 0) {
+            filterKeys.push('state')
+        }
+        for (var i = 0; i < filterTypesArr.length; i++) {
+            typesOfBillboard.push(filterTypesArr[i])
+        }
+        for (var i = 0; i < filterFacingArr.length; i++) {
+            facingOfBillboard.push(filterFacingArr[i])
+        }
+        for (var i = 0; i < filterLightningsArr.length; i++) {
+            lightningOfBillboard.push(filterLightningsArr[i])
+        }
+        for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+            audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
+        }
+        this.setState({
+            typesOfBillboard: typesOfBillboard,
+            facingOfBillboard: facingOfBillboard,
+            lightningOfBillboard: lightningOfBillboard,
+            audienceTypeOfBillboard: audienceTypeOfBillboard,
+        })
+
+        // this.filterBillboardData(filterKeys)
+    }
+
 	render() {
-		const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData } = this.state;
+		const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData, statusValue, typesOfBillboard,
+			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cities, states, } = this.state;
 		if (goForDetail) {
 			return (
 				<Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
@@ -96,7 +240,7 @@ class MegaSalepanel1 extends Component {
 					<div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
 						<div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 d-none d-sm-block'>
 							<h3 className="filterTextHead">Filteration</h3>
-							<Radio.Group>
+							<Radio.Group onChange={this.onChange} value={statusValue}>
 								<div className='filterDivs'>Status</div>
 								<Row>
 									<Col >
@@ -109,7 +253,10 @@ class MegaSalepanel1 extends Component {
 							</Radio.Group>
 							<div className="row">
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+										value={typesOfBillboard}
+									>
 										<div className='filterDivs'>Types</div>
 										<Row>
 											<Col>
@@ -146,7 +293,10 @@ class MegaSalepanel1 extends Component {
                         			</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										value={facingOfBillboard}
+										onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+									>
 										<Row>
 											<div className='filterDivs'>Facing</div>
 											<Col >
@@ -159,7 +309,10 @@ class MegaSalepanel1 extends Component {
 									</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										value={lightningOfBillboard}
+										onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
+									>
 										<div className='filterDivs'>Lightning</div>
 										<Row>
 											<Col >
@@ -172,7 +325,10 @@ class MegaSalepanel1 extends Component {
 									</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										value={audienceTypeOfBillboard}
+										onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+									>
 										<div className='filterDivs'>Audience Type</div>
 										<Row>
 											<Col >
@@ -196,27 +352,24 @@ class MegaSalepanel1 extends Component {
 								<Row className="fasla1" >
 									<Col>
 										<Select
-										// onChange={this.handleChange.bind(this, 'city')}
-										// options={cities}
+											onChange={this.handleChange.bind(this, 'city')}
+											options={cities}
 										>
 										</Select>
 									</Col>
 								</Row>
-
 								<div className='filterDivs'>States</div>
 								<Row className="fasla1" >
 									<Col>
 										<Select
-										// onChange={this.handleChange.bind(this, 'state')}
-										// options={states}
+											onChange={this.handleChange.bind(this, 'state')}
+											options={states}
 										>
 										</Select>
 									</Col>
 								</Row>
 
 							</div>
-							
-							{/* </CheckboxGroup> */}
 						</div>
 						<div className="col-12 d-block d-sm-none">
 							<div id="accordion">
