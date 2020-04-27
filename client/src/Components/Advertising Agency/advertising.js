@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import AaBanner from './aaBanner';
 import Header from '../Header/mainheader';
-import Footer from '../footer';
-import Bannerfooter from './bannerfooter';
+import Footer from '../Footer/mainFooter';
 import Aa1 from './aa1';
 import Aa2 from './aa2';
-import Aa3 from './aa3';
+import TopCitiesBill from '../HomePage/TopCitiesBillboardPanel/topCitiesBillboard';
 import './advertising.scss';
-import AbBanner from '../About Selmore/abBanner';
 
 class Advertising extends Component {
   constructor(props) {
@@ -38,10 +35,9 @@ class Advertising extends Component {
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        <AbBanner advertise={'ADVERTISING'} bred={'Advertising'} />
         <Aa1 />
         <Aa2 />
-        <Aa3 />
+        <TopCitiesBill />
         <Footer />
       </div>
     );
