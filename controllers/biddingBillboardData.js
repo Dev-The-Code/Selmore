@@ -16,7 +16,13 @@ exports.postBiddingBillboard = function(req,res,next){
     images:formData.images,
     billboardId:formData.billboardId,
     billboardAddress:formData.billboardAddress,
+    billboardType: formData.billboardType,
+    billboardFacing: formData.billboardFacing,
+    billboardLighting: formData.billboardLighting,
+    billboardAudienceType: formData.billboardAudienceType,
     billboardCity:formData.billboardCity,
+    billboardState: formData.billboardState,
+
   })
   
   postBillboardData.save((err,data) => {

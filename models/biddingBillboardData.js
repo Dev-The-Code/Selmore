@@ -15,7 +15,12 @@ const biddingBillboard = new Schema({
     images: { type: Array },
     billboardId: { type: String },
     billboardAddress: { type: String },
+    billboardType: { type: String },
+    billboardFacing: { type: String },
+    billboardLighting: { type: String },
+    billboardAudienceType: { type: String },
     billboardCity: { type: String },
+    billboardState: { type: String },
 });
 
 //model class

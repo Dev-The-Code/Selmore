@@ -52,7 +52,12 @@ class DashboardData extends Component {
             loader: false,
             isAlert: false,
             mgs: '',
-            redirectDashboard: false
+            redirectDashboard: false,
+            billboardType: '',
+            billboardFacing: '',
+            billboardLighting: '',
+            billboardAudienceType: '',
+            billboardState: ''
         }
     }
 
@@ -187,6 +192,7 @@ class DashboardData extends Component {
     }
 
     billboardImageAndId = (billboardDetail, param, e) => {
+        console.log(billboardDetail, 'billboardDetail')
         if (param == 'megaSale') {
             this.setState({
                 billboardImage: billboardDetail.images,
@@ -194,7 +200,12 @@ class DashboardData extends Component {
                 billboardAddress: billboardDetail.address,
                 billboardCity: billboardDetail.city,
                 megaSaleFormShow: true,
-                biddingFormShow: false
+                biddingFormShow: false,
+                billboardType: billboardDetail.type,
+                billboardFacing: billboardDetail.facing,
+                billboardLighting: billboardDetail.lightning,
+                billboardAudienceType: billboardDetail.audianceType,
+                billboardState: billboardDetail.state
             }
                 ,
                 () => {
@@ -210,7 +221,12 @@ class DashboardData extends Component {
                 billboardAddress: billboardDetail.address,
                 billboardCity: billboardDetail.city,
                 biddingFormShow: true,
-                megaSaleFormShow: false
+                megaSaleFormShow: false,
+                billboardType: billboardDetail.type,
+                billboardFacing: billboardDetail.facing,
+                billboardLighting: billboardDetail.lightning,
+                billboardAudienceType: billboardDetail.audianceType,
+                billboardState: billboardDetail.state
             },
                 () => {
                     document.getElementById('megaForm').click();
@@ -221,7 +237,8 @@ class DashboardData extends Component {
     }
 
     handleSubmitMegaSale = e => {
-        const { billboardImage, billboardId, billboardAddress, billboardCity } = this.state;
+        const { billboardImage, billboardId, billboardAddress, billboardCity, billboardType, billboardFacing, billboardLighting,
+            billboardAudienceType, billboardState } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -231,12 +248,17 @@ class DashboardData extends Component {
                     mgs: '',
                     redirectDashboard: false
                 })
+                values.billboardStatus = 'Available';
+                values.billboardCity = billboardCity;
+                values.billboardType = billboardType;
+                values.billboardFacing = billboardFacing;
+                values.billboardLighting = billboardLighting;
+                values.billboardAudienceType = billboardAudienceType;
+                values.billboardState = billboardState;
+                values.billboardAddress = billboardAddress;
                 values.images = billboardImage;
                 values.billboardId = billboardId;
-                values.billboardAddress = billboardAddress;
-                values.billboardCity = billboardCity;
                 values.objectId = '';
-                values.billboardStatus = 'Available';
                 let disscount = values.actualPrice - values.discountPrice;
                 let percantageOffDisscount = Math.round((disscount / values.actualPrice) * 100);
                 values.percantageOffDisscount = percantageOffDisscount;
@@ -246,7 +268,8 @@ class DashboardData extends Component {
     };
 
     handleSubmitBidding = e => {
-        const { billboardImage, billboardId, billboardAddress, billboardCity } = this.state;
+        const { billboardImage, billboardId, billboardAddress, billboardCity, billboardType, billboardFacing, billboardLighting,
+            billboardAudienceType, billboardState } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -260,6 +283,11 @@ class DashboardData extends Component {
                 values.billboardId = billboardId;
                 values.billboardAddress = billboardAddress;
                 values.billboardCity = billboardCity;
+                values.billboardType = billboardType;
+                values.billboardFacing = billboardFacing;
+                values.billboardLighting = billboardLighting;
+                values.billboardAudienceType = billboardAudienceType;
+                values.billboardState = billboardState;
                 values.objectId = ''
                 this.biddingUpload(values)
             }
@@ -334,11 +362,8 @@ class DashboardData extends Component {
     }
 
     render() {
-        const { redirectDashboard, billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
+        const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
         const { getFieldDecorator } = this.props.form;
-        // if (redirectDashboard) {
-        //     return <Redirect to={{ pathname: '/dashboard', state:'abc' }} />
-        // }
 
         const billboardRendring = (
             <div>
