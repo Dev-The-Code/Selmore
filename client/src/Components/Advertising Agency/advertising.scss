@@ -75,52 +75,68 @@ $light-color:#4a5964;
 	font-family: $font-regular;
 	font-size: 13px;
 }
-.wood3{
-	background-color: #E8E8E8;
-}
-.wood4{
-	background-color: white;
-}
+
 @media screen and (min-width: 360px) and (max-width: 767px){
-	.wood5{
-	     padding-top: 0px;
-
+	.wood4{
+		width: 110%;
+		background-color: white;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
 	}
-	.paragon1{
-	margin-left: 0%;
-}
-
 }
 @media screen and (min-width: 768px) and (max-width: 1023px){
-.wood5{
-    margin-left: 53px;
-    margin-right: 49px;
-}
-.paragon1{
-	margin-left: 3%;
-}
-
+	.wood4{
+		width: 107%;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
+	.wood4:hover{
+		width: 107%;
+		background-color: white;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px){
-.wood5{
-    margin-left: 53px;
-    margin-right: 49px;
-}
-.paragon1{
-	margin-left: 6%;
-}
-
+	.wood4{
+		width: 107%;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
+	.wood4:hover{
+		width: 107%;
+		background-color: white;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px){
-.wood5{
-    margin-left: 53px;
-    margin-right: 49px;
+	.wood4{
+		width: 106%;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
+	.wood4:hover{
+		width: 106%;
+		background-color: white;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
 }
-.paragon1{
-	margin-left: 7%;
+@media screen and (min-width: 1600px){
+	.wood4{
+		width: 104%;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
+	.wood4:hover{
+		width: 104%;
+		background-color: white;
+		border: 2px solid #e4e4e4;
+		margin-bottom: 15px;
+	}
 }
 
-}
 .wood6{
 	width: 76%;
     margin-left: 147px;
@@ -148,9 +164,8 @@ $light-color:#4a5964;
 	margin-top: -12px;
 }
 .free3{
-	border: 1px solid black;
     text-align: center;
-    margin-top: 7px;
+    margin-top: 10px;
 }
 .free4{
 	font-size: 30px;
@@ -159,9 +174,9 @@ $light-color:#4a5964;
 	padding: 21px;
 	padding-bottom: 0px;
 }
-.nokia{
+.cardProfileIcon{
 	width: 100%;
-    margin-top: 5px;
+    margin: 5px 0px 5px 0px;
 }
 .nokia2{
 	background-color: white;
@@ -175,8 +190,6 @@ $light-color:#4a5964;
 }
 .nokia4{
 	background-color:  #29abe2;
-}
-.rowd{
 	margin-right: 0px !important;
 }
 
