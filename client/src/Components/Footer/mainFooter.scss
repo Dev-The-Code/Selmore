@@ -18,9 +18,16 @@ $light-color:#6E8796;
 .listulSty{
     padding: 0;
     list-style: none;
-    font-size: 19px;
+}
+.footerNavtext{
     font-family: $font-regular;
     color: $secondary-color;
+    font-size: 19px;
+}
+.footerNavtext:hover{
+    font-family: $font-regular;
+    color: $primary-color;
+    font-size: 19px;
 }
 
 @media screen and (min-width: 360px) and (max-width: 767px) {

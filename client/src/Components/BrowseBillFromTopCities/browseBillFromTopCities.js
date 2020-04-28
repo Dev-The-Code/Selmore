@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import './topCitiesBillboard.scss';
+import Header from '../Header/mainheader';
+import Footer from '../Footer/mainFooter';
+import './browseBillFromTopCities.scss';
 import { Link, Redirect } from 'react-router-dom';
-import { HttpUtils } from '../../../Services/HttpUtils';
+import { Spin , Icon} from 'antd';
+import { HttpUtils } from '../../Services/HttpUtils';
 
 
-class TopCitiesBillboard extends Component {
+class BrowseBillFromTopCities extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -31,7 +34,8 @@ class TopCitiesBillboard extends Component {
             bilboardData: [],
             directMarket: false,
             cityName: '',
-            sliceCities: []
+            sliceCities: [],
+            dropDownUser: false,
         }
     }
     async componentWillMount() {
@@ -62,6 +66,7 @@ class TopCitiesBillboard extends Component {
             sliceCities: sliceCities,
             i: 8
         })
+        window.scrollTo(0, 0);
     }
 
     billCity = () => {
@@ -82,63 +87,68 @@ class TopCitiesBillboard extends Component {
             cityName: city
         })
     }
+
+    showDropDown = () => {
+        this.setState({
+            dropDownUser: true
+        })
+    }
+
+    hideDropDown = () => {
+        this.setState({
+            dropDownUser: false
+        })
+    }
     render() {
-        const { bilboardData, directMarket, cityName, sliceCities } = this.state;
-        // console.log("TopCitiesBillboard -> render -> sliceCities", sliceCities)
+        const { bilboardData, directMarket, cityName, sliceCities ,dropDownUser ,cities  } = this.state;
+        // console.log("TopCitiesBillboard -> render -> cities", cities)
         if (directMarket) {
             return <Redirect to={{
                 pathname: '/market_place',
                 state: { bilboardData: bilboardData, showValueHead: cityName }
             }} />
         }
+        const antIcon =
+			<Icon type="loading" style={{ fontSize: '110px' }} spin />;
         return (
             <div className="animated animatedFadeInUp fadeInUp">
-                <div className="row mainRwTopCitiesHome">
-                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
-                    <div className="col-1 col-md-1 col-lg-2 col-xl-2"></div>
-                    <div className="col-10 col-md-8 col-lg-6 col-xl-6">
-                        <h3 className="TopCitiesHeadHome">Browse Billboards From Top Cities</h3>
-                    </div>
-                    <div className="col-12 col-md-1 col-lg-2 col-xl-2">
-                        <Link to={'/topCities_billboard'}><p className="seeAllTopCities">See All ></p></Link>
-                    </div>
-                    <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
-                </div>
 
-                <div className="row mainTopCitiespanelHome">
+                <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
+
+                <div className="row mainRwTopCities">
                     <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                     <div className="col-10 col-md-10 col-lg-10 col-xl-10">
+                        <h3 className="TopCitiesHead">Browse Billboards From Top Cities</h3>
+                    </div>
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
+                </div>
+
+                <div className="row mainTopCitiespanel">
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div className="col-10 col-md-10 col-lg-10 col-xl-10">
+                        {cities.length == 0 ?
+							<div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+							:null}
                         <div className="row">
-                            {sliceCities && sliceCities.map((elem, key) => {
+                            {cities && cities.map((elem, key) => {
                                 return (
-                                    <div className="col-12 col-md-3 col-lg-3 col-xl-3" onClick={this.redirectToMarketPlace.bind(this, elem, elem[0].city)}>
-                                        <div className="cityDivBorderHome">
-                                            <h3 className="cityNamesHome">{elem[0].city}</h3>
-                                            <p className="cityNoAdsHome">{` ${elem.length} Ads available`}</p>
+                                    <div className="col-12 col-md-4 col-lg-3 col-xl-3" onClick={this.redirectToMarketPlace.bind(this, elem, elem[0].city)}>
+                                        <div className="cityDivBorder">
+                                            <h3 className="cityNames">{elem[0].city}</h3>
+                                            <p className="cityNoAds">{` ${elem.length} Ads available`}</p>
                                         </div>
                                     </div>
                                 )
                             })}
-
-                            {/* <div className="col-md-4 col-sm-3 col-12 panel3div citbox divbordered"
-                                onClick={this.redirectToMarketPlace.bind(this, elem, elem[0].city)}>
-                                <div className=''>
-                                    <div className="col-md-2 col-sm-1 col-1 innerdiv">
-                                        <i class="material-icons locate_icon">place</i>
-                                    </div>
-                                    <div className="col-md-10 col-sm-11 col-11 innerdiv cittxt">
-                                        <h5 className='divFont'>{elem[0].city}</h5>
-                                        <h6 className="hani2">{` ${elem.length} Ads available`}</h6>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                     <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
+
+                <Footer />
             </div>
         );
     }
 }
 
-export default TopCitiesBillboard;
+export default BrowseBillFromTopCities;

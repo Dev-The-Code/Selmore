@@ -33,6 +33,7 @@ import RootPage from './Components/RootPage';
 import './App.css';
 import { PrivateRoute } from './Components/Login Form/PrivateRoute';
 import { AdminAccess } from './Components/Login Form/AdminAccess';
+import BrowseBillFromTopCities from './Components/BrowseBillFromTopCities/browseBillFromTopCities';
 
 // import Billbidding from './Components/Billbidding/billbidding';
 // import CenteralStore from './Components/centeralStore';
@@ -75,6 +76,7 @@ class Routes extends Component {
               <AdminAccess exact path="/" component={RootPage}></AdminAccess>
               <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute>
               {/* <PrivateRoute exact path="/home" component={Home}></PrivateRoute> */}
+              <PrivateRoute exact path="/topCities_billboard" component={BrowseBillFromTopCities}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
               <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute>

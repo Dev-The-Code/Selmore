@@ -16,25 +16,25 @@ class MainFooter extends Component {
                     <div className="col-11 col-sm-2 col-md-2 col-lg-2 col-xl-2">
                         <h3 className="footerHeads">Contact</h3>
                         <ul className="listulSty">
-                            <li>Blog</li>
-                            <li>Forum</li>
-                            <li>List your ad</li>
-                            <li>Contact Us</li>
+                            <Link to={''}><li className="footerNavtext">Blog</li></Link>
+                            <Link to={''}><li className="footerNavtext">Forum</li></Link>
+                            <Link to={'/list_add'}><li className="footerNavtext">List your ad</li></Link>
+                            <Link to={'/contact'}><li className="footerNavtext">Contact Us</li></Link>
                         </ul>
                     </div>
                     <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
                     <div className="col-11 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <h3 className="footerHeads">Quick links</h3>
                         <ul className="listulSty">
-                            <li>About us</li>
-                            <li>FAQ</li>
-                            <li>Privacy policy</li>
-                            <li>Advertise on Selmore</li>
+                            <Link to={'/about'}><li className="footerNavtext">About us</li></Link>
+                            <Link to={'/faq'}><li className="footerNavtext">FAQ</li></Link>
+                            <Link to={'/faq'}><li className="footerNavtext">Privacy policy</li></Link>
+                            <Link to={'/advertising_agency'}><li className="footerNavtext">Advertise on Selmore</li></Link>
                         </ul>
                     </div>
                 </div>
             </div>
-        );
+        );  
     }
 }
 

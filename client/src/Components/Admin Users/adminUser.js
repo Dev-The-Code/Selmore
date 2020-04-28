@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './adminUser.scss';
 import Header from '../Header/mainheader';
-import Footer from '../footer';
+import Footer from '../Footer/mainFooter';
 import UserPanel1 from './adminUserPanel1';
 import { Link } from 'react-router-dom';
 

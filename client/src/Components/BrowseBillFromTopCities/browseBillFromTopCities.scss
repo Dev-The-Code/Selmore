@@ -5,51 +5,30 @@ $primary-color: #0088D1;
 $light-color:#6E8796;
 
 
-.mainRwTopCitiesHome{
+.mainRwTopCities{
     margin-top: 4vw;
 }
-.mainTopCitiespanelHome{
+.mainTopCitiespanel{
     margin-top: 2vw;
 }
-.TopCitiesHeadHome{
+.TopCitiesHead{
     text-align: center;
     font-size: 33px;
     font-family: $font-stack;
     color: $secondary-color;
 }
 
-@media screen and (min-width: 360px) and (max-width: 767px) {
-    .seeAllTopCities{
-        font-size: 18px;
-        font-family: $font-stack;
-        color: $primary-color;
-        text-decoration: underline;
-        text-align: center;
-        margin-top: 1vw;
-    }
-}
-@media screen and (min-width: 768px){
-    .seeAllTopCities{
-        font-size: 18px;
-        font-family: $font-stack;
-        color: $primary-color;
-        text-decoration: underline;
-        text-align: right;
-        margin-top: 0.6vw;
-    }
-}
-
-.cityDivBorderHome{
+.cityDivBorder{
     border: 2px solid #e4e4e4;
     margin-bottom: 10px;
     cursor: pointer;
 }
-.cityDivBorderHome:hover{
+.cityDivBorder:hover{
     background-color: #e4e4e4;
     margin-bottom: 10px;
     cursor: pointer;
 }
-.cityNamesHome{
+.cityNames{
     font-size: 20px;
     text-align: center;
     font-family: $font-stack;
@@ -57,7 +36,7 @@ $light-color:#6E8796;
     padding-top: 7px;
     margin: 0;
 }
-.cityNoAdsHome{
+.cityNoAds{
     text-align: center;
     font-size: 13px;
     font-family: $font-regular;
