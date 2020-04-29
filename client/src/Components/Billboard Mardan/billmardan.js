@@ -35,7 +35,6 @@ class Billmardan extends Component {
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        <AbBanner advertise={'BILLBOARDS'} bred={'LISTING'} bred2={'> MARDAN'} />
         <Mardanpanel1 />
         <Mardanpanel2 />
         <Footer />

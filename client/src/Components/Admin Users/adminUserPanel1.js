@@ -76,7 +76,7 @@ class UserPanel1 extends Component {
                     </div>
                     <div className="row" style={{ margin: '0px' }}>
                         <div className="col-12 col-md-12 col-lg-12 col-xl-12 userDataPlace">
-                            <div className="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <div className="tab-content py-3 px-sm-0" id="nav-tabContent">
                                 <div className="tab-pane fade show active text-justify" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <table class="table" style={{ textAlign: 'center' }}>
                                         <thead className="tablee_Head">
