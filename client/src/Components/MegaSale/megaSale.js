@@ -10,11 +10,16 @@ class MegaSale extends Component {
     super(props)
     this.state = {
       dropDownUser: false,
+      data: ''
     }
   }
 
   componentWillMount() {
     window.scrollTo(0, 0);
+    let data = this.props.location.state;
+    this.setState({
+      data: data,
+    })
   }
 
   showDropDown = () => {
@@ -30,13 +35,14 @@ class MegaSale extends Component {
   }
 
   render() {
-    const { dropDownUser } = this.state;
+    const { dropDownUser, data } = this.state;
+    console.log(data, 'data')
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner advertise={'MEGA SALE'} bred={'Mega Sale'} />
-        <MegaSalePanel />
-        <Footer/>
+        <MegaSalePanel filterData={data} />
+        <Footer />
       </div>
     );
   }

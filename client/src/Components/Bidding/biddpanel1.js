@@ -4,28 +4,81 @@ import { Link } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
 import moment from 'moment';
 import {
-	Checkbox, Form, Row, Col, Input, Radio, Button
+	Checkbox, Row, Col, Spin, Icon
 } from 'antd';
 import Select from 'react-select';
 
 const CheckboxGroup = Checkbox.Group;
 
+let filterTypesArr = [];
+let filterFacingArr = [];
+let filterLightningsArr = [];
+let filterAudienceTypeArr = [];
+let filterCityName = [];
+let filterStateName = [];
+
 class Biddpanel1 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			biddingBillboards: []
+			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
+				" Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
+				" Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
+				" Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
+				" Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+			statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
+			cities: [],
+			states: [],
+			biddingBillboards: [],
+			filteredData: [],
+			typesOfBillboard: [],
+			facingOfBillboard: [],
+			lightningOfBillboard: [],
+			audienceTypeOfBillboard: [],
+			notFoundFilterData: false,
+			showRecord: true,
+			cityValue: '',
+			stateValue: ''
 		}
 	}
 
 	componentDidMount() {
-		this.getBiddingBillboard()
+		this.getBiddingBillboard();
+		this.getCitiesAndStates();
 	}
 
 	componentWillUnmount() {
 		if (this.interval) {
 			clearInterval(this.interval);
 		}
+	}
+
+	getCitiesAndStates = () => {
+		const { citiesArr, statesArr } = this.state;
+
+		let city = citiesArr.map((elem, i) => {
+			return { label: elem, value: elem, id: i }
+		})
+		let state = statesArr.map((elem, i) => {
+			return { label: elem, value: elem, id: i }
+		})
+		this.setState({
+			cities: city,
+			states: state
+		})
 	}
 
 	getBiddingBillboard = async () => {
@@ -56,29 +109,1110 @@ class Biddpanel1 extends Component {
 
 		}
 	}
-	render() {
+
+	//get checkboxes values
+	onChangeCheckBoxes = (checkboxParam, checkboxValue) => {
+		if (checkboxParam == 'type') {
+			filterTypesArr = checkboxValue;
+		} else if (checkboxParam == 'facing') {
+			filterFacingArr = checkboxValue;
+		} else if (checkboxParam == 'lightning') {
+			filterLightningsArr = checkboxValue;
+		} else if (checkboxParam == 'audienceType') {
+			filterAudienceTypeArr = checkboxValue;
+		}
+
+		this.filterKeysGet();
+	}
+
+	//get dropdown values
+	handleChange = (dropDownParam, dropDownValueObj) => {
+		let dropDownValue = []
+		dropDownValue.push(dropDownValueObj.value)
+		if (dropDownParam == 'city') {
+			filterCityName = dropDownValue;
+			this.setState({
+				cityValue: dropDownValueObj
+			})
+		}
+		else if (dropDownParam == 'state') {
+			filterStateName = dropDownValue;
+			this.setState({
+				stateValue: dropDownValueObj
+			})
+		}
+		this.filterKeysGet();
+	}
+
+	removeValue = (param, value) => {
+		let arr = [];
+		if (param == "city") {
+			filterCityName = arr
+			this.setState({
+				cityValue: ''
+			})
+		}
+		else if (param == "state") {
+			filterStateName = arr
+			this.setState({
+				stateValue: ''
+			})
+		}
+		else if (param == 'type') {
+			let arr1 = [];
+			for (var i = 0; i < filterTypesArr.length; i++) {
+				if (filterTypesArr[i] != value) {
+					arr1.push(filterTypesArr[i])
+				}
+			}
+			filterTypesArr = arr1;
+		}
+		else if (param == 'facing') {
+			let arr1 = [];
+			for (var i = 0; i < filterFacingArr.length; i++) {
+				if (filterFacingArr[i] != value) {
+					arr1.push(filterFacingArr[i])
+				}
+			}
+			filterFacingArr = arr1;
+		}
+		else if (param == 'lightning') {
+			let arr1 = [];
+			for (var i = 0; i < filterLightningsArr.length; i++) {
+				if (filterLightningsArr[i] != value) {
+					arr1.push(filterLightningsArr[i])
+				}
+			}
+			filterLightningsArr = arr1;
+		}
+		else if (param == 'audienceType') {
+			let arr1 = [];
+			for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+				if (filterAudienceTypeArr[i] != value) {
+					arr1.push(filterAudienceTypeArr[i])
+				}
+			}
+			filterAudienceTypeArr = arr1;
+		}
+		this.filterKeysGet();
+		if (filterCityName.length == 0 && filterStateName.length == 0 && filterTypesArr.length == 0
+			&& filterFacingArr.length == 0 && filterLightningsArr.length == 0 && filterAudienceTypeArr.length == 0) {
+			this.setState({
+				showRecord: true,
+				notFoundFilterData: false,
+				filteredData: [],
+			})
+		}
+		else {
+			this.filterKeysGet();
+		}
+	}
+
+	showAllRooms = () => {
+		filterTypesArr = [];
+		filterFacingArr = [];
+		filterLightningsArr = [];
+		filterAudienceTypeArr = [];
+		filterCityName = [];
+		filterStateName = [];
+
+		this.setState({
+			showRecord: true,
+			notFoundFilterData: false,
+			cityValue: '',
+			stateValue: ''
+		})
+		this.filterKeysGet();
+	}
+
+
+	filterKeysGet = () => {
+		let typesOfBillboard = [];
+		let facingOfBillboard = [];
+		let lightningOfBillboard = [];
+		let audienceTypeOfBillboard = [];
+
+		let filterKeys = [];
+		if (filterTypesArr.length > 0) {
+			filterKeys.push('type')
+		}
+		if (filterFacingArr.length > 0) {
+			filterKeys.push('facing')
+		}
+		if (filterLightningsArr.length > 0) {
+			filterKeys.push('lightning')
+		}
+		if (filterAudienceTypeArr.length > 0) {
+			filterKeys.push('audianceType')
+		}
+		if (filterCityName.length > 0) {
+			filterKeys.push('city')
+		}
+		if (filterStateName.length > 0) {
+			filterKeys.push('state')
+		}
+		for (var i = 0; i < filterTypesArr.length; i++) {
+			typesOfBillboard.push(filterTypesArr[i])
+		}
+		for (var i = 0; i < filterFacingArr.length; i++) {
+			facingOfBillboard.push(filterFacingArr[i])
+		}
+		for (var i = 0; i < filterLightningsArr.length; i++) {
+			lightningOfBillboard.push(filterLightningsArr[i])
+		}
+		for (var i = 0; i < filterAudienceTypeArr.length; i++) {
+			audienceTypeOfBillboard.push(filterAudienceTypeArr[i])
+		}
+		this.setState({
+			typesOfBillboard: typesOfBillboard,
+			facingOfBillboard: facingOfBillboard,
+			lightningOfBillboard: lightningOfBillboard,
+			audienceTypeOfBillboard: audienceTypeOfBillboard,
+		})
+
+		this.filterBillboardData(filterKeys)
+	}
+
+	filterBillboardData = (filterKeys) => {
+		console.log(filterKeys, 'filterKeys')
+		if (filterKeys.length == 1) {
+			this.filterBillboardDataWithOneKey(filterKeys);
+		}
+		else if (filterKeys.length == 2) {
+			this.filterBillboardDataWithTwoKeys(filterKeys);
+		}
+		else if (filterKeys.length == 3) {
+			this.filterBillboardDataWithThreeKeys(filterKeys);
+		}
+		else if (filterKeys.length == 4) {
+			this.filterBillboardDataWithFourKeys(filterKeys)
+		}
+		else if (filterKeys.length == 5) {
+			this.filterBillboardDataWithFiveKeys(filterKeys)
+		}
+		else if (filterKeys.length == 6) {
+			this.filterBillboardDataWithSixKeys(filterKeys)
+		}
+	}
+
+
+
+	filterBillboardDataWithOneKey = (filterKeys) => {
 		const { biddingBillboards } = this.state;
+		let data;
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (filterKeys[i] == 'type') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+				})
+			}
+			else if (filterKeys[i] == 'facing') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+				})
+			}
+			else if (filterKeys[i] == 'lightning') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+				})
+			}
+			else if (filterKeys[i] == 'audianceType') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+				})
+			}
+			else if (filterKeys[i] == 'city') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+				})
+			}
+			else if (filterKeys[i] == 'state') {
+				data = biddingBillboards.filter((elem) => {
+					return elem.billboardState && filterStateName.includes(elem.billboardState)
+				})
+			}
+		}
+		if (data.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: data,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: data,
+				showRecord: false
+			})
+		}
+
+	}
+
+	filterBillboardDataWithTwoKeys = (filterKeys) => {
+		const { biddingBillboards } = this.state;
+		let data1;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'type') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'type') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+	}
+
+	filterBillboardDataWithThreeKeys = (filterKeys) => {
+		const { biddingBillboards } = this.state;
+		let data1;
+		let data2
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'type') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'type') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+	filterBillboardDataWithFourKeys = (filterKeys) => {
+		const { biddingBillboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'type') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'type') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+	filterBillboardDataWithFiveKeys = (filterKeys) => {
+		const { biddingBillboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let data4;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'type') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'type') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 4) {
+				if (filterKeys[i] == 'type') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data4.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+
+	filterBillboardDataWithSixKeys = (filterKeys) => {
+		const { biddingBillboards } = this.state;
+		let data1;
+		let data2;
+		let data3;
+		let data4;
+		let data5;
+		let filteredData;
+
+		for (var i = 0; i < filterKeys.length; i++) {
+			if (i == 0) {
+				if (filterKeys[i] == 'type') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data1 = biddingBillboards.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 1) {
+				if (filterKeys[i] == 'type') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data2 = data1.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 2) {
+				if (filterKeys[i] == 'type') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data3 = data2.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 3) {
+				if (filterKeys[i] == 'type') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data4 = data3.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 4) {
+				if (filterKeys[i] == 'type') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					data5 = data4.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+			if (i == 5) {
+				if (filterKeys[i] == 'type') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardType && filterTypesArr.includes(elem.billboardType)
+					})
+				}
+				else if (filterKeys[i] == 'facing') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardFacing && filterFacingArr.includes(elem.billboardFacing)
+					})
+				}
+				else if (filterKeys[i] == 'lightning') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardLighting && filterLightningsArr.includes(elem.billboardLighting)
+					})
+				}
+				else if (filterKeys[i] == 'audianceType') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardAudienceType && filterAudienceTypeArr.includes(elem.billboardAudienceType)
+					})
+				}
+				else if (filterKeys[i] == 'city') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardCity && filterCityName.includes(elem.billboardCity)
+					})
+				}
+				else if (filterKeys[i] == 'state') {
+					filteredData = data5.filter((elem) => {
+						return elem.billboardState && filterStateName.includes(elem.billboardState)
+					})
+				}
+			}
+		}
+
+		if (filteredData.length == 0) {
+			this.setState({
+				notFoundFilterData: true,
+				filteredData: filteredData,
+				showRecord: false
+			})
+		}
+		else {
+			this.setState({
+				notFoundFilterData: false,
+				filteredData: filteredData,
+				showRecord: false
+
+			})
+		}
+
+	}
+
+
+	render() {
+		const { biddingBillboards, cities, states, typesOfBillboard,
+			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, notFoundFilterData, filteredData, showRecord,
+			cityValue, stateValue } = this.state;
+		const antIcon =
+			<Icon type="loading" style={{ fontSize: '110px' }} spin />;
 		return (
 			<div>
+				<div className="row">
+					<div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3"></div>
+					{typesOfBillboard && typesOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{typesOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'type', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{facingOfBillboard && facingOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{facingOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'facing', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{lightningOfBillboard && lightningOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{lightningOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'lightning', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{audienceTypeOfBillboard && audienceTypeOfBillboard.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{audienceTypeOfBillboard.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'audienceType', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{filterCityName && filterCityName.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{filterCityName.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'city', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+					{filterStateName && filterStateName.length > 0 && <div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+						{filterStateName.map((elem, key) => {
+							return (
+								<div className="cross-card">
+									<li>{elem}<span class="close crossBtnExlpre"
+										onClick={this.removeValue.bind(this, 'state', elem)}
+									>x</span></li>
+								</div>)
+						})}
+					</div>}
+
+
+				</div>
 				<div className="row">
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 					<div className="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
 						<div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 d-none d-sm-block'>
 							<h3 className="filterTextHead">Filteration</h3>
-							<Radio.Group>
-								<div className='filterDivs'>Status</div>
-								<Row>
-									<Col >
-										<Radio className="fasla" value="Available" className="radioText">&nbsp;Available</Radio>
-									</Col>
-									<Col >
-										<Radio className="fasla" value="No Available" className="radioText">&nbsp;No Available</Radio>
-									</Col>
-								</Row>
-							</Radio.Group>
 							<div className="row">
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+										value={typesOfBillboard}
+									>
 										<div className='filterDivs'>Types</div>
 										<Row>
 											<Col>
@@ -115,7 +1249,10 @@ class Biddpanel1 extends Component {
                         			</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+										value={facingOfBillboard}
+									>
 										<Row>
 											<div className='filterDivs'>Facing</div>
 											<Col >
@@ -128,7 +1265,10 @@ class Biddpanel1 extends Component {
 									</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
+										value={lightningOfBillboard}
+									>
 										<div className='filterDivs'>Lightning</div>
 										<Row>
 											<Col >
@@ -141,7 +1281,10 @@ class Biddpanel1 extends Component {
 									</CheckboxGroup>
 								</div>
 								<div className="col-md-11">
-									<CheckboxGroup>
+									<CheckboxGroup
+										onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+										value={audienceTypeOfBillboard}
+									>
 										<div className='filterDivs'>Audience Type</div>
 										<Row>
 											<Col >
@@ -165,8 +1308,9 @@ class Biddpanel1 extends Component {
 								<Row className="fasla1" >
 									<Col>
 										<Select
-										// onChange={this.handleChange.bind(this, 'city')}
-										// options={cities}
+											onChange={this.handleChange.bind(this, 'city')}
+											options={cities}
+											value={cityValue}
 										>
 										</Select>
 									</Col>
@@ -176,173 +1320,14 @@ class Biddpanel1 extends Component {
 								<Row className="fasla1" >
 									<Col>
 										<Select
-										// onChange={this.handleChange.bind(this, 'state')}
-										// options={states}
+											onChange={this.handleChange.bind(this, 'state')}
+											options={states}
+											value={stateValue}
 										>
 										</Select>
 									</Col>
 								</Row>
-
 							</div>
-							<Form>
-								<div className='filterDivs'>Pricing</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-8 col-lg-8 col-xl-8">
-
-										<input
-											onChange={this.onChangeMin}
-											// value={minValue}
-											type="Number"
-											placeholder="Min"
-											className="megaSaleFilter_Input"
-										/>
-									</div>
-								</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-8 col-lg-8 col-xl-8">
-
-										<input
-											onChange={this.onChangeMax}
-											// value={maxValue}
-
-											type="Number"
-											placeholder="Max"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-										<button className="btn btn-primary">
-											<i class="fa fa-caret-right"></i>
-										</button>
-									</div>
-								</div>
-								<div className='filterDivs'>Width</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMin}
-											// value={minValue}
-											type="Number"
-											placeholder="Min"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMax}
-											// value={maxValue}
-											type="Number"
-											placeholder="Max"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-2 col-lg-2 col-xl-2">
-										<button className="btn btn-primary">
-											<i class="fa fa-caret-right"></i>
-										</button>
-									</div>
-								</div>
-								<div className='filterDivs'>Height</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMin}
-											// value={minValue}
-
-											type="Number"
-											placeholder="Min"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMax}
-											// value={maxValue}
-
-											type="Number"
-											placeholder="Max"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-2 col-lg-2 col-xl-2">
-										<button className="btn btn-primary">
-											<i class="fa fa-caret-right"></i>
-										</button>
-									</div>
-								</div>
-								<div className='filterDivs'>Traffic Count</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMin}
-											// value={minValue}
-
-											type="Number"
-											placeholder="Min"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMax}
-											// value={maxValue}
-
-											type="Number"
-											placeholder="Max"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-2 col-lg-2 col-xl-2">
-										<button className="btn btn-primary">
-											<i class="fa fa-caret-right"></i>
-										</button>
-									</div>
-								</div>
-								<div className='filterDivs'>Daily Visitor</div>
-								<div className="row fasla1">
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-
-										<input
-											onChange={this.onChangeMin}
-											// value={minValue}
-
-											type="Number"
-											placeholder="Min"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-										<input
-											onChange={this.onChangeMax}
-											// value={maxValue}
-
-											type="Number"
-											placeholder="Max"
-											className="megaSaleFilter_Input"
-										/>
-
-									</div>
-									<div className="col-12 col-md-2 col-lg-2 col-xl-2">
-										<button className="btn btn-primary">
-											<i class="fa fa-caret-right"></i>
-										</button>
-									</div>
-								</div>
-							</Form>
 							{/* </CheckboxGroup> */}
 						</div>
 						<div className="col-12 d-block d-sm-none">
@@ -358,20 +1343,12 @@ class Biddpanel1 extends Component {
 											<div className="row">
 												<div className="col-1"></div>
 												<div className="col-10">
-													<Radio.Group>
-														<div className='filterDivs'>Status</div>
-														<Row>
-															<Col >
-																<Radio className="fasla" value="Available" className="radioText">&nbsp;Available</Radio>
-															</Col>
-															<Col >
-																<Radio className="fasla" value="No Available" className="radioText">&nbsp;No Available</Radio>
-															</Col>
-														</Row>
-													</Radio.Group>
 													<div className="row">
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																onChange={this.onChangeCheckBoxes.bind(this, 'type')}
+																value={typesOfBillboard}
+															>
 																<div className='filterDivs'>Types</div>
 																<Row>
 																	<Col>
@@ -408,7 +1385,10 @@ class Biddpanel1 extends Component {
                         			</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																onChange={this.onChangeCheckBoxes.bind(this, 'facing')}
+																value={facingOfBillboard}
+															>
 																<Row>
 																	<div className='filterDivs'>Facing</div>
 																	<Col >
@@ -421,7 +1401,10 @@ class Biddpanel1 extends Component {
 															</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																onChange={this.onChangeCheckBoxes.bind(this, 'lightning')}
+																value={lightningOfBillboard}
+															>
 																<div className='filterDivs'>Lightning</div>
 																<Row>
 																	<Col >
@@ -434,7 +1417,10 @@ class Biddpanel1 extends Component {
 															</CheckboxGroup>
 														</div>
 														<div className="col-11">
-															<CheckboxGroup>
+															<CheckboxGroup
+																onChange={this.onChangeCheckBoxes.bind(this, 'audienceType')}
+																value={audienceTypeOfBillboard}
+															>
 																<div className='filterDivs'>Audience Type</div>
 																<Row>
 																	<Col >
@@ -458,8 +1444,9 @@ class Biddpanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																// onChange={this.handleChange.bind(this, 'city')}
-																// options={cities}
+																	onChange={this.handleChange.bind(this, 'city')}
+																	options={cities}
+																	value={cityValue}
 																>
 																</Select>
 															</Col>
@@ -469,8 +1456,9 @@ class Biddpanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																// onChange={this.handleChange.bind(this, 'state')}
-																// options={states}
+																	onChange={this.handleChange.bind(this, 'state')}
+																	options={states}
+																	value={stateValue}
 																>
 																</Select>
 															</Col>
@@ -478,165 +1466,7 @@ class Biddpanel1 extends Component {
 
 													</div>
 
-													<Form>
-														<div className='filterDivs'>Pricing</div>
-														<div className="row fasla1">
-															<div className="col-5">
 
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-															</div>
-														</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Width</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Height</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Traffic Count</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-														<div className='filterDivs'>Daily Visitor</div>
-														<div className="row fasla1">
-															<div className="col-5">
-
-																<input
-																	onChange={this.onChangeMin}
-																	// value={minValue}
-
-																	type="Number"
-																	placeholder="Min"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-5">
-																<input
-																	onChange={this.onChangeMax}
-																	// value={maxValue}
-
-																	type="Number"
-																	placeholder="Max"
-																	className="megaSaleFilter_Input_mob"
-																/>
-
-															</div>
-															<div className="col-2">
-																<button className="btn btn-primary">
-																	<i class="fa fa-caret-right"></i>
-																</button>
-															</div>
-														</div>
-													</Form>
 												</div>
 												<div className="col-1"></div>
 											</div>
@@ -648,7 +1478,78 @@ class Biddpanel1 extends Component {
 						</div>
 					</div>
 					<div className="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
-						<div className="row">
+
+
+					{biddingBillboards.length == 0 ?
+							<div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+							:
+							<div className="row">
+								{/* filterd data render */}
+								{notFoundFilterData && filteredData.length == 0 ?
+									<div className="noRecrdTxt">
+										<p className="noRecordText">
+											No Record Found
+                                </p>
+										<button
+											className="backBtn"
+											onClick={this.showAllRooms}
+										>Back</button>
+									</div>
+									:
+									filteredData && filteredData.map((elem, key) => {
+										return (
+											<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+										<div className="mainbiddingCardDiv">
+											<img src={elem.images[0]} alt="card" className="biddingCardImgs" />
+											<p className="hoursLeftTag">{`${elem.hours} Hrs Left`}</p>
+											<div className="biddingDetailCardDiv">
+												{elem && <p className="biddingCardName">{elem.billboardAddress} , {elem.billboardCity}</p>}
+												<p class="biddingCardText">DEAL EXPIRE IN:
+												<span className="biddingPageTiming"> {`${elem.calculateTime}`}</span>
+												</p>
+												<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
+													<button class="btn btn-primary">
+														<span className="moredetailbiddingbtn">Start Bidding</span>
+													</button>
+												</Link>
+											</div>
+										</div>
+									</div>
+										)
+									})
+								}
+
+
+								{/* all data render */}
+								{notFoundFilterData == false && filteredData.length == 0 && showRecord ?
+									biddingBillboards && biddingBillboards.map((elem, key) => {
+
+										return (
+											<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+										<div className="mainbiddingCardDiv">
+											<img src={elem.images[0]} alt="card" className="biddingCardImgs" />
+											<p className="hoursLeftTag">{`${elem.hours} Hrs Left`}</p>
+											<div className="biddingDetailCardDiv">
+												{elem && <p className="biddingCardName">{elem.billboardAddress} , {elem.billboardCity}</p>}
+												<p class="biddingCardText">DEAL EXPIRE IN:
+												<span className="biddingPageTiming"> {`${elem.calculateTime}`}</span>
+												</p>
+												<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
+													<button class="btn btn-primary">
+														<span className="moredetailbiddingbtn">Start Bidding</span>
+													</button>
+												</Link>
+											</div>
+										</div>
+									</div>
+										)
+									})
+									: null
+								}
+							</div>
+						}
+
+						{/* <div className="row">
 							{biddingBillboards && biddingBillboards.map((elem, key) => {
 								return (
 									<div className="col-11 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -670,36 +1571,8 @@ class Biddpanel1 extends Component {
 									</div>
 								)
 							})}
-							{/* {biddingBillboards && biddingBillboards.map((elem, key) => {
-								return (
-									<div className="col-12 col-md-4 col-lg-4 col-xl-4">
-										<div class="card_bidding">
-											<img class="card-img-top cardImag" src={elem.images[0]} alt="Card image" style={{ width: '100%' }} />
-											<div class="card-body">
-												<h4 class="card-title">{elem.billboardAddress}, {elem.billboardCity}</h4>
-												<h4 class="card-title"> </h4>
-												<p class="card-text">DEAL EXPIRE IN:
-											<span className="bidTiming"> {`${elem.calculateTime}`}</span>
+						</div> */}
 
-													<br />
-												<span className="bidTiming"> {elem.days}</span> DAYS
-													<span className="bidTiming"> {elem.hours}</span> HOURS
-													<span className="bidTiming"> {elem.minutes}</span> MINUTES
-													<br />
-													<span className="bidTiming"> {elem.seconds}</span> SECONDS
-													From <span className="bidTiming"> {elem.biddingStartDate}, {elem.biddingStartTime}</span> 
-											to <span className="bidTiming"> {elem.biddingEndDate}, {elem.biddingEndTime}</span>
-												</p>
-												<Link to={{ pathname: `/bidding_detail/${elem._id}`, state: elem }}>
-													<button class="btn btn-primary">
-														<span className="startBidBtn">Start Bidding</span>
-													</button>
-												</Link>
-											</div>
-										</div>
-									</div>)
-							})} */}
-						</div>
 					</div>
 					<div className="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
 				</div>

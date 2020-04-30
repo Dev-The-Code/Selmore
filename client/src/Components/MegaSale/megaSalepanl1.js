@@ -65,16 +65,20 @@ class MegaSalepanel1 extends Component {
 			stateValue: ''
 		}
 	}
-	componentDidMount() {
+
+
+	componentWillMount() {
 		this.megaSalebillBoardData();
-		this.getCitiesAndStates()
+		this.getCitiesAndStates();
 	}
 
 	componentWillUnmount() {
 		if (this.interval) {
 			clearInterval(this.interval);
 		}
+
 	}
+
 	getCitiesAndStates = () => {
 		const { citiesArr, statesArr } = this.state;
 
@@ -91,7 +95,9 @@ class MegaSalepanel1 extends Component {
 	}
 
 	megaSalebillBoardData = async () => {
+		const { megaSaleBiilboards } = this.state
 		let response = await HttpUtils.get('getallmegabillboard');
+
 		let MegaSaleBillboards = [];
 		if (response.code == 200) {
 			this.interval = setInterval(() => {
@@ -113,8 +119,40 @@ class MegaSalepanel1 extends Component {
 					megaSaleBiilboards: MegaSaleBillboards
 				})
 				MegaSaleBillboards = [];
+
+
 			}, 1000);
+
+
+			if (MegaSaleBillboards.length == 0) {
+				let dataForFilter = this.props.filterData;
+				if (dataForFilter) {
+					filterCityName = dataForFilter.city;
+					filterStateName = dataForFilter.state;
+					let cityDropValue = {
+						label: dataForFilter.city[0],
+						value: dataForFilter.city[0]
+					}
+					let stateDropValue = {
+						label: dataForFilter.state[0],
+						value: dataForFilter.state[0]
+					}
+					this.setState({
+						cityValue: cityDropValue,
+						stateValue: stateDropValue
+					})
+					this.filterKeysGet()
+				}
+			}
+			else {
+				console.log('else')
+			}
+
+
 		}
+
+
+
 	}
 
 
@@ -167,6 +205,7 @@ class MegaSalepanel1 extends Component {
 
 	//get dropdown values
 	handleChange = (dropDownParam, dropDownValueObj) => {
+		console.log(dropDownValueObj, 'dropDownValueObj')
 		let dropDownValue = []
 		dropDownValue.push(dropDownValueObj.value)
 		if (dropDownParam == 'city') {
@@ -390,7 +429,6 @@ class MegaSalepanel1 extends Component {
 				})
 			}
 		}
-		console.log(data, 'filteredData with 1 keys')
 		if (data.length == 0) {
 			this.setState({
 				notFoundFilterData: true,
@@ -504,6 +542,11 @@ class MegaSalepanel1 extends Component {
 
 			})
 		}
+		console.log(megaSaleBiilboards, 'megaSaleBiilboards')
+
+		console.log(data1, 'data1')
+		console.log(filteredData, 'filteredData')
+
 	}
 
 	filterBillboardDataWithThreeKeys = (filterKeys) => {
@@ -1930,7 +1973,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																value={cityValue}
+																	value={cityValue}
 																	onChange={this.handleChange.bind(this, 'city')}
 																	options={cities}
 																>
@@ -1942,7 +1985,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																value={stateValue}
+																	value={stateValue}
 																	onChange={this.handleChange.bind(this, 'state')}
 																	options={states}
 																>

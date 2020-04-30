@@ -81,10 +81,10 @@ class Market extends Component {
         else {
             this.billBoradDetails();
         }
+        this.getCitiesAndStates()
     }
 
     billBoradDetails = async () => {
-        const { citiesArr, statesArr, categoryArr } = this.state;
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -94,22 +94,34 @@ class Market extends Component {
         // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
         //create a range array value of width height daily visitor cities & states
+        if (data) {
+            if (data.code == 200) {
+                this.setState({
+                    billboardData: data,
+
+                })
+            }
+
+        }
+    }
+
+    getCitiesAndStates = () => {
+        const { citiesArr, statesArr, categoryArr } = this.state;
+
         let city = citiesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let catee = categoryArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await
-            this.setState({
-                billboardData: data,
-                cities: city,
-                category: catee,
-                states: state
-            })
+        let catee = categoryArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        this.setState({
+            cities: city,
+            category: catee,
+            states: state
+        })
     }
 
 
