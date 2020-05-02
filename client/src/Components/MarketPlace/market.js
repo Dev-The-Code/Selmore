@@ -2641,5 +2641,6 @@ class Market extends Component {
         )
     }
 }
+
 const WrappedDynamicFieldSet = Form.create()(Market);
 export default WrappedDynamicFieldSet;
