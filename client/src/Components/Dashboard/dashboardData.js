@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import NumberFormat from 'react-number-format';
 import { HttpUtils } from '../../Services/HttpUtils';
 import './dashboard.scss';
 import { Link } from "react-router-dom";
-import { Redirect } from 'react-router';
 import {
-    DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
+    Form, Input, Button, Spin, Icon
 } from 'antd';
-var filteredObj = {};
+
+let filterCompanyNameArr = [];
+let filterTypesArr = [];
+let filterAddresArr = [];
+let filterCityName = [];
+let filterStateName = [];
 
 class DashboardData extends Component {
     constructor(props) {
@@ -24,15 +27,14 @@ class DashboardData extends Component {
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
                 " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
-                " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+                " Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
                 "Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-                " Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+                " Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+                " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+                " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
@@ -57,7 +59,14 @@ class DashboardData extends Component {
             billboardFacing: '',
             billboardLighting: '',
             billboardAudienceType: '',
-            billboardState: ''
+            billboardState: '',
+            companyNameValue: '',
+            typeValue: '',
+            addressValue: '',
+            cityValue: '',
+            stateValue: '',
+            notFoundFilterData: false,
+            showRecord: true,
         }
     }
 
@@ -112,76 +121,692 @@ class DashboardData extends Component {
         });
     }
 
-    handleChangeCompany = (data) => {
-        filteredObj.companyName = data.value;
-        this.filteredData();
+    handleChange = (dropDownParam, dropDownValueObj) => {
+
+        let dropDownValue = []
+        dropDownValue.push(dropDownValueObj.value);
+
+        if (dropDownParam == 'companyName') {
+            filterCompanyNameArr = dropDownValue;
+            this.setState({
+                companyNameValue: dropDownValueObj
+            })
+        }
+        else if (dropDownParam == 'billboardType') {
+            filterTypesArr = dropDownValue;
+            this.setState({
+                typeValue: dropDownValueObj
+            })
+        }
+        else if (dropDownParam == 'billboardAddres') {
+            filterAddresArr = dropDownValue;
+            this.setState({
+                addressValue: dropDownValueObj
+            })
+        }
+        else if (dropDownParam == 'billboardCity') {
+            filterCityName = dropDownValue;
+            this.setState({
+                cityValue: dropDownValueObj
+            })
+        }
+        else if (dropDownParam == 'billboardState') {
+            filterStateName = dropDownValue;
+            this.setState({
+                stateValue: dropDownValueObj
+            })
+        }
+        this.filterKeysGet();
     }
 
-    handleChangeType = (data) => {
-        filteredObj.type = data.value;
-        this.filteredData();
+
+    removeValue = (param, value) => {
+        let arr = [];
+        if (param == "compamyName") {
+            filterCompanyNameArr = arr
+            this.setState({
+                companyNameValue: ''
+            })
+        }
+        else if (param == "billboardType") {
+            filterTypesArr = arr
+            this.setState({
+                typeValue: ''
+            })
+        }
+        else if (param == 'billboardAddres') {
+            filterAddresArr = arr;
+            this.setState({
+                addressValue: ''
+            })
+
+        }
+        else if (param == 'billboardCity') {
+            filterCityName = arr;
+            this.setState({
+                cityValue: ''
+            })
+        }
+        else if (param == 'billboardState') {
+            filterStateName = arr;
+            this.setState({
+                stateValue: ''
+            })
+        }
+       
+        // this.filterKeysGet();
+        if (filterCompanyNameArr.length == 0 && filterTypesArr.length == 0 && filterAddresArr.length == 0
+        	&& filterCityName.length == 0 && filterStateName.length == 0) {
+        	this.setState({
+        		showRecord: true,
+        		notFoundFilterData: false,
+        		filteredData: [],
+        	})
+        }
+        else {
+        	this.filterKeysGet();
+        }
     }
 
-    handleChangeSize = (data) => {
-        filteredObj.size = data.value;
-        this.filteredData();
+    showAllRooms = () => {
+        filterCompanyNameArr = [];
+        filterTypesArr = [];
+        filterAddresArr = [];
+        filterCityName = [];
+        filterStateName = [];
+
+        this.setState({
+            showRecord: true,
+            notFoundFilterData: false,
+            companyNameValue: '',
+            typeValue: '',
+            addressValue: '',
+            cityValue: '',
+            stateValue: ''
+        })
+        this.filterKeysGet();
     }
 
-    handleChangeAddress = (data) => {
-        filteredObj.address = data.value;
-        this.filteredData();
+
+    filterKeysGet = () => {
+
+        let filterKeys = [];
+        if (filterCompanyNameArr.length > 0) {
+            filterKeys.push('companyName')
+        }
+        if (filterTypesArr.length > 0) {
+            filterKeys.push('billboardType')
+        }
+        if (filterAddresArr.length > 0) {
+            filterKeys.push('billboardAddres')
+        }
+        if (filterCityName.length > 0) {
+            filterKeys.push('billboardCity')
+        }
+        if (filterStateName.length > 0) {
+            filterKeys.push('billboardState')
+        }
+
+
+        this.filterBillboardData(filterKeys)
     }
 
-    handleChangeCity = (data) => {
-        filteredObj.city = data.value;
-        this.filteredData();
+    filterBillboardData = (filterKeys) => {
+        if (filterKeys.length == 1) {
+            this.filterBillboardDataWithOneKey(filterKeys);
+        }
+        else if (filterKeys.length == 2) {
+            this.filterBillboardDataWithTwoKeys(filterKeys);
+        }
+        else if (filterKeys.length == 3) {
+            this.filterBillboardDataWithThreeKeys(filterKeys);
+        }
+        else if (filterKeys.length == 4) {
+            this.filterBillboardDataWithFourKeys(filterKeys)
+        }
+        else if (filterKeys.length == 5) {
+            this.filterBillboardDataWithFiveKeys(filterKeys)
+        }
     }
 
-    handleChangeState = (data) => {
-        filteredObj.state = data.value;
-        this.filteredData();
-    }
-
-    filteredData = () => {
+    filterBillboardDataWithOneKey = (filterKeys) => {
         const { billboardData } = this.state;
-        var filteredData = [];
-        if (filteredObj.companyName !== undefined && filteredObj.type !== undefined && filteredObj.address !== undefined &&
-            filteredObj.city !== undefined && filteredObj.state !== undefined) {
-            console.log('true condition')
-            for (var i in billboardData) {
-                let data = billboardData[i]
-                for (var j in data) {
-                    if (filteredObj.companyName == data[j]) {
-                        let checkingCompany = data;
-                        for (var address in checkingCompany) {
-                            if (filteredObj.address == checkingCompany[address]) {
-                                let checkingAddres = checkingCompany
-                                for (var type in checkingAddres) {
-                                    if (filteredObj.type == checkingAddres[type]) {
-                                        let CheckingType = checkingAddres;
-                                        for (var city in CheckingType) {
-                                            if (filteredObj.city == CheckingType[city]) {
-                                                let checkingCity = CheckingType;
-                                                for (var state in checkingCity) {
-                                                    if (filteredObj.state == checkingCity[state]) {
-                                                        let cheakingState = checkingCity;
-                                                        filteredData.push(cheakingState)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+        let data;
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (filterKeys[i] == 'companyName') {
+                data = billboardData.filter((elem) => {
+                    return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                })
+            }
+            else if (filterKeys[i] == 'billboardType') {
+                data = billboardData.filter((elem) => {
+                    return elem.type && filterTypesArr.includes(elem.type)
+                })
+            }
+            else if (filterKeys[i] == 'billboardAddres') {
+                data = billboardData.filter((elem) => {
+                    return elem.address && filterAddresArr.includes(elem.address)
+                })
+            }
+            else if (filterKeys[i] == 'billboardCity') {
+                data = billboardData.filter((elem) => {
+                    return elem.city && filterCityName.includes(elem.city)
+                })
+            }
+            else if (filterKeys[i] == 'billboardState') {
+                data = billboardData.filter((elem) => {
+                    return elem.state && filterStateName.includes(elem.state)
+                })
+            }
+        }
+
+        if (data.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: data,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: data,
+                showRecord: false
+            })
+        }
+
+        console.log(data, 'data')
+
+    }
+
+    filterBillboardDataWithTwoKeys = (filterKeys) => {
+        const { billboardData } = this.state;
+        let data1;
+        let filteredData;
+
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'companyName') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'companyName') {
+                    filteredData = data1.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    filteredData = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    filteredData = data1.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    filteredData = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    filteredData = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
                 }
             }
         }
-        this.setState({
-            billboardFilterdData: filteredData
-        })
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+
     }
+
+    filterBillboardDataWithThreeKeys = (filterKeys) => {
+        const { billboardData } = this.state;
+        let data1;
+        let data2
+        let filteredData;
+
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'companyName') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'companyName') {
+                    data2 = data1.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data2 = data1.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'companyName') {
+                    filteredData = data2.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    filteredData = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    filteredData = data2.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    filteredData = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    filteredData = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+        }
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+
+    }
+
+    filterBillboardDataWithFourKeys = (filterKeys) => {
+        const { billboardData } = this.state;
+        let data1;
+        let data2;
+        let data3;
+        let filteredData;
+
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'companyName') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'companyName') {
+                    data2 = data1.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data2 = data1.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'companyName') {
+                    data3 = data2.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data3 = data2.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'companyName') {
+                    filteredData = data3.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    filteredData = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    filteredData = data3.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    filteredData = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    filteredData = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+        }
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+
+    }
+
+    filterBillboardDataWithFiveKeys = (filterKeys) => {
+        const { billboardData } = this.state;
+        let data1;
+        let data2;
+        let data3;
+        let data4;
+        let filteredData;
+
+        for (var i = 0; i < filterKeys.length; i++) {
+            if (i == 0) {
+                if (filterKeys[i] == 'companyName') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data1 = billboardData.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 1) {
+                if (filterKeys[i] == 'companyName') {
+                    data2 = data1.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data2 = data1.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data2 = data1.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data2 = data1.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data2 = data1.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 2) {
+                if (filterKeys[i] == 'companyName') {
+                    data3 = data2.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data3 = data2.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data3 = data2.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data3 = data2.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data3 = data2.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 3) {
+                if (filterKeys[i] == 'companyName') {
+                    data4 = data3.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    data4 = data3.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    data4 = data3.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    data4 = data3.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    data4 = data3.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+            if (i == 4) {
+                if (filterKeys[i] == 'companyName') {
+                    filteredData = data4.filter((elem) => {
+                        return elem.companyName && filterCompanyNameArr.includes(elem.companyName)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardType') {
+                    filteredData = data4.filter((elem) => {
+                        return elem.type && filterTypesArr.includes(elem.type)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardAddres') {
+                    filteredData = data4.filter((elem) => {
+                        return elem.address && filterAddresArr.includes(elem.address)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardCity') {
+                    filteredData = data4.filter((elem) => {
+                        return elem.city && filterCityName.includes(elem.city)
+                    })
+                }
+                else if (filterKeys[i] == 'billboardState') {
+                    filteredData = data4.filter((elem) => {
+                        return elem.state && filterStateName.includes(elem.state)
+                    })
+                }
+            }
+        }
+
+        if (filteredData.length == 0) {
+            this.setState({
+                notFoundFilterData: true,
+                billboardFilterdData: filteredData,
+                showRecord: false
+            })
+        }
+        else {
+            this.setState({
+                notFoundFilterData: false,
+                billboardFilterdData: filteredData,
+                showRecord: false
+
+            })
+        }
+
+    }
+
 
     validateNumber(rule, value, callback) {
         if (isNaN(value)) {
@@ -192,7 +817,6 @@ class DashboardData extends Component {
     }
 
     billboardImageAndId = (billboardDetail, param, e) => {
-        console.log(billboardDetail, 'billboardDetail')
         if (param == 'megaSale') {
             this.setState({
                 billboardImage: billboardDetail.images,
@@ -296,7 +920,6 @@ class DashboardData extends Component {
 
     megaSaleUpload = async (values) => {
         let response = await HttpUtils.post('sendmegabillboard', values);
-        console.log(response, 'response')
         if (response) {
             if (response.code == 200) {
                 this.setState({
@@ -362,9 +985,11 @@ class DashboardData extends Component {
     }
 
     render() {
-        const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
+        const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, companyNameValue,
+            typeValue, addressValue, cityValue, stateValue, notFoundFilterData, showRecord } = this.state;
         const { getFieldDecorator } = this.props.form;
-
+        const antIcon =
+            <Icon type="loading" style={{ fontSize: '110px' }} spin />;
         const billboardRendring = (
             <div>
                 <br />
@@ -378,7 +1003,92 @@ class DashboardData extends Component {
                             <th className='tableHead' scope="col">State</th>
                             <th className='tableHead' scope="col">Action</th>
                         </thead>
-                        {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
+
+                        {/* {billboardData.length == 0 ?
+                            <div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+                            : */}
+                        {/* <div className="row"> */}
+                        {/* filterd data render */}
+                        {notFoundFilterData && billboardFilterdData.length == 0 ?
+                            <div className="noRecrdTxt">
+                                <p className="noRecordText">
+                                    No Record Found
+                                </p>
+                                <button
+                                    className="backBtn"
+                                    onClick={this.showAllRooms}
+                                >Back</button>
+                            </div>
+                            :
+                            billboardFilterdData && billboardFilterdData.map((elem, key) => {
+                                return (
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{key}</th>
+                                            <td className='tableTd'>{elem.companyName}</td>
+                                            <td className='tableTd'>{elem.address}</td>
+                                            <td className='tableTd'>{elem.city}</td>
+                                            <td className='tableTd'>{elem.state}</td>
+                                            <td className='tableTd'>
+                                                <div class="dropdown_dash">
+                                                    <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
+                                                    <div class="dropdown-content_dash">
+                                                        <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
+                                                        <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                )
+                            })
+                        }
+
+
+                        {/* all data render */}
+                        {notFoundFilterData == false && billboardFilterdData.length == 0 && showRecord ?
+                            billboardData && billboardData.map((elem, key) => {
+
+                                return (
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{key}</th>
+                                            <td className='tableTd'>{elem.companyName}</td>
+                                            <td className='tableTd'>{elem.address}</td>
+                                            <td className='tableTd'>{elem.city}</td>
+                                            <td className='tableTd'>{elem.state}</td>
+                                            <td className='tableTd'>
+                                                <div class="dropdown_dash">
+                                                    <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
+                                                    <div class="dropdown-content_dash">
+                                                        <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
+                                                        <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                )
+                            })
+                            : null
+                        }
+                        {/* </div> */}
+                        {/* // } */}
+
+
+
+
+
+
+
+
+
+
+
+
+                        {/* {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
                             return (<tbody>
                                 <tr>
                                     <th scope="row">{key}</th>
@@ -426,7 +1136,7 @@ class DashboardData extends Component {
                                     </tr>
                                 </tbody>)
                             })
-                        }
+                        } */}
                     </table>
                 </div>
             </div>
@@ -446,8 +1156,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>Company Name</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeCompany}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'companyName')}
+                                        // onChange={this.handleChangeCompany}
                                         options={companyName}
+                                        value={companyNameValue}
                                     >
                                     </Select>
                                 </div>
@@ -457,8 +1170,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>BillBoard Type</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeType}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardType')}
+                                        // onChange={this.handleChangeType}
                                         options={types}
+                                        value={typeValue}
                                     >
                                     </Select>
                                 </div>
@@ -468,8 +1184,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>Address</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeAddress}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardAddres')}
+                                        // onChange={this.handleChangeAddress}
                                         options={address}
+                                        value={addressValue}
                                     >
                                     </Select>
                                 </div>
@@ -479,8 +1198,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>City</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeCity}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardCity')}
+                                        // onChange={this.handleChangeCity}
                                         options={cities}
+                                        value={cityValue}
                                     >
                                     </Select>
                                 </div>
@@ -490,12 +1212,85 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>State</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeState}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardState')}
+                                        // onChange={this.handleChangeState}
                                         options={states}
+                                        value={stateValue}
                                     >
                                     </Select>
                                 </div>
                             </div>
+                        </div>
+                        <div className="row">
+                            {companyNameValue != "" &&
+                                <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                    <div className="filture">
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{companyNameValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'compamyName', companyNameValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                            {typeValue != '' &&
+                                <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                    <div className="filture">
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{typeValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardType', typeValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {addressValue != '' &&
+                                <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                    <div className="filture">
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{addressValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardAddres', addressValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {cityValue != '' &&
+
+                                <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                    <div className="filture">
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{cityValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardCity', cityValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {stateValue != '' &&
+                                <div className='col-xl-3 col-md-3 col-5 filterOne'>
+                                    <div className="filture">
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{stateValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardState', stateValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className='col-lg-12 d-none d-lg-block d-xl-block'>
@@ -506,8 +1301,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>Company Name</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeCompany}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'companyName')}
+                                        // onChange={this.handleChangeCompany}
                                         options={companyName}
+                                        value={companyNameValue}
                                     >
                                     </Select>
                                 </div>
@@ -517,8 +1315,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>BillBoard Type</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeType}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardType')}
+                                        // onChange={this.handleChangeType}
                                         options={types}
+                                        value={typeValue}
                                     >
                                     </Select>
                                 </div>
@@ -528,8 +1329,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>Address</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeAddress}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardAddres')}
+                                        // onChange={this.handleChangeAddress}
                                         options={address}
+                                        value={addressValue}
                                     >
                                     </Select>
                                 </div>
@@ -539,8 +1343,11 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>City</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeCity}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardCity')}
+                                        // onChange={this.handleChangeCity}
                                         options={cities}
+                                        value={cityValue}
                                     >
                                     </Select>
                                 </div>
@@ -550,12 +1357,83 @@ class DashboardData extends Component {
                                     <h4 className='text_topFilter'>State</h4>
                                 </div>
                                 <div>
-                                    <Select onChange={this.handleChangeState}
+                                    <Select
+                                        onChange={this.handleChange.bind(this, 'billboardState')}
+                                        // onChange={this.handleChangeState}
                                         options={states}
+                                        value={stateValue}
                                     >
                                     </Select>
                                 </div>
                             </div>
+                        </div>
+
+
+
+                        <div className="row">
+                            {companyNameValue != "" &&
+                                <div className='col-lg-2'>
+                                    <div>
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{companyNameValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'compamyName', companyNameValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {typeValue != '' &&
+                                <div className='col-lg-2'>
+                                    <div>
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{typeValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardType', typeValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {addressValue != '' &&
+                                <div className='col-lg-4'>
+                                    <div>
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{addressValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardAddres', addressValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {cityValue != '' &&
+                                <div className='col-lg-2'>
+                                    <div>
+                                        <div className="cross-card">
+                                            <h4 className='text_topFilter'>{cityValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardCity', cityValue)}
+                                                >x</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            {stateValue != '' &&
+                                <div className='col-lg-2'>
+                                    <div className="cross-card">
+                                        <h4 className='text_topFilter'>{stateValue.value}
+                                            <span class="close crossBtnExlpre"
+                                                onClick={this.removeValue.bind(this, 'billboardState', stateValue)}
+                                            >x</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
 

@@ -36,7 +36,6 @@ class MegaSale extends Component {
 
   render() {
     const { dropDownUser, data } = this.state;
-    console.log(data, 'data')
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
