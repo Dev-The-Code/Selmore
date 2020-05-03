@@ -52,11 +52,11 @@ const hitEndpoint = (method, endpoint, token, body) => {
 
 export const HttpUtils = {
     get: (endpoint, token) => hitEndpoint('GET', endpoint, token),
-    // delete: (endpoint, token) => hitEndpoint('DELETE', endpoint, token),
-    delete: (endpoint, data, token) => {
-        let body = JSON.stringify(data)
-        hitEndpoint('DELETE', endpoint, token, body)
-    },
+    delete: (endpoint, token) => hitEndpoint('DELETE', endpoint, token),
+    // delete: (endpoint, data, token) => {
+    //     let body = JSON.stringify(data)
+    //     hitEndpoint('DELETE', endpoint, token, body)
+    // },
     post: (endpoint, data, token) => {
         let body = JSON.stringify(data)
         return hitEndpoint('POST', endpoint, token, body)

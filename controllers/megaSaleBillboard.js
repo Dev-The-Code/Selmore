@@ -80,3 +80,74 @@ exports.getAllMegaBillBoardData = function (req, res, next) {
     }
   })
 }
+
+
+
+exports.deleteMegaSaleBillboard = function (req, res, next) {
+
+  var formData = req.body;
+  console.log(formData.objectId, 'formData')
+  megaSaleBillboard.findOneAndDelete({ "billboardId": "5d2c7d8676dc5f00176c8976" })
+  // console.log("deleted")
+  // BookedMegaSalebillboardData.save((err, data) => {
+  //   if (err) {
+  //     res.send({
+  //       code: 404,
+  //       content: err,
+  //       msg: 'user will not get from server some internal issue.'
+  //     })
+  //   }
+  //   else if (data) {
+  //     res.send({
+  //       code: 200,
+  //       content: data,
+  //       msg: 'Data Has been delete inserted'
+  //     })
+  //   }
+  // })
+
+  // BookedMegaSalebillboardData.deleteOne({ "_id": formData.objectId },
+  //   function (err, docs) {
+  //     if (err) {
+  //       res.json(err);
+  //     }
+  //     else {
+  //       res.send({
+  //         code: 200,
+  //         msg: 'Billboard data delete successfully',
+  //         content: docs
+  //       });
+  //       console.log(docs)
+  //     }
+  //     //  res.redirect('/view');
+  //   });
+
+  // BookedMegaSalebillboardData.findOneAndDelete(
+  //   { "_id": formData.objectId }
+  //   // { $set: formData },
+  //   // { multi: true }
+  // ).then((response) => {
+  //   console.log(response, 'response')
+  //   res.send({
+  //     code: 200,
+  //     msg: 'Billboard data delete successfully',
+  //     content: response
+  //   });
+  // }).catch(() => res.status(422).send({ msg: 'something went wrong' }));
+
+  // BookedMegaSalebillboardData.findByIdAndRemove(req.body.objectId, function (err, user) {
+  //   if (err) return res.status(500).send("There was a problem deleting the user.");
+  //   res.status(200).send("User: "+ user +" was deleted.");
+  // });
+
+  // BookedMegaSalebillboardData.deleteOne({
+  //   _id: req.body.objectId
+  // }, function(err, post){
+  //   if (err)
+  //     res.send(err)
+  //   res.send({
+  //     success: true
+  //   })
+  // })
+
+}
