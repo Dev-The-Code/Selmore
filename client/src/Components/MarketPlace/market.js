@@ -25,7 +25,7 @@ class Market extends Component {
         this.state = {
             categoryArr: ['Billboard ', 'Taxi Ads', 'Bus Ads', 'Bus Shelter Ads', 'Airport Ads', 'Shopping Mall', 'Streamers',
                 'Total Cinima Ads', 'Radio Ads', 'Other'],
-                citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
+            citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
                 " Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
                 " Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
@@ -1851,6 +1851,7 @@ class Market extends Component {
     render() {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cityValue, stateValue } = this.state;
+        console.log(billboardData, 'billboardData')
         const antIcon =
             <Icon type="loading" style={{ fontSize: '110px' }} spin />;
 

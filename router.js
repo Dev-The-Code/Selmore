@@ -29,6 +29,7 @@ module.exports = function (app) {
   app.post('/biddingHistory', biddingHistoryMaintene.biddingHistory);
   app.post('/getspecificBiddingbillboardHistory', biddingHistoryMaintene.getspecificBillboardBiddingHistory);
 
+  app.post('/megaSaleDelete', bookedMegaSaleBillboard.deleteMegaSaleBillboard);
 
 
 
