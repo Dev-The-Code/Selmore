@@ -44,3 +44,19 @@ body{
   line-height:  3px !important;
   zoom: 1;
 }
+
+.css-dvua67-singleValue {
+  color: hsl(0,0%,20%);
+  margin-left: 2px;
+  margin-right: 2px;
+  max-width: calc(100% - 8px);
+  overflow: visible !important;
+  position: absolute;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  box-sizing: border-box;
+}

@@ -6,7 +6,7 @@ import './dashboard.scss';
 import { Link } from "react-router-dom";
 import { Redirect } from 'react-router';
 import {
-    DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
+    DatePicker, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker, Spin
 } from 'antd';
 var filteredObj = {};
 
@@ -364,12 +364,10 @@ class DashboardData extends Component {
     render() {
         const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, biddingFormShow } = this.state;
         const { getFieldDecorator } = this.props.form;
-
         const billboardRendring = (
             <div>
-                <br />
-                <div className="scroll_table">
-                    <table className='tableData table'>
+                <div className={billboardData !== 0 ? "scroll_table" : "scroll_tableAfter"}>
+                    <table className='table tableData'>
                         <thead className="thead-dark" style={{ width: '10px' }}>
                             <th className='tableHead' scope="col">#</th>
                             <th className='tableHead' scope="col">Company Name</th>
@@ -431,77 +429,19 @@ class DashboardData extends Component {
                 </div>
             </div>
         );
+        console.log("billboardData",billboardData);
+        const antIcon =
+            <Icon type="loading" style={{ fontSize: '110px' }} spin />;
         return (
-            <div className="container">
-                <div className='row' style={{ marginLeft: '0px' }}>
-                    <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
+            <div>
+                <div className='row' style={{ marginTop: '1.5vw' }}>
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div className="col-10 col-md-10 col-lg-10 col-xl-10">
                         <div>
-                            <h2 className='text_topFilter filteration dashBoadFilter'>Filter</h2>
+                            <h2 className='filterTextDashboard'>Filteration</h2>
                         </div>
-                    </div>
-                    <div className='d-lg-none d-xl-none d-block filterOne scrolling-wrapper' >
-                        <div className="row">
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>Company Name</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeCompany}
-                                        options={companyName}
-                                    >
-                                    </Select>
-                                </div>
-                            </div>
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>BillBoard Type</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeType}
-                                        options={types}
-                                    >
-                                    </Select>
-                                </div>
-                            </div>
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>Address</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeAddress}
-                                        options={address}
-                                    >
-                                    </Select>
-                                </div>
-                            </div>
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>City</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeCity}
-                                        options={cities}
-                                    >
-                                    </Select>
-                                </div>
-                            </div>
-                            <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                <div className="filture">
-                                    <h4 className='text_topFilter'>State</h4>
-                                </div>
-                                <div>
-                                    <Select onChange={this.handleChangeState}
-                                        options={states}
-                                    >
-                                    </Select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-lg-12 d-none d-lg-block d-xl-block'>
-
-                        <div className="row">
-                            <div className='col-lg-2'>
+                        <div className="row filterBackColor">
+                            <div className='col-12 col-md-2 col-lg-2 col-xl-2'>
                                 <div>
                                     <h4 className='text_topFilter'>Company Name</h4>
                                 </div>
@@ -512,7 +452,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-lg-2'>
+                            <div className='col-12 col-md-2 col-lg-2 col-xl-2'>
                                 <div>
                                     <h4 className='text_topFilter'>BillBoard Type</h4>
                                 </div>
@@ -523,7 +463,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-lg-4'>
+                            <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
                                 <div>
                                     <h4 className='text_topFilter'>Address</h4>
                                 </div>
@@ -534,7 +474,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-lg-2'>
+                            <div className='col-12 col-md-2 col-lg-2 col-xl-2'>
                                 <div>
                                     <h4 className='text_topFilter'>City</h4>
                                 </div>
@@ -545,7 +485,7 @@ class DashboardData extends Component {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='col-lg-2'>
+                            <div className='col-12 col-md-2 col-lg-2 col-xl-2'>
                                 <div>
                                     <h4 className='text_topFilter'>State</h4>
                                 </div>
@@ -557,13 +497,20 @@ class DashboardData extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            {billboardRendring}
+                        </div>
+                        <div style={{ marginTop: '2vw' }}>
+                            {billboardData !== 0 ?
+                                <div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+                                :
+                                null
+                            }
+                        </div>
                     </div>
-
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
 
-                <div className='col-xl-12 col-lg-12 col-md-12 col-11'>
-                    {billboardRendring}
-                </div>
                 {/* {megaSaleFormShow ? */}
                 <div class="modal fade" id="megaForm">
                     <div class="modal-dialog">

@@ -101,7 +101,6 @@ class BillBoard extends Component {
         }
     }
     // onChange = g => {
-    //     // console.log('radio checked', g.target.radioValue);
     //     this.setState({
     //         radioValue: g.target.radioValue,
     //     });
@@ -408,7 +407,7 @@ class BillBoard extends Component {
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values , 'values');
+        console.log(values, 'values');
 
         let response = await HttpUtils.post('listadd', values);
         console.log(response);
@@ -442,723 +441,717 @@ class BillBoard extends Component {
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
             return (
-                <div className='row'>
-                    <div className="container">
-                        <div className="row">
-                            <div className='mainDive container'>
-                                <div className='formDiv up' key={index}>
-                                    {/* animation of page */}
-                                    <ReactCSSTransitionGroup transitionName="fade"
-                                        transitionAppear={true} transitionAppearTimeout={500}
-                                        transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                                        <Form.Item
-                                            className="FormListLable"
-                                            label={index === 0 ? 'BillBoard Detail' : ''}
-                                            style={{ textAlign: 'left' }}
-                                            required={false}
-                                            key={k}
-                                        ><br />
-                                            <div className="row">
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="type"></label>
-                                                        <Form.Item>
-                                                            <p className="FormListLable">BillBoard Type:</p>
-                                                            {getFieldDecorator(`type${index}`, {
-                                                                initialValue: { label: this.state.type, value: this.state.type },
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter a type',
-                                                                }],
-                                                            })(
-                                                                <Select
-                                                                    onChange={this.handleChange}
-                                                                    options={types}
-                                                                    style={{height:'20px'}}
-                                                                // defaultValue={{ label: this.state.type, value: this.state.type }}
-                                                                >
-                                                                </Select>
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group  up">
-                                                        <label for="category"></label>
-                                                        <Form.Item>
-                                                            <p className="FormListLable">Category:</p>
-                                                            {getFieldDecorator(`category${index}`, {
-                                                                initialValue: { label: this.state.category, value: this.state.category },
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter a category',
-                                                                }],
-                                                            })(
-                                                                <Select
-                                                                    onChange={this.handleChange}
-                                                                    options={categories}
-                                                                // defaultValue={{ label: this.state.category, value: this.state.category }}
-                                                                >
-                                                                </Select>
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="facing"></label>
-                                                        <Form.Item>
-                                                            <p className="FormListLable">Facing:</p>
-                                                            {getFieldDecorator(`facing${index}`, {
-                                                                initialValue: { label: this.state.facing, value: this.state.facing },
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter a facing',
-                                                                }],
-                                                            })(
-                                                                <Select
-                                                                    onChange={this.handleChange}
-                                                                    options={facings}
-                                                                // defaultValue={{ label: this.state.facing, value: this.state.facing }}
-                                                                >
-                                                                </Select>
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="size"></label>
-                                                        <Form.Item>
-                                                            {getFieldDecorator(`size${index}`, {
-                                                                initialValue: this.state.size,
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter a size',
-                                                                    whitespace: true
-                                                                }],
-                                                            })(
-                                                                <Input
-                                                                    type="text"
-                                                                    className={'form-control backcolor'}
-                                                                    id={"size"}
-                                                                    name="size"
-                                                                    placeholder="Enter billboard size"
-                                                                />
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="latitude"></label>
-                                                        <Form.Item>
-                                                            <br />
-                                                            {getFieldDecorator(`latitude${index}`, {
-                                                                initialValue: this.state.latitude,
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter latitude',
-                                                                    whitespace: true
-                                                                },
-                                                                { validator: this.validateNumber.bind(this) }]
-                                                            })(
-                                                                <Input
-                                                                    type="text"
-                                                                    className={'form-control '}
-                                                                    id="latitude"
-                                                                    name="latitude"
-                                                                    placeholder="Enter latitude"
-                                                                />
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="longitude"></label>
-                                                        <Form.Item>
-                                                            {getFieldDecorator(`longitude${index}`, {
-                                                                initialValue: this.state.longitude,
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter longitude',
-                                                                    whitespace: true
-                                                                },
-                                                                { validator: this.validateNumber.bind(this) }]
-                                                            })(
-                                                                <Input
-                                                                    type="text"
-                                                                    className={'form-control '}
-                                                                    id="longitude"
-                                                                    name="longitude"
-                                                                    placeholder="Enter longitude"
-                                                                />
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-4"></div>
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="vitalbox">
-                                                        <div className="row">
-                                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                                <FormItem label="Images">
-                                                                    {getFieldDecorator(`images${index}`, {
-                                                                        initialValue: this.state.imgArr,
-                                                                        rules: [{
-                                                                            required: true,
-                                                                            message: 'Please upload your Images!',
-                                                                            whitespace: true
-                                                                        }],
-                                                                    })(
-                                                                        <div className="clearfix">
-                                                                            <Upload
-                                                                                // fileList={this.state.imgArr}
-                                                                                onChange={this.onChange.bind(this, index)}>
-                                                                                <Button>
-                                                                                    <Icon type="upload" /> Upload
-                                                                                </Button>
-                                                                            </Upload>
-                                                                        </div>
-                                                                    )}
-                                                                </FormItem>
-                                                            </div>
-                                                            <br />
-                                                            <div className='row'>
-                                                                {imgArr.length >= 0 ? imgArr.map((elem, i) => {
-                                                                    return (
-                                                                        <div className='col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
-                                                                            <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px", margin: '10px' }} />
-                                                                        </div>
-                                                                    )
-                                                                }) : null}
-                                                            </div>
-                                                            {this.state.noChooseFile ?
-                                                                null
-                                                                : <div >
-                                                                    <h6 style={{ marginTop: "10px", }}>&nbsp;&nbsp; No File Chosen</h6>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
-                                                    <div className="form-group up">
-                                                        <label for="traffic"></label>
-                                                        <Form.Item>
-                                                            {getFieldDecorator(`traffic${index}`, {
-                                                                initialValue: this.state.traffic,
-                                                                rules: [{
-                                                                    required: true,
-                                                                    message: 'Please enter a type',
-                                                                    whitespace: true
-                                                                },
-                                                                { validator: this.validateNumber.bind(this) }],
-                                                            })(
-                                                                <Input
-                                                                    type="text"
-                                                                    className={'form-control backcolor'}
-                                                                    id={"traffic"}
-                                                                    name="traffic"
-                                                                    placeholder="Enter traffic count"
-                                                                />
-                                                            )}
-                                                        </Form.Item>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id='addWeiget'>
-                                                <div className="up"> Billboard Road City Point Details </div>
-                                                <br />
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="width"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`width${index}`, {
-                                                                    initialValue: this.state.width,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter Width',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { validator: this.validateNumber.bind(this) }]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"width"}
-                                                                        name="width"
-                                                                        placeholder="Enter Width"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="height"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`height${index}`, {
-                                                                    initialValue: this.state.height,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter Height',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { validator: this.validateNumber.bind(this) }]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"height"}
-                                                                        name="height"
-                                                                        placeholder="Enter Height"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="lightning"></label>
-                                                            <Form.Item>
-                                                                <p className="FormListLable">Lightning:</p>
-                                                                {getFieldDecorator(`lightning${index}`, {
-                                                                    initialValue: { label: this.state.lightning, value: this.state.lightning },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter Lightning',
-                                                                    }],
-                                                                })(
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={lightnings}
-                                                                    // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="description"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`description${index}`, {
-                                                                    initialValue: this.state.description,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter description',
-                                                                        whitespace: true
-                                                                    }],
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"description"}
-                                                                        name="description"
-                                                                        placeholder="Enter description"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="status"></label>
-                                                            <Form.Item>
-                                                                <p className="FormListLable">Status:</p>
-                                                                {getFieldDecorator(`status${index}`, {
-                                                                    initialValue: { label: this.state.status, value: this.state.status },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter status',
-                                                                    }],
-                                                                })(
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={statuses}
-                                                                    // defaultValue={{ label: this.state.status, value: this.state.status }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <div className="up"> Military Road City Point Rate Card </div>
-                                                <br />
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="dailyRate"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`dailyRate${index}`, {
-                                                                    initialValue: this.state.dailyRate,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter daily rate',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { 
-                                                                        validator: this.validateNumber.bind(this) 
-                                                                    }
-                                                                ]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"dailyRate"}
-                                                                        name="dailyRate"
-                                                                        placeholder="Enter daily rate"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="weeklyRate"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`weeklyRate${index}`, {
-                                                                    initialValue: this.state.weeklyRate,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter weekly rate',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { 
-                                                                        validator: this.validateNumber.bind(this) 
-                                                                    }]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"weeklyRate"}
-                                                                        name="weeklyRate"
-                                                                        placeholder="Enter weekly rate"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="monthlyRate"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`monthlyRate${index}`, {
-                                                                    initialValue: this.state.monthlyRate,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter monthly rate',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { 
-                                                                        validator: this.validateNumber.bind(this) 
-                                                                    }]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"monthlyRate"}
-                                                                        name="monthlyRate"
-                                                                        placeholder="Enter monthly rate"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="yearlyRate"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`yearlyRate${index}`, {
-                                                                    initialValue: this.state.yearlyRate,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter yearly rate',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { 
-                                                                        validator: this.validateNumber.bind(this) 
-                                                                    }]
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"yearlyRate"}
-                                                                        name="yearlyRate"
-                                                                        placeholder="Enter yearly rate"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <div className="up"> Military Road City Point Demographics </div>
-                                                <br />
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="audianceType"></label>
-                                                            <Form.Item>
-                                                                <p className="FormListLable">Audiance Type:</p>
-                                                                {getFieldDecorator(`audianceType${index}`, {
-                                                                    initialValue: { label: this.state.audianceType, value: this.state.audianceType },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter audiance type',
-                                                                    }],
-                                                                })(
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={audianceTypes}
-                                                                    // defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="dailyVisitor"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`dailyVisitor${index}`, {
-                                                                    initialValue: this.state.dailyVisitor,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter daily visitor',
-                                                                        whitespace: true
-                                                                    },
-                                                                    { 
-                                                                        validator: this.validateNumber.bind(this) 
-                                                                    }]
-                                                                })(
-                                                                    <Input
-                                                                        className={'form-control backcolor'}
-                                                                        id={"dailyVisitor"}
-                                                                        name="dailyVisitor"
-                                                                        placeholder="Enter daily visitor"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="nearBy"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`nearBy${index}`, {
-                                                                    initialValue: this.state.nearBy,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter near By',
-                                                                        whitespace: true
-                                                                    }],
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"nearBy"}
-                                                                        name="nearBy"
-                                                                        placeholder="Enter near By"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <div className="up"> Military Road City Point Location </div>
-                                                <br />
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="address"></label>
-                                                            <Form.Item>
-                                                                {getFieldDecorator(`address${index}`, {
-                                                                    initialValue: this.state.address,
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter address',
-                                                                        whitespace: true
-                                                                    }],
-                                                                })(
-                                                                    <Input
-                                                                        type="text"
-                                                                        className={'form-control backcolor'}
-                                                                        id={"address"}
-                                                                        name="address"
-                                                                        placeholder="Enter address"
-                                                                    />
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="city"></label>
-                                                            <Form.Item>
-                                                                <p className="FormListLable">City:</p>
-                                                                {getFieldDecorator(`city${index}`, {
-                                                                    initialValue: { label: this.state.city, value: this.state.city },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter city',
-                                                                    }],
-                                                                })(
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={cities}
-                                                                    // defaultValue={{ label: this.state.city, value: this.state.city }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <label for="state"></label>
-                                                            <Form.Item>
-                                                                <p className="FormListLable">States:</p>
-                                                                {getFieldDecorator(`state${index}`, {
-                                                                    initialValue: { label: this.state.state, value: this.state.state },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter state',
-                                                                    }],
-                                                                })(
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={states}
-                                                                    // defaultValue={{ label: this.state.state, value: this.state.state }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
-                                                        <div className="form-group up">
-                                                            <Form.Item>
-                                                                <p className="FormListLable">Country:</p>
-                                                                {getFieldDecorator(`country${index}`, {
-                                                                    initialValue: { label: this.state.country, value: this.state.country },
-                                                                    rules: [{
-                                                                        required: true,
-                                                                        message: 'Please enter country',
-                                                                    }],
-                                                                })(
-
-                                                                    <Select
-                                                                        onChange={this.handleChange}
-                                                                        options={country}
-                                                                    // defaultValue={{ label: this.state.country, value: this.state.country }}
-                                                                    >
-                                                                    </Select>
-                                                                )}
-                                                            </Form.Item>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {keys.length > 1 ? (
-                                                <Icon
-                                                    className="dynamic-delete-button btn btn-danger iconBtn fa fa-minus"
-                                                    onClick={() => this.removeForm(k)}
-                                                />
-                                            ) : null}
+                <div className='up' key={index}>
+                    {/* animation of page */}
+                    <ReactCSSTransitionGroup transitionName="fade"
+                        transitionAppear={true} transitionAppearTimeout={500}
+                        transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                        <Form.Item
+                            className="FormListLable"
+                            label={index === 0 ? 'BillBoard Detail' : ''}
+                            style={{ textAlign: 'left' }}
+                            required={false}
+                            key={k}
+                        ><br />
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="type"></label>
+                                        <Form.Item>
+                                            <p className="FormListLable">BillBoard Type:</p>
+                                            {getFieldDecorator(`type${index}`, {
+                                                initialValue: { label: this.state.type, value: this.state.type },
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter a type',
+                                                }],
+                                            })(
+                                                <Select
+                                                    onChange={this.handleChange}
+                                                    options={types}
+                                                    style={{ height: '20px' }}
+                                                // defaultValue={{ label: this.state.type, value: this.state.type }}
+                                                >
+                                                </Select>
+                                            )}
                                         </Form.Item>
-                                    </ReactCSSTransitionGroup>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div >
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group  up">
+                                        <label for="category"></label>
+                                        <Form.Item>
+                                            <p className="FormListLable">Category:</p>
+                                            {getFieldDecorator(`category${index}`, {
+                                                initialValue: { label: this.state.category, value: this.state.category },
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter a category',
+                                                }],
+                                            })(
+                                                <Select
+                                                    onChange={this.handleChange}
+                                                    options={categories}
+                                                // defaultValue={{ label: this.state.category, value: this.state.category }}
+                                                >
+                                                </Select>
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="facing"></label>
+                                        <Form.Item>
+                                            <p className="FormListLable">Facing:</p>
+                                            {getFieldDecorator(`facing${index}`, {
+                                                initialValue: { label: this.state.facing, value: this.state.facing },
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter a facing',
+                                                }],
+                                            })(
+                                                <Select
+                                                    onChange={this.handleChange}
+                                                    options={facings}
+                                                // defaultValue={{ label: this.state.facing, value: this.state.facing }}
+                                                >
+                                                </Select>
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="size"></label>
+                                        <Form.Item>
+                                            {getFieldDecorator(`size${index}`, {
+                                                initialValue: this.state.size,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter a size',
+                                                    whitespace: true
+                                                }],
+                                            })(
+                                                <Input
+                                                    type="text"
+                                                    className={'form-control backcolor'}
+                                                    id={"size"}
+                                                    name="size"
+                                                    placeholder="Enter billboard size"
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="latitude"></label>
+                                        <Form.Item>
+                                            <br />
+                                            {getFieldDecorator(`latitude${index}`, {
+                                                initialValue: this.state.latitude,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter latitude',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    type="text"
+                                                    className={'form-control '}
+                                                    id="latitude"
+                                                    name="latitude"
+                                                    placeholder="Enter latitude"
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="longitude"></label>
+                                        <Form.Item>
+                                            {getFieldDecorator(`longitude${index}`, {
+                                                initialValue: this.state.longitude,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter longitude',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }]
+                                            })(
+                                                <Input
+                                                    type="text"
+                                                    className={'form-control '}
+                                                    id="longitude"
+                                                    name="longitude"
+                                                    placeholder="Enter longitude"
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xl-7 col-lg-7 col-md-7 col-12">
+                                    <div className="vitalbox">
+                                        <div className="row">
+                                            <div className="col-xl-8 col-lg-8 col-md-8 col-12">
+                                                <FormItem label="Images">
+                                                    {getFieldDecorator(`images${index}`, {
+                                                        initialValue: this.state.imgArr,
+                                                        rules: [{
+                                                            required: true,
+                                                            message: 'Please upload your Images!',
+                                                            whitespace: true
+                                                        }],
+                                                    })(
+                                                        <div className="clearfix">
+                                                            <Upload
+                                                                // fileList={this.state.imgArr}
+                                                                onChange={this.onChange.bind(this, index)}>
+                                                                <Button>
+                                                                    <Icon type="upload" /> Upload
+                                                                                </Button>
+                                                            </Upload>
+                                                        </div>
+                                                    )}
+                                                </FormItem>
+                                            </div>
+                                            <br />
+                                            <div className='row'>
+                                                {imgArr.length >= 0 ? imgArr.map((elem, i) => {
+                                                    return (
+                                                        <div className='col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
+                                                            <img src={`${elem}`} alt={i} style={{ width: '70px', height: "70px", margin: '10px' }} />
+                                                        </div>
+                                                    )
+                                                }) : null}
+                                            </div>
+                                            {this.state.noChooseFile ?
+                                                null
+                                                : <div >
+                                                    <h6 style={{ marginTop: "10px", }}>&nbsp;&nbsp; No File Chosen</h6>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div className="row">
+                                <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div className="form-group up">
+                                        <label for="traffic"></label>
+                                        <Form.Item>
+                                            {getFieldDecorator(`traffic${index}`, {
+                                                initialValue: this.state.traffic,
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter a type',
+                                                    whitespace: true
+                                                },
+                                                { validator: this.validateNumber.bind(this) }],
+                                            })(
+                                                <Input
+                                                    type="text"
+                                                    className={'form-control backcolor'}
+                                                    id={"traffic"}
+                                                    name="traffic"
+                                                    placeholder="Enter traffic count"
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='addWeiget'>
+                                <div className="up"> Billboard Road City Point Details </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="width"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`width${index}`, {
+                                                    initialValue: this.state.width,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter Width',
+                                                        whitespace: true
+                                                    },
+                                                    { validator: this.validateNumber.bind(this) }]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"width"}
+                                                        name="width"
+                                                        placeholder="Enter Width"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="height"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`height${index}`, {
+                                                    initialValue: this.state.height,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter Height',
+                                                        whitespace: true
+                                                    },
+                                                    { validator: this.validateNumber.bind(this) }]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"height"}
+                                                        name="height"
+                                                        placeholder="Enter Height"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="lightning"></label>
+                                            <Form.Item>
+                                                <p className="FormListLable">Lightning:</p>
+                                                {getFieldDecorator(`lightning${index}`, {
+                                                    initialValue: { label: this.state.lightning, value: this.state.lightning },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter Lightning',
+                                                    }],
+                                                })(
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={lightnings}
+                                                    // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="description"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`description${index}`, {
+                                                    initialValue: this.state.description,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter description',
+                                                        whitespace: true
+                                                    }],
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"description"}
+                                                        name="description"
+                                                        placeholder="Enter description"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="status"></label>
+                                            <Form.Item>
+                                                <p className="FormListLable">Status:</p>
+                                                {getFieldDecorator(`status${index}`, {
+                                                    initialValue: { label: this.state.status, value: this.state.status },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter status',
+                                                    }],
+                                                })(
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={statuses}
+                                                    // defaultValue={{ label: this.state.status, value: this.state.status }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="up"> Military Road City Point Rate Card </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="dailyRate"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`dailyRate${index}`, {
+                                                    initialValue: this.state.dailyRate,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter daily rate',
+                                                        whitespace: true
+                                                    },
+                                                    {
+                                                        validator: this.validateNumber.bind(this)
+                                                    }
+                                                    ]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"dailyRate"}
+                                                        name="dailyRate"
+                                                        placeholder="Enter daily rate"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="weeklyRate"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`weeklyRate${index}`, {
+                                                    initialValue: this.state.weeklyRate,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter weekly rate',
+                                                        whitespace: true
+                                                    },
+                                                    {
+                                                        validator: this.validateNumber.bind(this)
+                                                    }]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"weeklyRate"}
+                                                        name="weeklyRate"
+                                                        placeholder="Enter weekly rate"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="monthlyRate"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`monthlyRate${index}`, {
+                                                    initialValue: this.state.monthlyRate,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter monthly rate',
+                                                        whitespace: true
+                                                    },
+                                                    {
+                                                        validator: this.validateNumber.bind(this)
+                                                    }]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"monthlyRate"}
+                                                        name="monthlyRate"
+                                                        placeholder="Enter monthly rate"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="yearlyRate"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`yearlyRate${index}`, {
+                                                    initialValue: this.state.yearlyRate,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter yearly rate',
+                                                        whitespace: true
+                                                    },
+                                                    {
+                                                        validator: this.validateNumber.bind(this)
+                                                    }]
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"yearlyRate"}
+                                                        name="yearlyRate"
+                                                        placeholder="Enter yearly rate"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="up"> Military Road City Point Demographics </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="audianceType"></label>
+                                            <Form.Item>
+                                                <p className="FormListLable">Audiance Type:</p>
+                                                {getFieldDecorator(`audianceType${index}`, {
+                                                    initialValue: { label: this.state.audianceType, value: this.state.audianceType },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter audiance type',
+                                                    }],
+                                                })(
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={audianceTypes}
+                                                    // defaultValue={{ label: this.state.audianceType, value: this.state.audianceType }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="dailyVisitor"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`dailyVisitor${index}`, {
+                                                    initialValue: this.state.dailyVisitor,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter daily visitor',
+                                                        whitespace: true
+                                                    },
+                                                    {
+                                                        validator: this.validateNumber.bind(this)
+                                                    }]
+                                                })(
+                                                    <Input
+                                                        className={'form-control backcolor'}
+                                                        id={"dailyVisitor"}
+                                                        name="dailyVisitor"
+                                                        placeholder="Enter daily visitor"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="nearBy"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`nearBy${index}`, {
+                                                    initialValue: this.state.nearBy,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter near By',
+                                                        whitespace: true
+                                                    }],
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"nearBy"}
+                                                        name="nearBy"
+                                                        placeholder="Enter near By"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div className="up"> Military Road City Point Location </div>
+                                <br />
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="address"></label>
+                                            <Form.Item>
+                                                {getFieldDecorator(`address${index}`, {
+                                                    initialValue: this.state.address,
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter address',
+                                                        whitespace: true
+                                                    }],
+                                                })(
+                                                    <Input
+                                                        type="text"
+                                                        className={'form-control backcolor'}
+                                                        id={"address"}
+                                                        name="address"
+                                                        placeholder="Enter address"
+                                                    />
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="city"></label>
+                                            <Form.Item>
+                                                <p className="FormListLable">City:</p>
+                                                {getFieldDecorator(`city${index}`, {
+                                                    initialValue: { label: this.state.city, value: this.state.city },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter city',
+                                                    }],
+                                                })(
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={cities}
+                                                    // defaultValue={{ label: this.state.city, value: this.state.city }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <label for="state"></label>
+                                            <Form.Item>
+                                                <p className="FormListLable">States:</p>
+                                                {getFieldDecorator(`state${index}`, {
+                                                    initialValue: { label: this.state.state, value: this.state.state },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter state',
+                                                    }],
+                                                })(
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={states}
+                                                    // defaultValue={{ label: this.state.state, value: this.state.state }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-xl-6 col-lg-6 col-md-6 col-12">
+                                        <div className="form-group up">
+                                            <Form.Item>
+                                                <p className="FormListLable">Country:</p>
+                                                {getFieldDecorator(`country${index}`, {
+                                                    initialValue: { label: this.state.country, value: this.state.country },
+                                                    rules: [{
+                                                        required: true,
+                                                        message: 'Please enter country',
+                                                    }],
+                                                })(
+
+                                                    <Select
+                                                        onChange={this.handleChange}
+                                                        options={country}
+                                                    // defaultValue={{ label: this.state.country, value: this.state.country }}
+                                                    >
+                                                    </Select>
+                                                )}
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {keys.length > 1 ? (
+                                // <Icon
+                                //     className="dynamic-delete-button btn btn-danger iconBtn fa fa-minus"
+                                //     onClick={() => this.removeForm(k)}
+                                // />
+                                <button type="button" onClick={() => this.removeForm(k)} className='btn btn-danger iconBtnRemove up'>
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            ) : null}
+                        </Form.Item>
+                    </ReactCSSTransitionGroup>
+                </div>
             )
         });
         return (
-            <div className='row' >
-                <div className='mainDive container shde'>
-                    {/* <form>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'normal')} checked />Normal
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'bidd')} style={{ marginLeft: '5vw' }} />Bidding
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio" onClick={this.drnShoww.bind(this, 'mega')} style={{ marginLeft: '5vw' }} />Mega Sale
-                        </label>
-                    </form> */}
-                    <br />
-                    <Form onSubmit={this.handleSubmit.bind(this)}>
-                        <div className="col-md-8 col-xl-8" style={{ paddingLeft: '0.6%' }}>
+            <div>
+                <div className='row'>
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
+                    <div className="col-10 col-md-10 col-lg-10 col-xl-10 formShade">
+                        <Form onSubmit={this.handleSubmit.bind(this)}>
                             <div className="form-group up">
-                                <Form.Item className="list_form">
-                                    <p  className="FormListLable">Company Name:</p>
-                                    {getFieldDecorator('company', {
-                                        initialValue: { label: this.state.compaNames, value: this.state.compaNames },
-                                        rules: [{
-                                            required: true,
-                                            message: 'Please enter your company name!',
-                                        }],
-                                    })(
-                                        <Select
-                                            // initialValue={this.state.compaNames}
-                                            onChange={this.handleChange}
-                                            options={companyName}
-                                            style={{ textAlign: 'left' }}
-                                            // defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
-                                            Select-placeholder="company"
-                                        ></Select>
-                                    )}
-                                </Form.Item>
+                                <div className="row">
+                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                        <Form.Item>
+                                            <p className="FormListLable">Company Name:</p>
+                                            {getFieldDecorator('company', {
+                                                initialValue: { label: this.state.compaNames, value: this.state.compaNames },
+                                                rules: [{
+                                                    required: true,
+                                                    message: 'Please enter your company name!',
+                                                }],
+                                            })(
+                                                <Select
+                                                    // initialValue={this.state.compaNames}
+                                                    onChange={this.handleChange}
+                                                    options={companyName}
+                                                    style={{ textAlign: 'left' }}
+                                                    // defaultValue={{ label: this.state.compaNames, value: this.state.compaNames }}
+                                                    Select-placeholder="company"
+                                                ></Select>
+                                            )}
+                                        </Form.Item>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        {formItems}
-
-                        <div className="col-md-1" style={{ paddingLeft: '0.6%' }}>
+                            {formItems}
                             <FormItem >
-                                <Button type="dashed" onClick={this.addForm} className='btn btn-primary iconBtn up'>
-                                    {/* <Icon className='fa fa-plus' /> */}
-                                    {/* <PlusOutlined /> */}
-                                </Button>
+                                <button type="button" onClick={this.addForm} className='btn btn-primary iconBtn up'>
+                                    More<i className='fa fa-plus'></i>
+                                </button>
                             </FormItem>
-                        </div>
-                        <div className="col-md-11"></div>
-                        <div className="col-md-2 col-4" style={{ paddingLeft: '0.6%' }}>
                             <Form.Item>
                                 <Button className="btn btn-primary btnapple up"
                                     type="primary" htmlType="submit"
@@ -1174,8 +1167,9 @@ class BillBoard extends Component {
                                     null
                                 }
                             </Form.Item>
-                        </div>
-                    </Form>
+                        </Form>
+                    </div>
+                    <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
             </div>
         )
