@@ -24,23 +24,22 @@ class MegaSalepanel1 extends Component {
 		this.state = {
 
 			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
-				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
-				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
-				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
-				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
-				" Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
-				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
-				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
-				" Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
-				" Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-				" Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
-				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
-				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
-				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+			" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+			" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+			" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+			" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+			" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+			" Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+			" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+			" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
+			"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+			" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+			" Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+			" Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+			" Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+			" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+			" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+			" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
 			statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
 			cities: [],
 			states: [],
@@ -62,19 +61,48 @@ class MegaSalepanel1 extends Component {
 			notFoundFilterData: false,
 			showRecord: true,
 			cityValue: '',
-			stateValue: ''
+			stateValue: '',
+			i: 0
 		}
 	}
-	componentDidMount() {
+	
+
+	componentWillUpdate() {
+		const { i } = this.state;
+		let dataForFilter = this.props.filterData;
+
+		if (dataForFilter && i == 0) {
+			filterCityName = dataForFilter.city;
+			filterStateName = dataForFilter.state;
+			let cityDropValue = {
+				label: dataForFilter.city[0],
+				value: dataForFilter.city[0]
+			}
+			let stateDropValue = {
+				label: dataForFilter.state[0],
+				value: dataForFilter.state[0]
+			}
+			this.setState({
+				cityValue: cityDropValue,
+				stateValue: stateDropValue,
+				i: 1
+			})
+			this.filterKeysGet()
+		}
+	}
+
+	componentWillMount() {
 		this.megaSalebillBoardData();
-		this.getCitiesAndStates()
+		this.getCitiesAndStates();
 	}
 
 	componentWillUnmount() {
 		if (this.interval) {
 			clearInterval(this.interval);
 		}
+
 	}
+
 	getCitiesAndStates = () => {
 		const { citiesArr, statesArr } = this.state;
 
@@ -92,6 +120,7 @@ class MegaSalepanel1 extends Component {
 
 	megaSalebillBoardData = async () => {
 		let response = await HttpUtils.get('getallmegabillboard');
+
 		let MegaSaleBillboards = [];
 		if (response.code == 200) {
 			this.interval = setInterval(() => {
@@ -113,8 +142,14 @@ class MegaSalepanel1 extends Component {
 					megaSaleBiilboards: MegaSaleBillboards
 				})
 				MegaSaleBillboards = [];
+
+
 			}, 1000);
+
 		}
+
+
+
 	}
 
 
@@ -167,6 +202,7 @@ class MegaSalepanel1 extends Component {
 
 	//get dropdown values
 	handleChange = (dropDownParam, dropDownValueObj) => {
+		console.log(dropDownValueObj, 'dropDownValueObj')
 		let dropDownValue = []
 		dropDownValue.push(dropDownValueObj.value)
 		if (dropDownParam == 'city') {
@@ -390,7 +426,6 @@ class MegaSalepanel1 extends Component {
 				})
 			}
 		}
-		console.log(data, 'filteredData with 1 keys')
 		if (data.length == 0) {
 			this.setState({
 				notFoundFilterData: true,
@@ -504,6 +539,11 @@ class MegaSalepanel1 extends Component {
 
 			})
 		}
+		console.log(megaSaleBiilboards, 'megaSaleBiilboards')
+
+		console.log(data1, 'data1')
+		console.log(filteredData, 'filteredData')
+
 	}
 
 	filterBillboardDataWithThreeKeys = (filterKeys) => {
@@ -1930,7 +1970,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																value={cityValue}
+																	value={cityValue}
 																	onChange={this.handleChange.bind(this, 'city')}
 																	options={cities}
 																>
@@ -1942,7 +1982,7 @@ class MegaSalepanel1 extends Component {
 														<Row className="fasla1" >
 															<Col>
 																<Select
-																value={stateValue}
+																	value={stateValue}
 																	onChange={this.handleChange.bind(this, 'state')}
 																	options={states}
 																>

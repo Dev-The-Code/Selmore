@@ -3,7 +3,7 @@ import Header from '../Header/mainheader';
 import Footer from '../Footer/mainFooter';
 import './browseBillFromTopCities.scss';
 import { Link, Redirect } from 'react-router-dom';
-import { Spin , Icon} from 'antd';
+import { Spin, Icon } from 'antd';
 import { HttpUtils } from '../../Services/HttpUtils';
 
 
@@ -17,15 +17,14 @@ class BrowseBillFromTopCities extends Component {
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
                 " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
-                " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+                " Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
                 "Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-                " Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+                " Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+                " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+                " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
@@ -100,7 +99,7 @@ class BrowseBillFromTopCities extends Component {
         })
     }
     render() {
-        const { bilboardData, directMarket, cityName, sliceCities ,dropDownUser ,cities  } = this.state;
+        const { bilboardData, directMarket, cityName, sliceCities, dropDownUser, cities } = this.state;
         // console.log("TopCitiesBillboard -> render -> cities", cities)
         if (directMarket) {
             return <Redirect to={{
@@ -109,7 +108,7 @@ class BrowseBillFromTopCities extends Component {
             }} />
         }
         const antIcon =
-			<Icon type="loading" style={{ fontSize: '110px' }} spin />;
+            <Icon type="loading" style={{ fontSize: '110px' }} spin />;
         return (
             <div className="animated animatedFadeInUp fadeInUp">
 
@@ -127,8 +126,8 @@ class BrowseBillFromTopCities extends Component {
                     <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                     <div className="col-10 col-md-10 col-lg-10 col-xl-10">
                         {cities.length == 0 ?
-							<div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
-							:null}
+                            <div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
+                            : null}
                         <div className="row">
                             {cities && cities.map((elem, key) => {
                                 return (

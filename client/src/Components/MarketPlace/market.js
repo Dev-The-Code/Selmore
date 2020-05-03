@@ -31,15 +31,14 @@ class Market extends Component {
                 " Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
                 " Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
                 " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-                " Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", " Hafizabad", "Hyderabad",
-                " Haroonabad", " Hasilpur", " Haveli Lakha", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+                " Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
                 " Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore", " Islamabad",
+                " Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
                 "Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke", " Mianwali Bangla",
-                " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Renala Khurd", " Pakpattan", " Pattoki",
-                " Pindi Bhattian", " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Rabwah",
-                " Raiwind", " Rajanpur", " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+                " Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+                " Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+                " Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+                " Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
                 " Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
                 " Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
                 " Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
@@ -81,10 +80,10 @@ class Market extends Component {
         else {
             this.billBoradDetails();
         }
+        this.getCitiesAndStates()
     }
 
     billBoradDetails = async () => {
-        const { citiesArr, statesArr, categoryArr } = this.state;
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
@@ -94,22 +93,34 @@ class Market extends Component {
         // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
         //create a range array value of width height daily visitor cities & states
+        if (data) {
+            if (data.code == 200) {
+                this.setState({
+                    billboardData: data,
+
+                })
+            }
+
+        }
+    }
+
+    getCitiesAndStates = () => {
+        const { citiesArr, statesArr, categoryArr } = this.state;
+
         let city = citiesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let catee = categoryArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
         let state = statesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        await
-            this.setState({
-                billboardData: data,
-                cities: city,
-                category: catee,
-                states: state
-            })
+        let catee = categoryArr.map((elem, i) => {
+            return { label: elem, value: elem, id: i }
+        })
+        this.setState({
+            cities: city,
+            category: catee,
+            states: state
+        })
     }
 
 
@@ -1840,6 +1851,7 @@ class Market extends Component {
     render() {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cityValue, stateValue } = this.state;
+        console.log(billboardData, 'billboardData')
         const antIcon =
             <Icon type="loading" style={{ fontSize: '110px' }} spin />;
 
@@ -2630,5 +2642,6 @@ class Market extends Component {
         )
     }
 }
+
 const WrappedDynamicFieldSet = Form.create()(Market);
 export default WrappedDynamicFieldSet;

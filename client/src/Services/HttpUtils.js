@@ -1,13 +1,13 @@
 import { AsyncStorage } from '@callstack/async-storage'
 
- const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:5000';
 // const BASE_URL = 'https://salmore.herokuapp.com';
 // const BASE_URL = 'https://selmoremedia.com';
 
 const headersFor = (token) => {
     let headers = {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': "application/json"
     };
     if (token) headers['Authorization'] = 'Bearer ' + token;
     return headers;
@@ -53,6 +53,10 @@ const hitEndpoint = (method, endpoint, token, body) => {
 export const HttpUtils = {
     get: (endpoint, token) => hitEndpoint('GET', endpoint, token),
     delete: (endpoint, token) => hitEndpoint('DELETE', endpoint, token),
+    // delete: (endpoint, data, token) => {
+    //     let body = JSON.stringify(data)
+    //     hitEndpoint('DELETE', endpoint, token, body)
+    // },
     post: (endpoint, data, token) => {
         let body = JSON.stringify(data)
         return hitEndpoint('POST', endpoint, token, body)

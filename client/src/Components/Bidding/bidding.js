@@ -11,11 +11,16 @@ class Bidding extends Component {
     super(props)
     this.state = {
       dropDownUser: false,
+      data: ''
     }
   }
-
+  
   componentWillMount() {
     window.scrollTo(0, 0);
+    let data = this.props.location.state;
+    this.setState({
+      data: data,
+    })
   }
 
   showDropDown = () => {
@@ -31,13 +36,13 @@ class Bidding extends Component {
   }
 
   render() {
-    const { dropDownUser } = this.state;
+    const { dropDownUser, data } = this.state;
     return (
       <div>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
-        <Bidbanner advertise={'BIDDING'} bred={'Bidding'} />
-        <Biddpanel1 />
-        <Footer/>
+        <Bidbanner advertise={'BIDDING'} bred={'Bidding'}  />
+        <Biddpanel1 filterData={data}/>
+        <Footer />
       </div>
     );
   }
