@@ -22,22 +22,22 @@ class Biddpanel1 extends Component {
 		super(props);
 		this.state = {
 			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
-			" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
-			" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
-			" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
-			" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-			" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-			" Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
-			" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-			" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
-			"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-			" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
-			" Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
-			" Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
-			" Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
-			" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
-			" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
-			" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+				" Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
+				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+				" Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+				" Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+				" Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
 			statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
 			cities: [],
 			states: [],
@@ -54,7 +54,7 @@ class Biddpanel1 extends Component {
 			i: 0
 		}
 	}
-	
+
 
 	componentDidMount() {
 		this.getBiddingBillboard();
@@ -121,11 +121,14 @@ class Biddpanel1 extends Component {
 					var hours = parseInt(totalSec / 3600);
 					var minutes = parseInt(totalSec / 60) % 60;
 					var seconds = totalSec % 60;
+					if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+						this.highestBidder(elem._id)
+					}
 					var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 					elemObj.calculateTime = calculateTime;
 					elemObj.hours = hours;
 					biddingBillboards.push(elemObj)
-					
+
 
 				})
 				this.setState({
@@ -134,6 +137,50 @@ class Biddpanel1 extends Component {
 				biddingBillboards = [];
 			}, 1000);
 
+		}
+	}
+
+
+	highestBidder = async (objectId) => {
+		let obj = {
+			id: objectId
+		}
+		let biddingBiggerAmount = 0;
+		let bidderDetail;
+		let response = await HttpUtils.post('getspecificBiddingbillboardHistory', obj);
+		if (response) {
+			if (response.code == 200) {
+				if (response.content.length > 0) {
+					let biddingData = response.content;
+					for (var i in biddingData) {
+						if (Number(biddingData[i].bidAamount) > Number(biddingBiggerAmount)) {
+							biddingBiggerAmount = biddingData[i].bidAamount;
+							bidderDetail = biddingData[i]
+						}
+					}
+				}
+
+				this.bookedBidderBillboard(bidderDetail)
+
+			}
+		}
+	}
+
+	bookedBidderBillboard = async (bidderDetail) => {
+		bidderDetail.objectId = '';
+		let response = await HttpUtils.post('bidderBillboardBooked', bidderDetail);
+		if (response) {
+			if (response.code == 200) {
+				let obj = {
+					objectId: bidderDetail.biddingBillboardId,
+				}
+				let res = await HttpUtils.post('biddingBillboardDelete', obj);
+				if (res) {
+					if (res.code == 200) {
+						window.location.reload(true);
+					}
+				}
+			}
 		}
 	}
 
@@ -301,7 +348,6 @@ class Biddpanel1 extends Component {
 	}
 
 	filterBillboardData = (filterKeys) => {
-		console.log(filterKeys, 'filterKeys')
 		if (filterKeys.length == 1) {
 			this.filterBillboardDataWithOneKey(filterKeys);
 		}
@@ -462,7 +508,7 @@ class Biddpanel1 extends Component {
 
 			})
 		}
-		
+
 	}
 
 	filterBillboardDataWithThreeKeys = (filterKeys) => {

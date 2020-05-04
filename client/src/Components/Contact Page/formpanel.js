@@ -43,7 +43,6 @@ class Formpanel extends Component {
 	}
 
 	onChangeEmail(rule, value, callback) {
-		// console.log(rule)
 		if (this.state.emailsArr.includes(value)) {
 			callback('Email is already exists');
 			this.setState({
@@ -59,7 +58,6 @@ class Formpanel extends Component {
 
 	//radio button state function
 	handleOptionChange(changeEvent) {
-		console.log(changeEvent.target.value, 'changeEvent')
 		this.setState({
 			selectedOption: changeEvent.target.value,
 			radioVal: true,
@@ -72,7 +70,6 @@ class Formpanel extends Component {
 		e.preventDefault();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
-				console.log('Received values of form: ', values);
 				this.setState({ isLoader: true })
 				this.fectSignUpApiFunc(values)
 				this.props.form.resetFields()
@@ -273,7 +270,7 @@ class Formpanel extends Component {
 									<RadioGroup name="radiogroup" defaultValue={1}>
 										<div className="form-check-inline ">
 											<label className="form-check-label" for='Buyer'>
-												<Radio value={1}
+												<Radio 
 													className={"form-check-input"}
 													id={"Buyer"}
 													name="Buyer"
@@ -286,7 +283,7 @@ class Formpanel extends Component {
 										</div>
 										<div className="form-check-inline checkmargin">
 											<label className="form-check-label" for='Seller'>
-												<Radio value={2}
+												<Radio 
 													className={"form-check-input"}
 													id={"Seller"}
 													name="Seller"

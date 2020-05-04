@@ -33,7 +33,6 @@ exports.postAddData = function(req,res,next){
       state:formData.state,
       country:formData.country
   })
-  console.log(postListData,'after creating object')
   postListData.save((err,data) => {
     if(err){
       res.send({
@@ -52,8 +51,6 @@ exports.postAddData = function(req,res,next){
   })
 }
 else if(formData.objectId != ''){
-  console.log('update')
-  console.log('hit app')
   listAdd.updateMany(
         {"_id":formData.objectId},
         {$set: formData},

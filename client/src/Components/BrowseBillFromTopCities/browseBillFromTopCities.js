@@ -57,7 +57,6 @@ class BrowseBillFromTopCities extends Component {
                 cities.push(city)
             }
         }
-        // console.log(cities)
         let sliceCities = cities.slice(0, i + 8);
 
         this.setState({
@@ -100,7 +99,6 @@ class BrowseBillFromTopCities extends Component {
     }
     render() {
         const { bilboardData, directMarket, cityName, sliceCities, dropDownUser, cities } = this.state;
-        // console.log("TopCitiesBillboard -> render -> cities", cities)
         if (directMarket) {
             return <Redirect to={{
                 pathname: '/market_place',

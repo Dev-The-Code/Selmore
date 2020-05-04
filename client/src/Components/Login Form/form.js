@@ -38,7 +38,6 @@ class FormLogin extends Component {
     })
     // fetch signIn api
     let response = await HttpUtils.post('signin', values);
-    console.log(response, 'response')
     try {
       if (response.code === 200) {
         localStorage.setItem('loggedIn', JSON.stringify(this.state.loggedIn))
@@ -49,7 +48,6 @@ class FormLogin extends Component {
         document.getElementById('closss').click();
         this.props.showDropDown();
       } else {
-        console.log(response.msg, 'response.msg')
         this.setState({
           isLoader: false,
           isAlert: true,
@@ -70,14 +68,12 @@ class FormLogin extends Component {
   }
 
   fectSignUpApiFunc = async (values) => {
-    console.log(values, 'values')
     this.setState({
       isLoader: true
     })
     let role = "buyer";
     values.role = role;
     let response = await HttpUtils.post('signup', values);
-    console.log(response, 'response')
 
     try {
       if (response.code === 200) {

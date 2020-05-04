@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './megaSale.scss';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { HttpUtils } from '../../Services/HttpUtils';
 import {
 	Checkbox, Row, Col, Radio, Spin, Icon
@@ -24,22 +24,22 @@ class MegaSalepanel1 extends Component {
 		this.state = {
 
 			citiesArr: ["Abbottabad", "Ahmadpur East", " Ahmed Nager Chatha", " Ali Khan Abad", " Alipur", " Arifwala",
-			" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
-			" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
-			" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
-			" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
-			" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
-			" Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
-			" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
-			" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
-			"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
-			" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
-			" Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
-			" Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
-			" Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
-			" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
-			" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
-			" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
+				" Attock", " Bhera", " Bhalwal", " Bahawalnagar", " Bahawalpur", " Bhakkar", 'Bhimber', " Burewala",
+				" Chillianwala", " Choa Saidanshah", " Chakwal", " Chak Jhumra", " Chichawatni", " Chiniot",
+				" Chishtian", " Chunian", " Dajkot", " Daska", " Davispur", " Darya Khan", " Dera Ghazi Khan", "Dera Ismail Khan",
+				" Dhaular", " Dina", " Dinga", " Dhudial Chakwal", " Dipalpur", " Faisalabad", " Fateh Jang",
+				" Ghakhar Mandi", " Gojra", " Gujranwala", " Gujrat", " Gujar Khan", " Harappa", 'Haripur', " Hafizabad", "Hyderabad",
+				" Haroonabad", " Hasilpur", " Haveli Lakha", " Islamabad", " Jalalpur Jattan", " Jampur", " Jaranwala", " Jhang",
+				" Jhelum", " Kallar Syedan", " Kalabagh", " Karor Lal Esan", 'Karachi', " Kasur", " Kamalia", " Kāmoke", " Khanewal",
+				" Khanpur", " Khanqah Sharif", " Kharian", " Khushab", " Kot Adu", " Jauharabad", " Lahore",
+				"Larkana", " Lalamusa", " Layyah", " Lawa Chakwal", " Liaquat Pur", " Lodhran", " Malakwal", " Mamoori", " Mailsi",
+				" Mandi Bahauddin", " Mian Channu", " Mianwali", " Miani", 'Mirpur', 'Mangla Cantt', " Multan", " Murree", " Muridke",
+				" Mianwali Bangla", " Muzaffargarh", " Narowal", " Nankana Sahib", " Okara", "Peshawar", " Pakpattan", " Pattoki", " Pindi Bhattian",
+				" Pind Dadan Khan", " Pir Mahal", " Qaimpur", " Qila Didar Singh", "Quetta", " Renala Khurd", " Rabwah", " Raiwind", " Rajanpur",
+				" Rahim Yar Khan", 'Rawalakot', " Rawalpindi", " Sadiqabad", " Sagri", " Sahiwal", " Sambrial",
+				" Samundri", " Sangla Hill", " Sarai Alamgir", " Sargodha", " Shakargarh", " Sheikhupura", " Shujaabad",
+				" Sialkot", " Sohawa", " Soianwala", " Siranwali", "Sukkur", " Tandlianwala", " Talagang", " Taxila", " Toba Tek Singh",
+				" Vehari", " Wah Cantonment", " Wazirabad", " Yazman", " Zafarwal"],
 			statesArr: ['Sindh', 'Punjab', 'KPK', 'Balochistan', 'Gilgit', 'Azad Kashmir'],
 			cities: [],
 			states: [],
@@ -65,7 +65,7 @@ class MegaSalepanel1 extends Component {
 			i: 0
 		}
 	}
-	
+
 
 	componentWillUpdate() {
 		const { i } = this.state;
@@ -134,6 +134,9 @@ class MegaSalepanel1 extends Component {
 					var hours = parseInt(totalSec / 3600);
 					var minutes = parseInt(totalSec / 60) % 60;
 					var seconds = totalSec % 60;
+					if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+						this.removedData(elem._id)
+					}
 					var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 					elemObj.calculateTime = calculateTime;
 					MegaSaleBillboards.push(elemObj)
@@ -152,6 +155,19 @@ class MegaSalepanel1 extends Component {
 
 	}
 
+	removedData = async (objectId) => {
+		let booked = {
+			objectId: objectId
+		}
+		let response = await HttpUtils.post('megaSaleDelete', booked);
+
+		if (response) {
+			if (response.code == 200) {
+				window.location.reload(true);
+			}
+		}
+
+	}
 
 	billboardData = async (data) => {
 		let obj = {
@@ -202,7 +218,6 @@ class MegaSalepanel1 extends Component {
 
 	//get dropdown values
 	handleChange = (dropDownParam, dropDownValueObj) => {
-		console.log(dropDownValueObj, 'dropDownValueObj')
 		let dropDownValue = []
 		dropDownValue.push(dropDownValueObj.value)
 		if (dropDownParam == 'city') {
@@ -539,11 +554,6 @@ class MegaSalepanel1 extends Component {
 
 			})
 		}
-		console.log(megaSaleBiilboards, 'megaSaleBiilboards')
-
-		console.log(data1, 'data1')
-		console.log(filteredData, 'filteredData')
-
 	}
 
 	filterBillboardDataWithThreeKeys = (filterKeys) => {

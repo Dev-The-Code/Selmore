@@ -19,7 +19,6 @@ class Location extends Component {
         let longitude = Number(this.props.longitude)
         let mapFalse = this.props.mapFalse;
         if (mapFalse) {
-            console.log(mapFalse, 'mapFalse')
             this.setState({
                 coords:
                 {

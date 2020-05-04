@@ -10,6 +10,7 @@ const biddingBillboardData = require('./controllers/biddingBillboardData');
 const bookedMarketPlaceBillboard = require('./controllers/bookedMarketPlaceBillboards');
 const bookedMegaSaleBillboard = require('./controllers/bookedMegaSaleBillboards');
 const biddingHistoryMaintene = require('./controllers/biddingHistoryMaintene');
+const bidderBillboardBooked = require('./controllers/bidderBillboardBooked');
 
 
 
@@ -28,11 +29,11 @@ module.exports = function (app) {
   app.post('/postMegaSalebillboard', bookedMegaSaleBillboard.postBookedMegaSaleBillboard);
   app.post('/biddingHistory', biddingHistoryMaintene.biddingHistory);
   app.post('/getspecificBiddingbillboardHistory', biddingHistoryMaintene.getspecificBillboardBiddingHistory);
+  app.post('/bidderBillboardBooked', bidderBillboardBooked.postBidderBookBillboard);
 
+  //delete api
   app.post('/megaSaleDelete', megaBillboardData.deleteMegaSaleBillboard);
-
-
-
+  app.post('/biddingBillboardDelete', biddingBillboardData.deletebiddingBillboard);
 
 
   //get routes
@@ -45,6 +46,8 @@ module.exports = function (app) {
   app.get('/getbiddingbillboard', biddingBillboardData.getBiddingbillboard);
   app.get('/getallbookedbillboard', bookedMarketPlaceBillboard.getBookedbillboard);
   app.get('/getallbookedMeagSalebillboard', bookedMegaSaleBillboard.getBookedMegaSalebillboard);
+  app.get('/getallbidderBookbillboard', bidderBillboardBooked.getBidderBookebillboard);
+
 
 
   //app.get('/getprofile',requireAuth, getprofile.getProfile)

@@ -24,7 +24,6 @@ mongoose.connect(configDB.EvenNodeDB,{ useNewUrlParser: true },function(err,db){
   }
   else {
     var db = mongoose.connection;
-      //console.log('connected to '+ configDB.EvenNodeDB);
       console.log("Database :: selmore :: connection established successfully.");
       //db.close();
   }

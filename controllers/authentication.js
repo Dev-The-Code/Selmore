@@ -99,7 +99,6 @@ exports.signup = function (req, res, next) {
       role: role
 
     });
-    console.log(user, 'checkingggggggg');
     user.save(function (err) {
       if (err) { return next(err); }
     });
@@ -189,7 +188,6 @@ exports.getemails = function (req, res, next) {
     }
     else if (data) {
       const userEmails = [];
-      console.log(data);
       for (var i = 0; i < data.length; i++) {
         userEmails.push(data[i].email)
       }
@@ -212,7 +210,6 @@ exports.getcompanyname = function (req, res, next) {
     }
     else if (companyname) {
       const comnpanynames = [];
-      console.log(comnpanynames);
       for (var i = 0; i < companyname.length; i++) {
         comnpanynames.push({
           companyName: companyname[i].companyName,
@@ -245,7 +242,6 @@ exports.getAllUsers = function (req, res, next) {
         delete userData[key].password;
         //delete allUsers[key].type;
       }
-      console.log(userData)
       res.send({
         code: 200,
         content: userData,

@@ -71,23 +71,6 @@ class Megapanel1 extends Component {
 
     }
 
-    deleteBillboard = async () => {
-        const { data, billboardData } = this.state;
-
-        let booked = {
-            objectId: data._id,
-        }
-        console.log(data , 'data')
-        console.log(billboardData , 'billboardData')
-        console.log(booked , 'booked')
-
-
-        let response = await HttpUtils.post('megaSaleDelete', booked);
-
-        console.log(response, 'response')
-
-    }
-
     bookedBillboard = async () => {
         const { data, billboardData } = this.state;
         let booked = {}
@@ -439,7 +422,6 @@ class Megapanel1 extends Component {
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">
-                                    <button onClick={this.deleteBillboard}>Delete</button>
                                     <h3 className="contactDetailHead">Contact Details</h3>
                                 </div>
                             </div>

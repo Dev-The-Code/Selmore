@@ -24,12 +24,8 @@ class CartPanel1 extends Component {
 
     getBokkedBillboards = async () => {
         let responseBookedData = await HttpUtils.get('getallbookedbillboard');
-        // console.log(response, 'response')
         let responseMegaSaleData = await HttpUtils.get('getallbookedMeagSalebillboard');
-        // console.log(respon , 'respon')
-        // let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
-        // let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
-        let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
+        let responsebidderData = await HttpUtils.get('getallbidderBookbillboard');
 
         if (responseBookedData) {
             if (responseBookedData.code == 200) {
@@ -48,10 +44,12 @@ class CartPanel1 extends Component {
             }
         }
 
-        if (bidBillboards != null || bidBillboards != undefined) {
-            this.setState({
-                bidBillboards: bidBillboards
-            })
+        if (responsebidderData) {
+            if (responsebidderData.code == 200) {
+                this.setState({
+                    bidBillboards: responsebidderData.content
+                })
+            }
         }
 
     }
@@ -162,11 +160,16 @@ class CartPanel1 extends Component {
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Company name</th>
-                                                    <th>Address</th>
-                                                    <th>Bid Amount</th>
-                                                    {/* <th>Action</th> */}
+                                                    <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Company Name</th>
+                                                    <th className="BidhistoryTH">Company Email</th>
+                                                    <th className="BidhistoryTH">Company Phone</th>
+                                                    <th className="BidhistoryTH">Address</th>
+                                                    <th className="BidhistoryTH">Book Date</th>
+                                                    <th className="BidhistoryTH">Bid Amount</th>
+                                                    <th className="BidhistoryTH">Bidding Time</th>
+                                                    <th className="BidhistoryTH">View</th>
+
                                                 </tr>
                                             </thead>
                                             {bidBillboards && bidBillboards.map((elem, key) => {
@@ -175,13 +178,16 @@ class CartPanel1 extends Component {
                                                         <tr>
                                                             <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.companyName}</td>
+                                                            <td className="tablee_td">{elem.companyEmail}</td>
+                                                            <td className="tablee_td">{elem.companyLandlineNo}</td>
                                                             <td className="tablee_td">{elem.address}, {elem.city}, {elem.state}</td>
-                                                            <td className="tablee_td"></td>
-                                                            <td className="tablee_td"></td>
+                                                            <td className="tablee_td">{`From ${elem.billboardAvailabilityFrom} To ${elem.billboardAvailabilityTo}`}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                                                {/* Rs.{elem.bidAamount} */}
+                                                            </td>
+                                                            <td className="tablee_td">{`${elem.date} ${elem.time}`}</td>
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
                                                         </tr>
                                                     </tbody>

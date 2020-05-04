@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Popform from '../Popform/popform';
 import NumberFormat from 'react-number-format';
 import './billofbidding.scss';
 import { HttpUtils } from '../../Services/HttpUtils';
@@ -32,9 +31,6 @@ class Billofpanel1 extends Component {
 		let date = new Date().getDate();
 		let month = new Date().getMonth();
 		const year = new Date().getFullYear();
-		// if (month == 1 || month == 2 || month == 3 || month == 4 || month == 5 || month == 6 || month == 7 || month == 8 || month == 9) {
-		// 	month = `0${month}`
-		// }
 		if (date == 1 || date == 2 || date == 3 || date == 4 || date == 5 || date == 6 || date == 7 || date == 8 || date == 9) {
 			date = `0${date}`
 		}
@@ -110,9 +106,6 @@ class Billofpanel1 extends Component {
 							this.setState({
 								lastBidAmount: biddingBiggerAmount
 							})
-						}
-						else {
-							console.log('less than amount')
 						}
 					}
 				}
@@ -199,8 +192,6 @@ class Billofpanel1 extends Component {
 				if (response.code == 200) {
 					this.setState({
 						loader: false,
-						// isAlert: true,
-						// mgs: 'Your bid amount submitted Sucessfully',
 					})
 					this.openNotification()
 				}
@@ -354,8 +345,6 @@ class Billofpanel1 extends Component {
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-3 doesit5"><span className="doesit3">Min.Bid</span></div>
 								<div className="col-md-9 doesit6">
-									{/* <NumberFormat value={data.minBidAmount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} /> */}
-
 									<span className="doesit4">Not Met</span>
 								</div>
 							</div>
@@ -367,10 +356,6 @@ class Billofpanel1 extends Component {
 								<div className="col-md-3 doesit7"><span className="doesit3">Bid End</span></div>
 								<div className="col-md-9 doesit6"><span className="doesit4">{data.biddingEndDate} - {data.biddingEndTime}</span></div>
 							</div>
-							{/* <div className="row" style={{ margin: '0px' }}>
-								<div className="col-md-3 doesit5"><span className="doesit3">Time Remaining</span></div>
-								<div className="col-md-9 doesit6"><span className="doesit4">10 hour 10 mins 10 second</span></div>
-							</div> */}
 						</div>
 						<div className="col-md-2"></div>
 					</div>

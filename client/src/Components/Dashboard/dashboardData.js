@@ -315,7 +315,6 @@ class DashboardData extends Component {
             })
         }
 
-        console.log(data, 'data')
 
     }
 

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './megaSalePanel.scss';
 import { Link, Redirect } from 'react-router-dom';
 import { HttpUtils } from '../../../Services/HttpUtils';
-import moment from 'moment';
-
 
 class MegaSaleHome extends Component {
     constructor(props) {
@@ -18,42 +16,6 @@ class MegaSaleHome extends Component {
             billboardData: '',
             megaSaleId: '',
             i: 0
-        }
-    }
-    componentDidMount() {
-        this.megaSalebillBoardData()
-    }
-
-    componentWillUnmount() {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-
-    megaSalebillBoardData = async () => {
-        let response = await HttpUtils.get('getallmegabillboard');
-        let MegaSaleBillboards = [];
-        if (response.code == 200) {
-            // this.interval = setInterval(() => {
-            let data = response.content;
-            data.map((elem, key) => {
-                let elemObj = elem;
-                let timeTillDateStart = `${`${elemObj.saleEndDate}, ${elemObj.saleEndTime}`}`;
-                const now = moment();
-                const then = moment(timeTillDateStart);
-                var totalSec = then.diff(now, 'seconds');
-                var hours = parseInt(totalSec / 3600);
-                var minutes = parseInt(totalSec / 60) % 60;
-                var seconds = totalSec % 60;
-                var calculateTime = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-                elemObj.calculateTime = calculateTime;
-                MegaSaleBillboards.push(elemObj)
-            })
-            this.setState({
-                megaSaleBiilboards: response.content
-            })
-            MegaSaleBillboards = [];
-            // }, 1000);
         }
     }
 
@@ -78,14 +40,14 @@ class MegaSaleHome extends Component {
 
     }
     render() {
-        const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData, i } = this.state;
+        const { goForDetail, megaSaleId, billboardData, i } = this.state;
+        const { megaSalebillBoards } = this.props;
         if (goForDetail) {
             return (
                 <Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
             )
         }
-        let megaData = megaSaleBiilboards.slice(0, i + 4);
-        console.log('mega bill board data', megaData)
+        let megaData = megaSalebillBoards.slice(0, i + 4);
         return (
             <div className="animated animatedFadeInUp fadeInUp">
 

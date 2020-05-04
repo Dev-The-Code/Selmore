@@ -21,20 +21,9 @@ class RootPage extends Component {
     }
 
     componentWillMount() {
-        // const { goToHome } = this.state;
-        // let data = this.props.location.state;
+       
         let adminUser = JSON.parse(localStorage.getItem("admin"));
 
-        // console.log(data, 'data')
-        // console.log(adminUser, 'adminUser')
-
-        // if ( data.from.state) {
-        //     this.setState({
-        //         goToHome: true,
-        //         forHome: false
-        //     })
-        // }
-        // // else 
         if (adminUser) {
             window.location.reload();
         }
@@ -170,61 +159,6 @@ class RootPage extends Component {
                                     : null
                                 }
                             </div>
-                            {/* <div className='formFiled'>
-                                <div className="form-group">
-                                    <label for="exampleInputEmail1" style={{ marginBottom: '0px' }}>
-                                        <span className="school3">
-                                            Email address:
-                                        </span>
-                                    </label>
-                                    <Form.Item>
-                                        {getFieldDecorator('email', {
-                                            // initialValue: email,
-                                            rules: [{
-                                                type: 'email',
-                                                message: 'The input is not valid E-mail!',
-                                            }, {
-                                                required: true,
-                                                message: 'Please input your E-mail!',
-                                            }],
-                                        })(
-                                            <Input
-                                                type="text"
-                                                className={"form-control"}
-                                                id={"exampleInputEmail1"}
-                                                name="email"
-                                                placeholder="Email:*"
-                                            />
-                                        )}
-                                    </Form.Item>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1" style={{ marginBottom: '0px' }}>
-                                        <span className="school3"
-                                        >Password:
-                                        </span>
-                                    </label>
-                                    <Form.Item>
-                                        {getFieldDecorator('password', {
-                                            // initialValue: password,
-                                            rules: [{ required: true, message: 'Please input your Password!' }],
-                                        })(
-                                            <Input type="password"
-                                                className={"form-control"}
-                                                id={"exampleInputPassword1"}
-                                                placeholder="Password" />
-                                        )}
-                                    </Form.Item>
-                                </div>
-                                <button type="submit" className="btn btn-primary"><span className="school5">Login</span></button>
-                                <br />
-                                {isAlert ?
-                                    <div class="alert alert-danger" role="alert" style={{ marginTop: '3vw' }}>
-                                        {mgs}
-                                    </div>
-                                    : null
-                                }
-                            </div> */}
                         </Form>
                     </div>
                     <div className='col-1 col-md-4 col-lg-4 col-xl-4'></div>
@@ -235,9 +169,6 @@ class RootPage extends Component {
                 {isLoader ? <div class="loading1">   </div>
                     : null
                 }
-                {/* <div className="col-md-1">
-                </div> */}
-                {/* <div className= 'col-12 col-md-4 col-lg-4 col-xl-4'></div> */}
             </div>
         );
     }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 
 //Components//
-import Home from './Components/home';
 import MainPage from './Components/HomePage/homePage';
 import About from './Components/About Selmore/about';
 import Advertising from './Components/Advertising Agency/advertising';
@@ -14,7 +13,6 @@ import Contactpage from './Components/Contact Page/contact';
 import Billboardmardan from './Components/Billboard Mardan/billmardan';
 import Bidding from './Components/Bidding/bidding';
 import Billofbidding1 from './Components/Billboard of bidding1/billofbidding';
-import BidForm from './Components/BiddingForm/bidForm';
 import './App.css';
 import Login from './Components/Login Form/loginform';
 import LogOut from './Components/LogOut/logOut'
@@ -79,7 +77,7 @@ class Routes extends Component {
               <PrivateRoute exact path="/topCities_billboard" component={BrowseBillFromTopCities}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
-              <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute>
+              {/* <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute> */}
               <PrivateRoute  path="/megaSale" component={MegaSale}></PrivateRoute>
               <PrivateRoute  path="/megaDetail/:value" component={MegaDetail}></PrivateRoute>
               <PrivateRoute  path="/about" component={About}></PrivateRoute>

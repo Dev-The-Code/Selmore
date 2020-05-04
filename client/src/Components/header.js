@@ -27,8 +27,7 @@ class Header extends Component {
     const { dropDownUser } = this.props;
     const value = JSON.parse(localStorage.getItem("loggedIn"));
     let adminUser = JSON.parse(localStorage.getItem("userData"));
-    // console.log(value, ' value')
-    // console.log(dropDownUser, 'dropDownUser')
+  
     return (
       <div>
         <div className="container" style={{ paddingLeft: '0px' }}>

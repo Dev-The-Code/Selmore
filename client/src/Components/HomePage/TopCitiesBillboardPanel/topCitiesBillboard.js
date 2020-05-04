@@ -36,7 +36,6 @@ class TopCitiesBillboard extends Component {
                 cities.push(city)
             }
         }
-        // console.log(cities)
         let sliceCities = cities.slice(0, i + 8);
 
         this.setState({
@@ -66,7 +65,6 @@ class TopCitiesBillboard extends Component {
     }
     render() {
         const { bilboardData, directMarket, cityName, sliceCities } = this.state;
-        // console.log("TopCitiesBillboard -> render -> sliceCities", sliceCities)
         if (directMarket) {
             return <Redirect to={{
                 pathname: '/market_place',

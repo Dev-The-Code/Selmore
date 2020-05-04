@@ -5,7 +5,6 @@ import Billofpanel1 from './billofpanel1';
 import Billofpanel2 from './billofpanel2';
 import './billofbidding.scss';
 import BannerBid from './biddingBanner';
-import AbBanner from '../About Selmore/abBanner';
 
 class Billbidding extends Component {
   constructor(props) {

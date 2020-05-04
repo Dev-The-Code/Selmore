@@ -37,7 +37,6 @@ class Militarypanel1 extends Component {
 	async componentDidMount() {
 		let data = this.props.data;
 		if (data.images && data.images.length > 0) {
-			console.log(data, 'data')
 			await this.setState({
 				data: data,
 				images: data.images,
@@ -48,7 +47,6 @@ class Militarypanel1 extends Component {
 				id: data
 			}
 			let response = await HttpUtils.post('getspecificbillboard', obj);
-			console.log(response, 'response')
 			if (response) {
 				if (response.code == 200) {
 					this.setState({
@@ -136,7 +134,6 @@ class Militarypanel1 extends Component {
 			status: 'No Available'
 		}
 		let response = await HttpUtils.post('listadd', updateBillboard);
-		console.log(response, 'response')
 		if (response) {
 			if (response.code == 200) {
 				this.bookedBillboard(values);

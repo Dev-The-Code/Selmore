@@ -1851,7 +1851,6 @@ class Market extends Component {
     render() {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cityValue, stateValue } = this.state;
-        console.log(billboardData, 'billboardData')
         const antIcon =
             <Icon type="loading" style={{ fontSize: '110px' }} spin />;
 
