@@ -30,13 +30,14 @@ class Home extends Component {
 
   getMegaSaleBillboards = async () => {
     let response = await HttpUtils.get('getallmegabillboard');
-    if (response.code == 200) {
-      let data = response.content;
+    if (response) {
+      if (response.code == 200) {
+        let data = response.content;
 
-      this.setState({
-        megaSalebillBoards: data
-      })
-
+        this.setState({
+          megaSalebillBoards: data
+        })
+      }
     }
 
     this.megaSalebillBoardData()
@@ -79,22 +80,23 @@ class Home extends Component {
 
   getBiddingBillboard = async () => {
     let response = await HttpUtils.get('getbiddingbillboard');
-    if (response.code == 200) {
-      let data = response.content;
-      data.map((elem, key) => {
-        let elemObj = elem;
-        let timeTillDateStart = `${`${elemObj.biddingEndDate}, ${elemObj.biddingEndTime}`}`;
-        const now = moment();
-        const then = moment(timeTillDateStart);
-        var totalSec = then.diff(now, 'seconds');
-        var hours = parseInt(totalSec / 3600);
-        var minutes = parseInt(totalSec / 60) % 60;
-        var seconds = totalSec % 60;
-        if (hours <= 0 && minutes <= 0 && seconds <= 0) {
-          this.highestBidder(elem._id)
-        }
-      })
-
+    if (response) {
+      if (response.code == 200) {
+        let data = response.content;
+        data.map((elem, key) => {
+          let elemObj = elem;
+          let timeTillDateStart = `${`${elemObj.biddingEndDate}, ${elemObj.biddingEndTime}`}`;
+          const now = moment();
+          const then = moment(timeTillDateStart);
+          var totalSec = then.diff(now, 'seconds');
+          var hours = parseInt(totalSec / 3600);
+          var minutes = parseInt(totalSec / 60) % 60;
+          var seconds = totalSec % 60;
+          if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+            this.highestBidder(elem._id)
+          }
+        })
+      }
     }
   }
 
@@ -130,7 +132,7 @@ class Home extends Component {
     if (response) {
       if (response.code == 200) {
         let obj = {
-          objectId : bidderDetail.biddingBillboardId,
+          objectId: bidderDetail.biddingBillboardId,
         }
         let response = await HttpUtils.post('biddingBillboardDelete', obj);
       }

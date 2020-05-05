@@ -1028,7 +1028,7 @@ class DashboardData extends Component {
                                                     <div class="dropdown-content_dash">
                                                         <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
                                                         <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
-                                                        <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -1057,7 +1057,7 @@ class DashboardData extends Component {
                                                     <div class="dropdown-content_dash">
                                                         <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
                                                         <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
-                                                        <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -1301,7 +1301,7 @@ class DashboardData extends Component {
                     <div class="modal-dialog">
                         <div class="modal-content modal_width">
                             <div class="modal-header">
-                                <h4 class="modal-title">Mega Sale</h4>
+                                {megaSaleFormShow ? <h4 class="modal-title">Mega Sale</h4> : <h4 class="modal-title">Bidding</h4>}
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">

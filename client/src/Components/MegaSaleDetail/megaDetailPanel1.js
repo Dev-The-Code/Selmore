@@ -135,6 +135,10 @@ class Megapanel1 extends Component {
             return null;
         }
 
+        if (redirectMegaSale) {
+            return <Redirect to='/megaSale' />
+        }
+
         let image;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
         const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
@@ -153,9 +157,7 @@ class Megapanel1 extends Component {
                 }
             })
         }
-        if (redirectMegaSale) {
-            return <Redirect to={{ pathname: '/megaSale' }} />
-        }
+
         return (
             <div>
                 <div className="container">
