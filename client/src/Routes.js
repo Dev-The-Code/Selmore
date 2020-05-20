@@ -33,8 +33,6 @@ import { PrivateRoute } from './Components/Login Form/PrivateRoute';
 import { AdminAccess } from './Components/Login Form/AdminAccess';
 import BrowseBillFromTopCities from './Components/BrowseBillFromTopCities/browseBillFromTopCities';
 
-// import Billbidding from './Components/Billbidding/billbidding';
-// import CenteralStore from './Components/centeralStore';
 
 class Routes extends Component {
   constructor(props) {
@@ -59,25 +57,13 @@ class Routes extends Component {
     return (
       <div className='App'>
         <Provider store={store}>
-          {/* <CenteralStore> */}
           <BrowserRouter>
             <div>
-
-              {/* <Route exact path="/"
-                render={props => {
-                  return <RootPage {...props}
-                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                    hideDropDown={this.hideDropDown} />
-                }}
-              // component={Home}
-              ></Route> */}
               <AdminAccess exact path="/" component={RootPage}></AdminAccess>
               <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute>
-              {/* <PrivateRoute exact path="/home" component={Home}></PrivateRoute> */}
               <PrivateRoute exact path="/topCities_billboard" component={BrowseBillFromTopCities}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
-              {/* <PrivateRoute  path="/bidding_form" component={BidForm}></PrivateRoute> */}
               <PrivateRoute  path="/megaSale" component={MegaSale}></PrivateRoute>
               <PrivateRoute  path="/megaDetail/:value" component={MegaDetail}></PrivateRoute>
               <PrivateRoute  path="/about" component={About}></PrivateRoute>
@@ -264,7 +250,6 @@ class Routes extends Component {
               ></Route> */}
             </div>
           </BrowserRouter>
-          {/* </CenteralStore> */}
         </Provider>
       </div >
     );

@@ -158,9 +158,15 @@ class Biddpanel1 extends Component {
 							bidderDetail = biddingData[i]
 						}
 					}
+					this.bookedBidderBillboard(bidderDetail)
+				}
+				else {
+					let obj = {
+						objectId: objectId,
+					}
+					let response = await HttpUtils.post('biddingBillboardDelete', obj);
 				}
 
-				this.bookedBidderBillboard(bidderDetail)
 
 			}
 		}

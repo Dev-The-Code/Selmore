@@ -53,6 +53,179 @@ class CartPanel1 extends Component {
         }
 
     }
+
+    paymentPaid = async (paymentStatus, bookFrom, data) => {
+
+        if (bookFrom == 'marketPlace') {
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+        }
+        else if (bookFrom == 'megaSale') {
+
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postMegaSalebillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postMegaSalebillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+
+        }
+        else if (bookFrom == 'bidding') {
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('bidderBillboardBooked', obj);
+                console.log(response , 'response')
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id,
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('bidderBillboardBooked', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+    }
+
     render() {
         const { bidBillboards, megaSaleBillboard, avalibleBillboard } = this.state;
         return (
@@ -90,6 +263,8 @@ class CartPanel1 extends Component {
                                                     <th className="BidhistoryTH">Amount</th>
                                                     <th className="BidhistoryTH">View</th>
 
+                                                    <th className="BidhistoryTH">Payment</th>
+
                                                     {/* <th>Action</th> */}
                                                 </tr>
                                             </thead>
@@ -112,7 +287,14 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
-
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'marketPlace', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'marketPlace', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -131,6 +313,7 @@ class CartPanel1 extends Component {
                                                     <th className="BidhistoryTH">Book Date</th>
                                                     <th className="BidhistoryTH">Sale Amount</th>
                                                     <th className="BidhistoryTH">View</th>
+                                                    <th className="BidhistoryTH">Payment</th>
                                                 </tr>
                                             </thead>
                                             {megaSaleBillboard && megaSaleBillboard.map((elem, key) => {
@@ -149,6 +332,14 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'megaSale', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'megaSale', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -169,6 +360,7 @@ class CartPanel1 extends Component {
                                                     <th className="BidhistoryTH">Bid Amount</th>
                                                     <th className="BidhistoryTH">Bidding Time</th>
                                                     <th className="BidhistoryTH">View</th>
+                                                    <th className="BidhistoryTH">Payment</th>
 
                                                 </tr>
                                             </thead>
@@ -189,6 +381,14 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'bidding', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'bidding', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )

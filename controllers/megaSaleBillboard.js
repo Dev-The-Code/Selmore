@@ -82,6 +82,25 @@ exports.getAllMegaBillBoardData = function (req, res, next) {
 }
 
 
+exports.getspecificMegaSalebillboard = function(req, res, next){
+  let id = req.body.id;
+  megaSaleBillboard.find({"_id":id},function(err,data){
+    if(err){
+      res.send({
+        msg:'Error getting billboard',
+        code:404,
+        err:err
+      })
+    }
+    else if(data){
+      res.send({
+        content:data,
+        msg:'Get billboard data',
+        code:200
+      })
+    }
+  })
+  }
 
 exports.deleteMegaSaleBillboard = function (req, res, next) {
 

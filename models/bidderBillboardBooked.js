@@ -19,6 +19,7 @@ const bidderBillboardBooked = new Schema({
     date: { type: String },
     state: { type: String },
     time: { type: String },
+    paymentStatus: { type: String }
 
 });
 

@@ -77,6 +77,26 @@ exports.getBiddingbillboard = function (req, res, next) {
   })
 }
 
+exports.getspecificBiddingbillboard = function(req, res, next){
+  let id = req.body.id;
+  BiddingbillboardData.find({"_id":id},function(err,data){
+    if(err){
+      res.send({
+        msg:'Error getting billboard',
+        code:404,
+        err:err
+      })
+    }
+    else if(data){
+      res.send({
+        content:data,
+        msg:'Get billboard data',
+        code:200
+      })
+    }
+  })
+  }
+
 exports.deletebiddingBillboard = function (req, res, next) {
 
   var formData = req.body;

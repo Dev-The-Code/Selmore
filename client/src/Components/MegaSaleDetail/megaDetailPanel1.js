@@ -86,6 +86,7 @@ class Megapanel1 extends Component {
         booked.billboardAmount = data.discountPrice;
         booked.bookedDate = 'From ' + data.billboardAvailabilityFrom + ' to ' + data.billboardAvailabilityTo;
         booked.objectId = '';
+        console.log(booked, 'booked')
         let response = await HttpUtils.post('postMegaSalebillboard', booked);
 
         if (response) {
@@ -95,12 +96,23 @@ class Megapanel1 extends Component {
                     billboardStatus: 'No Available'
                 }
                 let responseUpdate = await HttpUtils.post('sendmegabillboard', obj);
-                this.setState({
-                    loader: false,
-                    isAlert: true,
-                    mgs: 'We Will contact with you shortly',
-                    redirectMegaSale: true
-                })
+                if (responseUpdate) {
+                    if (responseUpdate.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: billboardData._id,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        this.setState({
+                            loader: false,
+                            isAlert: true,
+                            mgs: 'We Will contact with you shortly',
+                            redirectMegaSale: true
+                        })
+                    }
+                }
 
             }
             else {

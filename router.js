@@ -20,33 +20,47 @@ module.exports = function (app) {
   //app.post('/signin',requireSignin,  Authentication.signin);
   app.post('/signup', Authentication.signup);
   app.post('/signin', requireSignin, Authentication.signin);
-  app.post('/listadd', listAgencyForm.postAddData);
   app.post('/changeStatus', Authentication.changeStatus);
-  app.post('/sendmegabillboard', megaBillboardData.postmegaSaleBillboard);
-  app.post('/postbiddingbillboard', biddingBillboardData.postBiddingBillboard);
+
+  app.post('/listadd', listAgencyForm.postAddData);
+
   app.post('/getspecificbillboard', getAllBillboard.getspecificBillboard);
   app.post('/postmarketPlaceBookedbillboard', bookedMarketPlaceBillboard.postBookedBillboard);
-  app.post('/postMegaSalebillboard', bookedMegaSaleBillboard.postBookedMegaSaleBillboard);
+  app.post('/getspecificMarketPlaceBookedbillboard', bookedMarketPlaceBillboard.getspecificMarketPlaceBookedbillboard);
+
+
+  app.post('/postbiddingbillboard', biddingBillboardData.postBiddingBillboard);
+  app.post('/getspecificBiddingbillboard', biddingBillboardData.getspecificBiddingbillboard);
   app.post('/biddingHistory', biddingHistoryMaintene.biddingHistory);
   app.post('/getspecificBiddingbillboardHistory', biddingHistoryMaintene.getspecificBillboardBiddingHistory);
   app.post('/bidderBillboardBooked', bidderBillboardBooked.postBidderBookBillboard);
+  app.post('/getspecificBookedBidderbillboard', bidderBillboardBooked.getspecificBookedBidderbillboard);
 
-  //delete api
-  app.post('/megaSaleDelete', megaBillboardData.deleteMegaSaleBillboard);
   app.post('/biddingBillboardDelete', biddingBillboardData.deletebiddingBillboard);
+
+  app.post('/sendmegabillboard', megaBillboardData.postmegaSaleBillboard);
+  app.post('/getspecificMegaSalebillboard', megaBillboardData.getspecificMegaSalebillboard);
+  app.post('/postMegaSalebillboard', bookedMegaSaleBillboard.postBookedMegaSaleBillboard);
+  app.post('/getspecificBookedMegaSalebillboard', bookedMegaSaleBillboard.getspecificBookedMegaSalebillboard);
+  app.post('/megaSaleDelete', megaBillboardData.deleteMegaSaleBillboard);
+
+
 
 
   //get routes
 
   app.get('/getemails', Authentication.getemails);
   app.get('/getcompanyname', Authentication.getcompanyname);
-  app.get('/getbillboard', getAllBillboard.getBillboard);
   app.get('/getalluser', Authentication.getAllUsers);
-  app.get('/getallmegabillboard', megaBillboardData.getAllMegaBillBoardData);
-  app.get('/getbiddingbillboard', biddingBillboardData.getBiddingbillboard);
+
+  app.get('/getbillboard', getAllBillboard.getBillboard);
   app.get('/getallbookedbillboard', bookedMarketPlaceBillboard.getBookedbillboard);
-  app.get('/getallbookedMeagSalebillboard', bookedMegaSaleBillboard.getBookedMegaSalebillboard);
+
+  app.get('/getbiddingbillboard', biddingBillboardData.getBiddingbillboard);
   app.get('/getallbidderBookbillboard', bidderBillboardBooked.getBidderBookebillboard);
+
+  app.get('/getallmegabillboard', megaBillboardData.getAllMegaBillBoardData);
+  app.get('/getallbookedMeagSalebillboard', bookedMegaSaleBillboard.getBookedMegaSalebillboard);
 
 
 

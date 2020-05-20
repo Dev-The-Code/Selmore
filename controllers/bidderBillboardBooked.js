@@ -22,6 +22,8 @@ exports.postBidderBookBillboard = function (req, res, next) {
             date: formData.date,
             state: formData.state,
             time: formData.time,
+            paymentStatus: formData.paymentStatus
+
         })
 
         postBidderBillboardData.save((err, data) => {
@@ -62,6 +64,26 @@ exports.postBidderBookBillboard = function (req, res, next) {
 exports.getBidderBookebillboard = function (req, res, next) {
 
     bidderBillboardBooked.find(function (err, data) {
+        if (err) {
+            res.send({
+                msg: 'Error getting billboard',
+                code: 404,
+                err: err
+            })
+        }
+        else if (data) {
+            res.send({
+                content: data,
+                msg: 'All Bidder Booked billboard data',
+                code: 200
+            })
+        }
+    })
+}
+
+exports.getspecificBookedBidderbillboard = function (req, res, next) {
+    let id = req.body.id;
+    bidderBillboardBooked.find({ "_id": id }, function (err, data) {
       if (err) {
         res.send({
           msg: 'Error getting billboard',
@@ -72,7 +94,7 @@ exports.getBidderBookebillboard = function (req, res, next) {
       else if (data) {
         res.send({
           content: data,
-          msg: 'All Bidder Booked billboard data',
+          msg: 'Get billboard data',
           code: 200
         })
       }

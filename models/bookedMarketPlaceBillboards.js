@@ -17,7 +17,7 @@ const bookMarketPlaceBillboard = new Schema({
     selectDays: { type: String },
     dateRange: { type: Array },
     amountCharge: { type: Number },
-
+    paymentStatus :{type :String}
 });
 
 //model class

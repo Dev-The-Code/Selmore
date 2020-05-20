@@ -31,7 +31,10 @@ exports.postAddData = function(req,res,next){
       address:formData.address,
       city:formData.city,
       state:formData.state,
-      country:formData.country
+      country:formData.country,
+      bookFrom:formData.bookFrom,
+      bookId:formData.bookId,
+
   })
   postListData.save((err,data) => {
     if(err){

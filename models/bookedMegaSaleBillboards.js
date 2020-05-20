@@ -15,7 +15,7 @@ const bookedMegaSaleBillboards = new Schema({
     billboardId: { type: String },
     bookedDate: { type: String },
     billboardAmount: { type: Number },
-
+    paymentStatus: { type: String }
 });
 
 //model class

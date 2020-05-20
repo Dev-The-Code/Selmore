@@ -55,15 +55,21 @@ class Home extends Component {
       var hours = parseInt(totalSec / 3600);
       var minutes = parseInt(totalSec / 60) % 60;
       var seconds = totalSec % 60;
-
       if (hours <= 0 && minutes <= 0 && seconds <= 0) {
-        this.removedData(elem._id)
+        this.removedData(elem._id, elem)
       }
     })
 
   }
 
-  removedData = async (objectId) => {
+  removedData = async (objectId, data) => {
+    let updateMarketPlace = {
+      objectId: data.billboardId,
+      avalibleOn: '',
+      avalibleOnId: '',
+      status: "No Available",
+    }
+    let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
     let booked = {
       objectId: objectId
     }
@@ -93,14 +99,14 @@ class Home extends Component {
           var minutes = parseInt(totalSec / 60) % 60;
           var seconds = totalSec % 60;
           if (hours <= 0 && minutes <= 0 && seconds <= 0) {
-            this.highestBidder(elem._id)
+            this.highestBidder(elem._id, elem)
           }
         })
       }
     }
   }
 
-  highestBidder = async (objectId) => {
+  highestBidder = async (objectId, data) => {
     let obj = {
       id: objectId
     }
@@ -117,20 +123,34 @@ class Home extends Component {
               bidderDetail = biddingData[i]
             }
           }
+          this.bookedBidderBillboard(bidderDetail, data)
+        }
+        else {
+          let obj = {
+            objectId: objectId,
+          }
+          let response = await HttpUtils.post('biddingBillboardDelete', obj);
         }
 
-        this.bookedBidderBillboard(bidderDetail)
 
       }
     }
   }
 
-  bookedBidderBillboard = async (bidderDetail) => {
+  bookedBidderBillboard = async (bidderDetail, data) => {
     bidderDetail.objectId = '';
     let response = await HttpUtils.post('bidderBillboardBooked', bidderDetail);
-
     if (response) {
       if (response.code == 200) {
+
+        let updateMarketPlace = {
+          objectId: data.billboardId,
+          avalibleOn: '',
+          avalibleOnId: '',
+          status: "No Available",
+        }
+        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+
         let obj = {
           objectId: bidderDetail.biddingBillboardId,
         }
