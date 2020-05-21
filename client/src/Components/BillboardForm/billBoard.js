@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-// import './billboardDetail.css';
 import './billboardDetail.scss';
 import NumberFormat from 'react-number-format';
 import {
-    DatePicker, Radio, Form, Input, Icon, Button, Upload, Modal, notification, Cascader, TimePicker,
+    DatePicker, Form, Input, Icon, Button, Upload, notification, Cascader, TimePicker,
 } from 'antd';
-// import { PlusOutlined } from '@ant-design/icons';
-import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Select from 'react-select';
 import { HttpUtils } from '../../Services/HttpUtils';
@@ -25,7 +22,6 @@ class BillBoard extends Component {
     constructor() {
         super()
         this.state = {
-            // radioValue: 1,
             compaNames: '',
             type: '',
             category: '',
@@ -96,21 +92,15 @@ class BillBoard extends Component {
             audienceTypes: [],
             cities: [],
             states: [],
-            // showForm: 'normal'
         }
     }
-    // onChange = g => {
-    //     this.setState({
-    //         radioValue: g.target.radioValue,
-    //     });
-    // };
+
 
     async componentDidMount() {
         this.gettingDropDownValues();
     }
     async componentWillMount() {
         let data = this.props.data;
-        // console.log(data, 'data')
         await this.editDataShowns(data)
     }
     gettingDropDownValues = async () => {
@@ -406,10 +396,7 @@ class BillBoard extends Component {
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values, 'values');
-
         let response = await HttpUtils.post('listadd', values);
-        console.log(response);
 
         setTimeout(() => {
             this.setState({
@@ -424,18 +411,10 @@ class BillBoard extends Component {
         }
     }
 
-    // drnShoww = (u, g) => {
-    //     console.log(u, 'hhhhhhh')
-    //     this.setState({ showForm: u })
-    // }
-
     render() {
-        // const { showForm } = this.state;
-        const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
         const { getFieldDecorator, getFieldValue } = this.props.form;
         const { sumitDataAlert,
             companyName, types, categories, facings, lightnings, statuses, audianceTypes, cities, states, fileList, imgArr } = this.state;
-        // console.log(showForm, 'daniyalll');
         { getFieldDecorator('keys', { initialValue: [keys] }) };
         const keys = getFieldValue('keys');
         const formItems = keys.map((k, index) => {
@@ -469,7 +448,6 @@ class BillBoard extends Component {
                                                     onChange={this.handleChange}
                                                     options={types}
                                                     style={{ height: '20px' }}
-                                                // defaultValue={{ label: this.state.type, value: this.state.type }}
                                                 >
                                                 </Select>
                                             )}
@@ -493,7 +471,6 @@ class BillBoard extends Component {
                                                 <Select
                                                     onChange={this.handleChange}
                                                     options={categories}
-                                                // defaultValue={{ label: this.state.category, value: this.state.category }}
                                                 >
                                                 </Select>
                                             )}
@@ -517,7 +494,6 @@ class BillBoard extends Component {
                                                 <Select
                                                     onChange={this.handleChange}
                                                     options={facings}
-                                                // defaultValue={{ label: this.state.facing, value: this.state.facing }}
                                                 >
                                                 </Select>
                                             )}
@@ -619,11 +595,10 @@ class BillBoard extends Component {
                                                     })(
                                                         <div className="clearfix">
                                                             <Upload
-                                                                // fileList={this.state.imgArr}
                                                                 onChange={this.onChange.bind(this, index)}>
                                                                 <Button>
                                                                     <Icon type="upload" /> Upload
-                                                                                </Button>
+                                                                </Button>
                                                             </Upload>
                                                         </div>
                                                     )}
@@ -747,7 +722,6 @@ class BillBoard extends Component {
                                                     <Select
                                                         onChange={this.handleChange}
                                                         options={lightnings}
-                                                    // defaultValue={{ label: this.state.lightning, value: this.state.lightning }}
                                                     >
                                                     </Select>
                                                 )}

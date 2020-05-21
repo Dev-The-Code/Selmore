@@ -70,7 +70,9 @@ class Market extends Component {
     componentWillMount() {
         let data = this.props.data;
         let headingValue = this.props.showValueHead;
+      
         if (data) {
+
             this.setState({
                 billboardData: data,
                 headingValue: headingValue
@@ -87,6 +89,7 @@ class Market extends Component {
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
         let data = response.content;
+
         // localStorage.setItem('billboardData', JSON.stringify(data))
 
         //slice for render some data and click on more button then show some next data
@@ -94,10 +97,9 @@ class Market extends Component {
 
         //create a range array value of width height daily visitor cities & states
         if (data) {
-            if (data.code == 200) {
+            if (response.code == 200) {
                 this.setState({
                     billboardData: data,
-
                 })
             }
 
@@ -1851,7 +1853,6 @@ class Market extends Component {
     render() {
         const { billboardData, billboardFilterdData, cities, states, i, category, notFoundFilterData, minValue, maxValue, showRecord,
             typesOfBillboard, facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cityValue, stateValue } = this.state;
-        console.log(billboardData, 'billboardData')
         const antIcon =
             <Icon type="loading" style={{ fontSize: '110px' }} spin />;
 

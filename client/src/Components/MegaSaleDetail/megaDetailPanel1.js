@@ -71,23 +71,6 @@ class Megapanel1 extends Component {
 
     }
 
-    deleteBillboard = async () => {
-        const { data, billboardData } = this.state;
-
-        let booked = {
-            objectId: data._id,
-        }
-        console.log(data , 'data')
-        console.log(billboardData , 'billboardData')
-        console.log(booked , 'booked')
-
-
-        let response = await HttpUtils.post('megaSaleDelete', booked);
-
-        console.log(response, 'response')
-
-    }
-
     bookedBillboard = async () => {
         const { data, billboardData } = this.state;
         let booked = {}
@@ -103,6 +86,7 @@ class Megapanel1 extends Component {
         booked.billboardAmount = data.discountPrice;
         booked.bookedDate = 'From ' + data.billboardAvailabilityFrom + ' to ' + data.billboardAvailabilityTo;
         booked.objectId = '';
+        console.log(booked, 'booked')
         let response = await HttpUtils.post('postMegaSalebillboard', booked);
 
         if (response) {
@@ -112,12 +96,23 @@ class Megapanel1 extends Component {
                     billboardStatus: 'No Available'
                 }
                 let responseUpdate = await HttpUtils.post('sendmegabillboard', obj);
-                this.setState({
-                    loader: false,
-                    isAlert: true,
-                    mgs: 'We Will contact with you shortly',
-                    redirectMegaSale: true
-                })
+                if (responseUpdate) {
+                    if (responseUpdate.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: billboardData._id,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        this.setState({
+                            loader: false,
+                            isAlert: true,
+                            mgs: 'We Will contact with you shortly',
+                            redirectMegaSale: true
+                        })
+                    }
+                }
 
             }
             else {
@@ -152,6 +147,10 @@ class Megapanel1 extends Component {
             return null;
         }
 
+        if (redirectMegaSale) {
+            return <Redirect to='/megaSale' />
+        }
+
         let image;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
         const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
@@ -170,9 +169,7 @@ class Megapanel1 extends Component {
                 }
             })
         }
-        if (redirectMegaSale) {
-            return <Redirect to={{ pathname: '/megaSale' }} />
-        }
+
         return (
             <div>
                 <div className="container">
@@ -439,7 +436,6 @@ class Megapanel1 extends Component {
                             <div className="row">
 
                                 <div className="col-md-4 col-lg-4 col-xl-4 col-12">
-                                    <button onClick={this.deleteBillboard}>Delete</button>
                                     <h3 className="contactDetailHead">Contact Details</h3>
                                 </div>
                             </div>

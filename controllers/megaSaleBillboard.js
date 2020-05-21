@@ -82,12 +82,30 @@ exports.getAllMegaBillBoardData = function (req, res, next) {
 }
 
 
+exports.getspecificMegaSalebillboard = function(req, res, next){
+  let id = req.body.id;
+  megaSaleBillboard.find({"_id":id},function(err,data){
+    if(err){
+      res.send({
+        msg:'Error getting billboard',
+        code:404,
+        err:err
+      })
+    }
+    else if(data){
+      res.send({
+        content:data,
+        msg:'Get billboard data',
+        code:200
+      })
+    }
+  })
+  }
 
 exports.deleteMegaSaleBillboard = function (req, res, next) {
 
   var formData = req.body;
-  console.log(formData.objectId, 'formData')
-  megaSaleBillboard.findOneAndDelete({ "billboardId": "5d2c7d8676dc5f00176c8976" })
+  // megaSaleBillboard.findOneAndDelete({ "billboardId": "5d2c7d8676dc5f00176c8976" })
   // console.log("deleted")
   // BookedMegaSalebillboardData.save((err, data) => {
   //   if (err) {
@@ -106,21 +124,21 @@ exports.deleteMegaSaleBillboard = function (req, res, next) {
   //   }
   // })
 
-  // BookedMegaSalebillboardData.deleteOne({ "_id": formData.objectId },
-  //   function (err, docs) {
-  //     if (err) {
-  //       res.json(err);
-  //     }
-  //     else {
-  //       res.send({
-  //         code: 200,
-  //         msg: 'Billboard data delete successfully',
-  //         content: docs
-  //       });
-  //       console.log(docs)
-  //     }
-  //     //  res.redirect('/view');
-  //   });
+  megaSaleBillboard.deleteOne({ "_id": formData.objectId },
+    function (err, docs) {
+      if (err) {
+        res.json(err);
+      }
+      else {
+        res.send({
+          code: 200,
+          msg: 'Billboard data delete successfully',
+          content: docs
+        });
+        console.log(docs)
+      }
+      //  res.redirect('/view');
+    });
 
   // BookedMegaSalebillboardData.findOneAndDelete(
   //   { "_id": formData.objectId }

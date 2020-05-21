@@ -57,8 +57,6 @@ class MainHeader extends Component {
             </Menu>
         );
 
-        // console.log(value, ' value')
-        // console.log(dropDownUser, 'dropDownUser')
         return (
             <div>
                 <div className="d-none d-sm-block">

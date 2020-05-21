@@ -24,12 +24,8 @@ class CartPanel1 extends Component {
 
     getBokkedBillboards = async () => {
         let responseBookedData = await HttpUtils.get('getallbookedbillboard');
-        // console.log(response, 'response')
         let responseMegaSaleData = await HttpUtils.get('getallbookedMeagSalebillboard');
-        // console.log(respon , 'respon')
-        // let bookedAvalibleBillboards = JSON.parse(localStorage.getItem('bookedAvalibleBillboards'));
-        // let bookedMegaSaleBillboards = JSON.parse(localStorage.getItem('bookedMegaSaleBillboards'));
-        let bidBillboards = JSON.parse(localStorage.getItem('bidBillboards'));
+        let responsebidderData = await HttpUtils.get('getallbidderBookbillboard');
 
         if (responseBookedData) {
             if (responseBookedData.code == 200) {
@@ -48,13 +44,188 @@ class CartPanel1 extends Component {
             }
         }
 
-        if (bidBillboards != null || bidBillboards != undefined) {
-            this.setState({
-                bidBillboards: bidBillboards
-            })
+        if (responsebidderData) {
+            if (responsebidderData.code == 200) {
+                this.setState({
+                    bidBillboards: responsebidderData.content
+                })
+            }
         }
 
     }
+
+    paymentPaid = async (paymentStatus, bookFrom, data) => {
+
+        if (bookFrom == 'marketPlace') {
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+        }
+        else if (bookFrom == 'megaSale') {
+
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postMegaSalebillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('postMegaSalebillboard', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+
+        }
+        else if (bookFrom == 'bidding') {
+            if (paymentStatus == 'paid') {
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('bidderBillboardBooked', obj);
+                console.log(response , 'response')
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "No Available",
+                            bookFrom: bookFrom,
+                            bookId: data._id,
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+                    }
+                }
+
+            }
+            else if (paymentStatus == 'unpaid') {
+
+                let obj = {
+                    objectId: data._id,
+                    paymentStatus: paymentStatus,
+                }
+                let response = await HttpUtils.post('bidderBillboardBooked', obj);
+                console.log(response , 'response')
+
+                if (response) {
+                    if (response.code == 200) {
+                        let updateMarketPlace = {
+                            objectId: data.billboardId,
+                            avalibleOn: '',
+                            avalibleOnId: '',
+                            status: "Available",
+                            bookFrom: '',
+                            bookId: ''
+
+                        }
+                        let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+                        console.log(respMatkietPlace, 'market place')
+
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+    }
+
     render() {
         const { bidBillboards, megaSaleBillboard, avalibleBillboard } = this.state;
         return (
@@ -92,6 +263,8 @@ class CartPanel1 extends Component {
                                                     <th className="BidhistoryTH">Amount</th>
                                                     <th className="BidhistoryTH">View</th>
 
+                                                    <th className="BidhistoryTH">Payment</th>
+
                                                     {/* <th>Action</th> */}
                                                 </tr>
                                             </thead>
@@ -114,7 +287,14 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
-
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'marketPlace', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'marketPlace', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -133,6 +313,7 @@ class CartPanel1 extends Component {
                                                     <th className="BidhistoryTH">Book Date</th>
                                                     <th className="BidhistoryTH">Sale Amount</th>
                                                     <th className="BidhistoryTH">View</th>
+                                                    <th className="BidhistoryTH">Payment</th>
                                                 </tr>
                                             </thead>
                                             {megaSaleBillboard && megaSaleBillboard.map((elem, key) => {
@@ -151,6 +332,14 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'megaSale', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'megaSale', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -162,11 +351,17 @@ class CartPanel1 extends Component {
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Company name</th>
-                                                    <th>Address</th>
-                                                    <th>Bid Amount</th>
-                                                    {/* <th>Action</th> */}
+                                                    <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Company Name</th>
+                                                    <th className="BidhistoryTH">Company Email</th>
+                                                    <th className="BidhistoryTH">Company Phone</th>
+                                                    <th className="BidhistoryTH">Address</th>
+                                                    <th className="BidhistoryTH">Book Date</th>
+                                                    <th className="BidhistoryTH">Bid Amount</th>
+                                                    <th className="BidhistoryTH">Bidding Time</th>
+                                                    <th className="BidhistoryTH">View</th>
+                                                    <th className="BidhistoryTH">Payment</th>
+
                                                 </tr>
                                             </thead>
                                             {bidBillboards && bidBillboards.map((elem, key) => {
@@ -175,14 +370,25 @@ class CartPanel1 extends Component {
                                                         <tr>
                                                             <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.companyName}</td>
+                                                            <td className="tablee_td">{elem.companyEmail}</td>
+                                                            <td className="tablee_td">{elem.companyLandlineNo}</td>
                                                             <td className="tablee_td">{elem.address}, {elem.city}, {elem.state}</td>
-                                                            <td className="tablee_td"></td>
-                                                            <td className="tablee_td"></td>
+                                                            <td className="tablee_td">{`From ${elem.billboardAvailabilityFrom} To ${elem.billboardAvailabilityTo}`}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.bidAamount} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
-
-                                                                {/* Rs.{elem.bidAamount} */}
                                                             </td>
+                                                            <td className="tablee_td">{`${elem.date} ${elem.time}`}</td>
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                            </td>
+                                                            <tr>
+                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'bidding', elem)}
+                                                                >Paid</button></td>
+                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'bidding', elem)}
+                                                                >Unpaid</button></td>
+                                                            </tr>
                                                         </tr>
                                                     </tbody>
                                                 )

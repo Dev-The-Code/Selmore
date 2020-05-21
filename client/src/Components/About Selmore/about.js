@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import AbBanner from './abBanner';
 import Panel1 from './panel1';
-import Panel2 from './panel2';
 import ListAdHome from '../HomePage/ListingAdPanel/listingAd';
 import Header from '../Header/mainheader';
 

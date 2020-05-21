@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import store from '../../store';
 import {
     Form, Input,
 } from 'antd';
@@ -29,17 +28,12 @@ class SingUpForm extends Component {
     checkEmails = async () => {
         let response = await HttpUtils.get('getemails');
         let getEmail = response.content;
-        console.log(getEmail, 'getEmail')
         this.setState({
             emailsArr: getEmail
         })
     }
 
     onChangeEmail = (rule, value, callback) => {
-        console.log(value, 'value')
-        console.log(this.state.emailsArr, 'this.state.emailsArr')
-        console.log(this.state.emailsArr.includes(value), 'this.state.emailsArr.includes(value)')
-
         if (this.state.emailsArr.includes(value)) {
             callback('Email is already exists');
             this.setState({

@@ -16,6 +16,8 @@ exports.postBookedMegaSaleBillboard = function (req, res, next) {
       billboardId: formData.billboardId,
       bookedDate: formData.bookedDate,
       billboardAmount: formData.billboardAmount,
+      paymentStatus: formData.paymentStatus
+
     })
 
     postBillboardData.save((err, data) => {
@@ -65,6 +67,26 @@ exports.getBookedMegaSalebillboard = function (req, res, next) {
       res.send({
         content: data,
         msg: 'All Booked billboard data',
+        code: 200
+      })
+    }
+  })
+}
+
+exports.getspecificBookedMegaSalebillboard = function (req, res, next) {
+  let id = req.body.id;
+  BookedMegaSalebillboardData.find({ "_id": id }, function (err, data) {
+    if (err) {
+      res.send({
+        msg: 'Error getting billboard',
+        code: 404,
+        err: err
+      })
+    }
+    else if (data) {
+      res.send({
+        content: data,
+        msg: 'Get billboard data',
         code: 200
       })
     }

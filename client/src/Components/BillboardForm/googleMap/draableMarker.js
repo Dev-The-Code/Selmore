@@ -45,16 +45,12 @@ class Map extends Component {
                     longitude: position.coords.longitude
                 }
             });
-            //   this.props.getCoords(this.state.coords)
-            console.log('initialset', this.state.coords);
         })
     }
 
     getCurrPosition({ latitude, longitude }) {
 
         this.setState({ coords: { latitude, longitude } })
-        // this.props.getCoords(this.state.coords)
-        console.log('getcurr', this.state.coords);
         var location = localStorage.setItem('coords', JSON.stringify(this.state.coords));
     }
 
@@ -96,7 +92,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
         {props.isMarkerShown && <Marker position={{ lat: props.coords.latitude, lng: props.coords.longitude }}
             draggable={true}
             onDragEnd={position => {
-                // console.log(position.latLng.lat(), position.latLng.lng());
                 props.getCurrentPosition({ latitude: position.latLng.lat(), longitude: position.latLng.lng() });
             }} />}
     </GoogleMap>

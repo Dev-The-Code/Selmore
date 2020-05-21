@@ -47,7 +47,6 @@ class Comman extends Component {
         }
     }
     componentDidMount() {
-        //fetching billboard data
         this.billBoradDetails();
         // fetch('./cities.json')
         //     .then(resp => resp.json())
@@ -103,17 +102,13 @@ class Comman extends Component {
         //filter data with given values array
         const { billboardData } = this.state;
         var filteredData = [];
-        console.log(value, 'value')
         if (value.length >= 1) {
             //if user has filter values the run the code
             for (var i = 0; i < value.length; i++) {
                 for (var j in billboardData) {
                     let data = billboardData[j]
-                    // console.log(billboardData[j])
                     for (var k in data) {
-                        // console.log(data[k])
                         if (data[k] === value[i]) {
-                            // console.log(data)
                             filteredData.push(data)
                             break;
                         }

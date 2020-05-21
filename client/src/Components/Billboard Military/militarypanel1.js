@@ -31,26 +31,38 @@ class Militarypanel1 extends Component {
 			loader: false,
 			isAlert: false,
 			mgs: '',
-			redirectMarketPlace: false
+			redirectMarketPlace: false,
+			goForDetailMegaSale: false,
+			goForDetailBidding: false,
+			dataForDetail: ''
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
+
+		console.log(data, 'data from detail');
+
 		if (data.images && data.images.length > 0) {
-			console.log(data, 'data')
+			if (data.bookFrom != undefined || data.bookFrom != '' && data.bookId != undefined || data.bookId != '') {
+				this.getBookedBillboardDetail(data.bookFrom, data.bookId)
+			}
 			await this.setState({
 				data: data,
 				images: data.images,
 			})
+
 		}
 		else {
 			let obj = {
 				id: data
 			}
 			let response = await HttpUtils.post('getspecificbillboard', obj);
-			console.log(response, 'response')
 			if (response) {
 				if (response.code == 200) {
+					let data = response.content[0];
+					if (data.bookFrom != undefined || data.bookFrom != '' && data.bookId != undefined || data.bookId != '') {
+						this.getBookedBillboardDetail(data.bookFrom, data.bookId)
+					}
 					this.setState({
 						data: response.content[0],
 						images: response.content[0].images
@@ -136,7 +148,6 @@ class Militarypanel1 extends Component {
 			status: 'No Available'
 		}
 		let response = await HttpUtils.post('listadd', updateBillboard);
-		console.log(response, 'response')
 		if (response) {
 			if (response.code == 200) {
 				this.bookedBillboard(values);
@@ -210,13 +221,86 @@ class Militarypanel1 extends Component {
 		}
 	}
 
+	detailBillboardAvail = async (param) => {
+		const { data } = this.state;
+		let obj = {
+			id: data.avalibleOnId
+		}
+
+		if (param == 'megaSale') {
+			let response = await HttpUtils.post('getspecificMegaSalebillboard', obj);
+			if (response) {
+				if (response.code == 200) {
+					let dataOfBillboard = {
+						megasaleDetail: response.content[0],
+						bilboardDetail: data
+					}
+
+					this.setState({
+						goForDetailMegaSale: true,
+						dataForDetail: dataOfBillboard
+					})
+				}
+			}
+
+
+		}
+		else if (param == 'biding') {
+			let response = await HttpUtils.post('getspecificBiddingbillboard', obj);
+			console.log(response, 'response')
+			if (response) {
+				if (response.code == 200) {
+					let dataOfBillboard = {
+						megasaleDetail: response.content[0],
+						bilboardDetail: data
+					}
+
+					this.setState({
+						goForDetailBidding: true,
+						dataForDetail: response.content[0]
+
+					})
+				}
+
+			}
+		}
+	}
+
+	getBookedBillboardDetail = async (bookFrom, bookId) => {
+		if (bookFrom == 'marketPlace') {
+			let obj = {
+				id: bookId
+			}
+			let response = await HttpUtils.post('getspecificMarketPlaceBookedbillboard', obj);
+			console.log(response, 'response')
+		}
+		else if (bookFrom == 'megaSale') {
+			let obj = {
+				id: bookId
+			}
+			let response = await HttpUtils.post('getspecificBookedMegaSalebillboard', obj);
+			console.log(response, 'response')
+
+		}
+		else if (bookFrom == 'bidding') {
+			let obj = {
+				id: bookId
+			}
+			let response = await HttpUtils.post('getspecificBookedBidderbillboard', obj);
+			console.log(response, 'response')
+
+		}
+	}
+
 	render() {
-		const { data, images, loader, alert, mgs, redirectMarketPlace } = this.state;
+		const { data, images, loader, alert, mgs, redirectMarketPlace, goForDetailMegaSale, goForDetailBidding, dataForDetail } = this.state;
 		const { getFieldDecorator } = this.props.form;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
 		const valueUser = JSON.parse(localStorage.getItem("loggedIn"));
 		const antIcon = <Icon type="loading" style={{ fontSize: 24, marginRight: '10px' }} spin />;
+
+
 
 		if (images.length > 0) {
 			image = images.map((elem, key) => {
@@ -234,6 +318,17 @@ class Militarypanel1 extends Component {
 		}
 		if (redirectMarketPlace) {
 			return <Redirect to={{ pathname: '/market_place' }} />
+		}
+
+		if (goForDetailMegaSale) {
+			return (
+				<Redirect to={{ pathname: `/megaDetail/${data.avalibleOnId}`, state: dataForDetail }} />
+			)
+		}
+		if (goForDetailBidding) {
+			return (
+				<Redirect to={{ pathname: `/bidding_detail/${data.avalibleOnId}`, state: dataForDetail }} />
+			)
 		}
 		return (
 			<div>
@@ -358,8 +453,21 @@ class Militarypanel1 extends Component {
 									{valueUser && data.status && data.status == 'Available' ?
 										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook">Book Now</button>
 										:
-										<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Already Booked</button>
+										data.avalibleOn == 'megaSale' || data.avalibleOn == 'bidding' ?
+											<button className="btn btn-primary bookBtn_military" disabled>Avail On Deal</button>
+
+											:
+											<button className="btn btn-primary bookBtn_military" data-toggle="modal" data-target="#myBillBook" disabled>Already Booked</button>
 									}
+									{data.avalibleOn == "megaSale" ?
+
+										<button className="btn btn-primary bookBtn_military" onClick={this.detailBillboardAvail.bind(this, 'megaSale')}>Book From Mega Sale</button>
+										:
+										null
+									}
+									{data.avalibleOn == "bidding" ?
+										<button className="btn btn-primary bookBtn_military" onClick={this.detailBillboardAvail.bind(this, 'biding')}>Book From Bidding</button>
+										: null}
 								</div>
 							</div>
 

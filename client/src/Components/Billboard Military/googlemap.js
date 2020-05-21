@@ -36,7 +36,6 @@ class Location extends Component {
 
     render() {
         const { coords } = this.state;
-        console.log(coords , 'coords')
         const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
             <GoogleMap

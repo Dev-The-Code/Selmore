@@ -20,7 +20,7 @@ class Panel2 extends Component {
 								</div>
         				 	</div>
 	        				<div className="col-md-4 col-sm-4 floote1">
-	        					<img src="./images/about-panel2.png" style={{height:"160px"}}/>
+	        					<img src="./images/about-panel2.png" style={{height:"160px"}} alt = 'img'/>
 	        				</div>
     				</div>
     			</div>

@@ -100,14 +100,6 @@ class UserPanel1 extends Component {
                                                         <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '25px', color: 'green' }} onClick={this.changeStatus.bind(this, 'approved', elem._id)}></button></td>
                                                         <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '25px', color: 'red' }} onClick={this.changeStatus.bind(this, 'block', elem._id)}></button></td>
                                                     </tr>
-                                                    {/* <tr>
-                                                 <td className="tablee_th">1</td>
-                                                 <td className="tablee_td">Al Arcom Trading</td>
-                                                 <td className="tablee_td">arcomintl@gmail.com</td>
-                                                 <td className="tablee_td">0321 23456 7</td>
-                                                 <td className="tablee_td"><i class="fa fa-check-circle" style={{ fontSize: '25px', color: 'green' }}></i></td>
-                                                 <td className="tablee_td"><i class="fa fa-close" style={{ fontSize: '25px', color: 'red' }}></i></td>
-                                             </tr> */}
                                                 </tbody>)
                                         })}
 

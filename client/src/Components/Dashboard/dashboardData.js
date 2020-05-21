@@ -67,6 +67,7 @@ class DashboardData extends Component {
             stateValue: '',
             notFoundFilterData: false,
             showRecord: true,
+            oneBillboardData: ''
         }
     }
 
@@ -93,18 +94,22 @@ class DashboardData extends Component {
         }
         let response = await HttpUtils.get('getcompanyname');
         let responseBillboardData = await HttpUtils.get('getbillboard');
-        companyName = response.content.map((elem, i) => {
-            return { label: elem.companyName, value: elem.companyName, id: elem._id }
-        })
+        if (response) {
+            companyName = response.content.map((elem, i) => {
+                return { label: elem.companyName, value: elem.companyName, id: elem._id }
+            })
+        }
         types = typeArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
         let rangeValues = rangeNumArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
-        address = responseBillboardData.content.map((elem, i) => {
-            return { label: elem.address, value: elem.address, id: elem._id }
-        })
+        if (responseBillboardData) {
+            address = responseBillboardData.content.map((elem, i) => {
+                return { label: elem.address, value: elem.address, id: elem._id }
+            })
+        }
         cities = citiesArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
@@ -194,16 +199,17 @@ class DashboardData extends Component {
             })
         }
 
-        // this.filterKeysGet();
+        this.filterKeysGet();
         if (filterCompanyNameArr.length == 0 && filterTypesArr.length == 0 && filterAddresArr.length == 0
             && filterCityName.length == 0 && filterStateName.length == 0) {
             this.setState({
                 showRecord: true,
                 notFoundFilterData: false,
-                filteredData: [],
+                billboardFilterdData: [],
             })
         }
         else {
+            console.log('else condition true')
             this.filterKeysGet();
         }
     }
@@ -229,7 +235,6 @@ class DashboardData extends Component {
 
 
     filterKeysGet = () => {
-
         let filterKeys = [];
         if (filterCompanyNameArr.length > 0) {
             filterKeys.push('companyName')
@@ -315,7 +320,6 @@ class DashboardData extends Component {
             })
         }
 
-        console.log(data, 'data')
 
     }
 
@@ -829,13 +833,16 @@ class DashboardData extends Component {
                 billboardFacing: billboardDetail.facing,
                 billboardLighting: billboardDetail.lightning,
                 billboardAudienceType: billboardDetail.audianceType,
-                billboardState: billboardDetail.state
+                billboardState: billboardDetail.state,
+                oneBillboardData: billboardDetail,
+                loader: false,
+                isAlert: false,
+                mgs: '',
             }
                 ,
                 () => {
                     document.getElementById('megaForm').click();
                 })
-            // document.getElementById('megaForm').click();
 
         }
         else if (param == 'bidding') {
@@ -850,10 +857,15 @@ class DashboardData extends Component {
                 billboardFacing: billboardDetail.facing,
                 billboardLighting: billboardDetail.lightning,
                 billboardAudienceType: billboardDetail.audianceType,
-                billboardState: billboardDetail.state
+                billboardState: billboardDetail.state,
+                oneBillboardData: billboardDetail,
+                loader: false,
+                isAlert: false,
+                mgs: '',
+
             },
                 () => {
-                    document.getElementById('megaForm').click();
+                    document.getElementById('biddingForm').click();
                 })
         }
 
@@ -919,75 +931,124 @@ class DashboardData extends Component {
     };
 
     megaSaleUpload = async (values) => {
-        let response = await HttpUtils.post('sendmegabillboard', values);
-        if (response) {
-            if (response.code == 200) {
-                this.setState({
-                    loader: false,
-                    isAlert: true,
-                    mgs: 'Your billboard has been publish on mega sale',
-                    redirectDashboard: true
-                })
-                window.location.reload(true);
+        const { billboardId, oneBillboardData } = this.state;
+
+        if (oneBillboardData.status == 'No Available' || oneBillboardData.avalibleOn == "megaSale" || oneBillboardData.avalibleOn == "bidding") {
+            this.setState({
+                loader: false,
+                isAlert: true,
+                mgs: "This billboard is not avalible for mega Sale kindly select another one",
+                redirectDashboard: false
+            })
+        }
+        else {
+            let response = await HttpUtils.post('sendmegabillboard', values);
+            if (response) {
+                if (response.code == 200) {
+                    let obj = {
+                        objectId: billboardId,
+                        avalibleOn: 'megaSale',
+                        avalibleOnId: response.content._id,
+                        status: "No Available",
+                    }
+                    let resp = await HttpUtils.post('listadd', obj);
+                    if (resp) {
+                        if (resp.code == 200) {
+                            this.setState({
+                                loader: false,
+                                isAlert: true,
+                                mgs: 'Your billboard has been publish on mega sale',
+                                redirectDashboard: true
+                            })
+                            window.location.reload(true);
+                        }
+                    }
+
+                }
+                else {
+                    this.setState({
+                        loader: false,
+                        isAlert: true,
+                        mgs: response.msg,
+                        redirectDashboard: false
+                    })
+                }
             }
             else {
                 this.setState({
                     loader: false,
                     isAlert: true,
-                    mgs: response.msg,
+                    mgs: 'Kindly check your connection',
                     redirectDashboard: false
+
                 })
             }
         }
-        else {
-            this.setState({
-                loader: false,
-                isAlert: true,
-                mgs: 'Kindly check your connection',
-                redirectDashboard: false
 
-            })
-        }
+
 
     }
 
     biddingUpload = async (values) => {
-        let response = await HttpUtils.post('postbiddingbillboard', values);
-        if (response) {
-            if (response.code == 200) {
-                this.setState({
-                    loader: false,
-                    isAlert: true,
-                    mgs: 'Your billboard has been publish on bidding',
-                    redirectDashboard: true
-                })
-                window.location.reload(true);
+        const { billboardId, oneBillboardData } = this.state;
+        if (oneBillboardData.status == 'No Available' || oneBillboardData.avalibleOn == "megaSale" || oneBillboardData.avalibleOn == "bidding") {
+            this.setState({
+                loader: false,
+                isAlert: true,
+                mgs: "This billboard is not avalible for bidding kindly select another one",
+                redirectDashboard: false
+            })
+        }
+        else {
 
+            let response = await HttpUtils.post('postbiddingbillboard', values);
+            if (response) {
+                if (response.code == 200) {
+                    let obj = {
+                        objectId: billboardId,
+                        avalibleOn: 'bidding',
+                        avalibleOnId: response.content._id,
+                        status: "No Available",
+                    }
+                    let resp = await HttpUtils.post('listadd', obj);
+                    if (resp) {
+                        if (resp.code == 200) {
+                            this.setState({
+                                loader: false,
+                                isAlert: true,
+                                mgs: 'Your billboard has been publish on bidding',
+                                redirectDashboard: true
+                            })
+                            window.location.reload(true);
+                        }
+                    }
+                }
+                else {
+                    this.setState({
+                        loader: false,
+                        isAlert: true,
+                        mgs: response.msg,
+                        redirectDashboard: false
+                    })
+                }
             }
             else {
                 this.setState({
                     loader: false,
                     isAlert: true,
-                    mgs: response.msg,
+                    mgs: 'Kindly check your connection',
                     redirectDashboard: false
+
                 })
             }
-        }
-        else {
-            this.setState({
-                loader: false,
-                isAlert: true,
-                mgs: 'Kindly check your connection',
-                redirectDashboard: false
-
-            })
         }
     }
 
     render() {
         const { billboardData, companyName, types, address, cities, states, billboardFilterdData, megaSaleFormShow, companyNameValue,
-            typeValue, addressValue, cityValue, stateValue, notFoundFilterData, showRecord } = this.state;
+            typeValue, addressValue, cityValue, stateValue, notFoundFilterData, showRecord, biddingFormShow } = this.state;
         const { getFieldDecorator } = this.props.form;
+
         const antIcon =
             <Icon type="loading" style={{ fontSize: '110px' }} spin />;
         const billboardRendring = (
@@ -1072,67 +1133,6 @@ class DashboardData extends Component {
                             })
                             : null
                         }
-
-
-
-
-
-
-
-
-
-
-
-
-                        {/* {billboardFilterdData.length !== 0 ? billboardFilterdData && billboardFilterdData.map((elem, key) => {
-                            return (<tbody>
-                                <tr>
-                                    <th scope="row">{key}</th>
-                                    <td className='tableTd'>{elem.companyName}</td>
-                                    <td className='tableTd'>{elem.address}</td>
-                                    <td className='tableTd'>{elem.city}</td>
-                                    <td className='tableTd'>{elem.state}</td>
-                                    <td className='tableTd'>
-                                        <div class="dropdown_dash">
-                                            <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
-                                            <div class="dropdown-content_dash">
-                                                <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
-                                                <a href="#" data-toggle="modal" data-target="#megaForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>Mega Sale</span></a>
-                                                <a href="#" data-toggle="modal" data-target="#biddingForm"><span className="dropText" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>Bidding</span></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            )
-                        })
-                            :
-                            billboardData && billboardData.map((elem, key) => {
-                                return (<tbody>
-                                    <tr>
-                                        <th scope="row">{key}</th>
-                                        <td className='tableTd'>{elem.companyName}</td>
-                                        <td className='tableTd'>{elem.address}</td>
-                                        <td className='tableTd'>{elem.city}</td>
-                                        <td className='tableTd'>{elem.state}</td>
-                                        <td className='tableTd'>
-                                            <div class="dropdown_dash">
-                                                <button class="dropbtn_dash">Select <i class="fa fa-angle-down arowIcon"></i></button>
-                                                <div class="dropdown-content_dash">
-                                                    <Link to={{ pathname: `/billborad_Militry`, state: elem }}><span className="dropText">View</span></Link>
-                                                    <a data-toggle="modal" data-target="#megaForm" onClick={this.billboardImageAndId.bind(this, elem, 'megaSale')}>
-                                                        <span className="dropText" >Mega Sale</span>
-                                                    </a>
-                                                    <a data-toggle="modal" data-target="#megaForm" onClick={this.billboardImageAndId.bind(this, elem, 'bidding')}>
-                                                        <span className="dropText" >Bidding</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>)
-                            })
-                        } */}
                     </table>
                 </div>
             </div>
@@ -1284,17 +1284,18 @@ class DashboardData extends Component {
                         <div>
                             {billboardRendring}
                         </div>
-                        {/* <div style={{ marginTop: '2vw' }}>
-                            {billboardData !== 0 ?
+                        <div style={{ marginTop: '2vw' }}>
+                            {billboardData && billboardData.length == 0 ?
                                 <div style={{ textAlign: 'center' }}> <Spin indicator={antIcon} /> </div>
                                 :
                                 null}
-                        </div> */}
+                        </div>
                     </div>
                     <div className="col-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
 
-                {/* {megaSaleFormShow ? */}
+                {/* Mega Sale Form in modal */}
+
                 <div class="modal fade" id="megaForm">
                     <div class="modal-dialog">
                         <div class="modal-content modal_width">
@@ -1303,14 +1304,15 @@ class DashboardData extends Component {
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <div className="row padInModal">
-                                    <div className="col-12 col-md-5 col-lg-5 col-xl-5">
-                                        <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
-                                    </div>
-                                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-
-                                        <Form onSubmit={megaSaleFormShow ? this.handleSubmitMegaSale : this.handleSubmitBidding}>
-                                            {megaSaleFormShow ?
+                                {megaSaleFormShow ?
+                                    //                     {/* biddingFormShow */ }
+                                    // {/* megaSaleFormShow: false, */}
+                                    <div className="row padInModal">
+                                        <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                            <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                        </div>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                            <Form onSubmit={this.handleSubmitMegaSale}>
                                                 <div>
                                                     <div className="row">
                                                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -1487,8 +1489,51 @@ class DashboardData extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </Form>
+                                        </div>
+                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1">
 
-                                                :
+                                        </div>
+                                    </div>
+                                    : null}
+
+                                <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {this.state.isAlert ?
+                                <div class="alert alert-danger" role="alert">
+                                    {this.state.mgs}
+                                </div>
+                                : null}
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                        {this.state.isLoader ? <div class="loading">   </div>
+                            : null
+                        }
+                    </div>
+                </div>
+
+
+                {/* bidding Form in modal */}
+
+                <div class="modal fade" id="biddingForm">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal_width">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Bidding</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                {biddingFormShow ?
+                                    <div className="row padInModal">
+                                        <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                                            <img src="../images/log-in.png" alt='img' style={{ width: '100%', height: '257px' }} />
+                                        </div>
+                                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+
+                                            <Form onSubmit={this.handleSubmitBidding}>
+
 
 
                                                 <div>
@@ -1644,14 +1689,14 @@ class DashboardData extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            }
-                                        </Form>
+                                            </Form>
 
-                                    </div>
-                                    <div className="col-12 col-md-1 col-lg-1 col-xl-1">
+                                        </div>
+                                        <div className="col-12 col-md-1 col-lg-1 col-xl-1">
 
+                                        </div>
                                     </div>
-                                </div>
+                                    : null}
 
                                 <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
                             </div>

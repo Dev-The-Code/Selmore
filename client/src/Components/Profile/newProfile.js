@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import Cookimg from './cook.jpg';
-
-
-
 
 class NewProfile extends Component {
 	constructor(props) {
