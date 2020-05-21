@@ -99,6 +99,23 @@ $light-color: #4a5964;
   height: 10px;
 }
 
+.cross-card{
+  background-color: #23654f;
+  font-size: 13px;
+  color: white;
+  padding: 10px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+.crossBtnExlpre{
+  color: white !important;
+  opacity: 0.9 !important;
+  margin-top: -3px;
+}
+.liStyleFilter{
+  list-style: none;
+}
+
 .scroll_tableAfter {
   overflow: auto;
 }
