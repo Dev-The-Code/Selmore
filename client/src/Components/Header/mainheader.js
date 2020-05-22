@@ -17,13 +17,13 @@ class MainHeader extends Component {
 
     openNav = () => {
         this.setState({
-            navbar : true
-        })    
+            navbar: true
+        })
     }
 
     closeNav = () => {
         this.setState({
-            navbar : false,
+            navbar: false,
         })
     }
 
@@ -31,7 +31,7 @@ class MainHeader extends Component {
         const { dropDownUser } = this.props;
         const value = JSON.parse(localStorage.getItem("loggedIn"));
         let adminUser = JSON.parse(localStorage.getItem("userData"));
-    
+
         const menu = (
             <Menu>
                 <Menu.Item className="dropdownTextHover">
@@ -81,6 +81,11 @@ class MainHeader extends Component {
                                             <span className="buyMediaBtn">Buy Media</span>
                                         </a>
                                     </Dropdown>
+                                </li>
+                                <li className="menuLiTag">
+                                    <Link rel="noopener noreferrer" to={`/newiestBillboard`}>
+                                        <span className="menuText">Newiest Billboard</span>
+                                    </Link>
                                 </li>
                                 <li className="menuLiTag">
                                     <Link rel="noopener noreferrer" to={`/about`}>
@@ -176,6 +181,11 @@ class MainHeader extends Component {
                                                     <span className="buyMediaBtnMOB">Buy Media</span>
                                                 </a>
                                             </Dropdown>
+                                        </li>
+                                        <li>
+                                            <Link rel="noopener noreferrer" to={`/newiestBillboard`}>
+                                                <span className="menuTextMOB">Newiest Billboard</span>
+                                            </Link>
                                         </li>
                                         <li className="">
                                             <Link rel="noopener noreferrer" to={`/about`}>

@@ -1,0 +1,41 @@
+$font-stack: visby-bold;
+$font-regular: visby-regular;
+$secondary-color: #19303a;
+$primary-color: #19b3e8;
+$light-color: #4a5964;
+
+.myProfileLogoCompany {
+    text-align: center;
+    width: 100%;
+    border-radius: 5px;
+    border: 3px solid #e4e4e4;
+    background-color: white;
+    padding: 5px;
+}
+.myProfileName {
+    color: $secondary-color;
+    font-family: $font-stack;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 12px;
+}
+.mainField {
+    background-color: #f1ebeb;
+    padding: 10px;
+    font-family: $font-regular;
+}
+.fieldinnerLegend {
+    background-color: $primary-color;
+    color: white;
+    padding: 5px;
+    font-family: $font-stack;
+}
+.paraInnerText{
+    // font-family: $font-regular;
+    color: black;
+}
+.maindescripthead{
+    color: $secondary-color;
+    font-family: $font-stack;
+    font-size: 17px;
+}
