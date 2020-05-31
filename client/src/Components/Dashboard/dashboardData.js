@@ -1065,14 +1065,18 @@ class DashboardData extends Component {
                         </thead>
                         {/* filterd data render */}
                         {notFoundFilterData && billboardFilterdData.length == 0 ?
-                            <div className="noRecrdTxt">
-                                <p className="noRecordText">
-                                    No Record Found
-                                </p>
-                                <button
-                                    className="backBtn"
-                                    onClick={this.showAllRooms}
-                                >Back</button>
+                            <div className="row">
+                                <div className="col-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div className="noRecrdTxt">
+                                        <p className="noRecordText">
+                                            No Record Found
+                                        </p>
+                                        <button
+                                            className="backBtn"
+                                            onClick={this.showAllRooms}
+                                        >Back</button>
+                                    </div>
+                                </div>
                             </div>
                             :
                             billboardFilterdData && billboardFilterdData.map((elem, key) => {
@@ -1216,70 +1220,63 @@ class DashboardData extends Component {
                             </div>
                             <div className="row" style={{ margin: '0' }}>
                                 {companyNameValue != "" &&
-                                    <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                        <div className="filture">
-                                            <div className="cross-card">
-                                                <h4 className='text_topFilter'>{companyNameValue.value}
-                                                    <span class="close crossBtnExlpre"
-                                                        onClick={this.removeValue.bind(this, 'compamyName', companyNameValue)}
-                                                    >x</span>
-                                                </h4>
-                                            </div>
-
+                                    <div className='col-6 col-sm-2 col-md-2 col-lg-2 col-xl-2'>
+                                        <div className="cross-card">
+                                            <li className="liStyleFilter">
+                                                {companyNameValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'compamyName', companyNameValue)}
+                                                >x</span>
+                                            </li>
                                         </div>
                                     </div>
                                 }
                                 {typeValue != '' &&
-                                    <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                        <div className="filture">
-                                            <div className="cross-card">
-                                                <h4 className='text_topFilter'>{typeValue.value}
-                                                    <span class="close crossBtnExlpre"
-                                                        onClick={this.removeValue.bind(this, 'billboardType', typeValue)}
-                                                    >x</span>
-                                                </h4>
-                                            </div>
+                                    <div className='col-6 col-sm-2 col-md-2 col-lg-2 col-xl-2'>
+                                        <div className="cross-card">
+                                            <li className="liStyleFilter">
+                                                {typeValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardType', typeValue)}
+                                                >x</span>
+                                            </li>
                                         </div>
                                     </div>
                                 }
                                 {addressValue != '' &&
-                                    <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                        <div className="filture">
-                                            <div className="cross-card">
-                                                <h4 className='text_topFilter'>{addressValue.value}
-                                                    <span class="close crossBtnExlpre"
-                                                        onClick={this.removeValue.bind(this, 'billboardAddres', addressValue)}
-                                                    >x</span>
-                                                </h4>
-                                            </div>
+                                    <div className='col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4'>
+                                        <div className="cross-card">
+                                            <li className="liStyleFilter">
+                                                {addressValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardAddres', addressValue)}
+                                                >x</span>
+                                            </li>
                                         </div>
                                     </div>
                                 }
                                 {cityValue != '' &&
-                                    <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                        <div className="filture">
-                                            <div className="cross-card">
-                                                <h4 className='text_topFilter'>{cityValue.value}
-                                                    <span class="close crossBtnExlpre"
-                                                        onClick={this.removeValue.bind(this, 'billboardCity', cityValue)}
-                                                    >x</span>
-                                                </h4>
-                                            </div>
+                                    <div className='col-6 col-sm-2 col-md-2 col-lg-2 col-xl-2'>
+                                        <div className="cross-card">
+                                            <li className="liStyleFilter">
+                                                {cityValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardCity', cityValue)}
+                                                >x</span>
+                                            </li>
                                         </div>
                                     </div>
                                 }
                                 {stateValue != '' &&
-                                    <div className='col-xl-3 col-md-3 col-5 filterOne'>
-                                        <div className="filture">
-                                            <div className="cross-card">
-                                                <h4 className='text_topFilter'>{stateValue.value}
-                                                    <span class="close crossBtnExlpre"
-                                                        onClick={this.removeValue.bind(this, 'billboardState', stateValue)}
-                                                    >x</span>
-                                                </h4>
-                                            </div>
+                                    <div className='col-6 col-sm-2 col-md-2 col-lg-2 col-xl-2'>
+                                        <div className="cross-card">
+                                            <li className="liStyleFilter">
+                                                {stateValue.value}
+                                                <span class="close crossBtnExlpre"
+                                                    onClick={this.removeValue.bind(this, 'billboardState', stateValue)}
+                                                >x</span>
+                                            </li>
                                         </div>
-
                                     </div>
                                 }
                             </div>

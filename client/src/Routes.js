@@ -23,6 +23,7 @@ import AddBillboards from './Components/BillboardForm/addBillboards';
 import Billboardmilitary from './Components/Billboard Military/billmilitary';
 import MegaSale from './Components/MegaSale/megaSale';
 import MegaDetail from '../src/Components/MegaSaleDetail/megaDetail';
+import NewiestBillboard from '../src/Components/NewiestBillboard/newiestBillboard';
 import MarketPlace from './Components/MarketPlace/marketPlace';
 import Dashboard from './Components/Dashboard/dashboard';
 import AdminUser from './Components/Admin Users/adminUser';
@@ -66,6 +67,7 @@ class Routes extends Component {
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
               <PrivateRoute  path="/megaSale" component={MegaSale}></PrivateRoute>
               <PrivateRoute  path="/megaDetail/:value" component={MegaDetail}></PrivateRoute>
+              <PrivateRoute  path="/newiestBillboard" component={NewiestBillboard}></PrivateRoute>
               <PrivateRoute  path="/about" component={About}></PrivateRoute>
               <PrivateRoute  path="/advertising_agency" component={Advertising}></PrivateRoute>
               <PrivateRoute  path="/faq" component={Faq}></PrivateRoute>
