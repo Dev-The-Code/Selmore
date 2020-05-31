@@ -92,3 +92,24 @@ exports.getspecificMarketPlaceBookedbillboard = function (req, res, next) {
     }
   })
 }
+
+
+exports.getspecificUserMarketPlaceBookedbillboard = function (req, res, next) {
+  let id = req.body.id;
+  BookedbillboardData.find({ "companyId": id }, function (err, data) {
+    if (err) {
+      res.send({
+        msg: 'Error getting billboard',
+        code: 404,
+        err: err
+      })
+    }
+    else if (data) {
+      res.send({
+        content: data,
+        msg: 'Get billboard data',
+        code: 200
+      })
+    }
+  })
+}

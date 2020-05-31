@@ -27,63 +27,68 @@ class Panel1 extends Component {
   }
   async componentWillMount() {
     let response = await HttpUtils.get('getbillboard');
-    let data = response.content;
-    let billboardcategoryArr = [];
-    let taxiAdscategoryArr = [];
-    let busAdscategoryArr = [];
-    let busShelterAdscategoryArr = [];
-    let airportAdscategoryArr = [];
-    let shoppingMallcategoryArr = [];
-    let steamerMallcategoryArr = [];
-    let cinimaAdscategoryArr = [];
-    let radioAdscategoryArr = [];
-    let othercategoryArr = [];
-    for (var i in data) {
-      if (data[i].category[0] == 'Billboard ') {
-        billboardcategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Taxi Ads') {
-        taxiAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Bus Ads') {
-        busAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Bus Shelter Ads') {
-        busShelterAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Airport Ads') {
-        airportAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Shopping Mall') {
+    if (response) {
 
-        shoppingMallcategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Streamers') {
-        steamerMallcategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Total Cinima Ads') {
-        cinimaAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Radio Ads') {
-        radioAdscategoryArr.push(data[i]);
-      }
-      else if (data[i].category[0] == 'Other') {
-        othercategoryArr.push(data[i]);
+      if (response.code = 200) {
+        let data = response.content;
+        let billboardcategoryArr = [];
+        let taxiAdscategoryArr = [];
+        let busAdscategoryArr = [];
+        let busShelterAdscategoryArr = [];
+        let airportAdscategoryArr = [];
+        let shoppingMallcategoryArr = [];
+        let steamerMallcategoryArr = [];
+        let cinimaAdscategoryArr = [];
+        let radioAdscategoryArr = [];
+        let othercategoryArr = [];
+        for (var i in data) {
+          if (data[i].category[0] == 'Billboard ') {
+            billboardcategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Taxi Ads') {
+            taxiAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Bus Ads') {
+            busAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Bus Shelter Ads') {
+            busShelterAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Airport Ads') {
+            airportAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Shopping Mall') {
+
+            shoppingMallcategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Streamers') {
+            steamerMallcategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Total Cinima Ads') {
+            cinimaAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Radio Ads') {
+            radioAdscategoryArr.push(data[i]);
+          }
+          else if (data[i].category[0] == 'Other') {
+            othercategoryArr.push(data[i]);
+          }
+        }
+
+        this.setState({
+          billboardcategory: billboardcategoryArr,
+          taxiAdscategory: taxiAdscategoryArr,
+          busAdscategory: busAdscategoryArr,
+          busShelterAdscategory: busShelterAdscategoryArr,
+          airportAdscategory: airportAdscategoryArr,
+          shoppingMallcategory: shoppingMallcategoryArr,
+          steamerMallcategory: steamerMallcategoryArr,
+          cinimaAdscategory: cinimaAdscategoryArr,
+          radioAdscategory: radioAdscategoryArr,
+          othercategory: othercategoryArr,
+        })
       }
     }
-
-    this.setState({
-      billboardcategory: billboardcategoryArr,
-      taxiAdscategory: taxiAdscategoryArr,
-      busAdscategory: busAdscategoryArr,
-      busShelterAdscategory: busShelterAdscategoryArr,
-      airportAdscategory: airportAdscategoryArr,
-      shoppingMallcategory: shoppingMallcategoryArr,
-      steamerMallcategory: steamerMallcategoryArr,
-      cinimaAdscategory: cinimaAdscategoryArr,
-      radioAdscategory: radioAdscategoryArr,
-      othercategory: othercategoryArr,
-    })
   }
   hoverAlert = (value, nameKey) => {
     this.setState({

@@ -165,13 +165,210 @@ class Home extends Component {
     let responseMegaSaleData = await HttpUtils.get('getallbookedMeagSalebillboard');
     let responsebidderData = await HttpUtils.get('getallbidderBookbillboard');
 
-    console.log(responseBookedData , 'responseBookedData')
-    console.log(responseMegaSaleData , 'responseMegaSaleData')
-    console.log(responsebidderData , 'responsebidderData')
+    let paidMarketPlaceData = [];
+    let paidMegaSaleData = [];
+    let paidBiddingData = []
+
+    if (responseBookedData) {
+      if (responseBookedData.code == 200) {
+        let data = responseBookedData.content;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].paymentStatus == "paid") {
+            paidMarketPlaceData.push(data[i])
+          }
+        }
+      }
+
+    }
+
+    if (responseMegaSaleData) {
+      if (responseMegaSaleData.code == 200) {
+        let data = responseMegaSaleData.content;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].paymentStatus == "paid") {
+            paidMegaSaleData.push(data[i])
+          }
+        }
+      }
+
+    }
+
+    if (responsebidderData) {
+      if (responsebidderData.code == 200) {
+        let data = responsebidderData.content;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].paymentStatus == "paid") {
+            paidBiddingData.push(data[i])
+          }
+        }
+      }
+    }
+
+    if (paidMarketPlaceData.length > 0) {
+      this.checkingMarketPlaceBookDataExpire(paidMarketPlaceData)
+    }
+
+    if (paidMegaSaleData.length > 0) {
+      this.checkingMegaSaleBookDataExpire(paidMegaSaleData)
+    }
+
+    if (paidBiddingData.length > 0) {
+      this.checkingBiddingBookDataExpire(paidBiddingData)
+    }
+
 
 
   }
 
+  checkingMarketPlaceBookDataExpire = async (paidMarketPlaceData) => {
+    // paidMarketPlaceData.map((elem, key) => {
+    for (var i = 0; i < paidMarketPlaceData.length; i++) {
+      let expireDate = paidMarketPlaceData[i].dateRange[1];
+      const now = moment();
+      const then = moment(expireDate);
+      let daysDiff = then.diff(now, 'days');
+      if (daysDiff < 0) {
+        let obj = {
+          objectId: paidMarketPlaceData[i]._id,
+          paymentStatus: 'expire',
+        }
+        let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
+        if (response) {
+          if (response.code == 200) {
+            let updateMarketPlace = {
+              objectId: paidMarketPlaceData[i].billboardId,
+              avalibleOn: '',
+              avalibleOnId: '',
+              status: "Available",
+              bookFrom: '',
+              bookId: ''
+            }
+            let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+            if (respMatkietPlace) {
+              if (respMatkietPlace.code == 200) {
+                let objForEmail = {
+                  companyName: paidMarketPlaceData[i].companyName,
+                  companyEmail: paidMarketPlaceData[i].companyEmail,
+                  bookedDateFrom: paidMarketPlaceData[i].dateRange[0],
+                  bookedDateTo: paidMarketPlaceData[i].dateRange[1],
+                  paidAmountForBooking: paidMarketPlaceData[i].amountCharge,
+                  biilboardAddres: paidMarketPlaceData[i].address,
+                  billboardCity: paidMarketPlaceData[i].city,
+                  billboardState: paidMarketPlaceData[i].state,
+                }
+                let responseSendEmail = await HttpUtils.post('sendEmailToCompany', objForEmail);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // })
+  }
+
+  checkingMegaSaleBookDataExpire = async (paidMegaSaleData) => {
+    // paidMegaSaleData.map((elem, key) => {
+    for (var i = 0; i < paidMegaSaleData.length; i++) {
+      let expireDate = paidMegaSaleData[i].bookedDate.slice(19, 29);
+      const now = moment();
+      const then = moment(expireDate);
+      let daysDiff = then.diff(now, 'days');
+      // console.log(daysDiff, 'daysDiff')
+      if (daysDiff < 0) {
+        let obj = {
+          objectId: paidMegaSaleData[i]._id,
+          paymentStatus: 'expire',
+        }
+        let response = await HttpUtils.post('postMegaSalebillboard', obj);
+        if (response) {
+          if (response.code == 200) {
+            let updateMarketPlace = {
+              objectId: paidMegaSaleData[i].billboardId,
+              avalibleOn: '',
+              avalibleOnId: '',
+              status: "Available",
+              bookFrom: '',
+              bookId: ''
+
+            }
+            let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+            if (respMatkietPlace) {
+              if (respMatkietPlace.code == 200) {
+                let objForEmail = {
+                  companyName: paidMegaSaleData[i].companyName,
+                  companyEmail: paidMegaSaleData[i].companyEmail,
+                  bookedDateFrom: paidMegaSaleData[i].bookedDate.slice(5, 15),
+                  bookedDateTo: paidMegaSaleData[i].bookedDate.slice(19, 29),
+                  paidAmountForBooking: paidMegaSaleData[i].billboardAmount,
+                  biilboardAddres: paidMegaSaleData[i].address,
+                  billboardCity: paidMegaSaleData[i].city,
+                  billboardState: paidMegaSaleData[i].state,
+                }
+                let responseSendEmail = await HttpUtils.post('sendEmailToCompany', objForEmail);
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+
+    // })
+  }
+  checkingBiddingBookDataExpire = async (paidBiddingData) => {
+    // paidBiddingData.map((elem, key) => {
+    for (var i = 0; i < paidBiddingData.length; i++) {
+
+
+      let expireDate = paidBiddingData[i].billboardAvailabilityTo;
+      const now = moment();
+      const then = moment(expireDate);
+      let daysDiff = then.diff(now, 'days');
+      if (daysDiff < 0) {
+
+        let obj = {
+          objectId: paidBiddingData[i]._id,
+          paymentStatus: 'expire',
+        }
+        let response = await HttpUtils.post('bidderBillboardBooked', obj);
+
+        if (response) {
+          if (response.code == 200) {
+            let updateMarketPlace = {
+              objectId: paidBiddingData[i].billboardId,
+              avalibleOn: '',
+              avalibleOnId: '',
+              status: "Available",
+              bookFrom: '',
+              bookId: ''
+
+            }
+            let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
+
+            if (respMatkietPlace) {
+              if (respMatkietPlace.code == 200) {
+                let objForEmail = {
+                  companyName: paidBiddingData[i].companyName,
+                  companyEmail: paidBiddingData[i].companyEmail,
+                  bookedDateFrom: paidBiddingData[i].billboardAvailabilityFrom,
+                  bookedDateTo: paidBiddingData[i].billboardAvailabilityTo,
+                  paidAmountForBooking: paidBiddingData[i].bidAamount,
+                  biilboardAddres: paidBiddingData[i].address,
+                  billboardCity: paidBiddingData[i].city,
+                  billboardState: paidBiddingData[i].state,
+                }
+                let responseSendEmail = await HttpUtils.post('sendEmailToCompany', objForEmail);
+              }
+            }
+          }
+        }
+
+      }
+    }
+    // })
+  }
 
   showDropDown = () => {
     this.setState({
@@ -190,7 +387,7 @@ class Home extends Component {
       <div style={{ backgroundColor: 'white' }}>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner />
-        <MegaSale megaSalebillBoards={megaSalebillBoards} />
+        {megaSalebillBoards.length > 0 && <MegaSale megaSalebillBoards={megaSalebillBoards} />}
         <BrowseCategory />
         {/* <NewiestBill /> */}
         <PrestigiousClients />

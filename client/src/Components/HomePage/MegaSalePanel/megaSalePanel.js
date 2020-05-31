@@ -25,11 +25,11 @@ class MegaSaleHome extends Component {
             id: data.billboardId
         }
         let response = await HttpUtils.post('getspecificbillboard', obj);
-        let dataOfBillboard = {
-            megasaleDetail: data,
-            bilboardDetail: response.content[0]
-        }
         if (response.code == 200) {
+            let dataOfBillboard = {
+                megasaleDetail: data,
+                bilboardDetail: response.content[0]
+            }
             this.setState({
                 billboardData: dataOfBillboard,
                 goForDetail: true,

@@ -17,17 +17,17 @@ function tokenForSocialUser(usersocial) {
   return jwt.encode({ sub: usersocial.userId, iat: timestamp }, config.secret);
 }
 
-var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: "drens224@gmail.com",
-    pass: "drent1234"
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
+// var smtpTransport = nodemailer.createTransport('SMTP', {
+//   service: "gmail",
+//   auth: {
+//     user: "awaisrehman424@gmail.com",
+//     pass: "drent1234"
+//   },
+//   tls: {
+//     rejectUnauthorized: false
+//   }
 
-});
+// });
 
 exports.signin = function (req, res, next) {
   //user has already had their email and password auth'd
@@ -269,3 +269,50 @@ exports.changeStatus = function (req, res, next) {
     });
   }).catch(() => res.status(422).send({ msg: 'something went wrong' }));
 }
+
+
+
+// exports.sendEmailsToAdmin = function (req, res, next) {
+//   var companiesContact = req.body;
+//   const mailOptions = {
+//     from: companiesContact.companyEmail,
+//     to: `selmoremedia@gmail.com`,
+//     subject: `Billboard Now Free`,
+//     html: `<p>Your Billboard now free to sale</p>
+//   <h2>Contact details</h2>
+//   <ul>
+// <li> Name: ${companiesContact.companyName} </li>
+// <li> Email: ${companiesContact.companyEmail} </li>
+// <li> Booked Date From: ${companiesContact.bookedDateFrom} </li>
+// <li> Booked Date To: ${companiesContact.bookedDateTo} </li>
+// <li> Company paid amount for booked: ${companiesContact.paidAmountForBooking} </li>
+// <li> Billboard Address: ${companiesContact.biilboardAddres} </li>
+// <li> Billboard City: ${companiesContact.billboardCity} </li>
+// <li> Billboard State: ${companiesContact.billboardState} </li>
+
+// </ul>
+// <h3> Message:</h3>
+// <p>Now this billboard is free to sale on marketplace, mega Sale or bidding</p>`
+//     // text: companiesContact.projectDescription,
+//     // 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n'
+//     // + 'Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n'
+//     // // + `https://pure-hollows-17968.herokuapp.com/reset/${token}\n\n`
+//     // + 'If you did not request this, please ignore this email and your password will remain .\n',
+//   };
+
+//   smtpTransport.sendMail(mailOptions, (err, response) => {
+//     console.log(err, 'err')
+//     console.log(response, 'response')
+//     if (err) {
+//       res.send({
+//         code: 404,
+//         message: 'error'
+//       })
+//     } else {
+//       res.send({
+//         code: 200,
+//         message: 'Email has been sent'
+//       })
+//     }
+//   });
+// }

@@ -36,10 +36,14 @@ class Formpanel extends Component {
 
 	checkEmails = async () => {
 		let response = await HttpUtils.get('getemails');
-		let getEmail = response.content;
-		this.setState({
-			emailsArr: getEmail
-		})
+		if (response) {
+			if (response.code == 200) {
+				let getEmail = response.content;
+				this.setState({
+					emailsArr: getEmail
+				})
+			}
+		}
 	}
 
 	onChangeEmail(rule, value, callback) {
@@ -270,7 +274,7 @@ class Formpanel extends Component {
 									<RadioGroup name="radiogroup" defaultValue={1}>
 										<div className="form-check-inline ">
 											<label className="form-check-label" for='Buyer'>
-												<Radio 
+												<Radio
 													className={"form-check-input"}
 													id={"Buyer"}
 													name="Buyer"
@@ -283,7 +287,7 @@ class Formpanel extends Component {
 										</div>
 										<div className="form-check-inline checkmargin">
 											<label className="form-check-label" for='Seller'>
-												<Radio 
+												<Radio
 													className={"form-check-input"}
 													id={"Seller"}
 													name="Seller"

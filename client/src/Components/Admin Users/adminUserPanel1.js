@@ -24,23 +24,29 @@ class UserPanel1 extends Component {
         let blockUsers = [];
 
         let response = await HttpUtils.get('getalluser');
-        let data = response.content;
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].userStatus == 'pending') {
-                newUsers.push(data[i])
-            }
-            else if (data[i].userStatus == "approved") {
-                approvedUsers.push(data[i])
-            }
-            else if (data[i].userStatus == "block") {
-                blockUsers.push(data[i])
+        if (response) {
+            if (response.code == 200) {
+
+                let data = response.content;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].userStatus == 'pending') {
+                        newUsers.push(data[i])
+                    }
+                    else if (data[i].userStatus == "approved") {
+                        approvedUsers.push(data[i])
+                    }
+                    else if (data[i].userStatus == "block") {
+                        blockUsers.push(data[i])
+                    }
+                }
+                this.setState({
+                    newUsers: newUsers,
+                    approvedUsers: approvedUsers,
+                    blockUsers: blockUsers
+                })
+
             }
         }
-        this.setState({
-            newUsers: newUsers,
-            approvedUsers: approvedUsers,
-            blockUsers: blockUsers
-        })
     }
 
     changeStatus = async (e, id) => {

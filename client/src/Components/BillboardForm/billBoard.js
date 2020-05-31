@@ -107,9 +107,13 @@ class BillBoard extends Component {
         let { companyName, citiesArr, typeArr, categoryArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
             types, categories, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
         let response = await HttpUtils.get('getcompanyname');
+        if(response){
+
+        
         companyName = response.content.map((elem, i) => {
             return { label: elem.companyName, value: elem.companyName, id: elem._id }
         })
+    }
         types = typeArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })

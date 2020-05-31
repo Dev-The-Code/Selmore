@@ -38,45 +38,49 @@ class Comman2 extends Component {
             cities: [],
             states: [],
             billboardData: [],
-            i:0,
+            i: 0,
         }
     }
     componentDidMount() {
         //fetching billboard data
         this.billBoradDetails();
-       
+
     }
     billBoradDetails = async () => {
-        const { citiesArr,  statesArr } = this.state;
+        const { citiesArr, statesArr } = this.state;
 
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
-        let data = response.content;
-        localStorage.setItem('billboardData', JSON.stringify(data))
+        if (response) {
+            if (response.code == 200) {
+                let data = response.content;
+                localStorage.setItem('billboardData', JSON.stringify(data))
 
-        //slice for render some data and click on more button then show some next data
-        // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
+                //slice for render some data and click on more button then show some next data
+                // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
-        //create a range array value of width height daily visitor cities & states
-        let rangeNumArr = [];
-        for (var i = 0; i <= 5000; i = i + 5) {
-            rangeNumArr.push(i)
+                //create a range array value of width height daily visitor cities & states
+                let rangeNumArr = [];
+                for (var i = 0; i <= 5000; i = i + 5) {
+                    rangeNumArr.push(i)
+                }
+                let rangeValues = rangeNumArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                let city = citiesArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                let state = statesArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                await this.setState({
+                    billboardData: data,
+                    rangeValzForDropdown: rangeValues,
+                    cities: city,
+                    states: state
+                })
+            }
         }
-        let rangeValues = rangeNumArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let city = citiesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let state = statesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        await this.setState({
-            billboardData: data,
-            rangeValzForDropdown: rangeValues,
-            cities: city,
-            states: state
-        })
     }
 
     //filtration the data with given values
@@ -140,13 +144,13 @@ class Comman2 extends Component {
     }
     onFlipData = () => {
         this.setState({
-            i : this.state.i + 9
+            i: this.state.i + 9
         })
     }
     render() {
-        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown ,i} = this.state;
-        let flexxData = billboardData.slice(3,i+9);
-        let filterPoint = billboardFilterdData.slice(3,i+9);
+        const { billboardData, billboardFilterdData, cities, states, rangeValzForDropdown, i } = this.state;
+        let flexxData = billboardData.slice(3, i + 9);
+        let filterPoint = billboardFilterdData.slice(3, i + 9);
         const billboardRendring = (
             {/*<div>
                 { rendering the filtered billboard data on front end }
@@ -155,38 +159,38 @@ class Comman2 extends Component {
         );
         return (
             <div>
-               <div className='row'>
+                <div className='row'>
                     {flexxData && flexxData.map((elem, key) => {
                         return (
 
-                          <div className="col-12 col-md-4 col-lg-4 col-xl-4 luxpure8">
-                              <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
-                		    			     <img src={elem.images[0]} className="luxpure1" alt={key}/>
-                              </Link>
-                  						<div className="luxpure2">
-                    							<div className="row">
-                    								<div className="col-10 col-md-9 col-lg-10 col-xl-9">
-                    									<p className="luxpure4"><span>{elem.companyName.substr(0,20)}...</span></p>
-                    	  								<p className="luxpure3"><span>{elem.city}</span></p>
-                      								</div>
-                      								<div className="col-2 col-md-3 col-lg-2 col-xl-3">
-                    									<i className="fa fa-heart-o luxpure5"></i>
-                    								</div>
-                    							</div>
-                  						</div>
-                  						<div className="row luxpure6">
-                    							<div className="col-6 col-md-6 col-lg-6 col-xl-6 luxpure7">
-                      								<div className="luxpure9">
-                        									<i class="material-icons starcircus">star</i>
-                        									<i class="material-icons starcircus">star</i>
-                        									<i class="material-icons starcircus">star</i>
-                        									<i class="material-icons starcircus">star</i>
-                        									<i class="material-icons starcircus">star</i>
-                      								</div>
-                    							</div>
-                  							<div className="col-6 col-md-6 col-lg-6 col-xl-6"></div>
-                  						</div><br/>
-              			    	</div>
+                            <div className="col-12 col-md-4 col-lg-4 col-xl-4 luxpure8">
+                                <Link to={{ pathname: `/billborad_Militry`, state: elem }}>
+                                    <img src={elem.images[0]} className="luxpure1" alt={key} />
+                                </Link>
+                                <div className="luxpure2">
+                                    <div className="row">
+                                        <div className="col-10 col-md-9 col-lg-10 col-xl-9">
+                                            <p className="luxpure4"><span>{elem.companyName.substr(0, 20)}...</span></p>
+                                            <p className="luxpure3"><span>{elem.city}</span></p>
+                                        </div>
+                                        <div className="col-2 col-md-3 col-lg-2 col-xl-3">
+                                            <i className="fa fa-heart-o luxpure5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row luxpure6">
+                                    <div className="col-6 col-md-6 col-lg-6 col-xl-6 luxpure7">
+                                        <div className="luxpure9">
+                                            <i class="material-icons starcircus">star</i>
+                                            <i class="material-icons starcircus">star</i>
+                                            <i class="material-icons starcircus">star</i>
+                                            <i class="material-icons starcircus">star</i>
+                                            <i class="material-icons starcircus">star</i>
+                                        </div>
+                                    </div>
+                                    <div className="col-6 col-md-6 col-lg-6 col-xl-6"></div>
+                                </div><br />
+                            </div>
                         )
                     })}
                 </div>

@@ -63,7 +63,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
-                console.log(response , 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -77,7 +76,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
                     }
                 }
 
@@ -89,7 +87,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('postmarketPlaceBookedbillboard', obj);
-                console.log(response , 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -103,7 +100,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
 
                     }
                 }
@@ -118,7 +114,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('postMegaSalebillboard', obj);
-                console.log(response , 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -144,7 +139,7 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('postMegaSalebillboard', obj);
-                console.log(response , 'response')
+                console.log(response, 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -173,7 +168,7 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('bidderBillboardBooked', obj);
-                console.log(response , 'response')
+                console.log(response, 'response')
                 if (response) {
                     if (response.code == 200) {
                         let updateMarketPlace = {
@@ -198,7 +193,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('bidderBillboardBooked', obj);
-                console.log(response , 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -212,7 +206,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
 
                     }
                 }
@@ -222,7 +215,7 @@ class CartPanel1 extends Component {
         }
 
 
-
+        this.getBokkedBillboards()
 
     }
 
@@ -269,6 +262,7 @@ class CartPanel1 extends Component {
                                                 </tr>
                                             </thead>
                                             {avalibleBillboard && avalibleBillboard.map((elem, key) => {
+                                                console.log(elem.paymentStatus, 'elem.paymentStatus')
                                                 return (
                                                     <tbody>
                                                         <tr>
@@ -287,14 +281,39 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
-                                                            <tr>
-                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'marketPlace', elem)}
-                                                                >Paid</button></td>
-                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'marketPlace', elem)}
-                                                                >Unpaid</button></td>
-                                                            </tr>
+                                                            {elem.paymentStatus == '' || elem.paymentStatus == undefined ?
+
+                                                                <tr>
+
+                                                                    <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'paid', 'marketPlace', elem)}
+                                                                    >Paid</button></td>
+                                                                    <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'unpaid', 'marketPlace', elem)}
+                                                                    >Unpaid</button></td>
+                                                                </tr>
+                                                                // null
+
+                                                                :
+                                                                elem.paymentStatus == 'paid' ?
+                                                                    <tr>
+                                                                        <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                        >Paid</button></td>
+                                                                    </tr>
+                                                                    :
+                                                                    elem.paymentStatus == "unpaid" ?
+                                                                        <tr>
+                                                                            <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                            >UnPaid</button></td>
+                                                                        </tr>
+                                                                        :
+                                                                        elem.paymentStatus == "expire" ?
+                                                                            <tr>
+                                                                                <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                                >Expire</button></td>
+                                                                            </tr>
+                                                                            : null
+                                                            }
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -332,14 +351,36 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
-                                                            <tr>
-                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'megaSale', elem)}
-                                                                >Paid</button></td>
-                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'megaSale', elem)}
-                                                                >Unpaid</button></td>
-                                                            </tr>
+                                                            {elem.paymentStatus == '' || elem.paymentStatus == undefined ?
+
+                                                                <tr>
+                                                                    <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'paid', 'megaSale', elem)}
+                                                                    >Paid</button></td>
+                                                                    <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'unpaid', 'megaSale', elem)}
+                                                                    >Unpaid</button></td>
+                                                                </tr>
+                                                                :
+                                                                elem.paymentStatus == 'paid' ?
+                                                                    <tr>
+                                                                        <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                        >Paid</button></td>
+                                                                    </tr>
+                                                                    :
+                                                                    elem.paymentStatus == "unpaid" ?
+                                                                        <tr>
+                                                                            <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                            >UnPaid</button></td>
+                                                                        </tr>
+                                                                        :
+                                                                        elem.paymentStatus == "expire" ?
+                                                                            <tr>
+                                                                                <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                                >Expire</button></td>
+                                                                            </tr>
+                                                                            : null
+                                                            }
                                                         </tr>
                                                     </tbody>
                                                 )
@@ -381,14 +422,36 @@ class CartPanel1 extends Component {
                                                             <td className="tablee_th">
                                                                 <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
                                                             </td>
-                                                            <tr>
-                                                                <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'paid', 'bidding', elem)}
-                                                                >Paid</button></td>
-                                                                <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
-                                                                    onClick={this.paymentPaid.bind(this, 'unpaid', 'bidding', elem)}
-                                                                >Unpaid</button></td>
-                                                            </tr>
+                                                            {elem.paymentStatus == '' || elem.paymentStatus == undefined ?
+
+                                                                <tr>
+                                                                    <td className="tablee_td"><button class="fa fa-check-circle" style={{ fontSize: '17px', color: 'green' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'paid', 'bidding', elem)}
+                                                                    >Paid</button></td>
+                                                                    <td className="tablee_td"><button class="fa fa-close" style={{ fontSize: '17px', color: 'red' }}
+                                                                        onClick={this.paymentPaid.bind(this, 'unpaid', 'bidding', elem)}
+                                                                    >Unpaid</button></td>
+                                                                </tr>
+                                                                :
+                                                                elem.paymentStatus == 'paid' ?
+                                                                    <tr>
+                                                                        <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                        >Paid</button></td>
+                                                                    </tr>
+                                                                    :
+                                                                    elem.paymentStatus == "unpaid" ?
+                                                                        <tr>
+                                                                            <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                            >UnPaid</button></td>
+                                                                        </tr>
+                                                                        :
+                                                                        elem.paymentStatus == "expire" ?
+                                                                            <tr>
+                                                                                <td className="tablee_td"><button class="fa fa-check-circle" disabled style={{ fontSize: '17px', color: 'green' }}
+                                                                                >Expire</button></td>
+                                                                            </tr>
+                                                                            : null
+                                                            }
                                                         </tr>
                                                     </tbody>
                                                 )

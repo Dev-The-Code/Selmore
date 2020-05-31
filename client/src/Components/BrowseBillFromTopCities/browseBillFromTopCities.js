@@ -41,29 +41,35 @@ class BrowseBillFromTopCities extends Component {
         const { citiesArr, i } = this.state;
 
         let response = await HttpUtils.get('getbillboard');
-        let data = response.content;
-        let cities = []
-        let citiesData;
-        for (var k = 0; k < citiesArr.length; k++) {
-            let city = []
-            citiesData = {}
-            for (var j in data) {
-                if (citiesArr[k] == data[j].city) {
-                    city.push(data[j])
-                    citiesData[citiesArr[k]] = city;
+        if (response) {
+            if (response.code == 200) {
+
+                let data = response.content;
+                let cities = []
+                let citiesData;
+                for (var k = 0; k < citiesArr.length; k++) {
+                    let city = []
+                    citiesData = {}
+                    for (var j in data) {
+                        if (citiesArr[k] == data[j].city) {
+                            city.push(data[j])
+                            citiesData[citiesArr[k]] = city;
+                        }
+                    }
+                    if (city.length != 0) {
+                        cities.push(city)
+                    }
                 }
-            }
-            if (city.length != 0) {
-                cities.push(city)
+                let sliceCities = cities.slice(0, i + 8);
+
+                this.setState({
+                    cities: cities,
+                    sliceCities: sliceCities,
+                    i: 8
+                })
+
             }
         }
-        let sliceCities = cities.slice(0, i + 8);
-
-        this.setState({
-            cities: cities,
-            sliceCities: sliceCities,
-            i: 8
-        })
         window.scrollTo(0, 0);
     }
 

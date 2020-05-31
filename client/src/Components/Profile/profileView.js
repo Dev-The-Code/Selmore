@@ -1,12 +1,247 @@
 import React, { Component } from 'react';
 import './profileView.scss';
+import { HttpUtils } from '../../Services/HttpUtils'
+import NumberFormat from 'react-number-format';
 
 class ProfileView extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            paid: [],
+            unpaid: [],
+            expire: [],
+            pendingData: []
+        }
+    }
+
+
+    componentDidMount() {
+        this.getUserBillboardData()
+    }
+
+    getUserBillboardData = async () => {
+        let userData = JSON.parse(localStorage.getItem("userData"));
+        let paidData = [];
+        let unPaidData = [];
+        let expireData = [];
+        let pendingData = [];
+
+        if (userData) {
+            let obj = {
+                id: userData._id
+            }
+            let responseMarketPlace = await HttpUtils.post('getspecificUserMarketPlaceBookedbillboard', obj);
+            if (responseMarketPlace) {
+                if (responseMarketPlace.code == 200) {
+                    let data = responseMarketPlace.content;
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].paymentStatus == 'paid') {
+                            let obj = {
+                                bookedFrom: 'Market Place',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].amountCharge,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].dateRange[0],
+                                dateBookedTo: data[i].dateRange[1],
+
+                            }
+                            paidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'unPaid') {
+                            let obj = {
+                                bookedFrom: 'Market Place',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].amountCharge,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].dateRange[0],
+                                dateBookedTo: data[i].dateRange[1],
+
+                            }
+                            unPaidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'expire') {
+                            let obj = {
+                                bookedFrom: 'Market Place',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].amountCharge,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].dateRange[0],
+                                dateBookedTo: data[i].dateRange[1],
+
+                            }
+                            expireData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == undefined) {
+                            let obj = {
+                                bookedFrom: 'Market Place',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].amountCharge,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].dateRange[0],
+                                dateBookedTo: data[i].dateRange[1],
+
+                            }
+                            pendingData.push(obj)
+                        }
+                    }
+                }
+            }
+
+
+            let responseMegaSale = await HttpUtils.post('getspecificUserBookedMegaSalebillboard', obj);
+            if (responseMegaSale) {
+                if (responseMegaSale.code == 200) {
+                    let data = responseMegaSale.content;
+
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].paymentStatus == 'paid') {
+                            let obj = {
+                                bookedFrom: 'Mega Sale',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].billboardAmount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].bookedDate.slice(5, 15),
+                                dateBookedTo: data[i].bookedDate.slice(19, 29),
+
+                            }
+                            paidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'unPaid') {
+                            let obj = {
+                                bookedFrom: 'Mega Sale',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].billboardAmount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].bookedDate.slice(5, 15),
+                                dateBookedTo: data[i].bookedDate.slice(19, 29),
+
+                            }
+                            unPaidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'expire') {
+                            let obj = {
+                                bookedFrom: 'Mega Sale',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].billboardAmount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].bookedDate.slice(5, 15),
+                                dateBookedTo: data[i].bookedDate.slice(19, 29),
+
+                            }
+                            expireData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == undefined) {
+                            data[i].bookedFrom = 'Mega Sale'
+                            let obj = {
+                                bookedFrom: 'Mega Sale',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].billboardAmount,
+                                dateBookedFrom: data[i].bookedDate.slice(5, 15),
+                                dateBookedTo: data[i].bookedDate.slice(19, 29),
+                                billboardId: data[i].billboardId,
+
+                            }
+                            pendingData.push(obj)
+                        }
+                    }
+                }
+            }
+            let responseBidding = await HttpUtils.post('getspecificUserBookedBidderbillboard', obj);
+
+            if (responseBidding) {
+                if (responseBidding.code == 200) {
+                    let data = responseBidding.content;
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].paymentStatus == 'paid') {
+                            let obj = {
+                                bookedFrom: 'Bidding',
+                                payment: data[i].bidAamount,
+                                dateBookedFrom: data[i].billboardAvailabilityFrom,
+                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                billboardId: data[i].billboardId,
+
+                            }
+                            paidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'unPaid') {
+                            let obj = {
+                                bookedFrom: 'Bidding',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].bidAamount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].billboardAvailabilityFrom,
+                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+
+                            }
+                            unPaidData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == 'expire') {
+                            let obj = {
+                                bookedFrom: 'Bidding',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].bidAamount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].billboardAvailabilityFrom,
+                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+
+                            }
+                            expireData.push(obj)
+                        }
+                        else if (data[i].paymentStatus == undefined) {
+                            let obj = {
+                                bookedFrom: 'Bidding',
+                                address: data[i].address,
+                                city: data[i].city,
+                                state: data[i].state,
+                                payment: data[i].bidAamount,
+                                billboardId: data[i].billboardId,
+                                dateBookedFrom: data[i].billboardAvailabilityFrom,
+                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+
+                            }
+                            pendingData.push(obj)
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        this.setState({
+            paid: paidData,
+            unpaid: unPaidData,
+            expire: expireData,
+            pendingData: pendingData
+        })
+
     }
 
     render() {
+        const { paid, unpaid, expire, pendingData } = this.state;
         return (
             <div>
                 <div className="row" style={{ marginTop: '20px' }}>
@@ -41,7 +276,7 @@ class ProfileView extends Component {
                     </div>
                     <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
-                <br/><br/><br/>
+                <br /><br /><br />
                 <div className="row">
                     <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
                     <div className="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
@@ -55,6 +290,9 @@ class ProfileView extends Component {
                                         </a>
                                         <a className="nav-item nav-link tablee_Navtab" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
                                             <span className="doesit10">Payment paid(current)</span>
+                                        </a>
+                                        <a className="nav-item nav-link tablee_Navtab" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                            <span className="doesit10">Payment unpaid</span>
                                         </a>
                                         <a className="nav-item nav-link tablee_Navtab" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab" aria-controls="nav-users" aria-selected="false">
                                             <span className="doesit10">Expired</span>
@@ -72,19 +310,37 @@ class ProfileView extends Component {
                                             <thead className="tablee_Head">
                                                 <tr>
                                                     <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
+                                                    <th className="BidhistoryTH">Payment</th>
+                                                    <th className="BidhistoryTH">Booked Date From</th>
+                                                    <th className="BidhistoryTH">Booked Date To</th>
                                                     <th className="BidhistoryTH">Address</th>
-                                                    <th className="BidhistoryTH">Email</th>
-                                                    <th className="BidhistoryTH">Landline no.</th>
+                                                    <th className="BidhistoryTH">City</th>
+                                                    <th className="BidhistoryTH">State</th>
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="tablee_th">0</td>
-                                                    <td className="tablee_td">ram malengam road</td>
-                                                    <td className="tablee_td">daniyal@gmail</td>
-                                                    <td className="tablee_td">03232323</td>
-                                                </tr>
-                                            </tbody>
+                                            {pendingData && pendingData.map((elem, key) => {
+                                                return (
+                                                    <tbody>
+                                                        <tr>
+                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_td">{elem.bookedFrom}</td>
+                                                            <td className="tablee_td">
+                                                                <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            </td>
+                                                            <td className="tablee_td">{elem.dateBookedFrom}</td>
+                                                            <td className="tablee_td">{elem.dateBookedTo}</td>
+                                                            <td className="tablee_td">{elem.address}</td>
+                                                            <td className="tablee_td">{elem.city}</td>
+                                                            <td className="tablee_td">{elem.state}</td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                )
+
+                                            })}
                                         </table>
                                     </div>
                                     <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -92,19 +348,36 @@ class ProfileView extends Component {
                                             <thead className="tablee_Head">
                                                 <tr>
                                                     <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
+                                                    <th className="BidhistoryTH">Payment</th>
+                                                    <th className="BidhistoryTH">Booked Date</th>
                                                     <th className="BidhistoryTH">Address</th>
-                                                    <th className="BidhistoryTH">Email</th>
-                                                    <th className="BidhistoryTH">Landline no.</th>
+                                                    <th className="BidhistoryTH">City</th>
+                                                    <th className="BidhistoryTH">State</th>
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="tablee_th">0</td>
-                                                    <td className="tablee_td">ram malengam road</td>
-                                                    <td className="tablee_td">daniyal@gmail</td>
-                                                    <td className="tablee_td">03232323</td>
-                                                </tr>
-                                            </tbody>
+                                            {paid && paid.map((elem, key) => {
+                                                return (
+                                                    <tbody>
+                                                        <tr>
+                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_td">{elem.bookedFrom}</td>
+                                                            <td className="tablee_td">
+                                                                <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            </td>
+                                                            <td className="tablee_td">{elem.dateBookedFrom}</td>
+                                                            <td className="tablee_td">{elem.dateBookedTo}</td>
+                                                            <td className="tablee_td">{elem.address}</td>
+                                                            <td className="tablee_td">{elem.city}</td>
+                                                            <td className="tablee_td">{elem.state}</td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                )
+
+                                            })}
                                         </table>
                                     </div>
                                     <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
@@ -112,19 +385,73 @@ class ProfileView extends Component {
                                             <thead className="tablee_Head">
                                                 <tr>
                                                     <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
+                                                    <th className="BidhistoryTH">Payment</th>
+                                                    <th className="BidhistoryTH">Booked Date</th>
                                                     <th className="BidhistoryTH">Address</th>
-                                                    <th className="BidhistoryTH">Email</th>
-                                                    <th className="BidhistoryTH">Landline no.</th>
+                                                    <th className="BidhistoryTH">City</th>
+                                                    <th className="BidhistoryTH">State</th>
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            {unpaid && unpaid.map((elem, key) => {
+                                                return (
+                                                    <tbody>
+                                                        <tr>
+                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_td">{elem.bookedFrom}</td>
+                                                            <td className="tablee_td">
+                                                                <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            </td>
+                                                            <td className="tablee_td">{elem.dateBookedFrom}</td>
+                                                            <td className="tablee_td">{elem.dateBookedTo}</td>
+                                                            <td className="tablee_td">{elem.address}</td>
+                                                            <td className="tablee_td">{elem.city}</td>
+                                                            <td className="tablee_td">{elem.state}</td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                )
+
+                                            })}
+                                        </table>
+                                    </div>
+                                    <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+                                        <table class="table" style={{ textAlign: 'center' }}>
+                                            <thead className="tablee_Head">
                                                 <tr>
-                                                    <td className="tablee_th">0</td>
-                                                    <td className="tablee_td">ram malengam road</td>
-                                                    <td className="tablee_td">daniyal@gmail</td>
-                                                    <td className="tablee_td">03232323</td>
+                                                    <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
+                                                    <th className="BidhistoryTH">Payment</th>
+                                                    <th className="BidhistoryTH">Booked Date</th>
+                                                    <th className="BidhistoryTH">Address</th>
+                                                    <th className="BidhistoryTH">City</th>
+                                                    <th className="BidhistoryTH">State</th>
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
-                                            </tbody>
+                                            </thead>
+                                            {expire && expire.map((elem, key) => {
+                                                return (
+                                                    <tbody>
+                                                        <tr>
+                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_td">{elem.bookedFrom}</td>
+                                                            <td className="tablee_td">
+                                                                <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
+                                                            </td>
+                                                            <td className="tablee_td">{elem.dateBookedFrom}</td>
+                                                            <td className="tablee_td">{elem.dateBookedTo}</td>
+                                                            <td className="tablee_td">{elem.address}</td>
+                                                            <td className="tablee_td">{elem.city}</td>
+                                                            <td className="tablee_td">{elem.state}</td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                )
+
+                                            })}
                                         </table>
                                     </div>
                                 </div>
@@ -133,23 +460,6 @@ class ProfileView extends Component {
                     </div>
                     <div className="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
                 </div>
-                {/* <div className="col-xl-12 col-lg-12 col-md-12 d-none d-sm-block" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
-                    <img src={Cookimg} alt='img' className="" style={{ width: '100%', position: 'absolute' }} />
-                </div>
-                <div className="container" style={{ border: '1px solid rgba(0,0,0,0.3)', backgroundColor: 'white', marginTop: '15%', position: 'relative', borderRadius: '10px' }}>
-                    <div className="row">
-                        <div className="col-md-3 col-12" style={{ marginTop: '-8%' }}>
-                            <img src={Pro} alt='img' className="" style={{ width: '90%', borderRadius: '10px', border: '3px solid white', float: 'right' }} />
-                        </div>
-                        <div className="col-md-6 col-12">
-                            <h1 style={{ textAlign: 'center', backgroundColor: 'white', borderRadius: '10px', padding: '30px' }}>My Profile</h1>
-                        </div>
-                        <div className="col-md-3"></div>
-                    </div>
-                    <Panel1 />
-                    <Panel2 />
-                </div>
-                <Footer /> */}
             </div>
         )
     }

@@ -75,9 +75,9 @@ class Routes extends Component {
               <PrivateRoute  path="/bidding" component={Bidding}></PrivateRoute>
               <PrivateRoute  path="/bidding_detail/:value" component={Billofbidding1}></PrivateRoute>
               <PrivateRoute  path="/signin" component={Login}></PrivateRoute>
-              <PrivateRoute  path="/seller" component={Seller}></PrivateRoute>
+              {/* <PrivateRoute  path="/seller" component={Seller}></PrivateRoute>
               <PrivateRoute  path="/buyer" component={Buyer}></PrivateRoute>
-              <PrivateRoute  path="/billboard" component={Billboardmardan}></PrivateRoute>
+              <PrivateRoute  path="/billboard" component={Billboardmardan}></PrivateRoute> */}
               <PrivateRoute  path="/profile" component={ProfileView}></PrivateRoute>
               <PrivateRoute  path="/home" component={LogOut}></PrivateRoute>
               <PrivateRoute  path="/list_add" component={AddBillboards}></PrivateRoute>

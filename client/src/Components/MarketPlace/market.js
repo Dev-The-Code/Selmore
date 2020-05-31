@@ -70,7 +70,7 @@ class Market extends Component {
     componentWillMount() {
         let data = this.props.data;
         let headingValue = this.props.showValueHead;
-      
+
         if (data) {
 
             this.setState({
@@ -88,7 +88,6 @@ class Market extends Component {
     billBoradDetails = async () => {
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
-        let data = response.content;
 
         // localStorage.setItem('billboardData', JSON.stringify(data))
 
@@ -96,8 +95,9 @@ class Market extends Component {
         // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
         //create a range array value of width height daily visitor cities & states
-        if (data) {
+        if (response) {
             if (response.code == 200) {
+                let data = response.content;
                 this.setState({
                     billboardData: data,
                 })

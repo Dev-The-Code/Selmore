@@ -21,12 +21,13 @@ module.exports = function (app) {
   app.post('/signup', Authentication.signup);
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/changeStatus', Authentication.changeStatus);
-
+  // app.post('/sendEmailToCompany', Authentication.sendEmailsToAdmin)
   app.post('/listadd', listAgencyForm.postAddData);
 
   app.post('/getspecificbillboard', getAllBillboard.getspecificBillboard);
   app.post('/postmarketPlaceBookedbillboard', bookedMarketPlaceBillboard.postBookedBillboard);
   app.post('/getspecificMarketPlaceBookedbillboard', bookedMarketPlaceBillboard.getspecificMarketPlaceBookedbillboard);
+  app.post('/getspecificUserMarketPlaceBookedbillboard', bookedMarketPlaceBillboard.getspecificUserMarketPlaceBookedbillboard);
 
 
   app.post('/postbiddingbillboard', biddingBillboardData.postBiddingBillboard);
@@ -35,6 +36,7 @@ module.exports = function (app) {
   app.post('/getspecificBiddingbillboardHistory', biddingHistoryMaintene.getspecificBillboardBiddingHistory);
   app.post('/bidderBillboardBooked', bidderBillboardBooked.postBidderBookBillboard);
   app.post('/getspecificBookedBidderbillboard', bidderBillboardBooked.getspecificBookedBidderbillboard);
+  app.post('/getspecificUserBookedBidderbillboard', bidderBillboardBooked.getspecificUserBookedBidderbillboard);
 
   app.post('/biddingBillboardDelete', biddingBillboardData.deletebiddingBillboard);
 
@@ -42,6 +44,8 @@ module.exports = function (app) {
   app.post('/getspecificMegaSalebillboard', megaBillboardData.getspecificMegaSalebillboard);
   app.post('/postMegaSalebillboard', bookedMegaSaleBillboard.postBookedMegaSaleBillboard);
   app.post('/getspecificBookedMegaSalebillboard', bookedMegaSaleBillboard.getspecificBookedMegaSalebillboard);
+  app.post('/getspecificUserBookedMegaSalebillboard', bookedMegaSaleBillboard.getspecificUserBookedMegaSalebillboard);
+
   app.post('/megaSaleDelete', megaBillboardData.deleteMegaSaleBillboard);
 
 
@@ -65,4 +69,5 @@ module.exports = function (app) {
 
 
   //app.get('/getprofile',requireAuth, getprofile.getProfile)
+
 }

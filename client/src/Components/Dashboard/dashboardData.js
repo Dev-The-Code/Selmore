@@ -78,11 +78,15 @@ class DashboardData extends Component {
 
     billBoradData = async () => {
         let response = await HttpUtils.get('getbillboard');
-        let data = response.content;
-        this.setState({
-            billboardData: data
-        })
-        localStorage.setItem('billboardData', JSON.stringify(data))
+        if (response) {
+            if (response.code == 200) {
+                let data = response.content;
+                this.setState({
+                    billboardData: data
+                })
+                localStorage.setItem('billboardData', JSON.stringify(data))
+            }
+        }
     }
 
     gettingDropDownValues = async () => {

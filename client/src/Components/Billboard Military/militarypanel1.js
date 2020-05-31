@@ -246,7 +246,6 @@ class Militarypanel1 extends Component {
 		}
 		else if (param == 'biding') {
 			let response = await HttpUtils.post('getspecificBiddingbillboard', obj);
-			console.log(response, 'response')
 			if (response) {
 				if (response.code == 200) {
 					let dataOfBillboard = {

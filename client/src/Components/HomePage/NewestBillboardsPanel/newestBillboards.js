@@ -43,39 +43,43 @@ class NewestBillboards extends Component {
     componentDidMount() {
         //fetching billboard data
         this.billBoradDetails();
-       
+
     }
     billBoradDetails = async () => {
         const { citiesArr, statesArr } = this.state;
 
         // rededring the billboard data
         let response = await HttpUtils.get('getbillboard');
-        let data = response.content;
-        localStorage.setItem('billboardData', JSON.stringify(data))
+        if (response) {
+            if (response.code == 200) {
+                let data = response.content;
+                localStorage.setItem('billboardData', JSON.stringify(data))
 
-        //slice for render some data and click on more button then show some next data
-        // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
+                //slice for render some data and click on more button then show some next data
+                // var billboard = this.state.billboardData.slice(this.state.from, this.state.to)
 
-        //create a range array value of width height daily visitor cities & states
-        let rangeNumArr = [];
-        for (var i = 0; i <= 5000; i = i + 5) {
-            rangeNumArr.push(i)
+                //create a range array value of width height daily visitor cities & states
+                let rangeNumArr = [];
+                for (var i = 0; i <= 5000; i = i + 5) {
+                    rangeNumArr.push(i)
+                }
+                let rangeValues = rangeNumArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                let city = citiesArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                let state = statesArr.map((elem, i) => {
+                    return { label: elem, value: elem, id: i }
+                })
+                await this.setState({
+                    billboardData: data,
+                    rangeValzForDropdown: rangeValues,
+                    cities: city,
+                    states: state
+                })
+            }
         }
-        let rangeValues = rangeNumArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let city = citiesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        let state = statesArr.map((elem, i) => {
-            return { label: elem, value: elem, id: i }
-        })
-        await this.setState({
-            billboardData: data,
-            rangeValzForDropdown: rangeValues,
-            cities: city,
-            states: state
-        })
     }
 
     //filtration the data with given values
