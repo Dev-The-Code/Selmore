@@ -34,13 +34,12 @@ class Militarypanel1 extends Component {
 			redirectMarketPlace: false,
 			goForDetailMegaSale: false,
 			goForDetailBidding: false,
-			dataForDetail: ''
+			dataForDetail: '',
+			bookedArr: []
 		}
 	}
 	async componentDidMount() {
 		let data = this.props.data;
-
-		console.log(data, 'data from detail');
 
 		if (data.images && data.images.length > 0) {
 			if (data.bookFrom != undefined || data.bookFrom != '' && data.bookId != undefined || data.bookId != '') {
@@ -267,19 +266,57 @@ class Militarypanel1 extends Component {
 	}
 
 	getBookedBillboardDetail = async (bookFrom, bookId) => {
+		let bookedArr = [];
 		if (bookFrom == 'marketPlace') {
 			let obj = {
 				id: bookId
 			}
 			let response = await HttpUtils.post('getspecificMarketPlaceBookedbillboard', obj);
-			console.log(response, 'response')
+			let data = response.content[0];
+			const start = data.dateRange[0];
+			const end = data.dateRange[1];
+			// console.log(start.slice(8, 10), 'satart')
+			// console.log(start.slice(0, 4), 'satart')
+
+			// console.log(start.slice(5, 7), 'satart')
+
+
+			let bookedObj = {
+				bookFrom: "Market Place",
+				bookDateStart: start.slice(0,10),
+				bookDateEnd: end.slice(0,10),
+				paymentPaid: data.amountCharge,
+				companyName: data.companyName,
+				bookedId: data._id
+			}
+			bookedArr.push(bookedObj)
+			this.setState({
+				bookedArr: bookedArr
+			})
 		}
 		else if (bookFrom == 'megaSale') {
 			let obj = {
 				id: bookId
 			}
 			let response = await HttpUtils.post('getspecificBookedMegaSalebillboard', obj);
-			console.log(response, 'response')
+
+			let data = response.content[0];
+			const start = data.bookedDate.slice(5, 15);
+			const end = data.bookedDate.slice(19, 29);
+
+
+			let bookedObj = {
+				bookFrom: "Mega Sale",
+				bookDateStart: start,
+				bookDateEnd: end,
+				paymentPaid: data.billboardAmount,
+				companyName: data.companyName,
+				bookedId: data._id
+			}
+			bookedArr.push(bookedObj)
+			this.setState({
+				bookedArr: bookedArr
+			})
 
 		}
 		else if (bookFrom == 'bidding') {
@@ -287,13 +324,28 @@ class Militarypanel1 extends Component {
 				id: bookId
 			}
 			let response = await HttpUtils.post('getspecificBookedBidderbillboard', obj);
-			console.log(response, 'response')
+			let data = response.content[0];
+			const start = data.billboardAvailabilityFrom;
+			const end = data.billboardAvailabilityTo;
 
+
+			let bookedObj = {
+				bookFrom: "Bidding",
+				bookDateStart: start,
+				bookDateEnd: end,
+				paymentPaid: data.bidAamount,
+				companyName: data.companyName,
+				bookedId: data._id
+			}
+			bookedArr.push(bookedObj)
+			this.setState({
+				bookedArr: bookedArr
+			})
 		}
 	}
 
 	render() {
-		const { data, images, loader, alert, mgs, redirectMarketPlace, goForDetailMegaSale, goForDetailBidding, dataForDetail } = this.state;
+		const { data, images, loader, alert, mgs, redirectMarketPlace, goForDetailMegaSale, goForDetailBidding, dataForDetail, bookedArr } = this.state;
 		const { getFieldDecorator } = this.props.form;
 		let image;
 		let adminUser = JSON.parse(localStorage.getItem("userData"));
@@ -447,6 +499,33 @@ class Militarypanel1 extends Component {
 								<div className="col-md-9 ufone6"><span className="ufone4">{data.address}</span></div>
 							</div>
 							<br />
+							{/*Fourth panel*/}
+							{bookedArr && bookedArr.length > 0 ?
+								<div>
+									<div className="row ufone1" style={{ margin: '0px' }}>
+										<span className="ufone2">Book {bookedArr[0].companyName} </span>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Booked From</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{bookedArr[0].bookFrom}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Book Date Start</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{bookedArr[0].bookDateStart}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone5"><span className="ufone3">Book Date End</span></div>
+										<div className="col-md-9 ufone6"><span className="ufone4">{bookedArr[0].bookDateEnd}</span></div>
+									</div>
+									<div className="row" style={{ margin: '0px' }}>
+										<div className="col-md-3 ufone7"><span className="ufone3">Payment Paid</span></div>
+										<div className="col-md-9 ufone6">
+											<NumberFormat value={bookedArr[0].paymentPaid} displayType={'text'} thousandSeparator={true} />
+										</div>
+									</div>
+									<br />
+								</div>
+								: null}
 							<div className="row" style={{ margin: '0px' }}>
 								<div className="col-md-9"></div>
 								<div className="col-md-3">

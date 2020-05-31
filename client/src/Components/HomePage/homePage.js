@@ -24,8 +24,9 @@ class Home extends Component {
 
   componentWillMount() {
     window.scrollTo(0, 0);
-    this.getMegaSaleBillboards()
-    this.getBiddingBillboard()
+    this.getMegaSaleBillboards();
+    this.getBiddingBillboard();
+    this.checkingBookedBillboard()
   }
 
   getMegaSaleBillboards = async () => {
@@ -157,6 +158,18 @@ class Home extends Component {
         let response = await HttpUtils.post('biddingBillboardDelete', obj);
       }
     }
+  }
+
+  checkingBookedBillboard = async () => {
+    let responseBookedData = await HttpUtils.get('getallbookedbillboard');
+    let responseMegaSaleData = await HttpUtils.get('getallbookedMeagSalebillboard');
+    let responsebidderData = await HttpUtils.get('getallbidderBookbillboard');
+
+    console.log(responseBookedData , 'responseBookedData')
+    console.log(responseMegaSaleData , 'responseMegaSaleData')
+    console.log(responsebidderData , 'responsebidderData')
+
+
   }
 
 
