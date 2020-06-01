@@ -82,11 +82,11 @@ class MainHeader extends Component {
                                         </a>
                                     </Dropdown>
                                 </li>
-                                <li className="menuLiTag">
+                                {/* <li className="menuLiTag">
                                     <Link rel="noopener noreferrer" to={`/newiestBillboard`}>
                                         <span className="menuText">Newiest Billboard</span>
                                     </Link>
-                                </li>
+                                </li> */}
                                 <li className="menuLiTag">
                                     <Link rel="noopener noreferrer" to={`/about`}>
                                         <span className="menuText">About</span>
@@ -182,11 +182,11 @@ class MainHeader extends Component {
                                                 </a>
                                             </Dropdown>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link rel="noopener noreferrer" to={`/newiestBillboard`}>
                                                 <span className="menuTextMOB">Newiest Billboard</span>
                                             </Link>
-                                        </li>
+                                        </li> */}
                                         <li className="">
                                             <Link rel="noopener noreferrer" to={`/about`}>
                                                 <span className="menuTextMOB">About</span>

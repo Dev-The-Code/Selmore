@@ -242,6 +242,13 @@ class ProfileView extends Component {
 
     render() {
         const { paid, unpaid, expire, pendingData } = this.state;
+        console.log(paid, 'paid')
+        console.log(unpaid, 'unpaid')
+        console.log(expire, 'expire')
+        console.log(pendingData, 'pendingData')
+
+
+
         return (
             <div>
                 <div className="row" style={{ marginTop: '20px' }}>
@@ -317,14 +324,14 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    <th className="BidhistoryTH">View</th>
+                                                    {/* <th className="BidhistoryTH">View</th> */}
                                                 </tr>
                                             </thead>
-                                            {pendingData && pendingData.map((elem, key) => {
-                                                return (
-                                                    <tbody>
+                                            <tbody>
+                                                {pendingData && pendingData.map((elem, key) => {
+                                                    return (
                                                         <tr>
-                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.bookedFrom}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
@@ -337,10 +344,10 @@ class ProfileView extends Component {
 
 
                                                         </tr>
-                                                    </tbody>
-                                                )
+                                                    )
 
-                                            })}
+                                                })}
+                                            </tbody>
                                         </table>
                                     </div>
                                     <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -350,18 +357,19 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">#</th>
                                                     <th className="BidhistoryTH">Booked From</th>
                                                     <th className="BidhistoryTH">Payment</th>
-                                                    <th className="BidhistoryTH">Booked Date</th>
+                                                    <th className="BidhistoryTH">Booked Date From</th>
+                                                    <th className="BidhistoryTH">Booked Date To</th>
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    <th className="BidhistoryTH">View</th>
+                                                    {/* <th className="BidhistoryTH">View</th> */}
                                                 </tr>
                                             </thead>
-                                            {paid && paid.map((elem, key) => {
-                                                return (
-                                                    <tbody>
+                                            <tbody>
+                                                {paid && paid.length > 0 && paid.map((elem, key) => {
+                                                    return (
                                                         <tr>
-                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.bookedFrom}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
@@ -374,10 +382,10 @@ class ProfileView extends Component {
 
 
                                                         </tr>
-                                                    </tbody>
-                                                )
+                                                    )
 
-                                            })}
+                                                })}
+                                            </tbody>
                                         </table>
                                     </div>
                                     <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
@@ -387,18 +395,19 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">#</th>
                                                     <th className="BidhistoryTH">Booked From</th>
                                                     <th className="BidhistoryTH">Payment</th>
-                                                    <th className="BidhistoryTH">Booked Date</th>
+                                                    <th className="BidhistoryTH">Booked Date From</th>
+                                                    <th className="BidhistoryTH">Booked Date To</th>
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    <th className="BidhistoryTH">View</th>
+                                                    {/* <th className="BidhistoryTH">View</th> */}
                                                 </tr>
                                             </thead>
-                                            {unpaid && unpaid.map((elem, key) => {
-                                                return (
-                                                    <tbody>
+                                            <tbody>
+                                                {unpaid && unpaid.length > 0 && unpaid.map((elem, key) => {
+                                                    return (
                                                         <tr>
-                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.bookedFrom}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
@@ -408,13 +417,10 @@ class ProfileView extends Component {
                                                             <td className="tablee_td">{elem.address}</td>
                                                             <td className="tablee_td">{elem.city}</td>
                                                             <td className="tablee_td">{elem.state}</td>
-
-
                                                         </tr>
-                                                    </tbody>
-                                                )
-
-                                            })}
+                                                    )
+                                                })}
+                                            </tbody>
                                         </table>
                                     </div>
                                     <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
@@ -422,20 +428,21 @@ class ProfileView extends Component {
                                             <thead className="tablee_Head">
                                                 <tr>
                                                     <th className="BidhistoryTH">#</th>
-                                                    <th className="BidhistoryTH">Booked From</th>
                                                     <th className="BidhistoryTH">Payment</th>
-                                                    <th className="BidhistoryTH">Booked Date</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
+                                                    <th className="BidhistoryTH">Booked To</th>
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    <th className="BidhistoryTH">View</th>
+                                                    {/* <th className="BidhistoryTH">View</th> */}
                                                 </tr>
                                             </thead>
-                                            {expire && expire.map((elem, key) => {
-                                                return (
-                                                    <tbody>
+                                            <tbody>
+                                                {expire && expire.length > 0 && expire.map((elem, key) => {
+                                                    console.log(elem, 'expire elem')
+                                                    return (
                                                         <tr>
-                                                            <td className="tablee_th">0</td>
+                                                            <td className="tablee_th">{key}</td>
                                                             <td className="tablee_td">{elem.bookedFrom}</td>
                                                             <td className="tablee_td">
                                                                 <NumberFormat value={elem.payment} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} />
@@ -448,10 +455,10 @@ class ProfileView extends Component {
 
 
                                                         </tr>
-                                                    </tbody>
-                                                )
+                                                    )
 
-                                            })}
+                                                })}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

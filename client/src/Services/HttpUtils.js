@@ -1,8 +1,8 @@
 import { AsyncStorage } from '@callstack/async-storage'
 
-const BASE_URL = 'http://localhost:5000';
+// const BASE_URL = 'http://localhost:5000';
 // const BASE_URL = 'https://salmore.herokuapp.com';
-// const BASE_URL = 'https://selmoremedia.com';
+const BASE_URL = 'https://selmoremedia.com';
 
 const headersFor = (token) => {
     let headers = {
