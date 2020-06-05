@@ -57,6 +57,8 @@ class Biddpanel1 extends Component {
 
 
 	componentDidMount() {
+		filterCityName = [];
+		filterStateName = [];
 		this.getBiddingBillboard();
 		this.getCitiesAndStates();
 	}

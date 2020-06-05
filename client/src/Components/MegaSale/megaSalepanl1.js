@@ -69,9 +69,9 @@ class MegaSalepanel1 extends Component {
 
 	componentWillUpdate() {
 		const { i } = this.state;
+		
 		let dataForFilter = this.props.filterData;
-
-		if (dataForFilter && i == 0) {
+		if (dataForFilter != undefined && i == 0) {
 			filterCityName = dataForFilter.city;
 			filterStateName = dataForFilter.state;
 			let cityDropValue = {
@@ -92,6 +92,8 @@ class MegaSalepanel1 extends Component {
 	}
 
 	componentWillMount() {
+		filterCityName = [];
+		filterStateName = [];
 		this.megaSalebillBoardData();
 		this.getCitiesAndStates();
 	}
@@ -1633,6 +1635,10 @@ class MegaSalepanel1 extends Component {
 		const { megaSaleBiilboards, goForDetail, megaSaleId, billboardData, statusValue, typesOfBillboard,
 			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cities, states, notFoundFilterData, filteredData, showRecord,
 			cityValue, stateValue } = this.state;
+
+console.log(filterCityName , 'city array')
+console.log(filterStateName , 'state array')
+
 		if (goForDetail) {
 			return (
 				<Redirect to={{ pathname: `/megaDetail/${megaSaleId}`, state: billboardData }} />
