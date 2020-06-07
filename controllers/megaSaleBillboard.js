@@ -106,7 +106,6 @@ exports.deleteMegaSaleBillboard = function (req, res, next) {
 
   var formData = req.body;
   // megaSaleBillboard.findOneAndDelete({ "billboardId": "5d2c7d8676dc5f00176c8976" })
-  // console.log("deleted")
   // BookedMegaSalebillboardData.save((err, data) => {
   //   if (err) {
   //     res.send({

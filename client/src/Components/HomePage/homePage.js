@@ -317,7 +317,6 @@ class Home extends Component {
       const now = moment();
       const then = moment(expireDate);
       let daysDiff = then.diff(now, 'days');
-      // console.log(daysDiff, 'daysDiff')
       if (daysDiff < 0) {
         let obj = {
           objectId: paidMegaSaleData[i]._id,

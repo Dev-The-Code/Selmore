@@ -274,12 +274,7 @@ class Militarypanel1 extends Component {
 			let data = response.content[0];
 			const start = data.dateRange[0];
 			const end = data.dateRange[1];
-			// console.log(start.slice(8, 10), 'satart')
-			// console.log(start.slice(0, 4), 'satart')
-
-			// console.log(start.slice(5, 7), 'satart')
-
-
+			
 			let bookedObj = {
 				bookFrom: "Market Place",
 				bookDateStart: start.slice(0,10),

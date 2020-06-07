@@ -86,7 +86,6 @@ class Megapanel1 extends Component {
         booked.billboardAmount = data.discountPrice;
         booked.bookedDate = 'From ' + data.billboardAvailabilityFrom + ' to ' + data.billboardAvailabilityTo;
         booked.objectId = '';
-        console.log(booked, 'booked')
         let response = await HttpUtils.post('postMegaSalebillboard', booked);
 
         if (response) {

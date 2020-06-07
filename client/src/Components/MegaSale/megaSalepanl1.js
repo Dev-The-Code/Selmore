@@ -69,7 +69,7 @@ class MegaSalepanel1 extends Component {
 
 	componentWillUpdate() {
 		const { i } = this.state;
-		
+
 		let dataForFilter = this.props.filterData;
 		if (dataForFilter != undefined && i == 0) {
 			filterCityName = dataForFilter.city;
@@ -1636,8 +1636,6 @@ class MegaSalepanel1 extends Component {
 			facingOfBillboard, lightningOfBillboard, audienceTypeOfBillboard, cities, states, notFoundFilterData, filteredData, showRecord,
 			cityValue, stateValue } = this.state;
 
-console.log(filterCityName , 'city array')
-console.log(filterStateName , 'state array')
 
 		if (goForDetail) {
 			return (

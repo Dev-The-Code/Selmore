@@ -213,7 +213,6 @@ class DashboardData extends Component {
             })
         }
         else {
-            console.log('else condition true')
             this.filterKeysGet();
         }
     }

@@ -425,14 +425,11 @@ class BillBoard extends Component {
     //-----------------cloudnary function end ------------------//
 
     async postData(response, obj) {
-        console.log(obj, 'object for post')
         this.fectSignUpApiFunc(obj)
     }
 
     fectSignUpApiFunc = async (values) => {
-        console.log(values , 'values data for save in database')
         let response = await HttpUtils.post('listadd', values);
-        console.log(response, 'response')
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,

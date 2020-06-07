@@ -16,7 +16,6 @@ class NewestBillboards extends Component {
    
     render() {
         const { newestBillboard } = this.props;
-        console.log(newestBillboard , 'newestBillboard')
         return (
             <div className="animated animatedFadeInUp fadeInUp">
                 <div className="row mainRwNewestBill">
