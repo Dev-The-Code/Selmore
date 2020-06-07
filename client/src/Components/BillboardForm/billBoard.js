@@ -92,11 +92,30 @@ class BillBoard extends Component {
             audienceTypes: [],
             cities: [],
             states: [],
+            date: '',
+            time: '',
+            dayOfMonth: '',
+            monthNo: '',
+            yearCount: ''
         }
     }
 
 
     async componentDidMount() {
+        let date = new Date().getDate();
+        let month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
+        const hours = new Date().getHours();
+        let min = new Date().getMinutes();
+        const sec = new Date().getSeconds();
+
+        this.setState({
+            date: year + '-' + month + '-' + date,
+            time: hours + ':' + min + ':' + sec,
+            dayOfMonth: date,
+            monthNo: month,
+            yearCount: year
+        })
         this.gettingDropDownValues();
     }
     async componentWillMount() {
@@ -107,13 +126,13 @@ class BillBoard extends Component {
         let { companyName, citiesArr, typeArr, categoryArr, facingArr, lightningArr, statusArr, audienceTypeArr, statesArr,
             types, categories, facings, lightnings, statuses, audienceTypes, cities, states } = this.state;
         let response = await HttpUtils.get('getcompanyname');
-        if(response){
+        if (response) {
 
-        
-        companyName = response.content.map((elem, i) => {
-            return { label: elem.companyName, value: elem.companyName, id: elem._id }
-        })
-    }
+
+            companyName = response.content.map((elem, i) => {
+                return { label: elem.companyName, value: elem.companyName, id: elem._id }
+            })
+        }
         types = typeArr.map((elem, i) => {
             return { label: elem, value: elem, id: i }
         })
@@ -179,7 +198,12 @@ class BillBoard extends Component {
                 nearBy: data.nearBy,
                 address: data.address,
                 objectId: data._id,
-                imgArr: data.images
+                imgArr: data.images,
+                date: data.date,
+                time: data.time,
+                dayOfMonth: data.dayOfMonth,
+                monthNo: data.monthNo,
+                yearCount: data.yearCount
             })
         }
     }
@@ -263,13 +287,12 @@ class BillBoard extends Component {
     }
 
     async funcForUpload(values) {
-        const { index, imgArr, objectId } = this.state;
+        const { index, imgArr, objectId, date, time, dayOfMonth, monthNo, yearCount } = this.state;
         let arr = [];
         for (var i = 0; i <= index; i++) {
             let multipleBillbordObj = `billbordObj${i}`;
             multipleBillbordObj = {}
             for (var property in values) {
-
                 //seprate the billboard form data in user fill multiple form in one time
                 if (property == `traffic${i}`) {
                     multipleBillbordObj.traffic = values[property]
@@ -347,6 +370,12 @@ class BillBoard extends Component {
                 if (property == `images${i}`) {
                     multipleBillbordObj.images = values[property]
                 }
+                multipleBillbordObj.date = date;
+                multipleBillbordObj.time = time;
+                multipleBillbordObj.dayOfMonth = dayOfMonth;
+                multipleBillbordObj.monthNo = monthNo;
+                multipleBillbordObj.yearCount = yearCount;
+
 
             }
             let fileListRef = `fileList${i}`;
@@ -396,12 +425,14 @@ class BillBoard extends Component {
     //-----------------cloudnary function end ------------------//
 
     async postData(response, obj) {
+        console.log(obj, 'object for post')
         this.fectSignUpApiFunc(obj)
     }
 
     fectSignUpApiFunc = async (values) => {
+        console.log(values , 'values data for save in database')
         let response = await HttpUtils.post('listadd', values);
-
+        console.log(response, 'response')
         setTimeout(() => {
             this.setState({
                 sumitDataAlert: false,

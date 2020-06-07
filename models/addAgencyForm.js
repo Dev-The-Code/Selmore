@@ -34,7 +34,12 @@ const addSchema = new Schema({
     avalibleOn: { type: String },
     avalibleOnId: { type: String },
     bookFrom: { type: String },
-    bookId: { type: String }
+    date: { type: String },
+    time: { type: String },
+    dayOfMonth: { type: Number },
+    monthNo: { type: Number },
+    yearCount: { type: Number },
+
 });
 
 

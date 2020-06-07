@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './profileView.scss';
 import { HttpUtils } from '../../Services/HttpUtils'
 import NumberFormat from 'react-number-format';
+import { Link } from "react-router-dom";
 
 class ProfileView extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class ProfileView extends Component {
                             }
                             paidData.push(obj)
                         }
-                        else if (data[i].paymentStatus == 'unPaid') {
+                        else if (data[i].paymentStatus == 'unpaid') {
                             let obj = {
                                 bookedFrom: 'Market Place',
                                 address: data[i].address,
@@ -116,7 +117,7 @@ class ProfileView extends Component {
                             }
                             paidData.push(obj)
                         }
-                        else if (data[i].paymentStatus == 'unPaid') {
+                        else if (data[i].paymentStatus == 'unpaid') {
                             let obj = {
                                 bookedFrom: 'Mega Sale',
                                 address: data[i].address,
@@ -173,7 +174,7 @@ class ProfileView extends Component {
                                 bookedFrom: 'Bidding',
                                 payment: data[i].bidAamount,
                                 dateBookedFrom: data[i].billboardAvailabilityFrom,
-                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+                                dateBookedTo: data[i].billboardAvailabilityTo,
                                 address: data[i].address,
                                 city: data[i].city,
                                 state: data[i].state,
@@ -182,7 +183,7 @@ class ProfileView extends Component {
                             }
                             paidData.push(obj)
                         }
-                        else if (data[i].paymentStatus == 'unPaid') {
+                        else if (data[i].paymentStatus == 'unpaid') {
                             let obj = {
                                 bookedFrom: 'Bidding',
                                 address: data[i].address,
@@ -191,7 +192,7 @@ class ProfileView extends Component {
                                 payment: data[i].bidAamount,
                                 billboardId: data[i].billboardId,
                                 dateBookedFrom: data[i].billboardAvailabilityFrom,
-                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+                                dateBookedTo: data[i].billboardAvailabilityTo,
 
                             }
                             unPaidData.push(obj)
@@ -205,7 +206,7 @@ class ProfileView extends Component {
                                 payment: data[i].bidAamount,
                                 billboardId: data[i].billboardId,
                                 dateBookedFrom: data[i].billboardAvailabilityFrom,
-                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+                                dateBookedTo: data[i].billboardAvailabilityTo,
 
                             }
                             expireData.push(obj)
@@ -219,7 +220,7 @@ class ProfileView extends Component {
                                 payment: data[i].bidAamount,
                                 billboardId: data[i].billboardId,
                                 dateBookedFrom: data[i].billboardAvailabilityFrom,
-                                dateBookedTo: data[i].billboardAvailabilityFromTo,
+                                dateBookedTo: data[i].billboardAvailabilityTo,
 
                             }
                             pendingData.push(obj)
@@ -242,12 +243,6 @@ class ProfileView extends Component {
 
     render() {
         const { paid, unpaid, expire, pendingData } = this.state;
-        console.log(paid, 'paid')
-        console.log(unpaid, 'unpaid')
-        console.log(expire, 'expire')
-        console.log(pendingData, 'pendingData')
-
-
 
         return (
             <div>
@@ -292,16 +287,16 @@ class ProfileView extends Component {
                             <div className="col-10 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                                 <nav>
                                     <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                        <a className="nav-item nav-link active tablee_Navtab" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                                        <a className="nav-item nav-link active tablee_Navtab" id="nav-pending-tab" data-toggle="tab" href="#nav-pending" role="tab" aria-controls="nav-pending" aria-selected="true">
                                             <span className="doesit10">Payment pending</span>
                                         </a>
-                                        <a className="nav-item nav-link tablee_Navtab" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                        <a className="nav-item nav-link tablee_Navtab" id="nav-paid-tab" data-toggle="tab" href="#nav-paid" role="tab" aria-controls="nav-paid" aria-selected="false">
                                             <span className="doesit10">Payment paid(current)</span>
                                         </a>
-                                        <a className="nav-item nav-link tablee_Navtab" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                        <a className="nav-item nav-link tablee_Navtab" id="nav-unpaid-tab" data-toggle="tab" href="#nav-unpaid" role="tab" aria-controls="nav-unpaid" aria-selected="false">
                                             <span className="doesit10">Payment unpaid</span>
                                         </a>
-                                        <a className="nav-item nav-link tablee_Navtab" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab" aria-controls="nav-users" aria-selected="false">
+                                        <a className="nav-item nav-link tablee_Navtab" id="nav-expire-tab" data-toggle="tab" href="#nav-expire" role="tab" aria-controls="nav-expire" aria-selected="false">
                                             <span className="doesit10">Expired</span>
                                         </a>
                                     </div>
@@ -312,7 +307,7 @@ class ProfileView extends Component {
                         <div className="row" style={{ margin: '0px' }}>
                             <div className="col-12 col-md-12 col-lg-12 col-xl-12 userDataPlace">
                                 <div className="tab-content py-3 px-sm-0" id="nav-tabContent">
-                                    <div className="tab-pane fade show active text-justify" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div className="tab-pane fade show active text-justify" id="nav-pending" role="tabpanel" aria-labelledby="nav-pending-tab">
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
@@ -324,7 +319,7 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    {/* <th className="BidhistoryTH">View</th> */}
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -341,8 +336,9 @@ class ProfileView extends Component {
                                                             <td className="tablee_td">{elem.address}</td>
                                                             <td className="tablee_td">{elem.city}</td>
                                                             <td className="tablee_td">{elem.state}</td>
-
-
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                            </td>
                                                         </tr>
                                                     )
 
@@ -350,7 +346,7 @@ class ProfileView extends Component {
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <div className="tab-pane fade" id="nav-paid" role="tabpanel" aria-labelledby="nav-paid-tab">
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
@@ -362,7 +358,7 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    {/* <th className="BidhistoryTH">View</th> */}
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -379,8 +375,9 @@ class ProfileView extends Component {
                                                             <td className="tablee_td">{elem.address}</td>
                                                             <td className="tablee_td">{elem.city}</td>
                                                             <td className="tablee_td">{elem.state}</td>
-
-
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                            </td>
                                                         </tr>
                                                     )
 
@@ -388,7 +385,7 @@ class ProfileView extends Component {
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+                                    <div className="tab-pane fade" id="nav-unpaid" role="tabpanel" aria-labelledby="nav-unpaid-tab">
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
@@ -400,7 +397,7 @@ class ProfileView extends Component {
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    {/* <th className="BidhistoryTH">View</th> */}
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -417,29 +414,32 @@ class ProfileView extends Component {
                                                             <td className="tablee_td">{elem.address}</td>
                                                             <td className="tablee_td">{elem.city}</td>
                                                             <td className="tablee_td">{elem.state}</td>
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                            </td>
                                                         </tr>
                                                     )
                                                 })}
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div className="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+                                    <div className="tab-pane fade" id="nav-expire" role="tabpanel" aria-labelledby="nav-expire-tab">
                                         <table class="table" style={{ textAlign: 'center' }}>
                                             <thead className="tablee_Head">
                                                 <tr>
                                                     <th className="BidhistoryTH">#</th>
+                                                    <th className="BidhistoryTH">Booked From</th>
                                                     <th className="BidhistoryTH">Payment</th>
                                                     <th className="BidhistoryTH">Booked From</th>
                                                     <th className="BidhistoryTH">Booked To</th>
                                                     <th className="BidhistoryTH">Address</th>
                                                     <th className="BidhistoryTH">City</th>
                                                     <th className="BidhistoryTH">State</th>
-                                                    {/* <th className="BidhistoryTH">View</th> */}
+                                                    <th className="BidhistoryTH">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {expire && expire.length > 0 && expire.map((elem, key) => {
-                                                    console.log(elem, 'expire elem')
                                                     return (
                                                         <tr>
                                                             <td className="tablee_th">{key}</td>
@@ -452,8 +452,9 @@ class ProfileView extends Component {
                                                             <td className="tablee_td">{elem.address}</td>
                                                             <td className="tablee_td">{elem.city}</td>
                                                             <td className="tablee_td">{elem.state}</td>
-
-
+                                                            <td className="tablee_th">
+                                                                <Link to={{ pathname: `/billborad_Militry`, state: elem.billboardId }}><span className="dropText">View</span></Link>
+                                                            </td>
                                                         </tr>
                                                     )
 

@@ -33,8 +33,11 @@ exports.postAddData = function(req,res,next){
       state:formData.state,
       country:formData.country,
       bookFrom:formData.bookFrom,
-      bookId:formData.bookId,
-
+      date:formData.date,
+      time:formData.time,
+      dayOfMonth:formData.dayOfMonth,
+      monthNo:formData.monthNo,
+      yearCount:formData.yearCount,
   })
   postListData.save((err,data) => {
     if(err){

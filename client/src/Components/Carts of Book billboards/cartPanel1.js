@@ -127,7 +127,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
                     }
                 }
 
@@ -139,7 +138,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('postMegaSalebillboard', obj);
-                console.log(response, 'response')
 
                 if (response) {
                     if (response.code == 200) {
@@ -153,7 +151,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
 
                     }
                 }
@@ -168,7 +165,6 @@ class CartPanel1 extends Component {
                     paymentStatus: paymentStatus,
                 }
                 let response = await HttpUtils.post('bidderBillboardBooked', obj);
-                console.log(response, 'response')
                 if (response) {
                     if (response.code == 200) {
                         let updateMarketPlace = {
@@ -181,7 +177,6 @@ class CartPanel1 extends Component {
 
                         }
                         let respMatkietPlace = await HttpUtils.post('listadd', updateMarketPlace);
-                        console.log(respMatkietPlace, 'market place')
                     }
                 }
 
@@ -262,7 +257,6 @@ class CartPanel1 extends Component {
                                                 </tr>
                                             </thead>
                                             {avalibleBillboard && avalibleBillboard.map((elem, key) => {
-                                                console.log(elem.paymentStatus, 'elem.paymentStatus')
                                                 return (
                                                     <tbody>
                                                         <tr>

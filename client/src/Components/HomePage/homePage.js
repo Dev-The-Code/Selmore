@@ -18,16 +18,59 @@ class Home extends Component {
     super(props)
     this.state = {
       dropDownUser: false,
-      megaSalebillBoards: []
+      megaSalebillBoards: [],
+      newestBillboard: []
     }
   }
 
   componentWillMount() {
     window.scrollTo(0, 0);
+    this.getNewestBillboard()
     this.getMegaSaleBillboards();
     this.getBiddingBillboard();
     this.checkingBookedBillboard()
   }
+
+  getNewestBillboard = async () => {
+    let response = await HttpUtils.get('getbillboard');
+    let newestBillboardData = [];
+    let newestBillboard = [];
+
+    if (response) {
+      if (response.code == 200) {
+        let data = response.content;
+
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].date != undefined && data[i].time != undefined && data[i].dayOfMonth != undefined &&
+            data[i].monthNo != undefined && data[i].yearCount != undefined) {
+            newestBillboardData.push(data[i])
+
+
+          }
+        }
+        let dayCount = 7;
+        var toDate = new Date();
+        for (var j = dayCount; j = dayCount; j--) {
+          var sevenDaysAgo = moment().subtract(dayCount, 'days').toDate()
+          var dayOfMonthAgo = sevenDaysAgo.getDate();
+          var monthNoOfYear = sevenDaysAgo.getMonth() + 1;
+          var yearNo = sevenDaysAgo.getFullYear();
+          dayCount--;
+
+          for (var k = 0; k < newestBillboardData.length; k++) {
+            if (dayOfMonthAgo == newestBillboardData[k].dayOfMonth && monthNoOfYear == newestBillboardData[k].monthNo &&
+              yearNo == newestBillboardData[k].yearCount) {
+              newestBillboard.push(newestBillboardData[k])
+            }
+          }
+        }
+        this.setState({
+          newestBillboard: newestBillboard
+        })
+      }
+    }
+  }
+
 
   getMegaSaleBillboards = async () => {
     let response = await HttpUtils.get('getallmegabillboard');
@@ -317,6 +360,7 @@ class Home extends Component {
 
     // })
   }
+  
   checkingBiddingBookDataExpire = async (paidBiddingData) => {
     // paidBiddingData.map((elem, key) => {
     for (var i = 0; i < paidBiddingData.length; i++) {
@@ -382,14 +426,14 @@ class Home extends Component {
   }
 
   render() {
-    const { dropDownUser, megaSalebillBoards } = this.state;
+    const { dropDownUser, megaSalebillBoards, newestBillboard } = this.state;
     return (
       <div style={{ backgroundColor: 'white' }}>
         <Header showDropDown={this.showDropDown} hideDropDown={this.hideDropDown} dropDownUser={dropDownUser} />
         <Banner />
         {megaSalebillBoards.length > 0 && <MegaSale megaSalebillBoards={megaSalebillBoards} />}
         <BrowseCategory />
-        {/* <NewiestBill /> */}
+        {newestBillboard && newestBillboard.length > 3 && <NewiestBill newestBillboard={newestBillboard} />}
         <PrestigiousClients />
         <BrowseTopCity />
         <ListingAdPanel />
