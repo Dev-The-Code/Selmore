@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header/mainheader';
-import Footer from '../footer';
+import Footer from '../Footer/mainFooter';
 import Billofpanel1 from './billofpanel1';
 import Billofpanel2 from './billofpanel2';
 import './billofbidding.scss';

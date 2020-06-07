@@ -4,7 +4,6 @@ import Footer from '../Footer/mainFooter';
 import Biddpanel1 from './biddpanel1';
 import Bidbanner from './biddingbanner';
 import './bidding.scss';
-import AbBanner from '../About Selmore/abBanner';
 
 class Bidding extends Component {
   constructor(props) {

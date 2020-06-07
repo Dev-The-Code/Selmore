@@ -187,13 +187,7 @@ class Routes extends Component {
                     hideDropDown={this.hideDropDown} />
                 }}
               ></Route> */}
-              {/* <Route path="/city_bidding"
-                render={props => {
-                  return <Billbidding {...props}
-                    showDropDown={this.showDropDown} dropDownUser={this.dropDownUser}
-                    hideDropDown={this.hideDropDown} />
-                }}
-              ></Route> */}
+             
               {/* <Route path="/billboard"
                 render={props => {
                   return <Billboardmardan {...props}

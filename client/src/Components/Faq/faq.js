@@ -3,7 +3,6 @@ import Header from '../Header/mainheader';
 import Footer from '../Footer/mainFooter';
 import Faqpanel1 from './faqpanel1';
 import './faq.scss';
-import AbBanner from '../About Selmore/abBanner';
 
 class Faq extends Component {
   constructor(props) {

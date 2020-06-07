@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../header';
-import Footer from '../footer';
+import Header from '../Header/mainheader';
+import Footer from '../Footer/mainFooter';
 import Singpanel1 from './singpanel1';
 import './singposted.scss';
 import AbBanner from '../About Selmore/abBanner';
