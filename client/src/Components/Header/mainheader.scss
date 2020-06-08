@@ -26,6 +26,15 @@ $light-color: #6e8796;
     font-family: visby-bold;
     font-size: 20px;
 }
+.selmorelogo{
+    height: 100px;
+}
+.mobileselmorelogo {
+    height: 80px;
+    margin-left: 100px;
+    margin-top: -50px;
+}
+
 @media screen and (min-width: 360px) and (max-width: 767px) {
     .buyMediaBtn {
         background-color: #00334f;

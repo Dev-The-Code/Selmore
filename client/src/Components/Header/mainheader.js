@@ -153,11 +153,11 @@ class MainHeader extends Component {
 
                 <div className="d-block d-sm-none" style={{ paddingLeft: '0px' }}>
                     <div className="row">
-                        <div className="col-12 d-block d-sm-none">
+                        <div className="col-12">
                             <div className="col-6">
                                 <i onClick={this.openNav} className="fa fa-bars" style={{ content: '\f0c9', color: 'black', fontSize: '24px', marginTop: '20px' }}></i>
                             </div>
-                            <div className="col-6 d-block d-sm-none">
+                            <div className="col-6">
                                 <img src="../images/selmore-logo.png" alt='img' className="mobileselmorelogo" />
                             </div>
                         </div>

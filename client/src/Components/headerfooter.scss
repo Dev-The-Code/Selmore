@@ -1,29 +1,25 @@
-$font-stack:  visby-bold;
-$font-regular:  visby-regular;
+$font-stack: visby-bold;
+$font-regular: visby-regular;
 $secondary-color: #19303a;
 $primary-color: #19b3e8;
-$light-color:#4a5964;
+$light-color: #4a5964;
 
-@media screen and (min-width: 360px) and (max-width: 660px){
-    .navmargin{
-            margin-top: 30px;
-            margin-right: -2%;
-                margin-left: -15px;
+@media screen and (min-width: 360px) and (max-width: 767px) {
+    .navmargin {
+        margin-top: 30px;
+        margin-right: -2%;
+        margin-left: -15px;
     }
-    .selmorelogo{
-        height: 101px;
-        /* margin-left: 30px; */
-    }
-    .navFont{
+    .navFont {
         font-size: 7vw;
         font-family: $font-regular;
         font-weight: 600;
         color: $light-color;
     }
-    .bid_btn{
+    .bid_btn {
         height: 30px !important;
     }
-        .true2{
+    .true2 {
         list-style-type: none;
         text-align: center;
         margin-left: -40px;
@@ -31,7 +27,7 @@ $light-color:#4a5964;
         font-weight: 600;
         font-size: 8px;
     }
-    .true22{
+    .true22 {
         list-style-type: none;
         text-align: center;
         margin-left: -40px;
@@ -39,51 +35,47 @@ $light-color:#4a5964;
         font-weight: 600;
         font-size: 8px;
     }
-    .navbiddbtn{
-            /* margin-left: 10px; */
-            margin-top: 33px;
-            margin-right: 4px;
+    .navbiddbtn {
+        /* margin-left: 10px; */
+        margin-top: 33px;
+        margin-right: 4px;
     }
-    .true5{
+    .true5 {
         font-size: 10px !important;
         color: white;
     }
-    .navbtnmargin{
+    .navbtnmargin {
         background-color: $primary-color;
         margin-top: 4.1%;
         height: 31px;
     }
 }
-@media screen and (min-width: 768px) and (max-width: 1023px){
-    .navsm{
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .navsm {
         margin-left: -7vw;
     }
-    .navsm2{
+    .navsm2 {
         margin-left: 0vw;
     }
-    .navbtnmarginLog{
+    .navbtnmarginLog {
         // background-color: $primary-color;
         margin-top: 1vw;
         color: white !important;
     }
-    .navmargin{
-            margin-top: 15px;
-            margin-right: 7%;
+    .navmargin {
+        margin-top: 15px;
+        margin-right: 7%;
     }
-    .navFont{
+    .navFont {
         font-size: 1.5vw;
         font-family: $font-regular;
         font-weight: 600;
         color: $light-color;
     }
-    .selmorelogo{
-        height: 101px;
-
-    }
-    .bid_btn{
+    .bid_btn {
         height: 30px !important;
     }
-    .true2{
+    .true2 {
         list-style-type: none;
         text-align: center;
         margin-left: -18%;
@@ -93,7 +85,7 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .true22{
+    .true22 {
         list-style-type: none;
         text-align: center;
         margin-left: -17%;
@@ -103,50 +95,45 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .navbiddbtn{
-                /* margin-left: 17px; */
-            margin-top: 2.5%;
-            margin-right: 4px;
-
+    .navbiddbtn {
+        /* margin-left: 17px; */
+        margin-top: 2.5%;
+        margin-right: 4px;
     }
-    .blgs{
-            margin: 6px 6px 0px -10px;
-        }
-        .navbtnmargin{
-            background-color: $primary-color;
-            margin-top: 10px !important;
-            height: 31px;
-            color: white;
-        }
+    .blgs {
+        margin: 6px 6px 0px -10px;
+    }
+    .navbtnmargin {
+        background-color: $primary-color;
+        margin-top: 10px !important;
+        height: 31px;
+        color: white;
+    }
 }
-@media screen and (min-width: 1024px) and (max-width: 1365px){
-    .navsm{
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .navsm {
         margin-left: -21vw;
-        color: #007bff !important;     
+        color: #007bff !important;
     }
-    .navsm2{
+    .navsm2 {
         margin-left: 3vw;
-         color: #007bff !important;
+        color: #007bff !important;
     }
-    .navmargin{
+    .navmargin {
         margin-top: 36px;
         margin-right: 1.4vw;
         color: #007bff !important;
     }
-    .navFont{
+    .navFont {
         font-size: 1vw;
         font-family: $font-regular;
         font-weight: 600;
         color: $light-color;
     }
-    .selmorelogo{
-        height: 101px;
-        /* margin-left: 0px; */
-    }
-    .bid_btn{
+    .bid_btn {
         height: 30px !important;
     }
-    .true2{
+    .true2 {
         list-style-type: none;
         text-align: center;
         margin-left: -13%;
@@ -156,7 +143,7 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .true22{
+    .true22 {
         list-style-type: none;
         text-align: center;
         margin-left: -13%;
@@ -166,59 +153,51 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .navbiddbtn{
-            /* margin-left: 10px; */
-            margin-top: 4.5%;
-            margin-right: 4px;
-
+    .navbiddbtn {
+        /* margin-left: 10px; */
+        margin-top: 4.5%;
+        margin-right: 4px;
     }
-    .blgs{
-            margin: 29px 6px 0px -10px;
-        }
-    .navbtnmargin{
+    .blgs {
+        margin: 29px 6px 0px -10px;
+    }
+    .navbtnmargin {
         background-color: $primary-color;
         margin-left: 0%;
         margin-top: 2.7vw;
         height: 31px;
         color: white;
-    }    
-    .navbtnmarginLog{
+    }
+    .navbtnmarginLog {
         // background-color: $primary-color;
         margin-left: -1%;
         margin-top: 2.2vw;
         height: 31px;
         margin-bottom: 1vw;
         color: white;
-    } 
-
-
-
+    }
 }
 @media screen and (min-width: 1366px) and (max-width: 1600px) {
-    .navsm{
+    .navsm {
         margin-left: -24vw;
-        color: #007bff !important;        
+        color: #007bff !important;
     }
-    .navsm2{
+    .navsm2 {
         margin-left: -3vw;
-        color: #007bff !important;        
+        color: #007bff !important;
     }
-    .navmargin{
+    .navmargin {
         margin-top: 36px;
         margin-right: 1.4vw;
         color: #007bff !important;
     }
-    .navFont{
+    .navFont {
         font-size: 1vw;
         font-family: $font-regular;
         font-weight: 600;
         color: $light-color;
     }
-    .selmorelogo{
-        height: 101px;
-        /* margin-left: 30px; */
-    }
-    .true2{
+    .true2 {
         list-style-type: none;
         text-align: center;
         /* margin-left: 42px; */
@@ -229,10 +208,10 @@ $light-color:#4a5964;
         margin-bottom: 30px;
         margin-left: -10%;
     }
-    .bid_btn{
+    .bid_btn {
         height: 30px !important;
     }
-    .true22{
+    .true22 {
         list-style-type: none;
         text-align: center;
         margin-left: -10%;
@@ -242,53 +221,48 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .navbiddbtn{
-            /* margin-left: 10px; */
-            margin-top: 33px;
-            margin-right: 4px;
-
+    .navbiddbtn {
+        /* margin-left: 10px; */
+        margin-top: 33px;
+        margin-right: 4px;
     }
-    .blgs{
-            margin: 28px 6px 0px -10px;
-        }
-    .navbtnmargin{
+    .blgs {
+        margin: 28px 6px 0px -10px;
+    }
+    .navbtnmargin {
         background-color: $primary-color;
         margin-left: -0.5%;
         margin-top: 2.3vw;
         height: 31px;
         color: white;
-    }    
-    .navbtnmarginLog{
+    }
+    .navbtnmarginLog {
         margin-top: 2vw;
         // background-color: $primary-color;
         color: white;
     }
 }
-@media screen and (min-width: 1600px){
-    .navsm{
+@media screen and (min-width: 1600px) {
+    .navsm {
         margin-left: -1.5vw;
-        color: #007bff !important; 
-    }
-    .navsm2{
-        /* margin-left: 12% */
-    color: #007bff !important;    
-    }
-    .navmargin{
-            margin-top: 36px;
-            margin-right: 3%;
         color: #007bff !important;
     }
-    .navFont{
+    .navsm2 {
+        /* margin-left: 12% */
+        color: #007bff !important;
+    }
+    .navmargin {
+        margin-top: 36px;
+        margin-right: 3%;
+        color: #007bff !important;
+    }
+    .navFont {
         font-size: 1vw;
         font-family: $font-regular;
         font-weight: 600;
         color: $light-color;
     }
-    .selmorelogo{
-        height: 101px;
-        /* margin-left: 30px; */
-    }
-    .true2{
+    .true2 {
         list-style-type: none;
         text-align: center;
         /* margin-left: 42px; */
@@ -299,10 +273,10 @@ $light-color:#4a5964;
         margin-bottom: 30px;
         margin-left: -10%;
     }
-    .bid_btn{
+    .bid_btn {
         height: 30px !important;
     }
-    .true22{
+    .true22 {
         list-style-type: none;
         text-align: center;
         margin-left: -10%;
@@ -312,133 +286,128 @@ $light-color:#4a5964;
         margin-top: 12px;
         margin-bottom: 30px;
     }
-    .navbiddbtn{
-            /* margin-left: 10px; */
-            margin-top: 33px;
-            margin-right: 4px;
-
+    .navbiddbtn {
+        /* margin-left: 10px; */
+        margin-top: 33px;
+        margin-right: 4px;
     }
-    .blgs{
-            margin: 28px 6px 0px -10px;
-        }
-    .navbtnmargin{
+    .blgs {
+        margin: 28px 6px 0px -10px;
+    }
+    .navbtnmargin {
         background-color: $primary-color;
         margin-left: -0.7%;
         margin-top: 4.1%;
         height: 31px;
         color: white;
-    }    
-    .navbtnmarginLog{
+    }
+    .navbtnmarginLog {
         // background-color: $primary-color;
-        margin-left: -1%; 
-        margin-top: 1.8vw; 
-        height: 31px; 
+        margin-left: -1%;
+        margin-top: 1.8vw;
+        height: 31px;
         margin-bottom: 1vw;
         color: white;
     }
-
 }
-#myModal{
+#myModal {
     background-color: $primary-color;
 }
 
-
-.true3{
+.true3 {
     margin-top: 50px;
 }
-.footertext1{
-        text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 23px;
+.footertext1 {
+    text-align: center;
+    font-family: $font-stack;
+    font-weight: 600;
+    font-size: 23px;
 }
-.hrline3{
+.hrline3 {
     margin-bottom: 9px;
     border-bottom: 3px solid #29abe2;
 }
 
-
-.true2 a{
+.true2 a {
     color: black;
 }
-.true2 a:hover{
+.true2 a:hover {
     color: #29abe2;
 }
-.true22 a{
+.true22 a {
     color: black;
 }
-.true22 a:hover{
+.true22 a:hover {
     color: #29abe2;
 }
 .nav a:hover {
     color: black;
 }
-.true5{
+.true5 {
     font-size: 15px;
     color: white;
     font-family: $font-regular;
-
 }
-.true6{
+.true6 {
     margin: 5px;
     text-align: center;
 }
-.true7{
-        margin-top: 13px;
+.true7 {
+    margin-top: 13px;
 }
-@media screen and (min-width: 360px) and (max-width: 660px){
-        .footertext2{
-            width: 100%;
-            font-family: $font-regular;
-            font-size: 8px;
-            font-weight: 600;
-            text-align: center;
-    }
-    .footertext1{
+@media screen and (min-width: 360px) and (max-width: 660px) {
+    .footertext2 {
+        width: 100%;
+        font-family: $font-regular;
+        font-size: 8px;
+        font-weight: 600;
         text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 10px;
     }
-    .navmargin12{
+    .footertext1 {
+        text-align: center;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 10px;
+    }
+    .navmargin12 {
         margin-top: 33px;
         margin-left: 2%;
         margin-right: 4px;
     }
-    .navmargin13{
+    .navmargin13 {
         margin-top: 33px;
         margin-left: 2%;
         margin-right: 4px;
     }
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
-    .footertext2{
-         width: 100%;
-         text-align: center;
-         font-family: $font-regular;
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .footertext2 {
+        width: 100%;
+        text-align: center;
+        font-family: $font-regular;
         font-size: 9px;
         font-weight: 700;
         margin-top: 12px;
         margin-bottom: 29px;
         line-height: 16px;
     }
-    .footertext1{
+    .footertext1 {
         text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 20px;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 20px;
     }
-    .navmargin12{
+    .navmargin12 {
         margin-top: 2%;
         margin-right: 4px;
     }
-    .navmargin13{
+    .navmargin13 {
         margin-top: 2%;
         margin-right: 4px;
     }
 }
-@media screen and (min-width: 1024px) and (max-width: 1366px){
-    .footertext2{
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+    .footertext2 {
         width: 100%;
         text-align: center;
         font-family: $font-regular;
@@ -449,112 +418,106 @@ $light-color:#4a5964;
         margin-bottom: 30px;
         line-height: 16px;
     }
-    .footertext1{
+    .footertext1 {
         text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 22px;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 22px;
     }
-    .navmargin12{
+    .navmargin12 {
         margin-top: 3.7%;
         margin-right: 14px;
         margin-left: -0.4vw;
     }
-    .navmargin13{
+    .navmargin13 {
         margin-top: 2.7vw;
         margin-right: 10px;
         margin-left: 0vw;
     }
-
 }
-@media screen and (min-width: 1366px) and (max-width: 1600px){
-    .footertext2{
+@media screen and (min-width: 1366px) and (max-width: 1600px) {
+    .footertext2 {
         width: 100%;
         text-align: center;
         font-family: $font-regular;
         font-size: 12px;
-         font-weight: 600;
-         margin-top: 12px;
-         margin-bottom: 30px;
+        font-weight: 600;
+        margin-top: 12px;
+        margin-bottom: 30px;
         line-height: 15px;
     }
-    .footertext1{
+    .footertext1 {
         text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 23px;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 23px;
     }
-    .navmargin12{
+    .navmargin12 {
         margin-top: 2.3vw;
     }
-    .navmargin13{
+    .navmargin13 {
         margin-top: 2.3vw;
         margin-right: 10px;
         margin-left: -0.3vw;
     }
 }
-@media screen and (min-width: 1600px){
-    .footertext2{
+@media screen and (min-width: 1600px) {
+    .footertext2 {
         width: 100%;
         text-align: center;
         font-family: $font-regular;
         font-size: 12px;
-         font-weight: 600;
-         margin-top: 12px;
-         margin-bottom: 30px;
+        font-weight: 600;
+        margin-top: 12px;
+        margin-bottom: 30px;
         line-height: 15px;
     }
-    .footertext1{
+    .footertext1 {
         text-align: center;
-         font-family: $font-stack;
-         font-weight: 600;
-             font-size: 23px;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 23px;
     }
-    .navmargin12{
+    .navmargin12 {
         margin-top: 4.5%;
         margin-right: 10px;
         margin-left: 0vw;
     }
-    .navmargin13{
+    .navmargin13 {
         margin-top: 4.5%;
         margin-right: 10px;
         margin-left: 0vw;
     }
 }
 
-
 /*Mobile Menu CSS*/
-.mobileselmorelogo{
-        height: 60px;
-        margin-left: 100px;
-        margin-top: -60px;
-    }
+
 
 .menunav {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background: #223971;
-  overflow-x: hidden;
-  transition: 0.5s;
-  color: white;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #223971;
+    overflow-x: hidden;
+    transition: 0.5s;
+    color: white;
 }
 
 .menunav a {
-  
-  text-decoration: none;
-  font-size: 40px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-  color:white;
+    text-decoration: none;
+    font-size: 40px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    color: white;
 }
 
-.menunav a:hover, .menunav a:focus {
-  color: #818181;
+.menunav a:hover,
+.menunav a:focus {
+    color: #818181;
 }
 
 .menunav .closebtn {
@@ -565,30 +528,32 @@ $light-color:#4a5964;
 }
 
 @media screen and (max-height: 450px) {
-  .menunav {padding-top: 15px;}
-  .menunav a {font-size: 18px;}
+    .menunav {
+        padding-top: 15px;
+    }
+    .menunav a {
+        font-size: 18px;
+    }
 }
 
-
-.mob_butn{
-    background-color: #223971!important;
+.mob_butn {
+    background-color: #223971 !important;
     margin-bottom: 3vw;
     padding: 2vw 10vw 3vw 10vw;
 }
-.mob_Salebutn{
-    background-color: #223971!important;
+.mob_Salebutn {
+    background-color: #223971 !important;
     margin-bottom: 5vw;
     padding: -0vw 10vw 1vw 10vw;
 }
-.mob_li{
+.mob_li {
     list-style: none;
-    margin-left: -12%!important;
-
+    margin-left: -12% !important;
 }
 
 .modal-backdrop {
     position: unset;
 }
-.lamba{
+.lamba {
     height: 500px;
 }
