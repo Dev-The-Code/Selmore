@@ -69,6 +69,13 @@ class Dropdownn extends Component {
         }
         {adminUser !== null && adminUser.role == 'admin' ?
           <Menu.Item className="dropdownTextHover">
+            <Link rel="noopener noreferrer" to={`/noAvalibleBillboard`}>
+              <span className="menuTextinDrop">No Avalible Billboards</span>
+            </Link>
+          </Menu.Item> : null
+        }
+        {adminUser !== null && adminUser.role == 'admin' ?
+          <Menu.Item className="dropdownTextHover">
             <Link rel="noopener noreferrer" to={`/users`}>
               <span className="menuTextinDrop">Users</span>
             </Link>

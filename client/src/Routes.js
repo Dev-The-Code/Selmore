@@ -29,6 +29,7 @@ import './App.css';
 import { PrivateRoute } from './Components/Login Form/PrivateRoute';
 import { AdminAccess } from './Components/Login Form/AdminAccess';
 import BrowseBillFromTopCities from './Components/BrowseBillFromTopCities/browseBillFromTopCities';
+import NoAvalibleBillboard from './Components/NoAvalibleBillboard/noAvalibleBiilboard';
 
 
 class Routes extends Component {
@@ -60,6 +61,7 @@ class Routes extends Component {
               <PrivateRoute exact path="/home" component={MainPage}></PrivateRoute>
               <PrivateRoute exact path="/topCities_billboard" component={BrowseBillFromTopCities}></PrivateRoute>
               <PrivateRoute  path="/cart" component={Carts}></PrivateRoute>
+              <PrivateRoute  path="/noAvalibleBillboard" component={NoAvalibleBillboard}></PrivateRoute>
               <PrivateRoute  path="/users" component={AdminUser}></PrivateRoute>
               <PrivateRoute  path="/megaSale" component={MegaSale}></PrivateRoute>
               <PrivateRoute  path="/megaDetail/:value" component={MegaDetail}></PrivateRoute>
